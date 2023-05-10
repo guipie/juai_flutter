@@ -1,0 +1,20 @@
+{
+  "dart.flutterSdkPath": "/Users/meetqy/fvm/versions/2.10.5",
+  "java.configuration.updateBuildConfiguration": "interactive",
+  "svn.ignoreMissingSvnWarning": true,
+  "dart.lineLength": 500,
+  "[dart]": {
+    "editor.defaultFormatter": "Dart-Code.dart-code",
+    "editor.formatOnSave": true,
+    "editor.formatOnType": true,
+    "editor.rulers": [
+      500
+    ],
+    "editor.selectionHighlight": false,
+    "editor.suggest.snippetsPreventQuickSuggestions": false,
+    "editor.suggestSelection": "first",
+    "editor.tabCompletion": "onlySnippets",
+    "editor.wordBasedSuggestions": false,
+    "editor.wordWrapColumn": 100000,
+  },
+}

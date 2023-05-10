@@ -1,0 +1,34 @@
+name: flutter_quill_extensions
+description: Embed extensions for flutter_quill including image, video, formula and etc.
+version: 0.3.1
+homepage: https://bulletjournal.us/home/index.html
+repository: https://github.com/singerdmx/flutter-quill/tree/master/flutter_quill_extensions
+
+environment:
+  sdk: ">=2.17.0 <3.0.0"
+  flutter: ">=3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  flutter_quill:
+    path: ../flutter_quill
+
+  image_picker:
+  photo_view:
+  video_player:
+  youtube_player_flutter:
+  gallery_saver:
+  math_keyboard:
+  string_validator:
+  universal_html:
+  url_launcher:
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  pedantic: ^1.11.1
+
+# The following section is specific to Flutter packages.
+flutter:
