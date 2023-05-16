@@ -1,5 +1,4 @@
 import 'package:dart_mock/dart_mock.dart' as mock;
-import 'package:guxin_ai/wcao/kit/index.dart';
 
 class MockMine {
   final String nickName;
@@ -16,10 +15,10 @@ class MockMine {
   static MockMine get() {
     return MockMine(
       nickName: mock.cname(),
-      avatar: WcaoUtils.getRandomImage(),
+      avatar: "",
       createDay: mock.integer(min: 1, max: 99),
       tags: List.generate(mock.integer(min: 1, max: 4), (index) => '#${mock.ctitle(min: 3, max: 10)}'),
-      bg: WcaoUtils.getRandomImage(),
+      bg: "",
       visits: mock.integer(min: 1, max: 99),
       friends: mock.integer(min: 1, max: 99),
       fans: mock.integer(min: 1, max: 99),

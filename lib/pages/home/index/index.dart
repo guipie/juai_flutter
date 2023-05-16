@@ -1,8 +1,8 @@
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
+import 'package:guxin_ai/common/widgets/image_cache.dart';
 import 'package:guxin_ai/pages/home/index/search_dialog.dart';
-import 'package:guxin_ai/wcao/kit/index.dart';
-import 'package:guxin_ai/wcao/ui/theme.dart';
+import 'package:guxin_ai/common/widgets/ui/theme.dart';
 import 'package:get/get.dart';
 
 import 'dart:math' as math;
@@ -16,10 +16,10 @@ class PageViewIndex extends StatefulWidget {
 
 class _PageViewIndexState extends State<PageViewIndex> {
   List<String> swipers = [
-    WcaoUtils.getRandomImage(),
-    WcaoUtils.getRandomImage(),
-    WcaoUtils.getRandomImage(),
-    WcaoUtils.getRandomImage(),
+    // WcaoUtils.getRandomImage(),
+    // WcaoUtils.getRandomImage(),
+    // WcaoUtils.getRandomImage(),
+    // WcaoUtils.getRandomImage(),
   ];
 
   @override
@@ -84,7 +84,7 @@ class _PageViewIndexState extends State<PageViewIndex> {
                           opacity: .25,
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(20),
-                            child: WcaoUtils.imageCache(swipers[index]),
+                            child: ImageCacheWidget(imageUrl: swipers[index]),
                           ),
                         ),
                       ),
@@ -97,7 +97,7 @@ class _PageViewIndexState extends State<PageViewIndex> {
                               width: boxWidth + 24,
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(20),
-                                child: WcaoUtils.imageCache(swipers[index]),
+                                child: ImageCacheWidget(imageUrl: swipers[index]),
                               ),
                             ),
                             Positioned(
@@ -250,7 +250,6 @@ class _PageViewIndexState extends State<PageViewIndex> {
       ),
       child: CircleAvatar(
         radius: 10,
-        backgroundImage: NetworkImage(WcaoUtils.getRandomImage()),
       ),
     );
   }

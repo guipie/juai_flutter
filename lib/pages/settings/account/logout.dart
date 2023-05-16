@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:guxin_ai/common/routers/routes.dart';
-import 'package:guxin_ai/wcao/kit/index.dart';
-import 'package:guxin_ai/wcao/ui/theme.dart';
+import 'package:guxin_ai/common/widgets/ui/theme.dart';
 import 'package:get/get.dart';
 
 class AccountLogoutPage extends StatefulWidget {

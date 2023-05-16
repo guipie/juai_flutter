@@ -1,6 +1,6 @@
 import 'package:guxin_ai/common/utils/loading.dart';
 import 'package:guxin_ai/pages/conversation/widgets/markdow_body.dart';
-import 'package:guxin_ai/wcao/ui/theme.dart';
+import 'package:guxin_ai/common/widgets/ui/theme.dart';
 import 'package:dart_mock/dart_mock.dart';
 import 'package:flutter/material.dart';
 import 'package:guxin_ai/common/models/conversation.dart';

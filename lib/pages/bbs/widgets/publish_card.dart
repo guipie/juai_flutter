@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:guxin_ai/wcao/kit/index.dart';
-import 'package:guxin_ai/wcao/ui/tag.dart';
-import 'package:guxin_ai/wcao/ui/theme.dart';
+import 'package:guxin_ai/common/widgets/image_cache.dart';
+import 'package:guxin_ai/common/widgets/ui/tag.dart';
+import 'package:guxin_ai/common/widgets/ui/theme.dart';
 
 import '../mock.dart';
 
@@ -25,7 +25,7 @@ class PublishCard extends StatelessWidget {
               height: 44,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(44),
-                child: WcaoUtils.imageCache(item.avatar),
+                child: ImageCacheWidget(imageUrl: item.avatar),
               ),
             ),
             Expanded(
@@ -156,7 +156,7 @@ class PublishCard extends StatelessWidget {
                     height: 124,
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(4),
-                      child: WcaoUtils.imageCache(e),
+                      child: ImageCacheWidget(imageUrl: e),
                     ),
                   ))
               .toList(),

@@ -1,5 +1,4 @@
 import 'package:dart_mock/dart_mock.dart' as mock;
-import 'package:guxin_ai/wcao/kit/index.dart';
 
 class MockHistoryMatch {
   static final List<MockHistoryMatch> _data = [];
@@ -40,7 +39,7 @@ class MockHistoryMatch {
           "水瓶座",
           "双鱼座",
         ]),
-        avatar: WcaoUtils.getRandomImage(),
+        avatar: "",
       ));
     }
 

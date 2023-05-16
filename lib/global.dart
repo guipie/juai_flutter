@@ -8,7 +8,6 @@ import 'package:guxin_ai/common/utils/db_sqlite.dart';
 import 'package:guxin_ai/common/utils/loading.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
-import 'package:sqflite/sqflite.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
 /// 全局静态数据

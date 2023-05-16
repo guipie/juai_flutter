@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:guxin_ai/wcao/kit/index.dart';
-import 'package:guxin_ai/wcao/ui/theme.dart';
+import 'package:guxin_ai/common/utils/loading.dart';
+import 'package:guxin_ai/common/widgets/ui/theme.dart';
 import 'package:get/get.dart';
 
 /// HACK: 设置新密码
@@ -76,8 +76,8 @@ class _NewPasswordState extends State<PasswordReset> {
                     ),
                   ),
                   InkWell(
-                    onTap: () async {
-                      await WcaoUtils.toast('密码重置成功！');
+                    onTap: () {
+                      Loading.toast('密码重置成功！');
                       Get.back();
                     },
                     child: Container(

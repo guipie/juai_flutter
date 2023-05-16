@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:guxin_ai/wcao/kit/index.dart';
-import 'package:guxin_ai/wcao/ui/tag.dart';
-import 'package:guxin_ai/wcao/ui/theme.dart';
+import 'package:guxin_ai/common/widgets/ui/tag.dart';
+import 'package:guxin_ai/common/widgets/ui/theme.dart';
 import 'package:dart_mock/dart_mock.dart' as mock;
 
 import '../mock.dart';
@@ -22,7 +21,7 @@ class _BbsIndexPageState extends State<BbsIndexPage> {
 
   /// 热门话题
   List<Map> list = List.generate(mock.integer(min: 22, max: 32), (index) {
-    return {"avatar": WcaoUtils.getRandomImage(), "tag": mock.cword(min: 2, max: 4)};
+    return {"avatar": "", "tag": mock.cword(min: 2, max: 4)};
   });
 
   /// 热门标签

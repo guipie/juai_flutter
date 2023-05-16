@@ -9,7 +9,6 @@ import 'package:guxin_ai/common/store/user.dart';
 import 'package:guxin_ai/common/utils/loading.dart';
 import 'package:guxin_ai/common/values/cache.dart';
 import 'package:guxin_ai/common/server.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart' hide FormData;
 
 /*
@@ -67,7 +66,11 @@ class HttpUtil {
     // 添加拦截器
     dio.interceptors.add(InterceptorsWrapper(
       onRequest: (options, handler) {
-        Loading.loading("主人,请稍后...");
+        Map<String, dynamic>? authorization = getAuthorizationHeader();
+        if (authorization != null) {
+          options.headers.addAll(authorization);
+        }
+        if (options.headers["isLoading"] != null) Loading.loading("主人，请稍后...");
         if (!options.path.startsWith(_prefix)) options.path = _prefix + options.path;
         // Do something before request is sent
         return handler.next(options); //continue
@@ -78,8 +81,8 @@ class HttpUtil {
         // 这样请求将被中止并触发异常，上层catchError会被调用。
       },
       onResponse: (response, handler) {
-        Loading.dismiss();
-        debugPrint("请求结果response.data:${response.data}");
+        debugPrint("请求结果response.data:${response.data},是否loading:${response.requestOptions.headers["isLoading"]}");
+        if (response.requestOptions.headers["isLoading"] != null) Loading.dismiss();
         var status = response.data?["status"];
         var message = response.data?["message"];
         if (status == 200 && GetUtils.isNullOrBlank(message) == false) {
@@ -93,9 +96,7 @@ class HttpUtil {
         // 这样请求将被中止并触发异常，上层catchError会被调用。
       },
       onError: (DioError e, handler) {
-        Loading.dismiss();
-        debugPrint("请求出错:$e");
-        // Do something with response error
+        debugPrint("请求出错:$e,是否loading:${options.headers["isLoading"]}");
         Loading.dismiss();
         ErrorEntity eInfo = createErrorEntity(e);
         onError(eInfo);
@@ -118,11 +119,10 @@ class HttpUtil {
     debugPrint('error.code -> ' + eInfo.code.toString() + ', error.message -> ' + eInfo.message);
     switch (eInfo.code) {
       case 401:
-        UserStore.to.onLogout();
-        EasyLoading.showError(eInfo.message);
+        Loading.error(eInfo.message);
         break;
       default:
-        EasyLoading.showError('未知错误');
+        Loading.error('未知错误');
         break;
     }
   }
@@ -146,7 +146,7 @@ class HttpUtil {
               case 400:
                 return ErrorEntity(code: errCode, message: "请求语法错误");
               case 401:
-                return ErrorEntity(code: errCode, message: "没有权限");
+                return ErrorEntity(code: errCode, message: "没有权限,请退出登录重试");
               case 403:
                 return ErrorEntity(code: errCode, message: "未授权,拒绝执行");
               case 404:
@@ -206,7 +206,7 @@ class HttpUtil {
   /// list 是否列表 默认 false
   /// cacheKey 缓存key
   /// cacheDisk 是否磁盘缓存
-  Future get(
+  Future<ApiResponse> get(
     String path, {
     Map<String, dynamic>? queryParameters,
     Options? options,
@@ -218,6 +218,8 @@ class HttpUtil {
     bool isLoading = false,
   }) async {
     Options requestOptions = options ?? Options();
+    requestOptions.headers = requestOptions.headers ?? {};
+    requestOptions.headers!.addIf(isLoading, "isLoading", true);
     requestOptions.extra ??= <String, dynamic>{};
     requestOptions.extra!.addAll({
       "refresh": refresh,
@@ -226,19 +228,13 @@ class HttpUtil {
       "cacheKey": cacheKey,
       "cacheDisk": cacheDisk,
     });
-    requestOptions.headers = requestOptions.headers ?? {};
-    Map<String, dynamic>? authorization = getAuthorizationHeader();
-    if (authorization != null) {
-      requestOptions.headers!.addAll(authorization);
-    }
-    if (isLoading) requestOptions.headers!.addAll({"isLoading": true});
     var response = await dio.get(
       path,
       queryParameters: queryParameters,
       options: options,
       cancelToken: cancelToken,
     );
-    return response.data;
+    return ApiResponse.fromJson(response.data);
   }
 
   /// restful post 操作
@@ -251,11 +247,7 @@ class HttpUtil {
   }) async {
     Options requestOptions = options ?? Options();
     requestOptions.headers = requestOptions.headers ?? {};
-    Map<String, dynamic>? authorization = getAuthorizationHeader();
-    if (authorization != null) {
-      requestOptions.headers!.addAll(authorization);
-    }
-    if (isLoading) requestOptions.headers!.addAll({"isLoading": true});
+    requestOptions.headers!.addIf(isLoading, "isLoading", true);
     var response = await dio.post(
       path,
       data: data,
@@ -276,11 +268,7 @@ class HttpUtil {
   }) async {
     Options requestOptions = options ?? Options();
     requestOptions.headers = requestOptions.headers ?? {};
-    Map<String, dynamic>? authorization = getAuthorizationHeader();
-    if (authorization != null) {
-      requestOptions.headers!.addAll(authorization);
-    }
-    if (isLoading) requestOptions.headers!.addAll({"isLoading": true});
+    requestOptions.headers!.addIf(isLoading, "isLoading", true);
     var response = await dio.put(
       path,
       data: data,
@@ -297,13 +285,11 @@ class HttpUtil {
     dynamic data,
     Map<String, dynamic>? queryParameters,
     Options? options,
+    isLoading = false,
   }) async {
     Options requestOptions = options ?? Options();
     requestOptions.headers = requestOptions.headers ?? {};
-    Map<String, dynamic>? authorization = getAuthorizationHeader();
-    if (authorization != null) {
-      requestOptions.headers!.addAll(authorization);
-    }
+    requestOptions.headers!.addIf(isLoading, "isLoading", true);
     var response = await dio.patch(
       path,
       data: data,
@@ -324,11 +310,7 @@ class HttpUtil {
   }) async {
     Options requestOptions = options ?? Options();
     requestOptions.headers = requestOptions.headers ?? {};
-    Map<String, dynamic>? authorization = getAuthorizationHeader();
-    if (authorization != null) {
-      requestOptions.headers!.addAll(authorization);
-    }
-    if (isLoading) requestOptions.headers!.addAll({"isLoading": true});
+    requestOptions.headers!.addIf(isLoading, "isLoading", true);
     var response = await dio.delete(
       path,
       data: data,
@@ -345,13 +327,12 @@ class HttpUtil {
     dynamic data,
     Map<String, dynamic>? queryParameters,
     Options? options,
+    isLoading = false,
   }) async {
     Options requestOptions = options ?? Options();
     requestOptions.headers = requestOptions.headers ?? {};
-    Map<String, dynamic>? authorization = getAuthorizationHeader();
-    if (authorization != null) {
-      requestOptions.headers!.addAll(authorization);
-    }
+    requestOptions.headers!.addIf(isLoading, "isLoading", true);
+
     var response = await dio.post(
       path,
       data: FormData.fromMap(data),
@@ -369,13 +350,11 @@ class HttpUtil {
     int dataLength = 0,
     Map<String, dynamic>? queryParameters,
     Options? options,
+    isLoading = false,
   }) async {
     Options requestOptions = options ?? Options();
     requestOptions.headers = requestOptions.headers ?? {};
-    Map<String, dynamic>? authorization = getAuthorizationHeader();
-    if (authorization != null) {
-      requestOptions.headers!.addAll(authorization);
-    }
+    requestOptions.headers!.addIf(isLoading, "isLoading", true);
     requestOptions.headers!.addAll({
       Headers.contentLengthHeader: dataLength.toString(),
     });

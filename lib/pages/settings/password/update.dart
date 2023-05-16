@@ -1,7 +1,7 @@
 import 'package:guxin_ai/common/routers/routes.dart';
 import 'package:flutter/material.dart';
-import 'package:guxin_ai/wcao/kit/index.dart';
-import 'package:guxin_ai/wcao/ui/theme.dart';
+import 'package:guxin_ai/common/utils/loading.dart';
+import 'package:guxin_ai/common/widgets/ui/theme.dart';
 import 'package:get/get.dart';
 
 class PasswordUpdatePage extends StatefulWidget {
@@ -122,7 +122,7 @@ class _PasswordUpdatePageState extends State<PasswordUpdatePage> {
                 ),
                 InkWell(
                   onTap: () async {
-                    await WcaoUtils.toast('密码重置成功');
+                    Loading.toast('密码重置成功');
                     Get.offAllNamed('/login/password');
                   },
                   child: Container(

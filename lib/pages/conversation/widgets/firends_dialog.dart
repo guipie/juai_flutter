@@ -1,4 +1,4 @@
-import 'package:guxin_ai/wcao/ui/theme.dart';
+import 'package:guxin_ai/common/widgets/ui/theme.dart';
 import 'package:flutter/material.dart';
 
 class FirendsDialog extends StatefulWidget {

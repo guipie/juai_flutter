@@ -11,6 +11,7 @@ class UserAPI {
     return await HttpUtil().post(
       '/api/app/user/login',
       data: params.toJson(),
+      isLoading: true,
     );
   }
 

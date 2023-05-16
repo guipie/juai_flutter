@@ -2,8 +2,8 @@ import 'package:guxin_ai/common/routers/routes.dart';
 import 'package:guxin_ai/common/store/store.dart';
 import 'package:guxin_ai/pages/settings/controler.dart';
 import 'package:flutter/material.dart';
-import 'package:guxin_ai/wcao/ui/cell.dart';
-import 'package:guxin_ai/wcao/ui/theme.dart';
+import 'package:guxin_ai/common/widgets/ui/cell.dart';
+import 'package:guxin_ai/common/widgets/ui/theme.dart';
 import 'package:get/get.dart';
 
 class SettingsPage extends GetView<SettingsController> {

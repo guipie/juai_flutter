@@ -1,7 +1,7 @@
 import 'package:guxin_ai/pages/bbs/mock.dart';
 import 'package:guxin_ai/pages/conversation/widgets/firends_dialog.dart';
 import 'package:guxin_ai/pages/conversation/widgets/qr_scan.dart';
-import 'package:guxin_ai/wcao/ui/theme.dart';
+import 'package:guxin_ai/common/widgets/ui/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:scan/scan.dart';

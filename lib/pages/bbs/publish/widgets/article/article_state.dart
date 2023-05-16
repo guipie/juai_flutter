@@ -1,43 +1,46 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:guxin_ai/common/apis/common.dart';
+import 'package:guxin_ai/common/apis/common_api.dart';
 import 'package:guxin_ai/common/server.dart';
 import 'package:guxin_ai/common/services/storage.dart';
+import 'package:guxin_ai/common/values/storage.dart';
 
 class ArticleEditSate {
   final FocusNode focusNode = FocusNode();
   Timer? selectAllTimer;
   SelectionType selectionType = SelectionType.none;
-  List<String> insertImages = [];
+  List<String> insertFiles = [];
   List<String> insertVideos = [];
-  void matchImageInit(String sources) {
+
+  void matchFileInit(String sources) {
     var imageReg = RegExp(Qiniu_External_domain + r'(.{6}/.{10,20})"').allMatches(sources);
     for (RegExpMatch m in imageReg) {
       var imageUrl = m.groups([1]).first ?? "";
-      debugPrint("匹配到图片：$imageUrl");
-      insertImages.add(imageUrl);
+      debugPrint("匹配到文件：$imageUrl");
+      insertFiles.add(imageUrl);
     }
   }
 
-  void deleteImage(String sources) {
+  void deleteFile(String sources) {
     var imageReg = RegExp(Qiniu_External_domain + r'(.{6}/.{10,20})"').allMatches(sources);
     var currentImages = <String>[];
     for (RegExpMatch m in imageReg) {
       var imageUrl = m.groups([1]).first ?? "";
       currentImages.add(imageUrl);
     }
-    debugPrint("insertImages${insertImages.toSet()},currentImages:${currentImages.toSet()}");
-    Set.from(insertImages).difference(Set.from(currentImages)).forEach((element) {
+    debugPrint("insertImages${insertFiles.toSet()},currentImages:${currentImages.toSet()}");
+    Set.from(insertFiles).difference(Set.from(currentImages)).forEach((element) {
       CommonApis.deleteQiniuPic(element.toString()).then((value) {
-        insertImages.remove(element.toString());
+        insertFiles.remove(element.toString());
       });
     });
   }
 
-  void setSource(String source, {bool isDelImage = false, bool isDelVideo = false}) {
-    StorageService.to.setString("article", source);
-    if (isDelImage) deleteImage(source);
+  void setSource(String source, String text, {bool isDelImage = false, bool isDelVideo = false}) {
+    StorageService.to.setString(STORAGE_ARTICLE_DELTA, source);
+    StorageService.to.setString(STORAGE_ARTICLE_TEXT, text);
+    if (isDelImage) deleteFile(source);
   }
 }
 

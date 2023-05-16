@@ -2,9 +2,12 @@
   <!-- Flutter needs it to communicate with the running application
          to allow setting breakpoints, to provide hot reload, etc.
     -->
-  <uses-permission android:name="android.permission.INTERNET" />
-
+  <uses-permission android:name="android.permission.INTERNET" /> 
   <uses-permission android:name="android.permission.CAMERA" />
+  <!-- 写权限 -->
+  <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+  <!-- 读权限 -->
+  <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/> 
 
   <application>
     <meta-data android:name="flutterEmbedding" android:value="2" />

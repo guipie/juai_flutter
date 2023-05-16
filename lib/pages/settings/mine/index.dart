@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:guxin_ai/common/widgets/image_cache.dart';
 import 'package:guxin_ai/pages/settings/mine/mock.dart';
-import 'package:guxin_ai/wcao/kit/index.dart';
-import 'package:guxin_ai/wcao/ui/tag.dart';
-import 'package:guxin_ai/wcao/ui/theme.dart';
+import 'package:guxin_ai/common/widgets/ui/tag.dart';
+import 'package:guxin_ai/common/widgets/ui/theme.dart';
 import 'package:get/get.dart';
 
 import '../../bbs/mock.dart';
@@ -73,10 +73,7 @@ class _PageViewMineState extends State<PageViewMine> {
                     children: [
                       SizedBox(
                         width: double.infinity,
-                        child: WcaoUtils.imageCache(
-                          mine.bg,
-                          fit: BoxFit.cover,
-                        ),
+                        child: ImageCacheWidget(imageUrl: mine.bg),
                       ),
                       Positioned(
                         child: Container(
@@ -188,10 +185,7 @@ class _PageViewMineState extends State<PageViewMine> {
                     width: double.infinity,
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(8),
-                      child: WcaoUtils.imageCache(
-                        item.media[0],
-                        fit: BoxFit.fitWidth,
-                      ),
+                      child: ImageCacheWidget(imageUrl: item.media[0]),
                     ),
                   )
                 : Container(),

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:guxin_ai/wcao/kit/index.dart';
-import 'package:guxin_ai/wcao/ui/theme.dart';
+import 'package:guxin_ai/common/widgets/ui/theme.dart';
 
 class SettingsBacklistPage extends StatefulWidget {
   const SettingsBacklistPage({Key? key}) : super(key: key);
@@ -40,7 +39,7 @@ class _SettingsBacklistPageState extends State<SettingsBacklistPage> {
                       margin: const EdgeInsets.only(right: 12),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(28),
-                        child: Image.network(WcaoUtils.getRandomImage()),
+                        child: Image.network(""),
                       ),
                     ),
                     Expanded(

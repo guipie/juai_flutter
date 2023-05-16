@@ -1,6 +1,5 @@
 import 'package:guxin_ai/pages/history_match/mock.dart';
 import 'package:dart_mock/dart_mock.dart' as mock;
-import 'package:guxin_ai/wcao/kit/index.dart';
 
 class MockLike extends MockHistoryMatch {
   MockLike({
@@ -71,14 +70,14 @@ class MockLike extends MockHistoryMatch {
           "水瓶座",
           "双鱼座",
         ]),
-        avatar: WcaoUtils.getRandomImage(),
+        avatar: "",
         tag: List.generate(mock.integer(min: 1, max: 4), (index) => '#${mock.ctitle(min: 3, max: 10)}'),
         mediaType: mockType,
         media: List.generate(mock.integer(min: 0, max: 4), (index) {
           if (mockType) {
-            return WcaoUtils.getRandomImage();
+            return "";
           } else {
-            return WcaoUtils.getRandomImage();
+            return "";
           }
         }),
         share: mock.integer(min: 1, max: 99),

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:guxin_ai/pages/settings/login/controller.dart';
 import 'package:guxin_ai/pages/settings/login/widgets/login_btn.dart';
 import 'package:guxin_ai/pages/settings/login/widgets/username_text.dart';
-import 'package:guxin_ai/wcao/ui/theme.dart';
+import 'package:guxin_ai/common/widgets/ui/theme.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';

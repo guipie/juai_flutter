@@ -1,7 +1,7 @@
 library entities;
 
 export 'user.dart';
-export 'news.dart';
+export 'content.dart';
 export 'categories.dart';
 export 'channels.dart';
 export 'tags.dart';

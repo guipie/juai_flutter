@@ -2,6 +2,7 @@ import 'package:guxin_ai/common/store/store.dart';
 import 'package:guxin_ai/pages/bbs/publish/controller.dart';
 import 'package:guxin_ai/pages/bbs/publish/view.dart';
 import 'package:guxin_ai/pages/bbs/publish/view_article.dart';
+import 'package:guxin_ai/pages/bbs/publish/view_special.dart';
 import 'package:guxin_ai/pages/bbs_chat/controller.dart';
 import 'package:guxin_ai/pages/bbs_chat/view.dart';
 import 'package:guxin_ai/pages/settings/agreement/privacy.dart';
@@ -86,6 +87,13 @@ class AppPages {
       page: () => PublishArticlePage(),
       binding: BindingsBuilder(() => Get.put<PublishController>(PublishController())),
     ),
+    GetPage(
+      name: Routes.bbsPublishSpecial,
+      page: () => PublishSpecialPage(),
+      binding: BindingsBuilder(() => Get.put<PublishController>(PublishController())),
+    ),
+
+    ///gpt相关
     GetPage(
       name: Routes.bbsChat,
       page: () => BbsChatPage(),

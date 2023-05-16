@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:guxin_ai/common/apis/user.dart';
+import 'package:guxin_ai/common/apis/user_api.dart';
 import 'package:guxin_ai/common/entities/user.dart';
 import 'package:guxin_ai/common/routers/routes.dart';
 import 'package:guxin_ai/common/services/storage.dart';

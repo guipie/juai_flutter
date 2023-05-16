@@ -35,7 +35,9 @@ class _ArticleEditPageState extends State<ArticleEditPage> {
   @override
   void dispose() {
     state.selectAllTimer?.cancel();
-    state.setSource(jsonEncode(_controller.document.toDelta().toJson()), isDelImage: true, isDelVideo: true);
+    state.setSource(jsonEncode(_controller.document.toDelta().toJson()), _controller.document.toPlainText(), isDelImage: true, isDelVideo: true);
+    _controller.dispose();
+    state.focusNode.dispose();
     super.dispose();
   }
 
@@ -51,17 +53,20 @@ class _ArticleEditPageState extends State<ArticleEditPage> {
           selection: const TextSelection.collapsed(offset: 0),
         );
       });
-      state.matchImageInit(existDoc);
+      state.matchFileInit(existDoc);
     } catch (error) {
       debugPrint(error.toString());
-      final doc = Document()..insert(0, '..');
+      final doc = Document()..insert(0, '');
       setState(() {
         _controller = QuillController(document: doc, selection: const TextSelection.collapsed(offset: 0));
       });
     }
     _controller.addListener(() {
       var json = jsonEncode(_controller.document.toDelta().toJson());
-      state.setSource(json);
+      state.setSource(
+        json,
+        _controller.document.toPlainText(),
+      );
       debugPrint(json);
       // state.deleteImage(source);
     });
@@ -145,7 +150,7 @@ class _ArticleEditPageState extends State<ArticleEditPage> {
     Widget quillEditor = MouseRegion(
       cursor: SystemMouseCursors.text,
       child: QuillEditor(
-        controller: _controller!,
+        controller: _controller,
         scrollController: ScrollController(),
         scrollable: true,
         focusNode: state.focusNode,
@@ -320,11 +325,11 @@ class _ArticleEditPageState extends State<ArticleEditPage> {
   Future<String> _onImagePickCallback(File file) async {
     // Copies the picked file from temporary cache to applications directory
     final appDocDir = await getApplicationDocumentsDirectory();
-    final copiedFile = await file.copy('${appDocDir.path}/${basename(file.path)}');
+    final copiedFile = await file.copy('${appDocDir.path}\\${basename(file.path)}');
     debugPrint("图片选择的路径:${copiedFile.path}");
-    var uploadUrl = await QiniuUtil.instance.saveFile(file, QiniuFileType.image);
+    var uploadUrl = await QiniuUtil.saveFile(file, FileType.image);
     if (uploadUrl.isNotEmpty) {
-      state.insertImages.add(uploadUrl);
+      state.insertFiles.add(uploadUrl);
       return Qiniu_External_domain + uploadUrl;
     }
     return Future.error("图片上传出错了");
@@ -349,9 +354,14 @@ class _ArticleEditPageState extends State<ArticleEditPage> {
   Future<String> _onVideoPickCallback(File file) async {
     // Copies the picked file from temporary cache to applications directory
     final appDocDir = await getApplicationDocumentsDirectory();
-    final copiedFile = await file.copy('${appDocDir.path}/${basename(file.path)}');
+    final copiedFile = await file.copy('${appDocDir.path}\\${basename(file.path)}');
     debugPrint("视频选择的路径:${copiedFile.path}");
-    return QiniuUtil.instance.saveFile(file, QiniuFileType.video);
+    var uploadUrl = await QiniuUtil.saveFile(file, FileType.video);
+    if (uploadUrl.isNotEmpty) {
+      state.insertFiles.add(uploadUrl);
+      return Qiniu_External_domain + uploadUrl;
+    }
+    return Future.error("视频上传出错了");
   }
 
   Future<MediaPickSetting?> _selectMediaPickSetting(BuildContext context) => showDialog<MediaPickSetting>(

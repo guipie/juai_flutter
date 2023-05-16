@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:guxin_ai/wcao/ui/theme.dart';
+import 'package:guxin_ai/common/widgets/ui/theme.dart';
 
 class Tag extends StatelessWidget {
   const Tag(
@@ -13,6 +13,7 @@ class Tag extends StatelessWidget {
     this.fontWeight,
     this.close = false,
     this.onClose,
+    this.onTab,
     this.border,
   }) : super(key: key);
 
@@ -41,6 +42,9 @@ class Tag extends StatelessWidget {
   /// 关闭按钮
   final bool close;
 
+  /// 点击回调
+  final VoidCallback? onTab;
+
   /// 关闭回调
   final VoidCallback? onClose;
 
@@ -63,12 +67,15 @@ class Tag extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text(
-            text,
-            style: TextStyle(
-              fontSize: fontSize ?? WcaoTheme.fsSm,
-              color: color,
-              fontWeight: fontWeight,
+          InkWell(
+            onTap: onTab,
+            child: Text(
+              text,
+              style: TextStyle(
+                fontSize: fontSize ?? WcaoTheme.fsSm,
+                color: color,
+                fontWeight: fontWeight,
+              ),
             ),
           ),
           close

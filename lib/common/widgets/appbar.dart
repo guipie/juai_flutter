@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:getwidget/getwidget.dart';
+import 'package:guxin_ai/common/routers/routes.dart';
 import 'package:guxin_ai/pages/conversation/widgets/firends_dialog.dart';
 import 'package:guxin_ai/pages/conversation/widgets/qr_scan.dart';
-import 'package:guxin_ai/wcao/ui/theme.dart';
+import 'package:guxin_ai/common/widgets/ui/theme.dart';
 
 AppBar conversationBar(BuildContext context) {
   return AppBar(
@@ -57,6 +60,96 @@ AppBar conversationBar(BuildContext context) {
               ],
             ),
             value: 2,
+          ),
+        ],
+      )
+    ],
+  );
+}
+
+AppBar bbsBar(BuildContext context, List<String> tabs) {
+  return AppBar(
+    automaticallyImplyLeading: false,
+    title: SizedBox(
+      width: double.infinity,
+      child: Wrap(
+        alignment: WrapAlignment.start,
+        children: tabs
+            .map(
+              (e) => GFButton(
+                onPressed: () {
+                  tabs.indexOf(e);
+                },
+                size: GFSize.LARGE,
+                text: e,
+                color: 0 == tabs.indexOf(e) ? GFColors.WARNING : GFColors.FOCUS,
+                type: GFButtonType.transparent,
+              ),
+            )
+            .toList(),
+      ),
+    ),
+    actions: [
+      PopupMenuButton(
+        child: const Wrap(
+          crossAxisAlignment: WrapCrossAlignment.center,
+          children: [
+            Icon(Icons.add_outlined),
+            Text("发布"),
+            SizedBox(width: 10),
+          ],
+        ),
+        onSelected: (item) async {
+          if (item == 1) {
+            Get.toNamed(Routes.bbsPublishDongtai);
+          } else if (item == 2) {
+            Get.toNamed(Routes.bbsPublishArticle);
+          } else if (item == 3) {
+            Get.toNamed(Routes.bbsPublishSpecial);
+          }
+        },
+        itemBuilder: (BuildContext context) => [
+          PopupMenuItem(
+            padding: const EdgeInsets.only(left: 12),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const Icon(Icons.image_aspect_ratio_outlined),
+                Container(
+                  margin: const EdgeInsets.only(left: 8),
+                  child: const Text('动态'),
+                ),
+              ],
+            ),
+            value: 1,
+          ),
+          PopupMenuItem(
+            padding: const EdgeInsets.only(left: 12),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const Icon(Icons.article_outlined),
+                Container(
+                  margin: const EdgeInsets.only(left: 8),
+                  child: const Text('文章'),
+                ),
+              ],
+            ),
+            value: 2,
+          ),
+          PopupMenuItem(
+            padding: const EdgeInsets.only(left: 12),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const Icon(Icons.folder_special_outlined),
+                Container(
+                  margin: const EdgeInsets.only(left: 8),
+                  child: const Text('专栏'),
+                ),
+              ],
+            ),
+            value: 3,
           ),
         ],
       )

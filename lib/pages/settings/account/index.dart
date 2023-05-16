@@ -1,6 +1,6 @@
 import 'package:guxin_ai/common/routers/routes.dart';
 import 'package:flutter/material.dart';
-import 'package:guxin_ai/wcao/ui/cell.dart';
+import 'package:guxin_ai/common/widgets/ui/cell.dart';
 import 'package:get/get.dart';
 
 /// HACK: 账户设置

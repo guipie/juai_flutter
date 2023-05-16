@@ -14,17 +14,18 @@ dependencies:
 
   flutter_quill:
     path: ../flutter_quill
+  image_picker: ^0.8.5+3
+  photo_view: ^0.14.0
+  video_player: ^2.4.2
+  youtube_player_flutter: ^8.1.1
+  gallery_saver: ^2.3.2
+  # math_keyboard: ^0.1.8
+  string_validator: ^1.0.0
+  universal_html: ^2.2.1
+  url_launcher: ^6.1.9
 
-  image_picker:
-  photo_view:
-  video_player:
-  youtube_player_flutter:
-  gallery_saver:
-  math_keyboard:
-  string_validator:
-  universal_html:
-  url_launcher:
-
+dependency_overrides:
+  intl: ^0.18.0
 dev_dependencies:
   flutter_test:
     sdk: flutter

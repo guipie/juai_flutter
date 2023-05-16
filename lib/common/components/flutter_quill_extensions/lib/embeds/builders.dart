@@ -6,11 +6,9 @@ import 'package:flutter_quill/extensions.dart' as base;
 import 'package:flutter_quill/flutter_quill.dart' hide Text;
 import 'package:flutter_quill/translations.dart';
 import 'package:gallery_saver/gallery_saver.dart';
-import 'package:math_keyboard/math_keyboard.dart';
 import 'package:universal_html/html.dart' as html;
 
-import '../shims/dart_ui_fake.dart'
-    if (dart.library.html) '../shims/dart_ui_real.dart' as ui;
+import '../shims/dart_ui_fake.dart' if (dart.library.html) '../shims/dart_ui_real.dart' as ui;
 import 'utils.dart';
 import 'widgets/image.dart';
 import 'widgets/image_resizer.dart';
@@ -36,27 +34,15 @@ class ImageEmbedBuilder extends EmbedBuilder {
     OptionalSize? _imageSize;
     final style = node.style.attributes['style'];
     if (base.isMobile() && style != null) {
-      final _attrs = base.parseKeyValuePairs(style.value.toString(), {
-        Attribute.mobileWidth,
-        Attribute.mobileHeight,
-        Attribute.mobileMargin,
-        Attribute.mobileAlignment
-      });
+      final _attrs = base.parseKeyValuePairs(style.value.toString(), {Attribute.mobileWidth, Attribute.mobileHeight, Attribute.mobileMargin, Attribute.mobileAlignment});
       if (_attrs.isNotEmpty) {
-        assert(
-            _attrs[Attribute.mobileWidth] != null &&
-                _attrs[Attribute.mobileHeight] != null,
-            'mobileWidth and mobileHeight must be specified');
+        assert(_attrs[Attribute.mobileWidth] != null && _attrs[Attribute.mobileHeight] != null, 'mobileWidth and mobileHeight must be specified');
         final w = double.parse(_attrs[Attribute.mobileWidth]!);
         final h = double.parse(_attrs[Attribute.mobileHeight]!);
         _imageSize = OptionalSize(w, h);
-        final m = _attrs[Attribute.mobileMargin] == null
-            ? 0.0
-            : double.parse(_attrs[Attribute.mobileMargin]!);
+        final m = _attrs[Attribute.mobileMargin] == null ? 0.0 : double.parse(_attrs[Attribute.mobileMargin]!);
         final a = base.getAlignment(_attrs[Attribute.mobileAlignment]);
-        image = Padding(
-            padding: EdgeInsets.all(m),
-            child: imageByUrl(imageUrl, width: w, height: h, alignment: a));
+        image = Padding(padding: EdgeInsets.all(m), child: imageByUrl(imageUrl, width: w, height: h, alignment: a));
       }
     }
 
@@ -83,14 +69,11 @@ class ImageEmbedBuilder extends EmbedBuilder {
                             final _screenSize = MediaQuery.of(context).size;
                             return ImageResizer(
                                 onImageResize: (w, h) {
-                                  final res = getEmbedNode(
-                                      controller, controller.selection.start);
-                                  final attr = base.replaceStyleString(
-                                      getImageStyleString(controller), w, h);
+                                  final res = getEmbedNode(controller, controller.selection.start);
+                                  final attr = base.replaceStyleString(getImageStyleString(controller), w, h);
                                   controller
                                     ..skipRequestKeyboard = true
-                                    ..formatText(
-                                        res.offset, 1, StyleAttribute(attr));
+                                    ..formatText(res.offset, 1, StyleAttribute(attr));
                                 },
                                 imageWidth: _imageSize?.width,
                                 imageHeight: _imageSize?.height,
@@ -104,12 +87,9 @@ class ImageEmbedBuilder extends EmbedBuilder {
                     color: Colors.cyanAccent,
                     text: 'Copy'.i18n,
                     onPressed: () {
-                      final imageNode =
-                          getEmbedNode(controller, controller.selection.start)
-                              .value;
+                      final imageNode = getEmbedNode(controller, controller.selection.start).value;
                       final imageUrl = imageNode.value.data;
-                      controller.copiedImageUrl =
-                          ImageUrl(imageUrl, getImageStyleString(controller));
+                      controller.copiedImageUrl = ImageUrl(imageUrl, getImageStyleString(controller));
                       Navigator.pop(context);
                     },
                   );
@@ -118,21 +98,14 @@ class ImageEmbedBuilder extends EmbedBuilder {
                     color: Colors.red.shade200,
                     text: 'Remove'.i18n,
                     onPressed: () {
-                      final offset =
-                          getEmbedNode(controller, controller.selection.start)
-                              .offset;
-                      controller.replaceText(offset, 1, '',
-                          TextSelection.collapsed(offset: offset));
+                      final offset = getEmbedNode(controller, controller.selection.start).offset;
+                      controller.replaceText(offset, 1, '', TextSelection.collapsed(offset: offset));
                       Navigator.pop(context);
                     },
                   );
                   return Padding(
                     padding: const EdgeInsets.fromLTRB(50, 0, 50, 0),
-                    child: SimpleDialog(
-                        shape: const RoundedRectangleBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(10))),
-                        children: [resizeOption, copyOption, removeOption]),
+                    child: SimpleDialog(shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10))), children: [resizeOption, copyOption, removeOption]),
                   );
                 });
           },
@@ -149,8 +122,7 @@ class ImageEmbedBuilder extends EmbedBuilder {
 }
 
 class ImageEmbedBuilderWeb extends EmbedBuilder {
-  ImageEmbedBuilderWeb({this.constraints})
-      : assert(kIsWeb, 'ImageEmbedBuilderWeb is only for web platform');
+  ImageEmbedBuilderWeb({this.constraints}) : assert(kIsWeb, 'ImageEmbedBuilderWeb is only for web platform');
 
   final BoxConstraints? constraints;
 
@@ -203,8 +175,7 @@ class VideoEmbedBuilder extends EmbedBuilder {
 
     final videoUrl = node.value.data;
     if (videoUrl.contains('youtube.com') || videoUrl.contains('youtu.be')) {
-      return YoutubeVideoApp(
-          videoUrl: videoUrl, context: context, readOnly: readOnly);
+      return YoutubeVideoApp(videoUrl: videoUrl, context: context, readOnly: readOnly);
     }
     return VideoApp(
       videoUrl: videoUrl,
@@ -229,27 +200,27 @@ class FormulaEmbedBuilder extends EmbedBuilder {
   ) {
     assert(!kIsWeb, 'Please provide formula EmbedBuilder for Web');
 
-    final mathController = MathFieldEditingController();
-    return Focus(
-      onFocusChange: (hasFocus) {
-        if (hasFocus) {
-          // If the MathField is tapped, hides the built in keyboard
-          SystemChannels.textInput.invokeMethod('TextInput.hide');
-          debugPrint(mathController.currentEditingValue());
-        }
-      },
-      child: MathField(
-        controller: mathController,
-        variables: const ['x', 'y', 'z'],
-        onChanged: (value) {},
-        onSubmitted: (value) {},
-      ),
-    );
+    // final mathController = MathFieldEditingController();
+    // return Focus(
+    //   onFocusChange: (hasFocus) {
+    //     if (hasFocus) {
+    //       // If the MathField is tapped, hides the built in keyboard
+    //       SystemChannels.textInput.invokeMethod('TextInput.hide');
+    //       debugPrint(mathController.currentEditingValue());
+    //     }
+    //   },
+    //   child: MathField(
+    //     controller: mathController,
+    //     variables: const ['x', 'y', 'z'],
+    //     onChanged: (value) {},
+    //     onSubmitted: (value) {},
+    //   ),
+    // );
+    return Placeholder();
   }
 }
 
-Widget _menuOptionsForReadonlyImage(
-    BuildContext context, String imageUrl, Widget image) {
+Widget _menuOptionsForReadonlyImage(BuildContext context, String imageUrl, Widget image) {
   return GestureDetector(
       onTap: () {
         showDialog(
@@ -262,8 +233,7 @@ Widget _menuOptionsForReadonlyImage(
                 onPressed: () {
                   imageUrl = appendFileExtensionToImageUrl(imageUrl);
                   GallerySaver.saveImage(imageUrl).then((_) {
-                    ScaffoldMessenger.of(context)
-                        .showSnackBar(SnackBar(content: Text('Saved'.i18n)));
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Saved'.i18n)));
                     Navigator.pop(context);
                   });
                 },
@@ -273,19 +243,12 @@ Widget _menuOptionsForReadonlyImage(
                 color: Colors.cyanAccent,
                 text: 'Zoom'.i18n,
                 onPressed: () {
-                  Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              ImageTapWrapper(imageUrl: imageUrl)));
+                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => ImageTapWrapper(imageUrl: imageUrl)));
                 },
               );
               return Padding(
                 padding: const EdgeInsets.fromLTRB(50, 0, 50, 0),
-                child: SimpleDialog(
-                    shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(10))),
-                    children: [saveOption, zoomOption]),
+                child: SimpleDialog(shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10))), children: [saveOption, zoomOption]),
               );
             });
       },
@@ -293,13 +256,7 @@ Widget _menuOptionsForReadonlyImage(
 }
 
 class _SimpleDialogItem extends StatelessWidget {
-  const _SimpleDialogItem(
-      {required this.icon,
-      required this.color,
-      required this.text,
-      required this.onPressed,
-      Key? key})
-      : super(key: key);
+  const _SimpleDialogItem({required this.icon, required this.color, required this.text, required this.onPressed, Key? key}) : super(key: key);
 
   final IconData icon;
   final Color color;
@@ -315,8 +272,7 @@ class _SimpleDialogItem extends StatelessWidget {
           Icon(icon, size: 36, color: color),
           Padding(
             padding: const EdgeInsetsDirectional.only(start: 16),
-            child:
-                Text(text, style: const TextStyle(fontWeight: FontWeight.bold)),
+            child: Text(text, style: const TextStyle(fontWeight: FontWeight.bold)),
           ),
         ],
       ),

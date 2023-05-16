@@ -8,7 +8,7 @@ import 'package:guxin_ai/pages/conversation/view.dart';
 import 'package:guxin_ai/pages/home/index/index.dart';
 import 'package:guxin_ai/pages/settings/mine/index.dart';
 
-import 'package:guxin_ai/wcao/ui/theme.dart';
+import 'package:guxin_ai/common/widgets/ui/theme.dart';
 import 'package:get/get.dart';
 
 /// 首页 PageView Controller.

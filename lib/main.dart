@@ -1,6 +1,6 @@
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:guxin_ai/common/routers/pages.dart';
-import 'package:guxin_ai/wcao/ui/theme.dart';
+import 'package:guxin_ai/common/widgets/ui/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:guxin_ai/common/langs/translation_service.dart';
 import 'package:guxin_ai/common/routers/routes.dart';
@@ -17,6 +17,7 @@ import 'common/routers/observers.dart';
 
 Future<void> main() async {
   await ScreenUtil.ensureScreenSize();
+  await Global.init();
   // 必须加上这一行。
   if (GetPlatform.isDesktop) {
     await windowManager.ensureInitialized();
@@ -32,7 +33,6 @@ Future<void> main() async {
       await windowManager.focus();
     });
   }
-  await Global.init();
   runApp(
     ScreenUtilInit(
       designSize: const Size(375, 812),
@@ -73,7 +73,7 @@ class _MyAppState extends State<MyApp> {
       darkTheme: WcaoTheme.darkTheme,
       builder: EasyLoading.init(),
       getPages: AppPages.routes,
-      initialRoute: GetPlatform.isMobile ? Routes.bbsPublishDongtai : Routes.homePc,
+      initialRoute: GetPlatform.isMobile ? Routes.home : Routes.bbsPublishDongtai,
       navigatorObservers: [RouteObservers()],
       // unknownRoute: AppPages.unknownRoute,
       defaultTransition: Transition.rightToLeftWithFade,
@@ -86,7 +86,7 @@ class _MyAppState extends State<MyApp> {
       ],
       supportedLocales: ConfigStore.to.languages,
       locale: ConfigStore.to.locale,
-      fallbackLocale: const Locale('en', 'US'),
+      fallbackLocale: const Locale('zh', 'CN'),
       enableLog: true,
       logWriterCallback: Logger.write,
     );
