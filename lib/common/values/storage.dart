@@ -15,7 +15,9 @@ const String STORAGE_INDEX_CONTENT_CACHE_KEY = 'cache_index_news';
 /// 多语言
 const String STORAGE_LANGUAGE_CODE = 'language_code';
 
-///本地缓存文章
+///本地缓存文章相关
 const String STORAGE_ARTICLE_DELTA = 'article_delta';
 const String STORAGE_ARTICLE_TEXT = 'article_text';
 const String STORAGE_ARTICLE_TITLE = 'article_title';
+const String STORAGE_MY_TAG = 'my_tag';
+const String STORAGE_TOP_TAG = 'top_tag';

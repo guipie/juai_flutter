@@ -1,7 +1,7 @@
 import 'package:guxin_ai/common/routers/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:guxin_ai/common/utils/loading.dart';
-import 'package:guxin_ai/common/widgets/ui/theme.dart';
+import 'package:guxin_ai/common/theme.dart';
 import 'package:get/get.dart';
 
 class PasswordUpdatePage extends StatefulWidget {

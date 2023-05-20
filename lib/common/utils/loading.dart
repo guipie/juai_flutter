@@ -11,13 +11,14 @@ class Loading {
       ..indicatorSize = 35.0
       ..lineWidth = 2
       ..radius = 10.0
-      ..progressColor = Colors.white
+      ..progressColor = Colors.green
       ..backgroundColor = Colors.black.withOpacity(0.7)
       ..indicatorColor = Colors.white
       ..textColor = Colors.white
       ..maskColor = Colors.black.withOpacity(0.6)
       ..userInteractions = true
       ..dismissOnTap = false
+      ..toastPosition = EasyLoadingToastPosition.bottom
       ..maskType = EasyLoadingMaskType.custom;
   }
   static void confirm(String text, {Function()? onConfirm}) {
@@ -56,6 +57,14 @@ class Loading {
 
   static void toast(String text) {
     EasyLoading.showToast(text);
+  }
+
+  static void progress(double progress, String txt) {
+    EasyLoading.showProgress(
+      progress,
+      status: "hahaaa",
+      maskType: EasyLoadingMaskType.none,
+    );
   }
 
   static void dismiss() {

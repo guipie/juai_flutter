@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:guxin_ai/common/apis/apis.dart';
+import 'package:guxin_ai/common/store/content.dart';
 import 'package:guxin_ai/common/widgets/ui/tag.dart';
-import 'package:guxin_ai/common/widgets/ui/theme.dart';
+import 'package:guxin_ai/common/theme.dart';
 import 'package:dart_mock/dart_mock.dart' as mock;
 import 'package:get/get.dart';
 
@@ -20,13 +21,9 @@ class _BbsAddTagState extends State<BbsAddTag> {
   @override
   void initState() {
     super.initState();
+    tags = ContentStore.to.topTags;
     searchController.addListener(() {
       setState(() {});
-    });
-    ContentAPI.contentTags().then((value) {
-      setState(() {
-        tags = value;
-      });
     });
     // ContentAPI.contentTagsMine().then((value) {
     //   setState(() {

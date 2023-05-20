@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:guxin_ai/common/widgets/ui/theme.dart';
+import 'package:guxin_ai/common/theme.dart';
 
 class Cell extends StatelessWidget {
   const Cell(

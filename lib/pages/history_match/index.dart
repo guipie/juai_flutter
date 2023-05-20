@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:guxin_ai/common/widgets/image_cache.dart';
 import 'package:guxin_ai/pages/history_match/mock.dart';
-import 'package:guxin_ai/common/widgets/ui/theme.dart';
+import 'package:guxin_ai/common/theme.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
@@ -84,7 +84,7 @@ class _HistoryMatchState extends State<HistoryMatch> {
                     height: double.infinity,
                     child: ClipRRect(
                       borderRadius: WcaoTheme.radius,
-                      child: ImageCacheWidget(imageUrl: item.avatar),
+                      child: ImageCacheWidget(item.avatar),
                     ),
                   ),
                   Positioned(

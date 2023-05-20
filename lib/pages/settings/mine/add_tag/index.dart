@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:guxin_ai/common/widgets/ui/tag.dart';
-import 'package:guxin_ai/common/widgets/ui/theme.dart';
+import 'package:guxin_ai/common/theme.dart';
 import 'package:dart_mock/dart_mock.dart' as mock;
 import 'package:get/get.dart';
 

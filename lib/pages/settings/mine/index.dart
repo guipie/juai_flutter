@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:guxin_ai/common/widgets/image_cache.dart';
 import 'package:guxin_ai/pages/settings/mine/mock.dart';
 import 'package:guxin_ai/common/widgets/ui/tag.dart';
-import 'package:guxin_ai/common/widgets/ui/theme.dart';
+import 'package:guxin_ai/common/theme.dart';
 import 'package:get/get.dart';
 
 import '../../bbs/mock.dart';
@@ -73,7 +73,7 @@ class _PageViewMineState extends State<PageViewMine> {
                     children: [
                       SizedBox(
                         width: double.infinity,
-                        child: ImageCacheWidget(imageUrl: mine.bg),
+                        child: ImageCacheWidget(mine.bg),
                       ),
                       Positioned(
                         child: Container(
@@ -185,7 +185,7 @@ class _PageViewMineState extends State<PageViewMine> {
                     width: double.infinity,
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(8),
-                      child: ImageCacheWidget(imageUrl: item.media[0]),
+                      child: ImageCacheWidget(item.media[0]),
                     ),
                   )
                 : Container(),

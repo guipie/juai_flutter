@@ -3,7 +3,7 @@ import 'package:guxin_ai/common/routers/routes.dart';
 import 'package:guxin_ai/common/store/store.dart';
 import 'package:guxin_ai/common/widgets/avatar.dart';
 import 'package:guxin_ai/pages/home/widgets/PcWidgetMeasure.dart';
-import 'package:guxin_ai/common/widgets/ui/theme.dart';
+import 'package:guxin_ai/common/theme.dart';
 import 'package:get/get.dart';
 import 'package:getwidget/getwidget.dart';
 import 'controler.dart';

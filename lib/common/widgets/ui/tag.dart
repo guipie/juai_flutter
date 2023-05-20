@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:guxin_ai/common/widgets/ui/theme.dart';
+import 'package:guxin_ai/common/theme.dart';
 
 class Tag extends StatelessWidget {
   const Tag(
@@ -54,6 +54,7 @@ class Tag extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: 80,
       padding: padding ??
           const EdgeInsets.symmetric(
             vertical: 2,

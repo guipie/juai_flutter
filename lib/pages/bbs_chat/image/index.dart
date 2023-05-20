@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:guxin_ai/common/widgets/image_cache.dart';
-import 'package:guxin_ai/common/widgets/ui/theme.dart';
+import 'package:guxin_ai/common/theme.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../../bbs/mock.dart';
@@ -78,7 +78,7 @@ class _BbsChatImagePageState extends State<BbsChatImagePage> {
               Expanded(
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(8),
-                  child: ImageCacheWidget(imageUrl: item.avatar),
+                  child: ImageCacheWidget(item.avatar),
                 ),
               ),
               Container(
@@ -101,7 +101,7 @@ class _BbsChatImagePageState extends State<BbsChatImagePage> {
                           height: 24,
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(24),
-                            child: ImageCacheWidget(imageUrl: item.avatar),
+                            child: ImageCacheWidget(item.avatar),
                           ),
                         ),
                         Container(

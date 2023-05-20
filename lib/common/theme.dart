@@ -45,7 +45,31 @@ class WcaoTheme {
 
   /// fontSize xl 标题
   static double fsXl = 18;
+  static double fsXll = 24;
+  static double fsXlll = 36;
 
-  static ThemeData darkTheme = ThemeData.dark(useMaterial3: true).copyWith(cardColor: const Color(0xff222428));
-  static ThemeData lightTheme = ThemeData.light(useMaterial3: true).copyWith(cardColor: const Color.fromARGB(58, 197, 196, 196));
+  static ThemeData darkTheme = ThemeData.dark(useMaterial3: true).copyWith(
+    cardColor: const Color(0xff222428),
+    appBarTheme: const AppBarTheme(
+      elevation: 0,
+      centerTitle: false,
+      titleTextStyle: TextStyle(
+        color: Colors.white70,
+        fontSize: 20,
+        fontWeight: FontWeight.w500,
+      ),
+    ),
+  );
+  static ThemeData lightTheme = ThemeData.light(useMaterial3: true).copyWith(
+    cardColor: const Color.fromARGB(58, 197, 196, 196),
+    appBarTheme: const AppBarTheme(
+      elevation: 0,
+      centerTitle: false,
+      titleTextStyle: TextStyle(
+        color: Colors.black87,
+        fontSize: 20,
+        fontWeight: FontWeight.w500,
+      ),
+    ),
+  );
 }

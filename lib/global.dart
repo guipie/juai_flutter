@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:guxin_ai/common/services/storage.dart';
 import 'package:guxin_ai/common/store/chat.dart';
 import 'package:guxin_ai/common/store/config.dart';
+import 'package:guxin_ai/common/store/content.dart';
 import 'package:guxin_ai/common/store/user.dart';
 import 'package:guxin_ai/common/utils/db_sqlite.dart';
 import 'package:guxin_ai/common/utils/loading.dart';
@@ -24,6 +25,7 @@ class Global {
     Get.put<ConfigStore>(ConfigStore());
     Get.put<UserStore>(UserStore());
     Get.put<ChatStore>(ChatStore());
+    Get.put<ContentStore>(ContentStore());
   }
 
   static void setSystemUi() {

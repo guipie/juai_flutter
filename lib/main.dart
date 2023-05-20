@@ -1,6 +1,6 @@
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:guxin_ai/common/routers/pages.dart';
-import 'package:guxin_ai/common/widgets/ui/theme.dart';
+import 'package:guxin_ai/common/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:guxin_ai/common/langs/translation_service.dart';
 import 'package:guxin_ai/common/routers/routes.dart';
@@ -11,6 +11,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:media_kit/media_kit.dart';
 import 'package:window_manager/window_manager.dart';
 
 import 'common/routers/observers.dart';
@@ -21,6 +22,7 @@ Future<void> main() async {
   // 必须加上这一行。
   if (GetPlatform.isDesktop) {
     await windowManager.ensureInitialized();
+    MediaKit.ensureInitialized();
     WindowOptions windowOptions = const WindowOptions(
       center: true,
       minimumSize: Size(600, 800),
@@ -73,7 +75,7 @@ class _MyAppState extends State<MyApp> {
       darkTheme: WcaoTheme.darkTheme,
       builder: EasyLoading.init(),
       getPages: AppPages.routes,
-      initialRoute: GetPlatform.isMobile ? Routes.home : Routes.bbsPublishDongtai,
+      initialRoute: GetPlatform.isMobile ? Routes.home : Routes.homePc,
       navigatorObservers: [RouteObservers()],
       // unknownRoute: AppPages.unknownRoute,
       defaultTransition: Transition.rightToLeftWithFade,
@@ -87,7 +89,6 @@ class _MyAppState extends State<MyApp> {
       supportedLocales: ConfigStore.to.languages,
       locale: ConfigStore.to.locale,
       fallbackLocale: const Locale('zh', 'CN'),
-      enableLog: true,
       logWriterCallback: Logger.write,
     );
   }

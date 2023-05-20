@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:guxin_ai/common/utils/loading.dart';
-import 'package:guxin_ai/common/widgets/ui/theme.dart';
+import 'package:guxin_ai/common/theme.dart';
 import 'package:get/get.dart';
 
 /// HACK: 设置新密码

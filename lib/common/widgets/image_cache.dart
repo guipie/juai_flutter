@@ -2,13 +2,16 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:guxin_ai/common/assets.dart';
+import 'package:guxin_ai/common/server.dart';
+
+enum CacheImageType { network, local, asserts }
 
 class ImageCacheWidget extends StatefulWidget {
   final String imageUrl;
+  final CacheImageType cacheImageType;
   final double? width;
   final double? height;
-  const ImageCacheWidget({super.key, required this.imageUrl, this.width, this.height});
+  const ImageCacheWidget(this.imageUrl, {super.key, this.cacheImageType = CacheImageType.network, this.width, this.height});
 
   @override
   _ImageCacheWidgetState createState() => _ImageCacheWidgetState();
@@ -21,9 +24,9 @@ class _ImageCacheWidgetState extends State<ImageCacheWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (widget.imageUrl.startsWith("http")) {
+    if (widget.cacheImageType == CacheImageType.network && widget.imageUrl.isNotEmpty) {
       return CachedNetworkImage(
-        imageUrl: widget.imageUrl,
+        imageUrl: (widget.imageUrl.startsWith("http") ? "" : Qiniu_External_domain) + widget.imageUrl,
         errorWidget: (context, url, error) => GestureDetector(
           onTap: _retryLoading,
           child: const Icon(
@@ -45,7 +48,7 @@ class _ImageCacheWidgetState extends State<ImageCacheWidget> {
         height: widget.height,
         progressIndicatorBuilder: (context, url, downloadProgress) => LinearProgressIndicator(value: downloadProgress.progress),
       );
-    } else if (widget.imageUrl.startsWith(Assets.prefix)) {
+    } else if (widget.cacheImageType == CacheImageType.asserts) {
       return Image.asset(
         widget.imageUrl,
         fit: BoxFit.cover,

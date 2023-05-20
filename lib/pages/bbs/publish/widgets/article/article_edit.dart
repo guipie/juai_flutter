@@ -23,7 +23,7 @@ import 'read_only_page.dart';
 import 'universal_ui/universal_ui.dart';
 
 class ArticleEditPage extends StatefulWidget {
-  const ArticleEditPage({super.key});
+  const ArticleEditPage({Key? key}) : super(key: key);
 
   @override
   _ArticleEditPageState createState() => _ArticleEditPageState();

@@ -13,6 +13,7 @@ class Routes {
   static const bbsPublishArticle = "/bbs/publish/article";
   static const bbsPublishSpecial = "/bbs/publish/special";
   static const bbsTagAdd = "/bbs/publish/add/tag";
+  static const bbsDetail = "/bbs/detail";
 
   static const bbsChat = "/bbs-chat";
 

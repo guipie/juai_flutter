@@ -7,7 +7,7 @@ import 'package:guxin_ai/common/widgets/ui/tag.dart';
 import 'package:guxin_ai/pages/bbs/publish/controller.dart';
 import 'package:flutter/material.dart';
 import 'package:guxin_ai/pages/bbs/publish/state.dart';
-import 'package:guxin_ai/common/widgets/ui/theme.dart';
+import 'package:guxin_ai/common/theme.dart';
 import 'package:get/get.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:video_player/video_player.dart';
@@ -187,7 +187,8 @@ class PublishDongtaiPage extends StatelessWidget {
                 ClipRRect(
                   borderRadius: BorderRadius.circular(8),
                   child: ImageCacheWidget(
-                    imageUrl: file.path,
+                    file.path,
+                    cacheImageType: CacheImageType.local,
                     width: 1.sw / 3,
                     height: 200,
                   ),

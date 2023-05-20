@@ -4,7 +4,10 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:guxin_ai/common/entities/content.dart';
 import 'package:video_player/video_player.dart';
+
+import 'widgets/article/article_edit.dart';
 
 enum PublishType { dongtai, article }
 
@@ -34,4 +37,7 @@ class PublishState {
   late VideoPlayerController videoController;
   var videoPlaying = false.obs;
   var articleTitleController = TextEditingController();
+
+  var isPay = false.obs;
+  var payController = TextEditingController();
 }

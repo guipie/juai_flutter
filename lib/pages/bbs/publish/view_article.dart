@@ -1,11 +1,12 @@
 import 'package:flutter/services.dart';
 import 'package:getwidget/getwidget.dart';
+import 'package:guxin_ai/common/entities/content.dart';
 import 'package:guxin_ai/common/widgets/ui/tag.dart';
 import 'package:guxin_ai/pages/bbs/publish/controller.dart';
 import 'package:flutter/material.dart';
 import 'package:guxin_ai/pages/bbs/publish/state.dart';
 import 'package:guxin_ai/pages/bbs/publish/widgets/article/article_edit.dart';
-import 'package:guxin_ai/common/widgets/ui/theme.dart';
+import 'package:guxin_ai/common/theme.dart';
 import 'package:get/get.dart';
 
 class PublishArticlePage extends StatelessWidget {
@@ -15,11 +16,23 @@ class PublishArticlePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('发布文章'),
+        title: FutureBuilder<String>(
+          future: logic.getSpecialData(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.done) {
+              return Text(snapshot.data!);
+            } else {
+              return const Text('加载中...');
+            }
+          },
+        ),
         actions: [
-          TextButton(
+          GFButton(
             onPressed: () => logic.saveContents(PublishType.article),
-            child: const Text('发布'),
+            text: "发布",
+            color: GFColors.WARNING,
+            shape: GFButtonShape.pills,
+            size: GFSize.SMALL,
           ),
         ],
       ),
@@ -82,6 +95,33 @@ class PublishArticlePage extends StatelessWidget {
                             onClose: () => logic.tagClose(e),
                           ))
                       .toList(),
+                  GFButton(
+                    padding: const EdgeInsets.only(right: 10),
+                    onPressed: () {
+                      logic.state.isPay.value = !logic.state.isPay.value;
+                    },
+                    icon: Obx(
+                      () => Checkbox(
+                          value: logic.state.isPay.value,
+                          onChanged: (val) {
+                            logic.state.isPay.value = !logic.state.isPay.value;
+                          }),
+                    ),
+                    text: "是否付费",
+                    type: GFButtonType.outline,
+                  ),
+                  Obx(
+                    () => logic.state.isPay.value
+                        ? SizedBox(
+                            width: 200,
+                            child: TextField(
+                              controller: logic.state.payController,
+                              keyboardType: TextInputType.number,
+                              decoration: const InputDecoration(hintText: '请输入付费token数'),
+                            ),
+                          )
+                        : const Text(""),
+                  ),
                 ],
               ),
             ),

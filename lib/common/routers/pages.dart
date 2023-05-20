@@ -1,5 +1,7 @@
 import 'package:guxin_ai/common/store/store.dart';
+import 'package:guxin_ai/pages/bbs/detail/view.dart';
 import 'package:guxin_ai/pages/bbs/publish/controller.dart';
+import 'package:guxin_ai/pages/bbs/publish/controller_special.dart';
 import 'package:guxin_ai/pages/bbs/publish/view.dart';
 import 'package:guxin_ai/pages/bbs/publish/view_article.dart';
 import 'package:guxin_ai/pages/bbs/publish/view_special.dart';
@@ -90,7 +92,11 @@ class AppPages {
     GetPage(
       name: Routes.bbsPublishSpecial,
       page: () => PublishSpecialPage(),
-      binding: BindingsBuilder(() => Get.put<PublishController>(PublishController())),
+      binding: BindingsBuilder(() => Get.put<PublishSpecialController>(PublishSpecialController())),
+    ),
+    GetPage(
+      name: Routes.bbsDetail,
+      page: () => const BbsDetailPage(),
     ),
 
     ///gpt相关

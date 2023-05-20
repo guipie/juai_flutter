@@ -28,6 +28,7 @@ class QiniuUtil {
     String? key,
     Function(double progress)? progressListener,
     Function(String path, int? fileId)? completeListener,
+    String folder = "content",
   }) async {
     try {
       if (fileType == FileType.image) {
@@ -41,7 +42,7 @@ class QiniuUtil {
           return Future.error("请上传正确视频");
         }
       }
-      key = key ?? dateFormat(null, fmt: "yyyyMM") + "/" + DateTime.now().millisecondsSinceEpoch.toString() + path.extension(file.path);
+      key = folder + "/" + (key ?? dateFormat(null, fmt: "yyyyMM") + "/" + DateTime.now().millisecondsSinceEpoch.toString() + path.extension(file.path));
       int fileDbId = 0;
       return HttpUtil().post("/api/app/common/qiniu/token").then((value) async {
         final putController = PutController();

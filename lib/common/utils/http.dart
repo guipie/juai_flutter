@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'dart:convert';
+import 'dart:developer';
 
 import 'package:guxin_ai/common/apis/apis.dart';
 import 'package:cookie_jar/cookie_jar.dart';
@@ -7,6 +9,7 @@ import 'package:dio_cookie_manager/dio_cookie_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:guxin_ai/common/store/user.dart';
 import 'package:guxin_ai/common/utils/loading.dart';
+import 'package:guxin_ai/common/utils/utils.dart';
 import 'package:guxin_ai/common/values/cache.dart';
 import 'package:guxin_ai/common/server.dart';
 import 'package:get/get.dart' hide FormData;
@@ -81,7 +84,6 @@ class HttpUtil {
         // 这样请求将被中止并触发异常，上层catchError会被调用。
       },
       onResponse: (response, handler) {
-        debugPrint("请求结果response.data:${response.data},是否loading:${response.requestOptions.headers["isLoading"]}");
         if (response.requestOptions.headers["isLoading"] != null) Loading.dismiss();
         var status = response.data?["status"];
         var message = response.data?["message"];
@@ -96,7 +98,7 @@ class HttpUtil {
         // 这样请求将被中止并触发异常，上层catchError会被调用。
       },
       onError: (DioError e, handler) {
-        debugPrint("请求出错:$e,是否loading:${options.headers["isLoading"]}");
+        debugPrint("请求出错:$e");
         Loading.dismiss();
         ErrorEntity eInfo = createErrorEntity(e);
         onError(eInfo);
@@ -107,7 +109,10 @@ class HttpUtil {
     ));
 
     //是否开启请求日志
-    dio.interceptors.add(LogInterceptor(requestBody: true, responseBody: true));
+    dio.interceptors.add(LogInterceptor(
+      requestBody: true,
+      responseBody: true,
+    ));
   }
 
   /*

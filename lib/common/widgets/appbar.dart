@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:getwidget/getwidget.dart';
 import 'package:guxin_ai/common/routers/routes.dart';
 import 'package:guxin_ai/pages/conversation/widgets/firends_dialog.dart';
 import 'package:guxin_ai/pages/conversation/widgets/qr_scan.dart';
-import 'package:guxin_ai/common/widgets/ui/theme.dart';
+import 'package:guxin_ai/common/theme.dart';
 
 AppBar conversationBar(BuildContext context) {
   return AppBar(
@@ -70,25 +69,7 @@ AppBar conversationBar(BuildContext context) {
 AppBar bbsBar(BuildContext context, List<String> tabs) {
   return AppBar(
     automaticallyImplyLeading: false,
-    title: SizedBox(
-      width: double.infinity,
-      child: Wrap(
-        alignment: WrapAlignment.start,
-        children: tabs
-            .map(
-              (e) => GFButton(
-                onPressed: () {
-                  tabs.indexOf(e);
-                },
-                size: GFSize.LARGE,
-                text: e,
-                color: 0 == tabs.indexOf(e) ? GFColors.WARNING : GFColors.FOCUS,
-                type: GFButtonType.transparent,
-              ),
-            )
-            .toList(),
-      ),
-    ),
+    title: const Text("社区"),
     actions: [
       PopupMenuButton(
         child: const Wrap(

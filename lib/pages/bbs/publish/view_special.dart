@@ -1,65 +1,110 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:get/get.dart';
+import 'package:getwidget/getwidget.dart';
+import 'package:guxin_ai/common/theme.dart';
+import 'package:guxin_ai/pages/bbs/publish/widgets/select_special.dart';
+
+import 'controller_special.dart';
 
 class PublishSpecialPage extends StatelessWidget {
-  const PublishSpecialPage({Key? key}) : super(key: key);
-
+  PublishSpecialPage({Key? key}) : super(key: key);
+  final logic = Get.find<PublishSpecialController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('写专栏'),
+        title: const Text('创建专栏'),
+        actions: [
+          const SelectSpecialWidget(),
+          const SizedBox(
+            width: 20,
+          ),
+          GFButton(
+            onPressed: () => logic.saveSpecial(),
+            text: "发布",
+            color: GFColors.WARNING,
+            shape: GFButtonShape.pills,
+            size: GFSize.SMALL,
+          ),
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             TextField(
-              decoration: InputDecoration(
+              maxLength: 10,
+              controller: logic.titleController,
+              decoration: const InputDecoration(
                 labelText: '专栏名称',
               ),
+              maxLengthEnforcement: MaxLengthEnforcement.none,
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             TextField(
+              maxLength: 200,
               maxLines: 4,
-              decoration: InputDecoration(
+              controller: logic.summaryConroller,
+              decoration: const InputDecoration(
                 labelText: '专栏描述',
               ),
+              maxLengthEnforcement: MaxLengthEnforcement.none,
             ),
-            SizedBox(height: 20),
-            Row(
-              children: [
-                Expanded(
-                  child: TextField(
-                    decoration: InputDecoration(
-                      labelText: '专栏封面',
-                    ),
+            const SizedBox(height: 20),
+            InkWell(
+              onTap: () => logic.openSpecialImage(),
+              child: Container(
+                height: 200,
+                width: 200,
+                color: Colors.grey.withOpacity(0.3),
+                child: Obx(
+                  () => Stack(
+                    alignment: AlignmentDirectional.center,
+                    children: [
+                      logic.currentCover.isNotEmpty
+                          ? Image.file(
+                              File(logic.currentCover.value),
+                              fit: BoxFit.fill,
+                              width: 200,
+                            )
+                          : Icon(
+                              Icons.add_a_photo,
+                              size: 50,
+                              color: Colors.grey.withOpacity(0.7),
+                            ),
+                      if (!logic.currentCover.isNotEmpty)
+                        Positioned(
+                          child: Text(
+                            "专栏封面",
+                            style: TextStyle(
+                              color: WcaoTheme.placeholder,
+                              fontSize: WcaoTheme.fsL,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                          bottom: 1,
+                        )
+                    ],
                   ),
                 ),
-                SizedBox(width: 10),
-                Container(
-                  width: 100,
-                  height: 100,
-                  color: Colors.grey.withOpacity(0.3),
-                  child: Icon(
-                    Icons.add_a_photo,
-                    size: 50,
-                    color: Colors.grey.withOpacity(0.7),
-                  ),
-                ),
-              ],
+              ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Row(
               children: [
-                Checkbox(value: true, onChanged: (value) {}),
-                Text('专栏是否付费'),
+                Obx(
+                  () => Checkbox(
+                      value: logic.isPay.value,
+                      onChanged: (value) {
+                        logic.isPay.value = !logic.isPay.value;
+                      }),
+                ),
+                const Text('专栏是否付费'),
               ],
-            ),
-            Spacer(),
-            ElevatedButton(
-              onPressed: () {},
-              child: Text('发布专栏'),
             ),
           ],
         ),

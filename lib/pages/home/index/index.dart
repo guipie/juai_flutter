@@ -2,7 +2,7 @@ import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:guxin_ai/common/widgets/image_cache.dart';
 import 'package:guxin_ai/pages/home/index/search_dialog.dart';
-import 'package:guxin_ai/common/widgets/ui/theme.dart';
+import 'package:guxin_ai/common/theme.dart';
 import 'package:get/get.dart';
 
 import 'dart:math' as math;
@@ -84,7 +84,7 @@ class _PageViewIndexState extends State<PageViewIndex> {
                           opacity: .25,
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(20),
-                            child: ImageCacheWidget(imageUrl: swipers[index]),
+                            child: ImageCacheWidget(swipers[index]),
                           ),
                         ),
                       ),
@@ -97,7 +97,7 @@ class _PageViewIndexState extends State<PageViewIndex> {
                               width: boxWidth + 24,
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(20),
-                                child: ImageCacheWidget(imageUrl: swipers[index]),
+                                child: ImageCacheWidget(swipers[index]),
                               ),
                             ),
                             Positioned(

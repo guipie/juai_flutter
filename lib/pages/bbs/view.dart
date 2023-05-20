@@ -1,13 +1,7 @@
-import 'package:guxin_ai/common/routers/routes.dart';
 import 'package:guxin_ai/common/widgets/appbar.dart';
-import 'package:guxin_ai/pages/bbs/index/index.dart';
+import 'package:guxin_ai/pages/bbs/index/view.dart';
 import 'package:flutter/material.dart';
-import 'package:guxin_ai/common/widgets/ui/theme.dart';
 import 'package:get/get.dart';
-import 'package:getwidget/colors/gf_color.dart';
-import 'package:getwidget/components/button/gf_button.dart';
-import 'package:getwidget/getwidget.dart';
-import 'package:getwidget/types/gf_button_type.dart';
 
 import 'controller.dart';
 
@@ -29,7 +23,7 @@ class BbsPage extends GetView<BbsController> {
               child: PageView(
                 physics: const NeverScrollableScrollPhysics(),
                 controller: controller.state.pageController,
-                children: const [BbsIndexPage()],
+                children: [BbsIndexPage()],
               ),
             )
           ],

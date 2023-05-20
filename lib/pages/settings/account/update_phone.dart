@@ -1,6 +1,6 @@
 import 'package:guxin_ai/common/routers/routes.dart';
 import 'package:flutter/material.dart';
-import 'package:guxin_ai/common/widgets/ui/theme.dart';
+import 'package:guxin_ai/common/theme.dart';
 import 'package:get/get.dart';
 
 /// HACK: 账号设置-验证当前手机号

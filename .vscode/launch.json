@@ -7,7 +7,7 @@
     {
       "name": "guxin_ai",
       "request": "launch",
-      "type": "dart"
+      "type": "dart",
     },
     {
       "name": "guxin_ai (profile mode)",
@@ -20,6 +20,6 @@
       "request": "launch",
       "type": "dart",
       "flutterMode": "release"
-    }
+    },
   ]
 }
