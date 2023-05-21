@@ -3,8 +3,10 @@
 ///  Created by iotjin on 2020/09/16.
 ///  description:  图片全屏浏览器
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:guxin_ai/common/server.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
 
@@ -91,9 +93,9 @@ class _JhPhotoBrowserState extends State<GxImageBrowser> {
                     var _imgURL = widget.imgDataArr[index];
                     ImageProvider _picture;
                     if (_imgURL.startsWith('http')) {
-                      _picture = NetworkImage(_imgURL);
+                      _picture = CachedNetworkImageProvider(_imgURL);
                     } else {
-                      _picture = AssetImage(_imgURL);
+                      _picture = CachedNetworkImageProvider(Qiniu_External_domain + _imgURL);
                     }
                     return PhotoViewGalleryPageOptions(
                       imageProvider: _picture,
@@ -150,7 +152,7 @@ class _JhPhotoBrowserState extends State<GxImageBrowser> {
         SafeArea(
           child: Align(
             alignment: Alignment.bottomCenter,
-            child: Container(
+            child: SizedBox(
               height: widget.imgDataArr.length == 1 ? 0 : 50,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,

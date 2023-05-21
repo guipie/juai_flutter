@@ -35,16 +35,7 @@ Future<void> main() async {
       await windowManager.focus();
     });
   }
-  runApp(
-    ScreenUtilInit(
-      designSize: const Size(375, 812),
-      minTextAdapt: true,
-      splitScreenMode: true,
-      builder: (context, child) {
-        return const MyApp();
-      },
-    ),
-  );
+  runApp(const MyApp());
 }
 
 class MyApp extends StatefulWidget {
@@ -69,6 +60,7 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.init(context);
     return GetMaterialApp(
       title: '故新AI社区',
       theme: WcaoTheme.lightTheme,

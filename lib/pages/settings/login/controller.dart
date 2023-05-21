@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:guxin_ai/common/apis/user_api.dart';
 import 'package:guxin_ai/common/entities/user.dart';
 import 'package:guxin_ai/common/routers/routes.dart';
+import 'package:guxin_ai/common/store/content.dart';
 import 'package:guxin_ai/common/store/store.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
@@ -22,21 +23,21 @@ class LoginController extends GetxController {
       Routes.toHome();
     }
     userName.addListener(() {
-      if (userName.text.isNotEmpty && ((route == Routes.settingsLogin && password.text.isNotEmpty) || (route == Routes.settingsLoginByVocde && vcode.text.isNotEmpty))) {
+      if (((route == Routes.settingsLogin && password.text.isNotEmpty) || (route == Routes.settingsLoginByVocde && vcode.text.isNotEmpty)) && GetUtils.isPhoneNumber(userName.text)) {
         canLogin.value = true;
       } else {
         canLogin.value = false;
       }
     });
     password.addListener(() {
-      if (userName.text.isNotEmpty && password.text.isNotEmpty) {
+      if (GetUtils.isPhoneNumber(userName.text) && password.text.isNotEmpty) {
         canLogin.value = true;
       } else {
         canLogin.value = false;
       }
     });
     vcode.addListener(() {
-      if (userName.text.isNotEmpty && vcode.text.isNotEmpty) {
+      if (GetUtils.isPhoneNumber(userName.text) && vcode.text.isNotEmpty) {
         canLogin.value = true;
       } else {
         canLogin.value = false;
@@ -51,7 +52,10 @@ class LoginController extends GetxController {
       UserAPI.login(UserLoginRequestEntity(userName: userName.text, password: password.text, vcode: vcode.text)).then((value) {
         debugPrint(value.message);
         if (value.isOk) {
-          UserStore.to.saveProfile(UserLoginResponseEntity.fromJson(value.data["userResponse"]), UserTokenResponseEntity.fromJson(value.data["tokenInfo"])).then((value) => Routes.toHome());
+          UserStore.to.saveProfile(UserLoginResponseEntity.fromJson(value.data["userResponse"]), UserTokenResponseEntity.fromJson(value.data["tokenInfo"])).then((value) {
+            ContentStore.to.contentInit();
+            Routes.toHome();
+          });
         }
       });
     } else {
@@ -60,7 +64,7 @@ class LoginController extends GetxController {
   }
 
   void sendVcode() {
-    if (isSendingVcode.value == false) {
+    if (isSendingVcode.value == false && GetUtils.isPhoneNumber(userName.text)) {
       isSendingVcode.value = true;
       var seconds = 61;
       UserAPI.sendVcode(userName.text).then((value) {

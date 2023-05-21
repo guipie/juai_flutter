@@ -13,7 +13,6 @@ class BottommostWidget extends StatelessWidget {
           )
         : Container(
             padding: const EdgeInsets.only(top: 12, bottom: 48, left: 48, right: 48),
-            color: Colors.white,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [

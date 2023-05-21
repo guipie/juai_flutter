@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:guxin_ai/common/server.dart';
+import 'package:guxin_ai/common/widgets/avatar.dart';
 
 class ImageAvatarCacheWidget extends StatefulWidget {
   final String imageUrl;
@@ -19,6 +20,7 @@ class _ImageAvatarCacheWidgetState extends State<ImageAvatarCacheWidget> {
 
   @override
   Widget build(BuildContext context) {
+    if (widget.imageUrl.isEmpty) return avatar();
     return CachedNetworkImage(
       imageUrl: (widget.imageUrl.startsWith("http") ? "" : Qiniu_External_domain) + widget.imageUrl,
       errorWidget: (context, url, error) => GestureDetector(

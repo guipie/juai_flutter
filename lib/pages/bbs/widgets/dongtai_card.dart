@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:guxin_ai/common/entities/content.dart';
+import 'package:guxin_ai/common/routers/routeFade.dart';
+import 'package:guxin_ai/common/widgets/image_browser.dart';
 import 'package:guxin_ai/common/widgets/image_cache.dart';
 import 'package:guxin_ai/common/theme.dart';
 import 'package:guxin_ai/pages/bbs/widgets/tags.dart';
@@ -37,10 +39,22 @@ class DongtaiCardWidget extends StatelessWidget {
                 runSpacing: 8,
                 children: content.files
                     .map(
-                      (e) => SizedBox(
-                        width: 80,
-                        height: 80,
-                        child: ImageCacheWidget(e),
+                      (e) => InkWell(
+                        child: SizedBox(
+                          width: 80,
+                          height: 80,
+                          child: ImageCacheWidget(e),
+                        ),
+                        onTap: () {
+                          Navigator.of(context).push(
+                            RouteFade(
+                              page: GxImageBrowser(
+                                imgDataArr: content.files.map((e) => e.toString()).toList(),
+                                index: 0,
+                              ),
+                            ),
+                          );
+                        },
                       ),
                     )
                     .toList(),

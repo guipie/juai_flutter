@@ -14,6 +14,7 @@ class LoginVerifyCodePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: const Text("注册/忘记密码"),
       ),

@@ -18,12 +18,12 @@ AppBar conversationBar(BuildContext context) {
         ),
         onSelected: (item) async {
           if (item == 1) {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (_) => const QrScan(),
-              ),
-            );
+            // Navigator.push(
+            //   context,
+            //   MaterialPageRoute(
+            //     builder: (_) => const QrScan(),
+            //   ),
+            // );
           } else if (item == 2) {
             showDialog(
               context: context,

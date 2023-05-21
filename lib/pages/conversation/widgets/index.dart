@@ -1,10 +1,8 @@
 import 'package:guxin_ai/pages/bbs/mock.dart';
 import 'package:guxin_ai/pages/conversation/widgets/firends_dialog.dart';
-import 'package:guxin_ai/pages/conversation/widgets/qr_scan.dart';
 import 'package:guxin_ai/common/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:scan/scan.dart';
 
 class PageViewMessage extends StatefulWidget {
   const PageViewMessage({Key? key}) : super(key: key);
@@ -15,7 +13,6 @@ class PageViewMessage extends StatefulWidget {
 
 class _PageViewMessageState extends State<PageViewMessage> {
   List<MockLike> lists = [];
-  ScanController controller = ScanController();
 
   @override
   void initState() {
@@ -45,12 +42,6 @@ class _PageViewMessageState extends State<PageViewMessage> {
                   ),
                   onSelected: (item) async {
                     if (item == 1) {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) => const QrScan(),
-                        ),
-                      );
                     } else if (item == 2) {
                       showDialog(
                         context: context,
