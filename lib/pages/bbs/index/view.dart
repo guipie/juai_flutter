@@ -5,7 +5,7 @@ import 'package:guxin_ai/common/store/content.dart';
 import 'package:guxin_ai/common/theme.dart';
 import 'package:guxin_ai/common/widgets/bottommost.dart';
 import 'package:guxin_ai/pages/bbs/controller.dart';
-import 'package:guxin_ai/pages/bbs/widgets/card.dart';
+import 'package:guxin_ai/pages/bbs/widgets/card_index.dart';
 
 class BbsIndexPage extends StatelessWidget {
   BbsIndexPage({super.key});
@@ -29,7 +29,7 @@ class BbsIndexPage extends StatelessWidget {
                 ],
               ),
             ),
-            ...ContentStore.to.contents.map((e) => IndexCardWidget(e)).toList(),
+            ...ContentStore.to.contents.map((e) => CardIndexWidget(e)).toList(),
             Obx(() => BottommostWidget(logic.state.indexDownloading.value)),
           ],
         ),

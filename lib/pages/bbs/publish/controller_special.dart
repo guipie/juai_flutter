@@ -4,8 +4,8 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:guxin_ai/common/apis/content_special_api.dart';
-import 'package:guxin_ai/common/entities/content.dart';
-import 'package:guxin_ai/common/entities/content_special.dart';
+import 'package:guxin_ai/entities/content/content.dart';
+import 'package:guxin_ai/entities/content/special.dart';
 import 'package:guxin_ai/common/routers/routes.dart';
 import 'package:guxin_ai/common/utils/loading.dart';
 import 'package:guxin_ai/common/utils/qiniu_sdk.dart';
@@ -14,7 +14,7 @@ class PublishSpecialController extends GetxController {
   PublishSpecialController();
   var titleController = TextEditingController();
   var summaryConroller = TextEditingController();
-  var myAllSpecials = <ContentSpecialResEntity>[];
+  var myAllSpecials = <SpecialResEntity>[];
   var currentCover = "".obs;
   var isPay = false.obs;
   @override
@@ -25,7 +25,7 @@ class PublishSpecialController extends GetxController {
 
   saveSpecial() {
     try {
-      var entity = ContentSpecialReqEntity(
+      var entity = SpecialReqEntity(
         title: titleController.text.trim(),
         summary: summaryConroller.text.trim(),
         coverImage: currentCover.value,

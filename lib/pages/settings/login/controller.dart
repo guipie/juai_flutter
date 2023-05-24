@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:guxin_ai/common/apis/user_api.dart';
-import 'package:guxin_ai/common/entities/user.dart';
+import 'package:guxin_ai/entities/user_login.dart';
 import 'package:guxin_ai/common/routers/routes.dart';
 import 'package:guxin_ai/common/store/content.dart';
 import 'package:guxin_ai/common/store/store.dart';

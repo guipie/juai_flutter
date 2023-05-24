@@ -1,5 +1,5 @@
 import 'package:guxin_ai/common/apis/apis.dart';
-import 'package:guxin_ai/common/entities/user.dart';
+import 'package:guxin_ai/entities/user_login.dart';
 import 'package:guxin_ai/common/utils/http.dart';
 
 /// 用户

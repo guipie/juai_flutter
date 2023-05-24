@@ -1,4 +1,4 @@
-import 'package:guxin_ai/common/entities/content.dart';
+import 'package:guxin_ai/entities/content/content.dart';
 import 'package:guxin_ai/common/utils/http.dart';
 
 class ContentAPI {
@@ -20,6 +20,11 @@ class ContentAPI {
   static Future<int> contentAdd(ContentAddReqEntity addReqEntity) async {
     var response = await HttpUtil().post('/content', data: addReqEntity.toJson());
     return response.data ?? 0;
+  }
+
+  static Future<ContentResEntity> contentDetail(int id) async {
+    var response = await HttpUtil().get('/content/' + id.toString());
+    return response.data;
   }
 
   /* 话题相关接口 */

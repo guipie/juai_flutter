@@ -2,15 +2,15 @@ import 'dart:core';
 
 import 'package:get/get.dart';
 import 'package:guxin_ai/common/apis/content_special_api.dart';
-import 'package:guxin_ai/common/entities/content.dart';
-import 'package:guxin_ai/common/entities/content_special.dart';
+import 'package:guxin_ai/entities/content/content.dart';
+import 'package:guxin_ai/entities/content/special.dart';
 import 'package:guxin_ai/common/index.dart';
 import 'package:guxin_ai/common/store/store.dart';
 
 class ContentStore extends GetxController {
   static ContentStore get to => Get.find();
   late List<Map<dynamic, dynamic>> topTags;
-  late List<ContentSpecialResEntity> specials;
+  late List<SpecialResEntity> specials;
   var contents = <ContentResEntity>[].obs;
   @override
   void onInit() {

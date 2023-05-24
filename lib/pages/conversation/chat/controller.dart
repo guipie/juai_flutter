@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:guxin_ai/common/models/conversation.dart';
+import 'package:guxin_ai/entities/conversation.dart';
 import 'package:guxin_ai/common/store/chat.dart';
 import 'package:guxin_ai/common/utils/db_sqlite.dart';
 import 'package:guxin_ai/common/utils/http_chat.dart';

@@ -1,6 +1,6 @@
 import 'package:flutter/services.dart';
 import 'package:getwidget/getwidget.dart';
-import 'package:guxin_ai/common/entities/content.dart';
+import 'package:guxin_ai/entities/content/content.dart';
 import 'package:guxin_ai/common/widgets/ui/tag.dart';
 import 'package:guxin_ai/pages/bbs/publish/controller.dart';
 import 'package:flutter/material.dart';

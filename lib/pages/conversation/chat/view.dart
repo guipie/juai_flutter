@@ -3,7 +3,7 @@ import 'package:guxin_ai/pages/conversation/widgets/markdow_body.dart';
 import 'package:guxin_ai/common/theme.dart';
 import 'package:dart_mock/dart_mock.dart';
 import 'package:flutter/material.dart';
-import 'package:guxin_ai/common/models/conversation.dart';
+import 'package:guxin_ai/entities/conversation.dart';
 import 'package:guxin_ai/common/widgets/avatar.dart';
 import 'package:guxin_ai/pages/conversation/chat/state.dart';
 import 'package:get/get.dart';

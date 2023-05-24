@@ -1,4 +1,4 @@
-import 'package:dart_openai/openai.dart';
+import 'package:dart_openai/dart_openai.dart';
 import 'package:guxin_ai/common/server.dart';
 
 class HttpChat {
@@ -16,7 +16,7 @@ class HttpChat {
     return OpenAI.instance.chat.createStream(
       model: model ?? "gpt-3.5-turbo",
       messages: [
-        OpenAIChatCompletionChoiceMessageModel(
+        const OpenAIChatCompletionChoiceMessageModel(
           content: "You are ChatGPT, a large language model trained by OpenAI. Follow the user's instructions carefully. Respond using markdown.",
           role: OpenAIChatMessageRole.system,
         ),

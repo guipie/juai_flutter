@@ -44,7 +44,7 @@ class BbsChatPage extends StatelessWidget {
                   leading: GFAvatar(
                     backgroundColor: WcaoTheme.base,
                     child: Text(
-                      TimeStrLineFormat(logic.state.jitChatGpts[index]["date"]!),
+                      DateTimeStrLine(logic.state.jitChatGpts[index]["date"]!),
                       style: TextStyle(fontSize: WcaoTheme.fsSm),
                     ),
                   ),

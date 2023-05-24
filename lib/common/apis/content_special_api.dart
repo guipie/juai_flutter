@@ -1,4 +1,4 @@
-import 'package:guxin_ai/common/entities/content_special.dart';
+import 'package:guxin_ai/entities/content/special.dart';
 import 'package:guxin_ai/common/utils/http.dart';
 
 class ContentSpecialApi {
@@ -6,22 +6,22 @@ class ContentSpecialApi {
   //   var response = await HttpUtil().post('/content', data: addReqEntity.toJson());
   //   return response.data ?? 0;
   // }
-  static Future<ContentSpecialResEntity> get(int id) async {
+  static Future<SpecialResEntity> get(int id) async {
     var response = await HttpUtil().get('/contentSpecial/$id');
-    return ContentSpecialResEntity.fromJson(response.data);
+    return SpecialResEntity.fromJson(response.data);
   }
 
-  static Future<List<ContentSpecialResEntity>> getTop() async {
+  static Future<List<SpecialResEntity>> getTop() async {
     var response = await HttpUtil().get('/contentSpecial/top');
-    return (response.data as Iterable).map((e) => ContentSpecialResEntity.fromJson(e)).toList();
+    return (response.data as Iterable).map((e) => SpecialResEntity.fromJson(e)).toList();
   }
 
-  static Future<List<ContentSpecialResEntity>> getMine() async {
+  static Future<List<SpecialResEntity>> getMine() async {
     var response = await HttpUtil().get('/contentSpecial/mine');
-    return List<ContentSpecialResEntity>.from((response.data as Iterable).map((e) => ContentSpecialResEntity.fromJson(e)));
+    return List<SpecialResEntity>.from((response.data as Iterable).map((e) => SpecialResEntity.fromJson(e)));
   }
 
-  static Future<int> add(ContentSpecialReqEntity reqEntity) async {
+  static Future<int> add(SpecialReqEntity reqEntity) async {
     var response = await HttpUtil().post('/contentSpecial', data: reqEntity.toJson(), isLoading: true);
     return response.data;
   }

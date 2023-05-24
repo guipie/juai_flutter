@@ -1,4 +1,5 @@
 import 'package:guxin_ai/common/store/store.dart';
+import 'package:guxin_ai/pages/bbs/detail/controller.dart';
 import 'package:guxin_ai/pages/bbs/detail/view.dart';
 import 'package:guxin_ai/pages/bbs/publish/controller.dart';
 import 'package:guxin_ai/pages/bbs/publish/controller_special.dart';
@@ -96,7 +97,8 @@ class AppPages {
     ),
     GetPage(
       name: Routes.bbsDetail,
-      page: () => const BbsDetailPage(),
+      page: () => BbsDetailPage(),
+      binding: BindingsBuilder(() => Get.put<ContentDetailController>(ContentDetailController())),
     ),
 
     ///gpt相关

@@ -62,9 +62,9 @@ dependencies:
   sqflite_common_ffi:
   path_provider:
   flutter_quill:
-    path: lib/common/components/flutter_quill
+    path: lib/components/flutter_quill
   flutter_quill_extensions:
-    path: lib/common/components/flutter_quill_extensions
+    path: lib/components/flutter_quill_extensions
   filesystem_picker:
   file_picker:
   wechat_assets_picker:
@@ -81,6 +81,8 @@ dependencies:
 
 dependency_overrides:
   intl: ^0.18.0
+  flutter_quill:
+    path: lib/components/flutter_quill
 
 dev_dependencies:
   flutter_test:

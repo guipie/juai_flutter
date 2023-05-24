@@ -1,4 +1,4 @@
-import 'package:guxin_ai/common/entities/chat.dart';
+import 'package:guxin_ai/entities/chat.dart';
 
 /// 聊天会话相关
 class ChatAPI {

@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:guxin_ai/common/apis/user_api.dart';
-import 'package:guxin_ai/common/entities/user.dart';
+import 'package:guxin_ai/entities/user_login.dart';
 import 'package:guxin_ai/common/routers/routes.dart';
 import 'package:guxin_ai/common/services/storage.dart';
 import 'package:guxin_ai/common/utils/loading.dart';

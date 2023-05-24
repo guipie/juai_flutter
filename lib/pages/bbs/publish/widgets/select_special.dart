@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:guxin_ai/common/apis/content_special_api.dart';
-import 'package:guxin_ai/common/entities/content_special.dart';
+import 'package:guxin_ai/entities/content/special.dart';
 import 'package:guxin_ai/common/routers/routes.dart';
 import 'package:guxin_ai/common/theme.dart';
 import 'package:guxin_ai/common/widgets/image_cache.dart';
@@ -17,7 +17,7 @@ class SelectSpecialWidget extends StatefulWidget {
 }
 
 class _SelectSpecialWidgetState extends State<SelectSpecialWidget> {
-  List<ContentSpecialResEntity> mySpecials = [];
+  List<SpecialResEntity> mySpecials = [];
   @override
   void initState() {
     super.initState();

@@ -1,7 +1,7 @@
 import 'package:intl/intl.dart';
 
 /// 格式化时间
-String TimeLineFormat(DateTime dt) {
+String DateTimeLine(DateTime dt) {
   var now = DateTime.now();
   var difference = now.difference(dt);
   if (difference.inSeconds < 60) {
@@ -32,9 +32,9 @@ String TimeLineFormat(DateTime dt) {
   }
 }
 
-String TimeStrLineFormat(String date) {
-  var dt = DateTime.tryParse(date);
-  return TimeLineFormat(dt ?? DateTime.now());
+String DateTimeStrLine(String? date) {
+  var dt = DateTime.tryParse(date ?? DateTime.now().toString());
+  return DateTimeLine(dt ?? DateTime.now());
 }
 
 String dateFormatYMDHMS(DateTime dt) {

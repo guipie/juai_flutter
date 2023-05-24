@@ -4,7 +4,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:guxin_ai/common/entities/content.dart';
+import 'package:guxin_ai/entities/content/content.dart';
 import 'package:video_player/video_player.dart';
 
 import 'widgets/article/article_edit.dart';

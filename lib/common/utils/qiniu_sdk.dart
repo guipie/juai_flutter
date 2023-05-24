@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:guxin_ai/common/server.dart';
 import 'package:guxin_ai/common/utils/utils.dart';
 import 'package:qiniu_flutter_sdk/qiniu_flutter_sdk.dart';
 import 'package:path/path.dart' as path;
@@ -21,6 +22,25 @@ class QiniuUtil {
       retryLimit: 3,
     ),
   );
+
+  /*或拼接?vframe/jpg/offset/7/w/480/h/360 
+  vframe/ + 输出的截图格式（jpg,png）
+  offset/ + 指定截取视频的时刻，单位：秒
+  w/ + 图片宽
+  h/ + 图片高 
+  */
+  static String getVideoThumbnail(String videoUrl, {int? width, int? height}) {
+    if (!videoUrl.startsWith(Qiniu_External_domain)) videoUrl = Qiniu_External_domain + videoUrl;
+    if (width != null && height != null) return videoUrl + "?vframe/jpg/offset/1/w/$width/h/$height";
+    return videoUrl + "?vframe/jpg/offset/1";
+  }
+
+  /*?imageView2/1/w/100/h/200 */
+  static String getImageThumbnail(String imageUrl, {int width = 160, int height = 160}) {
+    if (!imageUrl.startsWith(Qiniu_External_domain)) imageUrl = Qiniu_External_domain + imageUrl;
+    return imageUrl + "?imageView2/1/w/$width/h/$height";
+  }
+
   static Future<String> saveFile(
     File file,
     FileType fileType, {

@@ -90,6 +90,7 @@ class HttpUtil {
         if (status == 200 && GetUtils.isNullOrBlank(message) == false) {
           Loading.success(message);
         } else if (GetUtils.isNullOrBlank(message) == false) {
+          debugPrint("没有成功，返回信息:$message");
           Loading.waring(message);
         }
         // Do something with response data
@@ -127,7 +128,7 @@ class HttpUtil {
         Loading.error(eInfo.message);
         break;
       default:
-        Loading.error('未知错误');
+        Loading.error(eInfo.message);
         break;
     }
   }
@@ -158,6 +159,8 @@ class HttpUtil {
                 return ErrorEntity(code: errCode, message: "无法找到服务器");
               case 405:
                 return ErrorEntity(code: errCode, message: "请求方法被禁止");
+              case 429:
+                return ErrorEntity(code: errCode, message: "访问太频繁了,我受不了r");
               case 500:
                 return ErrorEntity(code: errCode, message: "服务器内部错误");
               case 502:
@@ -181,7 +184,7 @@ class HttpUtil {
         }
       default:
         {
-          return ErrorEntity(code: -1, message: error.message ?? "ErrorEntity");
+          return ErrorEntity(code: -1, message: error.message ?? "系统升级中,请稍后再试...");
         }
     }
   }

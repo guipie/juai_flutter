@@ -4,8 +4,8 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:guxin_ai/common/apis/apis.dart';
 import 'package:guxin_ai/common/apis/content_special_api.dart';
-import 'package:guxin_ai/common/entities/content.dart';
-import 'package:guxin_ai/common/entities/content_special.dart';
+import 'package:guxin_ai/entities/content/content.dart';
+import 'package:guxin_ai/entities/content/special.dart';
 import 'package:guxin_ai/common/services/storage.dart';
 import 'package:guxin_ai/common/utils/loading.dart';
 import 'package:guxin_ai/common/utils/permission_check.dart';
@@ -22,7 +22,7 @@ import 'widgets/bbs_tag.dart';
 class PublishController extends GetxController {
   PublishController();
   final state = PublishState();
-  ContentSpecialResEntity? specialInfo;
+  SpecialResEntity? specialInfo;
   List<AssetEntity>? selectedAssets;
   @override
   Future<void> onInit() async {

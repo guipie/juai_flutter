@@ -1,6 +1,6 @@
 import 'package:guxin_ai/common/utils/utils.dart';
 import 'package:flutter/material.dart';
-import 'package:guxin_ai/common/models/conversation.dart';
+import 'package:guxin_ai/entities/conversation.dart';
 import 'package:guxin_ai/common/routers/routes.dart';
 import 'package:guxin_ai/common/widgets/appbar.dart';
 import 'package:guxin_ai/common/widgets/avatar.dart';
@@ -106,7 +106,7 @@ class ConversationPage extends GetView<ConversationController> {
                         ),
                       ),
                       Text(
-                        TimeLineFormat(DateTime.parse(item.sendTime)),
+                        DateTimeLine(DateTime.parse(item.sendTime)),
                         style: TextStyle(
                           fontSize: WcaoTheme.fsSm,
                           color: Theme.of(context).dividerColor,

@@ -11,16 +11,16 @@ import 'package:flutter_quill/extensions.dart';
 import 'package:flutter_quill/flutter_quill.dart' hide Text;
 import 'package:flutter_quill_extensions/flutter_quill_extensions.dart';
 import 'package:getwidget/getwidget.dart';
-import 'package:guxin_ai/common/components/flutter_quill/lib/src/translations/toolbar.i18n.dart';
 import 'package:guxin_ai/common/server.dart';
-import 'package:guxin_ai/common/services/services.dart';
-import 'package:guxin_ai/common/utils/utils.dart';
+import 'package:guxin_ai/common/services/storage.dart';
+import 'package:guxin_ai/common/utils/qiniu_sdk.dart';
+import 'package:guxin_ai/components/flutter_quill/lib/translations.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 
 import 'article_state.dart';
-import 'read_only_page.dart';
 import 'universal_ui/universal_ui.dart';
+import 'read_only_page.dart';
 
 class ArticleEditPage extends StatefulWidget {
   const ArticleEditPage({Key? key}) : super(key: key);
@@ -425,12 +425,12 @@ class _ArticleEditPageState extends State<ArticleEditPage> {
           indent: size.width * 0.1,
           endIndent: size.width * 0.1,
         ),
-        ListTile(
-          title: const Center(child: Text('Read only demo', style: itemStyle)),
-          dense: true,
-          visualDensity: VisualDensity.compact,
-          onTap: _readOnly,
-        ),
+        // ListTile(
+        //   title: const Center(child: Text('Read only demo', style: itemStyle)),
+        //   dense: true,
+        //   visualDensity: VisualDensity.compact,
+        //   onTap: _readOnly,
+        // ),
         Divider(
           thickness: 2,
           color: Colors.white,
@@ -441,15 +441,15 @@ class _ArticleEditPageState extends State<ArticleEditPage> {
     );
   }
 
-  void _readOnly() {
-    Navigator.pop(super.context);
-    Navigator.push(
-      super.context,
-      MaterialPageRoute(
-        builder: (context) => ReadOnlyPage(),
-      ),
-    );
-  }
+  // void _readOnly() {
+  //   Navigator.pop(super.context);
+  //   Navigator.push(
+  //     super.context,
+  //     MaterialPageRoute(
+  //       builder: (context) => ReadOnlyPage(),
+  //     ),
+  //   );
+  // }
 
   Future<String> _onImagePaste(Uint8List imageBytes) async {
     // Saves the image to applications directory
