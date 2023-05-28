@@ -2,16 +2,16 @@ import 'dart:async';
 import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:guxin_ai/common/apis/apis.dart';
-import 'package:guxin_ai/common/apis/content_special_api.dart';
-import 'package:guxin_ai/entities/content/content.dart';
-import 'package:guxin_ai/entities/content/special.dart';
-import 'package:guxin_ai/common/services/storage.dart';
-import 'package:guxin_ai/common/utils/loading.dart';
-import 'package:guxin_ai/common/utils/permission_check.dart';
-import 'package:guxin_ai/common/utils/qiniu_sdk.dart';
-import 'package:guxin_ai/common/values/storage.dart';
-import 'package:guxin_ai/pages/bbs/publish/state.dart';
+import 'package:JuAI/common/apis/apis.dart';
+import 'package:JuAI/common/apis/content_special_api.dart';
+import 'package:JuAI/entities/content/content.dart';
+import 'package:JuAI/entities/content/special.dart';
+import 'package:JuAI/common/services/storage.dart';
+import 'package:JuAI/common/utils/loading.dart';
+import 'package:JuAI/common/utils/permission_check.dart';
+import 'package:JuAI/common/utils/qiniu_sdk.dart';
+import 'package:JuAI/common/values/storage.dart';
+import 'package:JuAI/pages/bbs/publish/state.dart';
 import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:video_player/video_player.dart';
@@ -44,8 +44,8 @@ class PublishController extends GetxController {
 
   Future<String> getSpecialData() async {
     if (Get.arguments != null && Get.arguments > 0) {
-      specialInfo = await ContentSpecialApi.get(Get.arguments);
-      return "专栏：" + specialInfo!.title;
+      specialInfo = await SpecialApi.get(Get.arguments);
+      return "圈子：" + specialInfo!.title;
     }
     return "发布文章";
   }
@@ -88,6 +88,8 @@ class PublishController extends GetxController {
         var text = StorageService.to.getString(STORAGE_ARTICLE_TEXT);
         addReqEntity.summary = text.substring(0, text.length > 200 ? 199 : text.length - 1);
         addReqEntity.content = StorageService.to.getString(STORAGE_ARTICLE_DELTA);
+        StorageService.to.remove(STORAGE_ARTICLE_TEXT);
+        StorageService.to.remove(STORAGE_ARTICLE_DELTA);
       } else {
         return Loading.error("错误");
       }

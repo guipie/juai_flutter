@@ -1,12 +1,12 @@
 import 'package:flutter/services.dart';
 import 'package:getwidget/getwidget.dart';
-import 'package:guxin_ai/entities/content/content.dart';
-import 'package:guxin_ai/common/widgets/ui/tag.dart';
-import 'package:guxin_ai/pages/bbs/publish/controller.dart';
+import 'package:JuAI/entities/content/content.dart';
+import 'package:JuAI/common/widgets/tag.dart';
+import 'package:JuAI/pages/bbs/publish/controller.dart';
 import 'package:flutter/material.dart';
-import 'package:guxin_ai/pages/bbs/publish/state.dart';
-import 'package:guxin_ai/pages/bbs/publish/widgets/article/article_edit.dart';
-import 'package:guxin_ai/common/theme.dart';
+import 'package:JuAI/pages/bbs/publish/state.dart';
+import 'package:JuAI/pages/bbs/publish/widgets/article/article_edit.dart';
+import 'package:JuAI/common/theme.dart';
 import 'package:get/get.dart';
 
 class PublishArticlePage extends StatelessWidget {
@@ -50,12 +50,11 @@ class PublishArticlePage extends StatelessWidget {
                       child: TextField(
                         controller: logic.state.articleTitleController,
                         decoration: const InputDecoration(
-                          hintText: '  文章标题',
+                          hintText: '文章标题',
                           hintStyle: TextStyle(
                             color: Color.fromARGB(255, 138, 136, 134),
                           ),
                           border: InputBorder.none,
-                          counterText: "",
                         ),
                         maxLines: 1,
                         maxLength: 30,
@@ -87,7 +86,7 @@ class PublishArticlePage extends StatelessWidget {
                     ),
                   ),
                   ...logic.state.currentTags
-                      .map((e) => Tag(
+                      .map((e) => TagWidget(
                             e,
                             color: GFColors.WHITE,
                             backgroundColor: GFColors.SUCCESS,

@@ -1,4 +1,4 @@
-import 'package:guxin_ai/pages/conversation/state.dart';
+import 'package:JuAI/pages/conversation/state.dart';
 import 'package:get/get.dart';
 
 class ConversationController extends GetxController {

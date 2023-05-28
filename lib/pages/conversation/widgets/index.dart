@@ -1,6 +1,6 @@
-import 'package:guxin_ai/pages/bbs/mock.dart';
-import 'package:guxin_ai/pages/conversation/widgets/firends_dialog.dart';
-import 'package:guxin_ai/common/theme.dart';
+import 'package:JuAI/pages/bbs/mock.dart';
+import 'package:JuAI/pages/conversation/widgets/firends_dialog.dart';
+import 'package:JuAI/common/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

@@ -1,9 +1,9 @@
-import 'package:guxin_ai/entities/content/content.dart';
+import 'package:JuAI/entities/content/content.dart';
 
 class SpecialResEntity {
   String title;
   String summary;
-  dynamic content;
+  String? content;
   String coverImage;
   BaReadType readType;
   int payTokens;
@@ -15,7 +15,7 @@ class SpecialResEntity {
   SpecialResEntity({
     required this.title,
     required this.summary,
-    required this.content,
+    this.content,
     required this.coverImage,
     required this.readType,
     required this.payTokens,
@@ -28,7 +28,7 @@ class SpecialResEntity {
   factory SpecialResEntity.fromJson(Map<String, dynamic> json) => SpecialResEntity(
         title: json["Title"],
         summary: json["Summary"],
-        content: json["Content"],
+        content: json["Content"] ?? "",
         coverImage: json["CoverImage"],
         readType: BaReadType.values.firstWhere((e) => e.toString().split('.').last == json["ReadType"], orElse: () => BaReadType.Pub),
         payTokens: json["PayTokens"],

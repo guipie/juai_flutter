@@ -1,3 +1,4 @@
+import 'package:dart_mock/dart_mock.dart';
 import 'package:intl/intl.dart';
 
 /// 格式化时间
@@ -37,12 +38,18 @@ String DateTimeStrLine(String? date) {
   return DateTimeLine(dt ?? DateTime.now());
 }
 
+String dateStrFormatYMDHMS(dynamic date) {
+  var dt = DateTime.tryParse(date);
+  return DateFormat("yyyy-MM-dd HH:mm:ss").format(dt ?? DateTime.now());
+}
+
 String dateFormatYMDHMS(DateTime dt) {
   return DateFormat("yyyy-MM-dd HH:mm:ss").format(dt);
 }
 
-String dateFormat(DateTime? dt, {String? fmt}) {
+String dateFormat(dynamic dt, {String? fmt}) {
   dt = dt ?? DateTime.now();
+  var date = DateTime.tryParse(dt.toString());
   fmt = fmt ?? "yyyy-MM-dd HH:mm:ss";
-  return DateFormat(fmt).format(dt);
+  return DateFormat(fmt).format(date ?? DateTime.now());
 }

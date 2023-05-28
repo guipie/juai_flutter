@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:guxin_ai/common/theme.dart';
-import 'package:guxin_ai/common/widgets/ui/tag.dart';
+import 'package:JuAI/common/theme.dart';
+import 'package:JuAI/common/widgets/tag.dart';
 
 class TagsWidget extends StatelessWidget {
   const TagsWidget(this.tags, {super.key});
@@ -13,7 +13,7 @@ class TagsWidget extends StatelessWidget {
           spacing: 12,
           runSpacing: 6,
           children: tags.split("##").map((e) {
-            return Tag(
+            return TagWidget(
               "#" + e.replaceAll("#", "") + "#",
               borderRadius: BorderRadius.circular(24),
               fontSize: WcaoTheme.fsBase,

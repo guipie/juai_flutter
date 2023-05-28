@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:getwidget/getwidget.dart';
-import 'package:guxin_ai/common/theme.dart';
-import 'package:guxin_ai/pages/bbs/publish/widgets/select_special.dart';
+import 'package:JuAI/common/theme.dart';
+import 'package:JuAI/pages/bbs/publish/widgets/select_special.dart';
 
 import 'controller_special.dart';
 
@@ -16,7 +16,7 @@ class PublishSpecialPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('创建专栏'),
+        title: const Text('创建圈子'),
         actions: [
           const SelectSpecialWidget(),
           const SizedBox(
@@ -40,7 +40,7 @@ class PublishSpecialPage extends StatelessWidget {
               maxLength: 10,
               controller: logic.titleController,
               decoration: const InputDecoration(
-                labelText: '专栏名称',
+                labelText: '圈子名称',
               ),
               maxLengthEnforcement: MaxLengthEnforcement.none,
             ),
@@ -50,7 +50,7 @@ class PublishSpecialPage extends StatelessWidget {
               maxLines: 4,
               controller: logic.summaryConroller,
               decoration: const InputDecoration(
-                labelText: '专栏描述',
+                labelText: '圈子描述',
               ),
               maxLengthEnforcement: MaxLengthEnforcement.none,
             ),
@@ -79,7 +79,7 @@ class PublishSpecialPage extends StatelessWidget {
                       if (!logic.currentCover.isNotEmpty)
                         Positioned(
                           child: Text(
-                            "专栏封面",
+                            "圈子封面",
                             style: TextStyle(
                               color: WcaoTheme.placeholder,
                               fontSize: WcaoTheme.fsL,
@@ -103,7 +103,7 @@ class PublishSpecialPage extends StatelessWidget {
                         logic.isPay.value = !logic.isPay.value;
                       }),
                 ),
-                const Text('专栏是否付费'),
+                const Text('圈子是否付费'),
               ],
             ),
           ],

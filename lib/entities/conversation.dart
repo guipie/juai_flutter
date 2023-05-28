@@ -1,5 +1,5 @@
-import 'package:guxin_ai/common/assets.dart';
-import 'package:guxin_ai/common/utils/date.dart';
+import 'package:JuAI/common/assets.dart';
+import 'package:JuAI/common/utils/date.dart';
 
 class Conversation {
   Conversation({

@@ -4,19 +4,22 @@ import 'dart:convert';
 class UserLoginRequestEntity {
   String userName;
   String? password;
+  String? newPassword;
   String? vcode;
   String? u;
   UserLoginRequestEntity({
     required this.userName,
     this.password,
+    this.newPassword,
     this.vcode,
     this.u,
   });
   Map<String, dynamic> toJson() => {
-        "userName": userName,
-        "password": password,
-        "vcode": vcode,
-        "u": u,
+        "UserName": userName,
+        "Password": password,
+        "NewPassword": newPassword,
+        "Vcode": vcode,
+        "U": u,
       };
 }
 
@@ -28,16 +31,15 @@ class UserLoginResponseEntity {
   String nickName;
   String status;
   String sex;
-  String birthday;
+  String? birthday;
   String? email;
-  String? phone;
+  String phone;
   String? address;
   String? avatar;
   int tokenCount;
-  DateTime registerDate;
   DateTime lastLoginDate;
   String roleNames;
-  dynamic remark;
+  String? remark;
 
   UserLoginResponseEntity({
     required this.id,
@@ -45,16 +47,15 @@ class UserLoginResponseEntity {
     required this.nickName,
     required this.status,
     required this.sex,
-    required this.birthday,
+    this.birthday,
     this.email,
-    this.phone,
+    required this.phone,
     this.address,
     this.avatar,
     required this.tokenCount,
-    required this.registerDate,
     required this.lastLoginDate,
     required this.roleNames,
-    required this.remark,
+    this.remark,
   });
 
   factory UserLoginResponseEntity.fromRawJson(String str) => UserLoginResponseEntity.fromJson(json.decode(str));
@@ -70,10 +71,9 @@ class UserLoginResponseEntity {
         sex: json["Sex"],
         birthday: json["Birthday"],
         email: json["Email"],
-        phone: json["Phone"],
+        phone: json["Phone"] ?? "",
         address: json["Address"],
         tokenCount: json["TokenCount"],
-        registerDate: DateTime.parse(json["RegisterDate"]),
         lastLoginDate: DateTime.parse(json["LastLoginDate"]),
         roleNames: json["RoleNames"],
         remark: json["Remark"],
@@ -91,7 +91,6 @@ class UserLoginResponseEntity {
         "Address": address,
         "Avatar": avatar,
         "TokenCount": tokenCount,
-        "RegisterDate": registerDate.toIso8601String(),
         "LastLoginDate": lastLoginDate.toIso8601String(),
         "RoleNames": roleNames,
         "Remark": remark,
@@ -127,5 +126,22 @@ class UserTokenResponseEntity {
         "token": token,
         "expires_in": expiresIn,
         "token_type": tokenType,
+      };
+}
+
+class PhoneUpdateReq {
+  String? vcode;
+  String newPhone;
+  String? password;
+
+  PhoneUpdateReq({
+    this.vcode,
+    required this.newPhone,
+    this.password,
+  });
+  Map<String, dynamic> toJson() => {
+        "Vcode": vcode,
+        "NewPhone": newPhone,
+        "Password": password,
       };
 }

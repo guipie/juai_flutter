@@ -1,5 +1,5 @@
-import 'package:guxin_ai/entities/content/content.dart';
-import 'package:guxin_ai/common/utils/http.dart';
+import 'package:JuAI/entities/content/content.dart';
+import 'package:JuAI/common/utils/http.dart';
 
 class ContentAPI {
   /* 内容相关接口 */
@@ -24,6 +24,11 @@ class ContentAPI {
 
   static Future<ContentResEntity> contentDetail(int id) async {
     var response = await HttpUtil().get('/content/' + id.toString());
+    return response.data;
+  }
+
+  static Future<bool> contentLike(int id) async {
+    var response = await HttpUtil().post('/content/like/$id');
     return response.data;
   }
 

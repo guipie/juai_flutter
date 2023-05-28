@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:guxin_ai/common/widgets/image_cache.dart';
-import 'package:guxin_ai/common/theme.dart';
+import 'package:JuAI/common/widgets/image_cache.dart';
+import 'package:JuAI/common/theme.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../../bbs/mock.dart';

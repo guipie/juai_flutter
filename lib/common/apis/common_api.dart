@@ -1,4 +1,4 @@
-import 'package:guxin_ai/common/utils/http.dart';
+import 'package:JuAI/common/utils/http.dart';
 
 class CommonApis {
   static Future<bool> deleteQiniuPic(String key) {

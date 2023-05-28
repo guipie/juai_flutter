@@ -1,41 +1,45 @@
-import 'package:guxin_ai/common/store/store.dart';
-import 'package:guxin_ai/pages/bbs/detail/controller.dart';
-import 'package:guxin_ai/pages/bbs/detail/view.dart';
-import 'package:guxin_ai/pages/bbs/publish/controller.dart';
-import 'package:guxin_ai/pages/bbs/publish/controller_special.dart';
-import 'package:guxin_ai/pages/bbs/publish/view.dart';
-import 'package:guxin_ai/pages/bbs/publish/view_article.dart';
-import 'package:guxin_ai/pages/bbs/publish/view_special.dart';
-import 'package:guxin_ai/pages/bbs_chat/controller.dart';
-import 'package:guxin_ai/pages/bbs_chat/view.dart';
-import 'package:guxin_ai/pages/settings/agreement/privacy.dart';
-import 'package:guxin_ai/pages/settings/agreement/user.dart';
-import 'package:guxin_ai/pages/bbs/controller.dart';
-import 'package:guxin_ai/pages/bbs/view.dart';
-import 'package:guxin_ai/pages/conversation/controller.dart';
-import 'package:guxin_ai/pages/settings/about/index.dart';
-import 'package:guxin_ai/pages/settings/account/index.dart';
-import 'package:guxin_ai/pages/settings/account/logout.dart';
-import 'package:guxin_ai/pages/settings/account/update_phone.dart';
-import 'package:guxin_ai/pages/settings/backlist/index.dart';
-import 'package:guxin_ai/pages/settings/controler.dart';
-import 'package:guxin_ai/pages/settings/notification/index.dart';
-import 'package:guxin_ai/pages/settings/password/reset.dart';
-import 'package:guxin_ai/pages/settings/password/update.dart';
-import 'package:guxin_ai/pages/settings/privacy/index.dart';
-import 'package:guxin_ai/pages/settings/verify_code/index.dart';
-import 'package:guxin_ai/pages/settings/view.dart';
-import 'package:guxin_ai/pages/tools/controller.dart';
-import 'package:guxin_ai/pages/tools/view.dart';
-import 'package:guxin_ai/pages/conversation/chat/controller.dart';
-import 'package:guxin_ai/pages/conversation/chat/view.dart';
-import 'package:guxin_ai/pages/conversation/view.dart';
-import 'package:guxin_ai/pages/home/bindings.dart';
-import 'package:guxin_ai/pages/home/index.dart';
-import 'package:guxin_ai/pages/home/index_pc.dart';
-import 'package:guxin_ai/pages/settings/login/controller.dart';
-import 'package:guxin_ai/pages/settings/login/login_view.dart';
-import 'package:guxin_ai/pages/settings/login/login_vcode_view.dart';
+import 'package:JuAI/common/store/notice.dart';
+import 'package:JuAI/pages/bbs/detail/controller.dart';
+import 'package:JuAI/pages/bbs/detail/view.dart';
+import 'package:JuAI/pages/bbs/publish/controller.dart';
+import 'package:JuAI/pages/bbs/publish/controller_special.dart';
+import 'package:JuAI/pages/bbs/publish/view.dart';
+import 'package:JuAI/pages/bbs/publish/view_article.dart';
+import 'package:JuAI/pages/bbs/publish/view_special.dart';
+import 'package:JuAI/pages/bbs/special/index.dart';
+import 'package:JuAI/pages/bbs/special/view.dart';
+import 'package:JuAI/pages/bbs_chat/controller.dart';
+import 'package:JuAI/pages/bbs_chat/view.dart';
+import 'package:JuAI/pages/settings/account/pwd_reset.dart';
+import 'package:JuAI/pages/settings/account/pwd_update.dart';
+import 'package:JuAI/pages/settings/agreement/privacy.dart';
+import 'package:JuAI/pages/settings/agreement/user.dart';
+import 'package:JuAI/pages/bbs/controller.dart';
+import 'package:JuAI/pages/bbs/view.dart';
+import 'package:JuAI/pages/conversation/controller.dart';
+import 'package:JuAI/pages/settings/about/index.dart';
+import 'package:JuAI/pages/settings/account/index.dart';
+import 'package:JuAI/pages/settings/account/logout.dart';
+import 'package:JuAI/pages/settings/account/phone_update.dart';
+import 'package:JuAI/pages/settings/backlist/index.dart';
+import 'package:JuAI/pages/settings/controler.dart';
+import 'package:JuAI/pages/settings/mine/index.dart';
+import 'package:JuAI/pages/settings/notification/notice.dart';
+import 'package:JuAI/pages/settings/notification/notice_setting.dart';
+import 'package:JuAI/pages/settings/privacy/index.dart';
+import 'package:JuAI/pages/settings/account/account_vcode.dart';
+import 'package:JuAI/pages/settings/view.dart';
+import 'package:JuAI/pages/tools/controller.dart';
+import 'package:JuAI/pages/tools/view.dart';
+import 'package:JuAI/pages/conversation/chat/controller.dart';
+import 'package:JuAI/pages/conversation/chat/view.dart';
+import 'package:JuAI/pages/conversation/view.dart';
+import 'package:JuAI/pages/home/bindings.dart';
+import 'package:JuAI/pages/home/index.dart';
+import 'package:JuAI/pages/home/index_pc.dart';
+import 'package:JuAI/pages/settings/login/controller.dart';
+import 'package:JuAI/pages/settings/login/login_view.dart';
+import 'package:JuAI/pages/settings/login/login_vcode_view.dart';
 import 'package:get/get.dart';
 
 import 'routes.dart';
@@ -100,6 +104,11 @@ class AppPages {
       page: () => BbsDetailPage(),
       binding: BindingsBuilder(() => Get.put<ContentDetailController>(ContentDetailController())),
     ),
+    GetPage(
+      name: Routes.bbsSpecial,
+      page: () => SpecialPage(),
+      binding: BindingsBuilder(() => Get.put<SpecialController>(SpecialController())),
+    ),
 
     ///gpt相关
     GetPage(
@@ -111,7 +120,7 @@ class AppPages {
     //设置相关
     GetPage(
       name: Routes.settings,
-      page: () => const SettingsPage(),
+      page: () => SettingsPage(),
       binding: BindingsBuilder(() => Get.lazyPut(() => SettingsController())),
     ),
     GetPage(
@@ -120,7 +129,13 @@ class AppPages {
     ),
     GetPage(
       name: Routes.settingsNotice,
-      page: () => const SettingsNotificationPage(),
+      page: () => SettingsNoticePage(),
+      binding: BindingsBuilder(() => Get.lazyPut(() => NoticeStore())),
+    ),
+    GetPage(
+      name: Routes.settingsNoticeSetting,
+      page: () => SettingsNotificationSettingPage(),
+      binding: BindingsBuilder(() => Get.lazyPut(() => NoticeStore())),
     ),
     GetPage(
       name: Routes.settingsPrivacy,
@@ -132,11 +147,15 @@ class AppPages {
     ),
     GetPage(
       name: Routes.settingsUpdatePhone,
-      page: () => const AccountUpdatePhonePage(),
+      page: () => const AccountPhoneUpdatePage(),
     ),
     GetPage(
       name: Routes.settingsEnterVcode,
       page: () => const VerifyCodePage(),
+    ),
+    GetPage(
+      name: Routes.settingsMineHome,
+      page: () => SettingsMineHomeWidget(),
     ),
 
     GetPage(
@@ -155,7 +174,7 @@ class AppPages {
     ),
     GetPage(
       name: Routes.settingsForgetPwd,
-      page: () => const PasswordReset(),
+      page: () => const PasswordResetPage(),
     ),
     GetPage(
       name: Routes.settingsBacklist,

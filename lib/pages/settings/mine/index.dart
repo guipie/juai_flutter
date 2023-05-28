@@ -1,35 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:guxin_ai/common/widgets/image_cache.dart';
-import 'package:guxin_ai/pages/settings/mine/mock.dart';
-import 'package:guxin_ai/common/widgets/ui/tag.dart';
-import 'package:guxin_ai/common/theme.dart';
+import 'package:JuAI/common/widgets/avatar.dart';
+import 'package:JuAI/common/widgets/image_cache.dart';
+import 'package:JuAI/pages/settings/mine/mock.dart';
+import 'package:JuAI/common/widgets/tag.dart';
+import 'package:JuAI/common/theme.dart';
 import 'package:get/get.dart';
 
 import '../../bbs/mock.dart';
 
-class PageViewMine extends StatefulWidget {
-  const PageViewMine({Key? key}) : super(key: key);
+class SettingsMineHomeWidget extends StatelessWidget {
+  final MockMine mine = MockMine.get();
+  final List<MockLike> items = MockLike.get(num: 4);
 
-  @override
-  State<PageViewMine> createState() => _PageViewMineState();
-}
-
-/// TODO: NestedScrollView 如何实现上拉加载，下拉刷新
-
-class _PageViewMineState extends State<PageViewMine> {
-  MockMine mine = MockMine.get();
-  List<MockLike> items = [];
-
-  @override
-  void initState() {
-    super.initState();
-    MockLike.clear();
-
-    setState(() {
-      items = MockLike.get(num: 4);
-    });
-  }
-
+  SettingsMineHomeWidget({super.key});
   @override
   Widget build(BuildContext context) {
     return NestedScrollView(
@@ -38,18 +21,19 @@ class _PageViewMineState extends State<PageViewMine> {
           SliverAppBar(
             automaticallyImplyLeading: false,
             pinned: true,
-            expandedHeight: 376,
+            expandedHeight: 320,
+            leading: TextButton.icon(
+              onPressed: () {},
+              icon: Icon(Icons.arrow_back_sharp, color: Colors.white),
+              label: Text("返回", style: TextStyle(color: Colors.white)),
+            ),
+            leadingWidth: 100,
             actions: [
-              IconButton(
-                icon: Icon(
-                  Icons.settings_outlined,
-                  size: WcaoTheme.fsBase * 1.6,
-                  color: WcaoTheme.base,
-                ),
-                onPressed: () {
-                  Get.toNamed('/settings');
-                },
-              )
+              TextButton.icon(
+                onPressed: () => Get.toNamed('/mine/add-tag'),
+                icon: Icon(Icons.add_sharp, color: Colors.white),
+                label: Text("", style: TextStyle(color: Colors.white)),
+              ),
             ],
             flexibleSpace: LayoutBuilder(
               builder: (context, constraints) {
@@ -61,7 +45,7 @@ class _PageViewMineState extends State<PageViewMine> {
                     duration: const Duration(microseconds: 300),
                     opacity: isOpacity ? 1 : 0,
                     child: Text(
-                      mine.nickName,
+                      "哈哈哈哈",
                       style: TextStyle(
                         color: WcaoTheme.base,
                         fontSize: WcaoTheme.fsXl,
@@ -73,6 +57,7 @@ class _PageViewMineState extends State<PageViewMine> {
                     children: [
                       SizedBox(
                         width: double.infinity,
+                        height: top,
                         child: ImageCacheWidget(mine.bg),
                       ),
                       Positioned(
@@ -190,6 +175,7 @@ class _PageViewMineState extends State<PageViewMine> {
                   )
                 : Container(),
             Container(
+              width: double.infinity,
               alignment: Alignment.topLeft,
               margin: EdgeInsets.only(top: item.media.isNotEmpty ? 24 : 12),
               child: Wrap(
@@ -197,7 +183,7 @@ class _PageViewMineState extends State<PageViewMine> {
                 runSpacing: 6,
                 children: List.generate(
                   item.tag.length,
-                  (index) => Tag(
+                  (index) => TagWidget(
                     item.tag[index],
                     color: WcaoTheme.primary,
                     borderRadius: BorderRadius.circular(24),
@@ -223,7 +209,7 @@ class _PageViewMineState extends State<PageViewMine> {
           ),
         ),
         Text(
-          text,
+          "动态",
           style: TextStyle(
             color: WcaoTheme.secondary,
           ),
@@ -248,11 +234,9 @@ class _PageViewMineState extends State<PageViewMine> {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          CircleAvatar(
-            radius: 48,
-            backgroundImage: NetworkImage(
-              mine.avatar,
-            ),
+          avatar(
+            avatarUrl: mine.avatar,
+            radius: 28,
           ),
           Container(
             margin: const EdgeInsets.only(top: 12),
@@ -285,30 +269,17 @@ class _PageViewMineState extends State<PageViewMine> {
             ),
           ),
           Container(
-            margin: const EdgeInsets.only(top: 6),
-            child: Wrap(
-              alignment: WrapAlignment.center,
-              spacing: 12,
-              runSpacing: 6,
-              children: List.generate(
-                mine.tags.length,
-                (index) {
-                  if (index >= mine.tags.length - 1) {
-                    // 添加标签
-                    return InkWell(
-                      onTap: () => Get.toNamed('/mine/add-tag'),
-                      child: Tag(
-                        '+',
-                        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 4),
-                        backgroundColor: Colors.black.withOpacity(.4),
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(24),
-                        fontSize: WcaoTheme.fsBase,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    );
-                  } else {
-                    return Tag(
+            margin: const EdgeInsets.only(top: 5),
+            height: 100,
+            child: SingleChildScrollView(
+              child: Wrap(
+                alignment: WrapAlignment.center,
+                spacing: 12,
+                runSpacing: 6,
+                children: List.generate(
+                  mine.tags.length,
+                  (index) {
+                    return TagWidget(
                       mine.tags[index],
                       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                       backgroundColor: Colors.black.withOpacity(.4),
@@ -317,9 +288,9 @@ class _PageViewMineState extends State<PageViewMine> {
                       fontSize: WcaoTheme.fsBase,
                       fontWeight: FontWeight.bold,
                     );
-                  }
-                },
-              ).toList(),
+                  },
+                ).toList(),
+              ),
             ),
           ),
         ],

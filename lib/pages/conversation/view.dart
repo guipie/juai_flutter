@@ -1,10 +1,10 @@
-import 'package:guxin_ai/common/utils/utils.dart';
+import 'package:JuAI/common/utils/utils.dart';
 import 'package:flutter/material.dart';
-import 'package:guxin_ai/entities/conversation.dart';
-import 'package:guxin_ai/common/routers/routes.dart';
-import 'package:guxin_ai/common/widgets/appbar.dart';
-import 'package:guxin_ai/common/widgets/avatar.dart';
-import 'package:guxin_ai/common/theme.dart';
+import 'package:JuAI/entities/conversation.dart';
+import 'package:JuAI/common/routers/routes.dart';
+import 'package:JuAI/common/widgets/appbar.dart';
+import 'package:JuAI/common/widgets/avatar.dart';
+import 'package:JuAI/common/theme.dart';
 import 'package:get/get.dart';
 import 'controller.dart';
 

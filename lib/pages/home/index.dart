@@ -1,14 +1,11 @@
-import 'package:guxin_ai/pages/bbs/view.dart';
-import 'package:guxin_ai/pages/bbs_chat/view.dart';
-import 'package:guxin_ai/pages/home/controler.dart';
-import 'package:guxin_ai/pages/settings/view.dart';
-import 'package:guxin_ai/pages/tools/view.dart';
+import 'package:JuAI/pages/bbs/view.dart';
+import 'package:JuAI/pages/bbs_chat/view.dart';
+import 'package:JuAI/pages/home/controler.dart';
+import 'package:JuAI/pages/settings/view.dart';
 import 'package:flutter/material.dart';
-import 'package:guxin_ai/pages/conversation/view.dart';
-import 'package:guxin_ai/pages/home/index/index.dart';
-import 'package:guxin_ai/pages/settings/mine/index.dart';
+import 'package:JuAI/pages/conversation/view.dart';
 
-import 'package:guxin_ai/common/theme.dart';
+import 'package:JuAI/common/theme.dart';
 import 'package:get/get.dart';
 
 /// 首页 PageView Controller.
@@ -25,7 +22,7 @@ class HomePage extends GetView<HomeController> {
           const ConversationPage(),
           const BbsPage(),
           BbsChatPage(),
-          const SettingsPage(),
+          SettingsPage(),
         ],
       ),
       // floatingActionButton: FloatingActionButton(

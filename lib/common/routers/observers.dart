@@ -1,5 +1,5 @@
-import 'package:guxin_ai/common/routers/pages.dart';
-import 'package:guxin_ai/common/store/user.dart';
+import 'package:JuAI/common/routers/pages.dart';
+import 'package:JuAI/common/store/user.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

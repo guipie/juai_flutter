@@ -1,8 +1,8 @@
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
-import 'package:guxin_ai/common/widgets/image_cache.dart';
-import 'package:guxin_ai/pages/home/index/search_dialog.dart';
-import 'package:guxin_ai/common/theme.dart';
+import 'package:JuAI/common/widgets/image_cache.dart';
+import 'package:JuAI/pages/home/index/search_dialog.dart';
+import 'package:JuAI/common/theme.dart';
 import 'package:get/get.dart';
 
 import 'dart:math' as math;

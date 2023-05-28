@@ -1,4 +1,4 @@
-import 'package:guxin_ai/entities/chat.dart';
+import 'package:JuAI/entities/message/chat.dart';
 
 /// 聊天会话相关
 class ChatAPI {

@@ -1,6 +1,6 @@
-import 'package:guxin_ai/common/utils/date.dart';
-import 'package:guxin_ai/pages/bbs_chat/controller.dart';
-import 'package:guxin_ai/common/theme.dart';
+import 'package:JuAI/common/utils/date.dart';
+import 'package:JuAI/pages/bbs_chat/controller.dart';
+import 'package:JuAI/common/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:getwidget/getwidget.dart';

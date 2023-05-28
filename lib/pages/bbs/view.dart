@@ -1,5 +1,5 @@
-import 'package:guxin_ai/common/widgets/appbar.dart';
-import 'package:guxin_ai/pages/bbs/index/view.dart';
+import 'package:JuAI/common/widgets/appbar.dart';
+import 'package:JuAI/pages/bbs/index/view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

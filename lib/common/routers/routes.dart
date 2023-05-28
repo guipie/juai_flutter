@@ -14,10 +14,13 @@ class Routes {
   static const bbsPublishSpecial = "/bbs/publish/special";
   static const bbsTagAdd = "/bbs/publish/add/tag";
   static const bbsDetail = "/bbs/detail";
+  static const bbsDetailComment = "/bbs/detail/comment";
+  static const bbsSpecial = "/bbs/special";
 
   static const bbsChat = "/bbs-chat";
 
   static const settings = "/settings";
+  static const settingsMineHome = "/settings/mine/home";
   static const settingsAccount = "/settings/account";
   static const settingsUpdatePwd = "/settings/account/password/update";
   static const settingsUpdatePhone = "/settings/account/update-phone";
@@ -28,6 +31,7 @@ class Routes {
   static const settingsForgetPwd = "/settings/account/password/forget";
 
   static const settingsNotice = "/settings/notification";
+  static const settingsNoticeSetting = "/settings/notification/setting";
   static const settingsPrivacy = "/settings/privacy";
   static const settingsBacklist = "/settings/backlist";
   static const settingsAbout = "/settings/about";

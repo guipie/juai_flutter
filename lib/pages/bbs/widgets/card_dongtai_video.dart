@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:guxin_ai/common/server.dart';
-import 'package:guxin_ai/common/theme.dart';
-import 'package:guxin_ai/common/utils/utils.dart';
-import 'package:guxin_ai/common/widgets/image_cache.dart';
+import 'package:JuAI/common/server.dart';
+import 'package:JuAI/common/theme.dart';
+import 'package:JuAI/common/utils/utils.dart';
+import 'package:JuAI/common/widgets/image_cache.dart';
+import 'package:JuAI/pages/bbs/video/index.dart';
 import 'package:media_kit/media_kit.dart';
 import 'package:media_kit_video/media_kit_video.dart';
 import 'package:video_player/video_player.dart';
@@ -18,10 +19,10 @@ class CardDongtaiVideoWidget extends StatefulWidget {
 class _CardDongtaiVideoWidgetState extends State<CardDongtaiVideoWidget> {
   late VideoPlayerController _videoPlayerController;
   late Player _winPlayer;
-  late VideoController? _winVideoPlayerController;
-  final double _winHeight = 400;
+  late VideoController _winVideoPlayerController;
   var _isPlay = false;
   bool _isFirstLoading = true;
+  final _winHeight = 300.0;
   final GlobalKey globalKey = GlobalKey();
   @override
   void initState() {
@@ -49,7 +50,7 @@ class _CardDongtaiVideoWidgetState extends State<CardDongtaiVideoWidget> {
     } else {
       Future.microtask(() async {
         _winPlayer = Player();
-        _winVideoPlayerController = await VideoController.create(_winPlayer);
+        _winVideoPlayerController = VideoController(_winPlayer);
 
         // Play any media source.
         await _winPlayer.open(Media(Qiniu_External_domain + widget.videoUrl), play: true);
@@ -71,7 +72,6 @@ class _CardDongtaiVideoWidgetState extends State<CardDongtaiVideoWidget> {
       } else {
         Future.microtask(() async {
           /// Release allocated resources back to the system.
-          await _winVideoPlayerController?.dispose();
           await _winPlayer.dispose();
         });
       }
@@ -104,26 +104,25 @@ class _CardDongtaiVideoWidgetState extends State<CardDongtaiVideoWidget> {
       },
       child: Container(
         key: globalKey,
-        margin: const EdgeInsets.only(left: 4, top: 8),
+        margin: const EdgeInsets.only(left: 2, top: 8),
         child: Stack(
           alignment: AlignmentDirectional.center,
           children: [
             _isFirstLoading
                 ? ImageCacheWidget(
                     QiniuUtil.getVideoThumbnail(widget.videoUrl),
-                    height: 200,
+                    height: 160,
+                    width: 160,
                   )
-                : Center(
-                    child: GetPlatform.isMobile
-                        ? AspectRatio(
-                            aspectRatio: _videoPlayerController.value.aspectRatio,
-                            child: VideoPlayer(_videoPlayerController),
-                          )
-                        : Video(
-                            height: _winHeight,
-                            controller: _winVideoPlayerController,
-                          ),
-                  ),
+                : GetPlatform.isMobile
+                    ? AspectRatio(
+                        aspectRatio: _videoPlayerController.value.aspectRatio,
+                        child: VideoPlayer(_videoPlayerController),
+                      )
+                    : Video(
+                        height: _winHeight,
+                        controller: _winVideoPlayerController,
+                      ),
             if (!_isPlay)
               Positioned(
                 child: Icon(

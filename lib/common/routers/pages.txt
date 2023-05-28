@@ -1,0 +1,5 @@
+
+      GetPage(
+        name: RouteNames.bbsVideo,
+        page: () => const VideoPage(),
+      ),

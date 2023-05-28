@@ -1,5 +1,5 @@
 import 'package:dart_openai/dart_openai.dart';
-import 'package:guxin_ai/common/server.dart';
+import 'package:JuAI/common/server.dart';
 
 class HttpChat {
   static final HttpChat _instance = HttpChat._internal();

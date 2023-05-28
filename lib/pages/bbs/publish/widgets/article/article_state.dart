@@ -1,10 +1,10 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:guxin_ai/common/apis/common_api.dart';
-import 'package:guxin_ai/common/server.dart';
-import 'package:guxin_ai/common/services/storage.dart';
-import 'package:guxin_ai/common/values/storage.dart';
+import 'package:JuAI/common/apis/common_api.dart';
+import 'package:JuAI/common/server.dart';
+import 'package:JuAI/common/services/storage.dart';
+import 'package:JuAI/common/values/storage.dart';
 
 class ArticleEditSate {
   final FocusNode focusNode = FocusNode();

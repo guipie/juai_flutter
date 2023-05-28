@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:guxin_ai/common/apis/apis.dart';
-import 'package:guxin_ai/common/store/content.dart';
-import 'package:guxin_ai/common/widgets/ui/tag.dart';
-import 'package:guxin_ai/common/theme.dart';
+import 'package:JuAI/common/apis/apis.dart';
+import 'package:JuAI/common/store/content.dart';
+import 'package:JuAI/common/widgets/tag.dart';
+import 'package:JuAI/common/theme.dart';
 import 'package:dart_mock/dart_mock.dart' as mock;
 import 'package:get/get.dart';
 
@@ -85,7 +85,7 @@ class _BbsAddTagState extends State<BbsAddTag> {
                 runSpacing: 12,
                 children: myCurrentTags
                     .map(
-                      (m) => Tag(
+                      (m) => TagWidget(
                         "#" + m["Name"] + "#",
                         backgroundColor: WcaoTheme.primary,
                         color: Colors.white,
@@ -110,7 +110,7 @@ class _BbsAddTagState extends State<BbsAddTag> {
                   runSpacing: 12,
                   children: tags
                       .map(
-                        (m) => Tag(
+                        (m) => TagWidget(
                           "#" + m["Name"] + "#",
                           borderRadius: BorderRadius.circular(20),
                           padding: const EdgeInsets.symmetric(
@@ -142,7 +142,7 @@ class _BbsAddTagState extends State<BbsAddTag> {
       alignment: WrapAlignment.spaceBetween,
       children: List.generate(
         5,
-        (index) => Tag(
+        (index) => TagWidget(
           '${mock.integer(min: 6, max: 9)}0年代',
           border: Border.all(width: .5, color: WcaoTheme.outline),
           backgroundColor: Colors.white,

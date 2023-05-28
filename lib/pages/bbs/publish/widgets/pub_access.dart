@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
-import 'package:guxin_ai/entities/content/content.dart';
+import 'package:JuAI/entities/content/content.dart';
 
 class PubAccessWidget extends StatefulWidget {
   const PubAccessWidget({super.key});

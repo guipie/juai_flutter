@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:getwidget/getwidget.dart';
-import 'package:guxin_ai/common/apis/content_special_api.dart';
-import 'package:guxin_ai/entities/content/special.dart';
-import 'package:guxin_ai/common/routers/routes.dart';
-import 'package:guxin_ai/common/theme.dart';
-import 'package:guxin_ai/common/widgets/image_cache.dart';
-import 'package:guxin_ai/common/widgets/widgets.dart';
+import 'package:JuAI/common/apis/content_special_api.dart';
+import 'package:JuAI/entities/content/special.dart';
+import 'package:JuAI/common/routers/routes.dart';
+import 'package:JuAI/common/theme.dart';
+import 'package:JuAI/common/widgets/image_cache.dart';
+import 'package:JuAI/common/widgets/widgets.dart';
 
 class SelectSpecialWidget extends StatefulWidget {
   const SelectSpecialWidget({super.key});
@@ -22,7 +22,7 @@ class _SelectSpecialWidgetState extends State<SelectSpecialWidget> {
   void initState() {
     super.initState();
     setState(() {
-      ContentSpecialApi.getMine().then((value) => mySpecials = value);
+      SpecialApi.getMine().then((value) => mySpecials = value);
     });
   }
 
@@ -68,7 +68,7 @@ class _SelectSpecialWidgetState extends State<SelectSpecialWidget> {
         setState(() {});
       },
       type: GFButtonType.transparent,
-      icon: const Text("选择专栏"),
+      icon: const Text("选择圈子"),
       child: const Icon(
         Icons.arrow_forward_outlined,
         size: 18,

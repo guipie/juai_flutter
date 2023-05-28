@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:guxin_ai/common/routers/routes.dart';
-import 'package:guxin_ai/pages/conversation/widgets/firends_dialog.dart';
-import 'package:guxin_ai/pages/conversation/widgets/qr_scan.dart';
-import 'package:guxin_ai/common/theme.dart';
+import 'package:JuAI/common/routers/routes.dart';
+import 'package:JuAI/pages/conversation/widgets/firends_dialog.dart';
+import 'package:JuAI/pages/conversation/widgets/qr_scan.dart';
+import 'package:JuAI/common/theme.dart';
 
 AppBar conversationBar(BuildContext context) {
   return AppBar(
@@ -126,7 +126,7 @@ AppBar bbsBar(BuildContext context, List<String> tabs) {
                 const Icon(Icons.folder_special_outlined),
                 Container(
                   margin: const EdgeInsets.only(left: 8),
-                  child: const Text('专栏'),
+                  child: const Text('圈子'),
                 ),
               ],
             ),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:guxin_ai/common/theme.dart';
+import 'package:JuAI/common/theme.dart';
 import 'package:group_button/group_button.dart';
 
 class SearchDialog extends StatefulWidget {

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:guxin_ai/entities/content/content.dart';
-import 'package:guxin_ai/common/utils/date.dart';
-import 'package:guxin_ai/common/widgets/image_avatar_cache.dart';
-import 'package:guxin_ai/common/widgets/image_cache.dart';
-import 'package:guxin_ai/common/theme.dart';
-import 'package:guxin_ai/pages/bbs/widgets/card_article.dart';
-import 'package:guxin_ai/pages/bbs/widgets/card_dongtai.dart';
+import 'package:JuAI/common/widgets/avatar.dart';
+import 'package:JuAI/entities/content/content.dart';
+import 'package:JuAI/common/utils/date.dart';
+import 'package:JuAI/common/widgets/image_avatar_cache.dart';
+import 'package:JuAI/common/widgets/image_cache.dart';
+import 'package:JuAI/common/theme.dart';
+import 'package:JuAI/pages/bbs/widgets/card_article.dart';
+import 'package:JuAI/pages/bbs/widgets/card_dongtai.dart';
 
 class CardIndexWidget extends StatelessWidget {
   const CardIndexWidget(this.content, {Key? key}) : super(key: key);
@@ -24,14 +25,7 @@ class CardIndexWidget extends StatelessWidget {
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(
-                  width: 60,
-                  height: 60,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(44),
-                    child: ImageAvatarCacheWidget(content.avatar ?? ""),
-                  ),
-                ),
+                avatar(avatarUrl: content.avatar, radius: 26),
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),

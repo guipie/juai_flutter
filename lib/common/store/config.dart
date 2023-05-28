@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:guxin_ai/common/services/storage.dart';
-import 'package:guxin_ai/common/values/storage.dart';
+import 'package:JuAI/common/services/storage.dart';
+import 'package:JuAI/common/values/storage.dart';
 import 'package:get/get.dart';
 import 'package:package_info/package_info.dart';
 

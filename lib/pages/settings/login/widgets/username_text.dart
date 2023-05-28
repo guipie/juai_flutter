@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:guxin_ai/pages/settings/login/controller.dart';
-import 'package:guxin_ai/common/theme.dart';
+import 'package:JuAI/pages/settings/login/controller.dart';
+import 'package:JuAI/common/theme.dart';
 import 'package:get/get.dart';
 
 class UserNameText extends GetView<LoginController> {

@@ -1,11 +1,11 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:guxin_ai/common/apis/user_api.dart';
-import 'package:guxin_ai/entities/user_login.dart';
-import 'package:guxin_ai/common/routers/routes.dart';
-import 'package:guxin_ai/common/store/content.dart';
-import 'package:guxin_ai/common/store/store.dart';
+import 'package:JuAI/common/apis/user_api.dart';
+import 'package:JuAI/entities/user_login.dart';
+import 'package:JuAI/common/routers/routes.dart';
+import 'package:JuAI/common/store/content.dart';
+import 'package:JuAI/common/store/store.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 

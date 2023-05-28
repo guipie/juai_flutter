@@ -2,7 +2,9 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:guxin_ai/common/server.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:JuAI/common/assets.dart';
+import 'package:JuAI/common/server.dart';
 
 enum CacheImageType { network, local, asserts }
 
@@ -24,7 +26,15 @@ class _ImageCacheWidgetState extends State<ImageCacheWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (widget.cacheImageType == CacheImageType.network && widget.imageUrl.isNotEmpty) {
+    debugPrint("imageUrlimageUrlimageUrl${widget.imageUrl},cacheImageTypecacheImageType${widget.cacheImageType}");
+    if (widget.cacheImageType == CacheImageType.asserts || widget.imageUrl.isEmpty) {
+      return Image.asset(
+        widget.imageUrl.isEmpty ? Assets.image404 : widget.imageUrl,
+        fit: BoxFit.cover,
+        width: widget.width,
+        height: widget.height,
+      );
+    } else if (widget.cacheImageType == CacheImageType.network) {
       return CachedNetworkImage(
         imageUrl: (widget.imageUrl.startsWith("http") ? "" : Qiniu_External_domain) + widget.imageUrl,
         errorWidget: (context, url, error) => GestureDetector(
@@ -48,13 +58,6 @@ class _ImageCacheWidgetState extends State<ImageCacheWidget> {
         height: widget.height,
         progressIndicatorBuilder: (context, url, downloadProgress) => LinearProgressIndicator(value: downloadProgress.progress),
       );
-    } else if (widget.cacheImageType == CacheImageType.asserts) {
-      return Image.asset(
-        widget.imageUrl,
-        fit: BoxFit.cover,
-        width: widget.width,
-        height: widget.height,
-      );
     } else {
       return Image.file(
         File(widget.imageUrl),
@@ -63,5 +66,30 @@ class _ImageCacheWidgetState extends State<ImageCacheWidget> {
         height: widget.height,
       );
     }
+  }
+}
+
+class SvgImageWidget extends StatelessWidget {
+  const SvgImageWidget(
+    this.url, {
+    super.key,
+    this.svgType = CacheImageType.asserts,
+    this.width = 36,
+    this.height = 36,
+    this.color,
+  });
+  final CacheImageType svgType;
+  final String url;
+  final double width;
+  final double height;
+  final Color? color;
+  @override
+  Widget build(BuildContext context) {
+    return SvgPicture.asset(
+      url,
+      width: width,
+      height: height,
+      color: color,
+    );
   }
 }

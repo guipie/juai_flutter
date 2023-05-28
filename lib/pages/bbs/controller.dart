@@ -1,5 +1,5 @@
-import 'package:guxin_ai/common/store/content.dart';
-import 'package:guxin_ai/pages/bbs/state.dart';
+import 'package:JuAI/common/store/content.dart';
+import 'package:JuAI/pages/bbs/state.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:guxin_ai/common/assets.dart';
-import 'package:guxin_ai/common/routers/routeFade.dart';
+import 'package:JuAI/common/assets.dart';
+import 'package:JuAI/common/routers/routeFade.dart';
+import 'package:JuAI/common/server.dart';
+import 'package:JuAI/common/utils/qiniu_sdk.dart';
 
 import 'image_browser.dart';
 
 Widget avatar({String? avatarUrl, double radius = 22, Function? onClick, BuildContext? context}) {
-  avatarUrl = avatarUrl ?? Assets.defaultAvatar;
+  avatarUrl = (avatarUrl == null || avatarUrl.isEmpty) ? Assets.defaultAvatar : avatarUrl;
+  debugPrint("avatarUrlavatarUrlavatarUrlavatarUrl$avatarUrl");
   ImageProvider? image;
   if (avatarUrl.startsWith("assets/")) {
     image = AssetImage(avatarUrl);
   } else {
-    image = NetworkImage(avatarUrl);
+    image = NetworkImage(QiniuUtil.getImageThumbnail(Qiniu_External_domain + avatarUrl, width: 90, height: 90));
   }
   return InkWell(
     child: CircleAvatar(

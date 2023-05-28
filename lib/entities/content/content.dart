@@ -57,6 +57,10 @@ class ContentResEntity {
   String? createNick;
   String? avatar;
   DateTime createTime;
+  bool? isLiked;
+  int likeNum;
+  bool? isCommented;
+  int commentNum;
   List<dynamic> files;
 
   ContentResEntity({
@@ -72,6 +76,10 @@ class ContentResEntity {
     this.avatar,
     required this.createTime,
     required this.files,
+    required this.commentNum,
+    required this.likeNum,
+    this.isLiked,
+    this.isCommented,
   });
 
   factory ContentResEntity.fromJson(Map<String, dynamic> vjson) => ContentResEntity(
@@ -87,6 +95,10 @@ class ContentResEntity {
         avatar: vjson["Avatar"],
         createTime: DateTime.parse(vjson["CreateTime"]),
         files: vjson["Files"] ?? [],
+        isLiked: vjson["IsLiked"],
+        isCommented: vjson["IsCommented"],
+        commentNum: vjson["CommentNum"],
+        likeNum: vjson["LikeNum"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -102,5 +114,9 @@ class ContentResEntity {
         "Avatar": avatar,
         "CreateTime": "${createTime.year.toString().padLeft(4, '0')}-${createTime.month.toString().padLeft(2, '0')}-${createTime.day.toString().padLeft(2, '0')}",
         "Files": files,
+        "LikeNum": likeNum,
+        "CommentNum": commentNum,
+        "IsLiked": isLiked,
+        "IsCommented": isCommented,
       };
 }

@@ -9,8 +9,7 @@ import 'package:flutter_quill/flutter_quill.dart' hide Text;
 import 'package:flutter_quill_extensions/flutter_quill_extensions.dart';
 import 'package:path_provider/path_provider.dart';
 
-typedef DemoContentBuilder = Widget Function(
-    BuildContext context, QuillController? controller);
+typedef DemoContentBuilder = Widget Function(BuildContext context, QuillController? controller);
 
 // Common scaffold for all examples.
 class DemoScaffold extends StatefulWidget {
@@ -57,19 +56,16 @@ class _DemoScaffoldState extends State<DemoScaffold> {
 
   Future<void> _loadFromAssets() async {
     try {
-      final result =
-          await rootBundle.loadString('assets/${widget.documentFilename}');
+      final result = await rootBundle.loadString('assets/${widget.documentFilename}');
       final doc = Document.fromJson(jsonDecode(result));
       setState(() {
-        _controller = QuillController(
-            document: doc, selection: const TextSelection.collapsed(offset: 0));
+        _controller = QuillController(document: doc, selection: const TextSelection.collapsed(offset: 0));
         _loading = false;
       });
     } catch (error) {
       final doc = Document()..insert(0, 'Empty asset');
       setState(() {
-        _controller = QuillController(
-            document: doc, selection: const TextSelection.collapsed(offset: 0));
+        _controller = QuillController(document: doc, selection: const TextSelection.collapsed(offset: 0));
         _loading = false;
       });
     }
@@ -97,8 +93,7 @@ class _DemoScaffoldState extends State<DemoScaffold> {
     if (_isDesktop()) {
       toolbar = QuillToolbar.basic(
         controller: _controller!,
-        embedButtons: FlutterQuillEmbeds.buttons(
-            filePickImpl: openFileSystemPickerForDesktop),
+        embedButtons: FlutterQuillEmbeds.buttons(filePickImpl: openFileSystemPickerForDesktop),
       );
     }
     return Scaffold(
@@ -120,9 +115,7 @@ class _DemoScaffoldState extends State<DemoScaffold> {
         actions: actions,
       ),
       floatingActionButton: widget.floatingActionButton,
-      body: _loading
-          ? const Center(child: Text('Loading...'))
-          : widget.builder(context, _controller),
+      body: _loading ? const Center(child: Text('Loading...')) : widget.builder(context, _controller),
     );
   }
 

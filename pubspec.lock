@@ -81,6 +81,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.3.1"
+  checked_yaml:
+    dependency: transitive
+    description:
+      name: checked_yaml
+      sha256: feb6bed21949061731a7a75fc5d2aa727cf160b91af9a3e464c5e3a32e28b5ff
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.3"
+  cli_util:
+    dependency: transitive
+    description:
+      name: cli_util
+      sha256: b8db3080e59b2503ca9e7922c3df2072cf13992354d5e944074ffa836fba43b7
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.4.0"
   clock:
     dependency: transitive
     description:
@@ -133,10 +149,10 @@ packages:
     dependency: transitive
     description:
       name: csslib
-      sha256: b36c7f7e24c0bdf1bf9a3da461c837d1de64b9f8beb190c9011d8c72a3dfd745
+      sha256: f857285c8dc0b4f2f77b49a1c083ff8c75223a7549de20f3e607df58cf497a43
       url: "https://pub.dev"
     source: hosted
-    version: "0.17.2"
+    version: "0.17.0"
   cupertino_icons:
     dependency: "direct main"
     description:
@@ -157,10 +173,10 @@ packages:
     dependency: "direct main"
     description:
       name: dart_openai
-      sha256: cc762a5535d5278d8d4377070fd4375ed4227844d300ec016ab9c2c6f3a2afde
+      sha256: "688f17bdc165908f533b07438f2b01d02dd5afd326d4c01439f52aa9d4ab343c"
       url: "https://pub.dev"
     source: hosted
-    version: "1.9.92"
+    version: "1.9.93"
   device_info_plus:
     dependency: transitive
     description:
@@ -277,10 +293,10 @@ packages:
     dependency: "direct main"
     description:
       name: file_picker
-      sha256: c7a8e25ca60e7f331b153b0cb3d405828f18d3e72a6fa1d9440c86556fffc877
+      sha256: "9d6e95ec73abbd31ec54d0e0df8a961017e165aba1395e462e5b31ea0c165daf"
       url: "https://pub.dev"
     source: hosted
-    version: "5.3.0"
+    version: "5.3.1"
   filesystem_picker:
     dependency: "direct main"
     description:
@@ -346,10 +362,10 @@ packages:
     dependency: transitive
     description:
       name: flutter_keyboard_visibility
-      sha256: be41db80ab7156d893878ca48a7520d667075c4841a0435d5544fd836197b55a
+      sha256: "4983655c26ab5b959252ee204c2fffa4afeb4413cd030455194ec0caa3b8e7cb"
       url: "https://pub.dev"
     source: hosted
-    version: "5.4.3"
+    version: "5.4.1"
   flutter_keyboard_visibility_linux:
     dependency: transitive
     description:
@@ -390,6 +406,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.0"
+  flutter_launcher_icons:
+    dependency: "direct dev"
+    description:
+      name: flutter_launcher_icons
+      sha256: "526faf84284b86a4cb36d20a5e45147747b7563d921373d4ee0559c54fcdbcea"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.13.1"
   flutter_lints:
     dependency: "direct dev"
     description:
@@ -428,19 +452,22 @@ packages:
     source: hosted
     version: "2.0.15"
   flutter_quill:
-    dependency: "direct main"
+    dependency: transitive
     description:
-      path: "lib/components/flutter_quill"
-      relative: true
-    source: path
-    version: "7.1.19"
+      name: flutter_quill
+      sha256: "028b9722cb6e6310f473126cc8226363e93cf528eabbe339dd37235b2ae53d9d"
+      url: "https://pub.dev"
+    source: hosted
+    version: "7.2.0"
   flutter_quill_extensions:
     dependency: "direct main"
     description:
-      path: "lib/components/flutter_quill_extensions"
-      relative: true
-    source: path
-    version: "0.3.2"
+      path: flutter_quill_extensions
+      ref: HEAD
+      resolved-ref: c1bef0ae4f357a3d4e97041ea4b1ef4b0fb8b669
+      url: "https://github.com/singerdmx/flutter-quill.git"
+    source: git
+    version: "0.3.3"
   flutter_screenutil:
     dependency: "direct main"
     description:
@@ -458,7 +485,7 @@ packages:
     source: hosted
     version: "5.2.0"
   flutter_svg:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: flutter_svg
       sha256: "6ff8c902c8056af9736de2689f63f81c42e2d642b9f4c79dbf8790ae48b63012"
@@ -627,6 +654,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.6.7"
+  json_annotation:
+    dependency: transitive
+    description:
+      name: json_annotation
+      sha256: b10a7b2ff83d83c777edba3c6a0f97045ddadd56c944e1a23a3fdf43a1bf4467
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.8.1"
   lints:
     dependency: transitive
     description:
@@ -639,10 +674,10 @@ packages:
     dependency: transitive
     description:
       name: logging
-      sha256: "04094f2eb032cbb06c6f6e8d3607edcfcb0455e2bb6cbc010cb01171dcb64e6d"
+      sha256: "623a88c9594aa774443aa3eb2d41807a48486b5613e67599fb4c41c0ad47c340"
       url: "https://pub.dev"
     source: hosted
-    version: "1.1.1"
+    version: "1.2.0"
   markdown:
     dependency: transitive
     description:
@@ -695,10 +730,10 @@ packages:
     dependency: "direct main"
     description:
       name: media_kit
-      sha256: d9a32b3f6eafdfbba6aff2e37045a3a80009b6dfbdeec638d51d85e8b254a6a2
+      sha256: "07df87b1acbed111246520206185d596560e6b8ed754677aa2e77fa2710a17ee"
       url: "https://pub.dev"
     source: hosted
-    version: "0.0.7+1"
+    version: "0.0.8"
   media_kit_libs_linux:
     dependency: "direct main"
     description:
@@ -727,18 +762,18 @@ packages:
     dependency: "direct main"
     description:
       name: media_kit_native_event_loop
-      sha256: ed87140ad4b64156b2b470c8105f48d8cad7923c952ca05d23e02d28978d2cb3
+      sha256: "521125e534603c3f603b93283db3938f557f33ecc383fbd62edd4beb3bf73747"
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.3"
+    version: "1.0.4"
   media_kit_video:
     dependency: "direct main"
     description:
       name: media_kit_video
-      sha256: "634872ca85575e5756c466af04d1adbdb5178315d7f801901b8c731fae314c66"
+      sha256: fc2baeac6f47cfbafdf4a8575cccdb5a2d021df9b68366c639639ccd44fb99d6
       url: "https://pub.dev"
     source: hosted
-    version: "0.0.9"
+    version: "0.0.10"
   message_pack_dart:
     dependency: transitive
     description:
@@ -847,10 +882,10 @@ packages:
     dependency: transitive
     description:
       name: path_provider_linux
-      sha256: "2ae08f2216225427e64ad224a24354221c2c7907e448e6e0e8b57b1eb9f10ad1"
+      sha256: ffbb8cc9ed2c9ec0e4b7a541e56fd79b138e8f47d2fb86815f15358a349b3b57
       url: "https://pub.dev"
     source: hosted
-    version: "2.1.10"
+    version: "2.1.11"
   path_provider_platform_interface:
     dependency: transitive
     description:
@@ -1276,10 +1311,10 @@ packages:
     dependency: transitive
     description:
       name: url_launcher_android
-      sha256: "1a5848f598acc5b7d8f7c18b8cb834ab667e59a13edc3c93e9d09cf38cc6bc87"
+      sha256: eed4e6a1164aa9794409325c3b707ff424d4d1c2a785e7db67f8bbda00e36e51
       url: "https://pub.dev"
     source: hosted
-    version: "6.0.34"
+    version: "6.0.35"
   url_launcher_ios:
     dependency: transitive
     description:
@@ -1316,10 +1351,10 @@ packages:
     dependency: transitive
     description:
       name: url_launcher_web
-      sha256: "81fe91b6c4f84f222d186a9d23c73157dc4c8e1c71489c4d08be1ad3b228f1aa"
+      sha256: "6bb1e5d7fe53daf02a8fee85352432a40b1f868a81880e99ec7440113d5cfcab"
       url: "https://pub.dev"
     source: hosted
-    version: "2.0.16"
+    version: "2.0.17"
   url_launcher_windows:
     dependency: transitive
     description:

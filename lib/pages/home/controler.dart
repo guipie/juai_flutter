@@ -1,8 +1,8 @@
-import 'package:guxin_ai/common/routers/routes.dart';
-import 'package:guxin_ai/pages/bbs/view.dart';
-import 'package:guxin_ai/pages/bbs_chat/view.dart';
-import 'package:guxin_ai/pages/conversation/view.dart';
-import 'package:guxin_ai/pages/settings/view.dart';
+import 'package:JuAI/common/routers/routes.dart';
+import 'package:JuAI/pages/bbs/view.dart';
+import 'package:JuAI/pages/bbs_chat/view.dart';
+import 'package:JuAI/pages/conversation/view.dart';
+import 'package:JuAI/pages/settings/view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -37,7 +37,7 @@ class HomeController extends GetxController {
     } else if (state.currentPcRoute.value == Routes.bbsChat) {
       return BbsChatPage();
     } else if (state.currentPcRoute.value == Routes.settings) {
-      return const SettingsPage();
+      return SettingsPage();
     } else {
       return const ConversationPage();
     }

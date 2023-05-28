@@ -1,55 +1,146 @@
-import 'package:guxin_ai/common/routers/routes.dart';
-import 'package:guxin_ai/common/store/store.dart';
-import 'package:guxin_ai/pages/settings/controler.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:JuAI/common/assets.dart';
+import 'package:JuAI/common/routers/routes.dart';
+import 'package:JuAI/common/store/store.dart';
+import 'package:JuAI/common/widgets/avatar.dart';
+import 'package:JuAI/common/widgets/image_cache.dart';
+import 'package:JuAI/pages/settings/controler.dart';
 import 'package:flutter/material.dart';
-import 'package:guxin_ai/common/widgets/ui/cell.dart';
-import 'package:guxin_ai/common/theme.dart';
+import 'package:JuAI/common/widgets/cell.dart';
+import 'package:JuAI/common/theme.dart';
 import 'package:get/get.dart';
 
 class SettingsPage extends GetView<SettingsController> {
-  const SettingsPage({Key? key}) : super(key: key);
-
+  SettingsPage({Key? key}) : super(key: key);
+  final logic = Get.find<SettingsController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text("设置"),
+        actions: [
+          TextButton(
+            onPressed: () {},
+            child: SvgImageWidget(
+              Assets.iconToken,
+              width: 23,
+              height: 23,
+              color: Colors.amber,
+            ),
+          )
+        ],
       ),
       body: SafeArea(
-        child: Container(
+        child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 12),
-          child: Column(
-            children: [
-              Cell(
-                '账号安全',
-                onTap: () => Get.toNamed(Routes.settingsAccount),
-              ),
-              Cell(
-                '消息通知',
-                onTap: () => Get.toNamed(Routes.settingsNotice),
-              ),
-              Cell(
-                '隐私设置',
-                onTap: () => Get.toNamed(Routes.settingsPrivacy),
-              ),
-              Cell(
-                '清除缓存',
-                right: Text(
-                  '190M',
-                  style: TextStyle(fontSize: WcaoTheme.fsL),
+          child: SizedBox(
+            width: 1.sw,
+            height: 1.sh,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 12),
+                  child: InkWell(
+                    onTap: () => Get.toNamed(Routes.settingsAccount),
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                      decoration: const BoxDecoration(
+                          border: Border(
+                        bottom: BorderSide(width: .5, color: Colors.transparent),
+                      )),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          avatar(avatarUrl: UserStore.to.userInfo.value!.avatar, radius: 30),
+                          const SizedBox(width: 12),
+                          Wrap(
+                            direction: Axis.vertical,
+                            children: [
+                              Text(
+                                UserStore.to.userInfo.value!.nickName,
+                                style: TextStyle(fontSize: WcaoTheme.fsXl, fontWeight: FontWeight.bold),
+                              ),
+                              Text(UserStore.to.userInfo.value!.userName),
+                            ],
+                          ),
+                          const Spacer(),
+                          Icon(
+                            Icons.arrow_forward_ios,
+                            size: WcaoTheme.fsXl,
+                            color: WcaoTheme.secondary,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
                 ),
-                onTap: () => bottomConfirm(context),
-              ),
-              Cell('关于我们', onTap: () => Get.toNamed(Routes.settingsAbout)),
-              Cell(
-                '退出登录',
-                border: false,
-                onTap: () => UserStore.to.onLogout(),
-              ),
-            ],
+                Cell(
+                  '我的主页',
+                  onTap: () => Get.toNamed(Routes.settingsMineHome),
+                  border: false,
+                  isMustRight: false,
+                ),
+                Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                  child: Wrap(
+                    spacing: 30,
+                    runSpacing: 20,
+                    alignment: WrapAlignment.spaceAround,
+                    children: [
+                      _homeItem(Assets.iconToken, 2003, "token", context),
+                      _homeItem(Assets.iconDongtai, 34, "动态", context),
+                      _homeItem(Assets.iconHudong, 1003, "互动", context),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 10),
+                Cell(
+                  '消息通知',
+                  onTap: () => Get.toNamed(Routes.settingsNotice),
+                ),
+                Cell(
+                  '隐私设置',
+                  onTap: () => Get.toNamed(Routes.settingsPrivacy),
+                ),
+                Cell(
+                  '清除缓存',
+                  right: Text(
+                    '190M',
+                    style: TextStyle(fontSize: WcaoTheme.fsL),
+                  ),
+                  onTap: () => bottomConfirm(context),
+                ),
+                Cell('关于我们', onTap: () => Get.toNamed(Routes.settingsAbout)),
+                Cell(
+                  '退出登录',
+                  border: false,
+                  onTap: () => UserStore.to.onLogout(),
+                ),
+              ],
+            ),
           ),
         ),
       ),
+    );
+  }
+
+  _homeItem(String iconSvg, int num, String title, BuildContext context) {
+    var numStr = num > 1000 ? "${num ~/ 1000}k+" : "$num";
+    return Column(
+      children: [
+        SvgImageWidget(iconSvg),
+        RichText(
+          text: TextSpan(
+            style: TextStyle(color: Theme.of(context).colorScheme.primary),
+            children: [
+              TextSpan(text: numStr),
+              TextSpan(text: title, style: TextStyle(color: WcaoTheme.placeholder, fontSize: WcaoTheme.fsSm)),
+            ],
+          ),
+        ),
+      ],
     );
   }
 

@@ -1,11 +1,11 @@
 import 'dart:core';
 
 import 'package:get/get.dart';
-import 'package:guxin_ai/common/apis/content_special_api.dart';
-import 'package:guxin_ai/entities/content/content.dart';
-import 'package:guxin_ai/entities/content/special.dart';
-import 'package:guxin_ai/common/index.dart';
-import 'package:guxin_ai/common/store/store.dart';
+import 'package:JuAI/common/apis/content_special_api.dart';
+import 'package:JuAI/entities/content/content.dart';
+import 'package:JuAI/entities/content/special.dart';
+import 'package:JuAI/common/index.dart';
+import 'package:JuAI/common/store/store.dart';
 
 class ContentStore extends GetxController {
   static ContentStore get to => Get.find();
@@ -22,7 +22,7 @@ class ContentStore extends GetxController {
 
   void contentInit() {
     ContentAPI.topTags().then((value) => topTags = value);
-    ContentSpecialApi.getTop().then((value) => specials = value);
+    SpecialApi.getTop().then((value) => specials = value);
     getContents();
   }
 

@@ -1,11 +1,10 @@
 import 'dart:convert';
 
-import 'package:guxin_ai/common/apis/user_api.dart';
-import 'package:guxin_ai/entities/user_login.dart';
-import 'package:guxin_ai/common/routers/routes.dart';
-import 'package:guxin_ai/common/services/storage.dart';
-import 'package:guxin_ai/common/utils/loading.dart';
-import 'package:guxin_ai/common/values/storage.dart';
+import 'package:JuAI/entities/user_login.dart';
+import 'package:JuAI/common/routers/routes.dart';
+import 'package:JuAI/common/services/storage.dart';
+import 'package:JuAI/common/utils/loading.dart';
+import 'package:JuAI/common/values/storage.dart';
 import 'package:get/get.dart';
 
 class UserStore extends GetxController {
@@ -14,12 +13,12 @@ class UserStore extends GetxController {
   // 是否登录
   final _isLogin = false.obs;
   // 用户 profile
-  late Rx<UserLoginResponseEntity?> _userInfo;
+  late UserLoginResponseEntity? _userInfo;
   // 令牌 token
-  late Rx<UserTokenResponseEntity?> _tokenInfo;
+  late UserTokenResponseEntity? _tokenInfo;
   bool get isLogin => _isLogin.value;
-  UserLoginResponseEntity? get userInfo => _userInfo.value;
-  UserTokenResponseEntity? get tokenInfo => _tokenInfo.value;
+  Rx<UserLoginResponseEntity?> get userInfo => _userInfo.obs;
+  UserTokenResponseEntity? get tokenInfo => _tokenInfo;
 
   @override
   void onInit() {
@@ -31,9 +30,9 @@ class UserStore extends GetxController {
     var userInfoStr = StorageService.to.getString(STORAGE_USER_PROFILE_KEY);
     var tokenInfoStr = StorageService.to.getString(STORAGE_USER_TOKEN_KEY);
     if (userInfoStr.isNotEmpty && tokenInfoStr.isNotEmpty) {
-      _tokenInfo = UserTokenResponseEntity.fromRawJson(tokenInfoStr).obs;
-      _userInfo = UserLoginResponseEntity.fromRawJson(userInfoStr).obs;
-      _isLogin.value = !GetUtils.isNullOrBlank(tokenInfo?.token)! && !GetUtils.isNullOrBlank(userInfo?.userName)!;
+      _tokenInfo = UserTokenResponseEntity.fromRawJson(tokenInfoStr);
+      _userInfo = UserLoginResponseEntity.fromRawJson(userInfoStr);
+      _isLogin.value = !GetUtils.isNullOrBlank(tokenInfo?.token)! && !GetUtils.isNullOrBlank(userInfo.value!.userName)!;
     }
   }
 
@@ -51,16 +50,36 @@ class UserStore extends GetxController {
     await StorageService.to.setString(STORAGE_USER_TOKEN_KEY, tokenResponseEntity.toRawJson());
     await StorageService.to.setString(STORAGE_USER_PROFILE_KEY, userLoginResponseEntity.toRawJson());
     _userInfoInit();
+    userInfo.refresh();
+  }
+
+  Future<void> resetUserInfo(Map<dynamic, dynamic> update) async {
+    var user = _userInfo!.toJson();
+    for (var key in user.keys) {
+      if (update.keys.contains(key)) {
+        user[key] = update[key];
+      }
+    }
+    await StorageService.to.setString(STORAGE_USER_PROFILE_KEY, json.encode(user));
+    _userInfoInit();
   }
 
   // 注销
-  Future<void> onLogout() async {
+  Future<void> onLogout({isMust = false}) async {
     // if (_isLogin.value) await UserAPI.logout();
-    Loading.confirm("您确认是否退出？", onConfirm: () async {
-      await StorageService.to.remove(STORAGE_USER_TOKEN_KEY);
-      await StorageService.to.remove(STORAGE_USER_PROFILE_KEY);
-      _isLogin.value = false;
-      Get.offAllNamed(Routes.settingsLogin);
-    });
+    if (isMust) {
+      _logout();
+    } else {
+      Loading.confirm("您确认是否退出？", onConfirm: () async {
+        _logout();
+      });
+    }
+  }
+
+  _logout() async {
+    await StorageService.to.remove(STORAGE_USER_TOKEN_KEY);
+    await StorageService.to.remove(STORAGE_USER_PROFILE_KEY);
+    _isLogin.value = false;
+    Get.offAllNamed(Routes.settingsLogin);
   }
 }

@@ -1,9 +1,9 @@
-import 'package:guxin_ai/common/routers/routes.dart';
+import 'package:JuAI/common/routers/routes.dart';
 import 'package:flutter/material.dart';
-import 'package:guxin_ai/pages/settings/login/controller.dart';
-import 'package:guxin_ai/pages/settings/login/widgets/login_btn.dart';
-import 'package:guxin_ai/pages/settings/login/widgets/username_text.dart';
-import 'package:guxin_ai/common/theme.dart';
+import 'package:JuAI/pages/settings/login/controller.dart';
+import 'package:JuAI/pages/settings/login/widgets/login_btn.dart';
+import 'package:JuAI/pages/settings/login/widgets/username_text.dart';
+import 'package:JuAI/common/theme.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 

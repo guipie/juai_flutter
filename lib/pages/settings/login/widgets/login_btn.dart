@@ -1,6 +1,6 @@
-import 'package:guxin_ai/common/routers/routes.dart';
+import 'package:JuAI/common/routers/routes.dart';
 import 'package:flutter/material.dart';
-import 'package:guxin_ai/pages/settings/login/controller.dart';
+import 'package:JuAI/pages/settings/login/controller.dart';
 import 'package:get/get.dart';
 import 'package:getwidget/getwidget.dart';
 

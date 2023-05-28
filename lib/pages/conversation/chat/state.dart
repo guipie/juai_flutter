@@ -1,6 +1,6 @@
 import 'package:dart_openai/dart_openai.dart';
 import 'package:flutter/material.dart';
-import 'package:guxin_ai/entities/conversation.dart';
+import 'package:JuAI/entities/conversation.dart';
 import 'package:get/get.dart';
 
 enum SendType { canNotSend, canSend, sending }

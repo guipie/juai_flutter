@@ -1,6 +1,6 @@
-import 'package:guxin_ai/common/routers/routes.dart';
+import 'package:JuAI/common/routers/routes.dart';
 import 'package:flutter/material.dart';
-import 'package:guxin_ai/common/theme.dart';
+import 'package:JuAI/common/theme.dart';
 import 'package:get/get.dart';
 
 class SettingsAboutPage extends StatefulWidget {

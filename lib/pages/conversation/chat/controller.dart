@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:guxin_ai/entities/conversation.dart';
-import 'package:guxin_ai/common/store/chat.dart';
-import 'package:guxin_ai/common/utils/db_sqlite.dart';
-import 'package:guxin_ai/common/utils/http_chat.dart';
-import 'package:guxin_ai/pages/conversation/chat/state.dart';
+import 'package:JuAI/entities/conversation.dart';
+import 'package:JuAI/common/store/chat.dart';
+import 'package:JuAI/common/utils/db_sqlite.dart';
+import 'package:JuAI/common/utils/http_chat.dart';
+import 'package:JuAI/pages/conversation/chat/state.dart';
 import 'package:get/get.dart';
 
 class ChatController extends GetxController {

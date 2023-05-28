@@ -1,6 +1,7 @@
-import 'package:guxin_ai/common/apis/apis.dart';
-import 'package:guxin_ai/entities/user_login.dart';
-import 'package:guxin_ai/common/utils/http.dart';
+import 'package:get/get.dart';
+import 'package:JuAI/common/apis/apis.dart';
+import 'package:JuAI/entities/user_login.dart';
+import 'package:JuAI/common/utils/http.dart';
 
 /// 用户
 class UserAPI {
@@ -17,6 +18,54 @@ class UserAPI {
 
   static Future<ApiResponse> sendVcode(String phoneNum) async {
     return await HttpUtil().post('/api/app/common/sms/vcode/' + phoneNum).catchError((e) => ApiResponse(status: 0, message: "出错" + e, isOk: false), test: (Object o) => true);
+  }
+
+  static Future<ApiResponse> resetPwd(UserLoginRequestEntity userInfo) async {
+    return await HttpUtil()
+        .post(
+          '/api/app/user/reset/password',
+          data: userInfo.toJson(),
+          isLoading: true,
+        )
+        .catchError(
+          (e) => ApiResponse(status: 0, message: "出错" + e, isOk: false),
+        );
+  }
+
+  static Future<ApiResponse> resetPhoneBefore(PhoneUpdateReq req) async {
+    return await HttpUtil()
+        .post(
+          '/api/app/user/reset/phone/validate',
+          data: req.toJson(),
+          isLoading: true,
+        )
+        .catchError(
+          (e) => ApiResponse(status: 0, message: "出错" + e, isOk: false),
+        );
+  }
+
+  static Future<ApiResponse> resetPhone(PhoneUpdateReq req) async {
+    return await HttpUtil()
+        .post(
+          '/api/app/user/reset/phone',
+          data: req.toJson(),
+          isLoading: true,
+        )
+        .catchError(
+          (e) => ApiResponse(status: 0, message: "出错" + e, isOk: false),
+        );
+  }
+
+  static Future<ApiResponse> userUpdate(Map<dynamic, dynamic> userInfo) async {
+    return await HttpUtil()
+        .post(
+          '/api/app/user/update',
+          data: userInfo,
+          isLoading: true,
+        )
+        .catchError(
+          (e) => ApiResponse(status: 0, message: "出错" + e, isOk: false),
+        );
   }
 
   /// Logout

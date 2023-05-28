@@ -2,16 +2,16 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
 
-import 'package:guxin_ai/common/apis/apis.dart';
+import 'package:JuAI/common/apis/apis.dart';
 import 'package:cookie_jar/cookie_jar.dart';
 import 'package:dio/dio.dart';
 import 'package:dio_cookie_manager/dio_cookie_manager.dart';
 import 'package:flutter/material.dart';
-import 'package:guxin_ai/common/store/user.dart';
-import 'package:guxin_ai/common/utils/loading.dart';
-import 'package:guxin_ai/common/utils/utils.dart';
-import 'package:guxin_ai/common/values/cache.dart';
-import 'package:guxin_ai/common/server.dart';
+import 'package:JuAI/common/store/user.dart';
+import 'package:JuAI/common/utils/loading.dart';
+import 'package:JuAI/common/utils/utils.dart';
+import 'package:JuAI/common/values/cache.dart';
+import 'package:JuAI/common/server.dart';
 import 'package:get/get.dart' hide FormData;
 
 /*
@@ -267,7 +267,7 @@ class HttpUtil {
   }
 
   /// restful put 操作
-  Future put(
+  Future<ApiResponse> put(
     String path, {
     isLoading = false,
     dynamic data,
@@ -284,7 +284,7 @@ class HttpUtil {
       options: requestOptions,
       cancelToken: cancelToken,
     );
-    return response.data;
+    return ApiResponse.fromJson(response.data);
   }
 
   /// restful patch 操作

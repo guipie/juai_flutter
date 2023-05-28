@@ -1,4 +1,4 @@
-import 'package:guxin_ai/pages/history_match/mock.dart';
+import 'package:JuAI/pages/history_match/mock.dart';
 import 'package:dart_mock/dart_mock.dart' as mock;
 
 class MockLike extends MockHistoryMatch {

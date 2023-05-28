@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:guxin_ai/common/theme.dart';
+import 'package:JuAI/common/theme.dart';
 import 'package:dart_mock/dart_mock.dart' as mock;
+import 'package:JuAI/common/widgets/avatar.dart';
 
 import '../../../bbs/mock.dart';
 
@@ -45,10 +46,7 @@ Container listCard(MockLike item) {
     child: Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        CircleAvatar(
-          radius: 28,
-          backgroundImage: NetworkImage(item.avatar),
-        ),
+        avatar(avatarUrl: item.avatar, radius: 26),
         Expanded(
           child: Container(
             padding: const EdgeInsets.only(left: 12),

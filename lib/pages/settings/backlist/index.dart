@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:guxin_ai/common/theme.dart';
+import 'package:JuAI/common/theme.dart';
 
 class SettingsBacklistPage extends StatefulWidget {
   const SettingsBacklistPage({Key? key}) : super(key: key);

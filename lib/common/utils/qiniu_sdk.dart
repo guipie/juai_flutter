@@ -3,8 +3,8 @@ import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:guxin_ai/common/server.dart';
-import 'package:guxin_ai/common/utils/utils.dart';
+import 'package:JuAI/common/server.dart';
+import 'package:JuAI/common/utils/utils.dart';
 import 'package:qiniu_flutter_sdk/qiniu_flutter_sdk.dart';
 import 'package:path/path.dart' as path;
 import 'package:mime/mime.dart';
@@ -49,8 +49,10 @@ class QiniuUtil {
     Function(double progress)? progressListener,
     Function(String path, int? fileId)? completeListener,
     String folder = "content",
+    isLoading = false,
   }) async {
     try {
+      if (isLoading) Loading.loading("上传中...");
       if (fileType == FileType.image) {
         if (!GetUtils.isImage(file.path)) {
           Loading.waring("请上传正确图片");
@@ -100,10 +102,12 @@ class QiniuUtil {
         });
         var response = await _storage.putFile(file, value.data, options: PutOptions(controller: putController, key: key));
         debugPrint("response.rawData:${response.rawData.toString()}，key:${response.key}，hash:${response.hash}");
+        if (isLoading) Loading.dismiss();
         return response.key ?? "";
       });
     } catch (e) {
       Logger.write("上传出错了$e");
+      if (isLoading) Loading.dismiss();
       return "";
     }
   }

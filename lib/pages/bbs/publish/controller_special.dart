@@ -3,12 +3,12 @@ import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:guxin_ai/common/apis/content_special_api.dart';
-import 'package:guxin_ai/entities/content/content.dart';
-import 'package:guxin_ai/entities/content/special.dart';
-import 'package:guxin_ai/common/routers/routes.dart';
-import 'package:guxin_ai/common/utils/loading.dart';
-import 'package:guxin_ai/common/utils/qiniu_sdk.dart';
+import 'package:JuAI/common/apis/content_special_api.dart';
+import 'package:JuAI/entities/content/content.dart';
+import 'package:JuAI/entities/content/special.dart';
+import 'package:JuAI/common/routers/routes.dart';
+import 'package:JuAI/common/utils/loading.dart';
+import 'package:JuAI/common/utils/qiniu_sdk.dart';
 
 class PublishSpecialController extends GetxController {
   PublishSpecialController();
@@ -19,7 +19,7 @@ class PublishSpecialController extends GetxController {
   var isPay = false.obs;
   @override
   Future<void> onInit() async {
-    myAllSpecials = await ContentSpecialApi.getMine();
+    myAllSpecials = await SpecialApi.getMine();
     super.onInit();
   }
 
@@ -36,7 +36,7 @@ class PublishSpecialController extends GetxController {
       Loading.loading("发布中....");
       QiniuUtil.saveFile(File(entity.coverImage), FileType.image, folder: "special").then((value) {
         entity.coverImage = value;
-        ContentSpecialApi.add(entity).then((value) => {Get.offNamed(Routes.bbsPublishArticle, arguments: value)});
+        SpecialApi.add(entity).then((value) => {Get.offNamed(Routes.bbsPublishArticle, arguments: value)});
       });
     } catch (e) {
       Loading.error("发布失败");

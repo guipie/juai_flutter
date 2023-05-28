@@ -1,4 +1,4 @@
-import 'package:guxin_ai/pages/tools/state.dart';
+import 'package:JuAI/pages/tools/state.dart';
 import 'package:get/get.dart';
 
 class ToolsController extends GetxController {

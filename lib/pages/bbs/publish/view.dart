@@ -1,13 +1,13 @@
 import 'dart:io';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:guxin_ai/common/routers/routes.dart';
-import 'package:guxin_ai/common/widgets/image_cache.dart';
-import 'package:guxin_ai/common/widgets/ui/tag.dart';
-import 'package:guxin_ai/pages/bbs/publish/controller.dart';
+import 'package:JuAI/common/routers/routes.dart';
+import 'package:JuAI/common/widgets/image_cache.dart';
+import 'package:JuAI/common/widgets/tag.dart';
+import 'package:JuAI/pages/bbs/publish/controller.dart';
 import 'package:flutter/material.dart';
-import 'package:guxin_ai/pages/bbs/publish/state.dart';
-import 'package:guxin_ai/common/theme.dart';
+import 'package:JuAI/pages/bbs/publish/state.dart';
+import 'package:JuAI/common/theme.dart';
 import 'package:get/get.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:video_player/video_player.dart';
@@ -73,7 +73,7 @@ class PublishDongtaiPage extends StatelessWidget {
                     spacing: 2,
                     runSpacing: 2,
                     children: logic.state.currentTags
-                        .map((e) => Tag(
+                        .map((e) => TagWidget(
                               e,
                               color: GFColors.WHITE,
                               backgroundColor: GFColors.SUCCESS,

@@ -9,18 +9,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_quill/extensions.dart';
 import 'package:flutter_quill/flutter_quill.dart' hide Text;
+import 'package:flutter_quill/translations.dart';
 import 'package:flutter_quill_extensions/flutter_quill_extensions.dart';
 import 'package:getwidget/getwidget.dart';
-import 'package:guxin_ai/common/server.dart';
-import 'package:guxin_ai/common/services/storage.dart';
-import 'package:guxin_ai/common/utils/qiniu_sdk.dart';
-import 'package:guxin_ai/components/flutter_quill/lib/translations.dart';
+import 'package:JuAI/common/server.dart';
+import 'package:JuAI/common/services/storage.dart';
+import 'package:JuAI/common/utils/qiniu_sdk.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 
 import 'article_state.dart';
 import 'universal_ui/universal_ui.dart';
-import 'read_only_page.dart';
 
 class ArticleEditPage extends StatefulWidget {
   const ArticleEditPage({Key? key}) : super(key: key);
@@ -519,6 +518,7 @@ class NotesEmbedBuilder extends EmbedBuilder {
     Embed node,
     bool readOnly,
     bool inline,
+    TextStyle textStyle,
   ) {
     final notes = NotesBlockEmbed(node.value.data).document;
 

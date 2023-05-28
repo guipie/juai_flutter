@@ -17,7 +17,7 @@ class MockMine {
       nickName: mock.cname(),
       avatar: "",
       createDay: mock.integer(min: 1, max: 99),
-      tags: List.generate(mock.integer(min: 1, max: 4), (index) => '#${mock.ctitle(min: 3, max: 10)}'),
+      tags: List.generate(mock.integer(min: 6, max: 14), (index) => '#${mock.ctitle(min: 3, max: 10)}'),
       bg: "",
       visits: mock.integer(min: 1, max: 99),
       friends: mock.integer(min: 1, max: 99),

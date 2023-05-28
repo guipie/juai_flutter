@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:guxin_ai/common/routers/routes.dart';
-import 'package:guxin_ai/common/store/store.dart';
-import 'package:guxin_ai/common/widgets/avatar.dart';
-import 'package:guxin_ai/pages/home/widgets/PcWidgetMeasure.dart';
-import 'package:guxin_ai/common/theme.dart';
+import 'package:JuAI/common/routers/routes.dart';
+import 'package:JuAI/common/store/store.dart';
+import 'package:JuAI/common/widgets/avatar.dart';
+import 'package:JuAI/pages/home/widgets/PcWidgetMeasure.dart';
+import 'package:JuAI/common/theme.dart';
 import 'package:get/get.dart';
 import 'package:getwidget/getwidget.dart';
 import 'controler.dart';
@@ -36,10 +36,15 @@ class HomePcPage extends GetView<HomeController> {
             contentPadding: const EdgeInsets.only(left: 10, top: 50, right: 40, bottom: 50),
             style: ListTileStyle.drawer,
             title: Text(
-              UserStore.to.userInfo?.userName ?? "未登录",
+              UserStore.to.userInfo.value!.userName,
               style: const TextStyle(fontWeight: FontWeight.bold),
             ),
-            leading: Container(margin: const EdgeInsets.only(left: 0), height: 60, width: 60, child: avatar(context: context)),
+            leading: Container(
+              margin: const EdgeInsets.only(left: 0),
+              height: 60,
+              width: 60,
+              child: avatar(context: context, onClick: () => Get.toNamed(Routes.settingsAccount)),
+            ),
             trailing: InkWell(
               mouseCursor: MouseCursor.defer,
               hoverColor: Theme.of(context).primaryColorDark,

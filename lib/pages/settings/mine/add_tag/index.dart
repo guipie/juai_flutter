@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:guxin_ai/common/widgets/ui/tag.dart';
-import 'package:guxin_ai/common/theme.dart';
+import 'package:JuAI/common/widgets/tag.dart';
+import 'package:JuAI/common/theme.dart';
 import 'package:dart_mock/dart_mock.dart' as mock;
 import 'package:get/get.dart';
 
@@ -42,7 +42,7 @@ class _MineAddTagState extends State<MineAddTag> {
                   runSpacing: 12,
                   children: List.generate(
                     12,
-                    (index) => Tag(
+                    (index) => TagWidget(
                       mock.ctitle(),
                       backgroundColor: WcaoTheme.primary,
                       color: Colors.white,
@@ -112,7 +112,7 @@ class _MineAddTagState extends State<MineAddTag> {
       alignment: WrapAlignment.start,
       children: List.generate(
         16,
-        (index) => Tag(
+        (index) => TagWidget(
           mock.ctitle(),
           border: Border.all(width: .5, color: WcaoTheme.outline),
           backgroundColor: Colors.white,
@@ -131,7 +131,7 @@ class _MineAddTagState extends State<MineAddTag> {
       alignment: WrapAlignment.start,
       children: List.generate(
         16,
-        (index) => Tag(
+        (index) => TagWidget(
           mock.county(),
           border: Border.all(width: .5, color: WcaoTheme.outline),
           backgroundColor: Colors.white,
@@ -150,7 +150,7 @@ class _MineAddTagState extends State<MineAddTag> {
       alignment: WrapAlignment.spaceBetween,
       children: List.generate(
         5,
-        (index) => Tag(
+        (index) => TagWidget(
           '${mock.integer(min: 6, max: 9)}0年代',
           border: Border.all(width: .5, color: WcaoTheme.outline),
           backgroundColor: Colors.white,
@@ -169,7 +169,7 @@ class _MineAddTagState extends State<MineAddTag> {
       alignment: WrapAlignment.spaceBetween,
       children: List.generate(
         12,
-        (index) => Tag(
+        (index) => TagWidget(
           "${mock.cword(min: 2)}座",
           border: Border.all(width: .5, color: WcaoTheme.outline),
           backgroundColor: Colors.white,

@@ -1,0 +1,1 @@
+static const bbsVideo = '/bbs_video';

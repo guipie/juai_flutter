@@ -1,8 +1,9 @@
 import 'dart:convert';
 
-import 'package:guxin_ai/entities/user_base.dart';
+import 'package:JuAI/entities/user_base.dart';
 
 class CommentRes {
+  int id;
   String comment;
   int? replyId;
   int createId;
@@ -10,7 +11,10 @@ class CommentRes {
   String? avatar;
   String? createTime;
   UserInfo? replyUser;
+  int? likeNum;
+  bool? isLiked;
   CommentRes({
+    required this.id,
     required this.comment,
     this.replyId,
     this.replyUser,
@@ -18,10 +22,13 @@ class CommentRes {
     required this.createNick,
     this.avatar,
     this.createTime,
+    this.likeNum,
+    this.isLiked,
   });
 
   factory CommentRes.fromRawJson(String str) => CommentRes.fromJson(json.decode(str));
   factory CommentRes.fromJson(Map<String, dynamic> json) => CommentRes(
+        id: json["Id"],
         comment: json["Comment"],
         replyId: json["ReplyId"],
         createId: json["CreateId"],
@@ -29,6 +36,8 @@ class CommentRes {
         replyUser: json["ReplyUser"] == null ? null : UserInfo.fromJson(json["ReplyUser"]),
         createNick: json["CreateNick"] ?? "火星用户",
         createTime: json["CreateTime"],
+        likeNum: json["LikeNum"],
+        isLiked: json["IsLiked"],
       );
 }
 

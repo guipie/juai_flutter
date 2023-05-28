@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:guxin_ai/common/widgets/ui/cell.dart';
+import 'package:JuAI/common/widgets/cell.dart';
 import 'package:get/get.dart';
 
 class SettingsPrivacyPage extends StatefulWidget {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:guxin_ai/common/routers/routes.dart';
-import 'package:guxin_ai/common/store/config.dart';
-import 'package:guxin_ai/common/store/user.dart';
+import 'package:JuAI/common/routers/routes.dart';
+import 'package:JuAI/common/store/config.dart';
+import 'package:JuAI/common/store/user.dart';
 
 import 'package:get/get.dart';
 
