@@ -1,3 +1,6 @@
-import 'package:JuAI/common/store/store.dart';
+import 'package:JuAI/entities/content/content.dart';
+import 'package:get/get.dart';
 
-class SettingsMineHomeState {}
+class SettingsMineHomeState {
+  var items = <ContentResEntity>[].obs;
+}

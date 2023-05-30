@@ -23,6 +23,7 @@ class ContentAddReqEntity {
   late BaCategory category;
   List<int>? fileIds;
   int payTokens = 0;
+  int? specialId;
   BaReadType readType = BaReadType.Pub;
   ContentAddReqEntity() {
     title = summary = tags = content = "";
@@ -36,7 +37,8 @@ class ContentAddReqEntity {
         "Category": category.name,
         "FileIds": fileIds,
         "PayTokens": payTokens,
-        "readType": readType.name,
+        "ReadType": readType.name,
+        "SpecialId": specialId,
       };
 }
 

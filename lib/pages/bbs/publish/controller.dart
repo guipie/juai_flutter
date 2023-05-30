@@ -33,6 +33,10 @@ class PublishController extends GetxController {
         state.currentSendType.value = SendType.nosend;
       }
     });
+    if (Get.arguments != null) {
+      state.specialId = Get.arguments['specialId'];
+      state.specialName.value = Get.arguments['specialName'];
+    }
     super.onInit();
   }
 
@@ -40,14 +44,6 @@ class PublishController extends GetxController {
   void dispose() {
     state.videoController.dispose();
     super.dispose();
-  }
-
-  Future<String> getSpecialData() async {
-    if (Get.arguments != null && Get.arguments > 0) {
-      specialInfo = await SpecialApi.get(Get.arguments);
-      return "圈子：" + specialInfo!.title;
-    }
-    return "发布文章";
   }
 
   void saveContents(PublishType pub) async {
@@ -101,6 +97,7 @@ class PublishController extends GetxController {
         addReqEntity.readType = BaReadType.Pay;
         addReqEntity.payTokens = payTokens;
       }
+      addReqEntity.specialId = state.specialId;
       await ContentAPI.contentAdd(addReqEntity).then((value) => {if (value > 0) Get.back()});
     } catch (e) {
       Future.error(e);

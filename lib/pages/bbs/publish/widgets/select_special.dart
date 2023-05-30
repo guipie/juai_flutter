@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -8,7 +7,6 @@ import 'package:JuAI/entities/content/special.dart';
 import 'package:JuAI/common/routers/routes.dart';
 import 'package:JuAI/common/theme.dart';
 import 'package:JuAI/common/widgets/image_cache.dart';
-import 'package:JuAI/common/widgets/widgets.dart';
 
 class SelectSpecialWidget extends StatefulWidget {
   const SelectSpecialWidget({super.key});
@@ -39,7 +37,7 @@ class _SelectSpecialWidgetState extends State<SelectSpecialWidget> {
                   .map(
                     (e) => ListTile(
                       tileColor: WcaoTheme.placeholder,
-                      onTap: () => Get.offNamed(Routes.bbsPublishArticle, arguments: e.id),
+                      onTap: () => Get.offNamed(Routes.bbsPublishArticle, arguments: Map.from({"specialId": e.id, "specialName": e.title})),
                       title: Text(e.title),
                       subtitle: Text(e.summary.substring(0, e.summary.length > 50 ? 50 : e.summary.length) + "..."),
                       leading: SizedBox(

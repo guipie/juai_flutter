@@ -19,12 +19,12 @@ class CommentWidget extends StatefulWidget {
 class _CommentWidgetState extends State<CommentWidget> {
   var commentFocus = FocusNode();
   var commentController = TextEditingController();
-  var replyUserInfo = UserInfo(nickName: "", id: 0);
+  var replyUserInfo = UserInfo(nickName: "", id: 0, userId: 0, userName: '');
   var replyId = 0;
   var comments = <CommentRes>[];
   _removeAll() {
     setState(() {
-      replyUserInfo = UserInfo(nickName: "", id: 0);
+      replyUserInfo = UserInfo(nickName: "", id: 0, userId: 0, userName: '');
       replyId = 0;
       commentController.clear();
     });
@@ -55,7 +55,7 @@ class _CommentWidgetState extends State<CommentWidget> {
   }
 
   _toReply(BuildContext context, nick, id, reId) {
-    replyUserInfo = UserInfo(nickName: nick, id: id);
+    replyUserInfo = UserInfo(nickName: nick, id: id, userId: 0, userName: '');
     replyId = reId;
     FocusScope.of(context).requestFocus(commentFocus);
     setState(() {});

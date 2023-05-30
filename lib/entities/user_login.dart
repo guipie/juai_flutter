@@ -36,23 +36,22 @@ class UserLoginResponseEntity {
   String phone;
   String? address;
   String? avatar;
-  int tokenCount;
   DateTime lastLoginDate;
   String roleNames;
   String? remark;
-
+  int tokenNum;
   UserLoginResponseEntity({
     required this.id,
     required this.userName,
     required this.nickName,
     required this.status,
     required this.sex,
+    required this.tokenNum,
     this.birthday,
     this.email,
     required this.phone,
     this.address,
     this.avatar,
-    required this.tokenCount,
     required this.lastLoginDate,
     required this.roleNames,
     this.remark,
@@ -65,6 +64,7 @@ class UserLoginResponseEntity {
   factory UserLoginResponseEntity.fromJson(Map<String, dynamic> json) => UserLoginResponseEntity(
         id: json["Id"],
         userName: json["UserName"],
+        tokenNum: json["TokenNum"] ?? 0,
         nickName: json["NickName"],
         avatar: json["Avatar"],
         status: json["Status"],
@@ -73,8 +73,7 @@ class UserLoginResponseEntity {
         email: json["Email"],
         phone: json["Phone"] ?? "",
         address: json["Address"],
-        tokenCount: json["TokenCount"],
-        lastLoginDate: DateTime.parse(json["LastLoginDate"]),
+        lastLoginDate: DateTime.parse(json["LastLoginDate"] ?? DateTime.now().toString()),
         roleNames: json["RoleNames"],
         remark: json["Remark"],
       );
@@ -82,6 +81,7 @@ class UserLoginResponseEntity {
   Map<String, dynamic> toJson() => {
         "Id": id,
         "UserName": userName,
+        "TokenNum": tokenNum,
         "NickName": nickName,
         "Status": status,
         "Sex": sex,
@@ -90,7 +90,6 @@ class UserLoginResponseEntity {
         "Phone": phone,
         "Address": address,
         "Avatar": avatar,
-        "TokenCount": tokenCount,
         "LastLoginDate": lastLoginDate.toIso8601String(),
         "RoleNames": roleNames,
         "Remark": remark,

@@ -1,18 +1,20 @@
+import 'package:JuAI/common/utils/date.dart';
+import 'package:JuAI/entities/content/content.dart';
+import 'package:JuAI/pages/bbs/widgets/card_dongtai_images.dart';
+import 'package:JuAI/pages/bbs/widgets/card_dongtai_video.dart';
+import 'package:JuAI/pages/bbs/widgets/tags.dart';
+import 'package:JuAI/pages/bbs/widgets/tools.dart';
+import 'package:JuAI/pages/settings/mine/controller.dart';
 import 'package:flutter/material.dart';
 import 'package:JuAI/common/widgets/avatar.dart';
 import 'package:JuAI/common/widgets/image_cache.dart';
-import 'package:JuAI/pages/settings/mine/mock.dart';
 import 'package:JuAI/common/widgets/tag.dart';
 import 'package:JuAI/common/theme.dart';
 import 'package:get/get.dart';
 
-import '../../bbs/mock.dart';
-
 class SettingsMineHomeWidget extends StatelessWidget {
-  final MockMine mine = MockMine.get();
-  final List<MockLike> items = MockLike.get(num: 4);
-
   SettingsMineHomeWidget({super.key});
+  final logic = Get.find<SettingsMineHomeController>();
   @override
   Widget build(BuildContext context) {
     return NestedScrollView(
@@ -23,16 +25,16 @@ class SettingsMineHomeWidget extends StatelessWidget {
             pinned: true,
             expandedHeight: 320,
             leading: TextButton.icon(
-              onPressed: () {},
-              icon: Icon(Icons.arrow_back_sharp, color: Colors.white),
-              label: Text("返回", style: TextStyle(color: Colors.white)),
+              onPressed: () => Get.back(),
+              icon: const Icon(Icons.arrow_back_sharp, color: Colors.white),
+              label: const Text("返回", style: TextStyle(color: Colors.white)),
             ),
             leadingWidth: 100,
             actions: [
               TextButton.icon(
                 onPressed: () => Get.toNamed('/mine/add-tag'),
-                icon: Icon(Icons.add_sharp, color: Colors.white),
-                label: Text("", style: TextStyle(color: Colors.white)),
+                icon: const Icon(Icons.add_sharp, color: Colors.white),
+                label: const Text("", style: TextStyle(color: Colors.white)),
               ),
             ],
             flexibleSpace: LayoutBuilder(
@@ -58,7 +60,7 @@ class SettingsMineHomeWidget extends StatelessWidget {
                       SizedBox(
                         width: double.infinity,
                         height: top,
-                        child: ImageCacheWidget(mine.bg),
+                        child: ImageCacheWidget(""),
                       ),
                       Positioned(
                         child: Container(
@@ -85,17 +87,22 @@ class SettingsMineHomeWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   InkWell(
-                    child: adapterItem(mine.visits, '访客'),
+                    child: adapterItem(22, '全部'),
                     onTap: () => Get.toNamed('/mine/visitors'),
                   ),
                   adapterDrive(),
                   InkWell(
-                    child: adapterItem(mine.friends, '好友'),
+                    child: adapterItem(32, '动态'),
                     onTap: () => Get.toNamed('/mine/firends'),
                   ),
                   adapterDrive(),
                   InkWell(
-                    child: adapterItem(mine.fans, '粉丝'),
+                    child: adapterItem(41, '视频'),
+                    onTap: () => Get.toNamed('/mine/fans'),
+                  ),
+                  adapterDrive(),
+                  InkWell(
+                    child: adapterItem(41, '文章'),
                     onTap: () => Get.toNamed('/mine/fans'),
                   )
                 ],
@@ -104,19 +111,21 @@ class SettingsMineHomeWidget extends StatelessWidget {
           ),
         ];
       }),
-      body: ListView.builder(
-        physics: const ClampingScrollPhysics(), // 重要
-        padding: const EdgeInsets.all(0),
-        itemCount: items.length,
-        itemBuilder: (context, index) {
-          return dynamicItem(items[index], items.length - 1 > index);
-        },
+      body: Obx(
+        () => ListView.builder(
+          physics: const ClampingScrollPhysics(), // 重要
+          padding: const EdgeInsets.all(0),
+          itemCount: logic.state.items.length,
+          itemBuilder: (context, index) {
+            return _contentItem(logic.state.items[index]);
+          },
+        ),
       ),
     );
   }
 
   /// 我的动态 item
-  Container dynamicItem(MockLike item, bool bottomBorder) {
+  Container _contentItem(ContentResEntity content) {
     return Container(
       padding: const EdgeInsets.only(left: 12, right: 12),
       child: Container(
@@ -125,29 +134,28 @@ class SettingsMineHomeWidget extends StatelessWidget {
           border: Border(
             bottom: BorderSide(
               width: .5,
-              color: bottomBorder ? WcaoTheme.outline : Colors.transparent,
+              color: WcaoTheme.outline,
             ),
           ),
         ),
         child: Column(
           children: [
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        item.time.split('T')[0],
+                        dateFormatYMD(content.createTime),
                         style: TextStyle(color: WcaoTheme.secondary),
                       ),
                       Container(
                         margin: const EdgeInsets.only(top: 8),
                         width: 300,
                         child: Text(
-                          item.text,
+                          content.summary,
                           style: TextStyle(
                             fontSize: WcaoTheme.fsL,
                             overflow: TextOverflow.ellipsis,
@@ -164,33 +172,10 @@ class SettingsMineHomeWidget extends StatelessWidget {
                 ),
               ],
             ),
-            item.media.isNotEmpty
-                ? Container(
-                    margin: const EdgeInsets.only(top: 12),
-                    width: double.infinity,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(8),
-                      child: ImageCacheWidget(item.media[0]),
-                    ),
-                  )
-                : Container(),
-            Container(
-              width: double.infinity,
-              alignment: Alignment.topLeft,
-              margin: EdgeInsets.only(top: item.media.isNotEmpty ? 24 : 12),
-              child: Wrap(
-                spacing: 12,
-                runSpacing: 6,
-                children: List.generate(
-                  item.tag.length,
-                  (index) => TagWidget(
-                    item.tag[index],
-                    color: WcaoTheme.primary,
-                    borderRadius: BorderRadius.circular(24),
-                  ),
-                ).toList(),
-              ),
-            )
+            if (content.category == BaCategory.Image && content.files.isNotEmpty) CardDongtaiImagesWidget(content),
+            if (content.category == BaCategory.Video && content.files.isNotEmpty) CardDongtaiVideoWidget(content.files.first),
+            if (content.tags != null && content.tags!.length > 2) TagsWidget(content.tags!),
+            ToolsWidget(content),
           ],
         ),
       ),
@@ -209,7 +194,7 @@ class SettingsMineHomeWidget extends StatelessWidget {
           ),
         ),
         Text(
-          "动态",
+          text,
           style: TextStyle(
             color: WcaoTheme.secondary,
           ),
@@ -235,7 +220,7 @@ class SettingsMineHomeWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           avatar(
-            avatarUrl: mine.avatar,
+            avatarUrl: "",
             radius: 28,
           ),
           Container(
@@ -244,7 +229,7 @@ class SettingsMineHomeWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  mine.nickName,
+                  "mineNickName",
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: WcaoTheme.fsXl,
@@ -261,11 +246,29 @@ class SettingsMineHomeWidget extends StatelessWidget {
           ),
           Container(
             margin: const EdgeInsets.only(top: 12),
-            child: Text(
-              '${mine.createDay}天 ${mine.tags.length}动态',
-              style: TextStyle(
-                color: WcaoTheme.placeholder,
-              ),
+            child: Wrap(
+              alignment: WrapAlignment.center,
+              spacing: 8.0,
+              children: [
+                Text(
+                  '22天',
+                  style: TextStyle(
+                    color: WcaoTheme.placeholder,
+                  ),
+                ),
+                Text(
+                  '22关注',
+                  style: TextStyle(
+                    color: WcaoTheme.placeholder,
+                  ),
+                ),
+                Text(
+                  '22粉丝',
+                  style: TextStyle(
+                    color: WcaoTheme.placeholder,
+                  ),
+                )
+              ],
             ),
           ),
           Container(
@@ -277,10 +280,10 @@ class SettingsMineHomeWidget extends StatelessWidget {
                 spacing: 12,
                 runSpacing: 6,
                 children: List.generate(
-                  mine.tags.length,
+                  0,
                   (index) {
                     return TagWidget(
-                      mine.tags[index],
+                      "hah哈哈12",
                       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                       backgroundColor: Colors.black.withOpacity(.4),
                       color: Colors.white,

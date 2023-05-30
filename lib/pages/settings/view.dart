@@ -21,7 +21,7 @@ class SettingsPage extends GetView<SettingsController> {
         actions: [
           TextButton(
             onPressed: () {},
-            child: SvgImageWidget(
+            child: const SvgImageWidget(
               Assets.iconToken,
               width: 23,
               height: 23,
@@ -89,9 +89,19 @@ class SettingsPage extends GetView<SettingsController> {
                     runSpacing: 20,
                     alignment: WrapAlignment.spaceAround,
                     children: [
-                      _homeItem(Assets.iconToken, 2003, "token", context),
-                      _homeItem(Assets.iconDongtai, 34, "动态", context),
-                      _homeItem(Assets.iconHudong, 1003, "互动", context),
+                      _homeItem(Assets.iconToken, UserStore.to.userInfo.value!.tokenNum, "token", context),
+                      Obx(
+                        () => InkWell(
+                          child: _homeItem(Assets.iconDongtai, logic.state.contentsNum.value, "动态", context),
+                          onTap: () => Get.toNamed(Routes.settingsMineHome),
+                        ),
+                      ),
+                      Obx(
+                        () => InkWell(
+                          child: _homeItem(Assets.iconHudong, logic.state.hudongNum.value, "互动", context),
+                          onTap: () => Get.toNamed(Routes.settingsMineHome),
+                        ),
+                      ),
                     ],
                   ),
                 ),

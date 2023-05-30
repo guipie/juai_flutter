@@ -127,7 +127,9 @@ class BbsIndexPage extends StatelessWidget {
       child: Wrap(
         alignment: WrapAlignment.start,
         children: ContentStore.to.topTags
-            .map((e) => Container(
+            .map(
+              (e) => InkWell(
+                child: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                   child: Text(
                     '#${e['Name']}#',
@@ -136,7 +138,10 @@ class BbsIndexPage extends StatelessWidget {
                       fontSize: WcaoTheme.fsL,
                     ),
                   ),
-                ))
+                ),
+                onTap: () => Get.toNamed(Routes.bbsTag, arguments: '#${e['Name']}#'),
+              ),
+            )
             .toList(),
       ),
     );

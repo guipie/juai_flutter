@@ -8,8 +8,11 @@ import 'package:JuAI/pages/bbs/publish/view_article.dart';
 import 'package:JuAI/pages/bbs/publish/view_special.dart';
 import 'package:JuAI/pages/bbs/special/index.dart';
 import 'package:JuAI/pages/bbs/special/view.dart';
+import 'package:JuAI/pages/bbs/tag/controller.dart';
+import 'package:JuAI/pages/bbs/tag/view.dart';
 import 'package:JuAI/pages/bbs_chat/controller.dart';
 import 'package:JuAI/pages/bbs_chat/view.dart';
+import 'package:JuAI/pages/home/controler.dart';
 import 'package:JuAI/pages/settings/account/pwd_reset.dart';
 import 'package:JuAI/pages/settings/account/pwd_update.dart';
 import 'package:JuAI/pages/settings/agreement/privacy.dart';
@@ -23,6 +26,7 @@ import 'package:JuAI/pages/settings/account/logout.dart';
 import 'package:JuAI/pages/settings/account/phone_update.dart';
 import 'package:JuAI/pages/settings/backlist/index.dart';
 import 'package:JuAI/pages/settings/controler.dart';
+import 'package:JuAI/pages/settings/mine/controller.dart';
 import 'package:JuAI/pages/settings/mine/index.dart';
 import 'package:JuAI/pages/settings/notification/notice.dart';
 import 'package:JuAI/pages/settings/notification/notice_setting.dart';
@@ -110,6 +114,12 @@ class AppPages {
       binding: BindingsBuilder(() => Get.put<SpecialController>(SpecialController())),
     ),
 
+    GetPage(
+      name: Routes.bbsTag,
+      page: () => TagPage(),
+      binding: BindingsBuilder(() => Get.put<TagController>(TagController())),
+    ),
+
     ///gpt相关
     GetPage(
       name: Routes.bbsChat,
@@ -156,6 +166,7 @@ class AppPages {
     GetPage(
       name: Routes.settingsMineHome,
       page: () => SettingsMineHomeWidget(),
+      binding: BindingsBuilder(() => Get.lazyPut(() => SettingsMineHomeController())),
     ),
 
     GetPage(

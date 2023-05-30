@@ -1,5 +1,6 @@
 import 'dart:core';
 
+import 'package:JuAI/common/apis/content_tag_api.dart';
 import 'package:get/get.dart';
 import 'package:JuAI/common/apis/content_special_api.dart';
 import 'package:JuAI/entities/content/content.dart';
@@ -21,7 +22,7 @@ class ContentStore extends GetxController {
   }
 
   void contentInit() {
-    ContentAPI.topTags().then((value) => topTags = value);
+    ContentTagApi.topTags().then((value) => topTags = value);
     SpecialApi.getTop().then((value) => specials = value);
     getContents();
   }

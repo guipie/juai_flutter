@@ -12,10 +12,11 @@ class Routes {
   static const bbsPublishDongtai = "/bbs/publish/dongtai";
   static const bbsPublishArticle = "/bbs/publish/article";
   static const bbsPublishSpecial = "/bbs/publish/special";
-  static const bbsTagAdd = "/bbs/publish/add/tag";
   static const bbsDetail = "/bbs/detail";
   static const bbsDetailComment = "/bbs/detail/comment";
   static const bbsSpecial = "/bbs/special";
+  static const bbsTagAdd = "/bbs/publish/add/tag";
+  static const bbsTag = "/bbs/tag";
 
   static const bbsChat = "/bbs-chat";
 

@@ -33,7 +33,7 @@ class PublishDongtaiPage extends StatelessWidget {
                     color: GFColors.DANGER,
                     fullWidthButton: true,
                   )
-                : const Text('发布动态'),
+                : Text(logic.state.specialName.isNotEmpty ? ("圈子:" + logic.state.specialName.value) : '发布动态'),
           ),
           actions: [
             GFButton(
@@ -116,7 +116,7 @@ class PublishDongtaiPage extends StatelessWidget {
                     ),
                     GFButton(
                       onPressed: () {
-                        Get.toNamed(Routes.bbsPublishArticle);
+                        Get.offNamed(Routes.bbsPublishArticle);
                       },
                       text: "写文章",
                       size: GFSize.LARGE,

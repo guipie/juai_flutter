@@ -1,13 +1,7 @@
-import 'dart:io';
-
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:JuAI/entities/content/content.dart';
 import 'package:video_player/video_player.dart';
-
-import 'widgets/article/article_edit.dart';
 
 enum PublishType { dongtai, article }
 
@@ -40,4 +34,6 @@ class PublishState {
 
   var isPay = false.obs;
   var payController = TextEditingController();
+  var specialId = 0;
+  var specialName = "".obs;
 }

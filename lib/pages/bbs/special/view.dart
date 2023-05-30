@@ -1,5 +1,6 @@
 import 'package:JuAI/common/apis/content_special_api.dart';
 import 'package:JuAI/common/theme.dart';
+import 'package:JuAI/common/utils/date.dart';
 import 'package:JuAI/common/widgets/bottommost.dart';
 import 'package:JuAI/common/widgets/image_cache.dart';
 import 'package:JuAI/common/widgets/load_data.dart';
@@ -9,9 +10,9 @@ import 'package:get/get.dart';
 
 import 'index.dart';
 
-class SpecialPage extends StatelessWidget {
+class SpecialPage extends GetView<SpecialController> {
   SpecialPage({Key? key}) : super(key: key);
-  final _ = Get.find<SpecialController>();
+  final logic = Get.find<SpecialController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,7 +21,7 @@ class SpecialPage extends StatelessWidget {
         child: Column(
           children: [
             LoadDataWidget(
-              SpecialApi.get(_.specialId),
+              logic.getSpecialDetail(),
               chindFunc: (val) => SizedBox(
                 width: double.infinity,
                 child: Column(
@@ -35,16 +36,21 @@ class SpecialPage extends StatelessWidget {
                       subtitle: Text(val.summary, maxLines: 2, overflow: TextOverflow.ellipsis),
                     ),
                     Padding(
-                      padding: EdgeInsets.only(left: 13),
-                      child: RichText(
-                        text: TextSpan(
-                          style: TextStyle(color: WcaoTheme.placeholder),
-                          text: "创建于：2020-12-22",
-                          children: [
-                            TextSpan(text: "        "),
-                            TextSpan(text: "成员："),
-                            TextSpan(text: "24", style: TextStyle(color: Color.fromARGB(255, 3, 56, 231))),
-                          ],
+                      padding: const EdgeInsets.only(left: 13),
+                      child: Obx(
+                        () => RichText(
+                          text: TextSpan(
+                            style: TextStyle(color: WcaoTheme.placeholder),
+                            text: "创建于：" + dateFormatYMD(val.createTime),
+                            children: [
+                              const TextSpan(text: "        "),
+                              const TextSpan(text: "成员："),
+                              TextSpan(
+                                text: logic.userCnt.value.toString(),
+                                style: const TextStyle(color: Color.fromARGB(255, 3, 56, 231)),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
@@ -53,23 +59,29 @@ class SpecialPage extends StatelessWidget {
               ),
             ),
             Expanded(
-              child: _.contents.isNotEmpty
-                  ? Obx(
-                      () => ListView.builder(
-                        itemCount: _.contents.length,
+              child: Obx(
+                () => logic.contents.isNotEmpty
+                    ? ListView.builder(
+                        itemCount: logic.contents.length,
                         itemBuilder: (context, index) {
-                          return CardIndexWidget(_.contents[index]);
+                          return CardIndexWidget(logic.contents[index]);
                         },
-                      ),
-                    )
-                  : BottommostWidget(false),
+                      )
+                    : const BottommostWidget(false),
+              ),
             ),
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.add),
-        onPressed: () {},
+      floatingActionButton: FilledButton.icon(
+        onPressed: () => logic.toJoin(),
+        icon: const Icon(Icons.add, color: Colors.white),
+        label: Obx(
+          () => Text(
+            logic.isJoin.value ? "发布" : "加入",
+            style: TextStyle(fontSize: WcaoTheme.fsL, color: Colors.white),
+          ),
+        ),
       ),
     );
   }

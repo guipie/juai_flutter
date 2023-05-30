@@ -1,6 +1,4 @@
-import 'package:flutter/services.dart';
 import 'package:getwidget/getwidget.dart';
-import 'package:JuAI/entities/content/content.dart';
 import 'package:JuAI/common/widgets/tag.dart';
 import 'package:JuAI/pages/bbs/publish/controller.dart';
 import 'package:flutter/material.dart';
@@ -16,16 +14,7 @@ class PublishArticlePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: FutureBuilder<String>(
-          future: logic.getSpecialData(),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.done) {
-              return Text(snapshot.data!);
-            } else {
-              return const Text('加载中...');
-            }
-          },
-        ),
+        title: Text(logic.state.specialName.isNotEmpty ? ("圈子:" + logic.state.specialName.value) : '发布文章'),
         actions: [
           GFButton(
             onPressed: () => logic.saveContents(PublishType.article),
@@ -69,48 +58,48 @@ class PublishArticlePage extends StatelessWidget {
               ),
             ),
             // 添加话题
-            Container(
-              width: double.infinity,
-              padding: const EdgeInsets.symmetric(horizontal: 12),
-              child: Wrap(
-                alignment: WrapAlignment.start,
-                crossAxisAlignment: WrapCrossAlignment.center,
-                spacing: 2,
-                runSpacing: 2,
-                children: [
-                  IconButton(
-                    onPressed: () => logic.toTag(),
-                    icon: Icon(
-                      Icons.tag_outlined,
-                      color: WcaoTheme.secondary,
+            Obx(
+              () => Container(
+                width: double.infinity,
+                padding: const EdgeInsets.symmetric(horizontal: 12),
+                child: Wrap(
+                  alignment: WrapAlignment.start,
+                  crossAxisAlignment: WrapCrossAlignment.center,
+                  spacing: 8,
+                  runSpacing: 2,
+                  children: [
+                    IconButton(
+                      onPressed: () => logic.toTag(),
+                      icon: Icon(
+                        Icons.tag_outlined,
+                        color: WcaoTheme.secondary,
+                      ),
                     ),
-                  ),
-                  ...logic.state.currentTags
-                      .map((e) => TagWidget(
-                            e,
-                            color: GFColors.WHITE,
-                            backgroundColor: GFColors.SUCCESS,
-                            close: true,
-                            onClose: () => logic.tagClose(e),
-                          ))
-                      .toList(),
-                  GFButton(
-                    padding: const EdgeInsets.only(right: 10),
-                    onPressed: () {
-                      logic.state.isPay.value = !logic.state.isPay.value;
-                    },
-                    icon: Obx(
-                      () => Checkbox(
-                          value: logic.state.isPay.value,
-                          onChanged: (val) {
-                            logic.state.isPay.value = !logic.state.isPay.value;
-                          }),
+                    ...logic.state.currentTags
+                        .map((e) => TagWidget(
+                              e,
+                              color: GFColors.WHITE,
+                              backgroundColor: GFColors.SUCCESS,
+                              close: true,
+                              onClose: () => logic.tagClose(e),
+                            ))
+                        .toList(),
+                    GFButton(
+                      padding: const EdgeInsets.only(right: 10),
+                      onPressed: () {
+                        logic.state.isPay.value = !logic.state.isPay.value;
+                      },
+                      icon: Obx(
+                        () => Checkbox(
+                            value: logic.state.isPay.value,
+                            onChanged: (val) {
+                              logic.state.isPay.value = !logic.state.isPay.value;
+                            }),
+                      ),
+                      text: "是否付费",
+                      type: GFButtonType.outline,
                     ),
-                    text: "是否付费",
-                    type: GFButtonType.outline,
-                  ),
-                  Obx(
-                    () => logic.state.isPay.value
+                    logic.state.isPay.value
                         ? SizedBox(
                             width: 200,
                             child: TextField(
@@ -120,8 +109,8 @@ class PublishArticlePage extends StatelessWidget {
                             ),
                           )
                         : const Text(""),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ],

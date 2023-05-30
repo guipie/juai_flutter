@@ -43,7 +43,7 @@ class HomePcPage extends GetView<HomeController> {
               margin: const EdgeInsets.only(left: 0),
               height: 60,
               width: 60,
-              child: avatar(context: context, onClick: () => Get.toNamed(Routes.settingsAccount)),
+              child: avatar(context: context, onClick: () => Get.toNamed(Routes.settingsMineHome)),
             ),
             trailing: InkWell(
               mouseCursor: MouseCursor.defer,

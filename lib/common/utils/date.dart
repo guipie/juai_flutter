@@ -47,6 +47,10 @@ String dateFormatYMDHMS(DateTime dt) {
   return DateFormat("yyyy-MM-dd HH:mm:ss").format(dt);
 }
 
+String dateFormatYMD(DateTime dt) {
+  return DateFormat("yyyy-MM-dd").format(dt);
+}
+
 String dateFormat(dynamic dt, {String? fmt}) {
   dt = dt ?? DateTime.now();
   var date = DateTime.tryParse(dt.toString());

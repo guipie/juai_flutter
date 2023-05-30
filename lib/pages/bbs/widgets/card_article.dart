@@ -18,44 +18,46 @@ class CardAriticleWidget extends StatelessWidget {
       imageUrls.add(match.group(0) ?? "");
     }
     return Padding(
-      padding: const EdgeInsets.only(left: 10, top: 8),
+      padding: const EdgeInsets.all(2),
       child: Row(
         children: [
           if (imageUrls.isNotEmpty)
             Container(
-              margin: const EdgeInsets.only(right: 20),
+              margin: const EdgeInsets.only(right: 15),
               width: 60,
               height: 60,
               child: ImageCacheWidget(imageUrls.first),
             ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              InkWell(
-                onTap: () {
-                  Get.toNamed(Routes.bbsDetail, arguments: content.id);
-                },
-                child: Text(
-                  content.title,
-                  style: const TextStyle(fontWeight: FontWeight.bold),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                InkWell(
+                  onTap: () {
+                    Get.toNamed(Routes.bbsDetail, arguments: content.id);
+                  },
+                  child: Text(
+                    content.title,
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+                  ),
                 ),
-              ),
-              const SizedBox(height: 5),
-              Wrap(
-                spacing: 10,
-                children: [
-                  Text(
-                    "张飞",
-                    style: TextStyle(fontWeight: FontWeight.w400, color: WcaoTheme.secondary),
-                  ),
-                  Text(
-                    "4评论",
-                    style: TextStyle(fontWeight: FontWeight.w400, color: WcaoTheme.secondary),
-                  ),
-                ],
-              )
-            ],
-          ),
+                const SizedBox(height: 5),
+                Wrap(
+                  spacing: 10,
+                  children: [
+                    Text(
+                      "张飞",
+                      style: TextStyle(fontWeight: FontWeight.w400, color: WcaoTheme.secondary),
+                    ),
+                    Text(
+                      "${content.commentNum}评论",
+                      style: TextStyle(fontWeight: FontWeight.w400, color: WcaoTheme.secondary),
+                    ),
+                  ],
+                )
+              ],
+            ),
+          )
         ],
       ),
     );

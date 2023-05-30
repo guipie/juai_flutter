@@ -1,3 +1,4 @@
+import 'package:JuAI/common/apis/content_tag_api.dart';
 import 'package:flutter/material.dart';
 import 'package:JuAI/common/apis/apis.dart';
 import 'package:JuAI/common/store/content.dart';
@@ -66,7 +67,7 @@ class _BbsAddTagState extends State<BbsAddTag> {
                     if (myCurrentTags.isEmpty || myCurrentTags.any((element) => element["Name"] != searchController.text)) {
                       setState(() {
                         myCurrentTags.add({"Name": searchController.text});
-                        ContentAPI.contentTagAdd(searchController.text.trim());
+                        ContentTagApi.contentTagAdd(searchController.text.trim());
                         searchController.text = "";
                       });
                     } else {

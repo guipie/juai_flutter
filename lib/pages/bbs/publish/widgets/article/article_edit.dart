@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:JuAI/common/values/storage.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:filesystem_picker/filesystem_picker.dart';
 import 'package:flutter/foundation.dart';
@@ -44,8 +45,8 @@ class _ArticleEditPageState extends State<ArticleEditPage> {
   void initState() {
     super.initState();
     try {
-      debugPrint("初始化document：${StorageService.to.getString("article")}");
-      var existDoc = StorageService.to.getString("article");
+      var existDoc = StorageService.to.getString(STORAGE_ARTICLE_DELTA);
+      debugPrint("初始化document：$existDoc");
       setState(() {
         _controller = QuillController(
           document: Document.fromJson(jsonDecode(existDoc)),
@@ -54,7 +55,7 @@ class _ArticleEditPageState extends State<ArticleEditPage> {
       });
       state.matchFileInit(existDoc);
     } catch (error) {
-      debugPrint(error.toString());
+      debugPrint("初始化出错$error");
       final doc = Document()..insert(0, '');
       setState(() {
         _controller = QuillController(document: doc, selection: const TextSelection.collapsed(offset: 0));
@@ -66,7 +67,7 @@ class _ArticleEditPageState extends State<ArticleEditPage> {
         json,
         _controller.document.toPlainText(),
       );
-      debugPrint(json);
+      // debugPrint(json);
       // state.deleteImage(source);
     });
   }
@@ -326,7 +327,7 @@ class _ArticleEditPageState extends State<ArticleEditPage> {
     final appDocDir = await getApplicationDocumentsDirectory();
     final copiedFile = await file.copy('${appDocDir.path}\\${basename(file.path)}');
     debugPrint("图片选择的路径:${copiedFile.path}");
-    var uploadUrl = await QiniuUtil.saveFile(file, FileType.image);
+    var uploadUrl = await QiniuUtil.saveFile(file, FileType.image, isLoading: true);
     if (uploadUrl.isNotEmpty) {
       state.insertFiles.add(uploadUrl);
       return Qiniu_External_domain + uploadUrl;
@@ -355,7 +356,7 @@ class _ArticleEditPageState extends State<ArticleEditPage> {
     final appDocDir = await getApplicationDocumentsDirectory();
     final copiedFile = await file.copy('${appDocDir.path}\\${basename(file.path)}');
     debugPrint("视频选择的路径:${copiedFile.path}");
-    var uploadUrl = await QiniuUtil.saveFile(file, FileType.video);
+    var uploadUrl = await QiniuUtil.saveFile(file, FileType.video, isLoading: true);
     if (uploadUrl.isNotEmpty) {
       state.insertFiles.add(uploadUrl);
       return Qiniu_External_domain + uploadUrl;

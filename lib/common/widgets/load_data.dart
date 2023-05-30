@@ -21,7 +21,8 @@ class LoadDataWidget<T> extends StatelessWidget {
           case ConnectionState.done:
             debugPrint('done');
             if (snapshot.hasError) return Text('Error: ${snapshot.error}');
-            if (snapshot.data == null) return const BottommostWidget(false, isNodata: true);
+            debugPrint("snapshot.datasnapshot.datasnapshot.data${snapshot.data}");
+            if (snapshot.data == null || (snapshot.data is Iterable && (snapshot.data as Iterable).isEmpty)) return const BottommostWidget(false, isNodata: true);
             return chindFunc(snapshot.data!);
           default:
             return const BottommostWidget(false, isNodata: true);

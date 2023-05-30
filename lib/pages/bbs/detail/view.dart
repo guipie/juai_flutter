@@ -1,3 +1,4 @@
+import 'package:JuAI/pages/widgets/follow_btn.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:JuAI/common/utils/utils.dart';
@@ -36,12 +37,7 @@ class BbsDetailPage extends StatelessWidget {
                   "发布于" + DateTimeLine(detail.createTime),
                   style: TextStyle(fontSize: 12.0, color: Theme.of(context).colorScheme.onSurfaceVariant),
                 ),
-                trailing: 1 == 2
-                    ? OutlinedButton(onPressed: () {}, child: const Text("关注"))
-                    : FilledButton(
-                        onPressed: () {},
-                        child: const Text("已关注"),
-                      ),
+                trailing: FollowButtonWidget(detail.createId),
               ),
               if (detail.category == BaCategory.Image && detail.files.isNotEmpty) CardDongtaiImagesWidget(detail),
               if (detail.category == BaCategory.Video && detail.files.isNotEmpty) CardDongtaiVideoWidget(detail.files.first),

@@ -64,9 +64,10 @@ class QiniuUtil {
           return Future.error("请上传正确视频");
         }
       }
-      key = folder + "/" + (key ?? dateFormat(null, fmt: "yyyyMM") + "/" + DateTime.now().millisecondsSinceEpoch.toString() + path.extension(file.path));
       int fileDbId = 0;
-      return HttpUtil().post("/api/app/common/qiniu/token").then((value) async {
+      key = folder + "/" + (key ?? dateFormat(null, fmt: "yyyyMM") + "/" + DateTime.now().millisecondsSinceEpoch.toString() + path.extension(file.path));
+      Map<String, dynamic> queryParameters = {"key": key};
+      return HttpUtil().post("/api/app/common/qiniu/token", queryParameters: queryParameters).then((value) async {
         final putController = PutController();
         if (isInsertDb) {
           var width = 0, height = 0;
