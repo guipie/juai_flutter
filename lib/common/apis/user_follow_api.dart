@@ -16,4 +16,9 @@ class UserFollowApi {
     var data = await HttpUtil().post('/Follow/followed/$userId');
     return data.data;
   }
+
+  static Future<UserFollowHome> getFollowHome(int userId) async {
+    var data = await HttpUtil().get('/Follow/user/home/$userId');
+    return UserFollowHome.fromJson(data.data);
+  }
 }

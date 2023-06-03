@@ -49,14 +49,16 @@ class _SettingsNoticePageState extends State<SettingsNoticePage> {
                     ),
                     trailing: Text(dateFormat(notice.createTime, fmt: "yyyy-mm-dd")), // 通知时间
                     onTap: () {
-                      Get.bottomSheet(
-                        SingleChildScrollView(
-                          child: Padding(
-                            padding: const EdgeInsets.all(10),
-                            child: Text(notice.content ?? notice.description),
-                          ),
-                        ),
-                        backgroundColor: Colors.white,
+                      showModalBottomSheet(
+                        context: context,
+                        builder: (context) {
+                          return SingleChildScrollView(
+                            child: Padding(
+                              padding: const EdgeInsets.all(12),
+                              child: Text(notice.content ?? notice.description),
+                            ),
+                          );
+                        },
                       );
                     },
                   );

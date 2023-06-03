@@ -13,13 +13,13 @@ class UserStore extends GetxController {
   // 是否登录
   final _isLogin = false.obs;
   // 用户 profile
-  late UserLoginResponseEntity? _userInfo;
+  UserLoginResponseEntity _userInfo = UserLoginResponseEntity(id: 0, userName: "", nickName: "未登录", status: "", tokenNum: 0, phone: "", lastLoginDate: DateTime.now(), roleNames: "");
   // 令牌 token
   late UserTokenResponseEntity? _tokenInfo;
   bool get isLogin => _isLogin.value;
   Rx<UserLoginResponseEntity?> get userInfo => _userInfo.obs;
   UserTokenResponseEntity? get tokenInfo => _tokenInfo;
-
+  int get userId => userInfo.value!.id;
   @override
   void onInit() {
     _userInfoInit();

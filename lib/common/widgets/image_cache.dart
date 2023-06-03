@@ -13,7 +13,8 @@ class ImageCacheWidget extends StatefulWidget {
   final CacheImageType cacheImageType;
   final double? width;
   final double? height;
-  const ImageCacheWidget(this.imageUrl, {super.key, this.cacheImageType = CacheImageType.network, this.width, this.height});
+  final bool? isBackground;
+  const ImageCacheWidget(this.imageUrl, {super.key, this.cacheImageType = CacheImageType.network, this.width, this.height, this.isBackground});
 
   @override
   _ImageCacheWidgetState createState() => _ImageCacheWidgetState();
@@ -26,7 +27,7 @@ class _ImageCacheWidgetState extends State<ImageCacheWidget> {
 
   @override
   Widget build(BuildContext context) {
-    debugPrint("imageUrlimageUrlimageUrl${widget.imageUrl},cacheImageTypecacheImageType${widget.cacheImageType}");
+    debugPrint("imageUrlimageUrlimageUrl：${widget.imageUrl},cacheImageTypecacheImageType：${widget.cacheImageType}");
     if (widget.cacheImageType == CacheImageType.asserts || widget.imageUrl.isEmpty) {
       return Image.asset(
         widget.imageUrl.isEmpty ? Assets.image404 : widget.imageUrl,
@@ -39,10 +40,12 @@ class _ImageCacheWidgetState extends State<ImageCacheWidget> {
         imageUrl: (widget.imageUrl.startsWith("http") ? "" : Qiniu_External_domain) + widget.imageUrl,
         errorWidget: (context, url, error) => GestureDetector(
           onTap: _retryLoading,
-          child: const Icon(
-            Icons.image_not_supported_outlined,
-            size: 60,
-          ),
+          child: widget.isBackground == true
+              ? Image.asset(Assets.imageBj)
+              : const Icon(
+                  Icons.image_not_supported_outlined,
+                  size: 60,
+                ),
         ),
         imageBuilder: (context, imageProvider) => Container(
           decoration: BoxDecoration(

@@ -27,7 +27,7 @@ class SelectFile {
 }
 
 class FileUtils {
-  static void openFile(BuildContext context, Function(List<SelectFile> selectedFiles) selectedFunc, {RequestType fileType = RequestType.image, List<AssetEntity>? selectedAssets}) async {
+  static void openFile(BuildContext context, Function(List<SelectFile> selectedFiles) selectedFunc, {RequestType fileType = RequestType.image, List<AssetEntity>? selectedAssets, int maxAssets = 9}) async {
     List<SelectFile> selectedResult = <SelectFile>[];
     if (fileType == RequestType.image) {
       bool isCheck = await permissionCheckAndRequest(context, Permission.photos, "读取图片");
@@ -42,7 +42,7 @@ class FileUtils {
         context,
         pickerConfig: AssetPickerConfig(
           requestType: RequestType.image,
-          maxAssets: 9,
+          maxAssets: maxAssets,
           selectedAssets: selectedAssets,
         ),
       );

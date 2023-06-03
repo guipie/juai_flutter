@@ -1,3 +1,4 @@
+import 'package:JuAI/common/store/store.dart';
 import 'package:JuAI/pages/bbs/controller.dart';
 import 'package:JuAI/pages/bbs_chat/controller.dart';
 import 'package:JuAI/pages/conversation/controller.dart';

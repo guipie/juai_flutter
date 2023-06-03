@@ -1,13 +1,16 @@
+import 'package:JuAI/common/routers/routes.dart';
+import 'package:JuAI/common/store/store.dart';
 import 'package:JuAI/common/utils/date.dart';
+import 'package:JuAI/common/widgets/bottommost.dart';
 import 'package:JuAI/entities/content/content.dart';
 import 'package:JuAI/pages/bbs/widgets/card_dongtai_images.dart';
 import 'package:JuAI/pages/bbs/widgets/card_dongtai_video.dart';
 import 'package:JuAI/pages/bbs/widgets/tags.dart';
 import 'package:JuAI/pages/bbs/widgets/tools.dart';
 import 'package:JuAI/pages/settings/mine/controller.dart';
+import 'package:JuAI/pages/widgets/follow_btn.dart';
 import 'package:flutter/material.dart';
 import 'package:JuAI/common/widgets/avatar.dart';
-import 'package:JuAI/common/widgets/image_cache.dart';
 import 'package:JuAI/common/widgets/tag.dart';
 import 'package:JuAI/common/theme.dart';
 import 'package:get/get.dart';
@@ -15,6 +18,7 @@ import 'package:get/get.dart';
 class SettingsMineHomeWidget extends StatelessWidget {
   SettingsMineHomeWidget({super.key});
   final logic = Get.find<SettingsMineHomeController>();
+
   @override
   Widget build(BuildContext context) {
     return NestedScrollView(
@@ -23,7 +27,7 @@ class SettingsMineHomeWidget extends StatelessWidget {
           SliverAppBar(
             automaticallyImplyLeading: false,
             pinned: true,
-            expandedHeight: 320,
+            expandedHeight: 280,
             leading: TextButton.icon(
               onPressed: () => Get.back(),
               icon: const Icon(Icons.arrow_back_sharp, color: Colors.white),
@@ -31,11 +35,17 @@ class SettingsMineHomeWidget extends StatelessWidget {
             ),
             leadingWidth: 100,
             actions: [
-              TextButton.icon(
-                onPressed: () => Get.toNamed('/mine/add-tag'),
-                icon: const Icon(Icons.add_sharp, color: Colors.white),
-                label: const Text("", style: TextStyle(color: Colors.white)),
-              ),
+              if (UserStore.to.userId != logic.userId) FollowFillButtonWidget(logic.userId),
+              if (UserStore.to.userId == logic.userId)
+                TextButton.icon(
+                  style: ButtonStyle(iconColor: MaterialStateProperty.all(Colors.white)),
+                  onPressed: () => Get.toNamed(Routes.bbsPublishDongtai),
+                  icon: const Icon(Icons.send_sharp),
+                  label: const Text(
+                    "发布",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
             ],
             flexibleSpace: LayoutBuilder(
               builder: (context, constraints) {
@@ -47,7 +57,7 @@ class SettingsMineHomeWidget extends StatelessWidget {
                     duration: const Duration(microseconds: 300),
                     opacity: isOpacity ? 1 : 0,
                     child: Text(
-                      "哈哈哈哈",
+                      logic.state.homeInfo.value.nickName,
                       style: TextStyle(
                         color: WcaoTheme.base,
                         fontSize: WcaoTheme.fsXl,
@@ -57,20 +67,25 @@ class SettingsMineHomeWidget extends StatelessWidget {
                   ),
                   background: Stack(
                     children: [
-                      SizedBox(
+                      Container(
                         width: double.infinity,
                         height: top,
-                        child: ImageCacheWidget(""),
+                        color: const Color.fromARGB(255, 36, 36, 36),
                       ),
                       Positioned(
-                        child: Container(
-                          color: Colors.black.withOpacity(.33),
-                        ),
-                      ),
-                      Positioned(
-                        bottom: 56,
+                        bottom: 26,
                         width: MediaQuery.of(context).size.width,
                         child: profile(),
+                      ),
+                      Positioned(
+                        bottom: 12,
+                        right: 8,
+                        child: Obx(
+                          () => Text(
+                            logic.state.homeInfo.value.remark ?? "",
+                            style: TextStyle(color: WcaoTheme.secondary, fontSize: WcaoTheme.fsL),
+                          ),
+                        ),
                       )
                     ],
                   ),
@@ -80,45 +95,56 @@ class SettingsMineHomeWidget extends StatelessWidget {
           ),
 
           /// 数据信息
-          SliverToBoxAdapter(
-            child: Container(
-              padding: const EdgeInsets.all(24),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  InkWell(
-                    child: adapterItem(22, '全部'),
-                    onTap: () => Get.toNamed('/mine/visitors'),
-                  ),
-                  adapterDrive(),
-                  InkWell(
-                    child: adapterItem(32, '动态'),
-                    onTap: () => Get.toNamed('/mine/firends'),
-                  ),
-                  adapterDrive(),
-                  InkWell(
-                    child: adapterItem(41, '视频'),
-                    onTap: () => Get.toNamed('/mine/fans'),
-                  ),
-                  adapterDrive(),
-                  InkWell(
-                    child: adapterItem(41, '文章'),
-                    onTap: () => Get.toNamed('/mine/fans'),
-                  )
-                ],
-              ),
-            ),
-          ),
+          // SliverToBoxAdapter(
+          //   child: Container(
+          //     padding: const EdgeInsets.all(24),
+          //     child: Row(
+          //       mainAxisAlignment: MainAxisAlignment.start,
+          //       children: [
+          //         InkWell(
+          //           child: adapterItem(22, '全部'),
+          //           onTap: () => Get.toNamed('/mine/visitors'),
+          //         ),
+          //         adapterDrive(),
+          //         InkWell(
+          //           child: adapterItem(32, '动态'),
+          //           onTap: () => Get.toNamed('/mine/firends'),
+          //         ),
+          //         adapterDrive(),
+          //         InkWell(
+          //           child: adapterItem(41, '视频'),
+          //           onTap: () => Get.toNamed('/mine/fans'),
+          //         ),
+          //         adapterDrive(),
+          //         InkWell(
+          //           child: adapterItem(41, '文章'),
+          //           onTap: () => Get.toNamed('/mine/fans'),
+          //         )
+          //       ],
+          //     ),
+          //   ),
+          // ),
         ];
       }),
-      body: Obx(
-        () => ListView.builder(
-          physics: const ClampingScrollPhysics(), // 重要
-          padding: const EdgeInsets.all(0),
-          itemCount: logic.state.items.length,
-          itemBuilder: (context, index) {
-            return _contentItem(logic.state.items[index]);
-          },
+      body: NotificationListener(
+        onNotification: logic.handleScrollNotification,
+        child: Obx(
+          () => ListView.builder(
+            physics: const ClampingScrollPhysics(), // 重要
+            padding: const EdgeInsets.all(0),
+            itemCount: logic.state.items.length + 1,
+            itemBuilder: (context, index) {
+              debugPrint("indexindexindexindex$index");
+              if (index == logic.state.items.length) {
+                return BottommostWidget(
+                  logic.isLoading.value,
+                  isNodata: logic.state.items.isEmpty,
+                );
+              } else {
+                return _contentItem(logic.state.items[index]);
+              }
+            },
+          ),
         ),
       ),
     );
@@ -139,6 +165,7 @@ class SettingsMineHomeWidget extends StatelessWidget {
           ),
         ),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -205,7 +232,7 @@ class SettingsMineHomeWidget extends StatelessWidget {
 
   Container adapterDrive() {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 48),
+      margin: const EdgeInsets.symmetric(horizontal: 26),
       height: 12,
       width: .5,
       color: WcaoTheme.placeholder,
@@ -220,7 +247,7 @@ class SettingsMineHomeWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           avatar(
-            avatarUrl: "",
+            avatarUrl: logic.state.homeInfo.value.avatar,
             radius: 28,
           ),
           Container(
@@ -228,71 +255,75 @@ class SettingsMineHomeWidget extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
-                  "mineNickName",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: WcaoTheme.fsXl,
-                    fontWeight: FontWeight.bold,
+                Obx(
+                  () => Text(
+                    logic.state.homeInfo.value.nickName,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: WcaoTheme.fsXl,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
-                Icon(
-                  Icons.edit_note,
-                  color: Colors.white,
-                  size: WcaoTheme.fsBase * 2,
+                IconButton(
+                  onPressed: () => logic.toAddTag(),
+                  icon: const Icon(Icons.tag_sharp, color: Colors.white),
                 ),
               ],
             ),
           ),
-          Container(
-            margin: const EdgeInsets.only(top: 12),
-            child: Wrap(
-              alignment: WrapAlignment.center,
-              spacing: 8.0,
-              children: [
-                Text(
-                  '22天',
-                  style: TextStyle(
-                    color: WcaoTheme.placeholder,
+          Obx(
+            () => Container(
+              margin: const EdgeInsets.only(top: 12),
+              child: Wrap(
+                alignment: WrapAlignment.center,
+                spacing: 8.0,
+                children: [
+                  Text(
+                    DateTime.now().difference(logic.state.homeInfo.value.createTime ?? DateTime.now()).inDays.toString() + '天',
+                    style: TextStyle(
+                      color: WcaoTheme.placeholder,
+                    ),
                   ),
-                ),
-                Text(
-                  '22关注',
-                  style: TextStyle(
-                    color: WcaoTheme.placeholder,
+                  Text(
+                    '${logic.state.homeInfo.value.followedNum}关注',
+                    style: TextStyle(
+                      color: WcaoTheme.placeholder,
+                    ),
                   ),
-                ),
-                Text(
-                  '22粉丝',
-                  style: TextStyle(
-                    color: WcaoTheme.placeholder,
-                  ),
-                )
-              ],
+                  Text(
+                    '${logic.state.homeInfo.value.toBeFollowedNum}粉丝',
+                    style: TextStyle(
+                      color: WcaoTheme.placeholder,
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
           Container(
             margin: const EdgeInsets.only(top: 5),
             height: 100,
             child: SingleChildScrollView(
-              child: Wrap(
-                alignment: WrapAlignment.center,
-                spacing: 12,
-                runSpacing: 6,
-                children: List.generate(
-                  0,
-                  (index) {
-                    return TagWidget(
-                      "hah哈哈12",
-                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-                      backgroundColor: Colors.black.withOpacity(.4),
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(24),
-                      fontSize: WcaoTheme.fsBase,
-                      fontWeight: FontWeight.bold,
-                    );
-                  },
-                ).toList(),
+              child: Obx(
+                () => Wrap(
+                  alignment: WrapAlignment.center,
+                  spacing: 12,
+                  runSpacing: 6,
+                  children: (logic.state.homeInfo.value.tag ?? [])
+                      .map((e) => TagWidget(
+                            e.toString(),
+                            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                            backgroundColor: Colors.black.withOpacity(.4),
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(24),
+                            fontSize: WcaoTheme.fsBase,
+                            fontWeight: FontWeight.bold,
+                            close: logic.state.homeInfo.value.id == UserStore.to.userId,
+                            onClose: () => logic.delTag(e.toString()),
+                          ))
+                      .toList(),
+                ),
               ),
             ),
           ),

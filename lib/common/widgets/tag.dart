@@ -86,7 +86,7 @@ class TagWidget extends StatelessWidget {
                     child: Icon(
                       Icons.close,
                       color: color,
-                      size: WcaoTheme.fsBase,
+                      size: WcaoTheme.fsXl,
                     ),
                   ),
                 )

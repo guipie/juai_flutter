@@ -1,3 +1,4 @@
+import 'package:JuAI/common/store/store.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:JuAI/common/routers/pages.dart';
 import 'package:JuAI/common/theme.dart';
@@ -61,13 +62,16 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     ScreenUtil.init(context);
+    var home = GetPlatform.isMobile ? Routes.home : Routes.homePc;
+    if (!UserStore.to.isLogin) home = Routes.settingsLogin;
+    debugPrint("homehomehomehomehomehome$home");
     return GetMaterialApp(
       title: '故新AI社区',
       theme: WcaoTheme.lightTheme,
       darkTheme: WcaoTheme.darkTheme,
       builder: EasyLoading.init(),
       getPages: AppPages.routes,
-      initialRoute: GetPlatform.isMobile ? Routes.home : Routes.homePc,
+      initialRoute: home,
       navigatorObservers: [RouteObservers()],
       // unknownRoute: AppPages.unknownRoute,
       defaultTransition: Transition.rightToLeftWithFade,

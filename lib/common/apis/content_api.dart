@@ -31,14 +31,47 @@ class ContentAPI {
     return (response.data as Iterable).map((e) => ContentResEntity.fromJson(e)).toList();
   }
 
+  static Future<List<ContentResEntity>> myCommentContentList({
+    int? lastId,
+    bool refresh = false,
+  }) async {
+    var response = await HttpUtil().get(
+      '/content/mine/comment',
+      queryParameters: {"lastId": lastId},
+    );
+    return (response.data as Iterable).map((e) => ContentResEntity.fromJson(e)).toList();
+  }
+
+  static Future<List<ContentResEntity>> myLikeContentList({
+    int? lastId,
+    bool refresh = false,
+  }) async {
+    var response = await HttpUtil().get(
+      '/content/mine/like',
+      queryParameters: {"lastId": lastId},
+    );
+    return (response.data as Iterable).map((e) => ContentResEntity.fromJson(e)).toList();
+  }
+
+  static Future<List<ContentResEntity>> userContentList(
+    int userId, {
+    int? lastId,
+  }) async {
+    var response = await HttpUtil().get(
+      '/content/$userId',
+      queryParameters: {"lastId": lastId},
+    );
+    return (response.data as Iterable).map((e) => ContentResEntity.fromJson(e)).toList();
+  }
+
   static Future<int> contentAdd(ContentAddReqEntity addReqEntity) async {
     var response = await HttpUtil().post('/content', data: addReqEntity.toJson());
     return response.data ?? 0;
   }
 
   static Future<ContentResEntity> contentDetail(int id) async {
-    var response = await HttpUtil().get('/content/' + id.toString());
-    return response.data;
+    var response = await HttpUtil().get('/content/detail/$id');
+    return ContentResEntity.fromJson(response.data);
   }
 
   static Future<bool> contentLike(int id) async {

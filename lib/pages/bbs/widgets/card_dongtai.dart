@@ -16,7 +16,7 @@ class CardDongtaiWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 10),
+      padding: const EdgeInsets.only(left: 8),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -28,7 +28,6 @@ class CardDongtaiWidget extends StatelessWidget {
               child: Text(
                 content.summary,
                 style: TextStyle(
-                  color: WcaoTheme.base,
                   fontSize: WcaoTheme.fsL,
                 ),
               ),

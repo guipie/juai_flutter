@@ -27,7 +27,9 @@ import 'package:JuAI/pages/settings/account/phone_update.dart';
 import 'package:JuAI/pages/settings/backlist/index.dart';
 import 'package:JuAI/pages/settings/controler.dart';
 import 'package:JuAI/pages/settings/mine/controller.dart';
-import 'package:JuAI/pages/settings/mine/index.dart';
+import 'package:JuAI/pages/settings/mine/hudong/controller.dart';
+import 'package:JuAI/pages/settings/mine/hudong/view.dart';
+import 'package:JuAI/pages/settings/mine/view.dart';
 import 'package:JuAI/pages/settings/notification/notice.dart';
 import 'package:JuAI/pages/settings/notification/notice_setting.dart';
 import 'package:JuAI/pages/settings/privacy/index.dart';
@@ -167,6 +169,11 @@ class AppPages {
       name: Routes.settingsMineHome,
       page: () => SettingsMineHomeWidget(),
       binding: BindingsBuilder(() => Get.lazyPut(() => SettingsMineHomeController())),
+    ),
+    GetPage(
+      name: Routes.settingsMineHudong,
+      page: () => SettingMyHudongPage(),
+      binding: BindingsBuilder(() => Get.lazyPut(() => SettingMyHudongController())),
     ),
 
     GetPage(

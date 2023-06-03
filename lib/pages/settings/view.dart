@@ -52,16 +52,18 @@ class SettingsPage extends GetView<SettingsController> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          avatar(avatarUrl: UserStore.to.userInfo.value!.avatar, radius: 30),
+                          Obx(() => avatar(avatarUrl: logic.state.avatar.value, radius: 30)),
                           const SizedBox(width: 12),
                           Wrap(
                             direction: Axis.vertical,
                             children: [
-                              Text(
-                                UserStore.to.userInfo.value!.nickName,
-                                style: TextStyle(fontSize: WcaoTheme.fsXl, fontWeight: FontWeight.bold),
+                              Obx(
+                                () => Text(
+                                  logic.state.nickName.value,
+                                  style: TextStyle(fontSize: WcaoTheme.fsXl, fontWeight: FontWeight.bold),
+                                ),
                               ),
-                              Text(UserStore.to.userInfo.value!.userName),
+                              Text("AI号:" + UserStore.to.userInfo.value!.userName),
                             ],
                           ),
                           const Spacer(),
@@ -99,7 +101,7 @@ class SettingsPage extends GetView<SettingsController> {
                       Obx(
                         () => InkWell(
                           child: _homeItem(Assets.iconHudong, logic.state.hudongNum.value, "互动", context),
-                          onTap: () => Get.toNamed(Routes.settingsMineHome),
+                          onTap: () => Get.toNamed(Routes.settingsMineHudong),
                         ),
                       ),
                     ],
@@ -110,17 +112,25 @@ class SettingsPage extends GetView<SettingsController> {
                   '消息通知',
                   onTap: () => Get.toNamed(Routes.settingsNotice),
                 ),
-                Cell(
-                  '隐私设置',
-                  onTap: () => Get.toNamed(Routes.settingsPrivacy),
+                Obx(
+                  () => Cell(
+                    ConfigStore.to.isDarkMode.value ? "暗黑模式" : "明亮模式",
+                    onTap: () => ConfigStore.to.onDarkModeChage(),
+                  ),
                 ),
+                // Cell(
+                //   '隐私设置',
+                //   onTap: () => Get.toNamed(Routes.settingsPrivacy),
+                // ),
                 Cell(
                   '清除缓存',
-                  right: Text(
-                    '190M',
-                    style: TextStyle(fontSize: WcaoTheme.fsL),
+                  right: Obx(
+                    () => Text(
+                      logic.state.totalCache.value,
+                      style: TextStyle(fontSize: WcaoTheme.fsL),
+                    ),
                   ),
-                  onTap: () => bottomConfirm(context),
+                  onTap: () => logic.clearCache(context),
                 ),
                 Cell('关于我们', onTap: () => Get.toNamed(Routes.settingsAbout)),
                 Cell(
@@ -151,86 +161,6 @@ class SettingsPage extends GetView<SettingsController> {
           ),
         ),
       ],
-    );
-  }
-
-  Future<dynamic> bottomConfirm(BuildContext context) {
-    return showModalBottomSheet(
-      backgroundColor: Colors.transparent,
-      context: context,
-      builder: (ctx) {
-        return Container(
-          height: 200,
-          padding: const EdgeInsets.all(12),
-          child: Column(
-            children: [
-              Container(
-                padding: const EdgeInsets.only(top: 12),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: Column(
-                  children: [
-                    Text(
-                      '清除所有缓存记录',
-                      style: TextStyle(
-                        color: WcaoTheme.secondary,
-                      ),
-                    ),
-                    InkWell(
-                      onTap: () => Get.back(),
-                      child: Container(
-                        alignment: Alignment.center,
-                        margin: const EdgeInsets.only(top: 12),
-                        width: double.maxFinite,
-                        padding: const EdgeInsets.symmetric(vertical: 12),
-                        decoration: BoxDecoration(
-                          border: Border(
-                            top: BorderSide(
-                              width: 1,
-                              color: WcaoTheme.outline,
-                            ),
-                          ),
-                        ),
-                        child: Text(
-                          '清除缓存',
-                          style: TextStyle(
-                            color: Colors.red,
-                            fontWeight: FontWeight.bold,
-                            fontSize: WcaoTheme.fsXl,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              InkWell(
-                onTap: () => Get.back(),
-                child: Container(
-                  margin: const EdgeInsets.only(top: 12),
-                  alignment: Alignment.center,
-                  width: double.maxFinite,
-                  padding: const EdgeInsets.symmetric(vertical: 12),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: Text(
-                    '取消',
-                    style: TextStyle(
-                      color: Colors.blue,
-                      fontWeight: FontWeight.bold,
-                      fontSize: WcaoTheme.fsXl,
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        );
-      },
     );
   }
 }

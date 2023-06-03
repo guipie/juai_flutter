@@ -18,6 +18,7 @@ class BbsIndexPage extends StatelessWidget {
       onRefresh: () => Future(() => ContentStore.to.getContents()),
       child: Obx(
         () => ListView(
+          physics: const AlwaysScrollableScrollPhysics(),
           controller: logic.state.indexScrollController,
           children: [
             Container(

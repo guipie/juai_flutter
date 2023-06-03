@@ -1,3 +1,4 @@
+import 'package:JuAI/common/utils/date.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:JuAI/common/server.dart';
@@ -19,46 +20,57 @@ class CardAriticleWidget extends StatelessWidget {
     }
     return Padding(
       padding: const EdgeInsets.all(2),
-      child: Row(
-        children: [
-          if (imageUrls.isNotEmpty)
-            Container(
-              margin: const EdgeInsets.only(right: 15),
-              width: 60,
-              height: 60,
-              child: ImageCacheWidget(imageUrls.first),
-            ),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                InkWell(
-                  onTap: () {
-                    Get.toNamed(Routes.bbsDetail, arguments: content.id);
-                  },
-                  child: Text(
-                    content.title,
-                    style: const TextStyle(fontWeight: FontWeight.bold),
+      child: InkWell(
+        onTap: () => Get.toNamed(Routes.bbsDetail, arguments: content.id),
+        child: Row(
+          children: [
+            if (imageUrls.isNotEmpty)
+              Container(
+                margin: const EdgeInsets.only(right: 15),
+                width: 60,
+                height: 60,
+                child: ImageCacheWidget(imageUrls.first),
+              ),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  InkWell(
+                    onTap: () {
+                      Get.toNamed(Routes.bbsDetail, arguments: content.id);
+                    },
+                    child: Text(
+                      content.title,
+                      style: const TextStyle(fontWeight: FontWeight.bold),
+                    ),
                   ),
-                ),
-                const SizedBox(height: 5),
-                Wrap(
-                  spacing: 10,
-                  children: [
-                    Text(
-                      "张飞",
-                      style: TextStyle(fontWeight: FontWeight.w400, color: WcaoTheme.secondary),
-                    ),
-                    Text(
-                      "${content.commentNum}评论",
-                      style: TextStyle(fontWeight: FontWeight.w400, color: WcaoTheme.secondary),
-                    ),
-                  ],
-                )
-              ],
-            ),
-          )
-        ],
+                  const SizedBox(height: 5),
+                  Wrap(
+                    spacing: 10,
+                    children: [
+                      GestureDetector(
+                        behavior: HitTestBehavior.deferToChild,
+                        onTap: () => Get.toNamed(Routes.settingsMineHome, arguments: content.createId),
+                        child: Text(
+                          content.createNick!,
+                          style: TextStyle(fontWeight: FontWeight.w400, color: WcaoTheme.secondary),
+                        ),
+                      ),
+                      Text(
+                        "${content.commentNum}评论",
+                        style: TextStyle(fontWeight: FontWeight.w400, color: WcaoTheme.secondary),
+                      ),
+                      Text(
+                        dateFormatYMD(content.createTime),
+                        style: TextStyle(fontWeight: FontWeight.w200, color: WcaoTheme.secondary),
+                      ),
+                    ],
+                  )
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

@@ -30,7 +30,7 @@ class UserLoginResponseEntity {
   String userName;
   String nickName;
   String status;
-  String sex;
+  String? sex;
   String? birthday;
   String? email;
   String phone;
@@ -45,7 +45,7 @@ class UserLoginResponseEntity {
     required this.userName,
     required this.nickName,
     required this.status,
-    required this.sex,
+    this.sex,
     required this.tokenNum,
     this.birthday,
     this.email,

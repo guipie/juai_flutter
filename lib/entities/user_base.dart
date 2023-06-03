@@ -38,3 +38,36 @@ class UserInfo {
         "UserName": userName,
       };
 }
+
+class UserFollowHome {
+  String? avatar;
+  String nickName;
+  DateTime? createTime;
+  int id;
+  int followedNum;
+  int toBeFollowedNum;
+  List<dynamic>? tag;
+  String? remark;
+
+  UserFollowHome({
+    this.avatar,
+    required this.nickName,
+    required this.id,
+    required this.followedNum,
+    required this.toBeFollowedNum,
+    this.createTime,
+    this.tag,
+    this.remark,
+  });
+
+  factory UserFollowHome.fromJson(Map<String, dynamic> json) => UserFollowHome(
+        avatar: json["Avatar"],
+        nickName: json["NickName"] ?? "匿名用户",
+        id: json["Id"],
+        followedNum: json["FollowedNum"],
+        toBeFollowedNum: json["ToBeFollowedNum"],
+        tag: json["Tag"],
+        remark: json["Remark"],
+        createTime: DateTime.tryParse(json["CreateTime"]),
+      );
+}

@@ -37,13 +37,17 @@ class _SettingsAccountPageState extends State<SettingsAccountPage> {
               Cell(
                 '头像',
                 onTap: () {
-                  FileUtils.openFile(context, (selectedFiles) {
-                    var file = selectedFiles.first.file;
-                    var key = UserStore.to.userInfo.value!.phone + DateTime.now().millisecond.toString() + path.extension(file.path);
-                    QiniuUtil.saveFile(file, FileType.image, key: key, isLoading: true, folder: "avatar", completeListener: (fileUrl, i) {
-                      _toSet("Avatar", fileUrl, isBack: false);
-                    });
-                  });
+                  FileUtils.openFile(
+                    context,
+                    (selectedFiles) {
+                      var file = selectedFiles.first.file;
+                      var key = UserStore.to.userInfo.value!.phone + "/" + DateTime.now().second.toString() + path.extension(file.path);
+                      QiniuUtil.saveFile(file, FileType.image, key: key, isLoading: true, folder: "avatar", completeListener: (fileUrl, i) {
+                        _toSet("Avatar", fileUrl, isBack: false);
+                      });
+                    },
+                    maxAssets: 1,
+                  );
                 },
                 right: avatar(avatarUrl: UserStore.to.userInfo.value!.avatar),
               ),
@@ -53,9 +57,14 @@ class _SettingsAccountPageState extends State<SettingsAccountPage> {
                 right: Text(UserStore.to.userInfo.value!.nickName),
               ),
               Cell(
+                'JuAI号',
+                right: Text(UserStore.to.userInfo.value!.userName),
+                isMustRight: false,
+              ),
+              Cell(
                 '性别',
                 onTap: () => _confirmSexDiolog("性别", "Sex", UserStore.to.userInfo.value!.sex),
-                right: Text(UserStore.to.userInfo.value!.sex),
+                right: Text(UserStore.to.userInfo.value!.sex ?? "男"),
               ),
               // Cell(
               //   '聚AI号',
@@ -93,7 +102,7 @@ class _SettingsAccountPageState extends State<SettingsAccountPage> {
   _confirmDiolog(titile, name) {
     Get.bottomSheet(
       Container(
-        margin: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+        margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
         child: Wrap(
           alignment: WrapAlignment.end,
           children: <Widget>[
@@ -102,7 +111,7 @@ class _SettingsAccountPageState extends State<SettingsAccountPage> {
               decoration: InputDecoration(hintText: titile),
             ),
             TextButton(
-              child: Text("确定"),
+              child: const Text("确定"),
               onPressed: () {
                 var text = editController.text.trim();
                 if (text.isNotEmpty) {
@@ -122,8 +131,8 @@ class _SettingsAccountPageState extends State<SettingsAccountPage> {
       Wrap(
         children: <Widget>[
           ListTile(
-            leading: Icon(Icons.boy_sharp),
-            title: Text('男'),
+            leading: const Icon(Icons.boy_sharp),
+            title: const Text('男'),
             trailing: Checkbox(
                 value: value == "男",
                 onChanged: (val) {
@@ -132,8 +141,8 @@ class _SettingsAccountPageState extends State<SettingsAccountPage> {
             onTap: () => _toSet(name, "男"),
           ),
           ListTile(
-            leading: Icon(Icons.girl_sharp),
-            title: Text('女'),
+            leading: const Icon(Icons.girl_sharp),
+            title: const Text('女'),
             trailing: Checkbox(
                 value: value == "女",
                 onChanged: (val) {
@@ -154,6 +163,9 @@ class _SettingsAccountPageState extends State<SettingsAccountPage> {
       await UserStore.to.resetUserInfo(logic.state.editUser);
       setState(() {
         if (value.isOk && isBack) Get.back();
+        UserStore.to.userInfo.refresh();
+        logic.state.nickName.value = UserStore.to.userInfo.value!.nickName;
+        logic.state.avatar.value = UserStore.to.userInfo.value!.avatar;
       });
     });
   }

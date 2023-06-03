@@ -1,4 +1,7 @@
+import 'package:JuAI/common/assets.dart';
 import 'package:JuAI/common/routers/routes.dart';
+import 'package:JuAI/common/store/config.dart';
+import 'package:JuAI/common/widgets/image_cache.dart';
 import 'package:flutter/material.dart';
 import 'package:JuAI/common/theme.dart';
 import 'package:get/get.dart';
@@ -32,16 +35,15 @@ class _SettingsAboutPageState extends State<SettingsAboutPage> {
                       color: WcaoTheme.primary,
                       borderRadius: BorderRadius.circular(8),
                     ),
-                    child: Icon(
-                      Icons.baby_changing_station,
-                      color: Colors.white,
-                      size: WcaoTheme.fsBase * 3,
+                    child: const ImageCacheWidget(
+                      Assets.logo,
+                      cacheImageType: CacheImageType.asserts,
                     ),
                   ),
                   Container(
                     margin: const EdgeInsets.only(top: 12),
                     child: Text(
-                      '爱交友',
+                      '聚AI ~😊',
                       style: TextStyle(
                         fontSize: WcaoTheme.fsBase * 1.75,
                         fontWeight: FontWeight.bold,
@@ -51,11 +53,29 @@ class _SettingsAboutPageState extends State<SettingsAboutPage> {
                   Container(
                     margin: const EdgeInsets.only(top: 12),
                     child: Text(
-                      'V1.0.0',
+                      ConfigStore.to.version + (ConfigStore.to.isRelease ? "-Release" : "-Debug"),
                       style: TextStyle(
                         color: WcaoTheme.secondary,
                       ),
                     ),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 10),
+                    child: const Text("聚AI(juai.link)，是一款所有ai爱好者的APP;"),
+                  ),
+                  Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 10),
+                    child: const Text("在这里有最新的AI咨询，知识，和产品；"),
+                  ),
+                  Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 10),
+                    child: const Text("让它链接你我和AI；"),
                   ),
                 ],
               ),

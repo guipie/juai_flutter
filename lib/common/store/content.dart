@@ -10,8 +10,8 @@ import 'package:JuAI/common/store/store.dart';
 
 class ContentStore extends GetxController {
   static ContentStore get to => Get.find();
-  late List<Map<dynamic, dynamic>> topTags;
-  late List<SpecialResEntity> specials;
+  List<Map<dynamic, dynamic>> topTags = <Map<dynamic, dynamic>>[];
+  List<SpecialResEntity> specials = <SpecialResEntity>[];
   var contents = <ContentResEntity>[].obs;
   @override
   void onInit() {

@@ -1,14 +1,15 @@
 import 'package:JuAI/common/apis/user_follow_api.dart';
+import 'package:JuAI/common/theme.dart';
 import 'package:flutter/material.dart';
 
-class FollowButtonWidget extends StatefulWidget {
-  const FollowButtonWidget(this.userId, {super.key});
+class FollowFillButtonWidget extends StatefulWidget {
+  const FollowFillButtonWidget(this.userId, {super.key});
   final int userId;
   @override
-  State<FollowButtonWidget> createState() => _FollowButtonWidgetState();
+  State<FollowFillButtonWidget> createState() => _FollowFillButtonWidgetState();
 }
 
-class _FollowButtonWidgetState extends State<FollowButtonWidget> {
+class _FollowFillButtonWidgetState extends State<FollowFillButtonWidget> {
   bool isFollowed = false;
   @override
   void initState() {
@@ -26,11 +27,23 @@ class _FollowButtonWidgetState extends State<FollowButtonWidget> {
         ? FilledButton(
             onPressed: () => _setFollowed(),
             child: const Text("已关注"),
+            style: ButtonStyle(
+              padding: MaterialStateProperty.all(const EdgeInsets.symmetric(horizontal: 12)),
+            ),
           )
-        : OutlinedButton(onPressed: () => _setFollowed(), child: const Text("关注"));
+        : OutlinedButton(
+            onPressed: () => _setFollowed(),
+            child: const Text("关注"),
+            style: ButtonStyle(
+              padding: MaterialStateProperty.all(const EdgeInsets.symmetric(horizontal: 12)),
+            ),
+          );
   }
 
   _setFollowed() {
+    setState(() {
+      isFollowed = !isFollowed;
+    });
     UserFollowApi.followed(widget.userId).then(
       (value) => setState(() {
         isFollowed = value;

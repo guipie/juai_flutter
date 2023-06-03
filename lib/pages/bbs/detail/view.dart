@@ -1,3 +1,5 @@
+import 'package:JuAI/common/routers/routes.dart';
+import 'package:JuAI/common/widgets/load_data.dart';
 import 'package:JuAI/pages/widgets/follow_btn.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -15,40 +17,47 @@ class BbsDetailPage extends StatelessWidget {
   final logic = Get.find<ContentDetailController>();
   @override
   Widget build(BuildContext context) {
-    final detail = logic.state.currentContent;
     return Scaffold(
       appBar: AppBar(
-        title: Text(detail.title),
+        title: const Text("详情"),
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(15),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              ListTile(
-                selected: true,
-                leading: avatar(avatarUrl: detail.avatar),
-                title: Text(
-                  detail.createNick ?? "匿名作者",
-                  style: TextStyle(fontSize: 16.0, color: Theme.of(context).colorScheme.onSurface),
-                ),
-                subtitle: Text(
-                  "发布于" + DateTimeLine(detail.createTime),
-                  style: TextStyle(fontSize: 12.0, color: Theme.of(context).colorScheme.onSurfaceVariant),
-                ),
-                trailing: FollowButtonWidget(detail.createId),
+      body: LoadDataWidget(
+        logic.toDetail(),
+        chindFunc: (detail) {
+          return SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(15),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  ListTile(
+                    selected: true,
+                    leading: InkWell(
+                      onTap: () => Get.toNamed(Routes.settingsMineHome, arguments: detail.createId),
+                      child: avatar(avatarUrl: detail.avatar),
+                    ),
+                    title: Text(
+                      detail.createNick!,
+                      style: TextStyle(fontSize: 16.0, color: Theme.of(context).colorScheme.onSurface),
+                    ),
+                    subtitle: Text(
+                      "发布于" + DateTimeLine(detail.createTime),
+                      style: TextStyle(fontSize: 12.0, color: Theme.of(context).colorScheme.onSurfaceVariant),
+                    ),
+                    trailing: FollowFillButtonWidget(detail.createId),
+                  ),
+                  if (detail.category != BaCategory.Article) Text(detail.content),
+                  if (detail.category == BaCategory.Image && detail.files.isNotEmpty) CardDongtaiImagesWidget(detail),
+                  if (detail.category == BaCategory.Video && detail.files.isNotEmpty) CardDongtaiVideoWidget(detail.files.first),
+                  if (detail.category == BaCategory.Article) ReadOnlyPage(source: detail.content),
+                  const Divider(),
+                  const SizedBox(height: 8.0),
+                  CommentWidget(detail.id),
+                ],
               ),
-              if (detail.category == BaCategory.Image && detail.files.isNotEmpty) CardDongtaiImagesWidget(detail),
-              if (detail.category == BaCategory.Video && detail.files.isNotEmpty) CardDongtaiVideoWidget(detail.files.first),
-              if (detail.category == BaCategory.Text) Text(detail.content),
-              if (detail.category == BaCategory.Article) ReadOnlyPage(source: detail.content),
-              const Divider(),
-              const SizedBox(height: 8.0),
-              CommentWidget(detail.id),
-            ],
-          ),
-        ),
+            ),
+          );
+        },
       ),
     );
   }

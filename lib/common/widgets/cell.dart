@@ -34,7 +34,7 @@ class Cell extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 16),
           decoration: BoxDecoration(
               border: Border(
-            bottom: BorderSide(width: .5, color: border ? WcaoTheme.outline : Colors.transparent),
+            bottom: BorderSide(width: .5, color: border ? Theme.of(context).cardColor : Colors.transparent),
           )),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

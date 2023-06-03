@@ -7,13 +7,18 @@ import 'routes.dart';
 
 class RouteObservers extends NavigatorObserver {
   var whitelistPages = [Routes.settingsLogin, Routes.settingsLoginByVocde, Routes.settingsAgreementPrivacy, Routes.settingsAgreementUser];
+
   @override
   void didPush(Route<dynamic> route, Route<dynamic>? previousRoute) {
     super.didPush(route, previousRoute);
     var currentRoute = route.settings.name ?? '';
     debugPrint("当前路由：$currentRoute");
     if (!whitelistPages.contains(currentRoute) && !UserStore.to.isLogin) {
-      if (!UserStore.to.isLogin) Future.delayed(const Duration(milliseconds: 500), () => Get.offAllNamed(Routes.settingsLogin));
+      debugPrint("未登录未登录未登录未登录未登录");
+      if (!UserStore.to.isLogin) {
+        Get.offAllNamed(Routes.settingsLogin);
+        return;
+      }
     }
     if (currentRoute.isNotEmpty) AppPages.history.add(currentRoute);
     print('didPush');
