@@ -1,7 +1,5 @@
-import 'package:JuAI/common/utils/loading.dart';
 import 'package:JuAI/pages/conversation/widgets/markdow_body.dart';
 import 'package:JuAI/common/theme.dart';
-import 'package:dart_mock/dart_mock.dart';
 import 'package:flutter/material.dart';
 import 'package:JuAI/entities/conversation.dart';
 import 'package:JuAI/common/widgets/avatar.dart';
@@ -93,19 +91,9 @@ class _ChatViewGetX extends GetView<ChatController> {
           ),
           body: SafeArea(
             child: CustomScrollView(
+              reverse: true,
               controller: _.state.scrollContrller,
               slivers: [
-                Obx(
-                  () => SliverList(
-                    // Use a delegate to build items as they're scrolled on screen.
-                    delegate: SliverChildBuilderDelegate(
-                      // The builder function returns a ListTile with a title that
-                      // displays the index of the current item.
-                      (context, index) => msgItem(_.state.chats[index], context),
-                      childCount: _.state.chats.length,
-                    ),
-                  ),
-                ),
                 ValueListenableBuilder(
                   valueListenable: _.state.currentChat,
                   builder: (context, value, child) {
@@ -116,7 +104,7 @@ class _ChatViewGetX extends GetView<ChatController> {
                         // displays the index of the current item.
                         (context, index) {
                           if (_.state.currentChat.value.isNotEmpty) {
-                            return msgItem(Conversation.fromJsonFromChatGPT("", "", _.state.currentChat.value), context);
+                            return msgItem(Conversation.fromJsonFromChatGPT(_.state.currentConversationId, _.state.chatId, _.state.currentChat.value), context);
                           }
                           return const SizedBox.shrink();
                         },
@@ -125,6 +113,17 @@ class _ChatViewGetX extends GetView<ChatController> {
                       ),
                     );
                   },
+                ),
+                Obx(
+                  () => SliverList(
+                    // Use a delegate to build items as they're scrolled on screen.
+                    delegate: SliverChildBuilderDelegate(
+                      // The builder function returns a ListTile with a title that
+                      // displays the index of the current item.
+                      (context, index) => msgItem(_.state.chats.reversed.toList()[index], context),
+                      childCount: _.state.chats.length,
+                    ),
+                  ),
                 ),
               ],
             ),

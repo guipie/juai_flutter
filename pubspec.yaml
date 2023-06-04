@@ -49,13 +49,13 @@ dependencies:
   flutter_screenutil:
   dio: ^5.0.1
   dio_cookie_manager:
-  package_info:
+  package_info_plus:
   shared_preferences:
   getwidget:
   markdown_widget:
   flutter_highlight:
   window_manager: ^0.3.0
-  dart_openai: ^1.9.1
+  dart_openai:
   photo_view:
   sqflite:
   sqflite_common_ffi:
@@ -182,6 +182,7 @@ flutter:
     - assets/
     - assets/avatar/
     - assets/data/
+    - assets/data/avatar/
     - assets/images/
     - assets/icons/
 

@@ -100,7 +100,7 @@ class _VerifyCodePageState extends State<VerifyCodePage> {
               ),
               InkWell(
                 onTap: () async {
-                  if (vcodeController.text.trim().length > 4) {
+                  if (vcodeController.text.trim().length >= 4) {
                     if (type == VerifyCodeType.resetPwd) {
                       UserAPI.resetPwd(UserLoginRequestEntity(
                         userName: UserStore.to.userInfo.value!.userName,

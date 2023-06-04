@@ -1,6 +1,4 @@
 import 'dart:async';
-import 'dart:convert';
-import 'dart:developer';
 
 import 'package:JuAI/common/apis/apis.dart';
 import 'package:cookie_jar/cookie_jar.dart';
@@ -11,7 +9,7 @@ import 'package:JuAI/common/store/user.dart';
 import 'package:JuAI/common/utils/loading.dart';
 import 'package:JuAI/common/utils/utils.dart';
 import 'package:JuAI/common/values/cache.dart';
-import 'package:JuAI/common/server.dart';
+import 'package:JuAI/common/config.dart';
 import 'package:get/get.dart' hide FormData;
 
 /*

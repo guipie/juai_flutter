@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:JuAI/common/server.dart';
+import 'package:JuAI/common/config.dart';
 import 'package:JuAI/common/theme.dart';
 import 'package:JuAI/common/utils/utils.dart';
 import 'package:JuAI/common/widgets/image_cache.dart';

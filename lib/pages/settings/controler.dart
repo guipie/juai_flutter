@@ -45,7 +45,7 @@ class SettingsController extends GetxController {
     try {
       Directory tempDir = await getTemporaryDirectory();
       double value = await _getTotalSizeOfFilesInDir(tempDir);
-      debugPrint('临时目录大小: ' + value.toString());
+      debugPrint('临时目录大小${tempDir.path}: ' + value.toString());
       state.totalCache.value = _renderSize(value);
     } catch (err) {
       debugPrint("获取缓存出错了$err");
@@ -115,16 +115,17 @@ class SettingsController extends GetxController {
                     InkWell(
                       onTap: () async {
                         try {
+                          Loading.loading("清理中...");
+                          Get.back();
                           Directory tempDir = await getTemporaryDirectory();
                           //删除缓存目录
                           await delDir(tempDir);
                           await loadCache();
+                          Loading.dismiss();
                           Loading.success('清除缓存成功');
                         } catch (e) {
                           Loading.error('清除缓存失败');
-                        } finally {
-                          Get.back();
-                        }
+                        } finally {}
                       },
                       child: Container(
                         alignment: Alignment.center,

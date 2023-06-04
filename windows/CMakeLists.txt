@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.14)
-project(flutter_dating_template LANGUAGES CXX)
+project(ju_ai LANGUAGES CXX)
 
-set(BINARY_NAME "flutter_dating_template")
+set(BINARY_NAME "ju_ai")
 
 cmake_policy(SET CMP0063 NEW)
 

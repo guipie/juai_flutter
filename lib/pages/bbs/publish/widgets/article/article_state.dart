@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:JuAI/common/apis/common_api.dart';
-import 'package:JuAI/common/server.dart';
+import 'package:JuAI/common/config.dart';
 import 'package:JuAI/common/services/storage.dart';
 import 'package:JuAI/common/values/storage.dart';
 

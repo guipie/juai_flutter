@@ -23,13 +23,12 @@ class ChatController extends GetxController {
       state.currentConversationId = Get.arguments;
       state.chats.value = await DbSqlite.instance.queryAll("chat").then((value) => value.map((e) => Conversation.fromJson(e)).toList());
     }
-    Future.delayed(const Duration(milliseconds: 500), () => _toBottom());
     super.onInit();
   }
 
   @override
   void onReady() {
-    _toBottom();
+    Future.delayed(const Duration(milliseconds: 200), () => _toBottom());
     super.onReady();
   }
 
@@ -45,18 +44,19 @@ class ChatController extends GetxController {
       var sendMsg = state.messageController.text;
       state.chatId = state.chats.isNotEmpty ? state.chats[state.chats.length - 1].chatId + "mine" : "1";
       _toAddChatStore(Conversation.fromJsonFromMine(state.currentConversationId, state.chatId, sendMsg));
-      _toBottom();
+      Future.delayed(const Duration(milliseconds: 200), () => _toBottom());
       state.openAiStreamChat = HttpChat().chatStreamProxy(sendMsg);
       state.sendType.value = SendType.sending;
       state.messageController.text = "";
       state.openAiStreamChat.listen(
         (event) {
-          state.currentChat.value += event.choices[0].delta.content ?? '';
+          debugPrint("聊天中$event");
           state.chatId = event.id;
+          state.currentChat.value = state.currentChat.value + (event.choices.first.delta.content ?? '');
           _toBottom();
         },
       ).onDone(() {
-        debugPrint("数据接收完毕");
+        debugPrint("数据接收完毕[${state.currentChat.value}]");
         var answerChat = Conversation.fromJsonFromChatGPT(state.currentConversationId, state.chatId, state.currentChat.value);
         _toAddChatStore(answerChat);
         _toAddChatLastStore(answerChat);
@@ -70,7 +70,7 @@ class ChatController extends GetxController {
   void _toBottom() {
     // 滚动到最底部
     state.scrollContrller.animateTo(
-      state.scrollContrller.position.maxScrollExtent,
+      0,
       duration: const Duration(milliseconds: 100),
       curve: Curves.easeIn,
     );

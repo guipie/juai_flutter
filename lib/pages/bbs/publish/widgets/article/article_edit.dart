@@ -13,7 +13,7 @@ import 'package:flutter_quill/flutter_quill.dart' hide Text;
 import 'package:flutter_quill/translations.dart';
 import 'package:flutter_quill_extensions/flutter_quill_extensions.dart';
 import 'package:getwidget/getwidget.dart';
-import 'package:JuAI/common/server.dart';
+import 'package:JuAI/common/config.dart';
 import 'package:JuAI/common/services/storage.dart';
 import 'package:JuAI/common/utils/qiniu_sdk.dart';
 import 'package:path/path.dart';
