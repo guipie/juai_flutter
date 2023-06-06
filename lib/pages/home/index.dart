@@ -1,5 +1,6 @@
 import 'package:JuAI/pages/bbs/view.dart';
 import 'package:JuAI/pages/bbs_chat/view.dart';
+import 'package:JuAI/pages/conversation/role/view.dart';
 import 'package:JuAI/pages/home/controler.dart';
 import 'package:JuAI/pages/settings/view.dart';
 import 'package:flutter/material.dart';
@@ -20,8 +21,9 @@ class HomePage extends GetView<HomeController> {
         physics: const NeverScrollableScrollPhysics(),
         children: [
           const ConversationPage(),
+          // BbsChatPage(),
+          const RolePage(),
           const BbsPage(),
-          BbsChatPage(),
           SettingsPage(),
         ],
       ),
@@ -53,15 +55,21 @@ class HomePage extends GetView<HomeController> {
               label: "消息",
             ),
             BottomNavigationBarItem(
+              icon: Icon(Icons.six_ft_apart_outlined),
+              activeIcon: Icon(Icons.six_ft_apart),
+              label: "角色",
+            ),
+            //  BottomNavigationBarItem(
+            //   icon: Icon(Icons.live_help_outlined),
+            //   activeIcon: Icon(Icons.live_help_sharp),
+            //   label: "广场",
+            // ),
+            BottomNavigationBarItem(
               icon: Icon(Icons.home_work_outlined),
               activeIcon: Icon(Icons.home_work),
               label: "社区",
             ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.live_help_outlined),
-              activeIcon: Icon(Icons.live_help_sharp),
-              label: "广场",
-            ),
+
             BottomNavigationBarItem(
               icon: Icon(Icons.person_outline_outlined),
               activeIcon: Icon(Icons.person_outline),

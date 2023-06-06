@@ -8,6 +8,7 @@ import 'package:JuAI/common/widgets/appbar.dart';
 import 'package:JuAI/common/widgets/avatar.dart';
 import 'package:JuAI/common/theme.dart';
 import 'package:get/get.dart';
+import 'package:getwidget/getwidget.dart';
 import 'controller.dart';
 
 class ConversationPage extends GetView<ConversationController> {
@@ -27,7 +28,7 @@ class ConversationPage extends GetView<ConversationController> {
               children: [
                 TextButton.icon(
                   onPressed: () {
-                    Get.toNamed(Routes.currentChat);
+                    Get.toNamed(Routes.currentChat, arguments: DateTime.now().second);
                   },
                   style: ButtonStyle(
                     textStyle: MaterialStateProperty.resolveWith(
@@ -37,63 +38,23 @@ class ConversationPage extends GetView<ConversationController> {
                   icon: const Icon(Icons.add_outlined),
                   label: const Text("新建对话"),
                 ),
-                TextButton.icon(
-                  onPressed: () {
-                    controller.state.roleVisible.value = !controller.state.roleVisible.value;
-                  },
-                  style: ButtonStyle(
-                    textStyle: MaterialStateProperty.resolveWith(
-                      (states) => TextStyle(fontSize: WcaoTheme.fsXl),
-                    ),
-                  ),
-                  icon: const Icon(Icons.settings_sharp),
-                  label: Obx(() => controller.state.roleVisible.value ? const Text("会话") : const Text("角色")),
-                ),
               ],
             ),
           ),
           // search(),
-          const SizedBox(
-            height: 10,
-          ),
           Expanded(
             child: SingleChildScrollView(
               child: Obx(
-                () => controller.state.roleVisible.value
-                    ? AnimatedOpacity(
-                        // If the widget is visible, animate to 0.0 (invisible).
-                        // If the widget is hidden, animate to 1.0 (fully visible).
-                        opacity: 1,
-                        duration: const Duration(milliseconds: 800),
-                        // The green box must be a child of the AnimatedOpacity widget.
-                        child: Wrap(
-                          runSpacing: 10,
-                          runAlignment: WrapAlignment.center,
-                          children: controller.state.chatRoles
-                              .map(
-                                (e) => TextButton.icon(
-                                  onPressed: () {},
-                                  icon: ImageCacheWidget(
-                                    Assets.dataAvatarPrefix + e.avatar + ".png",
-                                    cacheImageType: CacheImageType.asserts,
-                                    width: 30,
-                                  ),
-                                  label: Text(e.name),
-                                ),
-                              )
-                              .toList(),
+                () => Column(
+                  children: controller.state.conversations
+                      .map(
+                        (e) => InkWell(
+                          child: listCard(e, context),
+                          onTap: () => Get.toNamed(Routes.currentChat, arguments: e.conversationId),
                         ),
                       )
-                    : Column(
-                        children: controller.state.conversations
-                            .map(
-                              (e) => InkWell(
-                                child: listCard(e, context),
-                                onTap: () => Get.toNamed(Routes.currentChat, arguments: e.conversationId),
-                              ),
-                            )
-                            .toList(),
-                      ),
+                      .toList(),
+                ),
               ),
             ),
           ),
@@ -109,7 +70,7 @@ class ConversationPage extends GetView<ConversationController> {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          aiAvatar(),
+          avatar(avatarUrl: item.lastSenderAvatar),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -129,14 +90,14 @@ class ConversationPage extends GetView<ConversationController> {
                     alignment: WrapAlignment.spaceBetween,
                     children: [
                       Text(
-                        item.sender,
+                        item.lastSender,
                         style: TextStyle(
                           fontSize: WcaoTheme.fsBase,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                       Text(
-                        DateTimeLine(DateTime.parse(item.sendTime)),
+                        DateTimeLine(DateTime.parse(item.lastSendTime)),
                         style: TextStyle(
                           fontSize: WcaoTheme.fsSm,
                           color: Theme.of(context).dividerColor,

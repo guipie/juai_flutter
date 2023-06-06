@@ -1,6 +1,7 @@
 import 'package:JuAI/common/routers/routes.dart';
 import 'package:JuAI/pages/bbs/view.dart';
 import 'package:JuAI/pages/bbs_chat/view.dart';
+import 'package:JuAI/pages/conversation/role/view.dart';
 import 'package:JuAI/pages/conversation/view.dart';
 import 'package:JuAI/pages/settings/view.dart';
 import 'package:flutter/material.dart';
@@ -34,8 +35,8 @@ class HomeController extends GetxController {
   Widget pcRoutePage() {
     if (state.currentPcRoute.value == Routes.bbs) {
       return const BbsPage();
-    } else if (state.currentPcRoute.value == Routes.bbsChat) {
-      return BbsChatPage();
+    } else if (state.currentPcRoute.value == Routes.chatRole) {
+      return const RolePage();
     } else if (state.currentPcRoute.value == Routes.settings) {
       return SettingsPage();
     } else {

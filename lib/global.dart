@@ -1,3 +1,4 @@
+import 'package:JuAI/common/store/notice.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:JuAI/common/services/storage.dart';
@@ -23,9 +24,16 @@ class Global {
     Loading();
     await Get.putAsync<StorageService>(() => StorageService().init());
     Get.put<ConfigStore>(ConfigStore());
-    Get.put<UserStore>(UserStore());
-    Get.put<ChatStore>(ChatStore());
-    Get.put<ContentStore>(ContentStore());
+    Get.put<UserStore>(UserStore()); //如果需要登录后才初始化的放在这里面。
+    loginedInit();
+  }
+
+  static void loginedInit() {
+    if (UserStore.to.isLogin) {
+      Get.put<NoticeStore>(NoticeStore());
+      Get.put<ChatStore>(ChatStore());
+      Get.put<ContentStore>(ContentStore());
+    }
   }
 
   static void setSystemUi() {

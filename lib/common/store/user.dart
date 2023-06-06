@@ -1,10 +1,14 @@
 import 'dart:convert';
 
+import 'package:JuAI/common/store/chat.dart';
+import 'package:JuAI/common/store/content.dart';
+import 'package:JuAI/common/store/notice.dart';
 import 'package:JuAI/entities/user_login.dart';
 import 'package:JuAI/common/routers/routes.dart';
 import 'package:JuAI/common/services/storage.dart';
 import 'package:JuAI/common/utils/loading.dart';
 import 'package:JuAI/common/values/storage.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class UserStore extends GetxController {
@@ -30,9 +34,15 @@ class UserStore extends GetxController {
     var userInfoStr = StorageService.to.getString(STORAGE_USER_PROFILE_KEY);
     var tokenInfoStr = StorageService.to.getString(STORAGE_USER_TOKEN_KEY);
     if (userInfoStr.isNotEmpty && tokenInfoStr.isNotEmpty) {
-      _tokenInfo = UserTokenResponseEntity.fromRawJson(tokenInfoStr);
-      _userInfo = UserLoginResponseEntity.fromRawJson(userInfoStr);
-      _isLogin.value = !GetUtils.isNullOrBlank(tokenInfo?.token)! && !GetUtils.isNullOrBlank(userInfo.value!.userName)!;
+      try {
+        _tokenInfo = UserTokenResponseEntity.fromRawJson(tokenInfoStr);
+        _userInfo = UserLoginResponseEntity.fromRawJson(userInfoStr);
+        _isLogin.value = !GetUtils.isNullOrBlank(tokenInfo?.token)! && !GetUtils.isNullOrBlank(userInfo.value!.userName)!;
+      } catch (e) {
+        _logout();
+        debugPrint("初始化用户出错了");
+        throw Exception("出错了，卸载重新安装");
+      }
     }
   }
 
@@ -54,7 +64,7 @@ class UserStore extends GetxController {
   }
 
   Future<void> resetUserInfo(Map<dynamic, dynamic> update) async {
-    var user = _userInfo!.toJson();
+    var user = _userInfo.toJson();
     for (var key in user.keys) {
       if (update.keys.contains(key)) {
         user[key] = update[key];

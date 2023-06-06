@@ -36,7 +36,7 @@ class HomePcPage extends GetView<HomeController> {
             contentPadding: const EdgeInsets.only(left: 10, top: 50, right: 40, bottom: 50),
             style: ListTileStyle.drawer,
             title: Text(
-              UserStore.to.userInfo.value!.userName,
+              UserStore.to.userInfo.value!.nickName,
               style: const TextStyle(fontWeight: FontWeight.bold),
             ),
             leading: Container(
@@ -62,7 +62,8 @@ class HomePcPage extends GetView<HomeController> {
             ),
           ),
           _item("消息会话", Routes.homeConversation, Icons.chat_bubble_outline_outlined, Icons.chat_bubble_sharp),
-          _item("会话广场", Routes.bbsChat, Icons.live_help_outlined, Icons.live_help_sharp),
+          // _item("会话广场", Routes.bbsChat, Icons.live_help_outlined, Icons.live_help_sharp),
+          _item("用户角色", Routes.chatRole, Icons.six_ft_apart_outlined, Icons.six_ft_apart_sharp),
           _item("发现社区", Routes.bbs, Icons.home_work_outlined, Icons.home_work_sharp),
           _item("我的设置", Routes.settings, Icons.person_outline_outlined, Icons.person_sharp),
         ],

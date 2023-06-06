@@ -24,10 +24,10 @@ class DbSqlite {
   // 创建数据库
   initDb() async {
     io.Directory documentsDirectory = await getApplicationDocumentsDirectory();
-    String path = join(documentsDirectory.path, "guxin_ai.db");
+    String path = join(documentsDirectory.path, "juai_1.03.db");
     var theDb = await openDatabase(path, version: 1, onCreate: (db, version) {
-      db.execute("CREATE TABLE IF NOT EXISTS chat(id INTEGER PRIMARY KEY AUTOINCREMENT, conversationId TEXT, chatId TEXT,sender TEXT,recevier TEXT, senderAvatar TEXT,receiverAvatar TEXT,sendTime TEXT,receiveTime,content TEXT)");
-      db.execute("CREATE TABLE IF NOT EXISTS chat_last(conversationId TEXT PRIMARY KEY, chatId TEXT,sender TEXT,recevier TEXT, senderAvatar TEXT,receiverAvatar TEXT,sendTime TEXT,receiveTime,content TEXT,draf TEXT)");
+      db.execute("CREATE TABLE IF NOT EXISTS chat(id INTEGER PRIMARY KEY AUTOINCREMENT, conversationId int, chatOpenAiId TEXT,sendId int,recevieId int, sendTime TEXT,receiveTime,content TEXT)");
+      db.execute("CREATE TABLE IF NOT EXISTS chat_last(conversationId int PRIMARY KEY, type TEXT,lastSender TEXT,lastSenderAvatar TEXT,lastSendTime TEXT,content TEXT,draf TEXT)");
     });
     return theDb;
   }
@@ -58,16 +58,6 @@ class DbSqlite {
     return await db.insert(table, row, nullColumnHack: "");
   }
 
-  // 更新数据
-  Future<int> update(String table, Map<String, dynamic> row, {String? where, List<Object?>? whereArgs}) async {
-    Database db = await database;
-    if (where == null || whereArgs == null) {
-      where = 'id = ?';
-      whereArgs = [row['id']];
-    }
-    return await db.update(table, row, where: where, whereArgs: whereArgs);
-  }
-
   Future<int> insertExist(String table, Map<String, dynamic> row, String where, List<Object?> whereArgs) async {
     Database db = await database;
     var data = await db.query(table, where: where, whereArgs: whereArgs);
@@ -77,6 +67,16 @@ class DbSqlite {
     } else {
       return await db.insert(table, row, nullColumnHack: "");
     }
+  }
+
+  // 更新数据
+  Future<int> update(String table, Map<String, dynamic> row, {String? where, List<Object?>? whereArgs}) async {
+    Database db = await database;
+    if (where == null || whereArgs == null) {
+      where = 'id = ?';
+      whereArgs = [row['id']];
+    }
+    return await db.update(table, row, where: where, whereArgs: whereArgs);
   }
 
   // 删除数据
@@ -94,6 +94,11 @@ class DbSqlite {
   Future<List<Map<String, dynamic>>> queryWhere(String table, String where, List<Object?> whereArgs, {List<String>? columns}) async {
     Database db = await database;
     return await db.query(table, where: where, whereArgs: whereArgs, columns: columns);
+  }
+
+  Future<List<Map<String, dynamic>>> queryWhereOrderBy(String table, String where, List<Object?> whereArgs, int limit, String orderBy, {List<String>? columns}) async {
+    Database db = await database;
+    return await db.query(table, where: where, whereArgs: whereArgs, orderBy: orderBy, limit: limit, columns: columns);
   }
 
   Future<void> _rowsCorrect(String table, Map<String, dynamic> rows) async {

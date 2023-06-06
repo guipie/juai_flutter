@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:JuAI/global.dart';
 import 'package:flutter/material.dart';
 import 'package:JuAI/common/apis/user_api.dart';
 import 'package:JuAI/entities/user_login.dart';
@@ -53,7 +54,7 @@ class LoginController extends GetxController {
         debugPrint(value.message);
         if (value.isOk) {
           UserStore.to.saveProfile(UserLoginResponseEntity.fromJson(value.data["userResponse"]), UserTokenResponseEntity.fromJson(value.data["tokenInfo"])).then((value) {
-            ContentStore.to.contentInit();
+            Global.loginedInit();
             Routes.toHome();
           });
         }

@@ -1,22 +1,22 @@
 // https://platform.openai.com/docs/api-reference/chat/create
 import 'dart:convert';
 
-class ChatMessageEntity {
+class ChatGPTResEntity {
   String role;
   String content;
   String? name;
 
-  ChatMessageEntity({
+  ChatGPTResEntity({
     this.role = "system",
     required this.content,
     this.name = "guxin",
   });
-  ChatMessageEntity copyWith({
+  ChatGPTResEntity copyWith({
     String? role,
     required String content,
     String? name,
   }) =>
-      ChatMessageEntity(role: role ?? this.role, content: content, name: name ?? this.name);
+      ChatGPTResEntity(role: role ?? this.role, content: content, name: name ?? this.name);
 
   Map<String, dynamic> toJson() => {
         "role": role,
@@ -27,7 +27,7 @@ class ChatMessageEntity {
 
 class ChatRequestBodyEntity {
   String model = "gpt-3.5-turbo";
-  List<ChatMessageEntity> messages;
+  List<ChatGPTResEntity> messages;
   double temperature = 1;
   // ignore: non_constant_identifier_names
   double top_p = 1;

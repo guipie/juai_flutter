@@ -7,6 +7,7 @@ class Routes {
   static const homePc = "/pc";
   static const homeConversation = '/home_conversation';
   static const currentChat = '/chat';
+  static const chatRole = '/chatRole';
 
   static const tools = "/tools";
 

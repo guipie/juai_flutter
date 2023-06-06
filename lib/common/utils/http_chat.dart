@@ -1,15 +1,16 @@
 import 'package:dart_openai/dart_openai.dart';
 import 'package:JuAI/common/config.dart';
+import 'package:flutter/foundation.dart';
 
 class HttpChat {
   static final HttpChat _instance = HttpChat._internal();
   factory HttpChat() {
     return _instance;
   }
-
   HttpChat._internal() {
     OpenAI.apiKey = SERVER_CHAT_API_KEY;
     OpenAI.baseUrl = SERVER_CHAT_PROXY_API_URL;
+    debugPrint("OpenAI.baseUrl:$SERVER_CHAT_PROXY_API_URL");
   }
 
   Stream<OpenAIStreamChatCompletionModel> chatStreamProxy(String content, {String? model}) {
@@ -29,6 +30,21 @@ class HttpChat {
         maxTokens: 1000,
         temperature: 0.8,
         topP: 1,
+      );
+    } on RequestFailedException catch (e) {
+      throw Exception("请求出错:${e.message}【${e.statusCode}】");
+    } catch (e) {
+      throw Exception("初始化聊天出错$e");
+    }
+  }
+
+  Future<OpenAIImageModel> chatImageProxy(String content, {int n = 1, OpenAIImageSize size = OpenAIImageSize.size512}) {
+    try {
+      return OpenAI.instance.image.create(
+        prompt: content,
+        n: 1,
+        size: size,
+        responseFormat: OpenAIImageResponseFormat.url,
       );
     } catch (e) {
       throw Exception("初始化聊天出错$e");

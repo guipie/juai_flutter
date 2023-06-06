@@ -7,12 +7,11 @@ import 'package:JuAI/pages/bbs/publish/view.dart';
 import 'package:JuAI/pages/bbs/publish/view_article.dart';
 import 'package:JuAI/pages/bbs/publish/view_special.dart';
 import 'package:JuAI/pages/bbs/special/index.dart';
-import 'package:JuAI/pages/bbs/special/view.dart';
 import 'package:JuAI/pages/bbs/tag/controller.dart';
 import 'package:JuAI/pages/bbs/tag/view.dart';
 import 'package:JuAI/pages/bbs_chat/controller.dart';
 import 'package:JuAI/pages/bbs_chat/view.dart';
-import 'package:JuAI/pages/home/controler.dart';
+import 'package:JuAI/pages/conversation/role/view.dart';
 import 'package:JuAI/pages/settings/account/pwd_reset.dart';
 import 'package:JuAI/pages/settings/account/pwd_update.dart';
 import 'package:JuAI/pages/settings/agreement/privacy.dart';
@@ -74,9 +73,15 @@ class AppPages {
       binding: BindingsBuilder(() => Get.lazyPut<ConversationController>(() => ConversationController())),
     ),
     GetPage(
+      name: Routes.chatRole,
+      page: () => const RolePage(),
+    ),
+    GetPage(
       name: Routes.currentChat,
       page: () => const ChatPage(),
-      binding: BindingsBuilder(() => Get.lazyPut(() => ChatController())),
+      binding: BindingsBuilder(() {
+        Get.lazyPut(() => ChatController());
+      }),
     ),
     //ai商店相关
     GetPage(

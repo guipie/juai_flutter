@@ -33,7 +33,7 @@ class _CardDongtaiImagesWidgetState extends State<CardDongtaiImagesWidget> {
                     RouteFade(
                       page: GxImageBrowser(
                         imgDataArr: widget.content.files.map((e) => e.toString()).toList(),
-                        index: 0,
+                        index: widget.content.files.indexOf(e),
                       ),
                     ),
                   );
