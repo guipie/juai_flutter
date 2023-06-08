@@ -3,6 +3,8 @@
 //     final chatRoleEntity = chatRoleEntityFromJson(jsonString);
 import 'dart:convert';
 
+enum ChatRoleEnum { system, user, assistant, chat }
+
 class ChatRoleEntity {
   String avatar;
   String name;

@@ -78,7 +78,7 @@ class AppPages {
     ),
     GetPage(
       name: Routes.currentChat,
-      page: () => const ChatPage(),
+      page: () => ChatPage(),
       binding: BindingsBuilder(() {
         Get.lazyPut(() => ChatController());
       }),

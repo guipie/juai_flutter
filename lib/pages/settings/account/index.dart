@@ -1,5 +1,5 @@
 import 'package:file_picker/file_picker.dart';
-import 'package:JuAI/common/apis/apis.dart';
+import 'package:JuAI/entities/api_response.dart';
 import 'package:JuAI/common/routers/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:JuAI/common/store/user.dart';

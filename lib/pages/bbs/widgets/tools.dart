@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:JuAI/common/apis/apis.dart';
+import 'package:JuAI/entities/api_response.dart';
 import 'package:JuAI/common/theme.dart';
 import 'package:JuAI/entities/content/content.dart';
 import 'package:JuAI/pages/bbs/detail/widgets/comment_widget.dart';

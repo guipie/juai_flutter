@@ -1,23 +1,51 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:JuAI/entities/api_response.dart';
 import 'package:JuAI/common/apis/notice_api.dart';
 import 'package:JuAI/common/assets.dart';
 import 'package:JuAI/common/config.dart';
+import 'package:JuAI/common/routers/routes.dart';
 import 'package:JuAI/common/store/user.dart';
+import 'package:JuAI/common/utils/loading.dart';
 import 'package:JuAI/entities/message/chat_role.dart';
 import 'package:flutter/material.dart';
-import 'package:JuAI/entities/conversation.dart';
+import 'package:JuAI/entities/message/conversation.dart';
 import 'package:JuAI/common/utils/db_sqlite.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:signalr_netcore/signalr_client.dart';
 
+enum SendType { canNotSend, canSend, sending }
+
 class ChatStore extends GetxController {
   static ChatStore get to => Get.find();
+  var sendType = SendType.canNotSend.obs;
+  var scrollContrller = ScrollController();
   var chatRoles = <ChatRoleEntity>[].obs;
-  var lastConversions = List<ConversationLast>.empty(growable: true).obs;
+  var currentChatRole = ChatRoleEntity(
+    avatar: Assets.robotAvatar,
+    name: "AI机器人",
+    context: [Context(role: "system", content: "You are ChatGPT, a large language model trained by OpenAI. Follow the user's instructions carefully. Respond using markdown.", date: DateTime.now().toString())],
+    modelConfig: ModelConfig(
+      model: "gpt-3.5-turbo",
+      temperature: 1,
+      maxTokens: 2000,
+      presencePenalty: 0,
+      sendMemory: true,
+      historyMessageCount: 2,
+      compressMessageLengthThreshold: 4000,
+    ),
+    lang: "cn",
+    builtin: true,
+    id: DateTime.now().second,
+  );
+  var lastChats = List<ConversationLast>.empty(growable: true).obs;
+  var chats = <Conversation>[].obs; //当前会话列表
+  ConversationLast? lastChat;
   var connected = false;
+  //流临时存储的会话数据
+  final ValueNotifier<String> currentChat = ValueNotifier("");
 // If you want only to log out the message for the higer level hub protocol:
   // final hubProtLogger = Logger("SignalR - hub");
 // If youn want to also to log out transport messages:
@@ -35,10 +63,10 @@ class ChatStore extends GetxController {
   @override
   Future<void> onInit() async {
     super.onInit();
-    lastConversions.value = await DbSqlite.instance.queryAll("chat_last").then((value) => value.map((e) => ConversationLast.fromJson(e)).toList());
+    lastChats.value = await DbSqlite.instance.queryAll("chat_last").then((value) => value.map((e) => ConversationLast.fromJson(e)).toList());
     _signalRInit();
     _loadChatRole();
-    debugPrint("初始化会话列表：${lastConversions.length}条");
+    debugPrint("初始化会话列表：${lastChats.length}条");
   }
 
   void _loadChatRole() {
@@ -69,7 +97,18 @@ class ChatStore extends GetxController {
         _signalRTimeOut();
       });
       hubConnection.on("ReceiveChatGPT", (arguments) {
-        debugPrint("接受到[ReceiveChatGPT]数据：$arguments");
+        if (arguments == null || arguments.first == null) return;
+        debugPrint("接受chatgpt回答[ReceiveChatGPT]数据：$arguments");
+        var chatResult = ApiResponse.fromRawJson(arguments.first.toString());
+        if (currentChat.value == "思考中..") currentChat.value = "";
+        currentChat.value = currentChat.value + (chatResult.data ?? "");
+        if (chatResult.status == 0) {
+          toBottom();
+          var conversation = Conversation.fromJsonFromChatGPT(currentChat.value, null, lastChat!);
+          toAddChatStore(conversation);
+          toAddChatLastStore(conversation);
+          currentChat.value = "";
+        }
       });
       hubConnection.on("ReceiveChat", (arguments) {
         debugPrint("接受到[ReceiveChat]数据：$arguments");
@@ -111,14 +150,14 @@ class ChatStore extends GetxController {
       debugPrint(value.toString());
       List.generate(value.length, (index) {
         var cChat = value[index];
-        var existIndex = lastConversions.indexWhere((m) => m.conversationId == cChat.sendId);
+        var existIndex = lastChats.indexWhere((m) => m.conversationId == cChat.sendId);
         ConversationLast _lastChat;
-        Conversation _chat = Conversation(conversationId: cChat.sendId, sendId: cChat.sendId, recevieId: UserStore.to.userId, sendTime: cChat.sendTime.toString(), receiveTime: DateTime.now().toString(), content: cChat.content);
         if (existIndex > -1) {
-          lastConversions[existIndex].content = cChat.content;
-          lastConversions[existIndex].lastSendTime = cChat.sendTime.toString();
-          lastConversions[existIndex].unread++;
-          _lastChat = lastConversions[existIndex];
+          lastChats[existIndex].content = cChat.content;
+          lastChats[existIndex].lastSenderAvatar = cChat.sendAvatar ?? "";
+          lastChats[existIndex].lastSendTime = cChat.sendTime.toString();
+          lastChats[existIndex].unread++;
+          _lastChat = lastChats[existIndex];
         } else {
           _lastChat = ConversationLast(
             conversationId: cChat.sendId,
@@ -126,11 +165,15 @@ class ChatStore extends GetxController {
             lastSenderAvatar: cChat.sendAvatar ?? "",
             lastSendTime: cChat.sendTime.toString(),
             content: cChat.content,
+            type: 'user',
           );
-          lastConversions.add(_lastChat);
+          _lastChat.unread++;
+          lastChats.add(_lastChat);
         }
-        DbSqlite.instance.insertExist("chat_last", _lastChat.toJson(), "conversationId=?", [_lastChat.conversationId]);
-        DbSqlite.instance.insert("chat", _chat.toJson());
+        lastChats.refresh();
+        Conversation _chat = Conversation(conversationId: _lastChat.conversationId, sendId: cChat.sendId, recevieId: UserStore.to.userId, sendTime: cChat.sendTime.toString(), receiveTime: DateTime.now().toString(), content: cChat.content);
+        toAddChatStore(_chat);
+        toAddChatLastStore(_chat);
       });
     });
     // var receiveChat = Conversation.fromJsonFromChatGPT(msg, chatOpenAiId, state.chatRoleEntity);
@@ -141,5 +184,70 @@ class ChatStore extends GetxController {
     // _toAddChatLastStore(receiveChat);
   }
 
-  void setLastConversion() {}
+  void toChat({ConversationLast? conversation, int? roleId, int? userId}) {
+    if (conversation != null) {
+      lastChat = conversation;
+    } else if (userId != null && userId > 0) {
+      UserAPI.getUserInfo(userId).then((value) {
+        lastChat = ConversationLast(
+          conversationId: userId,
+          lastSender: value.nickName,
+          lastSenderAvatar: value.avatar ?? "",
+          lastSendTime: DateTime.now().toString(),
+          content: "",
+          type: "user",
+        );
+      }).catchError((err) {
+        Loading.error("该用户获取失败");
+      });
+    } else if (roleId != null && roleId > 0) {
+      var chatRole = chatRoles.firstWhereOrNull((element) => element.id == roleId);
+      if (chatRole != null) {
+        lastChat = ConversationLast(
+          conversationId: roleId,
+          lastSender: chatRole.name,
+          lastSenderAvatar: Assets.dataAvatarPrefix + chatRole.avatar + ".png",
+          lastSendTime: DateTime.now().toString(),
+          content: "",
+          type: ChatRoleEnum.user.name,
+        );
+      } else {
+        return;
+      }
+    } else {
+      lastChat = ConversationLast(
+        conversationId: DateTime.now().millisecondsSinceEpoch,
+        lastSender: "AI机器人",
+        lastSenderAvatar: Assets.robotAvatar,
+        lastSendTime: DateTime.now().toString(),
+        content: "",
+        type: ChatRoleEnum.user.name,
+      );
+    }
+    Get.toNamed(Routes.currentChat);
+  }
+
+  void toBottom() {
+    // 滚动到最底部
+    scrollContrller.animateTo(
+      0,
+      duration: const Duration(milliseconds: 100),
+      curve: Curves.easeIn,
+    );
+  }
+
+  void toAddChatStore(Conversation conversation) {
+    ChatStore.to.chats.insert(0, conversation);
+    DbSqlite.instance.insert("chat", conversation.toJson());
+    Future.delayed(const Duration(milliseconds: 200), () => toBottom());
+  }
+
+  void toAddChatLastStore(Conversation conversation) {
+    lastChat!.content = conversation.content;
+    lastChat!.lastSendTime = DateTime.now().toString();
+    ChatStore.to.lastChats.removeWhere((element) => element.conversationId == conversation.conversationId);
+    ChatStore.to.lastChats.insert(0, lastChat!);
+    DbSqlite.instance.insertExist("chat_last", lastChat!.toJson(), "conversationId=?", [conversation.conversationId]);
+    Future.delayed(const Duration(milliseconds: 200), () => toBottom());
+  }
 }

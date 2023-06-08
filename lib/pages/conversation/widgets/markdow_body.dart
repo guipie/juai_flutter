@@ -8,6 +8,7 @@ class ConversationWidgets {
   Widget buildMarkdown(BuildContext context, String content) {
     codeWrapper(child, text) => CodeWrapperWidget(child: child, text: text);
     return MarkdownWidget(
+      padding: EdgeInsets.zero,
       shrinkWrap: true,
       data: content,
       config: (Get.isDarkMode ? MarkdownConfig.darkConfig : MarkdownConfig.defaultConfig).copy(

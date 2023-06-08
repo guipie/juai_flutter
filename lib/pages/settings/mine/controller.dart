@@ -1,4 +1,4 @@
-import 'package:JuAI/common/apis/apis.dart';
+import 'package:JuAI/entities/api_response.dart';
 import 'package:JuAI/common/apis/user_extend_api.dart';
 import 'package:JuAI/common/apis/user_follow_api.dart';
 import 'package:JuAI/common/store/store.dart';

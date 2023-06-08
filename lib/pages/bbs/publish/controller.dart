@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:JuAI/common/apis/apis.dart';
+import 'package:JuAI/entities/api_response.dart';
 import 'package:JuAI/common/apis/content_special_api.dart';
 import 'package:JuAI/entities/content/content.dart';
 import 'package:JuAI/entities/content/special.dart';

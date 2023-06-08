@@ -19,7 +19,7 @@ class RolePage extends StatelessWidget {
             children: ChatStore.to.chatRoles
                 .map(
                   (e) => TextButton.icon(
-                    onPressed: () => Get.toNamed(Routes.currentChat, arguments: e.id),
+                    onPressed: () => ChatStore.to.toChat(roleId: e.id),
                     icon: ImageCacheWidget(
                       Assets.dataAvatarPrefix + e.avatar + ".png",
                       cacheImageType: CacheImageType.asserts,

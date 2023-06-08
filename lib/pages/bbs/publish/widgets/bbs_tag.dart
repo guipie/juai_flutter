@@ -1,6 +1,6 @@
 import 'package:JuAI/common/apis/content_tag_api.dart';
 import 'package:flutter/material.dart';
-import 'package:JuAI/common/apis/apis.dart';
+import 'package:JuAI/entities/api_response.dart';
 import 'package:JuAI/common/store/content.dart';
 import 'package:JuAI/common/widgets/tag.dart';
 import 'package:JuAI/common/theme.dart';

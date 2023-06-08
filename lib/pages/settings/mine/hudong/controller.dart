@@ -1,4 +1,4 @@
-import 'package:JuAI/common/apis/apis.dart';
+import 'package:JuAI/entities/api_response.dart';
 import 'package:JuAI/entities/content/content.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

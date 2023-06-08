@@ -85,6 +85,11 @@ class DbSqlite {
     return await db.delete(table, where: 'id = ?', whereArgs: [id]);
   }
 
+  Future<int> delete(String table, {String? where, List<Object?>? whereArgs}) async {
+    Database db = await database;
+    return await db.delete(table, where: where, whereArgs: whereArgs);
+  }
+
   // 查询所有数据
   Future<List<Map<String, dynamic>>> queryAll(String table) async {
     Database db = await database;

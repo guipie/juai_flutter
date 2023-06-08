@@ -1,5 +1,6 @@
+import 'package:JuAI/entities/user_base.dart';
 import 'package:get/get.dart';
-import 'package:JuAI/common/apis/apis.dart';
+import 'package:JuAI/entities/api_response.dart';
 import 'package:JuAI/entities/user_login.dart';
 import 'package:JuAI/common/utils/http.dart';
 
@@ -14,6 +15,10 @@ class UserAPI {
       data: params.toJson(),
       isLoading: true,
     );
+  }
+
+  static Future<UserInfo> getUserInfo(int userId) async {
+    return HttpUtil().get('/api/app/user/$userId').then((value) => UserInfo.fromJson(value.data));
   }
 
   static Future<ApiResponse> sendVcode(String phoneNum) async {

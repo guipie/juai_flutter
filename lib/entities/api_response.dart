@@ -2,8 +2,8 @@ library apis;
 
 import 'dart:convert';
 
-export 'user_api.dart';
-export 'content_api.dart';
+export '../common/apis/user_api.dart';
+export '../common/apis/content_api.dart';
 
 class ApiResponse {
   int? status;

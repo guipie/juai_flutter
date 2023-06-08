@@ -31,20 +31,29 @@ class Conversation {
         receiveTime: json["receiveTime"],
         content: json["content"],
       );
-  factory Conversation.fromJsonFromMine(String content, String? chatOpenAiId, ChatRoleEntity chatRoleEntity) => Conversation(
-        conversationId: chatRoleEntity.id,
+  factory Conversation.fromJsonFromMine(String content, String? chatOpenAiId, ConversationLast last) => Conversation(
+        conversationId: last.conversationId,
         chatOpenAiId: chatOpenAiId,
         sendId: UserStore.to.userId,
-        recevieId: chatRoleEntity.id,
+        recevieId: last.conversationId,
         sendTime: dateFormatYMDHMS(DateTime.now()),
         receiveTime: dateFormatYMDHMS(DateTime.now()),
         content: content,
       );
-  factory Conversation.fromJsonFromChatGPT(String content, String chatOpenAiId, ChatRoleEntity chatRoleEntity) => Conversation(
+  factory Conversation.fromJsonFromChatGPT(String content, String? chatOpenAiId, ConversationLast last) => Conversation(
+        conversationId: last.conversationId,
+        chatOpenAiId: chatOpenAiId,
+        sendId: last.conversationId,
+        recevieId: UserStore.to.userId,
+        sendTime: dateFormatYMDHMS(DateTime.now()),
+        receiveTime: dateFormatYMDHMS(DateTime.now()),
+        content: content,
+      );
+  factory Conversation.fromJsonToUser(String content, String? chatOpenAiId, ChatRoleEntity chatRoleEntity) => Conversation(
         conversationId: chatRoleEntity.id,
         chatOpenAiId: chatOpenAiId,
-        sendId: chatRoleEntity.id,
-        recevieId: UserStore.to.userId,
+        sendId: UserStore.to.userId,
+        recevieId: chatRoleEntity.id,
         sendTime: dateFormatYMDHMS(DateTime.now()),
         receiveTime: dateFormatYMDHMS(DateTime.now()),
         content: content,
@@ -63,7 +72,7 @@ class Conversation {
 
 class ConversationLast {
   int conversationId;
-  String? type;
+  String type;
   String lastSender;
   String lastSenderAvatar;
   String lastSendTime;
@@ -76,12 +85,12 @@ class ConversationLast {
     required this.lastSenderAvatar,
     required this.lastSendTime,
     required this.content,
-    this.type,
+    required this.type,
     this.draf,
   });
   factory ConversationLast.fromJson(Map<String, dynamic> json) => ConversationLast(
         conversationId: json["conversationId"],
-        type: json["type"],
+        type: json["type"] ?? ChatRoleEnum.user.name,
         lastSender: json["lastSender"],
         lastSenderAvatar: json["lastSenderAvatar"],
         lastSendTime: json["lastSendTime"],

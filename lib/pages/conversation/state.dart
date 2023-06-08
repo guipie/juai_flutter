@@ -4,5 +4,5 @@ import 'package:get/get.dart';
 class ConversationState {
   // title
   var roleVisible = false.obs;
-  var conversations = ChatStore.to.lastConversions;
+  var conversations = ChatStore.to.lastChats;
 }
