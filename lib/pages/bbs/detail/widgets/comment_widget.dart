@@ -7,7 +7,7 @@ import 'package:JuAI/common/utils/date.dart';
 import 'package:JuAI/common/utils/loading.dart';
 import 'package:JuAI/common/widgets/avatar.dart';
 import 'package:JuAI/entities/content/comment.dart';
-import 'package:JuAI/entities/user_base.dart';
+import 'package:JuAI/entities/user/user_base.dart';
 
 class CommentWidget extends StatefulWidget {
   const CommentWidget(this.contentId, {super.key});

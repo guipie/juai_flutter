@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:JuAI/common/apis/chat_api.dart';
 import 'package:JuAI/entities/api_response.dart';
 import 'package:JuAI/common/apis/notice_api.dart';
 import 'package:JuAI/common/assets.dart';
@@ -8,11 +9,10 @@ import 'package:JuAI/common/config.dart';
 import 'package:JuAI/common/routers/routes.dart';
 import 'package:JuAI/common/store/user.dart';
 import 'package:JuAI/common/utils/loading.dart';
-import 'package:JuAI/entities/message/chat_role.dart';
+import 'package:JuAI/entities/message/chat_prompt.dart';
 import 'package:flutter/material.dart';
 import 'package:JuAI/entities/message/conversation.dart';
 import 'package:JuAI/common/utils/db_sqlite.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:signalr_netcore/signalr_client.dart';
 
@@ -22,27 +22,11 @@ class ChatStore extends GetxController {
   static ChatStore get to => Get.find();
   var sendType = SendType.canNotSend.obs;
   var scrollContrller = ScrollController();
-  var chatRoles = <ChatRoleEntity>[].obs;
-  var currentChatRole = ChatRoleEntity(
-    avatar: Assets.robotAvatar,
-    name: "AI机器人",
-    context: [Context(role: "system", content: "You are ChatGPT, a large language model trained by OpenAI. Follow the user's instructions carefully. Respond using markdown.", date: DateTime.now().toString())],
-    modelConfig: ModelConfig(
-      model: "gpt-3.5-turbo",
-      temperature: 1,
-      maxTokens: 2000,
-      presencePenalty: 0,
-      sendMemory: true,
-      historyMessageCount: 2,
-      compressMessageLengthThreshold: 4000,
-    ),
-    lang: "cn",
-    builtin: true,
-    id: DateTime.now().second,
-  );
+  var chatPrompts = <ChatPromptEntity>[].obs;
+  ChatPromptEntity? currentChatPrompt;
   var lastChats = List<ConversationLast>.empty(growable: true).obs;
   var chats = <Conversation>[].obs; //当前会话列表
-  ConversationLast? lastChat;
+  ConversationLast? lastChat; //当前会话详情
   var connected = false;
   //流临时存储的会话数据
   final ValueNotifier<String> currentChat = ValueNotifier("");
@@ -63,17 +47,16 @@ class ChatStore extends GetxController {
   @override
   Future<void> onInit() async {
     super.onInit();
-    lastChats.value = await DbSqlite.instance.queryAll("chat_last").then((value) => value.map((e) => ConversationLast.fromJson(e)).toList());
+    lastChats.value = await DbSqlite.instance.queryWhereOrderBy("chat_last", "userId=?", [UserStore.to.userId], 1000, "lastSendTime desc").then((value) => value.map((e) => ConversationLast.fromJson(e)).toList());
     _signalRInit();
     _loadChatRole();
     debugPrint("初始化会话列表：${lastChats.length}条");
   }
 
   void _loadChatRole() {
-    rootBundle.loadString(Assets.roleJson).then((value) {
-      List jsonList = json.decode(value);
-      chatRoles.value = jsonList.map((m) => ChatRoleEntity.fromJson(m)).toList();
-      debugPrint("加载成功${chatRoles.length}");
+    ChatApis.getChatPrompts().then((value) {
+      chatPrompts.value = value;
+      debugPrint("加载成功${value.length}");
     }).catchError((err) {
       debugPrint("加载失败$err");
     });
@@ -99,10 +82,10 @@ class ChatStore extends GetxController {
       hubConnection.on("ReceiveChatGPT", (arguments) {
         if (arguments == null || arguments.first == null) return;
         debugPrint("接受chatgpt回答[ReceiveChatGPT]数据：$arguments");
-        var chatResult = ApiResponse.fromRawJson(arguments.first.toString());
+        var chatResult = ApiChatResponse.fromRawJson(arguments.first.toString());
         if (currentChat.value == "思考中..") currentChat.value = "";
         currentChat.value = currentChat.value + (chatResult.data ?? "");
-        if (chatResult.status == 0) {
+        if (chatResult.isStop) {
           toBottom();
           var conversation = Conversation.fromJsonFromChatGPT(currentChat.value, null, lastChat!);
           toAddChatStore(conversation);
@@ -166,6 +149,7 @@ class ChatStore extends GetxController {
             lastSendTime: cChat.sendTime.toString(),
             content: cChat.content,
             type: 'user',
+            userId: UserStore.to.userId,
           );
           _lastChat.unread++;
           lastChats.add(_lastChat);
@@ -184,36 +168,37 @@ class ChatStore extends GetxController {
     // _toAddChatLastStore(receiveChat);
   }
 
-  void toChat({ConversationLast? conversation, int? roleId, int? userId}) {
+  void toChat({ConversationLast? conversation, ChatPromptEntity? chatPrompt, int? userId}) {
+    currentChatPrompt = null;
     if (conversation != null) {
       lastChat = conversation;
     } else if (userId != null && userId > 0) {
       UserAPI.getUserInfo(userId).then((value) {
         lastChat = ConversationLast(
-          conversationId: userId,
+          conversationId: DateTime.now().millisecondsSinceEpoch,
+          lastSenderId: value.id,
           lastSender: value.nickName,
           lastSenderAvatar: value.avatar ?? "",
           lastSendTime: DateTime.now().toString(),
           content: "",
           type: "user",
+          userId: UserStore.to.userId,
         );
       }).catchError((err) {
         Loading.error("该用户获取失败");
       });
-    } else if (roleId != null && roleId > 0) {
-      var chatRole = chatRoles.firstWhereOrNull((element) => element.id == roleId);
-      if (chatRole != null) {
-        lastChat = ConversationLast(
-          conversationId: roleId,
-          lastSender: chatRole.name,
-          lastSenderAvatar: Assets.dataAvatarPrefix + chatRole.avatar + ".png",
-          lastSendTime: DateTime.now().toString(),
-          content: "",
-          type: ChatRoleEnum.user.name,
-        );
-      } else {
-        return;
-      }
+    } else if (chatPrompt != null) {
+      currentChatPrompt = chatPrompt;
+      lastChat = ConversationLast(
+        conversationId: DateTime.now().millisecondsSinceEpoch,
+        promptId: chatPrompt.id,
+        lastSender: chatPrompt.title,
+        lastSenderAvatar: chatPrompt.avatar,
+        lastSendTime: DateTime.now().toString(),
+        content: "",
+        type: ChatPromptRoleEnum.user.name,
+        userId: UserStore.to.userId,
+      );
     } else {
       lastChat = ConversationLast(
         conversationId: DateTime.now().millisecondsSinceEpoch,
@@ -221,7 +206,8 @@ class ChatStore extends GetxController {
         lastSenderAvatar: Assets.robotAvatar,
         lastSendTime: DateTime.now().toString(),
         content: "",
-        type: ChatRoleEnum.user.name,
+        type: ChatPromptRoleEnum.user.name,
+        userId: UserStore.to.userId,
       );
     }
     Get.toNamed(Routes.currentChat);

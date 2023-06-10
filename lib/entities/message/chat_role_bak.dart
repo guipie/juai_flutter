@@ -3,9 +3,7 @@
 //     final chatRoleEntity = chatRoleEntityFromJson(jsonString);
 import 'dart:convert';
 
-enum ChatRoleEnum { system, user, assistant, chat }
-
-class ChatRoleEntity {
+class ChatRoleEntity_Bak {
   String avatar;
   String name;
   List<Context> context;
@@ -14,7 +12,7 @@ class ChatRoleEntity {
   bool builtin;
   int id;
 
-  ChatRoleEntity({
+  ChatRoleEntity_Bak({
     required this.avatar,
     required this.name,
     required this.context,
@@ -24,11 +22,11 @@ class ChatRoleEntity {
     required this.id,
   });
 
-  factory ChatRoleEntity.fromRawJson(String str) => ChatRoleEntity.fromJson(json.decode(str));
+  factory ChatRoleEntity_Bak.fromRawJson(String str) => ChatRoleEntity_Bak.fromJson(json.decode(str));
 
   String toRawJson() => json.encode(toJson());
 
-  factory ChatRoleEntity.fromJson(Map<String, dynamic> json) => ChatRoleEntity(
+  factory ChatRoleEntity_Bak.fromJson(Map<String, dynamic> json) => ChatRoleEntity_Bak(
         avatar: json["avatar"],
         name: json["name"],
         context: List<Context>.from(json["context"].map((x) => Context.fromJson(x))),

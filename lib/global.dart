@@ -24,10 +24,11 @@ class Global {
     Loading();
     await Get.putAsync<StorageService>(() => StorageService().init());
     Get.put<ConfigStore>(ConfigStore());
-    Get.put<UserStore>(UserStore()); //如果需要登录后才初始化的放在这里面。
-    loginedInit();
+    Get.put<UserStore>(UserStore());
+    // loginedInit();
   }
 
+  //如果需要登录后才初始化的放在这里面。
   static void loginedInit() {
     if (UserStore.to.isLogin) {
       Get.put<NoticeStore>(NoticeStore());

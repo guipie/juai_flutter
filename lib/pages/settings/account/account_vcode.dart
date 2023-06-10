@@ -5,7 +5,7 @@ import 'package:JuAI/common/store/user.dart';
 import 'package:JuAI/common/theme.dart';
 import 'package:get/get.dart';
 import 'package:JuAI/common/utils/loading.dart';
-import 'package:JuAI/entities/user_login.dart';
+import 'package:JuAI/entities/user/user_login.dart';
 
 enum VerifyCodeType {
   resetPwd,

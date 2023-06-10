@@ -30,6 +30,7 @@ class ChatToolWidget extends StatelessWidget {
         ),
         const SizedBox(width: 5),
         InkWell(
+          child: const Icon(Icons.six_ft_apart_outlined),
           onTap: () {
             showModalBottomSheet(
               context: context,
@@ -40,27 +41,32 @@ class ChatToolWidget extends StatelessWidget {
               builder: (context) {
                 return ListView.builder(
                   itemBuilder: (context, index) {
-                    var _role = ChatStore.to.chatRoles[index];
+                    var _role = ChatStore.to.chatPrompts[index];
                     return ListTile(
-                      leading: avatar(avatarUrl: Assets.dataAvatarPrefix + _role.avatar + ".png", radius: 18),
-                      title: Text(_role.name),
+                      leading: avatar(avatarUrl: _role.avatar, radius: 18),
+                      title: Text(_role.title),
                       subtitle: TextShowHide(
-                        text: _role.context.first.content,
+                        text: _role.prompts.first.prompt,
                         maxLines: 2,
-                        additionMore: _role.context.map((e) => e.content).toList(),
+                        additionMore: _role.prompts.map((e) => e.prompt).toList(),
                       ),
-                      trailing: TextButton(onPressed: () {}, child: const Text("确定")),
+                      trailing: TextButton(
+                          onPressed: () {
+                            Get.back();
+                            ChatStore.to.toChat(chatPrompt: _role);
+                          },
+                          child: const Text("确定")),
                     );
                   },
-                  itemCount: ChatStore.to.chatRoles.length,
+                  itemCount: ChatStore.to.chatPrompts.length,
                 );
               },
             );
           },
-          child: const Icon(Icons.display_settings_outlined),
         ),
         const SizedBox(width: 10),
         InkWell(
+          child: const Icon(Icons.display_settings_outlined),
           onTap: () {
             showModalBottomSheet(
               context: context,
@@ -125,7 +131,6 @@ class ChatToolWidget extends StatelessWidget {
               },
             );
           },
-          child: const Icon(Icons.mark_chat_read_outlined),
         ),
         const SizedBox(width: 20),
       ],

@@ -38,6 +38,12 @@ Widget avatar({String? avatarUrl, double radius = 22, Function? onClick, BuildCo
   );
 }
 
-Widget aiAvatar() {
-  return const CircleAvatar(backgroundImage: AssetImage(Assets.robotAvatar));
+Widget aiAvatar(String? url, {Function? onClick}) {
+  if (url == null || url.isEmpty) {
+    return InkWell(
+      child: const CircleAvatar(backgroundImage: AssetImage(Assets.robotAvatar)),
+      onTap: () => onClick,
+    );
+  }
+  return avatar(avatarUrl: url);
 }

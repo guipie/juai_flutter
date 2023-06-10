@@ -42,18 +42,45 @@ class ChatController extends GetxController {
   }
 
   void onSend() {
+    if (state.drawImage.value) {
+      onSendImage();
+    } else {
+      onSendChat();
+    }
+  }
+
+  void onSendChat() {
     if (state.messageController.text.trim().isNotEmpty && ChatStore.to.sendType.value == SendType.canSend) {
       ChatStore.to.sendType.value = SendType.sending;
       var sendMsg = state.messageController.text.trim().toString();
       state.messageController.text = "";
       ChatStore.to.toAddChatStore(Conversation.fromJsonFromMine(sendMsg, null, lastChat!));
       ChatStore.to.currentChat.value = "思考中..";
-      ChatApis.sendChatGPT(ChatSendReqEntity.fromInitJson(sendMsg)).then((value) {
+      ChatApis.sendChatGPT(ChatSendReqEntity.fromInitJson(sendMsg, lastChat!.conversationId)).then((value) {
         if (!value.isOk) {
           Loading.waring(value.message ?? "无法聊天");
         }
       }).catchError((err) {
         Loading.waring("聊天出错了$err");
+        ChatStore.to.sendType.value = SendType.canSend;
+        ChatStore.to.currentChat.value = "";
+      });
+    }
+  }
+
+  void onSendImage() {
+    if (state.messageController.text.trim().isNotEmpty && ChatStore.to.sendType.value == SendType.canSend) {
+      ChatStore.to.sendType.value = SendType.sending;
+      var sendMsg = state.messageController.text.trim().toString();
+      state.messageController.text = "";
+      ChatStore.to.toAddChatStore(Conversation.fromJsonFromMine(sendMsg, null, lastChat!));
+      ChatStore.to.currentChat.value = "思考中..";
+      ChatApis.sendChatGPTImage(ChatSendImageReqEntity(conversationId: lastChat!.conversationId, prompt: sendMsg)).then((value) {
+        if (!value.isOk) {
+          Loading.waring(value.message ?? "无法聊天");
+        }
+      }).catchError((err) {
+        Loading.waring("画图出错了$err");
         ChatStore.to.sendType.value = SendType.canSend;
         ChatStore.to.currentChat.value = "";
       });

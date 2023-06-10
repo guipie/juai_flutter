@@ -2,7 +2,7 @@ import 'package:JuAI/entities/content/content.dart';
 import 'package:JuAI/entities/content/special.dart';
 import 'package:JuAI/common/utils/http.dart';
 import 'package:JuAI/entities/entities.dart';
-import 'package:JuAI/entities/user_base.dart';
+import 'package:JuAI/entities/user/user_base.dart';
 import 'package:flutter/material.dart';
 
 class SpecialApi {

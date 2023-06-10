@@ -1,6 +1,6 @@
 import 'package:JuAI/common/store/chat.dart';
 import 'package:JuAI/common/store/user.dart';
-import 'package:JuAI/entities/message/chat_role.dart';
+import 'package:JuAI/entities/message/chat_prompt.dart';
 import 'package:JuAI/pages/conversation/chat/widget/chat_tool.dart';
 import 'package:JuAI/pages/conversation/widgets/markdow_body.dart';
 import 'package:JuAI/common/theme.dart';
@@ -43,27 +43,16 @@ class ChatPage extends StatelessWidget {
                           // The builder function returns a ListTile with a title that
                           // displays the index of the current item.
                           (context, index) {
-                            if (ChatStore.to.currentChat.value.isNotEmpty) {
-                              return Wrap(
-                                alignment: WrapAlignment.center,
-                                children: [
-                                  msgItem(
-                                    Conversation.fromJsonFromChatGPT(
-                                      ChatStore.to.currentChat.value,
-                                      null,
-                                      _.lastChat!,
-                                    ),
-                                    _,
-                                    context,
-                                  ),
-                                  OutlinedButton(
-                                    onPressed: () => _.stopChat(),
-                                    child: const Text("停止.."),
-                                  ),
-                                ],
-                              );
-                            }
-                            return const SizedBox.shrink();
+                            if (ChatStore.to.currentChat.value.isEmpty) return const SizedBox.shrink();
+                            return msgItem(
+                              Conversation.fromJsonFromChatGPT(
+                                ChatStore.to.currentChat.value,
+                                null,
+                                _.lastChat!,
+                              ),
+                              _,
+                              context,
+                            );
                           },
                           // Builds 1000 ListTiles
                           childCount: 1,
@@ -86,7 +75,7 @@ class ChatPage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 20),
-            if (_.lastChat!.type != ChatRoleEnum.chat.name)
+            if (_.lastChat!.type != ChatPromptRoleEnum.chat.name)
               Container(
                 color: WcaoTheme.primaryFocus.withOpacity(0.6),
                 child: Column(

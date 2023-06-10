@@ -1,4 +1,5 @@
 import 'package:JuAI/common/routers/routes.dart';
+import 'package:JuAI/global.dart';
 import 'package:JuAI/pages/bbs/view.dart';
 import 'package:JuAI/pages/bbs_chat/view.dart';
 import 'package:JuAI/pages/conversation/role/view.dart';
@@ -17,6 +18,7 @@ class HomeController extends GetxController {
   /// 在 widget 内存中分配后立即调用。
   @override
   void onInit() {
+    Global.loginedInit();
     super.onInit();
   }
 

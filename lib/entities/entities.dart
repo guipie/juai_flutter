@@ -1,6 +1,6 @@
 library entities;
 
-export 'user_login.dart';
+export 'user/user_login.dart';
 export 'content/content.dart';
 export 'categories.dart';
 export 'channels.dart';

@@ -47,9 +47,9 @@ class Routes {
 
   static void toHome() {
     if (GetPlatform.isMobile) {
-      Get.offAndToNamed(home);
+      Get.offAllNamed(home);
     } else {
-      Get.toNamed(homePc);
+      Get.offAllNamed(homePc);
     }
   }
 }

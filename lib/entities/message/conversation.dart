@@ -1,6 +1,7 @@
 import 'package:JuAI/common/store/store.dart';
 import 'package:JuAI/common/utils/date.dart';
-import 'package:JuAI/entities/message/chat_role.dart';
+
+import 'chat_prompt.dart';
 
 class Conversation {
   Conversation({
@@ -49,11 +50,11 @@ class Conversation {
         receiveTime: dateFormatYMDHMS(DateTime.now()),
         content: content,
       );
-  factory Conversation.fromJsonToUser(String content, String? chatOpenAiId, ChatRoleEntity chatRoleEntity) => Conversation(
-        conversationId: chatRoleEntity.id,
+  factory Conversation.fromJsonToUser(int conversationId, String content, String? chatOpenAiId) => Conversation(
+        conversationId: conversationId,
         chatOpenAiId: chatOpenAiId,
         sendId: UserStore.to.userId,
-        recevieId: chatRoleEntity.id,
+        recevieId: conversationId,
         sendTime: dateFormatYMDHMS(DateTime.now()),
         receiveTime: dateFormatYMDHMS(DateTime.now()),
         content: content,
@@ -72,38 +73,53 @@ class Conversation {
 
 class ConversationLast {
   int conversationId;
+  int? promptId;
   String type;
+  int? lastSenderId;
   String lastSender;
   String lastSenderAvatar;
   String lastSendTime;
   String content;
   String? draf;
-  int unread = 0;
+  int unread;
+  int userId;
   ConversationLast({
     required this.conversationId,
+    this.promptId,
+    this.lastSenderId,
     required this.lastSender,
     required this.lastSenderAvatar,
     required this.lastSendTime,
     required this.content,
     required this.type,
     this.draf,
+    this.unread = 0,
+    required this.userId,
   });
   factory ConversationLast.fromJson(Map<String, dynamic> json) => ConversationLast(
         conversationId: json["conversationId"],
-        type: json["type"] ?? ChatRoleEnum.user.name,
+        promptId: json["promptId"],
+        type: json["type"] ?? ChatPromptRoleEnum.user.name,
         lastSender: json["lastSender"],
+        lastSenderId: json["lastSenderId"],
         lastSenderAvatar: json["lastSenderAvatar"],
         lastSendTime: json["lastSendTime"],
         content: json["content"],
         draf: json["draf"],
+        unread: json["unread"] ?? 0,
+        userId: json["userId"] ?? UserStore.to.userId,
       );
   Map<String, dynamic> toJson() => {
         "conversationId": conversationId,
+        "promptId": promptId,
         "type": type,
         "lastSender": lastSender,
+        "lastSenderId": lastSenderId,
         "lastSenderAvatar": lastSenderAvatar,
         "lastSendTime": lastSendTime,
         "content": content,
         "draf": draf,
+        "unread": unread,
+        "userId": userId,
       };
 }

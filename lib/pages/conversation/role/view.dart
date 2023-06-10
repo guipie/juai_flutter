@@ -1,9 +1,6 @@
-import 'package:JuAI/common/assets.dart';
-import 'package:JuAI/common/routers/routes.dart';
 import 'package:JuAI/common/store/chat.dart';
-import 'package:JuAI/common/widgets/image_cache.dart';
+import 'package:JuAI/common/widgets/avatar.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class RolePage extends StatelessWidget {
   const RolePage({Key? key}) : super(key: key);
@@ -16,16 +13,12 @@ class RolePage extends StatelessWidget {
         child: SingleChildScrollView(
           child: Wrap(
             runSpacing: 10,
-            children: ChatStore.to.chatRoles
+            children: ChatStore.to.chatPrompts
                 .map(
                   (e) => TextButton.icon(
-                    onPressed: () => ChatStore.to.toChat(roleId: e.id),
-                    icon: ImageCacheWidget(
-                      Assets.dataAvatarPrefix + e.avatar + ".png",
-                      cacheImageType: CacheImageType.asserts,
-                      width: 30,
-                    ),
-                    label: Text(e.name),
+                    onPressed: () => ChatStore.to.toChat(chatPrompt: e),
+                    icon: aiAvatar(e.avatar),
+                    label: Text(e.title),
                   ),
                 )
                 .toList(),
