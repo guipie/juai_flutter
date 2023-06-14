@@ -36,12 +36,17 @@ class PublishSpecialController extends GetxController {
       Loading.loading("发布中....");
       QiniuUtil.saveFile(File(entity.coverImage), FileType.image, folder: "special").then((value) {
         entity.coverImage = value;
-        SpecialApi.add(entity).then((value) => {Get.offNamed(Routes.bbsPublishArticle, arguments: value)});
+        SpecialApi.add(entity).then((value) {
+          if (value > 0) {
+            Loading.success("发布成功");
+            Get.offNamed(Routes.bbsPublishArticle, arguments: {"specialId": value, "specialName": entity.title});
+          }
+        });
       });
     } catch (e) {
       Loading.error("发布失败");
     } finally {
-      Loading.dismiss();
+      Future.delayed(const Duration(seconds: 10), () => Loading.dismiss());
     }
   }
 

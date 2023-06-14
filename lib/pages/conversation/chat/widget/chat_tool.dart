@@ -1,8 +1,8 @@
-import 'package:JuAI/common/assets.dart';
 import 'package:JuAI/common/store/chat.dart';
+import 'package:JuAI/common/store/store.dart';
 import 'package:JuAI/common/theme.dart';
+import 'package:JuAI/common/utils/loading.dart';
 import 'package:JuAI/common/widgets/avatar.dart';
-import 'package:JuAI/common/widgets/cell.dart';
 import 'package:JuAI/pages/conversation/chat/controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +13,7 @@ import 'text_show_hide.dart';
 class ChatToolWidget extends StatelessWidget {
   ChatToolWidget({super.key});
   final _ = Get.find<ChatController>();
+  var contextType = UserStore.to.gptTokenSettings.value.contextType.obs;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -41,19 +42,19 @@ class ChatToolWidget extends StatelessWidget {
               builder: (context) {
                 return ListView.builder(
                   itemBuilder: (context, index) {
-                    var _role = ChatStore.to.chatPrompts[index];
+                    var _prompt = ChatStore.to.chatPrompts[index];
                     return ListTile(
-                      leading: avatar(avatarUrl: _role.avatar, radius: 18),
-                      title: Text(_role.title),
+                      leading: avatar(avatarUrl: _prompt.avatar, radius: 18),
+                      title: Text(_prompt.title),
                       subtitle: TextShowHide(
-                        text: _role.prompts.first.prompt,
+                        text: _prompt.prompts.first.prompt,
                         maxLines: 2,
-                        additionMore: _role.prompts.map((e) => e.prompt).toList(),
+                        additionMore: _prompt.prompts.map((e) => e.prompt).toList(),
                       ),
                       trailing: TextButton(
                           onPressed: () {
                             Get.back();
-                            ChatStore.to.toChat(chatPrompt: _role);
+                            _.toAddPrompt(_prompt);
                           },
                           child: const Text("确定")),
                     );
@@ -66,66 +67,93 @@ class ChatToolWidget extends StatelessWidget {
         ),
         const SizedBox(width: 10),
         InkWell(
-          child: const Icon(Icons.display_settings_outlined),
+          child: contextType.value != 0
+              ? const Icon(
+                  Icons.display_settings_sharp,
+                  color: Colors.green,
+                )
+              : const Icon(Icons.display_settings_outlined),
           onTap: () {
             showModalBottomSheet(
               context: context,
-              useSafeArea: true,
               shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.only(topLeft: Radius.circular(30), topRight: Radius.circular(30)),
               ),
               builder: (context) {
                 return Padding(
                   padding: const EdgeInsets.all(15),
-                  child: Wrap(
-                    children: [
-                      const Text(
-                        "保持上下文设置",
-                        style: TextStyle(color: Colors.red),
-                      ),
-                      ListTile(
-                        title: const Text('不保持'),
-                        subtitle: Text(
-                          "只会消耗当前会话的token",
-                          style: TextStyle(color: WcaoTheme.secondary),
+                  child: Obx(
+                    () => Wrap(
+                      children: [
+                        const Text(
+                          "保持上下文设置",
+                          style: TextStyle(color: Colors.red),
                         ),
-                        trailing: Transform.scale(
-                          scale: .8,
-                          child: CupertinoSwitch(
-                            value: false,
-                            onChanged: (value) {},
+                        ListTile(
+                          title: const Text('不保持'),
+                          subtitle: Text(
+                            "只会消耗每次请求的token",
+                            style: TextStyle(color: WcaoTheme.secondary),
+                          ),
+                          trailing: Transform.scale(
+                            scale: .8,
+                            child: CupertinoSwitch(
+                              value: contextType.value == 0,
+                              onChanged: (value) {
+                                if (value) {
+                                  contextType.value = 0;
+                                  UserStore.to.setGetGptToken(contextType: contextType.value);
+                                }
+                              },
+                            ),
                           ),
                         ),
-                      ),
-                      ListTile(
-                        title: const Text('全部保持'),
-                        subtitle: Text(
-                          "携带当前所有会话，消耗token较多",
-                          style: TextStyle(color: WcaoTheme.secondary),
-                        ),
-                        trailing: Transform.scale(
-                          scale: .8,
-                          child: CupertinoSwitch(
-                            value: false,
-                            onChanged: (value) {},
+                        ListTile(
+                          title: const Text('全部保持'),
+                          subtitle: Text(
+                            "携带全部上下文，消耗token较多",
+                            style: TextStyle(color: WcaoTheme.secondary),
+                          ),
+                          trailing: Transform.scale(
+                            scale: .8,
+                            child: CupertinoSwitch(
+                              value: contextType.value == -1,
+                              onChanged: (value) {
+                                if (value) {
+                                  contextType.value = -1;
+                                  UserStore.to.setGetGptToken(contextType: contextType.value);
+                                }
+                              },
+                            ),
                           ),
                         ),
-                      ),
-                      ListTile(
-                        title: const Text('自定义'),
-                        subtitle: Text(
-                          "携带当前最近会话数量的token",
-                          style: TextStyle(color: WcaoTheme.secondary),
-                        ),
-                        trailing: Transform.scale(
-                          scale: .8,
-                          child: CupertinoSwitch(
-                            value: false,
-                            onChanged: (value) {},
+                        ListTile(
+                          title: UserStore.to.gptTokenSettings.value.contextType > 0 ? Text('自定义[${UserStore.to.gptTokenSettings.value.contextType}]') : const Text('自定义'),
+                          subtitle: Text(
+                            "当前上下文最近的会话数量(建议)",
+                            style: TextStyle(color: WcaoTheme.secondary),
+                          ),
+                          trailing: Transform.scale(
+                            scale: .8,
+                            child: CupertinoSwitch(
+                              value: contextType.value > 0,
+                              onChanged: (value) {
+                                if (value) {
+                                  Loading.confirmTextFiled(
+                                    "请输入自定义数量",
+                                    inputText: "3",
+                                    onConfirm: (inputText) {
+                                      contextType.value = int.parse(inputText);
+                                      UserStore.to.setGetGptToken(contextType: contextType.value);
+                                    },
+                                  );
+                                }
+                              },
+                            ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 );
               },

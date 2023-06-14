@@ -21,6 +21,7 @@ class Loading {
       ..toastPosition = EasyLoadingToastPosition.bottom
       ..maskType = EasyLoadingMaskType.custom;
   }
+  static var instance = EasyLoading.instance;
   static void confirm(String text, {Function()? onConfirm}) {
     Get.defaultDialog(
       title: "确认提示",
@@ -30,6 +31,39 @@ class Loading {
       textCancel: "取消",
       onConfirm: () {
         onConfirm?.call();
+        Get.back();
+      },
+    );
+  }
+
+  static void confirmWidget(Widget text, {Function()? onConfirm}) {
+    Get.defaultDialog(
+      title: "确认提示",
+      content: text,
+      radius: 30,
+      textConfirm: "确认",
+      textCancel: "取消",
+      onConfirm: () {
+        onConfirm?.call();
+        Get.back();
+      },
+    );
+  }
+
+  static void confirmTextFiled(String hintText, {TextInputType? textInputType, String? inputText, Function(String inputText)? onConfirm}) {
+    var textController = TextEditingController(text: inputText);
+    Get.defaultDialog(
+      title: "确认提示",
+      content: TextField(
+        decoration: InputDecoration(hintText: hintText),
+        keyboardType: textInputType,
+        controller: textController,
+      ),
+      radius: 30,
+      textConfirm: "确认",
+      textCancel: "取消",
+      onConfirm: () {
+        if (textController.text.trim().isNotEmpty) onConfirm?.call(textController.text);
         Get.back();
       },
     );

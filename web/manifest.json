@@ -1,6 +1,6 @@
 {
-    "name": "guxin_ai",
-    "short_name": "gxai",
+    "name": "juai",
+    "short_name": "ja",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#hexcode",

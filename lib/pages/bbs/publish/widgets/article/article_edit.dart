@@ -49,7 +49,7 @@ class _ArticleEditPageState extends State<ArticleEditPage> {
       debugPrint("初始化document：$existDoc");
       setState(() {
         _controller = QuillController(
-          document: Document.fromJson(jsonDecode(existDoc)),
+          document: Document.fromJson(jsonDecode(existDoc.isNotEmpty ? existDoc : "")),
           selection: const TextSelection.collapsed(offset: 0),
         );
       });

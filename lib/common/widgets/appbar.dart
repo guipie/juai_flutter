@@ -1,3 +1,4 @@
+import 'package:JuAI/pages/bbs/controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:JuAI/common/routers/routes.dart';
@@ -67,6 +68,7 @@ AppBar conversationBar(BuildContext context) {
 }
 
 AppBar bbsBar(BuildContext context, List<String> tabs) {
+  final logic = Get.find<BbsController>();
   return AppBar(
     automaticallyImplyLeading: false,
     title: const Text("社区"),
@@ -81,13 +83,7 @@ AppBar bbsBar(BuildContext context, List<String> tabs) {
           ],
         ),
         onSelected: (item) async {
-          if (item == 1) {
-            Get.toNamed(Routes.bbsPublishDongtai);
-          } else if (item == 2) {
-            Get.toNamed(Routes.bbsPublishArticle);
-          } else if (item == 3) {
-            Get.toNamed(Routes.bbsPublishSpecial);
-          }
+          logic.toPublish(item);
         },
         itemBuilder: (BuildContext context) => [
           PopupMenuItem(

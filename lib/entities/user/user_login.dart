@@ -29,7 +29,6 @@ class UserLoginResponseEntity {
   int id;
   String userName;
   String nickName;
-  String status;
   String? sex;
   String? birthday;
   String? email;
@@ -44,7 +43,6 @@ class UserLoginResponseEntity {
     required this.id,
     required this.userName,
     required this.nickName,
-    required this.status,
     this.sex,
     required this.tokenNum,
     this.birthday,
@@ -67,13 +65,12 @@ class UserLoginResponseEntity {
         tokenNum: json["TokenNum"] ?? 0,
         nickName: json["NickName"],
         avatar: json["Avatar"],
-        status: json["Status"],
         sex: json["Sex"],
         birthday: json["Birthday"],
         email: json["Email"],
         phone: json["Phone"] ?? "",
         address: json["Address"],
-        lastLoginDate: DateTime.parse(json["LastLoginDate"] ?? DateTime.now().toString()),
+        lastLoginDate: DateTime.tryParse(json["LastLoginTime"].toString()) ?? DateTime.now(),
         roleNames: json["RoleNames"],
         remark: json["Remark"],
       );
@@ -83,7 +80,6 @@ class UserLoginResponseEntity {
         "UserName": userName,
         "TokenNum": tokenNum,
         "NickName": nickName,
-        "Status": status,
         "Sex": sex,
         "Birthday": birthday,
         "Email": email,

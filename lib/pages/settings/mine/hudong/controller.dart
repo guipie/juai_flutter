@@ -29,7 +29,7 @@ class SettingMyHudongController extends GetxController {
   _loadData() {
     if (!isLoading) {
       isLoading = true;
-      ContentAPI.myContentList(lastId: ccontents.isEmpty ? null : ccontents.last.id).then((value) {
+      ContentAPI.myCommentContentList(lastId: ccontents.isEmpty ? null : ccontents.last.id).then((value) {
         ccontents.addAll(value);
         isLoading = false;
       });

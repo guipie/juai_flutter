@@ -37,7 +37,7 @@ class HttpUtil {
     connectTimeout: const Duration(seconds: 30),
 
     // 响应流上前后两次接受到数据的间隔，单位为5000毫秒。
-    receiveTimeout: const Duration(milliseconds: 1000 * 10),
+    receiveTimeout: const Duration(milliseconds: 1000 * 30),
 
     // Http请求头.
     headers: {},
@@ -90,7 +90,6 @@ class HttpUtil {
         } else if (GetUtils.isNullOrBlank(message) == false) {
           debugPrint("没有成功，返回信息:$message");
           Loading.waring(message);
-          return handler.reject(DioError(requestOptions: response.requestOptions, response: response));
         }
         // Do something with response data
         return handler.next(response); // continue
@@ -251,6 +250,7 @@ class HttpUtil {
     dynamic data,
     Map<String, dynamic>? queryParameters,
     Options? options,
+    void Function(int, int)? onReceiveProgress,
   }) async {
     Options requestOptions = options ?? Options();
     requestOptions.headers = requestOptions.headers ?? {};
@@ -261,6 +261,7 @@ class HttpUtil {
       queryParameters: queryParameters,
       options: requestOptions,
       cancelToken: cancelToken,
+      onReceiveProgress: onReceiveProgress,
     );
     return ApiResponse.fromJson(response.data);
   }

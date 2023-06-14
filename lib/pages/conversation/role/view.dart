@@ -17,7 +17,7 @@ class RolePage extends StatelessWidget {
                 .map(
                   (e) => TextButton.icon(
                     onPressed: () => ChatStore.to.toChat(chatPrompt: e),
-                    icon: aiAvatar(e.avatar),
+                    icon: aiAvatar(e.avatar, radius: 18, onClick: () => ChatStore.to.toChat(chatPrompt: e)),
                     label: Text(e.title),
                   ),
                 )

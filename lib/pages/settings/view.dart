@@ -147,7 +147,7 @@ class SettingsPage extends GetView<SettingsController> {
   }
 
   _homeItem(String iconSvg, int num, String title, BuildContext context) {
-    var numStr = num > 1000 ? "${num ~/ 1000}k+" : "$num";
+    var numStr = num <= 0 ? "0" : (num > 1000 ? "${num ~/ 1000}k+" : "$num");
     return Column(
       children: [
         SvgImageWidget(iconSvg),

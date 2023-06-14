@@ -1,9 +1,11 @@
-import 'package:JuAI/common/apis/content_special_api.dart';
+import 'package:JuAI/common/routers/routes.dart';
 import 'package:JuAI/common/theme.dart';
 import 'package:JuAI/common/utils/date.dart';
 import 'package:JuAI/common/widgets/bottommost.dart';
 import 'package:JuAI/common/widgets/image_cache.dart';
 import 'package:JuAI/common/widgets/load_data.dart';
+import 'package:JuAI/components/reaction_button/flutter_reaction_button.dart';
+import 'package:JuAI/components/reaction_button/src/ui/reaction_button.dart';
 import 'package:JuAI/pages/bbs/widgets/card_index.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -73,15 +75,42 @@ class SpecialPage extends GetView<SpecialController> {
           ],
         ),
       ),
-      floatingActionButton: FilledButton.icon(
-        onPressed: () => logic.toJoin(),
-        icon: const Icon(Icons.add, color: Colors.white),
-        label: Obx(
-          () => Text(
-            logic.isJoin.value ? "发布" : "加入",
-            style: TextStyle(fontSize: WcaoTheme.fsL, color: Colors.white),
-          ),
-        ),
+      floatingActionButton: Obx(
+        () => logic.isJoin.value
+            ? ReactionButton<String>(
+                onReactionChanged: (String? value) {
+                  logic.toJoinOrPublish(route: value!);
+                },
+                reactions: [
+                  Reaction<String>(
+                    value: Routes.bbsPublishDongtai,
+                    icon: TextButton.icon(onPressed: () {}, icon: const Icon(Icons.image_aspect_ratio_outlined), label: const Text("动态")),
+                  ),
+                  Reaction<String>(
+                    value: Routes.bbsPublishArticle,
+                    icon: TextButton.icon(onPressed: () {}, icon: const Icon(Icons.article_outlined), label: const Text("文章")),
+                  ),
+                  Reaction<String>(
+                    value: Routes.bbsPublishSpecial,
+                    icon: TextButton.icon(onPressed: () {}, icon: const Icon(Icons.folder_special_outlined), label: const Text("新圈子")),
+                  ),
+                ],
+                initialReaction: Reaction<String>(
+                  value: 'publish',
+                  icon: FilledButton(onPressed: () {}, child: const Text("发布")),
+                ),
+                boxRadius: 10,
+                boxDuration: const Duration(milliseconds: 500),
+                itemScaleDuration: const Duration(milliseconds: 200),
+              )
+            : FilledButton.icon(
+                onPressed: () => logic.toJoinOrPublish(),
+                icon: const Icon(Icons.add, color: Colors.white),
+                label: Text(
+                  "加入",
+                  style: TextStyle(fontSize: WcaoTheme.fsL, color: Colors.white),
+                ),
+              ),
       ),
     );
   }

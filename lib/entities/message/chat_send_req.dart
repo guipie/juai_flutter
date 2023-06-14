@@ -20,9 +20,9 @@ class ChatSendReqEntity {
 
   factory ChatSendReqEntity.fromRawJson(String str) => ChatSendReqEntity.fromJson(json.decode(str));
   factory ChatSendReqEntity.fromInitJson(String content, int conversationId) => ChatSendReqEntity(
-        contextType: UserStore.to.tokenEntity.value.contextType,
+        contextType: UserStore.to.gptTokenSettings.value.contextType,
         conversationId: conversationId,
-        promptId: ChatStore.to.currentChatPrompt == null ? null : ChatStore.to.currentChatPrompt!.id,
+        promptId: ChatStore.to.currentChatPrompt == null ? ChatStore.to.lastChat!.promptId : ChatStore.to.currentChatPrompt!.id,
         chatMessages: [
           ChatMessage(
             role: ChatPromptRoleEnum.user.name,

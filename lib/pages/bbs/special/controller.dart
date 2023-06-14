@@ -2,6 +2,7 @@ import 'package:JuAI/common/apis/content_special_api.dart';
 import 'package:JuAI/common/routers/routes.dart';
 import 'package:JuAI/entities/content/content.dart';
 import 'package:JuAI/entities/content/special.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class SpecialController extends GetxController {
@@ -36,9 +37,11 @@ class SpecialController extends GetxController {
     }
   }
 
-  toJoin() {
+  toJoinOrPublish({String? route}) async {
     if (isJoin.value) {
-      Get.toNamed(Routes.bbsPublishDongtai, arguments: Map.from({"specialId": specialId, "specialName": detail.title}));
+      var result = await Get.toNamed(route!, arguments: {"specialId": specialId, "specialName": detail.title});
+      debugPrint("result,result:$result");
+      if (result != null && result > 0) _getContents(true);
     } else {
       SpecialApi.joinSpecial(specialId).then((value) => isJoin.value = value > 0);
     }

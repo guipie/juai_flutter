@@ -17,6 +17,10 @@ class UserAPI {
     );
   }
 
+  static Future<ApiResponse> replaceToken() async {
+    return await HttpUtil().post('/api/app/user/replaceToken');
+  }
+
   static Future<UserInfo> getUserInfo(int userId) async {
     return HttpUtil().get('/api/app/user/$userId').then((value) => UserInfo.fromJson(value.data));
   }

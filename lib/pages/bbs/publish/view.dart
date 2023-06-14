@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:JuAI/pages/bbs/widgets/card_dongtai_video.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:JuAI/common/routers/routes.dart';
 import 'package:JuAI/common/widgets/image_cache.dart';
@@ -114,14 +115,17 @@ class PublishDongtaiPage extends StatelessWidget {
                         color: WcaoTheme.secondary,
                       ),
                     ),
-                    GFButton(
-                      onPressed: () {
-                        Get.offNamed(Routes.bbsPublishArticle);
-                      },
-                      text: "写文章",
-                      size: GFSize.LARGE,
-                      type: GFButtonType.transparent,
-                    ),
+                    // GFButton(
+                    //   onPressed: () {
+                    //     Get.offAndToNamed(
+                    //       Routes.bbsPublishArticle,
+                    //       arguments: {"specialId": logic.state.specialId, "specialName": logic.state.specialName},
+                    //     );
+                    //   },
+                    //   text: "写文章",
+                    //   size: GFSize.LARGE,
+                    //   type: GFButtonType.transparent,
+                    // ),
                     // IconButton(
                     //   onPressed: () {},
                     //   icon: Icon(
@@ -231,51 +235,10 @@ class PublishDongtaiPage extends StatelessWidget {
       child: Container(
         margin: const EdgeInsets.only(left: 4),
         height: 200,
-        child: Stack(
-          children: [
-            Center(
-              child: logic.state.videoController.value.isInitialized
-                  ? AspectRatio(
-                      aspectRatio: logic.state.videoController.value.aspectRatio,
-                      child: VideoPlayer(logic.state.videoController),
-                    )
-                  : Container(),
-            ),
-            Obx(
-              () => logic.state.videoPlaying.value
-                  ? Container()
-                  : Positioned(
-                      top: 100,
-                      left: 1.sw / 2.3,
-                      child: const Icon(
-                        Icons.play_circle_fill_outlined,
-                        size: GFSize.MEDIUM,
-                        color: GFColors.WHITE,
-                      ),
-                    ),
-            ),
-            Positioned(
-              top: 8,
-              right: 2,
-              child: InkWell(
-                onTap: () => logic.state.dongtaiVideos.clear(),
-                child: const Icon(
-                  Icons.delete_outlined,
-                  color: GFColors.WARNING,
-                ),
-              ),
-            ),
-            if (file.percentage > 0)
-              Positioned(
-                bottom: 0,
-                height: 0.6,
-                child: GFProgressBar(
-                  margin: EdgeInsets.zero,
-                  progressBarColor: GFColors.SUCCESS,
-                  percentage: file.percentage > 1 ? 1 : file.percentage,
-                ),
-              )
-          ],
+        child: CardDongtaiVideoWidget(
+          file.path,
+          isNetwork: false,
+          isFirstLoading: false,
         ),
       ),
     );

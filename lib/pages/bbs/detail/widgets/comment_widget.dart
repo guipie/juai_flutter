@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:JuAI/common/apis/content_api.dart';
 import 'package:JuAI/common/apis/content_comment_api.dart';
 import 'package:JuAI/common/store/user.dart';
 import 'package:JuAI/common/utils/date.dart';

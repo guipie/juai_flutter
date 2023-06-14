@@ -1,4 +1,4 @@
-package com.example.guxin_ai
+package com.juai.link
 
 import io.flutter.embedding.android.FlutterActivity
 

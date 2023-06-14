@@ -22,7 +22,6 @@ import 'widgets/bbs_tag.dart';
 class PublishController extends GetxController {
   PublishController();
   final state = PublishState();
-  SpecialResEntity? specialInfo;
   List<AssetEntity>? selectedAssets;
   @override
   Future<void> onInit() async {
@@ -34,8 +33,8 @@ class PublishController extends GetxController {
       }
     });
     if (Get.arguments != null) {
-      state.specialId = Get.arguments['specialId'];
-      state.specialName.value = Get.arguments['specialName'];
+      state.specialId = Get.arguments['specialId'] ?? 0;
+      state.specialName.value = (Get.arguments['specialName'] ?? "").toString();
     }
     super.onInit();
   }
@@ -98,7 +97,13 @@ class PublishController extends GetxController {
         addReqEntity.payTokens = payTokens;
       }
       addReqEntity.specialId = state.specialId;
-      await ContentAPI.contentAdd(addReqEntity).then((value) => {if (value > 0) Get.back()});
+      await ContentAPI.contentAdd(addReqEntity).then((value) {
+        if (value > 0) {
+          // if (state.specialId <= 0)
+          StorageService.to.remove(STORAGE_ARTICLE_DELTA);
+          Get.back(result: value);
+        }
+      });
     } catch (e) {
       Future.error(e);
     } finally {
@@ -168,13 +173,14 @@ class PublishController extends GetxController {
     try {
       Loading.loading("加载中...");
       for (var f in files ?? []) {
-        state.videoController = VideoPlayerController.file(
-          File(f.path!),
-          videoPlayerOptions: VideoPlayerOptions(allowBackgroundPlayback: false),
-        )..initialize().then((_) {
-            state.dongtaiVideos.add(DongtaiFile(path: f.path!, percentage: 0.0));
-            state.currentSendType.value = SendType.cansend;
-          });
+        state.dongtaiVideos.add(DongtaiFile(path: f.path!, percentage: 0.0));
+        // state.videoController = VideoPlayerController.file(
+        //   File(f.path!),
+        //   videoPlayerOptions: VideoPlayerOptions(allowBackgroundPlayback: false),
+        // )..initialize().then((_) {
+        //     state.dongtaiVideos.add(DongtaiFile(path: f.path!, percentage: 0.0));
+        //     state.currentSendType.value = SendType.cansend;
+        //   });
       }
     } catch (e) {
       Loading.error("加载出错了");

@@ -25,12 +25,17 @@ class CardIndexWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             if (content.category != BaCategory.Article)
-              InkWell(
+              GestureDetector(
+                behavior: HitTestBehavior.deferToChild,
                 onTap: () => Get.toNamed(Routes.settingsMineHome, arguments: content.createId),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    avatar(avatarUrl: content.avatar, radius: 24),
+                    avatar(
+                      avatarUrl: content.avatar,
+                      radius: 24,
+                      onClick: () => Get.toNamed(Routes.settingsMineHome, arguments: content.createId),
+                    ),
                     Expanded(
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),

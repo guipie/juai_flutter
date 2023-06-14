@@ -31,6 +31,7 @@ class _ToolsWidgetState extends State<ToolsWidget> {
               showModalBottomSheet(
                 context: context,
                 useSafeArea: true,
+                useRootNavigator: true,
                 builder: (context) {
                   return SingleChildScrollView(
                     padding: const EdgeInsets.all(22),

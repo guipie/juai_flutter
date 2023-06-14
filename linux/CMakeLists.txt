@@ -1,8 +1,8 @@
 cmake_minimum_required(VERSION 3.10)
 project(runner LANGUAGES CXX)
 
-set(BINARY_NAME "guxin_ai")
-set(APPLICATION_ID "com.example.guxin_ai")
+set(BINARY_NAME "juai")
+set(APPLICATION_ID "com.example.juai")
 
 cmake_policy(SET CMP0063 NEW)
 

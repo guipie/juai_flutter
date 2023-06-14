@@ -13,6 +13,7 @@ class Assets {
   static const String articleEditorJson = _dataPrefix + "editor.json";
   static const String articleEditorPcJson = _dataPrefix + "editor_pc.json";
   static const String roleJson = _dataPrefix + "role.json";
+  static const String privacyMd = _dataPrefix + "privacy.md";
 
   static const String _imagePrefix = prefix + "images/";
   static const String imageBj = _imagePrefix + "bg.jpg";

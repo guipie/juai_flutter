@@ -46,6 +46,10 @@ class UserFollowHome {
   int id;
   int followedNum;
   int toBeFollowedNum;
+  int videoNum;
+  int articleNum;
+  int dongtaiNum;
+  int specialNum;
   List<dynamic>? tag;
   String? remark;
 
@@ -55,6 +59,10 @@ class UserFollowHome {
     required this.id,
     required this.followedNum,
     required this.toBeFollowedNum,
+    required this.videoNum,
+    required this.articleNum,
+    required this.dongtaiNum,
+    required this.specialNum,
     this.createTime,
     this.tag,
     this.remark,
@@ -66,6 +74,10 @@ class UserFollowHome {
         id: json["Id"],
         followedNum: json["FollowedNum"],
         toBeFollowedNum: json["ToBeFollowedNum"],
+        videoNum: json["VideoNum"],
+        articleNum: json["ArticleNum"],
+        dongtaiNum: json["DongtaiNum"],
+        specialNum: json["SpecialNum"],
         tag: json["Tag"],
         remark: json["Remark"],
         createTime: DateTime.tryParse(json["CreateTime"]),

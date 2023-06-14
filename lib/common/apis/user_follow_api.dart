@@ -17,7 +17,7 @@ class UserFollowApi {
     return data.data;
   }
 
-  static Future<UserFollowHome> getFollowHome(int userId) async {
+  static Future<UserFollowHome> getFollowUserHome(int userId) async {
     var data = await HttpUtil().get('/Follow/user/home/$userId');
     return UserFollowHome.fromJson(data.data);
   }

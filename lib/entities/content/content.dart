@@ -93,7 +93,7 @@ class ContentResEntity {
         readType: BaReadType.values.firstWhereOrNull((element) => element.name == vjson["ReadType"]) ?? BaReadType.Pub,
         id: vjson["Id"],
         createId: vjson["CreateId"],
-        createNick: vjson["CreateNick"] ?? "匿名",
+        createNick: vjson["CreateNick"] ?? ("---" + vjson["CreateId"].toString()),
         avatar: vjson["Avatar"],
         createTime: DateTime.parse(vjson["CreateTime"]),
         files: vjson["Files"] ?? [],

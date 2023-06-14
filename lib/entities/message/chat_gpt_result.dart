@@ -9,7 +9,7 @@ class ChatGPTResEntity {
   ChatGPTResEntity({
     this.role = "system",
     required this.content,
-    this.name = "guxin",
+    this.name = "juai",
   });
   ChatGPTResEntity copyWith({
     String? role,

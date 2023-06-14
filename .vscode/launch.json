@@ -5,18 +5,18 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "guxin_ai",
+      "name": "juai",
       "request": "launch",
       "type": "dart",
     },
     {
-      "name": "guxin_ai (profile mode)",
+      "name": "juai (profile mode)",
       "request": "launch",
       "type": "dart",
       "flutterMode": "profile"
     },
     {
-      "name": "guxin_ai (release mode)",
+      "name": "juai (release mode)",
       "request": "launch",
       "type": "dart",
       "flutterMode": "release"

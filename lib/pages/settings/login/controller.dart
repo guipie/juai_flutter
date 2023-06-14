@@ -1,11 +1,11 @@
 import 'dart:async';
 
+import 'package:JuAI/common/utils/loading.dart';
 import 'package:JuAI/global.dart';
 import 'package:flutter/material.dart';
 import 'package:JuAI/common/apis/user_api.dart';
 import 'package:JuAI/entities/user/user_login.dart';
 import 'package:JuAI/common/routers/routes.dart';
-import 'package:JuAI/common/store/content.dart';
 import 'package:JuAI/common/store/store.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
@@ -20,7 +20,7 @@ class LoginController extends GetxController {
   @override
   void onInit() {
     var route = Get.currentRoute;
-    if (UserStore.to.isLogin && UserStore.to.userInfo != null && UserStore.to.tokenInfo != null) {
+    if (UserStore.to.isLogin && UserStore.to.tokenInfo != null) {
       Routes.toHome();
     }
     userName.addListener(() {
@@ -55,7 +55,7 @@ class LoginController extends GetxController {
         if (value.isOk) {
           UserStore.to.saveProfile(UserLoginResponseEntity.fromJson(value.data["userResponse"]), UserTokenResponseEntity.fromJson(value.data["tokenInfo"])).then((value) {
             Routes.toHome();
-          });
+          }).catchError((err) => Loading.error("登录出错了"));
         }
       });
     } else {

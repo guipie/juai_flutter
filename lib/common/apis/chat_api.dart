@@ -2,8 +2,15 @@ import 'package:JuAI/common/utils/http.dart';
 import 'package:JuAI/entities/api_response.dart';
 import 'package:JuAI/entities/message/chat_prompt.dart';
 import 'package:JuAI/entities/message/chat_send_req.dart';
+import 'package:JuAI/entities/message/conversation.dart';
 
 class ChatApis {
+  static Future<ApiResponse> addConversation(ConversationLast last) {
+    var data = last.toJson();
+    data.addEntries({"Id": last.conversationId}.entries);
+    return HttpUtil().post("/ChatGPT/conversation", data: data).catchError((err) => throw Exception(err));
+  }
+
   static Future<ApiResponse> sendChatGPT(ChatSendReqEntity chatSendReqEntity) {
     return HttpUtil().post("/ChatGPT/stream", data: chatSendReqEntity.toJson()).catchError((err) => throw Exception(err));
   }

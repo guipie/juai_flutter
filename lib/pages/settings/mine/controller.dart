@@ -1,8 +1,8 @@
+import 'package:JuAI/common/apis/content_special_api.dart';
 import 'package:JuAI/entities/api_response.dart';
 import 'package:JuAI/common/apis/user_extend_api.dart';
 import 'package:JuAI/common/apis/user_follow_api.dart';
 import 'package:JuAI/common/store/store.dart';
-import 'package:JuAI/common/utils/loading.dart';
 import 'package:JuAI/pages/settings/mine/state.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -15,16 +15,22 @@ class SettingsMineHomeController extends GetxController {
   @override
   void onInit() {
     userId = Get.arguments ?? UserStore.to.userId;
-    UserFollowApi.getFollowHome(userId).then((value) => state.homeInfo.value = value);
+    UserFollowApi.getFollowUserHome(userId).then((value) => state.homeInfo.value = value);
     getUserContents();
+    SpecialApi.getMine().then((value) => state.specials.value = value);
     super.onInit();
   }
 
-  void getUserContents() {
+  void getUserContents({bool isFirst = false}) {
     if (!isLoading.value) {
       isLoading.value = true;
-      ContentAPI.userContentList(userId, lastId: state.items.isEmpty ? null : state.items.last.id).then((value) {
-        state.items.addAll(value);
+      var lastId = state.contents.isEmpty ? null : state.contents.last.id;
+      if (isFirst) lastId = null;
+      ContentAPI.userContentList(userId, type: state.currentType.value, lastId: lastId).then((value) {
+        if (lastId == null) {
+          state.contents.clear();
+        }
+        state.contents.addAll(value);
         isLoading.value = false;
       });
     }

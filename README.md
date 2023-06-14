@@ -1,4 +1,4 @@
-# guxin.chat
+# juai
 基于flutter开发的chatgpt聊天系统，可以直播聊天，可社区发布内容。
 ![image](https://github.com/guipie/guxin.chat/assets/55727172/6749d921-4203-4cca-9023-b489d2d2ba7a)
 ![image](https://github.com/guipie/guxin.chat/assets/55727172/d0b1cdb9-1345-40ac-a362-09a23d250c62)

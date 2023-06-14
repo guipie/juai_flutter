@@ -1,3 +1,4 @@
+import 'package:JuAI/common/apis/content_special_api.dart';
 import 'package:JuAI/common/routers/routes.dart';
 import 'package:JuAI/common/store/store.dart';
 import 'package:JuAI/common/utils/date.dart';
@@ -5,6 +6,7 @@ import 'package:JuAI/common/widgets/bottommost.dart';
 import 'package:JuAI/entities/content/content.dart';
 import 'package:JuAI/pages/bbs/widgets/card_dongtai_images.dart';
 import 'package:JuAI/pages/bbs/widgets/card_dongtai_video.dart';
+import 'package:JuAI/pages/bbs/widgets/specials.dart';
 import 'package:JuAI/pages/bbs/widgets/tags.dart';
 import 'package:JuAI/pages/bbs/widgets/tools.dart';
 import 'package:JuAI/pages/settings/mine/controller.dart';
@@ -93,37 +95,76 @@ class SettingsMineHomeWidget extends StatelessWidget {
               },
             ),
           ),
-
-          /// 数据信息
-          // SliverToBoxAdapter(
-          //   child: Container(
-          //     padding: const EdgeInsets.all(24),
-          //     child: Row(
-          //       mainAxisAlignment: MainAxisAlignment.start,
-          //       children: [
-          //         InkWell(
-          //           child: adapterItem(22, '全部'),
-          //           onTap: () => Get.toNamed('/mine/visitors'),
-          //         ),
-          //         adapterDrive(),
-          //         InkWell(
-          //           child: adapterItem(32, '动态'),
-          //           onTap: () => Get.toNamed('/mine/firends'),
-          //         ),
-          //         adapterDrive(),
-          //         InkWell(
-          //           child: adapterItem(41, '视频'),
-          //           onTap: () => Get.toNamed('/mine/fans'),
-          //         ),
-          //         adapterDrive(),
-          //         InkWell(
-          //           child: adapterItem(41, '文章'),
-          //           onTap: () => Get.toNamed('/mine/fans'),
-          //         )
-          //       ],
-          //     ),
-          //   ),
-          // ),
+          //圈子
+          SliverToBoxAdapter(
+            child: FutureBuilder(
+              future: SpecialApi.getMine(),
+              builder: (BuildContext context, AsyncSnapshot snapshot) {
+                if (snapshot.hasData) return SpecialsWidget(snapshot.data);
+                return const SizedBox.shrink();
+              },
+            ),
+          ),
+          // 数据信息
+          SliverToBoxAdapter(
+            child: Container(
+              padding: const EdgeInsets.all(24),
+              child: Obx(
+                () => Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    InkWell(
+                      child: adapterItem(
+                        logic.state.homeInfo.value.articleNum + logic.state.homeInfo.value.dongtaiNum + logic.state.homeInfo.value.videoNum,
+                        '全部',
+                        isSeleted: logic.state.currentType.value == "all",
+                      ),
+                      onTap: () {
+                        logic.state.currentType.value = "all";
+                        logic.getUserContents(isFirst: true);
+                      },
+                    ),
+                    adapterDrive(),
+                    InkWell(
+                      child: adapterItem(
+                        logic.state.homeInfo.value.dongtaiNum,
+                        '动态',
+                        isSeleted: logic.state.currentType.value == "dongtai",
+                      ),
+                      onTap: () {
+                        logic.state.currentType.value = "dongtai";
+                        logic.getUserContents(isFirst: true);
+                      },
+                    ),
+                    adapterDrive(),
+                    InkWell(
+                      child: adapterItem(
+                        logic.state.homeInfo.value.videoNum,
+                        '视频',
+                        isSeleted: logic.state.currentType.value == "video",
+                      ),
+                      onTap: () {
+                        logic.state.currentType.value = "video";
+                        logic.getUserContents(isFirst: true);
+                      },
+                    ),
+                    adapterDrive(),
+                    InkWell(
+                      child: adapterItem(
+                        logic.state.homeInfo.value.articleNum,
+                        '文章',
+                        isSeleted: logic.state.currentType.value == "article",
+                      ),
+                      onTap: () {
+                        logic.state.currentType.value = "article";
+                        logic.getUserContents(isFirst: true);
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
         ];
       }),
       body: NotificationListener(
@@ -132,16 +173,16 @@ class SettingsMineHomeWidget extends StatelessWidget {
           () => ListView.builder(
             physics: const ClampingScrollPhysics(), // 重要
             padding: const EdgeInsets.all(0),
-            itemCount: logic.state.items.length + 1,
+            itemCount: logic.state.contents.length + 1,
             itemBuilder: (context, index) {
               debugPrint("indexindexindexindex$index");
-              if (index == logic.state.items.length) {
+              if (index == logic.state.contents.length) {
                 return BottommostWidget(
                   logic.isLoading.value,
-                  isNodata: logic.state.items.isEmpty,
+                  isNodata: logic.state.contents.isEmpty,
                 );
               } else {
-                return _contentItem(logic.state.items[index]);
+                return _contentItem(logic.state.contents[index]);
               }
             },
           ),
@@ -209,21 +250,21 @@ class SettingsMineHomeWidget extends StatelessWidget {
     );
   }
 
-  Column adapterItem(int num, String text) {
+  Column adapterItem(int num, String text, {bool isSeleted = false}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text(
           "$num",
           style: TextStyle(
-            fontSize: WcaoTheme.fsXl,
-            fontWeight: FontWeight.bold,
+            fontSize: isSeleted ? WcaoTheme.fsXl : WcaoTheme.fsL,
+            fontWeight: isSeleted ? FontWeight.bold : FontWeight.w400,
           ),
         ),
         Text(
           text,
           style: TextStyle(
-            color: WcaoTheme.secondary,
+            color: isSeleted ? WcaoTheme.secondary : WcaoTheme.placeholder,
           ),
         )
       ],

@@ -1,8 +1,13 @@
+import 'package:JuAI/common/utils/http.dart';
+import 'package:JuAI/common/utils/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:JuAI/common/services/storage.dart';
 import 'package:JuAI/common/values/storage.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+
+enum PlatformType { Android, IOS, Windows, Mac, Linux, Web }
 
 class ConfigStore extends GetxController {
   static ConfigStore get to => Get.find();
@@ -27,6 +32,28 @@ class ConfigStore extends GetxController {
 
   Future<void> getPlatform() async {
     _platform = await PackageInfo.fromPlatform();
+    _upgrade();
+  }
+
+  void _upgrade() {
+    PlatformType type = PlatformType.Android;
+    if (GetPlatform.isIOS) {
+      type = PlatformType.IOS;
+    } else if (GetPlatform.isMacOS) {
+      type = PlatformType.Mac;
+    } else if (GetPlatform.isWindows) {
+      type = PlatformType.Windows;
+    } else if (GetPlatform.isLinux) {
+      type = PlatformType.Linux;
+    } else if (GetPlatform.isWeb) {
+      type = PlatformType.Web;
+    }
+    HttpUtil().get("/common/upgrade/" + type.name).then((value) {
+      debugPrint("升级信息$value");
+      if (value.data != null && int.tryParse(value.data)! > 0) {
+        EasyLoading.showInfo("请去juai.link,升级最新版本", dismissOnTap: false);
+      }
+    });
   }
 
   // 标记用户已打开APP

@@ -55,10 +55,13 @@ class ContentAPI {
 
   static Future<List<ContentResEntity>> userContentList(
     int userId, {
+    String type = "all",
     int? lastId,
   }) async {
+    var url = '/content/$userId';
+    if (type != "all") url += "/" + type;
     var response = await HttpUtil().get(
-      '/content/$userId',
+      url,
       queryParameters: {"lastId": lastId},
     );
     return (response.data as Iterable).map((e) => ContentResEntity.fromJson(e)).toList();

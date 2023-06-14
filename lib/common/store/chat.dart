@@ -86,11 +86,12 @@ class ChatStore extends GetxController {
         if (currentChat.value == "思考中..") currentChat.value = "";
         currentChat.value = currentChat.value + (chatResult.data ?? "");
         if (chatResult.isStop) {
-          toBottom();
           var conversation = Conversation.fromJsonFromChatGPT(currentChat.value, null, lastChat!);
           toAddChatStore(conversation);
           toAddChatLastStore(conversation);
           currentChat.value = "";
+          toBottom();
+          UserStore.to.userInfo.value!.tokenNum -= (chatResult.reqUsegeCnt + chatResult.resUsegeCnt);
         }
       });
       hubConnection.on("ReceiveChat", (arguments) {
@@ -169,6 +170,7 @@ class ChatStore extends GetxController {
   }
 
   void toChat({ConversationLast? conversation, ChatPromptEntity? chatPrompt, int? userId}) {
+    debugPrint("conversation：${conversation?.toJson()},chatPrompt${chatPrompt?.toJson()},userId:$userId");
     currentChatPrompt = null;
     if (conversation != null) {
       lastChat = conversation;
@@ -210,7 +212,7 @@ class ChatStore extends GetxController {
         userId: UserStore.to.userId,
       );
     }
-    Get.toNamed(Routes.currentChat);
+    Get.toNamed(Routes.currentChat, arguments: DateTime.now());
   }
 
   void toBottom() {

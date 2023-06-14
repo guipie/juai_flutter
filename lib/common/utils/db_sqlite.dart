@@ -24,10 +24,10 @@ class DbSqlite {
   // 创建数据库
   initDb() async {
     io.Directory documentsDirectory = await getApplicationDocumentsDirectory();
-    String path = join(documentsDirectory.path, "juai_1.04.db");
+    String path = join(documentsDirectory.path, "juai_1.05.db");
     var theDb = await openDatabase(path, version: 1, onCreate: (db, version) {
       db.execute("CREATE TABLE IF NOT EXISTS chat(id INTEGER PRIMARY KEY AUTOINCREMENT, conversationId int, chatOpenAiId TEXT,sendId int,recevieId int, sendTime TEXT,receiveTime,content TEXT)");
-      db.execute("CREATE TABLE IF NOT EXISTS chat_last(conversationId int PRIMARY KEY, type TEXT,lastSender TEXT,lastSenderAvatar TEXT,lastSendTime TEXT,content TEXT,draf TEXT,userId int)");
+      db.execute("CREATE TABLE IF NOT EXISTS chat_last(conversationId int PRIMARY KEY, type TEXT,lastSender TEXT,lastSenderAvatar TEXT,lastSendTime TEXT,content TEXT,draf TEXT,userId int,promptId int null)");
     });
     return theDb;
   }
