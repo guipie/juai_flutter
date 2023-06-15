@@ -95,7 +95,7 @@ class _JhPhotoBrowserState extends State<GxImageBrowser> {
                     if (_imgURL.startsWith('http')) {
                       _picture = CachedNetworkImageProvider(_imgURL);
                     } else {
-                      _picture = CachedNetworkImageProvider(Qiniu_External_domain + _imgURL);
+                      _picture = CachedNetworkImageProvider(QINIU_DOMAIN + _imgURL);
                     }
                     return PhotoViewGalleryPageOptions(
                       imageProvider: _picture,

@@ -37,7 +37,7 @@ class _ImageCacheWidgetState extends State<ImageCacheWidget> {
       );
     } else if (widget.cacheImageType == CacheImageType.network) {
       return CachedNetworkImage(
-        imageUrl: (widget.imageUrl.startsWith("http") ? "" : Qiniu_External_domain) + widget.imageUrl,
+        imageUrl: (widget.imageUrl.startsWith("http") ? "" : QINIU_DOMAIN) + widget.imageUrl,
         errorWidget: (context, url, error) => GestureDetector(
           onTap: _retryLoading,
           child: widget.isBackground == true

@@ -22,7 +22,7 @@ class _ImageAvatarCacheWidgetState extends State<ImageAvatarCacheWidget> {
   Widget build(BuildContext context) {
     if (widget.imageUrl.isEmpty) return avatar();
     return CachedNetworkImage(
-      imageUrl: (widget.imageUrl.startsWith("http") ? "" : Qiniu_External_domain) + widget.imageUrl,
+      imageUrl: (widget.imageUrl.startsWith("http") ? "" : QINIU_DOMAIN) + widget.imageUrl,
       errorWidget: (context, url, error) => GestureDetector(
         onTap: _retryLoading,
         child: const Icon(

@@ -31,7 +31,7 @@ class SpecialsWidget extends StatelessWidget {
                       borderRadius: const BorderRadius.all(Radius.circular(5)),
                       image: DecorationImage(
                         fit: BoxFit.fill,
-                        image: NetworkImage(Qiniu_External_domain + item.coverImage),
+                        image: NetworkImage(QINIU_DOMAIN + item.coverImage),
                       ),
                     ),
                     child: Column(

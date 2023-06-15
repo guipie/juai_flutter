@@ -1,3 +1,5 @@
+import 'package:JuAI/common/apis/chat_api.dart';
+import 'package:JuAI/common/apis/content_api.dart';
 import 'package:JuAI/common/store/chat.dart';
 import 'package:JuAI/common/utils/db_sqlite.dart';
 import 'package:JuAI/entities/message/conversation.dart';
@@ -34,6 +36,7 @@ class ConversationController extends GetxController {
     state.conversations.removeWhere((element) => element.conversationId == conversationId);
     DbSqlite.instance.delete("chat_last", where: "conversationId=?", whereArgs: [conversationId]);
     DbSqlite.instance.delete("chat", where: "conversationId=?", whereArgs: [conversationId]);
+    ChatApis.delConversation(conversationId);
     // Loading.waring('已删除');
   }
 }

@@ -14,7 +14,7 @@ class ArticleEditSate {
   List<String> insertVideos = [];
 
   void matchFileInit(String sources) {
-    var imageReg = RegExp(Qiniu_External_domain + r'(.{6}/.{10,20})"').allMatches(sources);
+    var imageReg = RegExp(QINIU_DOMAIN + r'(.{6}/.{10,20})"').allMatches(sources);
     for (RegExpMatch m in imageReg) {
       var imageUrl = m.groups([1]).first ?? "";
       debugPrint("匹配到文件：$imageUrl");
@@ -23,7 +23,7 @@ class ArticleEditSate {
   }
 
   void deleteFile(String sources) {
-    var imageReg = RegExp(Qiniu_External_domain + r'(.{6}/.{10,20})"').allMatches(sources);
+    var imageReg = RegExp(QINIU_DOMAIN + r'(.{6}/.{10,20})"').allMatches(sources);
     var currentImages = <String>[];
     for (RegExpMatch m in imageReg) {
       var imageUrl = m.groups([1]).first ?? "";

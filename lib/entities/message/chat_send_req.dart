@@ -19,19 +19,45 @@ class ChatSendReqEntity {
   });
 
   factory ChatSendReqEntity.fromRawJson(String str) => ChatSendReqEntity.fromJson(json.decode(str));
-  factory ChatSendReqEntity.fromInitJson(String content, int conversationId) => ChatSendReqEntity(
+  factory ChatSendReqEntity.fromInitJson(String content, int conversationId) {
+    var data = ChatSendReqEntity(
+      contextType: UserStore.to.gptTokenSettings.value.contextType,
+      conversationId: conversationId,
+      promptId: ChatStore.to.currentChatPrompt == null ? ChatStore.to.lastChat!.promptId : ChatStore.to.currentChatPrompt!.id,
+      chatMessages: [
+        ChatMessage(
+          role: ChatPromptRoleEnum.user.name,
+          content: content,
+          name: null,
+        ),
+      ],
+    );
+    if (ChatStore.to.currentChatPrompt != null) {
+      data.chatMessages.insertAll(
+        0,
+        ChatStore.to.currentChatPrompt!.prompts
+            .map((e) => ChatMessage(
+                  role: e.role,
+                  content: e.prompt,
+                  name: null,
+                ))
+            .toList(),
+      );
+    }
+    return data;
+  }
+  factory ChatSendReqEntity.fromPrompt(int conversationId, ChatPromptEntity prompt) => ChatSendReqEntity(
         contextType: UserStore.to.gptTokenSettings.value.contextType,
         conversationId: conversationId,
         promptId: ChatStore.to.currentChatPrompt == null ? ChatStore.to.lastChat!.promptId : ChatStore.to.currentChatPrompt!.id,
-        chatMessages: [
-          ChatMessage(
-            role: ChatPromptRoleEnum.user.name,
-            content: content,
-            name: null,
-          ),
-        ],
+        chatMessages: prompt.prompts
+            .map((e) => ChatMessage(
+                  role: e.role,
+                  content: e.prompt,
+                  name: null,
+                ))
+            .toList(),
       );
-
   String toRawJson() => json.encode(toJson());
 
   factory ChatSendReqEntity.fromJson(Map<String, dynamic> json) => ChatSendReqEntity(

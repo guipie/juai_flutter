@@ -38,7 +38,7 @@ class _CardDongtaiVideoWidgetState extends State<CardDongtaiVideoWidget> {
   void _setInit() {
     debugPrint("第一次初始化_isPlay:$_isPlay");
     if (GetPlatform.isMobile) {
-      _videoPlayerController = (widget.isNetwork ? VideoPlayerController.network(Qiniu_External_domain + widget.videoUrl) : VideoPlayerController.file(File(widget.videoUrl)))
+      _videoPlayerController = (widget.isNetwork ? VideoPlayerController.network(QINIU_DOMAIN + widget.videoUrl) : VideoPlayerController.file(File(widget.videoUrl)))
         ..initialize().then((_) {
           _videoPlayerController.play();
           _isPlay = true;
@@ -58,7 +58,7 @@ class _CardDongtaiVideoWidgetState extends State<CardDongtaiVideoWidget> {
         _winVideoPlayerController = VideoController(_winPlayer);
 
         // Play any media source.
-        await _winPlayer.open(Media(widget.isNetwork ? (Qiniu_External_domain + widget.videoUrl) : widget.videoUrl), play: true);
+        await _winPlayer.open(Media(widget.isNetwork ? (QINIU_DOMAIN + widget.videoUrl) : widget.videoUrl), play: true);
         _winPlayer.setPlaylistMode(PlaylistMode.single);
         _winPlayer.play();
         _isPlay = true;

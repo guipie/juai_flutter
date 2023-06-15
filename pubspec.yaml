@@ -46,6 +46,7 @@ dependencies:
   #scan: ^1.6.0
   dotted_border: ^2.0.0+2
   cached_network_image: ^3.2.0
+  url_launcher:
   flutter_screenutil:
   dio: ^5.0.1
   dio_cookie_manager:

@@ -15,7 +15,7 @@ Widget avatar({String? avatarUrl, double radius = 22, Function? onClick, BuildCo
   } else if (avatarUrl.startsWith("assets/")) {
     image = AssetImage(avatarUrl);
   } else {
-    image = NetworkImage(QiniuUtil.getImageThumbnail(Qiniu_External_domain + avatarUrl, width: 90, height: 90));
+    image = NetworkImage(QiniuUtil.getImageThumbnail(QINIU_DOMAIN + avatarUrl, width: 90, height: 90));
   }
   return InkWell(
     child: CircleAvatar(

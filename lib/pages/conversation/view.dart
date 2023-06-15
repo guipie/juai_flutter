@@ -1,4 +1,5 @@
 import 'package:JuAI/common/store/chat.dart';
+import 'package:JuAI/common/store/config.dart';
 import 'package:JuAI/common/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:JuAI/entities/message/conversation.dart';
@@ -14,6 +15,7 @@ class ConversationPage extends GetView<ConversationController> {
 
   @override
   Widget build(BuildContext context) {
+    ConfigStore.to.upgrade(context);
     return SafeArea(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

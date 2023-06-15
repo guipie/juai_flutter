@@ -50,6 +50,18 @@ class ChatController extends GetxController {
         ChatStore.to.toAddChatStore(_conversation);
         ChatStore.to.toAddChatLastStore(_conversation);
       }
+      ChatStore.to.currentChat.value = "思考中..";
+      ChatApis.sendChatGPT(ChatSendReqEntity.fromPrompt(lastChat!.conversationId, prompt)).then((value) {
+        if (!value.isOk) {
+          ChatStore.to.currentChat.value = "";
+          UserStore.to.userInfo.value!.tokenNum = value.data;
+          return Loading.waring(value.message ?? "无法聊天");
+        }
+      }).catchError((err) {
+        Loading.waring("聊天出错了$err");
+        ChatStore.to.sendType.value = SendType.canSend;
+        ChatStore.to.currentChat.value = "";
+      });
     }
   }
 

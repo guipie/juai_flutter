@@ -19,6 +19,10 @@ class ChatApis {
     return HttpUtil().post("/ChatGPT/image", data: chatSendImageReqEntity.toJson()).catchError((err) => throw Exception(err));
   }
 
+  static Future<ApiResponse> delConversation(int conversationId) {
+    return HttpUtil().delete("/ChatGPT/conversation/$conversationId").catchError((err) => throw Exception(err));
+  }
+
   static Future<List<ChatPromptEntity>> getChatPrompts() async {
     var response = await HttpUtil().get("/ChatGPT/prompts");
     return (response.data as Iterable).map((e) => ChatPromptEntity.fromJson(e)).toList();

@@ -170,10 +170,13 @@ class ChatStore extends GetxController {
   }
 
   void toChat({ConversationLast? conversation, ChatPromptEntity? chatPrompt, int? userId}) {
-    debugPrint("conversation：${conversation?.toJson()},chatPrompt${chatPrompt?.toJson()},userId:$userId");
+    debugPrint("conversation：${conversation?.toJson()},chatPrompt：${chatPrompt?.toJson()},userId:$userId");
     currentChatPrompt = null;
     if (conversation != null) {
       lastChat = conversation;
+      if (conversation.promptId != null && conversation.promptId! > 0) {
+        currentChatPrompt = chatPrompts.firstWhere((element) => element.id == conversation.promptId!);
+      }
     } else if (userId != null && userId > 0) {
       UserAPI.getUserInfo(userId).then((value) {
         lastChat = ConversationLast(

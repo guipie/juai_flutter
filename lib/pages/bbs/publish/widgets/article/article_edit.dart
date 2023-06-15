@@ -330,7 +330,7 @@ class _ArticleEditPageState extends State<ArticleEditPage> {
     var uploadUrl = await QiniuUtil.saveFile(file, FileType.image, isLoading: true);
     if (uploadUrl.isNotEmpty) {
       state.insertFiles.add(uploadUrl);
-      return Qiniu_External_domain + uploadUrl;
+      return QINIU_DOMAIN + uploadUrl;
     }
     return Future.error("图片上传出错了");
   }
@@ -359,7 +359,7 @@ class _ArticleEditPageState extends State<ArticleEditPage> {
     var uploadUrl = await QiniuUtil.saveFile(file, FileType.video, isLoading: true);
     if (uploadUrl.isNotEmpty) {
       state.insertFiles.add(uploadUrl);
-      return Qiniu_External_domain + uploadUrl;
+      return QINIU_DOMAIN + uploadUrl;
     }
     return Future.error("视频上传出错了");
   }

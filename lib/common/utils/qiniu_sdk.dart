@@ -30,14 +30,14 @@ class QiniuUtil {
   h/ + 图片高 
   */
   static String getVideoThumbnail(String videoUrl, {int? width, int? height}) {
-    if (!videoUrl.startsWith(Qiniu_External_domain)) videoUrl = Qiniu_External_domain + videoUrl;
+    if (!videoUrl.startsWith(QINIU_DOMAIN)) videoUrl = QINIU_DOMAIN + videoUrl;
     if (width != null && height != null) return videoUrl + "?vframe/jpg/offset/1/w/$width/h/$height";
     return videoUrl + "?vframe/jpg/offset/1";
   }
 
   /*?imageView2/1/w/100/h/200 */
   static String getImageThumbnail(String imageUrl, {int width = 160, int height = 160}) {
-    if (!imageUrl.startsWith(Qiniu_External_domain)) imageUrl = Qiniu_External_domain + imageUrl;
+    if (!imageUrl.startsWith(QINIU_DOMAIN)) imageUrl = QINIU_DOMAIN + imageUrl;
     return imageUrl + "?imageView2/1/w/$width/h/$height";
   }
 

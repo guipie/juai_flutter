@@ -1,12 +1,12 @@
 import 'package:JuAI/common/utils/http.dart';
-import 'package:JuAI/common/utils/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:JuAI/common/services/storage.dart';
 import 'package:JuAI/common/values/storage.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:url_launcher/url_launcher.dart';
 
+// ignore: constant_identifier_names
 enum PlatformType { Android, IOS, Windows, Mac, Linux, Web }
 
 class ConfigStore extends GetxController {
@@ -32,10 +32,9 @@ class ConfigStore extends GetxController {
 
   Future<void> getPlatform() async {
     _platform = await PackageInfo.fromPlatform();
-    _upgrade();
   }
 
-  void _upgrade() {
+  void upgrade(BuildContext context) {
     PlatformType type = PlatformType.Android;
     if (GetPlatform.isIOS) {
       type = PlatformType.IOS;
@@ -50,8 +49,26 @@ class ConfigStore extends GetxController {
     }
     HttpUtil().get("/common/upgrade/" + type.name).then((value) {
       debugPrint("升级信息$value");
-      if (value.data != null && int.tryParse(value.data)! > 0) {
-        EasyLoading.showInfo("请去juai.link,升级最新版本", dismissOnTap: false);
+      if (value.data != null && value.data["Version"] != _platform?.version) {
+        showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: const Text('版本升级'),
+              content: const Text('内测阶段，升级频繁，每次升级都有新功能，望理解'),
+              actions: <Widget>[
+                FilledButton(
+                  child: const Text('去升级'),
+                  onPressed: () {
+                    final Uri _url = Uri.parse('http://124.220.50.194');
+                    launchUrl(_url);
+                  },
+                ),
+              ],
+            );
+          },
+        );
       }
     });
   }
