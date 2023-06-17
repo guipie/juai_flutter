@@ -95,6 +95,7 @@ dev_dependencies:
   # rules and activating additional ones.
   flutter_lints: ^1.0.0
   flutter_launcher_icons:
+  msix: ^3.14.2
 
 flutter_launcher_icons:
   #  image_path: "assets/images/icon-128x128.png" flutter pub run flutter_launcher_icons
