@@ -1,4 +1,4 @@
-import 'package:JuAI/entities/content/content.dart';
+import 'package:juai/entities/content/content.dart';
 
 class SpecialResEntity {
   String title;

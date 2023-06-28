@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:JuAI/common/values/storage.dart';
+import 'package:juai/common/values/storage.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:filesystem_picker/filesystem_picker.dart';
 import 'package:flutter/foundation.dart';
@@ -13,9 +13,9 @@ import 'package:flutter_quill/flutter_quill.dart' hide Text;
 import 'package:flutter_quill/translations.dart';
 import 'package:flutter_quill_extensions/flutter_quill_extensions.dart';
 import 'package:getwidget/getwidget.dart';
-import 'package:JuAI/common/config.dart';
-import 'package:JuAI/common/services/storage.dart';
-import 'package:JuAI/common/utils/qiniu_sdk.dart';
+import 'package:juai/common/config.dart';
+import 'package:juai/common/services/storage.dart';
+import 'package:juai/common/utils/qiniu_sdk.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 

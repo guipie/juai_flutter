@@ -2,10 +2,10 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:JuAI/common/config.dart';
-import 'package:JuAI/common/theme.dart';
-import 'package:JuAI/common/utils/utils.dart';
-import 'package:JuAI/common/widgets/image_cache.dart';
+import 'package:juai/common/config.dart';
+import 'package:juai/common/theme.dart';
+import 'package:juai/common/utils/utils.dart';
+import 'package:juai/common/widgets/image_cache.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:media_kit/media_kit.dart';
 import 'package:media_kit_video/media_kit_video.dart';

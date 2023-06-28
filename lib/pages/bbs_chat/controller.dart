@@ -1,5 +1,5 @@
-import 'package:JuAI/common/config.dart';
-import 'package:JuAI/pages/bbs_chat/state.dart';
+import 'package:juai/common/config.dart';
+import 'package:juai/pages/bbs_chat/state.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:signalr_netcore/signalr_client.dart';

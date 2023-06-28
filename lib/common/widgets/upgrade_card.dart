@@ -1,5 +1,5 @@
 //upgrade_card.dart文件
-import 'package:JuAI/common/assets.dart';
+import 'package:juai/common/assets.dart';
 import 'package:flutter/material.dart';
 
 class UpgradeCard extends StatefulWidget {

@@ -1,4 +1,4 @@
-import 'package:JuAI/common/theme.dart';
+import 'package:juai/common/theme.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

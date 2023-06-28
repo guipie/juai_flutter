@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:JuAI/common/theme.dart';
-import 'package:dart_mock/dart_mock.dart' as mock;
-
-import '../../../bbs/mock.dart';
+import 'package:juai/common/theme.dart';
 
 class MineFans extends StatefulWidget {
   const MineFans({Key? key}) : super(key: key);
@@ -12,15 +9,10 @@ class MineFans extends StatefulWidget {
 }
 
 class _MineFansState extends State<MineFans> {
-  List<MockLike> lists = [];
-
   @override
   void initState() {
     super.initState();
-
-    setState(() {
-      lists = MockLike.get();
-    });
+    setState(() {});
   }
 
   @override
@@ -31,16 +23,14 @@ class _MineFansState extends State<MineFans> {
       ),
       body: SafeArea(
         child: ListView(
-          children: lists.map((e) => listCard(e)).toList(),
+          children: [2, 3, 4, 5].map((e) => listCard()).toList(),
         ),
       ),
     );
   }
 }
 
-Container listCard(MockLike item) {
-  bool fav = mock.boolean();
-
+Container listCard() {
   return Container(
     padding: const EdgeInsets.symmetric(horizontal: 12),
     margin: const EdgeInsets.only(top: 24),
@@ -49,7 +39,7 @@ Container listCard(MockLike item) {
       children: [
         CircleAvatar(
           radius: 28,
-          backgroundImage: NetworkImage(item.avatar),
+          backgroundImage: NetworkImage(""),
         ),
         Expanded(
           child: Container(
@@ -63,7 +53,7 @@ Container listCard(MockLike item) {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      item.nickName,
+                      "粉丝1",
                       style: TextStyle(
                         fontSize: WcaoTheme.fsXl,
                         fontWeight: FontWeight.bold,
@@ -72,7 +62,7 @@ Container listCard(MockLike item) {
                     Container(
                       margin: const EdgeInsets.only(top: 4),
                       child: Text(
-                        '${mock.integer(min: 1, max: 99)}天 | ${mock.integer(min: 1, max: 99)}动态',
+                        '21天 | 33动态',
                         style: TextStyle(
                           color: WcaoTheme.secondary,
                           fontSize: WcaoTheme.fsBase,
@@ -84,12 +74,12 @@ Container listCard(MockLike item) {
                 InkWell(
                   child: Container(
                     decoration: BoxDecoration(
-                      color: fav ? WcaoTheme.placeholder : WcaoTheme.primary,
+                      color: false ? WcaoTheme.placeholder : WcaoTheme.primary,
                       borderRadius: BorderRadius.circular(20),
                     ),
                     padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                     child: Text(
-                      fav ? '已关注' : '关注',
+                      false ? '已关注' : '关注',
                       style: TextStyle(fontSize: WcaoTheme.fsSm, color: Colors.white),
                     ),
                   ),

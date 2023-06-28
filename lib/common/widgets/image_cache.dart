@@ -3,8 +3,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:JuAI/common/assets.dart';
-import 'package:JuAI/common/config.dart';
+import 'package:juai/common/assets.dart';
+import 'package:juai/common/config.dart';
 
 enum CacheImageType { network, local, asserts }
 

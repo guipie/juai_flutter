@@ -5,6 +5,7 @@ const String STORAGE_USER_PROFILE_KEY = 'user_profile';
 
 /// 用户 - 配置信息
 const String STORAGE_USER_TOKEN_KEY = 'user_token';
+const String STORAGE_USER_CHATGPT_IMAGE_SETTING = 'user_chat_image_settings';
 const String STORAGE_USER_GPT_TOKEN_SETTINGS = 'user_gpt_token_settings';
 
 /// 设备是否第一次打开

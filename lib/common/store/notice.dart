@@ -2,9 +2,9 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:JuAI/common/apis/notice_api.dart';
+import 'package:juai/common/apis/notice_api.dart';
 
-import 'package:JuAI/entities/message/notice.dart';
+import 'package:juai/entities/message/notice.dart';
 
 class NoticeStore extends GetxController {
   NoticeStore();

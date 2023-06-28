@@ -1,12 +1,12 @@
 import 'dart:async';
 
-import 'package:JuAI/common/utils/loading.dart';
-import 'package:JuAI/global.dart';
+import 'package:juai/common/utils/loading.dart';
+import 'package:juai/global.dart';
 import 'package:flutter/material.dart';
-import 'package:JuAI/common/apis/user_api.dart';
-import 'package:JuAI/entities/user/user_login.dart';
-import 'package:JuAI/common/routers/routes.dart';
-import 'package:JuAI/common/store/store.dart';
+import 'package:juai/common/apis/user_api.dart';
+import 'package:juai/entities/user/user_login.dart';
+import 'package:juai/common/routers/routes.dart';
+import 'package:juai/common/store/store.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 
@@ -59,7 +59,7 @@ class LoginController extends GetxController {
         }
       });
     } else {
-      EasyLoading.showToast("输入正确的手机号或邮箱");
+      EasyLoading.showToast("输入正确的手机号");
     }
   }
 

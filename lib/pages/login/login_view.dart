@@ -1,9 +1,10 @@
-import 'package:JuAI/common/routers/routes.dart';
+import 'package:juai/common/routers/routes.dart';
+import 'package:juai/pages/login/widgets/password_text.dart';
 import 'package:flutter/material.dart';
-import 'package:JuAI/pages/settings/login/controller.dart';
-import 'package:JuAI/pages/settings/login/widgets/login_btn.dart';
-import 'package:JuAI/pages/settings/login/widgets/username_text.dart';
-import 'package:JuAI/common/theme.dart';
+import 'package:juai/pages/login/controller.dart';
+import 'package:juai/pages/login/widgets/login_btn.dart';
+import 'package:juai/pages/login/widgets/username_text.dart';
+import 'package:juai/common/theme.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
@@ -33,7 +34,7 @@ class LoginPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const UserNameText(),
-                buildPassWord(),
+                const PasswrodText(),
                 const SizedBox(height: 20),
                 const LoginBtn(),
                 Container(
@@ -94,51 +95,4 @@ class LoginPage extends StatelessWidget {
   }
 
   /// 密码登录
-  Column buildPassWord() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Container(
-          margin: const EdgeInsets.only(top: 12),
-          child: Wrap(
-            children: [
-              Text(
-                '密码',
-                style: TextStyle(
-                  fontSize: 14,
-                  color: WcaoTheme.placeholder,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-            ],
-          ),
-        ),
-        Container(
-          margin: const EdgeInsets.only(top: 12),
-          height: 50,
-          child: TextField(
-            controller: logic.password,
-            obscureText: true,
-            enableSuggestions: false,
-            autocorrect: false,
-            decoration: InputDecoration(
-              hintText: "请输入密码",
-              contentPadding: const EdgeInsets.symmetric(vertical: 0, horizontal: 16),
-              enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8),
-                borderSide: BorderSide(
-                  color: WcaoTheme.outline,
-                  width: 2,
-                ),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8),
-                borderSide: const BorderSide(width: 2),
-              ),
-            ),
-          ),
-        ),
-      ],
-    );
-  }
 }

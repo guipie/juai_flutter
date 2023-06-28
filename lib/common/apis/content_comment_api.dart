@@ -1,5 +1,5 @@
-import 'package:JuAI/entities/content/comment.dart';
-import 'package:JuAI/common/utils/http.dart';
+import 'package:juai/entities/content/comment.dart';
+import 'package:juai/common/utils/http.dart';
 
 class ContentCommentApi {
   static Future<List<CommentRes>> getNewest(int contentId) async {

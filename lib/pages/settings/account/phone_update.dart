@@ -1,11 +1,11 @@
-import 'package:JuAI/entities/api_response.dart';
-import 'package:JuAI/common/routers/routes.dart';
+import 'package:juai/entities/api_response.dart';
+import 'package:juai/common/routers/routes.dart';
 import 'package:flutter/material.dart';
-import 'package:JuAI/common/theme.dart';
+import 'package:juai/common/theme.dart';
 import 'package:get/get.dart';
-import 'package:JuAI/common/utils/loading.dart';
-import 'package:JuAI/entities/entities.dart';
-import 'package:JuAI/pages/settings/account/account_vcode.dart';
+import 'package:juai/common/utils/loading.dart';
+import 'package:juai/entities/entities.dart';
+import 'package:juai/pages/settings/account/account_vcode.dart';
 
 /// HACK: 账号设置-验证当前手机号
 

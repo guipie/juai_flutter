@@ -1,5 +1,5 @@
-import 'package:JuAI/entities/api_response.dart';
-import 'package:JuAI/entities/content/content.dart';
+import 'package:juai/entities/api_response.dart';
+import 'package:juai/entities/content/content.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

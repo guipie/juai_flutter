@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:getwidget/getwidget.dart';
-import 'package:JuAI/common/theme.dart';
-import 'package:JuAI/pages/bbs/publish/widgets/select_special.dart';
+import 'package:juai/common/theme.dart';
+import 'package:juai/pages/bbs/publish/widgets/select_special.dart';
 
 import 'controller_special.dart';
 

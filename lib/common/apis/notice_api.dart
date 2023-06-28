@@ -1,5 +1,5 @@
-import 'package:JuAI/common/utils/http.dart';
-import 'package:JuAI/entities/message/chat_message.dart';
+import 'package:juai/common/utils/http.dart';
+import 'package:juai/entities/message/chat_message.dart';
 
 class NoticeApis {
   static Future<List<ChatMessageEntity>> getAllChat() async {

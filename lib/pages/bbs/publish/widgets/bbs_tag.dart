@@ -1,10 +1,8 @@
-import 'package:JuAI/common/apis/content_tag_api.dart';
+import 'package:juai/common/apis/content_tag_api.dart';
 import 'package:flutter/material.dart';
-import 'package:JuAI/entities/api_response.dart';
-import 'package:JuAI/common/store/content.dart';
-import 'package:JuAI/common/widgets/tag.dart';
-import 'package:JuAI/common/theme.dart';
-import 'package:dart_mock/dart_mock.dart' as mock;
+import 'package:juai/common/store/content.dart';
+import 'package:juai/common/widgets/tag.dart';
+import 'package:juai/common/theme.dart';
 import 'package:get/get.dart';
 
 class BbsAddTag extends StatefulWidget {
@@ -131,25 +129,6 @@ class _BbsAddTagState extends State<BbsAddTag> {
               ),
             )
           ],
-        ),
-      ),
-    );
-  }
-
-  Wrap tabbarView2() {
-    return Wrap(
-      runSpacing: 12,
-      spacing: 12,
-      alignment: WrapAlignment.spaceBetween,
-      children: List.generate(
-        5,
-        (index) => TagWidget(
-          '${mock.integer(min: 6, max: 9)}0年代',
-          border: Border.all(width: .5, color: WcaoTheme.outline),
-          backgroundColor: Colors.white,
-          color: WcaoTheme.base,
-          padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 12),
-          borderRadius: BorderRadius.circular(24),
         ),
       ),
     );

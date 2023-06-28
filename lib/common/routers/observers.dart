@@ -1,5 +1,5 @@
-import 'package:JuAI/common/routers/pages.dart';
-import 'package:JuAI/common/store/user.dart';
+import 'package:juai/common/routers/pages.dart';
+import 'package:juai/common/store/user.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -12,8 +12,9 @@ class RouteObservers extends NavigatorObserver {
   void didPush(Route<dynamic> route, Route<dynamic>? previousRoute) {
     super.didPush(route, previousRoute);
     var currentRoute = route.settings.name ?? '';
+    if (currentRoute.isEmpty) return;
     debugPrint("当前路由：$currentRoute");
-    if (!whitelistPages.contains(currentRoute) && !UserStore.to.isLogin) {
+    if ((!whitelistPages.contains(currentRoute) && !UserStore.to.isLogin) || (Get.isDialogOpen ?? false)) {
       debugPrint("未登录未登录未登录未登录未登录");
       if (!UserStore.to.isLogin) {
         Get.offAllNamed(Routes.settingsLogin);
@@ -21,7 +22,7 @@ class RouteObservers extends NavigatorObserver {
       }
     }
     if (currentRoute.isNotEmpty) AppPages.history.add(currentRoute);
-    print('didPush');
+    debugPrint('didPush');
     print(AppPages.history);
   }
 

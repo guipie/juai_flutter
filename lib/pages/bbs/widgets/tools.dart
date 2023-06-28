@@ -1,10 +1,11 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:JuAI/entities/api_response.dart';
-import 'package:JuAI/common/theme.dart';
-import 'package:JuAI/entities/content/content.dart';
-import 'package:JuAI/pages/bbs/detail/widgets/comment_widget.dart';
+import 'package:juai/common/utils/my_share.dart';
+import 'package:juai/entities/api_response.dart';
+import 'package:juai/common/theme.dart';
+import 'package:juai/entities/content/content.dart';
+import 'package:juai/pages/bbs/detail/widgets/comment_widget.dart';
 
 class ToolsWidget extends StatefulWidget {
   const ToolsWidget(this.content, {super.key});
@@ -24,7 +25,12 @@ class _ToolsWidgetState extends State<ToolsWidget> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           // 分享
-          iconText(Icons.share_outlined, Random().nextInt(1000)),
+          InkWell(
+            onTap: () {
+              MyShare.shareContentDetail(widget.content);
+            },
+            child: iconText(Icons.share_outlined, Random().nextInt(10)),
+          ),
           const Spacer(),
           InkWell(
             onTap: () {

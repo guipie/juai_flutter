@@ -4,7 +4,7 @@
 
 import 'dart:convert';
 
-import 'package:JuAI/common/assets.dart';
+import 'package:juai/common/assets.dart';
 
 enum ChatPromptRoleEnum { system, user, assistant, chat }
 // To parse this JSON data, do

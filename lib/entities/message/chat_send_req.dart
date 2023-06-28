@@ -1,9 +1,15 @@
 import 'dart:convert';
 
-import 'package:JuAI/common/store/chat.dart';
-import 'package:JuAI/common/store/user.dart';
+import 'package:juai/common/store/chat.dart';
+import 'package:juai/common/store/user.dart';
 
 import 'chat_prompt.dart';
+
+class GptImageSize {
+  static String size256 = "256x256";
+  static String size512 = "512x512";
+  static String size1024 = "1024x1024";
+}
 
 class ChatSendReqEntity {
   int contextType; // 0不保持上下文，-1保持全部上下文，其他保持当前会话个数的上下文
@@ -106,23 +112,35 @@ class ChatMessage {
 class ChatSendImageReqEntity {
   int conversationId;
   String prompt;
+  String imageSize;
+  int imageNum;
 
   ChatSendImageReqEntity({
     required this.conversationId,
     required this.prompt,
+    required this.imageSize,
+    required this.imageNum,
   });
-
   factory ChatSendImageReqEntity.fromRawJson(String str) => ChatSendImageReqEntity.fromJson(json.decode(str));
 
   String toRawJson() => json.encode(toJson());
-
+  factory ChatSendImageReqEntity.fromJsonBySetting(int cId, String prompt) => ChatSendImageReqEntity(
+        conversationId: cId,
+        prompt: prompt,
+        imageSize: ChatStore.to.gptImageSetting["ImageSize"] ?? GptImageSize.size256,
+        imageNum: ChatStore.to.gptImageSetting["ImageNum"] ?? 1,
+      );
   factory ChatSendImageReqEntity.fromJson(Map<String, dynamic> json) => ChatSendImageReqEntity(
         conversationId: json["ConversationId"],
         prompt: json["Prompt"],
+        imageSize: json["ImageSize"],
+        imageNum: json["ImageNum"],
       );
 
   Map<String, dynamic> toJson() => {
         "ConversationId": conversationId,
         "Prompt": prompt,
+        "ImageSize": imageSize,
+        "ImageNum": imageNum,
       };
 }

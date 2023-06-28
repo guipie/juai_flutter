@@ -1,4 +1,4 @@
-import 'package:JuAI/common/utils/http.dart';
+import 'package:juai/common/utils/http.dart';
 
 class UserExtendApi {
   static Future<bool> updateInsert(Map<String, dynamic> data) async {

@@ -1,4 +1,4 @@
-import 'package:JuAI/pages/tools/state.dart';
+import 'package:juai/pages/tools/state.dart';
 import 'package:get/get.dart';
 
 class ToolsController extends GetxController {

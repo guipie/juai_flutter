@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'dart:math';
 
-import 'package:JuAI/common/store/chat.dart';
-import 'package:JuAI/common/theme.dart';
-import 'package:JuAI/entities/message/chat_prompt.dart';
+import 'package:juai/common/store/chat.dart';
+import 'package:juai/common/theme.dart';
+import 'package:juai/entities/message/chat_prompt.dart';
 import 'package:flutter/material.dart';
 
 const List<MaterialColor> primaries = <MaterialColor>[

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:JuAI/common/assets.dart';
-import 'package:JuAI/common/routers/routeFade.dart';
-import 'package:JuAI/common/config.dart';
-import 'package:JuAI/common/utils/qiniu_sdk.dart';
+import 'package:juai/common/assets.dart';
+import 'package:juai/common/routers/routeFade.dart';
+import 'package:juai/common/config.dart';
+import 'package:juai/common/utils/qiniu_sdk.dart';
 
 import 'image_browser.dart';
 

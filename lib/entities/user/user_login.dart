@@ -110,7 +110,7 @@ class UserTokenResponseEntity {
   String toRawJson() => json.encode(toJson());
 
   factory UserTokenResponseEntity.fromJson(Map<String, dynamic> json) => UserTokenResponseEntity(
-        success: json["success"],
+        success: json["success"] ?? true,
         token: json["token"],
         expiresIn: json["expires_in"]?.toDouble(),
         tokenType: json["token_type"],

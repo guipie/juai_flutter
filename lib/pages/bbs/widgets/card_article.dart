@@ -1,11 +1,11 @@
-import 'package:JuAI/common/utils/date.dart';
+import 'package:juai/common/utils/date.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:JuAI/common/config.dart';
-import 'package:JuAI/common/widgets/image_cache.dart';
-import 'package:JuAI/entities/content/content.dart';
-import 'package:JuAI/common/routers/routes.dart';
-import 'package:JuAI/common/theme.dart';
+import 'package:juai/common/config.dart';
+import 'package:juai/common/widgets/image_cache.dart';
+import 'package:juai/entities/content/content.dart';
+import 'package:juai/common/routers/routes.dart';
+import 'package:juai/common/theme.dart';
 
 class CardAriticleWidget extends StatelessWidget {
   const CardAriticleWidget(this.content, {super.key});
@@ -53,16 +53,16 @@ class CardAriticleWidget extends StatelessWidget {
                         onTap: () => Get.toNamed(Routes.settingsMineHome, arguments: content.createId),
                         child: Text(
                           content.createNick!,
-                          style: TextStyle(fontWeight: FontWeight.w400, color: WcaoTheme.secondary),
+                          style: TextStyle(fontWeight: FontWeight.w400, fontSize: 13, color: WcaoTheme.secondary),
                         ),
                       ),
                       Text(
                         "${content.commentNum}评论",
-                        style: TextStyle(fontWeight: FontWeight.w400, color: WcaoTheme.secondary),
+                        style: TextStyle(fontWeight: FontWeight.w400, fontSize: 13, color: WcaoTheme.secondary),
                       ),
                       Text(
                         dateFormatYMD(content.createTime),
-                        style: TextStyle(fontWeight: FontWeight.w200, color: WcaoTheme.secondary),
+                        style: TextStyle(fontWeight: FontWeight.w200, fontSize: 13, color: WcaoTheme.secondary),
                       ),
                     ],
                   )

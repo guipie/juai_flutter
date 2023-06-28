@@ -1,9 +1,9 @@
-import 'package:JuAI/common/assets.dart';
-import 'package:JuAI/common/routers/routes.dart';
-import 'package:JuAI/common/store/config.dart';
-import 'package:JuAI/common/widgets/image_cache.dart';
+import 'package:juai/common/assets.dart';
+import 'package:juai/common/routers/routes.dart';
+import 'package:juai/common/store/config.dart';
+import 'package:juai/common/widgets/image_cache.dart';
 import 'package:flutter/material.dart';
-import 'package:JuAI/common/theme.dart';
+import 'package:juai/common/theme.dart';
 import 'package:get/get.dart';
 
 class SettingsAboutPage extends StatefulWidget {

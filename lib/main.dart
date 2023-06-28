@@ -1,12 +1,12 @@
-import 'package:JuAI/common/store/store.dart';
+import 'package:juai/common/store/store.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:JuAI/common/routers/pages.dart';
-import 'package:JuAI/common/theme.dart';
+import 'package:juai/common/routers/pages.dart';
+import 'package:juai/common/theme.dart';
 import 'package:flutter/material.dart';
-import 'package:JuAI/common/langs/translation_service.dart';
-import 'package:JuAI/common/routers/routes.dart';
-import 'package:JuAI/common/utils/logger.dart';
-import 'package:JuAI/global.dart';
+import 'package:juai/common/langs/translation_service.dart';
+import 'package:juai/common/routers/routes.dart';
+import 'package:juai/common/utils/logger.dart';
+import 'package:juai/global.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -63,7 +63,6 @@ class _MyAppState extends State<MyApp> {
     ScreenUtil.init(context);
     var home = GetPlatform.isMobile ? Routes.home : Routes.homePc;
     if (!UserStore.to.isLogin) home = Routes.settingsLogin;
-    debugPrint("homehomehomehomehomehome:$home");
     return GetMaterialApp(
       title: '故新AI社区',
       theme: WcaoTheme.lightTheme,

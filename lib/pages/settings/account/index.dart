@@ -1,15 +1,15 @@
 import 'package:file_picker/file_picker.dart';
-import 'package:JuAI/entities/api_response.dart';
-import 'package:JuAI/common/routers/routes.dart';
+import 'package:juai/entities/api_response.dart';
+import 'package:juai/common/routers/routes.dart';
 import 'package:flutter/material.dart';
-import 'package:JuAI/common/store/user.dart';
-import 'package:JuAI/common/utils/date.dart';
-import 'package:JuAI/common/utils/file_utils.dart';
-import 'package:JuAI/common/utils/qiniu_sdk.dart';
-import 'package:JuAI/common/widgets/avatar.dart';
-import 'package:JuAI/common/widgets/cell.dart';
+import 'package:juai/common/store/user.dart';
+import 'package:juai/common/utils/date.dart';
+import 'package:juai/common/utils/file_utils.dart';
+import 'package:juai/common/utils/qiniu_sdk.dart';
+import 'package:juai/common/widgets/avatar.dart';
+import 'package:juai/common/widgets/cell.dart';
 import 'package:get/get.dart';
-import 'package:JuAI/pages/settings/controler.dart';
+import 'package:juai/pages/settings/controler.dart';
 import 'package:path/path.dart' as path;
 
 /// HACK: 账户设置

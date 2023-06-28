@@ -3,12 +3,12 @@ import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:JuAI/common/apis/content_special_api.dart';
-import 'package:JuAI/entities/content/content.dart';
-import 'package:JuAI/entities/content/special.dart';
-import 'package:JuAI/common/routers/routes.dart';
-import 'package:JuAI/common/utils/loading.dart';
-import 'package:JuAI/common/utils/qiniu_sdk.dart';
+import 'package:juai/common/apis/content_special_api.dart';
+import 'package:juai/entities/content/content.dart';
+import 'package:juai/entities/content/special.dart';
+import 'package:juai/common/routers/routes.dart';
+import 'package:juai/common/utils/loading.dart';
+import 'package:juai/common/utils/qiniu_sdk.dart';
 
 class PublishSpecialController extends GetxController {
   PublishSpecialController();

@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_quill/flutter_quill.dart' hide Text;
 import 'package:flutter_quill_extensions/flutter_quill_extensions.dart';
-import 'package:JuAI/pages/bbs/publish/widgets/article/widgets/readonly_scaffold.dart';
+import 'package:juai/pages/bbs/publish/widgets/article/widgets/readonly_scaffold.dart';
 
 import 'universal_ui/universal_ui.dart';
 

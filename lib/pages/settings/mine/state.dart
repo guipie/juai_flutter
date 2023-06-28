@@ -1,6 +1,6 @@
-import 'package:JuAI/entities/content/content.dart';
-import 'package:JuAI/entities/content/special.dart';
-import 'package:JuAI/entities/user/user_base.dart';
+import 'package:juai/entities/content/content.dart';
+import 'package:juai/entities/content/special.dart';
+import 'package:juai/entities/user/user_base.dart';
 import 'package:get/get.dart';
 
 class SettingsMineHomeState {

@@ -11,7 +11,6 @@ class BbsState {
   late PageController pageController;
   late TabController tabController;
 
-  var indexScrollController = ScrollController();
   var indexUploading = false.obs;
   var indexDownloading = false.obs;
 }

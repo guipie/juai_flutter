@@ -1,6 +1,6 @@
-import 'package:JuAI/common/apis/content_tag_api.dart';
-import 'package:JuAI/common/widgets/load_data.dart';
-import 'package:JuAI/pages/bbs/widgets/card_index.dart';
+import 'package:juai/common/apis/content_tag_api.dart';
+import 'package:juai/common/widgets/load_data.dart';
+import 'package:juai/pages/bbs/widgets/card_index.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

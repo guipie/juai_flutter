@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:JuAI/common/widgets/tag.dart';
-import 'package:JuAI/common/theme.dart';
-import 'package:dart_mock/dart_mock.dart' as mock;
+import 'package:juai/common/widgets/tag.dart';
+import 'package:juai/common/theme.dart';
 import 'package:get/get.dart';
 
 class MineAddTag extends StatefulWidget {
@@ -43,7 +42,7 @@ class _MineAddTagState extends State<MineAddTag> {
                   children: List.generate(
                     12,
                     (index) => TagWidget(
-                      mock.ctitle(),
+                      "mock.ctitle()",
                       backgroundColor: WcaoTheme.primary,
                       color: Colors.white,
                       close: true,
@@ -113,7 +112,7 @@ class _MineAddTagState extends State<MineAddTag> {
       children: List.generate(
         16,
         (index) => TagWidget(
-          mock.ctitle(),
+          " mock.ctitle()",
           border: Border.all(width: .5, color: WcaoTheme.outline),
           backgroundColor: Colors.white,
           color: WcaoTheme.base,
@@ -132,7 +131,7 @@ class _MineAddTagState extends State<MineAddTag> {
       children: List.generate(
         16,
         (index) => TagWidget(
-          mock.county(),
+          "mock.county()",
           border: Border.all(width: .5, color: WcaoTheme.outline),
           backgroundColor: Colors.white,
           color: WcaoTheme.base,
@@ -151,7 +150,7 @@ class _MineAddTagState extends State<MineAddTag> {
       children: List.generate(
         5,
         (index) => TagWidget(
-          '${mock.integer(min: 6, max: 9)}0年代',
+          '20年代',
           border: Border.all(width: .5, color: WcaoTheme.outline),
           backgroundColor: Colors.white,
           color: WcaoTheme.base,
@@ -170,7 +169,7 @@ class _MineAddTagState extends State<MineAddTag> {
       children: List.generate(
         12,
         (index) => TagWidget(
-          "${mock.cword(min: 2)}座",
+          "牛逼座",
           border: Border.all(width: .5, color: WcaoTheme.outline),
           backgroundColor: Colors.white,
           color: WcaoTheme.base,

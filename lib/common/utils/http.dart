@@ -1,15 +1,15 @@
 import 'dart:async';
 
-import 'package:JuAI/entities/api_response.dart';
+import 'package:juai/entities/api_response.dart';
 import 'package:cookie_jar/cookie_jar.dart';
 import 'package:dio/dio.dart';
 import 'package:dio_cookie_manager/dio_cookie_manager.dart';
 import 'package:flutter/material.dart';
-import 'package:JuAI/common/store/user.dart';
-import 'package:JuAI/common/utils/loading.dart';
-import 'package:JuAI/common/utils/utils.dart';
-import 'package:JuAI/common/values/cache.dart';
-import 'package:JuAI/common/config.dart';
+import 'package:juai/common/store/user.dart';
+import 'package:juai/common/utils/loading.dart';
+import 'package:juai/common/utils/utils.dart';
+import 'package:juai/common/values/cache.dart';
+import 'package:juai/common/config.dart';
 import 'package:get/get.dart' hide FormData;
 
 /*

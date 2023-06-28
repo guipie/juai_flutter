@@ -29,7 +29,7 @@ class BottomSheetView extends StatelessWidget {
               .toList(),
         ),
         Container(
-          color: Color(0xFFE6E6E6),
+          color: const Color(0xFFE6E6E6),
           height: 7.h,
         ),
         _itemBgView(context, label: "取消", onTap: () => Get.back(), line: false),

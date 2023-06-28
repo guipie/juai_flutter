@@ -1,12 +1,11 @@
-import 'package:JuAI/common/store/chat.dart';
-import 'package:JuAI/common/store/config.dart';
-import 'package:JuAI/common/utils/utils.dart';
+import 'package:juai/common/store/chat.dart';
+import 'package:juai/common/utils/utils.dart';
+import 'package:juai/common/widgets/socket_connect.dart';
 import 'package:flutter/material.dart';
-import 'package:JuAI/entities/message/conversation.dart';
-import 'package:JuAI/common/routers/routes.dart';
-import 'package:JuAI/common/widgets/appbar.dart';
-import 'package:JuAI/common/widgets/avatar.dart';
-import 'package:JuAI/common/theme.dart';
+import 'package:juai/entities/message/conversation.dart';
+import 'package:juai/common/widgets/appbar.dart';
+import 'package:juai/common/widgets/avatar.dart';
+import 'package:juai/common/theme.dart';
 import 'package:get/get.dart';
 import 'controller.dart';
 
@@ -15,11 +14,11 @@ class ConversationPage extends GetView<ConversationController> {
 
   @override
   Widget build(BuildContext context) {
-    ConfigStore.to.upgrade(context);
     return SafeArea(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          const SocketConnectWidget(),
           conversationBar(context),
           SizedBox(
             width: double.infinity,

@@ -1,9 +1,9 @@
-import 'package:JuAI/common/apis/content_special_api.dart';
-import 'package:JuAI/entities/api_response.dart';
-import 'package:JuAI/common/apis/user_extend_api.dart';
-import 'package:JuAI/common/apis/user_follow_api.dart';
-import 'package:JuAI/common/store/store.dart';
-import 'package:JuAI/pages/settings/mine/state.dart';
+import 'package:juai/common/apis/content_special_api.dart';
+import 'package:juai/entities/api_response.dart';
+import 'package:juai/common/apis/user_extend_api.dart';
+import 'package:juai/common/apis/user_follow_api.dart';
+import 'package:juai/common/store/store.dart';
+import 'package:juai/pages/settings/mine/state.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

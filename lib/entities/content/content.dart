@@ -7,6 +7,7 @@
 import 'dart:convert';
 
 import 'package:get/get.dart';
+import 'package:juai/common/utils/base_page/base_page_state.dart';
 
 enum BaCategory { Text, Image, Video, Article }
 
@@ -47,14 +48,13 @@ ContentResEntity contentResEntityFromJson(String str) => ContentResEntity.fromJs
 String contentResEntityToJson(ContentResEntity data) => json.encode(data.toJson());
 
 /// 内容列表 response
-class ContentResEntity {
+class ContentResEntity extends PagingStateBase {
   String title;
   String summary;
   String content;
   String? tags;
   BaCategory category;
   BaReadType readType;
-  int id;
   int createId;
   String? createNick;
   String? avatar;
@@ -63,16 +63,18 @@ class ContentResEntity {
   int likeNum;
   bool? isCommented;
   int commentNum;
+  int? specialId;
+  String? specialName;
   List<dynamic> files;
 
   ContentResEntity({
+    required int id,
     required this.title,
     required this.summary,
     required this.content,
     this.tags,
     required this.category,
     required this.readType,
-    required this.id,
     required this.createId,
     this.createNick,
     this.avatar,
@@ -81,8 +83,10 @@ class ContentResEntity {
     required this.commentNum,
     required this.likeNum,
     this.isLiked,
+    this.specialId,
+    this.specialName,
     this.isCommented,
-  });
+  }) : super(id);
 
   factory ContentResEntity.fromJson(Map<String, dynamic> vjson) => ContentResEntity(
         title: vjson["Title"],
@@ -101,6 +105,8 @@ class ContentResEntity {
         isCommented: vjson["IsCommented"],
         commentNum: vjson["CommentNum"],
         likeNum: vjson["LikeNum"],
+        specialId: vjson["SpecialId"],
+        specialName: vjson["SpecialName"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -120,5 +126,7 @@ class ContentResEntity {
         "CommentNum": commentNum,
         "IsLiked": isLiked,
         "IsCommented": isCommented,
+        "SpecialId": specialId,
+        "SpecialName": specialName,
       };
 }

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:JuAI/common/apis/content_comment_api.dart';
-import 'package:JuAI/common/store/user.dart';
-import 'package:JuAI/common/utils/date.dart';
-import 'package:JuAI/common/utils/loading.dart';
-import 'package:JuAI/common/widgets/avatar.dart';
-import 'package:JuAI/entities/content/comment.dart';
-import 'package:JuAI/entities/user/user_base.dart';
+import 'package:juai/common/apis/content_comment_api.dart';
+import 'package:juai/common/store/user.dart';
+import 'package:juai/common/utils/date.dart';
+import 'package:juai/common/utils/loading.dart';
+import 'package:juai/common/widgets/avatar.dart';
+import 'package:juai/entities/content/comment.dart';
+import 'package:juai/entities/user/user_base.dart';
 
 class CommentWidget extends StatefulWidget {
   const CommentWidget(this.contentId, {super.key});

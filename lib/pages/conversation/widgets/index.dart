@@ -1,6 +1,5 @@
-import 'package:JuAI/pages/bbs/mock.dart';
-import 'package:JuAI/pages/conversation/widgets/firends_dialog.dart';
-import 'package:JuAI/common/theme.dart';
+import 'package:juai/pages/conversation/widgets/firends_dialog.dart';
+import 'package:juai/common/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -12,15 +11,11 @@ class PageViewMessage extends StatefulWidget {
 }
 
 class _PageViewMessageState extends State<PageViewMessage> {
-  List<MockLike> lists = [];
-
   @override
   void initState() {
     super.initState();
 
-    setState(() {
-      lists = MockLike.get();
-    });
+    setState(() {});
   }
 
   @override
@@ -87,10 +82,10 @@ class _PageViewMessageState extends State<PageViewMessage> {
                 child: Column(
                   children: [
                     // search(),
-                    ...lists
+                    ...[1, 2, 3]
                         .map(
                           (e) => InkWell(
-                            child: listCard(e),
+                            child: listCard(),
                             onTap: () => Get.toNamed('/message/chat'),
                           ),
                         )
@@ -105,7 +100,7 @@ class _PageViewMessageState extends State<PageViewMessage> {
     );
   }
 
-  Container listCard(MockLike item) {
+  Container listCard() {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12),
       margin: const EdgeInsets.only(top: 24),
@@ -114,7 +109,7 @@ class _PageViewMessageState extends State<PageViewMessage> {
         children: [
           CircleAvatar(
             radius: 28,
-            backgroundImage: NetworkImage(item.avatar),
+            backgroundImage: NetworkImage("erorr"),
           ),
           Expanded(
             child: Container(
@@ -135,14 +130,14 @@ class _PageViewMessageState extends State<PageViewMessage> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        item.nickName,
+                        "已删除",
                         style: TextStyle(
                           fontSize: WcaoTheme.fsXl,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                       Text(
-                        item.time.split('T')[0],
+                        'T',
                         style: TextStyle(fontSize: WcaoTheme.fsSm, color: Theme.of(context).colorScheme.secondary),
                       )
                     ],
@@ -156,7 +151,7 @@ class _PageViewMessageState extends State<PageViewMessage> {
                           child: Container(
                             padding: const EdgeInsets.only(right: 24),
                             child: Text(
-                              item.text,
+                              "item.text",
                               style: TextStyle(
                                 overflow: TextOverflow.ellipsis,
                                 color: Theme.of(context).colorScheme.secondary,
@@ -168,7 +163,7 @@ class _PageViewMessageState extends State<PageViewMessage> {
                         CircleAvatar(
                           radius: 10,
                           child: Text(
-                            '${item.fav}',
+                            'item.fav',
                             style: TextStyle(fontSize: WcaoTheme.fsSm),
                           ),
                         )

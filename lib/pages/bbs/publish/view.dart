@@ -1,17 +1,15 @@
 import 'dart:io';
 
-import 'package:JuAI/pages/bbs/widgets/card_dongtai_video.dart';
+import 'package:juai/pages/bbs/widgets/card_dongtai_video.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:JuAI/common/routers/routes.dart';
-import 'package:JuAI/common/widgets/image_cache.dart';
-import 'package:JuAI/common/widgets/tag.dart';
-import 'package:JuAI/pages/bbs/publish/controller.dart';
+import 'package:juai/common/widgets/image_cache.dart';
+import 'package:juai/common/widgets/tag.dart';
+import 'package:juai/pages/bbs/publish/controller.dart';
 import 'package:flutter/material.dart';
-import 'package:JuAI/pages/bbs/publish/state.dart';
-import 'package:JuAI/common/theme.dart';
+import 'package:juai/pages/bbs/publish/state.dart';
+import 'package:juai/common/theme.dart';
 import 'package:get/get.dart';
 import 'package:getwidget/getwidget.dart';
-import 'package:video_player/video_player.dart';
 
 class PublishDongtaiPage extends StatelessWidget {
   PublishDongtaiPage({super.key});
@@ -167,8 +165,8 @@ class PublishDongtaiPage extends StatelessWidget {
     );
   }
 
-  LongPressDraggable<int> _selectedImage(DongtaiFile file, int index) {
-    return LongPressDraggable<int>(
+  Draggable<int> _selectedImage(DongtaiFile file, int index) {
+    return Draggable<int>(
       data: index,
       onDragStarted: () => logic.state.isDrag.value = true,
       onDragEnd: (details) {

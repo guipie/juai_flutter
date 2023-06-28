@@ -1,18 +1,17 @@
-import 'package:JuAI/common/routers/routes.dart';
+import 'package:juai/common/routers/routes.dart';
 import 'package:flutter/material.dart';
-import 'package:JuAI/common/widgets/avatar.dart';
-import 'package:JuAI/entities/content/content.dart';
-import 'package:JuAI/common/utils/date.dart';
-import 'package:JuAI/common/widgets/image_avatar_cache.dart';
-import 'package:JuAI/common/widgets/image_cache.dart';
-import 'package:JuAI/common/theme.dart';
-import 'package:JuAI/pages/bbs/widgets/card_article.dart';
-import 'package:JuAI/pages/bbs/widgets/card_dongtai.dart';
+import 'package:juai/common/widgets/avatar.dart';
+import 'package:juai/entities/content/content.dart';
+import 'package:juai/common/utils/date.dart';
+import 'package:juai/common/theme.dart';
+import 'package:juai/pages/bbs/widgets/card_article.dart';
+import 'package:juai/pages/bbs/widgets/card_dongtai.dart';
 import 'package:get/get.dart';
 
 class CardIndexWidget extends StatelessWidget {
-  const CardIndexWidget(this.content, {Key? key}) : super(key: key);
+  const CardIndexWidget(this.content, {Key? key, this.isShowSpecial = true}) : super(key: key);
   final ContentResEntity content;
+  final bool isShowSpecial;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +19,7 @@ class CardIndexWidget extends StatelessWidget {
       elevation: 0.15,
       margin: const EdgeInsets.all(2),
       child: Padding(
-        padding: const EdgeInsets.all(20),
+        padding: const EdgeInsets.all(10),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -68,6 +67,31 @@ class CardIndexWidget extends StatelessWidget {
               ),
             if (content.category == BaCategory.Text || content.category == BaCategory.Image || content.category == BaCategory.Video) CardDongtaiWidget(content),
             if (content.category == BaCategory.Article) CardAriticleWidget(content),
+            if ((content.specialId ?? 0) > 0 && isShowSpecial)
+              Container(
+                padding: EdgeInsets.zero,
+                margin: EdgeInsets.zero,
+                alignment: Alignment.centerRight,
+                width: double.infinity,
+                child: InkWell(
+                  onTap: () => Get.toNamed(Routes.bbsSpecial, arguments: content.specialId),
+                  child: Container(
+                    child: Text(
+                      content.specialName ?? "",
+                      softWrap: false,
+                      style: const TextStyle(color: Colors.white),
+                    ),
+                    padding: const EdgeInsets.symmetric(horizontal: 6),
+                    decoration: BoxDecoration(
+                      color: WcaoTheme.primary,
+                      borderRadius: const BorderRadius.only(
+                        topRight: Radius.circular(12),
+                        bottomRight: Radius.circular(12),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
           ],
         ),
       ),

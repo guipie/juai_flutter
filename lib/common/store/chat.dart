@@ -1,18 +1,19 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:JuAI/common/apis/chat_api.dart';
-import 'package:JuAI/entities/api_response.dart';
-import 'package:JuAI/common/apis/notice_api.dart';
-import 'package:JuAI/common/assets.dart';
-import 'package:JuAI/common/config.dart';
-import 'package:JuAI/common/routers/routes.dart';
-import 'package:JuAI/common/store/user.dart';
-import 'package:JuAI/common/utils/loading.dart';
-import 'package:JuAI/entities/message/chat_prompt.dart';
+import 'package:juai/common/apis/chat_api.dart';
+import 'package:juai/common/index.dart';
+import 'package:juai/common/values/storage.dart';
+import 'package:juai/common/apis/notice_api.dart';
+import 'package:juai/common/assets.dart';
+import 'package:juai/common/config.dart';
+import 'package:juai/common/routers/routes.dart';
+import 'package:juai/common/store/user.dart';
+import 'package:juai/entities/message/chat_prompt.dart';
+import 'package:juai/entities/message/chat_send_req.dart';
 import 'package:flutter/material.dart';
-import 'package:JuAI/entities/message/conversation.dart';
-import 'package:JuAI/common/utils/db_sqlite.dart';
+import 'package:juai/entities/message/conversation.dart';
+import 'package:juai/common/utils/db_sqlite.dart';
 import 'package:get/get.dart';
 import 'package:signalr_netcore/signalr_client.dart';
 
@@ -23,13 +24,16 @@ class ChatStore extends GetxController {
   var sendType = SendType.canNotSend.obs;
   var scrollContrller = ScrollController();
   var chatPrompts = <ChatPromptEntity>[].obs;
-  ChatPromptEntity? currentChatPrompt;
+  ChatPromptEntity? currentChatPrompt; //当前会话角色
   var lastChats = List<ConversationLast>.empty(growable: true).obs;
   var chats = <Conversation>[].obs; //当前会话列表
   ConversationLast? lastChat; //当前会话详情
-  var connected = false;
+  var connected = ValueNotifier(true);
   //流临时存储的会话数据
   final ValueNotifier<String> currentChat = ValueNotifier("");
+
+  var gptImageSetting = Map.from({"ImageNum": 1, "ImageSize": GptImageSize.size256});
+
 // If you want only to log out the message for the higer level hub protocol:
   // final hubProtLogger = Logger("SignalR - hub");
 // If youn want to also to log out transport messages:
@@ -50,6 +54,7 @@ class ChatStore extends GetxController {
     lastChats.value = await DbSqlite.instance.queryWhereOrderBy("chat_last", "userId=?", [UserStore.to.userId], 1000, "lastSendTime desc").then((value) => value.map((e) => ConversationLast.fromJson(e)).toList());
     _signalRInit();
     _loadChatRole();
+    loadGptImageSetting();
     debugPrint("初始化会话列表：${lastChats.length}条");
   }
 
@@ -60,6 +65,18 @@ class ChatStore extends GetxController {
     }).catchError((err) {
       debugPrint("加载失败$err");
     });
+  }
+
+  void loadGptImageSetting({String? size, int? num}) {
+    try {
+      if (size != null) gptImageSetting["ImageSize"] = size;
+      if (num != null) gptImageSetting["ImageNum"] = num;
+      StorageService.to.setString(STORAGE_USER_CHATGPT_IMAGE_SETTING, jsonEncode(gptImageSetting));
+      gptImageSetting = jsonDecode(StorageService.to.getString(STORAGE_USER_CHATGPT_IMAGE_SETTING));
+    } catch (e) {
+      debugPrint("加载生成图片设置出错了$e");
+      gptImageSetting = Map.from({"ImageNum": 1, "ImageSize": GptImageSize.size256});
+    }
   }
 
   void _signalRInit() {
@@ -76,7 +93,7 @@ class ChatStore extends GetxController {
     try {
       hubConnection.onclose(({error}) {
         debugPrint("连接关闭：$error");
-        connected = false;
+        connected.value = false;
         _signalRTimeOut();
       });
       hubConnection.on("ReceiveChatGPT", (arguments) {
@@ -99,31 +116,37 @@ class ChatStore extends GetxController {
         getAllChat();
       });
       hubConnection.onreconnecting(({error}) {
+        connected.value = false;
         debugPrint("重新连接：$error");
       });
       hubConnection.onreconnected(({connectionId}) {
         debugPrint("重新连接结束：$connectionId");
+        if (hubConnection.state == HubConnectionState.Connected) connected.value = true;
       });
       // hubConnection.serverTimeoutInMilliseconds = 1000 * 10;
       // hubConnection.keepAliveIntervalInMilliseconds = 1000 * 10;
       hubConnection.start()!.onError((error, stackTrace) {
-        connected = false;
+        connected.value = false;
         debugPrint("连接出错了$error，stackTrace：$stackTrace");
         _signalRTimeOut();
       });
     } catch (e) {
-      connected = false;
+      connected.value = false;
       debugPrint("连接出错了$e");
     }
     // state.hubConnection.start();
   }
 
   void _signalRTimeOut() {
-    Timer.periodic(const Duration(seconds: 10), (timer) {
-      if (connected) timer.cancel();
-      connected = true;
+    Timer.periodic(const Duration(seconds: 5), (timer) {
+      debugPrint("重连检测中..");
+      if (hubConnection.state == HubConnectionState.Connected) connected.value = true;
+      if (connected.value) {
+        timer.cancel();
+        return;
+      }
       hubConnection.start()!.onError((error, stackTrace) {
-        connected = false;
+        connected.value = false;
         debugPrint("重试连接出错了$error，stackTrace：$stackTrace");
       });
     });
@@ -172,6 +195,7 @@ class ChatStore extends GetxController {
   void toChat({ConversationLast? conversation, ChatPromptEntity? chatPrompt, int? userId}) {
     debugPrint("conversation：${conversation?.toJson()},chatPrompt：${chatPrompt?.toJson()},userId:$userId");
     currentChatPrompt = null;
+    chats.clear();
     if (conversation != null) {
       lastChat = conversation;
       if (conversation.promptId != null && conversation.promptId! > 0) {

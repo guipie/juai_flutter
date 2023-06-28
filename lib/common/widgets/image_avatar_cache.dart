@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:JuAI/common/config.dart';
-import 'package:JuAI/common/widgets/avatar.dart';
+import 'package:juai/common/config.dart';
+import 'package:juai/common/widgets/avatar.dart';
 
 class ImageAvatarCacheWidget extends StatefulWidget {
   final String imageUrl;

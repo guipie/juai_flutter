@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
-import 'package:JuAI/entities/content/content.dart';
-import 'package:JuAI/common/routers/routes.dart';
-import 'package:JuAI/common/theme.dart';
-import 'package:JuAI/pages/bbs/widgets/card_dongtai_images.dart';
-import 'package:JuAI/pages/bbs/widgets/tags.dart';
-import 'package:JuAI/pages/bbs/widgets/tools.dart';
+import 'package:juai/entities/content/content.dart';
+import 'package:juai/common/routers/routes.dart';
+import 'package:juai/common/theme.dart';
+import 'package:juai/pages/bbs/widgets/card_dongtai_images.dart';
+import 'package:juai/pages/bbs/widgets/tags.dart';
+import 'package:juai/pages/bbs/widgets/tools.dart';
 
 import 'card_dongtai_video.dart';
 

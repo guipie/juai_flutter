@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:JuAI/common/routers/routes.dart';
-import 'package:JuAI/common/utils/loading.dart';
-import 'package:JuAI/common/theme.dart';
+import 'package:juai/common/routers/routes.dart';
+import 'package:juai/common/utils/loading.dart';
+import 'package:juai/common/theme.dart';
 import 'package:get/get.dart';
-import 'package:JuAI/pages/settings/account/account_vcode.dart';
+import 'package:juai/pages/settings/account/account_vcode.dart';
 
 class PasswordResetPage extends StatefulWidget {
   const PasswordResetPage({Key? key}) : super(key: key);

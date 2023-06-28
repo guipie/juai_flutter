@@ -1,13 +1,13 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:JuAI/common/assets.dart';
-import 'package:JuAI/common/routers/routes.dart';
-import 'package:JuAI/common/store/store.dart';
-import 'package:JuAI/common/widgets/avatar.dart';
-import 'package:JuAI/common/widgets/image_cache.dart';
-import 'package:JuAI/pages/settings/controler.dart';
+import 'package:juai/common/assets.dart';
+import 'package:juai/common/routers/routes.dart';
+import 'package:juai/common/store/store.dart';
+import 'package:juai/common/widgets/avatar.dart';
+import 'package:juai/common/widgets/image_cache.dart';
+import 'package:juai/pages/settings/controler.dart';
 import 'package:flutter/material.dart';
-import 'package:JuAI/common/widgets/cell.dart';
-import 'package:JuAI/common/theme.dart';
+import 'package:juai/common/widgets/cell.dart';
+import 'package:juai/common/theme.dart';
 import 'package:get/get.dart';
 
 class SettingsPage extends GetView<SettingsController> {
@@ -133,6 +133,7 @@ class SettingsPage extends GetView<SettingsController> {
                   onTap: () => logic.clearCache(context),
                 ),
                 Cell('关于我们', onTap: () => Get.toNamed(Routes.settingsAbout)),
+                Cell('意见反馈', onTap: () => Get.toNamed(Routes.settingsSuggestions)),
                 Cell(
                   '退出登录',
                   border: false,

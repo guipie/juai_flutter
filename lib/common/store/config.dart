@@ -1,7 +1,8 @@
-import 'package:JuAI/common/utils/http.dart';
+import 'package:juai/common/utils/http.dart';
+import 'package:juai/common/utils/loading.dart';
 import 'package:flutter/material.dart';
-import 'package:JuAI/common/services/storage.dart';
-import 'package:JuAI/common/values/storage.dart';
+import 'package:juai/common/services/storage.dart';
+import 'package:juai/common/values/storage.dart';
 import 'package:get/get.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -32,9 +33,10 @@ class ConfigStore extends GetxController {
 
   Future<void> getPlatform() async {
     _platform = await PackageInfo.fromPlatform();
+    _upgrade();
   }
 
-  void upgrade(BuildContext context) {
+  void _upgrade() {
     PlatformType type = PlatformType.Android;
     if (GetPlatform.isIOS) {
       type = PlatformType.IOS;
@@ -48,26 +50,24 @@ class ConfigStore extends GetxController {
       type = PlatformType.Web;
     }
     HttpUtil().get("/common/upgrade/" + type.name).then((value) {
-      debugPrint("升级信息$value");
+      debugPrint("升级信息${value.data}");
       if (value.data != null && value.data["Version"] != _platform?.version) {
-        showDialog(
-          context: context,
+        Get.dialog(
+          AlertDialog(
+            title: const Text('版本升级'),
+            content: const Text('内测阶段，升级频繁，每次升级都有新功能，望理解'),
+            actions: <Widget>[
+              FilledButton(
+                child: const Text('去升级'),
+                onPressed: () {
+                  final Uri _url = Uri.parse('http://124.220.50.194');
+                  launchUrl(_url);
+                },
+              ),
+            ],
+          ),
+          useSafeArea: false,
           barrierDismissible: false,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              title: const Text('版本升级'),
-              content: const Text('内测阶段，升级频繁，每次升级都有新功能，望理解'),
-              actions: <Widget>[
-                FilledButton(
-                  child: const Text('去升级'),
-                  onPressed: () {
-                    final Uri _url = Uri.parse('http://124.220.50.194');
-                    launchUrl(_url);
-                  },
-                ),
-              ],
-            );
-          },
         );
       }
     });

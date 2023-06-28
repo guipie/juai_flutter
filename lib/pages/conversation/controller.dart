@@ -1,9 +1,8 @@
-import 'package:JuAI/common/apis/chat_api.dart';
-import 'package:JuAI/common/apis/content_api.dart';
-import 'package:JuAI/common/store/chat.dart';
-import 'package:JuAI/common/utils/db_sqlite.dart';
-import 'package:JuAI/entities/message/conversation.dart';
-import 'package:JuAI/pages/conversation/state.dart';
+import 'package:juai/common/apis/chat_api.dart';
+import 'package:juai/common/store/chat.dart';
+import 'package:juai/common/utils/db_sqlite.dart';
+import 'package:juai/entities/message/conversation.dart';
+import 'package:juai/pages/conversation/state.dart';
 import 'package:get/get.dart';
 
 class ConversationController extends GetxController {

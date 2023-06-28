@@ -1,7 +1,7 @@
-import 'package:JuAI/common/config.dart';
-import 'package:JuAI/common/routers/routes.dart';
-import 'package:JuAI/common/theme.dart';
-import 'package:JuAI/entities/content/special.dart';
+import 'package:juai/common/config.dart';
+import 'package:juai/common/routers/routes.dart';
+import 'package:juai/common/theme.dart';
+import 'package:juai/entities/content/special.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

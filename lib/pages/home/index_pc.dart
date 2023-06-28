@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:JuAI/common/routers/routes.dart';
-import 'package:JuAI/common/store/store.dart';
-import 'package:JuAI/common/widgets/avatar.dart';
-import 'package:JuAI/pages/home/widgets/PcWidgetMeasure.dart';
-import 'package:JuAI/common/theme.dart';
+import 'package:juai/common/routers/routes.dart';
+import 'package:juai/common/store/store.dart';
+import 'package:juai/common/widgets/avatar.dart';
+import 'package:juai/pages/home/widgets/PcWidgetMeasure.dart';
+import 'package:juai/common/theme.dart';
 import 'package:get/get.dart';
 import 'package:getwidget/getwidget.dart';
 import 'controler.dart';

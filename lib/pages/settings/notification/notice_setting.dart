@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:JuAI/common/store/notice.dart';
-import 'package:JuAI/common/widgets/cell.dart';
+import 'package:juai/common/store/notice.dart';
+import 'package:juai/common/widgets/cell.dart';
 
 /// HACK: 消息通知设置
 

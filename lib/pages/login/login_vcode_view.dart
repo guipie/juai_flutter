@@ -1,11 +1,13 @@
-import 'package:JuAI/common/routers/routes.dart';
+import 'package:juai/common/routers/routes.dart';
 import 'package:flutter/material.dart';
-import 'package:JuAI/pages/settings/login/controller.dart';
-import 'package:JuAI/pages/settings/login/widgets/login_btn.dart';
-import 'package:JuAI/pages/settings/login/widgets/username_text.dart';
-import 'package:JuAI/common/theme.dart';
+import 'package:juai/pages/login/controller.dart';
+import 'package:juai/pages/login/widgets/login_btn.dart';
+import 'package:juai/pages/login/widgets/username_text.dart';
+import 'package:juai/common/theme.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+
+import 'widgets/password_text.dart';
 
 // 验证码登录
 class LoginVerifyCodePage extends StatelessWidget {
@@ -33,6 +35,7 @@ class LoginVerifyCodePage extends StatelessWidget {
               children: [
                 const UserNameText(),
                 buildVerifyCode(),
+                const PasswrodText(),
                 const LoginBtn(),
                 InkWell(
                   onTap: () {

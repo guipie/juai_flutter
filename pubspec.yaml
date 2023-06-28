@@ -1,4 +1,4 @@
-name: JuAI
+name: juai
 description: 聚AI，链接你我和它.
 
 # The following line prevents the package from being accidentally published to
@@ -35,23 +35,21 @@ dependencies:
   signalr_netcore:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-
   cupertino_icons: ^1.0.2
   flutter_easyloading:
-  card_swiper: ^2.0.3
   get:
-  group_button: ^5.0.1
   pull_to_refresh: ^2.0.0
-  dart_mock: ^2.0.0
   #scan: ^1.6.0
-  dotted_border: ^2.0.0+2
-  cached_network_image: ^3.2.0
+  cached_network_image:
+  image_gallery_saver:
   url_launcher:
   flutter_screenutil:
-  dio: ^5.0.1
+  dio:
   dio_cookie_manager:
   package_info_plus:
   shared_preferences:
+  share_plus:
+  qr_flutter:
   getwidget:
   markdown_widget:
   flutter_highlight:

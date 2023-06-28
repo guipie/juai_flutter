@@ -1,9 +1,9 @@
 import 'dart:io';
 
-import 'package:JuAI/common/apis/statistics_api.dart';
-import 'package:JuAI/common/store/store.dart';
-import 'package:JuAI/common/theme.dart';
-import 'package:JuAI/common/utils/loading.dart';
+import 'package:juai/common/apis/statistics_api.dart';
+import 'package:juai/common/store/store.dart';
+import 'package:juai/common/theme.dart';
+import 'package:juai/common/utils/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:path_provider/path_provider.dart';

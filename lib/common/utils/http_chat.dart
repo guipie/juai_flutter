@@ -1,6 +1,6 @@
-import 'package:JuAI/common/utils/loading.dart';
+import 'package:juai/common/utils/loading.dart';
 import 'package:dart_openai/dart_openai.dart';
-import 'package:JuAI/common/config.dart';
+import 'package:juai/common/config.dart';
 import 'package:flutter/foundation.dart';
 
 class HttpChat {

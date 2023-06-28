@@ -1,20 +1,22 @@
-import 'package:JuAI/common/apis/content_special_api.dart';
-import 'package:JuAI/common/routers/routes.dart';
-import 'package:JuAI/common/store/store.dart';
-import 'package:JuAI/common/utils/date.dart';
-import 'package:JuAI/common/widgets/bottommost.dart';
-import 'package:JuAI/entities/content/content.dart';
-import 'package:JuAI/pages/bbs/widgets/card_dongtai_images.dart';
-import 'package:JuAI/pages/bbs/widgets/card_dongtai_video.dart';
-import 'package:JuAI/pages/bbs/widgets/specials.dart';
-import 'package:JuAI/pages/bbs/widgets/tags.dart';
-import 'package:JuAI/pages/bbs/widgets/tools.dart';
-import 'package:JuAI/pages/settings/mine/controller.dart';
-import 'package:JuAI/pages/widgets/follow_btn.dart';
+import 'package:juai/common/apis/content_api.dart';
+import 'package:juai/common/apis/content_special_api.dart';
+import 'package:juai/common/routers/routes.dart';
+import 'package:juai/common/store/store.dart';
+import 'package:juai/common/utils/date.dart';
+import 'package:juai/common/utils/loading.dart';
+import 'package:juai/common/widgets/bottommost.dart';
+import 'package:juai/entities/content/content.dart';
+import 'package:juai/pages/bbs/widgets/card_dongtai_images.dart';
+import 'package:juai/pages/bbs/widgets/card_dongtai_video.dart';
+import 'package:juai/pages/bbs/widgets/specials.dart';
+import 'package:juai/pages/bbs/widgets/tags.dart';
+import 'package:juai/pages/bbs/widgets/tools.dart';
+import 'package:juai/pages/settings/mine/controller.dart';
+import 'package:juai/pages/widgets/follow_btn.dart';
 import 'package:flutter/material.dart';
-import 'package:JuAI/common/widgets/avatar.dart';
-import 'package:JuAI/common/widgets/tag.dart';
-import 'package:JuAI/common/theme.dart';
+import 'package:juai/common/widgets/avatar.dart';
+import 'package:juai/common/widgets/tag.dart';
+import 'package:juai/common/theme.dart';
 import 'package:get/get.dart';
 
 class SettingsMineHomeWidget extends StatelessWidget {
@@ -233,11 +235,38 @@ class SettingsMineHomeWidget extends StatelessWidget {
                     ],
                   ),
                 ),
-                IconButton(
-                  icon: const Icon(Icons.more_horiz),
-                  iconSize: WcaoTheme.fsBase * 2.5,
-                  onPressed: () {},
-                ),
+                if (UserStore.to.userId == content.createId)
+                  PopupMenuButton(
+                    child: Icon(
+                      Icons.more_horiz,
+                      size: WcaoTheme.fsBase * 2.5,
+                    ),
+                    onSelected: (val) {
+                      Loading.confirm("确定删除吗？", onConfirm: () {
+                        ContentAPI.delContentDetail(content.id).then((isDel) {
+                          if (isDel) {
+                            logic.state.contents.removeWhere((element) => element.id == content.id);
+                          }
+                        });
+                      });
+                    },
+                    itemBuilder: (context) => [
+                      PopupMenuItem(
+                        padding: const EdgeInsets.only(left: 12),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            const Icon(Icons.delete_forever_sharp),
+                            Container(
+                              margin: const EdgeInsets.only(left: 8),
+                              child: const Text('删除'),
+                            ),
+                          ],
+                        ),
+                        value: 1,
+                      ),
+                    ],
+                  ),
               ],
             ),
             if (content.category == BaCategory.Image && content.files.isNotEmpty) CardDongtaiImagesWidget(content),

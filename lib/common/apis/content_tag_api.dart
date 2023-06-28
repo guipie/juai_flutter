@@ -1,5 +1,5 @@
-import 'package:JuAI/common/utils/http.dart';
-import 'package:JuAI/entities/content/content.dart';
+import 'package:juai/common/utils/http.dart';
+import 'package:juai/entities/content/content.dart';
 
 class ContentTagApi {
   /* 话题相关接口 */

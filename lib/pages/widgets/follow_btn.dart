@@ -1,5 +1,5 @@
-import 'package:JuAI/common/apis/user_follow_api.dart';
-import 'package:JuAI/common/theme.dart';
+import 'package:juai/common/apis/user_follow_api.dart';
+import 'package:juai/common/theme.dart';
 import 'package:flutter/material.dart';
 
 class FollowFillButtonWidget extends StatefulWidget {

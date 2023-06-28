@@ -57,14 +57,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.2"
-  card_swiper:
-    dependency: "direct main"
-    description:
-      name: card_swiper
-      sha256: "0c94c538f47be1dab52d018d4900a7046b4cb0700dc7f95b8628da89d1212b35"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.0.4"
   characters:
     dependency: transitive
     description:
@@ -169,14 +161,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.5"
-  dart_mock:
-    dependency: "direct main"
-    description:
-      name: dart_mock
-      sha256: "92c3075605a6fb245d60604b873ffc5e1a7e47beb20b4983b27357f6863a0851"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.0.0"
   dart_openai:
     dependency: "direct main"
     description:
@@ -225,14 +209,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.0"
-  dotted_border:
-    dependency: "direct main"
-    description:
-      name: dotted_border
-      sha256: "07a5c5e8d4e6e992279e190e0352be8faa5b8f96d81c77a78b2d42f060279840"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.0.0+3"
   equatable:
     dependency: transitive
     description:
@@ -542,14 +518,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.1.1"
-  group_button:
-    dependency: "direct main"
-    description:
-      name: group_button
-      sha256: "1382097b97589a66601fbfdf244dc3214e396724ea43899c481fcd40f0d89298"
-      url: "https://pub.dev"
-    source: hosted
-    version: "5.3.0"
   highlight:
     dependency: transitive
     description:
@@ -614,6 +582,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.0.17"
+  image_gallery_saver:
+    dependency: "direct main"
+    description:
+      name: image_gallery_saver
+      sha256: "467de169167b5c4e1ddde65395e4653c336a82f760b6700ea295085b7f2dd248"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.2"
   image_picker:
     dependency: transitive
     description:
@@ -878,14 +854,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.8.3"
-  path_drawing:
-    dependency: transitive
-    description:
-      name: path_drawing
-      sha256: bbb1934c0cbb03091af082a6389ca2080345291ef07a5fa6d6e078ba8682f977
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.0.1"
   path_parsing:
     dependency: transitive
     description:
@@ -1086,6 +1054,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.5.0"
+  qr:
+    dependency: transitive
+    description:
+      name: qr
+      sha256: "64957a3930367bf97cc211a5af99551d630f2f4625e38af10edd6b19131b64b3"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.1"
+  qr_flutter:
+    dependency: "direct main"
+    description:
+      name: qr_flutter
+      sha256: "5095f0fc6e3f71d08adef8feccc8cea4f12eec18a2e31c2e8d82cb6019f4b097"
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.1.0"
   quiver:
     dependency: transitive
     description:
@@ -1126,6 +1110,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.1"
+  share_plus:
+    dependency: "direct main"
+    description:
+      name: share_plus
+      sha256: ed3fcea4f789ed95913328e629c0c53e69e80e08b6c24542f1b3576046c614e8
+      url: "https://pub.dev"
+    source: hosted
+    version: "7.0.2"
+  share_plus_platform_interface:
+    dependency: transitive
+    description:
+      name: share_plus_platform_interface
+      sha256: "0c6e61471bd71b04a138b8b588fa388e66d8b005e6f2deda63371c5c505a0981"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.2.1"
   shared_preferences:
     dependency: "direct main"
     description:

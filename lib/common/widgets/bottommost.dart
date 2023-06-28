@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
-import 'package:JuAI/common/theme.dart';
+import 'package:juai/common/theme.dart';
 
 class BottommostWidget extends StatelessWidget {
   const BottommostWidget(this.isLoading, {super.key, this.isNodata = false});

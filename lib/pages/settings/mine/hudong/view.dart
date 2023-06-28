@@ -1,4 +1,4 @@
-import 'package:JuAI/pages/settings/mine/hudong/widget.dart';
+import 'package:juai/pages/settings/mine/hudong/widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

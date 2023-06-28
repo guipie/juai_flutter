@@ -1,16 +1,17 @@
 import 'dart:async';
 
-import 'package:JuAI/common/apis/chat_api.dart';
-import 'package:JuAI/common/store/store.dart';
-import 'package:JuAI/common/utils/utils.dart';
-import 'package:JuAI/entities/message/chat_prompt.dart';
-import 'package:JuAI/entities/message/chat_send_req.dart';
+import 'package:juai/common/apis/chat_api.dart';
+import 'package:juai/common/store/store.dart';
+import 'package:juai/common/utils/utils.dart';
+import 'package:juai/entities/message/chat_prompt.dart';
+import 'package:juai/entities/message/chat_send_req.dart';
 import 'package:flutter/material.dart';
-import 'package:JuAI/entities/message/conversation.dart';
-import 'package:JuAI/common/store/chat.dart';
-import 'package:JuAI/common/utils/db_sqlite.dart';
-import 'package:JuAI/pages/conversation/chat/state.dart';
+import 'package:juai/entities/message/conversation.dart';
+import 'package:juai/common/store/chat.dart';
+import 'package:juai/common/utils/db_sqlite.dart';
+import 'package:juai/pages/conversation/chat/state.dart';
 import 'package:get/get.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class ChatController extends GetxController {
   ChatController();
@@ -20,7 +21,6 @@ class ChatController extends GetxController {
   void onInit() {
     debugPrint("当前聊天对象：${ChatStore.to.lastChat!.toJson()}");
     lastChat = ChatStore.to.lastChat;
-    if (lastChat == null) return;
     state.messageController.addListener(() {
       debugPrint(state.messageController.text);
       if (state.messageController.text.trim().isNotEmpty) {
@@ -29,15 +29,40 @@ class ChatController extends GetxController {
         ChatStore.to.sendType.value = SendType.canNotSend;
       }
     });
-    DbSqlite.instance.queryWhereOrderBy("chat", "conversationId=?", [lastChat!.conversationId], 20, "id desc").then((value) {
-      ChatStore.to.chats.value = value.map((e) => Conversation.fromJson(e)).toList();
+    if (lastChat == null) return;
+    ChatStore.to.scrollContrller.addListener(() {
+      if (ChatStore.to.scrollContrller.position.pixels == ChatStore.to.scrollContrller.position.maxScrollExtent) {
+        debugPrint("滑动到底部了");
+        Future.delayed(const Duration(milliseconds: 500), () {
+          if (state.loadStatus.value == LoadStatus.canLoading) _loadChats(isFirst: false);
+        });
+      }
+    });
+    _loadChats();
+    super.onInit();
+  }
+
+  _loadChats({bool isFirst = true}) {
+    state.loadStatus.value = LoadStatus.loading;
+    var where = "conversationId=?";
+    var whereVal = [lastChat!.conversationId];
+    if (ChatStore.to.chats.isNotEmpty) {
+      where += " and id<?";
+      whereVal.add(ChatStore.to.chats.last.id!);
+    }
+    DbSqlite.instance.queryWhereOrderBy("chat", where, whereVal, 10, "id desc").then((value) {
+      debugPrint("加载聊天记录列表：${value.length},$where,$whereVal");
+      if (value.length == 10) {
+        state.loadStatus.value = LoadStatus.canLoading;
+      } else {
+        state.loadStatus.value = LoadStatus.noMore;
+      }
+      ChatStore.to.chats.addAll(value.map((e) => Conversation.fromJson(e)).toList());
       if (ChatStore.to.chats.isEmpty && ChatStore.to.currentChatPrompt != null) {
         toAddPrompt(ChatStore.to.currentChatPrompt);
       }
-      Future.delayed(const Duration(milliseconds: 200), () => ChatStore.to.toBottom());
+      if (isFirst) Future.delayed(const Duration(milliseconds: 200), () => ChatStore.to.toBottom());
     });
-    ChatApis.addConversation(lastChat!);
-    super.onInit();
   }
 
   toAddPrompt(ChatPromptEntity? prompt) {
@@ -69,18 +94,19 @@ class ChatController extends GetxController {
   void dispose() {
     state.messageController.dispose();
     lastChat = ChatStore.to.lastChat = null;
+    ChatStore.to.scrollContrller.dispose();
     super.dispose();
   }
 
-  void onSend() {
+  void onSend(BuildContext context) {
     if (state.drawImage.value) {
       onSendImage();
     } else {
-      onSendChat();
+      onSendChat(context);
     }
   }
 
-  void onSendChat() {
+  void onSendChat(BuildContext context) {
     if (state.messageController.text.trim().isNotEmpty && ChatStore.to.sendType.value == SendType.canSend) {
       ChatStore.to.sendType.value = SendType.sending;
       var sendMsg = state.messageController.text.trim().toString();
@@ -93,6 +119,7 @@ class ChatController extends GetxController {
           UserStore.to.userInfo.value!.tokenNum = value.data;
           return Loading.waring(value.message ?? "无法聊天");
         }
+        FocusScope.of(context).requestFocus(state.messageFocusNode);
       }).catchError((err) {
         Loading.waring("聊天出错了$err");
         ChatStore.to.sendType.value = SendType.canSend;
@@ -108,7 +135,7 @@ class ChatController extends GetxController {
       state.messageController.text = "";
       ChatStore.to.toAddChatStore(Conversation.fromJsonFromMine(sendMsg, null, lastChat!));
       ChatStore.to.currentChat.value = "思考中..";
-      ChatApis.sendChatGPTImage(ChatSendImageReqEntity(conversationId: lastChat!.conversationId, prompt: sendMsg)).then((value) {
+      ChatApis.sendChatGPTImage(ChatSendImageReqEntity.fromJsonBySetting(lastChat!.conversationId, sendMsg)).then((value) {
         if (!value.isOk) {
           ChatStore.to.currentChat.value = "";
           UserStore.to.userInfo.value!.tokenNum = value.data;
@@ -124,5 +151,11 @@ class ChatController extends GetxController {
 
   stopChat() {
     Loading.success("已停止");
+  }
+
+  Future<bool> pageBack() async {
+    debugPrint("返回了");
+    if (ChatStore.to.chats.isNotEmpty) ChatApis.addConversation(lastChat!);
+    return true;
   }
 }

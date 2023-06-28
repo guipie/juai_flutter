@@ -1,8 +1,7 @@
-import 'package:JuAI/entities/content/content.dart';
+import 'package:juai/entities/content/content.dart';
 import 'package:get/get.dart';
-import 'package:JuAI/common/apis/content_api.dart';
-import 'package:JuAI/common/store/content.dart';
-import 'package:JuAI/pages/bbs/detail/state.dart';
+import 'package:juai/common/apis/content_api.dart';
+import 'package:juai/pages/bbs/detail/state.dart';
 
 class ContentDetailController extends GetxController {
   ContentDetailController();
@@ -15,12 +14,8 @@ class ContentDetailController extends GetxController {
   }
 
   Future<ContentResEntity> toDetail() async {
-    var _content = ContentStore.to.contents.firstWhereOrNull((m) => m.id == state.contentId);
-    if (_content == null) {
-      state.currentContent = await ContentAPI.contentDetail(state.contentId);
-    } else {
-      state.currentContent = _content;
-    }
+    state.currentContent = await ContentAPI.contentDetail(state.contentId);
+    state.title.value = state.currentContent.title;
     return state.currentContent;
   }
 }

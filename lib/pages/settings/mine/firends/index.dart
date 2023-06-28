@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:JuAI/common/theme.dart';
-import 'package:dart_mock/dart_mock.dart' as mock;
-
-import '../../../bbs/mock.dart';
+import 'package:juai/common/theme.dart';
 
 class MineFirends extends StatefulWidget {
   const MineFirends({Key? key}) : super(key: key);
@@ -12,15 +9,11 @@ class MineFirends extends StatefulWidget {
 }
 
 class _MineFirendsState extends State<MineFirends> {
-  List<MockLike> lists = [];
-
   @override
   void initState() {
     super.initState();
 
-    setState(() {
-      lists = MockLike.get();
-    });
+    setState(() {});
   }
 
   @override
@@ -31,14 +24,14 @@ class _MineFirendsState extends State<MineFirends> {
       ),
       body: SafeArea(
         child: ListView(
-          children: lists.map((e) => listCard(e)).toList(),
+          children: [4, 5, 7, 32, 23, 5].map((e) => listCard()).toList(),
         ),
       ),
     );
   }
 }
 
-Container listCard(MockLike item) {
+Container listCard() {
   return Container(
     padding: const EdgeInsets.symmetric(horizontal: 12),
     margin: const EdgeInsets.only(top: 24),
@@ -47,7 +40,7 @@ Container listCard(MockLike item) {
       children: [
         CircleAvatar(
           radius: 28,
-          backgroundImage: NetworkImage(item.avatar),
+          backgroundImage: NetworkImage("aaa"),
         ),
         Expanded(
           child: Container(
@@ -61,7 +54,7 @@ Container listCard(MockLike item) {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      item.nickName,
+                      "删除了",
                       style: TextStyle(
                         fontSize: WcaoTheme.fsXl,
                         fontWeight: FontWeight.bold,
@@ -70,7 +63,7 @@ Container listCard(MockLike item) {
                     Container(
                       margin: const EdgeInsets.only(top: 4),
                       child: Text(
-                        '${mock.integer(min: 1, max: 99)}天 | ${mock.integer(min: 1, max: 99)}动态',
+                        '22天 | 21动态',
                         style: TextStyle(
                           color: WcaoTheme.secondary,
                           fontSize: WcaoTheme.fsBase,

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:JuAI/entities/content/content.dart';
-import 'package:JuAI/common/routers/routeFade.dart';
-import 'package:JuAI/common/utils/utils.dart';
-import 'package:JuAI/common/widgets/image_browser.dart';
-import 'package:JuAI/common/widgets/image_cache.dart';
+import 'package:juai/entities/content/content.dart';
+import 'package:juai/common/routers/routeFade.dart';
+import 'package:juai/common/utils/utils.dart';
+import 'package:juai/common/widgets/image_browser.dart';
+import 'package:juai/common/widgets/image_cache.dart';
 
 class CardDongtaiImagesWidget extends StatefulWidget {
   const CardDongtaiImagesWidget(this.content, {super.key});

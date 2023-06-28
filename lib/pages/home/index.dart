@@ -1,12 +1,12 @@
-import 'package:JuAI/pages/bbs/view.dart';
-import 'package:JuAI/pages/bbs_chat/view.dart';
-import 'package:JuAI/pages/conversation/role/view.dart';
-import 'package:JuAI/pages/home/controler.dart';
-import 'package:JuAI/pages/settings/view.dart';
+import 'package:juai/pages/bbs/view.dart';
+import 'package:juai/pages/bbs_chat/view.dart';
+import 'package:juai/pages/conversation/role/view.dart';
+import 'package:juai/pages/home/controler.dart';
+import 'package:juai/pages/settings/view.dart';
 import 'package:flutter/material.dart';
-import 'package:JuAI/pages/conversation/view.dart';
+import 'package:juai/pages/conversation/view.dart';
 
-import 'package:JuAI/common/theme.dart';
+import 'package:juai/common/theme.dart';
 import 'package:get/get.dart';
 
 /// 首页 PageView Controller.
@@ -23,7 +23,7 @@ class HomePage extends GetView<HomeController> {
           const ConversationPage(),
           // BbsChatPage(),
           const RolePage(),
-          const BbsPage(),
+          BbsPage(),
           SettingsPage(),
         ],
       ),

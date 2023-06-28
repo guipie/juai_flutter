@@ -1,16 +1,16 @@
-import 'package:JuAI/common/routers/routes.dart';
-import 'package:JuAI/common/theme.dart';
-import 'package:JuAI/common/utils/date.dart';
-import 'package:JuAI/common/widgets/bottommost.dart';
-import 'package:JuAI/common/widgets/image_cache.dart';
-import 'package:JuAI/common/widgets/load_data.dart';
-import 'package:JuAI/components/reaction_button/flutter_reaction_button.dart';
-import 'package:JuAI/components/reaction_button/src/ui/reaction_button.dart';
-import 'package:JuAI/pages/bbs/widgets/card_index.dart';
+import 'package:juai/common/routers/routes.dart';
+import 'package:juai/common/theme.dart';
+import 'package:juai/common/utils/date.dart';
+import 'package:juai/common/widgets/image_cache.dart';
+import 'package:juai/common/widgets/load_data.dart';
+import 'package:juai/common/widgets/load_data_refresh.dart';
+import 'package:juai/components/reaction_button/flutter_reaction_button.dart';
+import 'package:juai/entities/content/content.dart';
+import 'package:juai/pages/bbs/widgets/card_index.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'index.dart';
+import 'controller.dart';
 
 class SpecialPage extends GetView<SpecialController> {
   SpecialPage({Key? key}) : super(key: key);
@@ -60,16 +60,17 @@ class SpecialPage extends GetView<SpecialController> {
                 ),
               ),
             ),
+            const SizedBox(
+              height: 20,
+            ),
             Expanded(
-              child: Obx(
-                () => logic.contents.isNotEmpty
-                    ? ListView.builder(
-                        itemCount: logic.contents.length,
-                        itemBuilder: (context, index) {
-                          return CardIndexWidget(logic.contents[index]);
-                        },
-                      )
-                    : const BottommostWidget(false),
+              child: LoadDataRefresh.buildRefreshListWidget<ContentResEntity, SpecialController>(
+                itemBuilder: (item, index) {
+                  return CardIndexWidget(
+                    item,
+                    isShowSpecial: false,
+                  );
+                },
               ),
             ),
           ],

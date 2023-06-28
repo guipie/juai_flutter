@@ -10,8 +10,9 @@ enum SendType { nosend, cansend, sending }
 class DongtaiFile {
   String? url;
   String path;
+  String? name;
   double percentage = 0.0;
-  DongtaiFile({required this.path, this.url, required this.percentage});
+  DongtaiFile({required this.path, this.url, this.name, required this.percentage});
 }
 // class PublishModel {
 //   PublishType type;

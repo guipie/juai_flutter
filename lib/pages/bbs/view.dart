@@ -1,5 +1,5 @@
-import 'package:JuAI/common/widgets/appbar.dart';
-import 'package:JuAI/pages/bbs/index/view.dart';
+import 'package:juai/common/widgets/appbar.dart';
+import 'package:juai/pages/bbs/index/view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -23,7 +23,7 @@ class BbsPage extends GetView<BbsController> {
               child: PageView(
                 physics: const NeverScrollableScrollPhysics(),
                 controller: controller.state.pageController,
-                children: [BbsIndexPage()],
+                children: const [BbsIndexPage()],
               ),
             )
           ],

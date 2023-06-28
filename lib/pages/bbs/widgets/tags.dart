@@ -1,7 +1,7 @@
-import 'package:JuAI/common/routers/routes.dart';
+import 'package:juai/common/routers/routes.dart';
 import 'package:flutter/material.dart';
-import 'package:JuAI/common/theme.dart';
-import 'package:JuAI/common/widgets/tag.dart';
+import 'package:juai/common/theme.dart';
+import 'package:juai/common/widgets/tag.dart';
 import 'package:get/get.dart';
 
 class TagsWidget extends StatelessWidget {
@@ -15,9 +15,9 @@ class TagsWidget extends StatelessWidget {
       child: Wrap(
           spacing: 12,
           runSpacing: 6,
-          children: tags.split("##").map((e) {
+          children: tags.split(",").map((e) {
             return TagWidget(
-              "#" + e.replaceAll("#", "") + "#",
+              e,
               onTab: () => Get.toNamed(Routes.bbsTag, arguments: e),
               borderRadius: BorderRadius.circular(24),
               fontSize: WcaoTheme.fsBase,

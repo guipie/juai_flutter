@@ -1,5 +1,5 @@
-import 'package:JuAI/common/store/store.dart';
-import 'package:JuAI/common/utils/date.dart';
+import 'package:juai/common/store/store.dart';
+import 'package:juai/common/utils/date.dart';
 
 import 'chat_prompt.dart';
 

@@ -1,6 +1,6 @@
-import 'package:JuAI/common/widgets/bottommost.dart';
-import 'package:JuAI/entities/content/content.dart';
-import 'package:JuAI/pages/bbs/widgets/card_index.dart';
+import 'package:juai/common/widgets/bottommost.dart';
+import 'package:juai/entities/content/content.dart';
+import 'package:juai/pages/bbs/widgets/card_index.dart';
 import 'package:flutter/material.dart';
 
 class HudongListWidget extends StatelessWidget {

@@ -1,10 +1,10 @@
-import 'package:JuAI/pages/bbs/controller.dart';
+import 'package:juai/pages/bbs/controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:JuAI/common/routers/routes.dart';
-import 'package:JuAI/pages/conversation/widgets/firends_dialog.dart';
-import 'package:JuAI/pages/conversation/widgets/qr_scan.dart';
-import 'package:JuAI/common/theme.dart';
+import 'package:juai/common/routers/routes.dart';
+import 'package:juai/pages/conversation/widgets/firends_dialog.dart';
+import 'package:juai/pages/conversation/widgets/qr_scan.dart';
+import 'package:juai/common/theme.dart';
 
 AppBar conversationBar(BuildContext context) {
   return AppBar(

@@ -3,8 +3,8 @@
 // const SERVER_API_URL = 'https://yapi.ducafecat.tech/mock/11';
 // ignore_for_file: constant_identifier_names
 
-import 'package:JuAI/common/config.dev.dart';
-import 'package:JuAI/common/config.prod.dart';
+import 'package:juai/common/config.dev.dart';
+import 'package:juai/common/config.prod.dart';
 import 'package:flutter/foundation.dart';
 
 const SERVER_API_URL = kReleaseMode ? JuAIConfigProd.SERVER_API_URL : JuAIConfigDev.SERVER_API_URL;

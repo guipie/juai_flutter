@@ -1,4 +1,4 @@
-import 'package:JuAI/common/routers/routes.dart';
+import 'package:juai/common/routers/routes.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';

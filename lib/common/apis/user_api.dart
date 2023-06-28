@@ -1,8 +1,8 @@
-import 'package:JuAI/entities/user/user_base.dart';
+import 'package:juai/entities/user/user_base.dart';
 import 'package:get/get.dart';
-import 'package:JuAI/entities/api_response.dart';
-import 'package:JuAI/entities/user/user_login.dart';
-import 'package:JuAI/common/utils/http.dart';
+import 'package:juai/entities/api_response.dart';
+import 'package:juai/entities/user/user_login.dart';
+import 'package:juai/common/utils/http.dart';
 
 /// 用户
 class UserAPI {

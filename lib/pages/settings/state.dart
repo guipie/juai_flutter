@@ -1,4 +1,4 @@
-import 'package:JuAI/common/store/user.dart';
+import 'package:juai/common/store/user.dart';
 import 'package:get/get.dart';
 
 class SettingsState {

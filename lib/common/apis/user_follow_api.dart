@@ -1,5 +1,5 @@
-import 'package:JuAI/common/utils/http.dart';
-import 'package:JuAI/entities/user/user_base.dart';
+import 'package:juai/common/utils/http.dart';
+import 'package:juai/entities/user/user_base.dart';
 
 class UserFollowApi {
   static Future<List<UserInfo>> getFollowUsers(int lastId) async {

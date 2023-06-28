@@ -1,16 +1,16 @@
-import 'package:JuAI/common/routers/routes.dart';
-import 'package:JuAI/common/widgets/load_data.dart';
-import 'package:JuAI/pages/widgets/follow_btn.dart';
+import 'package:juai/common/routers/routes.dart';
+import 'package:juai/common/widgets/load_data.dart';
+import 'package:juai/pages/widgets/follow_btn.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:JuAI/common/utils/utils.dart';
-import 'package:JuAI/entities/content/content.dart';
-import 'package:JuAI/common/widgets/avatar.dart';
-import 'package:JuAI/pages/bbs/detail/controller.dart';
-import 'package:JuAI/pages/bbs/detail/widgets/comment_widget.dart';
-import 'package:JuAI/pages/bbs/publish/widgets/article/read_only_page.dart';
-import 'package:JuAI/pages/bbs/widgets/card_dongtai_images.dart';
-import 'package:JuAI/pages/bbs/widgets/card_dongtai_video.dart';
+import 'package:juai/common/utils/utils.dart';
+import 'package:juai/entities/content/content.dart';
+import 'package:juai/common/widgets/avatar.dart';
+import 'package:juai/pages/bbs/detail/controller.dart';
+import 'package:juai/pages/bbs/detail/widgets/comment_widget.dart';
+import 'package:juai/pages/bbs/publish/widgets/article/read_only_page.dart';
+import 'package:juai/pages/bbs/widgets/card_dongtai_images.dart';
+import 'package:juai/pages/bbs/widgets/card_dongtai_video.dart';
 
 class BbsDetailPage extends StatelessWidget {
   BbsDetailPage({super.key});
@@ -19,7 +19,7 @@ class BbsDetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("详情"),
+        title: Obx(() => Text(logic.state.title.value)),
       ),
       body: LoadDataWidget(
         logic.toDetail(),

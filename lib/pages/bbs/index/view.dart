@@ -1,41 +1,32 @@
-import 'package:JuAI/common/routers/routes.dart';
-import 'package:JuAI/pages/bbs/widgets/specials.dart';
+import 'package:juai/common/routers/routes.dart';
+import 'package:juai/common/widgets/load_data_refresh.dart';
+import 'package:juai/entities/content/content.dart';
+import 'package:juai/pages/bbs/index/controller.dart';
+import 'package:juai/pages/bbs/widgets/specials.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:JuAI/common/config.dart';
-import 'package:JuAI/common/store/content.dart';
-import 'package:JuAI/common/theme.dart';
-import 'package:JuAI/common/widgets/bottommost.dart';
-import 'package:JuAI/pages/bbs/controller.dart';
-import 'package:JuAI/pages/bbs/widgets/card_index.dart';
+import 'package:juai/common/store/content.dart';
+import 'package:juai/common/theme.dart';
+import 'package:juai/pages/bbs/widgets/card_index.dart';
 
 class BbsIndexPage extends StatelessWidget {
-  BbsIndexPage({super.key});
-  final logic = Get.find<BbsController>();
-
+  const BbsIndexPage({super.key});
   @override
   Widget build(BuildContext context) {
-    return RefreshIndicator(
-      onRefresh: () => Future(() => ContentStore.to.getContents()),
-      child: Obx(
-        () => ListView(
-          physics: const AlwaysScrollableScrollPhysics(),
-          controller: logic.state.indexScrollController,
-          children: [
-            Container(
-              padding: const EdgeInsets.only(top: 12, bottom: 24),
-              child: Column(
-                children: [
-                  // search(),
-                  SpecialsWidget(ContentStore.to.specials),
-                  topTag(context),
-                ],
-              ),
-            ),
-            ...ContentStore.to.contents.map((e) => CardIndexWidget(e)).toList(),
-            Obx(() => BottommostWidget(logic.state.indexDownloading.value)),
-          ],
-        ),
+    return NestedScrollView(
+      headerSliverBuilder: (context, innerBoxIsScrolled) {
+        return [
+          SliverToBoxAdapter(
+            child: SpecialsWidget(ContentStore.to.specials),
+          ),
+          SliverToBoxAdapter(
+            child: topTag(context),
+          ),
+        ];
+      },
+      body: LoadDataRefresh.buildRefreshListWidget<ContentResEntity, BbsIndexController>(
+        itemBuilder: (item, index) => CardIndexWidget(item),
+        tag: "BbsIndex",
       ),
     );
   }

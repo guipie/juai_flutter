@@ -1,5 +1,5 @@
-import 'package:JuAI/entities/content/content.dart';
-import 'package:JuAI/common/utils/http.dart';
+import 'package:juai/entities/content/content.dart';
+import 'package:juai/common/utils/http.dart';
 
 class ContentAPI {
   /* 内容相关接口 */
@@ -70,6 +70,11 @@ class ContentAPI {
   static Future<int> contentAdd(ContentAddReqEntity addReqEntity) async {
     var response = await HttpUtil().post('/content', data: addReqEntity.toJson());
     return response.data ?? 0;
+  }
+
+  static Future<bool> delContentDetail(int id) async {
+    var response = await HttpUtil().delete('/content/$id', isLoading: true);
+    return response.isOk;
   }
 
   static Future<ContentResEntity> contentDetail(int id) async {

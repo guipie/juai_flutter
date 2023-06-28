@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:getwidget/getwidget.dart';
-import 'package:JuAI/common/apis/content_special_api.dart';
-import 'package:JuAI/entities/content/special.dart';
-import 'package:JuAI/common/routers/routes.dart';
-import 'package:JuAI/common/theme.dart';
-import 'package:JuAI/common/widgets/image_cache.dart';
+import 'package:juai/common/apis/content_special_api.dart';
+import 'package:juai/entities/content/special.dart';
+import 'package:juai/common/routers/routes.dart';
+import 'package:juai/common/theme.dart';
+import 'package:juai/common/widgets/image_cache.dart';
 
 class SelectSpecialWidget extends StatefulWidget {
   const SelectSpecialWidget({super.key});

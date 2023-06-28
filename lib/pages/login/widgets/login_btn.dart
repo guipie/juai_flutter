@@ -1,6 +1,6 @@
-import 'package:JuAI/common/routers/routes.dart';
+import 'package:juai/common/routers/routes.dart';
 import 'package:flutter/material.dart';
-import 'package:JuAI/pages/settings/login/controller.dart';
+import 'package:juai/pages/login/controller.dart';
 import 'package:get/get.dart';
 import 'package:getwidget/getwidget.dart';
 

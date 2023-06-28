@@ -1,6 +1,6 @@
-import 'package:JuAI/common/utils/date.dart';
-import 'package:JuAI/pages/bbs_chat/controller.dart';
-import 'package:JuAI/common/theme.dart';
+import 'package:juai/common/utils/date.dart';
+import 'package:juai/pages/bbs_chat/controller.dart';
+import 'package:juai/common/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:getwidget/getwidget.dart';

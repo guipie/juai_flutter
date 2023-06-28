@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:getwidget/getwidget.dart';
-import 'package:JuAI/common/apis/notice_api.dart';
-import 'package:JuAI/common/routers/routes.dart';
-import 'package:JuAI/common/store/notice.dart';
-import 'package:JuAI/common/utils/date.dart';
-import 'package:JuAI/common/widgets/bottommost.dart';
+import 'package:juai/common/apis/notice_api.dart';
+import 'package:juai/common/routers/routes.dart';
+import 'package:juai/common/store/notice.dart';
+import 'package:juai/common/utils/date.dart';
+import 'package:juai/common/widgets/bottommost.dart';
 
 class SettingsNoticePage extends StatefulWidget {
   SettingsNoticePage({super.key});

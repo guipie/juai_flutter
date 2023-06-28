@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:JuAI/entities/user/user_base.dart';
+import 'package:juai/entities/user/user_base.dart';
 
 class CommentRes {
   int id;

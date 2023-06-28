@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:JuAI/common/values/colors.dart';
-import 'package:JuAI/common/values/radii.dart';
+import 'package:juai/common/values/colors.dart';
+import 'package:juai/common/values/radii.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 /// 输入框

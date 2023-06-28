@@ -12,6 +12,7 @@ class Routes {
   static const tools = "/tools";
 
   static const bbs = "/bbs";
+  static const bbsIndex = "/bbsIndex";
   static const bbsPublishDongtai = "/bbs/publish/dongtai";
   static const bbsPublishArticle = "/bbs/publish/article";
   static const bbsPublishSpecial = "/bbs/publish/special";
@@ -40,6 +41,8 @@ class Routes {
   static const settingsAbout = "/settings/about";
   static const settingsAgreementPrivacy = "/settings/agreement/privacy";
   static const settingsAgreementUser = "/settings/agreement/user";
+  static const settingsSuggestions = "/settings/suggestions";
+
   static const notFound = '/not_found';
 
   static const Application = '/application';

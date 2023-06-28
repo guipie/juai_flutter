@@ -1,10 +1,10 @@
 import 'package:getwidget/getwidget.dart';
-import 'package:JuAI/common/widgets/tag.dart';
-import 'package:JuAI/pages/bbs/publish/controller.dart';
+import 'package:juai/common/widgets/tag.dart';
+import 'package:juai/pages/bbs/publish/controller.dart';
 import 'package:flutter/material.dart';
-import 'package:JuAI/pages/bbs/publish/state.dart';
-import 'package:JuAI/pages/bbs/publish/widgets/article/article_edit.dart';
-import 'package:JuAI/common/theme.dart';
+import 'package:juai/pages/bbs/publish/state.dart';
+import 'package:juai/pages/bbs/publish/widgets/article/article_edit.dart';
+import 'package:juai/common/theme.dart';
 import 'package:get/get.dart';
 
 class PublishArticlePage extends StatelessWidget {

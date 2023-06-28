@@ -1,8 +1,8 @@
-import 'package:JuAI/entities/content/content.dart';
-import 'package:JuAI/entities/content/special.dart';
-import 'package:JuAI/common/utils/http.dart';
-import 'package:JuAI/entities/entities.dart';
-import 'package:JuAI/entities/user/user_base.dart';
+import 'package:juai/entities/content/content.dart';
+import 'package:juai/entities/content/special.dart';
+import 'package:juai/common/utils/http.dart';
+import 'package:juai/entities/entities.dart';
+import 'package:juai/entities/user/user_base.dart';
 import 'package:flutter/material.dart';
 
 class SpecialApi {
@@ -30,8 +30,8 @@ class SpecialApi {
     return response.data;
   }
 
-  static Future<List<ContentResEntity>> getSpecialContents(int id) async {
-    var response = await HttpUtil().get("/contentSpecial/contents/$id").catchError((err) => debugPrint(err));
+  static Future<List<ContentResEntity>> getSpecialContents(int id, int? lastId) async {
+    var response = await HttpUtil().get("/contentSpecial/contents/$id?lastId=$lastId").catchError((err) => debugPrint(err));
     return List<ContentResEntity>.from((response.data as Iterable).map((e) => ContentResEntity.fromJson(e)));
   }
 
