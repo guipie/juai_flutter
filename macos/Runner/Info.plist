@@ -28,12 +28,13 @@
     <string>MainMenu</string>
     <key>NSPrincipalClass</key>
     <string>NSApplication</string>
+
+    <key>NSAppTransportSecurity</key>
+    <dict>
+      <key>NSAllowsArbitraryLoads</key>
+      <true />
+    </dict>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>你的相册权限描述</string>
   </dict>
-  <key>NSAppTransportSecurity</key>
-  <dict>
-    <key>NSAllowsArbitraryLoads</key>
-    <true />
-  </dict>
-  <key>NSPhotoLibraryUsageDescription</key>
-  <string>你的相册权限描述</string>
 </plist>
