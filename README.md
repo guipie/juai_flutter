@@ -1,7 +1,18 @@
-# juai
-基于flutter开发的chatgpt聊天系统，可以直播聊天，可社区发布内容。
-![image](https://github.com/guipie/guxin.chat/assets/55727172/6749d921-4203-4cca-9023-b489d2d2ba7a)
-![image](https://github.com/guipie/guxin.chat/assets/55727172/d0b1cdb9-1345-40ac-a362-09a23d250c62)
-![1683690444073](https://github.com/guipie/guxin.chat/assets/55727172/92800cd0-44d1-4ad5-8716-61c42e4a6373)
-![1683690477716](https://github.com/guipie/guxin.chat/assets/55727172/c8f0f921-4379-4c71-b6f4-704039081e7c)
-![image](https://github.com/guipie/guxin.chat/assets/55727172/5c5bd91c-64ec-4e1a-ba10-00b5f915f01f)
+# juai_flutter
+
+A new Flutter project.
+
+## Getting Started
+## 项目结构(https://github.com/kauemurakami/getx_pattern)
+## 项目脚手架(https://github.com/jonataslaw/get_cli/blob/master/README-zh_CN.md)
+## 设计图作者：社交APP设计-MasterGo 社区 https://mastergo.com/community/resource/10124
+This project is a starting point for a Flutter application.
+
+A few resources to get you started if this is your first Flutter project:
+
+- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
+- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+
+For help getting started with Flutter development, view the
+[online documentation](https://docs.flutter.dev/), which offers tutorials,
+samples, guidance on mobile development, and a full API reference.

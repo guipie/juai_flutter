@@ -1,0 +1,15 @@
+{
+  "app": {
+    "name": "聚AI",
+    "title": "聚AI,工作生活必备工具",
+    "chat": "聊天"
+  },
+  "buttons": {
+    "login": "登录",
+    "sign_in": "注册",
+    "logout": "注销",
+    "sign_in_fb": "用 Facebook 登录",
+    "sign_in_google": "用 Google 登录",
+    "sign_in_apple": "用 Apple 登录"
+  }
+}

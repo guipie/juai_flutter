@@ -1,89 +1,50 @@
-import 'package:juai/common/store/store.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:juai/common/routers/pages.dart';
-import 'package:juai/common/theme.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:juai/common/langs/translation_service.dart';
-import 'package:juai/common/routers/routes.dart';
-import 'package:juai/common/utils/logger.dart';
-import 'package:juai/global.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:media_kit/media_kit.dart';
-import 'package:window_manager/window_manager.dart';
+import 'package:juai_flutter/app/core/theme/index.dart';
+import 'package:juai_flutter/generated/locales.g.dart';
 
-import 'common/routers/observers.dart';
+import 'app/routes/app_pages.dart';
 
-Future<void> main() async {
-  await ScreenUtil.ensureScreenSize();
-  await Global.init();
-  // 必须加上这一行。
-  if (GetPlatform.isDesktop) {
-    await windowManager.ensureInitialized();
-    MediaKit.ensureInitialized();
-    WindowOptions windowOptions = const WindowOptions(
-      center: true,
-      minimumSize: Size(600, 800),
-      backgroundColor: Colors.transparent,
-      skipTaskbar: false,
-      titleBarStyle: TitleBarStyle.normal,
-    );
-    windowManager.waitUntilReadyToShow(windowOptions, () async {
-      await windowManager.show();
-      await windowManager.focus();
-    });
-  }
+void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatefulWidget {
-  const MyApp({Key? key}) : super(key: key);
-
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  @override
-  void initState() {
-    super.initState();
-    initialization();
-  }
-
-  void initialization() async {
-    // 启动页关闭
-    await Future.delayed(const Duration(seconds: 3));
-    FlutterNativeSplash.remove();
-  }
-
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.init(context);
-    var home = GetPlatform.isMobile ? Routes.home : Routes.homePc;
-    if (!UserStore.to.isLogin) home = Routes.settingsLogin;
-    return GetMaterialApp(
-      title: '故新AI社区',
-      theme: WcaoTheme.lightTheme,
-      darkTheme: WcaoTheme.darkTheme,
-      builder: EasyLoading.init(),
-      getPages: AppPages.routes,
-      initialRoute: home,
-      navigatorObservers: [RouteObservers()],
-      // unknownRoute: AppPages.unknownRoute,
-      defaultTransition: Transition.rightToLeftWithFade,
-      debugShowCheckedModeBanner: false,
-      translations: TranslationService(),
-      localizationsDelegates: const [
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      supportedLocales: ConfigStore.to.languages,
-      locale: ConfigStore.to.locale,
-      fallbackLocale: const Locale('zh', 'CN'),
-      logWriterCallback: Logger.write,
+    return ScreenUtilInit(
+      designSize: const Size(375, 812),
+      splitScreenMode: false,
+      child: const Center(
+        child: Text("juai.link"),
+      ),
+      builder: (BuildContext context, Widget? child) {
+        return GetMaterialApp(
+          title: LocaleKeys.app_name.tr,
+          enableLog: kDebugMode,
+          translationsKeys: AppTranslation.translations,
+          locale: Get.deviceLocale,
+          fallbackLocale: const Locale('zh', 'CN'),
+          theme: createLightThemeData(),
+          darkTheme: createDarkThemeData(),
+          debugShowCheckedModeBanner: false,
+          initialRoute: AppPages.initRoute,
+          getPages: AppPages.routes,
+          defaultTransition: Transition.rightToLeft,
+          builder: EasyLoading.init(
+            builder: (_, child) => MediaQuery(
+              data: MediaQuery.of(context).copyWith(
+                textScaler: const TextScaler.linear(1.0),
+              ),
+              child: child!,
+            ),
+          ),
+        );
+      },
     );
   }
 }

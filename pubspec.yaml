@@ -1,9 +1,8 @@
-name: juai
-description: 聚AI，链接你我和它.
-
+name: juai_flutter
+description: "A new Flutter project."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
-publish_to: "none" # Remove this line if you wish to publish to pub.dev
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -12,14 +11,15 @@ publish_to: "none" # Remove this line if you wish to publish to pub.dev
 # build by specifying --build-name and --build-number, respectively.
 # In Android, build-name is used as versionName while build-number used as versionCode.
 # Read more about Android versioning at https://developer.android.com/studio/publish/versioning
-# In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
+# In iOS, build-name is used as CFBundleShortVersionString while build-number is used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
+# In Windows, build-name is used as the major, minor, and patch parts
+# of the product and file versions while build-number is used as the build suffix.
 version: 1.0.0+1
 
 environment:
-  sdk: ">=3.0.0"
-  flutter: ">=3.0.0"
+  sdk: ^3.5.3
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -30,57 +30,19 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_localizations:
-    sdk: flutter
-  signalr_netcore:
+
+
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^1.0.2
-  flutter_easyloading:
-  get:
-  pull_to_refresh: ^2.0.0
-  #scan: ^1.6.0
-  cached_network_image:
-  image_gallery_saver:
-  url_launcher:
-  flutter_screenutil:
-  dio:
-  dio_cookie_manager:
-  package_info_plus:
-  shared_preferences:
-  share_plus:
-  qr_flutter:
-  getwidget:
-  markdown_widget:
-  flutter_highlight:
-  window_manager: ^0.3.0
-  dart_openai:
-  photo_view:
-  sqflite:
-  sqflite_common_ffi:
-  path_provider:
-  filesystem_picker:
-  file_picker:
-  wechat_assets_picker:
-  qiniu_flutter_sdk:
-  mime: ^1.0.4
-  video_player:
-  media_kit: # Primary package.
-  media_kit_video: # For video rendering.
-  media_kit_native_event_loop: # Support for higher number of concurrent instances & better performance.
-  media_kit_libs_macos_video: # macOS package for video native libraries.
-  media_kit_libs_windows_video: # Windows package for video native libraries.
-  media_kit_libs_linux:
-  flutter_native_splash:
-  permission_handler:
-  flutter_svg:
-  flutter_quill_extensions:
-    git:
-      url: https://github.com/singerdmx/flutter-quill.git
-      path: flutter_quill_extensions #不在git仓库的根目录
-
-dependency_overrides:
-  intl: ^0.18.0
+  cupertino_icons: ^1.0.8
+  get: any
+  flutter_screenutil: ^5.9.3
+  shimmer: ^3.0.0
+  easy_refresh: ^3.4.0
+  flutter_svg: ^2.0.10+1
+  photo_view: ^0.15.0
+  flutter_easyloading: ^3.0.5
+  dio: ^5.7.0
 
 dev_dependencies:
   flutter_test:
@@ -91,86 +53,14 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^1.0.0
-  flutter_launcher_icons:
-  msix: ^3.14.2
+  flutter_lints: ^4.0.0
 
-flutter_launcher_icons:
-  #  image_path: "assets/images/icon-128x128.png" flutter pub run flutter_launcher_icons
-  image_path_android: "assets/images/icon-1024x1024.png"
-  image_path_ios: "assets/images/icon-1024x1024.png"
-  android: true # can specify file name here e.g. "ic_launcher"
-  ios: true # can specify file name here e.g. "My-Launcher-Icon"
-  #adaptive_icon_background: "assets/images/christmas-background.png" # only available for Android 8.0 devices and above
-  #adaptive_icon_foreground: "assets/images/icon-foreground-432x432.png" # only available for Android 8.0 devices and above
-  min_sdk_android: 21 # android min sdk min:16, default 21
-  remove_alpha_ios: true
-  background_color_ios: "#ffffff"
-  web:
-    generate: true
-    image_path: "assets/images/icon-60x60.png"
-    background_color: "#hexcode"
-    theme_color: "#hexcode"
-  windows:
-    generate: true
-    image_path: "assets/images/icon-60x60.png"
-    icon_size: 48 # min:48, max:256, default: 48
-  macos:
-    generate: true
-    image_path: "assets/images/icon-60x60.png"
-
-flutter_native_splash:
-  # 该锯生成原生代码来自定义 Flutter 默认白色原生闪屏界面的背景色和闪屏图像。
-  # 自定义下面的参数，然后在命令行终端运行下面的命令：
-  # flutter pub run flutter_native_splash:create
-  # 要恢复为 Flutter 默认的白色闪屏界面，运行下面的命令：
-  # flutter pub run flutter_native_splash:remove
-
-  # 只有 color 或 background_image 是必需的参数。使用 color 将闪屏界面的背景设置为单色。
-  # 使用 background_image 可将 png 图像设置为闪屏界面的背景。该图像会被拉伸以适应应用大小。
-  # color 和 background_image 不能同时设置，只有一个会被使用。
-  #color: "#42a5f5"
-  color: "#160000"
-  image: assets/splash.png
-  android: true
-  ios: true
-  android_gravity: fill
-  ios_content_mode: scaleAspectFill
-  fullscreen: true
-  android12: true
-  android_12:
-    # The image parameter sets the splash screen icon image.  If this parameter is not specified,
-    # the app's launcher icon will be used instead.
-    # Please note that the splash screen will be clipped to a circle on the center of the screen.
-    # App icon with an icon background: This should be 960×960 pixels, and fit within a circle
-    # 640 pixels in diameter.
-    # App icon without an icon background: This should be 1152×1152 pixels, and fit within a circle
-    # 768 pixels in diameter.
-    icon_background_color: "#1565C0"
-    image: "assets/splash.png"
-    image_dark: "assets/splash.png"
-    icon_background_color_dark: "#1565C0"
-
-    # Splash screen background color.
-    color: "#160000"
-
-    # App icon background color.
-    #icon_background_color: "#eb0b0b"
-
-    # The branding property allows you to specify an image used as branding in the splash screen.
-    #branding: assets/splash.png
-
-    # The image_dark, color_dark, icon_background_color_dark, and branding_dark set values that
-    # apply when the device is in dark mode. If they are not specified, the app will use the
-    # parameters from above.
-    #image_dark: assets/android12splash-invert.png
-    #color_dark: "#042a49"
-    #icon_background_color_dark: "#eeeeee"
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
-# The following section is specific to Flutter.
+# The following section is specific to Flutter packages.
 flutter:
+
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
@@ -178,36 +68,27 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    # - images/a_dot_burr.jpeg
-    - assets/
-    - assets/avatar/
-    - assets/data/
-    - assets/data/avatar/
-    - assets/images/
-    - assets/icons/
+    - images/
+    - images/frame/
+    - images/home/
+    - images/splash/
+    - images/widget/
+    - images/img/
 
   # An image asset can refer to one or more resolution-specific "variants", see
-  # https://flutter.dev/assets-and-images/#resolution-aware.
+  # https://flutter.dev/to/resolution-aware-images
 
   # For details regarding adding assets from package dependencies, see
-  # https://flutter.dev/assets-and-images/#from-packages
+  # https://flutter.dev/to/asset-from-package
 
   # To add custom fonts to your application, add a fonts section here,
   # in this "flutter" section. Each entry in this list should have a
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
-  #   - family: Trajan Pro
-  #     fonts:
-  #       - asset: fonts/TrajanPro.ttf
-  #       - asset: fonts/TrajanPro_Bold.ttf
-  #         weight: 700
-  #
+  fonts:
+    - family: Poppins
+      fonts:
+        - asset: fonts/Poppins.ttf
   # For details regarding fonts from package dependencies,
-  # see https://flutter.dev/custom-fonts/#from-packages
+  # see https://flutter.dev/to/font-from-package
