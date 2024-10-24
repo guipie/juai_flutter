@@ -1,214 +1,19 @@
-import 'package:easy_refresh/easy_refresh.dart';
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:juai_flutter/app/data/model/chat.dart';
+import 'package:juai_flutter/app/demo_data.dart';
+import 'package:juai_flutter/app/global_widgets/refresh/paging_mixin.dart';
 
-class ConversationController extends GetxController
-    with StateMixin, GetSingleTickerProviderStateMixin {
-  EasyRefreshController refreshController = EasyRefreshController();
+class ConversationController extends GetxController with StateMixin, PagingMixin<Chat> {
   ScrollController scrollController = ScrollController();
 
+  bool isFirst = false;
   var data = RxList<Chat>.empty();
   var titleOpacity = 0.0.obs;
 
   var online = true.obs;
-
-  @override
-  void onInit() {
-    loadData();
-    super.onInit();
-  }
-
-  //读取对话列表
-  Future<void> loadData({bool isFirst = true}) async {
-    await Future.delayed(const Duration(seconds: 1));
-    // List<ConversationInfo> data = await Imclient.getConversationInfos([
-    //   ConversationType.Single,
-    //   ConversationType.Group,
-    //   ConversationType.Channel
-    // ], [
-    //   0
-    // ]);
-    if (isFirst) data.clear();
-    online.value = true;
-
-    if (true) {
-      Chat chat = Chat();
-      chat.name = "Dream.Machine";
-      chat.online = true;
-      chat.msg = "Photo 😻 Love u ❤️";
-      chat.timestamp = "2 min ago";
-      chat.portrait = "images/img/1.png";
-      chat.unread = 4;
-      data.add(chat);
-    }
-
-    if (true) {
-      Chat chat = Chat();
-      chat.online = true;
-      chat.name = "Spoony";
-      chat.msg = "Hello! How are you?";
-      chat.timestamp = "15 min ago";
-      chat.portrait = "images/img/2.png";
-      chat.unread = 99;
-      data.add(chat);
-    }
-
-    if (true) {
-      Chat chat = Chat();
-      chat.name = "Emerson Herwitz";
-      chat.msg = "Yep, it’ll be awesome. I prom...";
-      chat.timestamp = "Yesterday";
-      chat.portrait = "images/img/5.jpg";
-      chat.unread = 6;
-      chat.online = true;
-      data.add(chat);
-    }
-
-    if (true) {
-      Chat chat = Chat();
-      chat.name = "Dulce Bator";
-      chat.msg = "Bye!";
-      chat.timestamp = "Feb 22";
-      chat.portrait = "images/img/4.jpg";
-      chat.unread = 20;
-      data.add(chat);
-    }
-
-    if (true) {
-      Chat chat = Chat();
-      chat.name = "Giana Torff";
-      chat.msg = "hot stuff here 🔥ui8.net";
-      chat.timestamp = "Feb 16";
-      chat.portrait = "images/img/5.jpg";
-      data.add(chat);
-    }
-
-    if (true) {
-      Chat chat = Chat();
-      chat.name = "Livia Herwitz";
-      chat.msg = "hot stuff here 🔥ui8.net";
-      chat.timestamp = "Feb 9";
-      chat.portrait = "images/img/6.jpg";
-      data.add(chat);
-    }
-
-    if (true) {
-      Chat chat = Chat();
-      chat.name = "Audio message";
-      chat.msg = "😱😱😱";
-      chat.timestamp = "Feb 2";
-      chat.online = true;
-      chat.portrait = "images/img/1.png";
-      data.add(chat);
-    }
-
-    if (true) {
-      Chat chat = Chat();
-      chat.name = "❤️ Ruben Dias ❤️";
-      chat.timestamp = "Jan 27";
-      chat.msg = "just a sec";
-      chat.portrait = "images/img/8.png";
-      data.add(chat);
-    }
-
-    if (true) {
-      Chat chat = Chat();
-      chat.name = "Emerson Herwitz";
-      chat.timestamp = "Jan 16";
-      chat.online = true;
-      chat.msg = "😲😲😲";
-      chat.portrait = "images/img/9.jpg";
-      data.add(chat);
-    }
-
-    if (true) {
-      Chat chat = Chat();
-      chat.name = "Aspen Last";
-      chat.timestamp = "Jan 5";
-      chat.msg = "look at this photo";
-      chat.portrait = "images/img/6.jpg";
-      data.add(chat);
-    }
-    // int unreadCount = 0; 设置未读数量
-    // for (var element in data) {
-    //   if (!element.isSilent) {
-    //     unreadCount += element.unreadCount.unread;
-    //   }
-    // }
-    //widget.unreadCountCallback(unreadCount);
-    //await fillData(data);
-    change(null, status: RxStatus.success());
-  }
-
-  Future<void> loadMore() async {
-    // 模拟加载更多操作
-    // await loadData(isFirst: false);
-    await Future.delayed(const Duration(seconds: 3));
-  }
-  // //填充聊天数据
-  // Future fillData(List<ConversationInfo> newData) async {
-  //   data.clear();
-  //   for (ConversationInfo item in newData) {
-  //     Chat chat = Chat();
-  //     //用户名
-  //     //单人聊天
-  //     if (item.conversation.conversationType == ConversationType.Single) {
-  //       //异步获取信息
-  //       var userInfo = await Imclient.getUserInfo(item.conversation.target);
-  //       if (userInfo != null) {
-  //         Cache.putUserInfo(userInfo);
-  //       }
-  //       if (userInfo != null &&
-  //           userInfo.portrait != null &&
-  //           userInfo.portrait!.isNotEmpty) {
-  //         chat.portrait = userInfo.portrait!; //头像
-  //         chat.name = userInfo.displayName!;
-  //       } else {
-  //         chat.name = '私聊';
-  //       }
-  //     } else if (item.conversation.conversationType == ConversationType.Group) {
-  //       var groupInfo = await Imclient.getGroupInfo(item.conversation.target);
-  //       if (groupInfo != null) {
-  //         Cache.putGroupInfo(groupInfo);
-  //         if (groupInfo.portrait != null && groupInfo.portrait!.isNotEmpty) {
-  //           chat.portrait = groupInfo.portrait!;
-  //         }
-  //         if (groupInfo.name != null && groupInfo.name!.isNotEmpty) {
-  //           chat.name = groupInfo.name!;
-  //         }
-  //       } else {
-  //         chat.name = '群聊';
-  //       }
-  //       //localPortrait = 'images/group_avatar_default.png';
-  //     } else if (item.conversation.conversationType ==
-  //         ConversationType.Channel) {
-  //       var channelInfo =
-  //           await Imclient.getChannelInfo(item.conversation.target);
-  //       if (channelInfo != null &&
-  //           channelInfo.portrait != null &&
-  //           channelInfo.portrait!.isNotEmpty) {
-  //         chat.portrait = channelInfo.portrait!;
-  //         chat.name = channelInfo.name!;
-  //       } else {
-  //         chat.name = 'Channel';
-  //       }
-  //       //localPortrait = 'images/channel_avatar_default.png';
-  //       chat.localPortrait = "Channel";
-  //     }
-
-  //     //获取摘要
-  //     if (item.lastMessage != null) {
-  //       String digest =
-  //           await item.lastMessage!.content.digest(item.lastMessage!);
-  //       Cache.putConversationDigest(item.conversation, digest);
-  //       chat.msg = digest;
-  //     }
-  //     chat.timestamp = item.timestamp;
-  //     chat.unread = item.unreadCount.unread;
-  //     data.add(chat);
-  //   }
-  // }
 
   void showMenu() {
     showModalBottomSheet(
@@ -228,9 +33,7 @@ class ConversationController extends GetxController
                 width: 40,
                 height: 3,
                 margin: const EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                    color: Colors.black,
-                    borderRadius: BorderRadius.circular(3)),
+                decoration: BoxDecoration(color: Colors.black, borderRadius: BorderRadius.circular(3)),
               ),
               Expanded(
                 child: GridView(
@@ -317,5 +120,17 @@ class ConversationController extends GetxController
     }
     online.value = false;
     change(null, status: RxStatus.success());
+  }
+
+  @override
+  Future fecthData(int page) async {
+    if (isFirst == true) {
+      isFirst = true;
+      endLoad([], maxCount: 22);
+      return;
+    }
+    await Future.delayed(const Duration(seconds: 2));
+    endLoad(DemoData.getConversations());
+    debugPrint("当前页面：$page,总数量：${items.length}");
   }
 }

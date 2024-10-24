@@ -77,45 +77,42 @@ Widget getCountBox(int count) {
 }
 
 /* 预览展位图 */
-Widget getLoadingView() {
-  return ListView.builder(
-    shrinkWrap: true,
-    physics: const NeverScrollableScrollPhysics(),
-    itemBuilder: (content, index) {
-      return Padding(
-        padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
-        child: Shimmer.fromColors(
-          baseColor: const Color(0xFFF2F2F2),
-          highlightColor: const Color(0xFFFFFFFF),
-          period: const Duration(seconds: 2),
-          child: Row(
-            children: [
-              Container(
-                width: 52.w,
-                height: 50.h,
-                decoration: ShapeDecoration(
-                  color: const Color(0xFFF3F3F3),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(5)),
-                ),
-              ),
-              16.horizontalSpace,
-              Expanded(
-                child: Container(
+Widget getLoadingView({int num = 12}) {
+  return Column(
+    children: [
+      for (var i = 0; i < num; i++)
+        Container(
+          padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
+          child: Shimmer.fromColors(
+            baseColor: const Color(0xFFF2F2F2),
+            highlightColor: const Color(0xFFFFFFFF),
+            period: const Duration(seconds: 2),
+            child: Row(
+              children: [
+                Container(
                   width: 52.w,
                   height: 50.h,
                   decoration: ShapeDecoration(
                     color: const Color(0xFFF3F3F3),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(5)),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
                   ),
                 ),
-              ),
-            ],
+                16.horizontalSpace,
+                Expanded(
+                  child: Container(
+                    width: 52.w,
+                    height: 50.h,
+                    decoration: ShapeDecoration(
+                      color: const Color(0xFFF3F3F3),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
-        ),
-      );
-    },
+        )
+    ],
   );
 }
 
@@ -172,8 +169,7 @@ Widget getListTitle(String title) {
     alignment: Alignment.centerLeft,
     child: Text(
       title,
-      style:
-          Theme.of(Get.context!).textTheme.labelLarge!.copyWith(fontSize: 40),
+      style: Theme.of(Get.context!).textTheme.labelLarge!.copyWith(fontSize: 40),
     ),
   );
 }
