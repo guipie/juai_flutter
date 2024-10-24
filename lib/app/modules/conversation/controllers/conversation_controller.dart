@@ -130,7 +130,7 @@ class ConversationController extends GetxController with StateMixin, PagingMixin
       return;
     }
     await Future.delayed(const Duration(seconds: 2));
-    endLoad(DemoData.getConversations());
+    endLoad(DemoData.getConversations(), maxCount: 32);
     debugPrint("当前页面：$page,总数量：${items.length}");
   }
 }

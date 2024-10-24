@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:juai_flutter/app/global_widgets/common_widget.dart';
+import 'package:juai_flutter/app/global_widgets/common/common_widget.dart';
 import 'package:juai_flutter/app/global_widgets/refresh/constructor.dart';
 import 'package:juai_flutter/generated/locales.g.dart';
 
@@ -37,58 +37,44 @@ class ConversationView extends GetView<ConversationController> {
             return InkWell(
               onTap: null,
               child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
+                padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 12.w),
                 child: Row(
                   children: [
-                    chat.portrait != null
-                        ? getOnlineBox(
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(6.r),
-                              child: ImageFiltered(
-                                imageFilter: const ColorFilter.mode(
-                                  Colors.grey,
-                                  BlendMode.color,
-                                ),
-                                enabled: !chat.online,
-                                child: Image.asset(
-                                  chat.portrait!,
-                                  fit: BoxFit.cover,
-                                  width: 52.w,
-                                  height: 50.w,
-                                  cacheWidth: 200,
-                                  errorBuilder: (context, error, stackTrace) {
-                                    return Container(
-                                      width: 52.w,
-                                      height: 50.w,
-                                      alignment: Alignment.center,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(6.r),
-                                        color: Theme.of(context).colorScheme.surface,
-                                      ),
-                                      child: Text(
-                                        chat.localPortrait ?? "",
-                                        style: TextStyle(fontSize: 11.sp, color: Colors.white),
-                                      ),
-                                    );
-                                  },
-                                ),
-                              ),
-                            ),
-                            online: chat.online,
-                          )
-                        : Container(
-                            width: 52.w,
-                            height: 50.w,
-                            alignment: Alignment.center,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(6.r),
-                              color: Theme.of(context).colorScheme.surface,
-                            ),
-                            child: Text(
-                              chat.localPortrait ?? "",
-                              style: TextStyle(fontSize: 11.sp, color: Colors.white),
-                            ),
+                    getOnlineBox(
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(6.r),
+                        child: ImageFiltered(
+                          imageFilter: const ColorFilter.mode(
+                            Colors.grey,
+                            BlendMode.color,
                           ),
+                          enabled: !chat.online,
+                          child: Image.asset(
+                            chat.portrait!,
+                            fit: BoxFit.cover,
+                            width: 44.w,
+                            height: 44.w,
+                            cacheWidth: 200,
+                            errorBuilder: (context, error, stackTrace) {
+                              return Container(
+                                width: 44.w,
+                                height: 44.w,
+                                alignment: Alignment.center,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(6.r),
+                                  color: Theme.of(context).colorScheme.surface,
+                                ),
+                                child: Text(
+                                  chat.localPortrait ?? "",
+                                  style: TextStyle(fontSize: 11.sp, color: Colors.white),
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                      ),
+                      online: chat.online,
+                    ),
                     16.horizontalSpace,
                     Expanded(
                       child: Column(
@@ -97,26 +83,20 @@ class ConversationView extends GetView<ConversationController> {
                           Text(
                             (chat.name ?? "") + (index + 1).toString(),
                             overflow: TextOverflow.ellipsis,
+                            style: Theme.of(Get.context!).textTheme.titleMedium,
                           ),
-                          10.verticalSpace,
+                          2.verticalSpace,
                           Text(
                             chat.msg ?? "",
                             maxLines: 1,
-                            style: Theme.of(Get.context!).textTheme.displaySmall,
+                            style: Theme.of(context).textTheme.labelSmall,
                           ),
                         ],
                       ),
                     ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Text(
-                          chat.timestamp ?? "",
-                          style: Theme.of(context).textTheme.displaySmall,
-                        ),
-                        10.verticalSpace,
-                        chat.unread != 0 ? getCountBox(chat.unread) : const SizedBox()
-                      ],
+                    Text(
+                      chat.timestamp ?? "",
+                      style: Theme.of(Get.context!).textTheme.bodySmall,
                     ),
                   ],
                 ),

@@ -7,6 +7,8 @@ class AppNeedToLogin {}
 class AppService extends GetxService {
   static AppService get to => Get.find();
 
+  static bool get isMobile => GetPlatform.isAndroid || GetPlatform.isIOS;
+
   /// 获取设备的唯一编码
   SystemDevice device = SystemDevice();
 

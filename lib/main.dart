@@ -1,9 +1,8 @@
+import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:juai_flutter/app/core/theme/index.dart';
 import 'package:juai_flutter/generated/locales.g.dart';
 
 import 'app/routes/app_pages.dart';
@@ -17,31 +16,28 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      designSize: const Size(375, 812),
+      designSize: const Size(375, 128),
       splitScreenMode: false,
       child: const Center(
         child: Text("juai.link"),
       ),
       builder: (BuildContext context, Widget? child) {
-        return GetMaterialApp(
-          title: LocaleKeys.app_name.tr,
-          enableLog: kDebugMode,
-          translationsKeys: AppTranslation.translations,
-          locale: Get.deviceLocale,
-          fallbackLocale: const Locale('zh', 'CN'),
-          theme: createLightThemeData(),
-          darkTheme: createDarkThemeData(),
-          debugShowCheckedModeBanner: false,
-          initialRoute: AppPages.initRoute,
-          getPages: AppPages.routes,
-          defaultTransition: Transition.rightToLeft,
-          builder: EasyLoading.init(
-            builder: (_, child) => MediaQuery(
-              data: MediaQuery.of(context).copyWith(
-                textScaler: const TextScaler.linear(1.0),
-              ),
-              child: child!,
-            ),
+        return AdaptiveTheme(
+          light: ThemeData.light(useMaterial3: true),
+          dark: ThemeData.dark(useMaterial3: true),
+          initial: AdaptiveThemeMode.system,
+          builder: (theme, darkTheme) => GetMaterialApp(
+            title: LocaleKeys.app_name.tr,
+            enableLog: kDebugMode,
+            translationsKeys: AppTranslation.translations,
+            locale: Get.deviceLocale,
+            fallbackLocale: const Locale('zh', 'CN'),
+            theme: theme,
+            darkTheme: darkTheme,
+            debugShowCheckedModeBanner: false,
+            initialRoute: AppPages.initRoute,
+            getPages: AppPages.routes,
+            defaultTransition: Transition.rightToLeft,
           ),
         );
       },

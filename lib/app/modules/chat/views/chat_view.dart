@@ -5,8 +5,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:juai_flutter/app/core/styles/ju_colors.dart';
 import 'package:juai_flutter/app/data/model/msg.dart';
-import 'package:juai_flutter/app/global_widgets/common_widget.dart';
-import 'package:juai_flutter/app/global_widgets/text_field.dart';
+import 'package:juai_flutter/app/global_widgets/common/common_widget.dart';
+import 'package:juai_flutter/app/global_widgets/form/text_field.dart';
 import 'package:juai_flutter/app/modules/chat/controllers/chat_controller.dart';
 import 'package:juai_flutter/wallpaper_page.dart';
 
@@ -60,9 +60,7 @@ class ChatView extends GetView<ChatController> {
                   Text(
                     controller.chat.online ? "Online" : "",
                     style: Theme.of(Get.context!).textTheme.bodySmall!.copyWith(
-                          color: controller.chat.online
-                              ? JuColors.greenColor
-                              : JuColors.greyColor,
+                          color: controller.chat.online ? JuColors.greenColor : JuColors.greyColor,
                         ),
                   ),
                 ],
@@ -179,8 +177,7 @@ class ChatView extends GetView<ChatController> {
                       height: 128.h,
                       child: GridView(
                         scrollDirection: Axis.horizontal,
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
+                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
                           childAspectRatio: 1,
                         ),
@@ -188,9 +185,7 @@ class ChatView extends GetView<ChatController> {
                       ),
                     ),
                     secondChild: const SizedBox(),
-                    crossFadeState: controller.isShow.value
-                        ? CrossFadeState.showFirst
-                        : CrossFadeState.showSecond,
+                    crossFadeState: controller.isShow.value ? CrossFadeState.showFirst : CrossFadeState.showSecond,
                     duration: const Duration(milliseconds: 350),
                   ),
                 )

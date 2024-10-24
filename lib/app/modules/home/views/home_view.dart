@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:juai_flutter/app/core/styles/ju_colors.dart';
-import 'package:juai_flutter/app/global_widgets/common_widget.dart';
+import 'package:juai_flutter/app/global_widgets/common/common_widget.dart';
 import 'package:juai_flutter/app/modules/conversation/views/conversation_view.dart';
 
 import '../controllers/home_controller.dart';
@@ -34,20 +34,17 @@ class HomeView extends GetView<HomeController> {
             showUnselectedLabels: false,
             items: [
               BottomNavigationBarItem(
-                activeIcon:
-                    SvgPicture.asset("images/frame/frame_chat_active.svg"),
+                activeIcon: SvgPicture.asset("images/frame/frame_chat_active.svg"),
                 icon: SvgPicture.asset("images/frame/frame_chat.svg"),
                 label: "CHAT",
               ),
               BottomNavigationBarItem(
-                activeIcon:
-                    SvgPicture.asset("images/frame/frame_contacts_active.svg"),
+                activeIcon: SvgPicture.asset("images/frame/frame_contacts_active.svg"),
                 icon: SvgPicture.asset("images/frame/frame_contacts.svg"),
                 label: "Contacts",
               ),
               BottomNavigationBarItem(
-                activeIcon:
-                    SvgPicture.asset("images/frame/frame_settings_active.svg"),
+                activeIcon: SvgPicture.asset("images/frame/frame_settings_active.svg"),
                 icon: SvgPicture.asset("images/frame/frame_settings.svg"),
                 label: "SETTING",
               )

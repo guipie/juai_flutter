@@ -28,7 +28,9 @@ PreferredSizeWidget JuAppBar({
             : Container(
                 alignment: Alignment.centerLeft,
                 padding: EdgeInsets.symmetric(horizontal: 24.w),
-                child: Text(text),
+                child: Text(
+                  text,
+                ),
               ),
         titleSpacing: 0,
         toolbarHeight: appHeight.h,
@@ -70,7 +72,6 @@ Widget getCountBox(int count) {
       style: Theme.of(Get.context!).textTheme.bodySmall!.copyWith(
             fontSize: 12.sp,
             fontFamily: "",
-            color: Colors.white,
           ),
     ),
   );
@@ -90,8 +91,8 @@ Widget getLoadingView({int num = 12}) {
             child: Row(
               children: [
                 Container(
-                  width: 52.w,
-                  height: 50.h,
+                  width: 66.w,
+                  height: 66.w,
                   decoration: ShapeDecoration(
                     color: const Color(0xFFF3F3F3),
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
@@ -100,8 +101,8 @@ Widget getLoadingView({int num = 12}) {
                 16.horizontalSpace,
                 Expanded(
                   child: Container(
-                    width: 52.w,
-                    height: 50.h,
+                    width: 66.w,
+                    height: 66.w,
                     decoration: ShapeDecoration(
                       color: const Color(0xFFF3F3F3),
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),

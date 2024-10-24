@@ -37,7 +37,7 @@ mixin PagingMixin<T> on GetxController {
     _pagingController = PagingController(firstPageKey: initPage);
     _pagingController.addPageRequestListener((pageKey) {
       _page = pageKey;
-      if (_pages.contains(_page)) return;
+      if (_pages.contains(_page) && _page != 1) return;
       fecthData(pageKey);
       _pages.add(_page);
     });

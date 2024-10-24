@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:juai_flutter/app/global_widgets/text_field.dart';
+import 'package:juai_flutter/app/global_widgets/form/text_field.dart';
 import 'package:juai_flutter/app/modules/login/controllers/login_controller.dart';
 
 //登录页面 - 验证码
@@ -40,8 +40,7 @@ class LoginCodePage extends GetView<LoginController> {
             const Spacer(),
             Obx(
               () => ElevatedButton(
-                onPressed:
-                    controller.inputSuccess.value ? controller.checkCode : null,
+                onPressed: controller.inputSuccess.value ? controller.checkCode : null,
                 child: const Text("Continue"),
               ),
             ),
