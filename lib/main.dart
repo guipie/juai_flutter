@@ -1,46 +1,89 @@
-import 'package:adaptive_theme/adaptive_theme.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
-import 'package:juai_flutter/generated/locales.g.dart';
+import 'package:chat_bot/module/splash_page.dart';
+import 'package:chat_bot/utils/hive_box.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
-import 'app/routes/app_pages.dart';
+import 'base.dart';
+import 'base/riverpod/provider_log.dart';
+import 'base/theme.dart';
+import 'initial.dart';
+ProviderContainer? globalRef;
+void main() async {
+  await Initial.init();
 
-void main() {
-  runApp(const MyApp());
+  S.load(getLocaleByCode(HiveBox().globalLanguageCode));
+  globalRef = ProviderContainer(
+    observers: [
+      ProviderLogger(),
+    ],
+  );
+  runApp(
+    UncontrolledProviderScope(
+      container: globalRef!,
+      child: const MyApp(),
+    ),
+  );
+  if (Platform.isAndroid) {
+    SystemUiOverlayStyle style = const SystemUiOverlayStyle(statusBarColor: Colors.transparent);
+    SystemChrome.setSystemUIOverlayStyle(style);
+  }
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends ConsumerWidget {
   const MyApp({super.key});
+
   @override
-  Widget build(BuildContext context) {
-    return ScreenUtilInit(
-      designSize: const Size(375, 128),
-      splitScreenMode: false,
-      child: const Center(
-        child: Text("juai.link"),
-      ),
-      builder: (BuildContext context, Widget? child) {
-        return AdaptiveTheme(
-          light: ThemeData.light(useMaterial3: true),
-          dark: ThemeData.dark(useMaterial3: true),
-          initial: AdaptiveThemeMode.system,
-          builder: (theme, darkTheme) => GetMaterialApp(
-            title: LocaleKeys.app_name.tr,
-            enableLog: kDebugMode,
-            translationsKeys: AppTranslation.translations,
-            locale: Get.deviceLocale,
-            fallbackLocale: const Locale('zh', 'CN'),
-            theme: theme,
-            darkTheme: darkTheme,
-            debugShowCheckedModeBanner: false,
-            initialRoute: AppPages.initRoute,
-            getPages: AppPages.routes,
-            defaultTransition: Transition.rightToLeft,
-          ),
-        );
+  Widget build(BuildContext context, WidgetRef ref) {
+    var globalLanguage = ref.watch(globalLanguageProvider);
+    var primaryColor = ref.watch(primaryColorProvider);
+    return MaterialApp(
+      key: ValueKey(globalLanguage),
+      navigatorKey: F.navigatorKey,
+      title: S.current.app_name,
+      localeResolutionCallback: (Locale? locale, Iterable<Locale> supportedLocales) {
+        if (locale != null) {
+          return locale;
+        }
+        return supportedLocales.first;
+      },
+      debugShowCheckedModeBanner: false,
+      theme: ref.watch(themeProvider).theme(primaryColor),
+      localizationsDelegates: const [
+        S.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ],
+      supportedLocales: S.delegate.supportedLocales,
+      home: const SplashPage(),
+      locale: getLocaleByCode(globalLanguage),
+      builder: (context, child) {
+        return FlutterEasyLoading(
+            child: ScrollConfiguration(
+          behavior: const ScrollPhysicsConfig(),
+          child: child ?? Container(),
+        ));
       },
     );
+  }
+}
+
+/// 全局滚动配置，默认全部使用iOS的BouncingScrollPhysics效果
+class ScrollPhysicsConfig extends ScrollBehavior {
+  const ScrollPhysicsConfig();
+
+  @override
+  ScrollPhysics getScrollPhysics(BuildContext context) {
+    switch (getPlatform(context)) {
+      case TargetPlatform.iOS:
+      case TargetPlatform.macOS:
+      case TargetPlatform.android:
+        return const BouncingScrollPhysics();
+      case TargetPlatform.fuchsia:
+      case TargetPlatform.linux:
+      case TargetPlatform.windows:
+        return const ClampingScrollPhysics();
+      default:
+        return const BouncingScrollPhysics();
+    }
   }
 }

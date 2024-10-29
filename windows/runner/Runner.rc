@@ -89,13 +89,13 @@ BEGIN
     BEGIN
         BLOCK "040904e4"
         BEGIN
-            VALUE "CompanyName", "juai.link" "\0"
-            VALUE "FileDescription", "juai_flutter" "\0"
+            VALUE "CompanyName", "com.example" "\0"
+            VALUE "FileDescription", "chat_bot" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "juai_flutter" "\0"
-            VALUE "LegalCopyright", "Copyright (C) 2024 juai.link. All rights reserved." "\0"
-            VALUE "OriginalFilename", "juai_flutter.exe" "\0"
-            VALUE "ProductName", "juai_flutter" "\0"
+            VALUE "InternalName", "chat_bot" "\0"
+            VALUE "LegalCopyright", "Copyright (C) 2024 com.example. All rights reserved." "\0"
+            VALUE "OriginalFilename", "chat_bot.exe" "\0"
+            VALUE "ProductName", "chat_bot" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

@@ -1,107 +1,105 @@
-name: juai_flutter
+name: chat_bot
 description: "A new Flutter project."
-# The following line prevents the package from being accidentally published to
-# pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
-# The following defines the version and build number for your application.
-# A version number is three numbers separated by dots, like 1.2.43
-# followed by an optional build number separated by a +.
-# Both the version and the builder number may be overridden in flutter
-# build by specifying --build-name and --build-number, respectively.
-# In Android, build-name is used as versionName while build-number used as versionCode.
-# Read more about Android versioning at https://developer.android.com/studio/publish/versioning
-# In iOS, build-name is used as CFBundleShortVersionString while build-number is used as CFBundleVersion.
-# Read more about iOS versioning at
-# https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-# In Windows, build-name is used as the major, minor, and patch parts
-# of the product and file versions while build-number is used as the build suffix.
-version: 1.0.0+1
+
+version: 1.1.4+114
 
 environment:
-  sdk: ^3.5.3
+  sdk: '>=3.2.5 <4.0.0'
 
-# Dependencies specify other packages that your package needs in order to work.
-# To automatically upgrade your package dependencies to the latest versions
-# consider running `flutter pub upgrade --major-versions`. Alternatively,
-# dependencies can be manually updated by changing the version numbers below to
-# the latest version available on pub.dev. To see which dependencies have newer
-# versions available, run `flutter pub outdated`.
 dependencies:
   flutter:
     sdk: flutter
-
-
-  # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^1.0.8
-  adaptive_theme:
-  get: any
-  flutter_screenutil: ^5.9.3
-  shimmer: ^3.0.0
-  easy_refresh: ^3.4.0
-  flutter_svg: ^2.0.10+1
-  photo_view: ^0.15.0
-  flutter_easyloading: ^3.0.5
-  dio: ^5.7.0
-  simple_animations: ^5.0.2
-  flutter_spinkit: ^5.2.1
-  infinite_scroll_pagination: ^4.0.0
-  url_launcher: ^6.3.1
-  get_storage: ^2.1.1
-  permission_handler: ^11.3.1
-  device_info_plus: ^11.1.0
-  extended_image: ^9.0.4
-  crypto: ^3.0.6
-  convert: ^3.1.2
-  decimal: ^3.0.2
-  rational: ^2.2.3
-
-dev_dependencies:
-  flutter_test:
+  flutter_localizations:
+    sdk: flutter
+  flutter_web_plugins:
     sdk: flutter
 
-  # The "flutter_lints" package below contains a set of recommended lints to
-  # encourage good coding practices. The lint set provided by the package is
-  # activated in the `analysis_options.yaml` file located at the root of your
-  # package. See that file for information about deactivating specific lint
-  # rules and activating additional ones.
-  flutter_lints: ^4.0.0
+  cupertino_icons: ^1.0.2
+  dart_openai:
+    path: ./pub/openai
+  shared_preferences: ^2.2.3
+  package_info_plus: ^8.0.0
+  pull_down_button: ^0.9.4
+  syncfusion_flutter_sliders: ^25.1.40
+  url_launcher: ^6.2.6
+  dio: ^5.4.3+1
+  image_picker: '1.0.8'
+  extended_image: ^8.2.0
+  flutter_slidable:
+    git:
+      url: https://github.com/letsar/flutter_slidable.git
+      ref: master
+  dropdown_button2: ^2.3.9
+  intl: '0.19.0'
+  flutter_image_compress: ^2.2.0
+  permission_handler: ^11.3.1
+  path_provider: ^2.1.3
+  gal: ^2.3.0
+  fluttertoast: ^8.2.5
+  just_audio: ^0.9.37
+  riverpod: ^2.5.1
+  flutter_riverpod: ^2.5.1
+  connectivity_plus: ^6.0.2
+  share_plus: '7.2.2'
+  record: ^5.0.5
+  logger: ^2.4.0
+  responsive_framework: ^1.4.0
+  pretty_dio_logger: ^1.3.1
+  flutter_easyloading: ^3.0.5
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
+  flutter_gemini: ^2.0.3
+  flutter_markdown: '0.6.20'
+  loading_animation_widget: ^1.2.1
+  sqflite: '2.4.0'
+  sqlite3_flutter_libs: ^0.5.26
+  sqflite_common_ffi:
+  path: ^1.8.3
+  photo_view: ^0.15.0
+  animated_text_kit: ^4.2.2
+  lottie: ^3.1.0
+  flutter_native_splash: ^2.4.0
+  screenshot: ^3.0.0
+  icloud_storage: ^2.2.0
+  synchronized: any
+  flutter_highlighter: ^0.1.1
+dev_dependencies:
+  flutter_lints: ^2.0.0
+  #flutter pub run flutter_launcher_icons
+  flutter_launcher_icons: "^0.13.1"
+  hive_generator: ^2.0.1
+  build_runner:
 
-# For information on the generic Dart part of this file, see the
-# following page: https://dart.dev/tools/pub/pubspec
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  remove_alpha_ios: true
+  image_path: "assets/images/logo.png"
+  min_sdk_android: 21 # android min sdk min:16, default 21
+  windows:
+    generate: true
+    image_path: "assets/images/logo.png"
+    icon_size: 48 # min:48, max:256, default: 48
 
-# The following section is specific to Flutter packages.
+
 flutter:
-
-  # The following line ensures that the Material Icons font is
-  # included with your application, so that you can use the icons in
-  # the material Icons class.
   uses-material-design: true
-
-  # To add assets to your application, add an assets section, like this:
   assets:
-    - images/
-    - images/frame/
-    - images/home/
-    - images/splash/
-    - images/widget/
-    - images/img/
+    - assets/
+    - assets/command.json
+    - assets/images/
+    - assets/lottie/
+flutter_intl:
+  enabled: true
 
-  # An image asset can refer to one or more resolution-specific "variants", see
-  # https://flutter.dev/to/resolution-aware-images
-
-  # For details regarding adding assets from package dependencies, see
-  # https://flutter.dev/to/asset-from-package
-
-  # To add custom fonts to your application, add a fonts section here,
-  # in this "flutter" section. Each entry in this list should have a
-  # "family" key with the font family name, and a "fonts" key with a
-  # list giving the asset and other descriptors for the font. For
-  # example:
-  fonts:
-    - family: Poppins
-      fonts:
-        - asset: fonts/Poppins.ttf
-  # For details regarding fonts from package dependencies,
-  # see https://flutter.dev/to/font-from-package
+flutter_native_splash:
+  color: "#FFFFFF"
+  color_android: "#FFFFFF"
+  color_dark_android: "#111111"
+  color_ios: "#FFFFFF"
+  color_dark_ios: "#111111"
+  android_12:
+    color: "#FFFFFF"
+    color_dark: "#111111"
