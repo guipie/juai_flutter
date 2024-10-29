@@ -8,14 +8,14 @@ import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
 class MyDbProvider {
   static void getInstance() {
-    ChatItemProvider();
     PromptItemProvider();
     DictProvider.getInstance();
+    ChatItemProvider();
   }
 }
 
 abstract class DbBase {
-  static const String _dbName = "juai.db";
+  static const String _dbName = "juai2.db";
   static const int _newVersion = 1;
   static int _oldVersion = 0;
 

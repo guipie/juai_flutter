@@ -22,6 +22,7 @@ class AllModelBeanAdapter extends TypeAdapter<AllModelBean> {
       apiServer: fields[2] as String?,
       defaultModelType: fields[7] as SupportedModels?,
       organization: fields[3] as String?,
+      updateTime: fields[8] as int?,
       alias: fields[4] as String?,
       supportedModels: (fields[6] as List?)?.cast<SupportedModels>(),
       time: fields[5] as int?,
@@ -31,7 +32,7 @@ class AllModelBeanAdapter extends TypeAdapter<AllModelBean> {
   @override
   void write(BinaryWriter writer, AllModelBean obj) {
     writer
-      ..writeByte(8)
+      ..writeByte(9)
       ..writeByte(0)
       ..write(obj.apiKey)
       ..writeByte(1)
@@ -46,6 +47,8 @@ class AllModelBeanAdapter extends TypeAdapter<AllModelBean> {
       ..write(obj.defaultModelType)
       ..writeByte(5)
       ..write(obj.time)
+      ..writeByte(8)
+      ..write(obj.updateTime)
       ..writeByte(6)
       ..write(obj.supportedModels);
   }

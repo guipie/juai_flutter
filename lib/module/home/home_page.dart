@@ -1,17 +1,10 @@
 import 'package:chat_bot/base.dart';
 import 'package:chat_bot/base/version_check.dart';
-import 'package:chat_bot/module/chat/chat_audio/chat_audio_page.dart';
 import 'package:chat_bot/module/chat/chat_list_page.dart';
 import 'package:chat_bot/module/home/home_viewmodel.dart';
-import 'package:lottie/lottie.dart';
 
-import '../../base/components/common_dialog.dart';
-import '../../base/components/lottie_widget.dart';
-import '../../base/db/chat_item.dart';
 import '../../base/theme.dart';
 import '../../const.dart';
-import '../../hive_bean/openai_bean.dart';
-import '../chat/chat_list_view_model.dart';
 import '../prompt/prompt_page.dart';
 import '../services/services_page.dart';
 import '../setting/setting_page.dart';
@@ -23,7 +16,8 @@ class HomePage extends ConsumerStatefulWidget {
   ConsumerState createState() => _HomePageState();
 }
 
-class _HomePageState extends ConsumerState<HomePage> with WidgetsBindingObserver {
+class _HomePageState extends ConsumerState<HomePage>
+    with WidgetsBindingObserver {
   @override
   void initState() {
     super.initState();
@@ -40,7 +34,8 @@ class _HomePageState extends ConsumerState<HomePage> with WidgetsBindingObserver
 
     var brightness = View.of(context).platformDispatcher.platformBrightness;
 
-    if (SpUtil.getInt(spLightTheme, defValue: ThemeType.system.index) != ThemeType.system.index) {
+    if (SpUtil.getInt(spLightTheme, defValue: ThemeType.system.index) !=
+        ThemeType.system.index) {
       return;
     }
 
@@ -70,82 +65,108 @@ class _HomePageState extends ConsumerState<HomePage> with WidgetsBindingObserver
           PromptPage(),
           ServicesPage(),
           SettingPage(),
+          SettingPage(),
         ],
       ),
       bottomNavigationBar: Container(
         color: Colors.transparent,
         child: SizedBox(
-          height: kBottomNavigationBarHeight + MediaQuery.paddingOf(context).bottom + kBottomNavigationBarHeight / 2,
+          height: kBottomNavigationBarHeight +
+              MediaQuery.paddingOf(context).bottom +
+              kBottomNavigationBarHeight / 2,
           child: CustomPaint(
             painter: BottomNavPainter(
               bgColor: Theme.of(context).cardColor,
             ),
             child: Padding(
-              padding:
-                  EdgeInsets.only(bottom: MediaQuery.paddingOf(context).bottom, top: kBottomNavigationBarHeight / 2),
+              padding: EdgeInsets.only(
+                  bottom: MediaQuery.paddingOf(context).bottom,
+                  top: kBottomNavigationBarHeight / 2),
               child: Row(
                 children: [
                   Expanded(
-                      child: BottomNavItem(
-                    label: S.current.home_chat,
-                    index: 0,
-                    checked: currentIndex == 0,
-                  )),
-                  Expanded(
-                      child: BottomNavItem(
-                    label: S.current.home_factory,
-                    index: 1,
-                    checked: currentIndex == 1,
-                  )),
-                  GestureDetector(
-                    onTap: () {
-                      if (!isExistModels()) {
-                        showCommonDialog(
-                          context,
-                          title: S.current.reminder,
-                          content: S.current.enter_setting_init_server,
-                          hideCancelBtn: true,
-                          autoPop: true,
-                          confirmText: S.current.yes_know,
-                          confirmCallback: () {},
-                        );
-                        return;
-                      }
-                      if (!isExistTTSAndWhisperModels()) {
-                        showCommonDialog(
-                          context,
-                          title: S.current.reminder,
-                          content: S.current.not_support_tts,
-                          hideCancelBtn: true,
-                          autoPop: true,
-                          confirmText: S.current.yes_know,
-                          confirmCallback: () {},
-                        );
-                        return;
-                      }
-                      F.push(const ChatAudioPage()).then((value) {
-                        ChatItemProvider().deleteAll(specialGenerateAudioChatParentItemTime);
-                      });
-                    },
-                    behavior: HitTestBehavior.opaque,
-                    child: const LottieWidget(
-                      scale: 2.4,
-                      transformHitTests: false,
-                      width: 80,
+                    child: BottomNavItem(
+                      label: S.current.home_chat,
+                      index: 0,
+                      checked: currentIndex == 0,
+                      icon: Icons.chat_bubble_outline,
+                      iconChecked: Icons.chat_bubble,
                     ),
                   ),
                   Expanded(
-                      child: BottomNavItem(
-                    label: S.current.home_server,
-                    index: 2,
-                    checked: currentIndex == 2,
-                  )),
+                    child: BottomNavItem(
+                      icon: Icons.model_training_outlined,
+                      iconChecked: Icons.model_training,
+                      label: S.current.home_model,
+                      index: 1,
+                      checked: currentIndex == 1,
+                    ),
+                  ),
+                  // GestureDetector(
+                  //   onTap: () {
+                  //     if (!isExistModels()) {
+                  //       showCommonDialog(
+                  //         context,
+                  //         title: S.current.reminder,
+                  //         content: S.current.enter_setting_init_server,
+                  //         hideCancelBtn: true,
+                  //         autoPop: true,
+                  //         confirmText: S.current.yes_know,
+                  //         confirmCallback: () {},
+                  //       );
+                  //       return;
+                  //     }
+                  //     if (!isExistTTSAndWhisperModels()) {
+                  //       showCommonDialog(
+                  //         context,
+                  //         title: S.current.reminder,
+                  //         content: S.current.not_support_tts,
+                  //         hideCancelBtn: true,
+                  //         autoPop: true,
+                  //         confirmText: S.current.yes_know,
+                  //         confirmCallback: () {},
+                  //       );
+                  //       return;
+                  //     }
+                  //     F.push(const ChatAudioPage()).then((value) {
+                  //       ChatItemProvider()
+                  //           .deleteAll(specialGenerateAudioChatParentItemTime);
+                  //     });
+                  //   },
+                  //   behavior: HitTestBehavior.opaque,
+                  //   child: const LottieWidget(
+                  //     scale: 2.4,
+                  //     transformHitTests: false,
+                  //     width: 80,
+                  //   ),
+                  // ),
                   Expanded(
-                      child: BottomNavItem(
-                    label: S.current.home_setting,
-                    index: 3,
-                    checked: currentIndex == 3,
-                  )),
+                    child: BottomNavItem(
+                      label: S.current.home_square,
+                      index: 2,
+                      checked: currentIndex == 2,
+                      icon: Icons.square_outlined,
+                      iconChecked: Icons.square,
+                    ),
+                  ),
+                  Expanded(
+                    child: BottomNavItem(
+                      label: S.current.home_factory,
+                      index: 3,
+                      checked: currentIndex == 3,
+                      icon: Icons.store_outlined,
+                      iconChecked: Icons.store,
+                    ),
+                  ),
+                  Expanded(
+                    child: BottomNavItem(
+                      label: S.current.home_my,
+                      index: 4,
+                      checked: currentIndex == 4,
+                      icon: Icons.settings_outlined,
+                      iconChecked: Icons.settings,
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -160,8 +181,16 @@ class BottomNavItem extends ConsumerWidget {
   final bool checked;
   final int index;
   final String label;
+  final IconData icon;
+  final IconData iconChecked;
 
-  const BottomNavItem({super.key, required this.checked, required this.index, required this.label});
+  const BottomNavItem(
+      {super.key,
+      required this.icon,
+      required this.iconChecked,
+      required this.checked,
+      required this.index,
+      required this.label});
 
   @override
   Widget build(BuildContext context, ref) {
@@ -175,17 +204,27 @@ class BottomNavItem extends ConsumerWidget {
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Icon(
+              checked ? iconChecked : icon,
+              color: checked ? Theme.of(context).primaryColor : null,
+            ),
             Text(label,
-                style: checked ? Theme.of(context).textTheme.titleMedium : Theme.of(context).textTheme.bodyMedium),
-            const SizedBox(height: 5),
-            Container(
-              decoration: BoxDecoration(
-                color: checked ? Theme.of(context).primaryColor : Colors.transparent,
-                borderRadius: BorderRadius.circular(5),
-              ),
-              height: 3,
-              width: 30,
-            )
+                style: checked
+                    ? Theme.of(context)
+                        .textTheme
+                        .titleSmall!
+                        .copyWith(color: Theme.of(context).primaryColor)
+                    : Theme.of(context).textTheme.bodySmall),
+            // Container(
+            //   decoration: BoxDecoration(
+            //     color: checked
+            //         ? Theme.of(context).primaryColor
+            //         : Colors.transparent,
+            //     borderRadius: BorderRadius.circular(5),
+            //   ),
+            //   height: 3,
+            //   width: 30,
+            // )
           ],
         ),
       ),
@@ -205,9 +244,13 @@ class BottomNavPainter extends CustomPainter {
       ..color = bgColor
       ..style = PaintingStyle.fill;
 
-    canvas.drawRect(Rect.fromLTRB(0, kBottomNavigationBarHeight / 2, size.width, size.height), paint);
+    canvas.drawRect(
+        Rect.fromLTRB(
+            0, kBottomNavigationBarHeight / 2, size.width, size.height),
+        paint);
 
-    canvas.drawCircle(Offset(size.width / 2, kBottomNavigationBarHeight), kBottomNavigationBarHeight / 1.35, paint);
+    canvas.drawCircle(Offset(size.width / 2, kBottomNavigationBarHeight),
+        kBottomNavigationBarHeight / 1.35, paint);
   }
 
   @override

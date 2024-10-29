@@ -72,9 +72,9 @@ class PromptItem {
 }
 
 class PromptItemProvider extends DbBase {
+  PromptItemProvider._();
   @override
   String tableName = 'prompt_item';
-  PromptItemProvider._();
 
   static PromptItemProvider? _instance;
 

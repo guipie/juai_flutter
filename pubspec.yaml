@@ -39,8 +39,8 @@ dependencies:
   gal: ^2.3.0
   fluttertoast: ^8.2.5
   just_audio: ^0.9.37
-  riverpod: ^2.5.1
-  flutter_riverpod: ^2.5.1
+  # riverpod: ^2.5.1
+  flutter_riverpod: ^2.6.1
   connectivity_plus: ^6.0.2
   share_plus: '7.2.2'
   record: ^5.0.5
@@ -71,6 +71,12 @@ dev_dependencies:
   flutter_launcher_icons: "^0.13.1"
   hive_generator: ^2.0.1
   build_runner:
+  # the code generator
+  riverpod_generator:
+  # riverpod_lint makes it easier to work with Riverpod
+  riverpod_lint:
+  # import custom_lint too as riverpod_lint depends on it
+  custom_lint:
 
 flutter_launcher_icons:
   android: "launcher_icon"

@@ -99,8 +99,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "hold_talk": MessageLookupByLibrary.simpleMessage("Hold to speak"),
         "home_chat": MessageLookupByLibrary.simpleMessage("Chat"),
         "home_factory": MessageLookupByLibrary.simpleMessage("Library"),
+        "home_model": MessageLookupByLibrary.simpleMessage("Model"),
+        "home_my": MessageLookupByLibrary.simpleMessage("My"),
         "home_server": MessageLookupByLibrary.simpleMessage("Server"),
         "home_setting": MessageLookupByLibrary.simpleMessage("Setting"),
+        "home_square": MessageLookupByLibrary.simpleMessage("Square"),
         "input_name":
             MessageLookupByLibrary.simpleMessage("Please enter a name"),
         "input_text": MessageLookupByLibrary.simpleMessage("Type text here"),

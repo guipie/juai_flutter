@@ -1,4 +1,5 @@
 {
   "svn.ignoreMissingSvnWarning": true,
-  "java.configuration.updateBuildConfiguration": "interactive"
+  "java.configuration.updateBuildConfiguration": "interactive",
+  "nuxt.isNuxtApp": false
 }

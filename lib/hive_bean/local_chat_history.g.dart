@@ -25,13 +25,14 @@ class ChatParentItemAdapter extends TypeAdapter<ChatParentItem> {
       apiKey: fields[6] as String?,
       temperature: fields[7] as String?,
       historyMessageCount: fields[8] as int?,
+      chatParentType: fields[10] as int?,
     );
   }
 
   @override
   void write(BinaryWriter writer, ChatParentItem obj) {
     writer
-      ..writeByte(8)
+      ..writeByte(9)
       ..writeByte(3)
       ..write(obj.moduleType)
       ..writeByte(2)
@@ -47,7 +48,9 @@ class ChatParentItemAdapter extends TypeAdapter<ChatParentItem> {
       ..writeByte(8)
       ..write(obj.historyMessageCount)
       ..writeByte(9)
-      ..write(obj.pin);
+      ..write(obj.pin)
+      ..writeByte(10)
+      ..write(obj.chatParentType);
   }
 
   @override

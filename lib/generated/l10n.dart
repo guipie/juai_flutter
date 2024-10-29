@@ -100,11 +100,41 @@ class S {
     );
   }
 
+  /// `Square`
+  String get home_square {
+    return Intl.message(
+      'Square',
+      name: 'home_square',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Model`
+  String get home_model {
+    return Intl.message(
+      'Model',
+      name: 'home_model',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Server`
   String get home_server {
     return Intl.message(
       'Server',
       name: 'home_server',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `My`
+  String get home_my {
+    return Intl.message(
+      'My',
+      name: 'home_my',
       desc: '',
       args: [],
     );
