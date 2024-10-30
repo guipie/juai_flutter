@@ -1,6 +1,6 @@
 import 'package:chat_bot/base.dart';
-import 'package:chat_bot/base/components/chat_markdown.dart';
-import 'package:chat_bot/base/components/components.dart';
+import 'package:chat_bot/components/chat_markdown.dart';
+import 'package:chat_bot/components/components.dart';
 import 'package:chat_bot/hive_bean/local_chat_history.dart';
 import 'package:chat_bot/hive_bean/openai_bean.dart';
 import 'package:chat_bot/module/chat/chat_detail/chat_page.dart';
@@ -20,7 +20,7 @@ import 'package:screenshot/screenshot.dart';
 import 'package:share_plus/share_plus.dart';
 
 import '../../../base/api.dart';
-import '../../../base/components/screenshot_view.dart';
+import '../../../components/screenshot_view.dart';
 import '../../../hive_bean/supported_models.dart';
 import '../../../services/db/chat_item.dart';
 

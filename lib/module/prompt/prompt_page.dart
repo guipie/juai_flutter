@@ -1,6 +1,6 @@
 import 'package:chat_bot/base.dart';
-import 'package:chat_bot/base/components/common_loading.dart';
-import 'package:chat_bot/base/components/components.dart';
+import 'package:chat_bot/components/common_loading.dart';
+import 'package:chat_bot/components/components.dart';
 import 'package:chat_bot/module/prompt/prompt_add_page.dart';
 import 'package:chat_bot/module/prompt/prompt_viewmodel.dart';
 import 'package:chat_bot/services/db/chat_item.dart';

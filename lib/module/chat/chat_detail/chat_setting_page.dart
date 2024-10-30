@@ -1,12 +1,12 @@
 import 'package:chat_bot/base.dart';
-import 'package:chat_bot/base/components/components.dart';
+import 'package:chat_bot/components/components.dart';
 import 'package:chat_bot/hive_bean/openai_bean.dart';
 import 'package:chat_bot/module/chat/chat_list_view_model.dart';
 import 'package:chat_bot/utils/hive_box.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:pull_down_button/pull_down_button.dart';
 
-import '../../../base/components/common_text_field.dart';
+import '../../../components/common_text_field.dart';
 import '../../../hive_bean/supported_models.dart';
 import '../../setting/setting_page.dart';
 import 'chat_setting_viewmodel.dart';

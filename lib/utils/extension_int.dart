@@ -1,4 +1,3 @@
-
 import '../base.dart';
 
 extension ExtensionInt on int? {
@@ -53,6 +52,12 @@ extension ExtensionInt on int? {
 
   TextStyle textStyle({Color? color}) {
     return TextStyle(fontSize: toInt().toDouble(), color: color);
+  }
+}
+
+extension ExtensionObjInt on Object? {
+  int toInt() {
+    return this == null ? 0 : toString().toInt();
   }
 }
 

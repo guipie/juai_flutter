@@ -1,5 +1,5 @@
 import 'package:chat_bot/base.dart';
-import 'package:chat_bot/base/components/common_dialog.dart';
+import 'package:chat_bot/components/common_dialog.dart';
 import 'package:chat_bot/constants/theme.dart';
 import 'package:chat_bot/module/chat/chat_audio/chat_audio_page.dart';
 import 'package:chat_bot/module/chat/chat_image/chat_image_page.dart';
@@ -9,8 +9,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:pull_down_button/pull_down_button.dart';
 
-import '../../base/components/common_loading.dart';
-import '../../base/components/multi_state_widget.dart';
+import '../../components/common_loading.dart';
+import '../../components/multi_state_widget.dart';
 import '../../hive_bean/local_chat_history.dart';
 import '../../hive_bean/openai_bean.dart';
 import '../../services/db/chat_item.dart';

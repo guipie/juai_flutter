@@ -11,8 +11,8 @@ import 'package:pull_down_button/pull_down_button.dart';
 import 'package:record/record.dart';
 
 import '../../../base/api.dart';
-import '../../../base/components/autio_popover.dart';
-import '../../../base/components/lottie_widget.dart';
+import '../../../components/autio_popover.dart';
+import '../../../components/lottie_widget.dart';
 import '../../../constants/theme.dart';
 import '../../../services/db/chat_item.dart';
 

@@ -4,9 +4,8 @@ import 'package:chat_bot/module/setting/openai/openai_viewmodel.dart';
 
 import '../../../base.dart';
 import '../../../base/api.dart';
-import '../../../base/components/common_text_field.dart';
+import '../../../components/common_text_field.dart';
 import '../../../hive_bean/local_chat_history.dart';
-import '../../../utils/hive_box.dart';
 import '../setting_page.dart';
 
 ///apikey 和 apiServer取一样的字段
@@ -142,7 +141,9 @@ class _OllamaAddPageState extends ConsumerState<OllamaAddPage> {
                   openAi.time = time ?? DateTime.now().millisecondsSinceEpoch;
 
                   var apiResult = await API().getSupportModules(openAi);
-                  supportedModels = apiResult.map((e) => SupportedModels(id: e.id, ownedBy: e.ownedBy)).toList();
+                  supportedModels = apiResult
+                      .map((e) => SupportedModels(id: e.id, ownedBy: e.ownedBy))
+                      .toList();
                   if (supportedModels.isEmpty) {
                     return;
                   }
@@ -154,9 +155,13 @@ class _OllamaAddPageState extends ConsumerState<OllamaAddPage> {
 
                   bool result;
                   if (widget.openAi?.time != null) {
-                    result =await ref.read(openAiListProvider(APIType.ollama).notifier).update(openAi);
+                    result = await ref
+                        .read(openAiListProvider(APIType.ollama).notifier)
+                        .update(openAi);
                   } else {
-                    result =await ref.read(openAiListProvider(APIType.ollama).notifier).add(openAi);
+                    result = await ref
+                        .read(openAiListProvider(APIType.ollama).notifier)
+                        .add(openAi);
                   }
                   if (result) {
                     S.current.save_success.success();

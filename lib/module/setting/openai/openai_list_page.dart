@@ -1,4 +1,4 @@
-import 'package:chat_bot/base/components/common_dialog.dart';
+import 'package:chat_bot/components/common_dialog.dart';
 import 'package:chat_bot/hive_bean/local_chat_history.dart';
 import 'package:chat_bot/hive_bean/openai_bean.dart';
 import 'package:chat_bot/module/setting/gemini/gemini_add_page.dart';
@@ -10,9 +10,9 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:pull_down_button/pull_down_button.dart';
 
 import '../../../base.dart';
-import '../../../base/components/common_loading.dart';
-import '../../../base/components/common_text_field.dart';
-import '../../../base/components/multi_state_widget.dart';
+import '../../../components/common_loading.dart';
+import '../../../components/common_text_field.dart';
+import '../../../components/multi_state_widget.dart';
 import '../../../constants/theme.dart';
 import '../cohere/cohere_add_page.dart';
 import '../deepseek/deepseek_add_page.dart';

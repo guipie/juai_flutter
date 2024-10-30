@@ -1,3 +1,5 @@
+import 'package:chat_bot/pages/home/home_pc_page.dart';
+
 import '../base.dart';
 import 'home/home_page.dart';
 
@@ -14,7 +16,11 @@ class _SplashPageState extends State<SplashPage> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       Future.delayed(const Duration(milliseconds: 500), () {
-        F.pushReplacementNoAnimation(const HomePage());
+        if (F.mobile) {
+          F.pushReplacementNoAnimation(const HomePage());
+        } else {
+          F.pushReplacementNoAnimation(const HomePcPage());
+        }
       });
     });
   }

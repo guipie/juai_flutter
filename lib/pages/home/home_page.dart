@@ -2,6 +2,7 @@ import 'package:chat_bot/base.dart';
 import 'package:chat_bot/base/version_check.dart';
 import 'package:chat_bot/module/chat/chat_list_page.dart';
 import 'package:chat_bot/pages/home/home_viewmodel.dart';
+import 'package:chat_bot/pages/home/widgets.dart';
 
 import '../../const.dart';
 import '../../constants/theme.dart';
@@ -84,24 +85,17 @@ class _HomePageState extends ConsumerState<HomePage>
                   top: kBottomNavigationBarHeight / 2),
               child: Row(
                 children: [
-                  Expanded(
-                    child: BottomNavItem(
-                      label: S.current.home_chat,
-                      index: 0,
-                      checked: currentIndex == 0,
-                      icon: Icons.chat_bubble_outline,
-                      iconChecked: Icons.chat_bubble,
-                    ),
-                  ),
-                  Expanded(
-                    child: BottomNavItem(
-                      icon: Icons.model_training_outlined,
-                      iconChecked: Icons.model_training,
-                      label: S.current.home_model,
-                      index: 1,
-                      checked: currentIndex == 1,
-                    ),
-                  ),
+                  ...menus
+                      .map((m) => Expanded(
+                            child: BottomNavItem(
+                              label: m.label,
+                              index: m.index,
+                              checked: currentIndex == m.index,
+                              icon: m.icon,
+                              iconChecked: m.checkedIcon,
+                            ),
+                          ))
+                      .toList(),
                   // GestureDetector(
                   //   onTap: () {
                   //     if (!isExistModels()) {
@@ -140,33 +134,6 @@ class _HomePageState extends ConsumerState<HomePage>
                   //     width: 80,
                   //   ),
                   // ),
-                  Expanded(
-                    child: BottomNavItem(
-                      label: S.current.home_square,
-                      index: 2,
-                      checked: currentIndex == 2,
-                      icon: Icons.square_outlined,
-                      iconChecked: Icons.square,
-                    ),
-                  ),
-                  Expanded(
-                    child: BottomNavItem(
-                      label: S.current.home_factory,
-                      index: 3,
-                      checked: currentIndex == 3,
-                      icon: Icons.store_outlined,
-                      iconChecked: Icons.store,
-                    ),
-                  ),
-                  Expanded(
-                    child: BottomNavItem(
-                      label: S.current.home_my,
-                      index: 4,
-                      checked: currentIndex == 4,
-                      icon: Icons.settings_outlined,
-                      iconChecked: Icons.settings,
-                    ),
-                  ),
                 ],
               ),
             ),
@@ -174,87 +141,5 @@ class _HomePageState extends ConsumerState<HomePage>
         ),
       ),
     );
-  }
-}
-
-class BottomNavItem extends ConsumerWidget {
-  final bool checked;
-  final int index;
-  final String label;
-  final IconData icon;
-  final IconData iconChecked;
-
-  const BottomNavItem(
-      {super.key,
-      required this.icon,
-      required this.iconChecked,
-      required this.checked,
-      required this.index,
-      required this.label});
-
-  @override
-  Widget build(BuildContext context, ref) {
-    return GestureDetector(
-      onTap: () {
-        ref.read(homeIndexProvider.notifier).update((state) => index);
-      },
-      behavior: HitTestBehavior.opaque,
-      child: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(
-              checked ? iconChecked : icon,
-              color: checked ? Theme.of(context).primaryColor : null,
-            ),
-            Text(label,
-                style: checked
-                    ? Theme.of(context)
-                        .textTheme
-                        .titleSmall!
-                        .copyWith(color: Theme.of(context).primaryColor)
-                    : Theme.of(context).textTheme.bodySmall),
-            // Container(
-            //   decoration: BoxDecoration(
-            //     color: checked
-            //         ? Theme.of(context).primaryColor
-            //         : Colors.transparent,
-            //     borderRadius: BorderRadius.circular(5),
-            //   ),
-            //   height: 3,
-            //   width: 30,
-            // )
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class BottomNavPainter extends CustomPainter {
-  final Color bgColor;
-
-  BottomNavPainter({this.bgColor = Colors.white});
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    //绘制矩形，然后顶部中间是个半圆
-    Paint paint = Paint()
-      ..color = bgColor
-      ..style = PaintingStyle.fill;
-
-    canvas.drawRect(
-        Rect.fromLTRB(
-            0, kBottomNavigationBarHeight / 2, size.width, size.height),
-        paint);
-
-    canvas.drawCircle(Offset(size.width / 2, kBottomNavigationBarHeight),
-        kBottomNavigationBarHeight / 1.35, paint);
-  }
-
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) {
-    return true;
   }
 }

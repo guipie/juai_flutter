@@ -5,7 +5,7 @@ import 'package:flutter/cupertino.dart';
 
 import '../../../base.dart';
 import '../../../base/api.dart';
-import '../../../base/components/common_text_field.dart';
+import '../../../components/common_text_field.dart';
 import '../../../constants/theme.dart';
 import '../../../hive_bean/local_chat_history.dart';
 import '../setting_page.dart';

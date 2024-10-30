@@ -22,6 +22,8 @@ class _FImpl {
 
   get height => MediaQuery.sizeOf(context).height;
 
+  get mobile => Platform.isAndroid || Platform.isIOS;
+  get pc => !(Platform.isAndroid || Platform.isIOS);
   String formatTime(int ms) {
     return DateUtil.formatDateMs(ms, format: "yyyy-MM-dd HH:mm:ss");
   }
@@ -31,23 +33,32 @@ class _FImpl {
   }
 
   Future<T?> push<T extends Object?>(Widget page) {
-    return Navigator.of(context).push(CupertinoPageRoute(builder: (context) => page));
+    return Navigator.of(context)
+        .push(CupertinoPageRoute(builder: (context) => page));
   }
 
   Future<T?> pushTransparent<T extends Object?>(Widget page) {
-    return Navigator.of(context).push(TransparentMaterialPageRoute(
-        pageBuilder: (BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation) {
+    return Navigator.of(context).push(TransparentMaterialPageRoute(pageBuilder:
+        (BuildContext context, Animation<double> animation,
+            Animation<double> secondaryAnimation) {
       return page;
     }));
   }
 
   //replace
-  Future<T?> pushReplacement<T extends Object?, TO extends Object?>(Widget page, {TO? result}) {
-    return Navigator.of(context).pushReplacement(CupertinoPageRoute(builder: (context) => page), result: result);
+  Future<T?> pushReplacement<T extends Object?, TO extends Object?>(Widget page,
+      {TO? result}) {
+    return Navigator.of(context).pushReplacement(
+        CupertinoPageRoute(builder: (context) => page),
+        result: result);
   }
 
-  Future<T?> pushReplacementNoAnimation<T extends Object?, TO extends Object?>(Widget page, {TO? result}) {
-    return Navigator.of(context).pushReplacement(NoAnimationPageRoute(builder: (context) => page), result: result);
+  Future<T?> pushReplacementNoAnimation<T extends Object?, TO extends Object?>(
+      Widget page,
+      {TO? result}) {
+    return Navigator.of(context).pushReplacement(
+        NoAnimationPageRoute(builder: (context) => page),
+        result: result);
   }
 
   void popUntil(RoutePredicate predicate) {
@@ -98,7 +109,8 @@ class _FImpl {
       barrierDismissible: barrierDismissible,
       barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
       barrierColor: barrierColor ?? Colors.black45,
-      transitionDuration: transitionDuration ?? const Duration(milliseconds: 300),
+      transitionDuration:
+          transitionDuration ?? const Duration(milliseconds: 300),
       transitionBuilder: (context, animation, secondaryAnimation, child) {
         final curve = transitionCurve ?? Curves.easeOutQuad;
         switch (transition) {
@@ -116,7 +128,8 @@ class _FImpl {
 
           case EDialogTransition.rotation3d:
             return Rotation3DTransition(
-                Tween<double>(begin: pi, end: 2.0 * pi).animate(CurvedAnimation(parent: animation, curve: curve)),
+                Tween<double>(begin: pi, end: 2.0 * pi)
+                    .animate(CurvedAnimation(parent: animation, curve: curve)),
                 child: child);
 
           default:
@@ -130,7 +143,8 @@ class _FImpl {
         }
       },
       navigatorKey: navigatorKey,
-      routeSettings: routeSettings ?? RouteSettings(arguments: arguments, name: name),
+      routeSettings:
+          routeSettings ?? RouteSettings(arguments: arguments, name: name),
       context: context,
     );
   }
@@ -158,7 +172,8 @@ class NoAnimationPageRoute<T> extends PageRoute<T> {
 
   @override
   bool canTransitionFrom(TransitionRoute<dynamic> previousRoute) {
-    return previousRoute is NoAnimationPageRoute || previousRoute is CupertinoPageRoute;
+    return previousRoute is NoAnimationPageRoute ||
+        previousRoute is CupertinoPageRoute;
   }
 
   @override
@@ -167,7 +182,8 @@ class NoAnimationPageRoute<T> extends PageRoute<T> {
   }
 
   @override
-  Widget buildPage(BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation) {
+  Widget buildPage(BuildContext context, Animation<double> animation,
+      Animation<double> secondaryAnimation) {
     return builder(context);
   }
 

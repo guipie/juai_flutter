@@ -15,9 +15,9 @@ import 'package:record/record.dart';
 import 'package:share_plus/share_plus.dart';
 
 import '../../../base/api.dart';
-import '../../../base/components/autio_popover.dart';
-import '../../../base/components/lottie_widget.dart';
 import '../../../base/providers.dart';
+import '../../../components/autio_popover.dart';
+import '../../../components/lottie_widget.dart';
 import '../../../hive_bean/generate_content.dart';
 import '../../../hive_bean/openai_bean.dart';
 import '../../../utils/hive_box.dart';
