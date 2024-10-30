@@ -5,8 +5,8 @@ import 'package:chat_bot/hive_bean/local_chat_history.dart';
 import 'package:extended_image/extended_image.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
-import '../db/chat_item.dart';
-import '../theme.dart';
+import '../../constants/theme.dart';
+import '../../services/db/chat_item.dart';
 import 'chat_markdown.dart';
 
 class ScreenShotChatPage extends ConsumerWidget {

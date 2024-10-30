@@ -1,6 +1,6 @@
 import 'package:hive/hive.dart';
 
-import '../base/db/chat_item.dart';
+import '../services/db/chat_item.dart';
 
 part 'local_chat_history.g.dart';
 
@@ -16,7 +16,6 @@ enum APIType {
   zeroOne(8, "零一万物", "https://api.lingyiwanwu.com"),
   miniMax(9, "MiniMax", "https://api.minimax.chat"),
   coHere(10, "Cohere", "https://api.cohere.com");
-
 
   final int code;
   final String name;

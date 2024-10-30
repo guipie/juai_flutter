@@ -1,6 +1,6 @@
-import 'package:chat_bot/base/db/chat_item.dart';
 import 'package:chat_bot/hive_bean/local_chat_history.dart';
 import 'package:chat_bot/hive_bean/openai_bean.dart';
+import 'package:chat_bot/services/db/chat_item.dart';
 import 'package:chat_bot/utils/hive_box.dart';
 
 import '../../base.dart';
@@ -17,11 +17,13 @@ var specialGenerateAudioChatParentItemTime = 100002;
 ///全局翻译聊天使用的parentID
 var specialGenerateTranslateChatParentItemTime = 100003;
 
-final chatParentListProvider = StateNotifierProvider<ChatParentListNotify, AsyncValue<List<ChatParentItem>>>((ref) {
+final chatParentListProvider = StateNotifierProvider<ChatParentListNotify,
+    AsyncValue<List<ChatParentItem>>>((ref) {
   return ChatParentListNotify(const AsyncValue.loading(), ref);
 });
 
-class ChatParentListNotify extends StateNotifier<AsyncValue<List<ChatParentItem>>> {
+class ChatParentListNotify
+    extends StateNotifier<AsyncValue<List<ChatParentItem>>> {
   final StateNotifierProviderRef ref;
 
   ChatParentListNotify(super.state, this.ref) {
@@ -67,11 +69,13 @@ class ChatParentListNotify extends StateNotifier<AsyncValue<List<ChatParentItem>
 
         //再查找最新的一条消息记录
         for (var i = 0; i < list.length; i++) {
-          var chatItem = await ChatItemProvider().getLatestChatItem(list[i].id ?? 0);
+          var chatItem =
+              await ChatItemProvider().getLatestChatItem(list[i].id ?? 0);
           list[i].chatItem = chatItem;
         }
 
-        list.removeWhere((element) => element.id == specialGenerateTextChatParentItemTime);
+        list.removeWhere(
+            (element) => element.id == specialGenerateTextChatParentItemTime);
         return list;
       } catch (e) {
         HiveBox().chatHistory.clear();

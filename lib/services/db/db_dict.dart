@@ -1,4 +1,4 @@
-import 'package:chat_bot/base/db/db_base.dart';
+import 'package:chat_bot/services/db/db_base.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
 class DictProvider extends DbBase {

@@ -7,7 +7,7 @@ import 'package:flutter/cupertino.dart';
 import '../../../base.dart';
 import '../../../base/api.dart';
 import '../../../base/components/common_text_field.dart';
-import '../../../base/theme.dart';
+import '../../../constants/theme.dart';
 import '../../../hive_bean/local_chat_history.dart';
 import '../setting_page.dart';
 
@@ -35,9 +35,8 @@ class _QianWenAddPageState extends ConsumerState<QianWenAddPage> {
     controller.text = openAi.apiKey ?? "";
     time = openAi.time;
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      ref
-          .watch(qianwenApiServerAddressProvider.notifier)
-          .update((state) => openAi.apiServer ?? "https://dashscope.aliyuncs.com");
+      ref.watch(qianwenApiServerAddressProvider.notifier).update(
+          (state) => openAi.apiServer ?? "https://dashscope.aliyuncs.com");
     });
   }
 
@@ -88,11 +87,15 @@ class _QianWenAddPageState extends ConsumerState<QianWenAddPage> {
               SettingWithTitle(
                 label: "API Key",
                 widget: CommonTextField(
-                    maxLine: 3, color: Theme.of(context).canvasColor, controller: controller, hintText: "API Key"),
+                    maxLine: 3,
+                    color: Theme.of(context).canvasColor,
+                    controller: controller,
+                    hintText: "API Key"),
               ),
               const SizedBox(height: 15),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -112,7 +115,8 @@ class _QianWenAddPageState extends ConsumerState<QianWenAddPage> {
                     Consumer(
                       builder: (context, ref, _) {
                         var list = ["https://dashscope.aliyuncs.com"];
-                        String server = ref.watch(qianwenApiServerAddressProvider);
+                        String server =
+                            ref.watch(qianwenApiServerAddressProvider);
                         return ListView.separated(
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
@@ -125,14 +129,18 @@ class _QianWenAddPageState extends ConsumerState<QianWenAddPage> {
                           },
                           itemBuilder: (context, index) {
                             return Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 0),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 15, vertical: 0),
                               decoration: BoxDecoration(
                                 color: Theme.of(context).cardColor,
                                 borderRadius: BorderRadius.circular(10),
                               ),
                               child: ListTile(
                                 onTap: () {
-                                  ref.watch(qianwenApiServerAddressProvider.notifier).state = list[index];
+                                  ref
+                                      .watch(qianwenApiServerAddressProvider
+                                          .notifier)
+                                      .state = list[index];
                                 },
                                 contentPadding: EdgeInsets.zero,
                                 dense: true,
@@ -141,7 +149,10 @@ class _QianWenAddPageState extends ConsumerState<QianWenAddPage> {
                                   style: TextStyle(
                                     color: server == list[index]
                                         ? Theme.of(context).primaryColor
-                                        : Theme.of(context).textTheme.titleSmall?.color,
+                                        : Theme.of(context)
+                                            .textTheme
+                                            .titleSmall
+                                            ?.color,
                                     fontSize: 14,
                                   ),
                                 ),
@@ -185,7 +196,8 @@ class _QianWenAddPageState extends ConsumerState<QianWenAddPage> {
                 }
                 AllModelBean openAi = AllModelBean();
                 openAi.apiKey = controller.text;
-                openAi.apiServer = ref.watch(qianwenApiServerAddressProvider.notifier).state;
+                openAi.apiServer =
+                    ref.watch(qianwenApiServerAddressProvider.notifier).state;
                 openAi.model = APIType.qianwen.code;
                 openAi.alias = aliasController.text;
                 var result = await API().validateApiKey(openAi);
@@ -234,7 +246,10 @@ class _QianWenAddPageState extends ConsumerState<QianWenAddPage> {
 
                 AllModelBean openAi = AllModelBean();
                 openAi.apiKey = controller.text.trim();
-                openAi.apiServer = ref.watch(qianwenApiServerAddressProvider.notifier).state.trim();
+                openAi.apiServer = ref
+                    .watch(qianwenApiServerAddressProvider.notifier)
+                    .state
+                    .trim();
                 openAi.model = APIType.qianwen.code;
                 openAi.alias = aliasController.text.trim();
                 openAi.time = time ?? DateTime.now().millisecondsSinceEpoch;
@@ -242,7 +257,9 @@ class _QianWenAddPageState extends ConsumerState<QianWenAddPage> {
 
                 try {
                   var result = await API().getSupportModules(openAi);
-                  supportedModels = result.map((e) => SupportedModels(id: e.id, ownedBy: e.ownedBy)).toList();
+                  supportedModels = result
+                      .map((e) => SupportedModels(id: e.id, ownedBy: e.ownedBy))
+                      .toList();
                 } catch (e) {}
 
                 if (supportedModels.isEmpty) {
@@ -254,9 +271,13 @@ class _QianWenAddPageState extends ConsumerState<QianWenAddPage> {
                 openAi.defaultModelType = supportedModels.first;
                 bool result;
                 if (widget.openAi?.time != null) {
-                  result = await ref.read(openAiListProvider(APIType.gemini).notifier).update(openAi);
+                  result = await ref
+                      .read(openAiListProvider(APIType.gemini).notifier)
+                      .update(openAi);
                 } else {
-                  result = await ref.read(openAiListProvider(APIType.gemini).notifier).add(openAi);
+                  result = await ref
+                      .read(openAiListProvider(APIType.gemini).notifier)
+                      .add(openAi);
                 }
                 if (result) {
                   S.current.save_success.success();

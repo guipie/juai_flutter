@@ -1,8 +1,8 @@
 import 'package:chat_bot/hive_bean/openai_bean.dart';
 
 import '../../../base.dart';
-import '../../../base/db/chat_item.dart';
 import '../../../hive_bean/local_chat_history.dart';
+import '../../../services/db/chat_item.dart';
 
 ///语音模式，还是录入文字模式
 final inputModeProvider = StateProvider.autoDispose<bool>((ref) {

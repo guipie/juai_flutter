@@ -6,7 +6,7 @@ import 'package:flutter/cupertino.dart';
 import '../../../base.dart';
 import '../../../base/api.dart';
 import '../../../base/components/common_text_field.dart';
-import '../../../base/theme.dart';
+import '../../../constants/theme.dart';
 import '../../../hive_bean/local_chat_history.dart';
 import '../setting_page.dart';
 
@@ -42,7 +42,9 @@ class _OpenAIAddPageState extends ConsumerState<OpenAIAddPage> {
     time = openAi.time;
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       ref.watch(apiServerHistoryProvider.notifier).add(openAi.apiServer);
-      ref.watch(apiServerAddressProvider.notifier).update((state) => openAi.apiServer ?? "https://api.openai.com");
+      ref
+          .watch(apiServerAddressProvider.notifier)
+          .update((state) => openAi.apiServer ?? "https://api.openai.com");
     });
   }
 
@@ -88,17 +90,23 @@ class _OpenAIAddPageState extends ConsumerState<OpenAIAddPage> {
               SettingWithTitle(
                 label: S.current.org_notrequired,
                 widget: CommonTextField(
-                    color: Theme.of(context).canvasColor, controller: orgController, hintText: S.current.input_text),
+                    color: Theme.of(context).canvasColor,
+                    controller: orgController,
+                    hintText: S.current.input_text),
               ),
               const SizedBox(height: 15),
               SettingWithTitle(
                 label: "API Key",
                 widget: CommonTextField(
-                    maxLine: 3, color: Theme.of(context).canvasColor, controller: controller, hintText: "sk-xxxxxx"),
+                    maxLine: 3,
+                    color: Theme.of(context).canvasColor,
+                    controller: controller,
+                    hintText: "sk-xxxxxx"),
               ),
               const SizedBox(height: 15),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -114,7 +122,8 @@ class _OpenAIAddPageState extends ConsumerState<OpenAIAddPage> {
                         ),
                         Builder(builder: (context) {
                           return Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 10),
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 10),
                               child: Icon(
                                 CupertinoIcons.add_circled,
                                 color: Theme.of(context).primaryColor,
@@ -133,48 +142,69 @@ class _OpenAIAddPageState extends ConsumerState<OpenAIAddPage> {
                                   ),
                                 ),
                                 builder: (context) {
-                                  TextEditingController serverNameController = TextEditingController();
+                                  TextEditingController serverNameController =
+                                      TextEditingController();
                                   return Card(
                                     color: ref.watch(themeProvider).xffF6F6F6(),
                                     child: Column(
                                       mainAxisSize: MainAxisSize.min,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
                                         const SizedBox(height: 20),
                                         Padding(
-                                          padding: const EdgeInsets.only(left: 10),
+                                          padding:
+                                              const EdgeInsets.only(left: 10),
                                           child: Text(
                                             "API Server",
-                                            style: Theme.of(context).textTheme.titleMedium,
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .titleMedium,
                                           ),
                                         ),
                                         Container(
                                           padding: const EdgeInsets.all(30),
                                           child: CommonTextField(
-                                              controller: serverNameController, hintText: S.current.hint_addServerDesc),
+                                              controller: serverNameController,
+                                              hintText:
+                                                  S.current.hint_addServerDesc),
                                         ),
                                         Container(
-                                          margin: const EdgeInsets.symmetric(horizontal: 30),
+                                          margin: const EdgeInsets.symmetric(
+                                              horizontal: 30),
                                           decoration: BoxDecoration(
-                                            color: Theme.of(context).primaryColor,
-                                            borderRadius: BorderRadius.circular(10),
+                                            color:
+                                                Theme.of(context).primaryColor,
+                                            borderRadius:
+                                                BorderRadius.circular(10),
                                           ),
                                           alignment: Alignment.center,
-                                          padding: const EdgeInsets.symmetric(vertical: 10),
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 10),
                                           child: Text(
                                             S.current.btn_add,
-                                            style: const TextStyle(color: Colors.white, fontSize: 16),
+                                            style: const TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 16),
                                           ),
                                         ).click(() {
-                                          if (serverNameController.text.trim().isEmpty) {
-                                            ("API Server ${S.current.cannot_empty}").fail();
+                                          if (serverNameController.text
+                                              .trim()
+                                              .isEmpty) {
+                                            ("API Server ${S.current.cannot_empty}")
+                                                .fail();
                                             return;
                                           }
-                                          ref.read(apiServerHistoryProvider.notifier).add(serverNameController.text);
+                                          ref
+                                              .read(apiServerHistoryProvider
+                                                  .notifier)
+                                              .add(serverNameController.text);
                                           F.pop();
                                         }),
                                         SizedBox(
-                                          height: MediaQuery.of(context).viewInsets.bottom,
+                                          height: MediaQuery.of(context)
+                                              .viewInsets
+                                              .bottom,
                                         ),
                                       ],
                                     ),
@@ -204,14 +234,17 @@ class _OpenAIAddPageState extends ConsumerState<OpenAIAddPage> {
                           },
                           itemBuilder: (context, index) {
                             return Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 0),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 15, vertical: 0),
                               decoration: BoxDecoration(
                                 color: Theme.of(context).cardColor,
                                 borderRadius: BorderRadius.circular(10),
                               ),
                               child: ListTile(
                                 onTap: () {
-                                  ref.watch(apiServerAddressProvider.notifier).state = list[index];
+                                  ref
+                                      .watch(apiServerAddressProvider.notifier)
+                                      .state = list[index];
                                 },
                                 contentPadding: EdgeInsets.zero,
                                 dense: true,
@@ -220,7 +253,10 @@ class _OpenAIAddPageState extends ConsumerState<OpenAIAddPage> {
                                   style: TextStyle(
                                     color: server == list[index]
                                         ? Theme.of(context).primaryColor
-                                        : Theme.of(context).textTheme.titleSmall?.color,
+                                        : Theme.of(context)
+                                            .textTheme
+                                            .titleSmall
+                                            ?.color,
                                     fontSize: 14,
                                   ),
                                 ),
@@ -236,7 +272,10 @@ class _OpenAIAddPageState extends ConsumerState<OpenAIAddPage> {
                                             color: Colors.red,
                                             size: 16,
                                           ).click(() {
-                                            ref.read(apiServerHistoryProvider.notifier).remove(list[index]);
+                                            ref
+                                                .read(apiServerHistoryProvider
+                                                    .notifier)
+                                                .remove(list[index]);
                                           })
                                         : null),
                               ),
@@ -265,7 +304,8 @@ class _OpenAIAddPageState extends ConsumerState<OpenAIAddPage> {
                 AllModelBean openAi = AllModelBean();
                 openAi.apiKey = controller.text;
                 openAi.organization = orgController.text;
-                openAi.apiServer = ref.watch(apiServerAddressProvider.notifier).state;
+                openAi.apiServer =
+                    ref.watch(apiServerAddressProvider.notifier).state;
                 openAi.model = APIType.openAI.code;
                 openAi.alias = aliasController.text;
                 var result = await API().validateApiKey(openAi);
@@ -316,13 +356,16 @@ class _OpenAIAddPageState extends ConsumerState<OpenAIAddPage> {
                   AllModelBean openAi = AllModelBean();
                   openAi.apiKey = controller.text;
                   openAi.organization = orgController.text;
-                  openAi.apiServer = ref.watch(apiServerAddressProvider.notifier).state;
+                  openAi.apiServer =
+                      ref.watch(apiServerAddressProvider.notifier).state;
                   openAi.model = APIType.openAI.code;
                   openAi.alias = aliasController.text;
                   openAi.time = time ?? DateTime.now().millisecondsSinceEpoch;
 
                   var apiResult = await API().getSupportModules(openAi);
-                  supportedModels = apiResult.map((e) => SupportedModels(id: e.id, ownedBy: e.ownedBy)).toList();
+                  supportedModels = apiResult
+                      .map((e) => SupportedModels(id: e.id, ownedBy: e.ownedBy))
+                      .toList();
                   if (supportedModels.isEmpty) {
                     S.current.set_default_models.toast();
                     var models = [
@@ -346,20 +389,28 @@ class _OpenAIAddPageState extends ConsumerState<OpenAIAddPage> {
                       "gemini-pro",
                       "gemini-pro-vision",
                     ];
-                    supportedModels.addAll(models.map((e) => SupportedModels(id: e, ownedBy: "openai")).toList());
+                    supportedModels.addAll(models
+                        .map((e) => SupportedModels(id: e, ownedBy: "openai"))
+                        .toList());
                   }
                   openAi.supportedModels = supportedModels;
 
-                  if (supportedModels.where((element) => element.id?.contains("gpt-4") == true).isNotEmpty) {
-                    openAi.defaultModelType =
-                        supportedModels.firstWhere((element) => element.id?.contains("gpt-4") == true);
+                  if (supportedModels
+                      .where((element) => element.id?.contains("gpt-4") == true)
+                      .isNotEmpty) {
+                    openAi.defaultModelType = supportedModels.firstWhere(
+                        (element) => element.id?.contains("gpt-4") == true);
                   }
 
                   bool result;
                   if (widget.openAi?.time != null) {
-                    result =await ref.read(openAiListProvider(APIType.openAI).notifier).update(openAi);
+                    result = await ref
+                        .read(openAiListProvider(APIType.openAI).notifier)
+                        .update(openAi);
                   } else {
-                    result =await ref.read(openAiListProvider(APIType.openAI).notifier).add(openAi);
+                    result = await ref
+                        .read(openAiListProvider(APIType.openAI).notifier)
+                        .add(openAi);
                   }
                   if (result) {
                     S.current.save_success.success();

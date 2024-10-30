@@ -9,7 +9,7 @@ import 'package:dart_openai/dart_openai.dart';
 import 'package:flutter_gemini/flutter_gemini.dart';
 
 import '../../base.dart';
-import '../db/chat_item.dart';
+import '../../services/db/chat_item.dart';
 
 class GeminiImpl extends APIImpl {
   /// 单例
@@ -36,7 +36,8 @@ class GeminiImpl extends APIImpl {
         .toList();
 
     var content = (await Gemini.instance.chat(contents, modelName: modelType));
-    return GenerateContentBean(content: content?.content?.parts?.last.text ?? '');
+    return GenerateContentBean(
+        content: content?.content?.parts?.last.text ?? '');
   }
 
   @override
@@ -46,7 +47,9 @@ class GeminiImpl extends APIImpl {
       await Future.delayed(const Duration(milliseconds: 100));
       var models = await Gemini.instance.listModels();
       eDismiss();
-      return models.map((e) => SupportedModels(ownedBy: e.version, id: e.name)).toList();
+      return models
+          .map((e) => SupportedModels(ownedBy: e.version, id: e.name))
+          .toList();
     } on RequestFailedException catch (e) {
       e.message.fail();
       return [];
@@ -76,7 +79,10 @@ class GeminiImpl extends APIImpl {
   ) async {
     initAPI(bean);
     RequestParams lastOneMessage = chatItems.last;
-    if (lastOneMessage.images.isNotEmpty && lastOneMessage.images.where((element) => element.isNotEmpty).isNotEmpty) {
+    if (lastOneMessage.images.isNotEmpty &&
+        lastOneMessage.images
+            .where((element) => element.isNotEmpty)
+            .isNotEmpty) {
       return Stream.fromFuture(Gemini.instance
           .textAndImage(
         text: lastOneMessage.content.last,
@@ -84,7 +90,8 @@ class GeminiImpl extends APIImpl {
         images: lastOneMessage.images.map((e) => base64Decode(e)).toList(),
       )
           .then((value) {
-        return GenerateContentBean(content: value?.content?.parts?.last.text ?? '');
+        return GenerateContentBean(
+            content: value?.content?.parts?.last.text ?? '');
       }));
     } else {
       var contents = chatItems
@@ -93,9 +100,9 @@ class GeminiImpl extends APIImpl {
               role: e.role != ChatType.bot.index ? 'user' : 'model'))
           .toList();
 
-      return Gemini.instance
-          .streamChat(contents, modelName: modelType)
-          .map((event) => GenerateContentBean(content: event.content?.parts?.last.text));
+      return Gemini.instance.streamChat(contents, modelName: modelType).map(
+          (event) =>
+              GenerateContentBean(content: event.content?.parts?.last.text));
     }
   }
 
@@ -131,8 +138,8 @@ class GeminiImpl extends APIImpl {
   }
 
   @override
-  Future<List<OpenAIImageData>> generateOpenAIImage(
-      AllModelBean bean, String prompt, OpenAIImageStyle style, OpenAIImageSize size) {
+  Future<List<OpenAIImageData>> generateOpenAIImage(AllModelBean bean,
+      String prompt, OpenAIImageStyle style, OpenAIImageSize size) {
     throw UnimplementedError();
   }
 

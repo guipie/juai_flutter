@@ -6,9 +6,8 @@ import 'package:flutter/cupertino.dart';
 import '../../../base.dart';
 import '../../../base/api.dart';
 import '../../../base/components/common_text_field.dart';
-import '../../../base/theme.dart';
+import '../../../constants/theme.dart';
 import '../../../hive_bean/local_chat_history.dart';
-import '../../services/services_page.dart';
 import '../setting_page.dart';
 import 'deepseek_viewmodel.dart';
 
@@ -36,7 +35,9 @@ class _DeepSeekAddPageState extends ConsumerState<DeepSeekAddPage> {
     controller.text = openAi.apiKey ?? "";
     time = openAi.time;
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      ref.watch(deepSeekApiServerAddressProvider.notifier).update((state) => openAi.apiServer ?? APIType.deepSeek.host);
+      ref
+          .watch(deepSeekApiServerAddressProvider.notifier)
+          .update((state) => openAi.apiServer ?? APIType.deepSeek.host);
     });
   }
 
@@ -87,11 +88,15 @@ class _DeepSeekAddPageState extends ConsumerState<DeepSeekAddPage> {
               SettingWithTitle(
                 label: "API Key",
                 widget: CommonTextField(
-                    maxLine: 3, color: Theme.of(context).canvasColor, controller: controller, hintText: "API Key"),
+                    maxLine: 3,
+                    color: Theme.of(context).canvasColor,
+                    controller: controller,
+                    hintText: "API Key"),
               ),
               const SizedBox(height: 15),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -111,7 +116,8 @@ class _DeepSeekAddPageState extends ConsumerState<DeepSeekAddPage> {
                     Consumer(
                       builder: (context, ref, _) {
                         var list = [APIType.deepSeek.host];
-                        String server = ref.watch(deepSeekApiServerAddressProvider);
+                        String server =
+                            ref.watch(deepSeekApiServerAddressProvider);
                         return ListView.separated(
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
@@ -124,14 +130,18 @@ class _DeepSeekAddPageState extends ConsumerState<DeepSeekAddPage> {
                           },
                           itemBuilder: (context, index) {
                             return Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 0),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 15, vertical: 0),
                               decoration: BoxDecoration(
                                 color: Theme.of(context).cardColor,
                                 borderRadius: BorderRadius.circular(10),
                               ),
                               child: ListTile(
                                 onTap: () {
-                                  ref.watch(deepSeekApiServerAddressProvider.notifier).state = list[index];
+                                  ref
+                                      .watch(deepSeekApiServerAddressProvider
+                                          .notifier)
+                                      .state = list[index];
                                 },
                                 contentPadding: EdgeInsets.zero,
                                 dense: true,
@@ -140,7 +150,10 @@ class _DeepSeekAddPageState extends ConsumerState<DeepSeekAddPage> {
                                   style: TextStyle(
                                     color: server == list[index]
                                         ? Theme.of(context).primaryColor
-                                        : Theme.of(context).textTheme.titleSmall?.color,
+                                        : Theme.of(context)
+                                            .textTheme
+                                            .titleSmall
+                                            ?.color,
                                     fontSize: 14,
                                   ),
                                 ),
@@ -184,7 +197,8 @@ class _DeepSeekAddPageState extends ConsumerState<DeepSeekAddPage> {
                 }
                 AllModelBean openAi = AllModelBean();
                 openAi.apiKey = controller.text;
-                openAi.apiServer = ref.watch(deepSeekApiServerAddressProvider.notifier).state;
+                openAi.apiServer =
+                    ref.watch(deepSeekApiServerAddressProvider.notifier).state;
                 openAi.model = APIType.deepSeek.code;
                 openAi.alias = aliasController.text;
                 var result = await API().validateApiKey(openAi);
@@ -233,7 +247,10 @@ class _DeepSeekAddPageState extends ConsumerState<DeepSeekAddPage> {
 
                 AllModelBean openAi = AllModelBean();
                 openAi.apiKey = controller.text.trim();
-                openAi.apiServer = ref.watch(deepSeekApiServerAddressProvider.notifier).state.trim();
+                openAi.apiServer = ref
+                    .watch(deepSeekApiServerAddressProvider.notifier)
+                    .state
+                    .trim();
                 openAi.model = APIType.deepSeek.code;
                 openAi.alias = aliasController.text.trim();
                 openAi.time = time ?? DateTime.now().millisecondsSinceEpoch;
@@ -241,7 +258,9 @@ class _DeepSeekAddPageState extends ConsumerState<DeepSeekAddPage> {
 
                 try {
                   var result = await API().getSupportModules(openAi);
-                  supportedModels = result.map((e) => SupportedModels(id: e.id, ownedBy: e.ownedBy)).toList();
+                  supportedModels = result
+                      .map((e) => SupportedModels(id: e.id, ownedBy: e.ownedBy))
+                      .toList();
                 } catch (e) {}
 
                 if (supportedModels.isEmpty) {
@@ -253,9 +272,13 @@ class _DeepSeekAddPageState extends ConsumerState<DeepSeekAddPage> {
                 openAi.defaultModelType = supportedModels.first;
                 bool result;
                 if (widget.openAi?.time != null) {
-                  result = await ref.read(openAiListProvider(APIType.deepSeek).notifier).update(openAi);
+                  result = await ref
+                      .read(openAiListProvider(APIType.deepSeek).notifier)
+                      .update(openAi);
                 } else {
-                  result = await ref.read(openAiListProvider(APIType.deepSeek).notifier).add(openAi);
+                  result = await ref
+                      .read(openAiListProvider(APIType.deepSeek).notifier)
+                      .add(openAi);
                 }
                 if (result) {
                   S.current.save_success.success();

@@ -1,6 +1,6 @@
 import 'package:chat_bot/base.dart';
-import 'package:chat_bot/base/db/prompt_item.dart';
 import 'package:chat_bot/module/prompt/prompt_viewmodel.dart';
+import 'package:chat_bot/services/db/prompt_item.dart';
 
 import '../../base/components/common_text_field.dart';
 import '../setting/setting_page.dart';

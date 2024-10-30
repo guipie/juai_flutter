@@ -13,7 +13,7 @@ import '../../../base.dart';
 import '../../../base/components/common_loading.dart';
 import '../../../base/components/common_text_field.dart';
 import '../../../base/components/multi_state_widget.dart';
-import '../../../base/theme.dart';
+import '../../../constants/theme.dart';
 import '../cohere/cohere_add_page.dart';
 import '../deepseek/deepseek_add_page.dart';
 import '../kimi/kimi_add_page.dart';
@@ -33,7 +33,8 @@ class OpenAIListPage extends ConsumerStatefulWidget {
   ConsumerState createState() => _OpenAIListPageState();
 }
 
-class _OpenAIListPageState extends ConsumerState<OpenAIListPage> with TickerProviderStateMixin {
+class _OpenAIListPageState extends ConsumerState<OpenAIListPage>
+    with TickerProviderStateMixin {
   final ScrollController _scrollController = ScrollController();
 
   @override
@@ -41,7 +42,8 @@ class _OpenAIListPageState extends ConsumerState<OpenAIListPage> with TickerProv
     super.initState();
     _scrollController.addListener(() {
       //判断是不是上下滚动
-      if (_scrollController.position.userScrollDirection == ScrollDirection.forward) {}
+      if (_scrollController.position.userScrollDirection ==
+          ScrollDirection.forward) {}
     });
   }
 
@@ -83,7 +85,9 @@ class _OpenAIListPageState extends ConsumerState<OpenAIListPage> with TickerProv
           final chatHistory = ref.watch(openAiListProvider(widget.apiType));
           return RefreshIndicator.adaptive(
             onRefresh: () async {
-              await ref.read(openAiListProvider(widget.apiType).notifier).load();
+              await ref
+                  .read(openAiListProvider(widget.apiType).notifier)
+                  .load();
             },
             child: MultiStateWidget<List<AllModelBean>>(
               value: chatHistory,
@@ -98,7 +102,8 @@ class _OpenAIListPageState extends ConsumerState<OpenAIListPage> with TickerProv
                   itemCount: data.length,
                   physics: const AlwaysScrollableScrollPhysics(),
                   separatorBuilder: (BuildContext context, int index) {
-                    return const Padding(padding: EdgeInsets.symmetric(vertical: 5));
+                    return const Padding(
+                        padding: EdgeInsets.symmetric(vertical: 5));
                   },
                   padding: const EdgeInsets.symmetric(vertical: 15),
                   itemBuilder: (BuildContext context, int index) {
@@ -144,7 +149,8 @@ class OpenAIListItem extends ConsumerWidget {
             padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 15),
             child: CommonTextField(
               controller: controller,
-              hintText: "${S.current.please_input} ${S.current.model} ${S.current.name}",
+              hintText:
+                  "${S.current.please_input} ${S.current.model} ${S.current.name}",
               maxLength: 10,
             ),
           ),
@@ -164,12 +170,15 @@ class OpenAIListItem extends ConsumerWidget {
               isDestructiveAction: false,
               onPressed: () {
                 if (controller.text.isEmpty) {
-                  (S.current.please_input + S.current.model + S.current.name).fail();
+                  (S.current.please_input + S.current.model + S.current.name)
+                      .fail();
                   return;
                 }
 
                 Navigator.of(context).pop();
-                ref.watch(openAiListProvider(apiType).notifier).updateModelType(item.time!, controller.text);
+                ref
+                    .watch(openAiListProvider(apiType).notifier)
+                    .updateModelType(item.time!, controller.text);
               },
               child: Text(
                 S.current.confirm,
@@ -236,7 +245,9 @@ class OpenAIListItem extends ConsumerWidget {
                     showCommonDialog(
                       context,
                       confirmCallback: () {
-                        ref.watch(openAiListProvider(apiType).notifier).remove(item);
+                        ref
+                            .watch(openAiListProvider(apiType).notifier)
+                            .remove(item);
                       },
                       content: S.current.delete_config_reminder,
                       title: S.current.reminder,
@@ -292,7 +303,10 @@ class OpenAIListItem extends ConsumerWidget {
                                       item.alias ?? (item.apiKey ?? ''),
                                       maxLines: 1,
                                       overflow: TextOverflow.ellipsis,
-                                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleMedium
+                                          ?.copyWith(
                                             fontWeight: FontWeight.bold,
                                           ),
                                     ),
@@ -328,37 +342,58 @@ class OpenAIListItem extends ConsumerWidget {
                                       scrollController: ScrollController(),
                                       itemBuilder: (context) {
                                         return item.getTextModels
-                                            .where((element) => element.id != null && element.id!.isNotEmpty)
+                                            .where((element) =>
+                                                element.id != null &&
+                                                element.id!.isNotEmpty)
                                             .map((e) {
                                           return PullDownMenuItem(
-                                            title: e.id?.replaceFirst("models/", "") ?? "",
-                                            icon: e.id == (item.defaultModelType?.id ?? item.supportedModels?.first.id)
+                                            title: e.id?.replaceFirst(
+                                                    "models/", "") ??
+                                                "",
+                                            icon: e.id ==
+                                                    (item.defaultModelType
+                                                            ?.id ??
+                                                        item.supportedModels
+                                                            ?.first.id)
                                                 ? CupertinoIcons.checkmark
                                                 : null,
-                                            iconColor: Theme.of(context).primaryColor,
+                                            iconColor:
+                                                Theme.of(context).primaryColor,
                                             onTap: () {
-                                              ref.watch(openAiListProvider(apiType).notifier).update(item.copyWith(
+                                              ref
+                                                  .watch(openAiListProvider(
+                                                          apiType)
+                                                      .notifier)
+                                                  .update(item.copyWith(
                                                     defaultModelType: e,
                                                   ));
                                             },
                                           );
                                         }).toList();
                                       },
-                                      buttonBuilder: (context, showMenu) => Container(
+                                      buttonBuilder: (context, showMenu) =>
+                                          Container(
                                         margin: const EdgeInsets.only(left: 10),
                                         decoration: BoxDecoration(
-                                          border: Border.all(color: Theme.of(context).primaryColor),
-                                          borderRadius: BorderRadius.circular(3),
+                                          border: Border.all(
+                                              color: Theme.of(context)
+                                                  .primaryColor),
+                                          borderRadius:
+                                              BorderRadius.circular(3),
                                         ),
                                         padding: const EdgeInsets.symmetric(
                                           horizontal: 5,
                                           vertical: 1,
                                         ),
                                         child: Text(
-                                          (item.defaultModelType?.id ?? item.supportedModels?.first.id ?? "")
+                                          (item.defaultModelType?.id ??
+                                                  item.supportedModels?.first
+                                                      .id ??
+                                                  "")
                                               .replaceFirst("models/", ""),
                                           style: TextStyle(
-                                            color: Theme.of(context).primaryColor,
+                                            color:
+                                                Theme.of(context).primaryColor,
                                             fontSize: 10,
                                           ),
                                         ),
@@ -386,7 +421,10 @@ class OpenAIListItem extends ConsumerWidget {
                           item.apiServer ?? '',
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
-                          style: Theme.of(context).textTheme.bodySmall?.copyWith(fontSize: 13),
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodySmall
+                              ?.copyWith(fontSize: 13),
                         ),
                         getSupportedFunctions(context),
                       ],
@@ -395,7 +433,9 @@ class OpenAIListItem extends ConsumerWidget {
                 ],
               ),
             ).click(() {
-              HiveBox().appConfig.put(HiveBox.cDefaultApiServerKey, item.apiKey ?? "");
+              HiveBox()
+                  .appConfig
+                  .put(HiveBox.cDefaultApiServerKey, item.apiKey ?? "");
               onTap();
             }),
           ),

@@ -6,7 +6,7 @@ import 'package:chat_bot/hive_bean/openai_bean.dart';
 import 'package:chat_bot/module/chat/chat_detail/chat_page.dart';
 import 'package:chat_bot/module/chat/chat_detail/chat_viewmodel.dart';
 import 'package:chat_bot/module/chat/chat_list_view_model.dart';
-import 'package:chat_bot/module/photoview_page.dart';
+import 'package:chat_bot/pages/photoview_page.dart';
 import 'package:chat_bot/utils/hive_box.dart';
 import 'package:dart_openai/dart_openai.dart';
 import 'package:dio/dio.dart';
@@ -21,8 +21,8 @@ import 'package:share_plus/share_plus.dart';
 
 import '../../../base/api.dart';
 import '../../../base/components/screenshot_view.dart';
-import '../../../base/db/chat_item.dart';
 import '../../../hive_bean/supported_models.dart';
+import '../../../services/db/chat_item.dart';
 
 class ChatImagePage extends ConsumerStatefulWidget {
   final bool showKeyboard;

@@ -2,15 +2,13 @@ import 'package:chat_bot/hive_bean/openai_bean.dart';
 import 'package:chat_bot/hive_bean/supported_models.dart';
 import 'package:chat_bot/module/setting/minimax/minimax_viewmodel.dart';
 import 'package:chat_bot/module/setting/openai/openai_viewmodel.dart';
-import 'package:chat_bot/module/setting/zeroone/zeroone_viewmodel.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../../../base.dart';
 import '../../../base/api.dart';
 import '../../../base/components/common_text_field.dart';
-import '../../../base/theme.dart';
+import '../../../constants/theme.dart';
 import '../../../hive_bean/local_chat_history.dart';
-import '../../services/services_page.dart';
 import '../setting_page.dart';
 
 class MiniMaxAddPage extends ConsumerStatefulWidget {
@@ -39,7 +37,9 @@ class _MiniMaxAddPageState extends ConsumerState<MiniMaxAddPage> {
     controller.text = openAi.apiKey ?? "";
     time = openAi.time;
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      ref.watch(miniMaxApiServerAddressProvider.notifier).update((state) => openAi.apiServer ?? APIType.miniMax.host);
+      ref
+          .watch(miniMaxApiServerAddressProvider.notifier)
+          .update((state) => openAi.apiServer ?? APIType.miniMax.host);
     });
   }
 
@@ -99,11 +99,15 @@ class _MiniMaxAddPageState extends ConsumerState<MiniMaxAddPage> {
               SettingWithTitle(
                 label: "API Key",
                 widget: CommonTextField(
-                    maxLine: 3, color: Theme.of(context).canvasColor, controller: controller, hintText: "API Key"),
+                    maxLine: 3,
+                    color: Theme.of(context).canvasColor,
+                    controller: controller,
+                    hintText: "API Key"),
               ),
               const SizedBox(height: 15),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -123,7 +127,8 @@ class _MiniMaxAddPageState extends ConsumerState<MiniMaxAddPage> {
                     Consumer(
                       builder: (context, ref, _) {
                         var list = [APIType.miniMax.host];
-                        String server = ref.watch(miniMaxApiServerAddressProvider);
+                        String server =
+                            ref.watch(miniMaxApiServerAddressProvider);
                         return ListView.separated(
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
@@ -136,14 +141,18 @@ class _MiniMaxAddPageState extends ConsumerState<MiniMaxAddPage> {
                           },
                           itemBuilder: (context, index) {
                             return Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 0),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 15, vertical: 0),
                               decoration: BoxDecoration(
                                 color: Theme.of(context).cardColor,
                                 borderRadius: BorderRadius.circular(10),
                               ),
                               child: ListTile(
                                 onTap: () {
-                                  ref.watch(miniMaxApiServerAddressProvider.notifier).state = list[index];
+                                  ref
+                                      .watch(miniMaxApiServerAddressProvider
+                                          .notifier)
+                                      .state = list[index];
                                 },
                                 contentPadding: EdgeInsets.zero,
                                 dense: true,
@@ -152,7 +161,10 @@ class _MiniMaxAddPageState extends ConsumerState<MiniMaxAddPage> {
                                   style: TextStyle(
                                     color: server == list[index]
                                         ? Theme.of(context).primaryColor
-                                        : Theme.of(context).textTheme.titleSmall?.color,
+                                        : Theme.of(context)
+                                            .textTheme
+                                            .titleSmall
+                                            ?.color,
                                     fontSize: 14,
                                   ),
                                 ),
@@ -199,7 +211,8 @@ class _MiniMaxAddPageState extends ConsumerState<MiniMaxAddPage> {
                 }
                 AllModelBean openAi = AllModelBean();
                 openAi.apiKey = controller.text;
-                openAi.apiServer = ref.watch(miniMaxApiServerAddressProvider.notifier).state;
+                openAi.apiServer =
+                    ref.watch(miniMaxApiServerAddressProvider.notifier).state;
                 openAi.model = APIType.miniMax.code;
                 openAi.alias = aliasController.text;
                 var result = await API().validateApiKey(openAi);
@@ -251,7 +264,10 @@ class _MiniMaxAddPageState extends ConsumerState<MiniMaxAddPage> {
 
                 AllModelBean openAi = AllModelBean();
                 openAi.apiKey = controller.text.trim();
-                openAi.apiServer = ref.watch(miniMaxApiServerAddressProvider.notifier).state.trim();
+                openAi.apiServer = ref
+                    .watch(miniMaxApiServerAddressProvider.notifier)
+                    .state
+                    .trim();
                 openAi.model = APIType.miniMax.code;
                 openAi.organization = orgController.text.trim();
                 openAi.alias = aliasController.text.trim();
@@ -260,7 +276,9 @@ class _MiniMaxAddPageState extends ConsumerState<MiniMaxAddPage> {
 
                 try {
                   var result = await API().getSupportModules(openAi);
-                  supportedModels = result.map((e) => SupportedModels(id: e.id, ownedBy: e.ownedBy)).toList();
+                  supportedModels = result
+                      .map((e) => SupportedModels(id: e.id, ownedBy: e.ownedBy))
+                      .toList();
                 } catch (e) {
                   e.e();
                 }
@@ -274,9 +292,13 @@ class _MiniMaxAddPageState extends ConsumerState<MiniMaxAddPage> {
                 openAi.defaultModelType = supportedModels.first;
                 bool result;
                 if (widget.openAi?.time != null) {
-                  result = await ref.read(openAiListProvider(APIType.miniMax).notifier).update(openAi);
+                  result = await ref
+                      .read(openAiListProvider(APIType.miniMax).notifier)
+                      .update(openAi);
                 } else {
-                  result = await ref.read(openAiListProvider(APIType.miniMax).notifier).add(openAi);
+                  result = await ref
+                      .read(openAiListProvider(APIType.miniMax).notifier)
+                      .add(openAi);
                 }
                 if (result) {
                   S.current.save_success.success();

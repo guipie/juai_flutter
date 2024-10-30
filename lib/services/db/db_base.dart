@@ -1,7 +1,7 @@
 import 'package:chat_bot/base.dart';
-import 'package:chat_bot/base/db/chat_item.dart';
-import 'package:chat_bot/base/db/db_dict.dart';
-import 'package:chat_bot/base/db/prompt_item.dart';
+import 'package:chat_bot/services/db/chat_item.dart';
+import 'package:chat_bot/services/db/db_dict.dart';
+import 'package:chat_bot/services/db/prompt_item.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';

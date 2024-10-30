@@ -1,23 +1,20 @@
+import 'package:chat_bot/base.dart';
 import 'package:chat_bot/hive_bean/openai_bean.dart';
+import 'package:chat_bot/module/chat/chat_detail/chat_viewmodel.dart';
+import 'package:chat_bot/module/chat/chat_list_view_model.dart';
 import 'package:chat_bot/utils/hive_box.dart';
 import 'package:dart_openai/dart_openai.dart';
-import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:pull_down_button/pull_down_button.dart';
 import 'package:record/record.dart';
 
-import 'package:chat_bot/base.dart';
-import 'package:chat_bot/module/chat/chat_detail/chat_viewmodel.dart';
-import 'package:chat_bot/module/chat/chat_list_view_model.dart';
-import 'package:flutter/cupertino.dart';
-
 import '../../../base/api.dart';
 import '../../../base/components/autio_popover.dart';
 import '../../../base/components/lottie_widget.dart';
-import '../../../base/db/chat_item.dart';
-import '../../../base/theme.dart';
-import 'package:just_audio/just_audio.dart';
+import '../../../constants/theme.dart';
+import '../../../services/db/chat_item.dart';
 
 class ChatAudioPage extends ConsumerStatefulWidget {
   const ChatAudioPage({super.key});
@@ -43,12 +40,16 @@ class _ChatAudioPageState extends ConsumerState<ChatAudioPage> {
     supportedModels = HiveBox()
         .openAIConfig
         .values
-        .where((element) => (element.getWhisperModels.isNotEmpty && element.getTTSModels.isNotEmpty))
+        .where((element) => (element.getWhisperModels.isNotEmpty &&
+            element.getTTSModels.isNotEmpty))
         .toList();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      if (ref.watch(currentGenerateAudioChatModelProvider.notifier).state == null) {
-        ref.watch(currentGenerateAudioChatModelProvider.notifier).state = supportedModels.first;
-        ref.watch(currentGenerateAudioChatTextParserProvider.notifier).state = supportedModels.first;
+      if (ref.watch(currentGenerateAudioChatModelProvider.notifier).state ==
+          null) {
+        ref.watch(currentGenerateAudioChatModelProvider.notifier).state =
+            supportedModels.first;
+        ref.watch(currentGenerateAudioChatTextParserProvider.notifier).state =
+            supportedModels.first;
       }
     });
   }
@@ -63,7 +64,8 @@ class _ChatAudioPageState extends ConsumerState<ChatAudioPage> {
   void startRecord() async {
     if (await record.hasPermission()) {
       startTime = null;
-      audioPath = "${(await getApplicationDocumentsDirectory()).path}/${DateTime.now().millisecondsSinceEpoch}.m4a";
+      audioPath =
+          "${(await getApplicationDocumentsDirectory()).path}/${DateTime.now().millisecondsSinceEpoch}.m4a";
       await record.start(const RecordConfig(), path: audioPath!);
       startTime = DateTime.now();
     } else {
@@ -85,16 +87,19 @@ class _ChatAudioPageState extends ConsumerState<ChatAudioPage> {
     } catch (e) {
       e.toString().fail();
     }
-    ref.watch(audioRecordingStateProvider.notifier).state = AudioRecordingState.normal;
+    ref.watch(audioRecordingStateProvider.notifier).state =
+        AudioRecordingState.normal;
   }
 
   void stopRecord() async {
     //判断时间
     if (DateTime.now().millisecondsSinceEpoch -
-            (startTime?.millisecondsSinceEpoch ?? DateTime.now().millisecondsSinceEpoch) <
+            (startTime?.millisecondsSinceEpoch ??
+                DateTime.now().millisecondsSinceEpoch) <
         1000) {
       S.current.record_time_too_short.fail();
-      ref.watch(audioRecordingStateProvider.notifier).state = AudioRecordingState.normal;
+      ref.watch(audioRecordingStateProvider.notifier).state =
+          AudioRecordingState.normal;
       await record.stop();
       return;
     }
@@ -109,29 +114,36 @@ class _ChatAudioPageState extends ConsumerState<ChatAudioPage> {
       return;
     }
 
-    ref.watch(audioRecordingStateProvider.notifier).state = AudioRecordingState.sending;
+    ref.watch(audioRecordingStateProvider.notifier).state =
+        AudioRecordingState.sending;
 
     try {
-      var model = ref.watch(currentGenerateAudioChatModelProvider.notifier).state;
-      var textModel = ref.watch(currentGenerateAudioChatTextParserProvider.notifier).state;
+      var model =
+          ref.watch(currentGenerateAudioChatModelProvider.notifier).state;
+      var textModel =
+          ref.watch(currentGenerateAudioChatTextParserProvider.notifier).state;
 
       if (model == null || textModel == null) {
-        ref.watch(audioRecordingStateProvider.notifier).state = AudioRecordingState.normal;
+        ref.watch(audioRecordingStateProvider.notifier).state =
+            AudioRecordingState.normal;
         S.current.no_module_use.fail();
         return;
       }
-      if (ref.watch(audioRecordingStateProvider.notifier).state == AudioRecordingState.normal) {
+      if (ref.watch(audioRecordingStateProvider.notifier).state ==
+          AudioRecordingState.normal) {
         return;
       }
       var content = await API().tts2Text(model, path);
       if (content != null && content.isNotEmpty) {
         sendMessage(model, textModel, content);
       } else {
-        ref.watch(audioRecordingStateProvider.notifier).state = AudioRecordingState.normal;
+        ref.watch(audioRecordingStateProvider.notifier).state =
+            AudioRecordingState.normal;
         S.current.can_not_get_voice_content.fail();
       }
     } catch (e) {
-      ref.watch(audioRecordingStateProvider.notifier).state = AudioRecordingState.normal;
+      ref.watch(audioRecordingStateProvider.notifier).state =
+          AudioRecordingState.normal;
       e.toString().fail();
     }
   }
@@ -150,9 +162,13 @@ class _ChatAudioPageState extends ConsumerState<ChatAudioPage> {
                 return PullDownMenuItem(
                   title: e.alias ?? "",
                   iconColor: Theme.of(context).primaryColor,
-                  icon: e.alias == supportedModel.alias ? CupertinoIcons.checkmark : null,
+                  icon: e.alias == supportedModel.alias
+                      ? CupertinoIcons.checkmark
+                      : null,
                   onTap: () {
-                    ref.watch(currentGenerateAudioChatModelProvider.notifier).state = e;
+                    ref
+                        .watch(currentGenerateAudioChatModelProvider.notifier)
+                        .state = e;
                   },
                 );
               }).toList();
@@ -218,11 +234,20 @@ class _ChatAudioPageState extends ConsumerState<ChatAudioPage> {
                         .map((e) => PullDownMenuItem(
                               title: e.alias ?? "",
                               iconColor: Theme.of(context).primaryColor,
-                              icon: e == ref.watch(currentGenerateAudioChatTextParserProvider.notifier).state
+                              icon: e ==
+                                      ref
+                                          .watch(
+                                              currentGenerateAudioChatTextParserProvider
+                                                  .notifier)
+                                          .state
                                   ? CupertinoIcons.checkmark
                                   : null,
                               onTap: () {
-                                ref.watch(currentGenerateAudioChatTextParserProvider.notifier).state = e;
+                                ref
+                                    .watch(
+                                        currentGenerateAudioChatTextParserProvider
+                                            .notifier)
+                                    .state = e;
                               },
                             ))
                         .toList(),
@@ -264,15 +289,21 @@ class _ChatAudioPageState extends ConsumerState<ChatAudioPage> {
                                   decoration: BoxDecoration(
                                     color: talker == e
                                         ? Theme.of(context).primaryColor
-                                        : ref.watch(themeProvider).inputPanelBg(),
+                                        : ref
+                                            .watch(themeProvider)
+                                            .inputPanelBg(),
                                     borderRadius: BorderRadius.circular(1000),
                                   ),
                                   alignment: Alignment.center,
                                   child: Text(
                                     e,
                                     style: TextStyle(
-                                      color:
-                                          talker == e ? Colors.white : Theme.of(context).textTheme.titleMedium?.color,
+                                      color: talker == e
+                                          ? Colors.white
+                                          : Theme.of(context)
+                                              .textTheme
+                                              .titleMedium
+                                              ?.color,
                                       fontSize: 16,
                                     ),
                                   ),
@@ -315,15 +346,18 @@ class _ChatAudioPageState extends ConsumerState<ChatAudioPage> {
             Container(
               alignment: Alignment.bottomCenter,
               width: F.width,
-              padding: EdgeInsets.only(bottom: MediaQuery.paddingOf(context).bottom),
-              height: kBottomNavigationBarHeight + MediaQuery.paddingOf(context).bottom,
+              padding:
+                  EdgeInsets.only(bottom: MediaQuery.paddingOf(context).bottom),
+              height: kBottomNavigationBarHeight +
+                  MediaQuery.paddingOf(context).bottom,
               child: Consumer(builder: (context, ref, _) {
                 var state = ref.watch(audioRecordingStateProvider);
 
                 if (state != AudioRecordingState.normal) {
                   return CupertinoButton(
                     minSize: 10,
-                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 20),
                     color: Theme.of(context).primaryColor,
                     borderRadius: BorderRadius.circular(100),
                     child: Container(
@@ -344,13 +378,15 @@ class _ChatAudioPageState extends ConsumerState<ChatAudioPage> {
                 return Listener(
                   behavior: HitTestBehavior.opaque,
                   onPointerDown: (event) async {
-                    ref.watch(audioRecordingStateProvider.notifier).state = AudioRecordingState.recording;
+                    ref.watch(audioRecordingStateProvider.notifier).state =
+                        AudioRecordingState.recording;
                     audioOverlay.showAudio(context);
                     startRecord();
                   },
                   onPointerUp: (event) {
                     audioOverlay.removeAudio();
-                    if (ref.watch(audioRecordingStateProvider.notifier).state == AudioRecordingState.canceling) {
+                    if (ref.watch(audioRecordingStateProvider.notifier).state ==
+                        AudioRecordingState.canceling) {
                       cancel();
                     } else {
                       stopRecord();
@@ -360,18 +396,22 @@ class _ChatAudioPageState extends ConsumerState<ChatAudioPage> {
                     //获取他相对于整个屏幕左上角的偏移
                     var offset = event.position;
 
-                    double paddingBottom = MediaQuery.of(context).size.height - offset.dy;
+                    double paddingBottom =
+                        MediaQuery.of(context).size.height - offset.dy;
 
                     if (paddingBottom < 200) {
-                      ref.watch(audioRecordingStateProvider.notifier).state = AudioRecordingState.recording;
+                      ref.watch(audioRecordingStateProvider.notifier).state =
+                          AudioRecordingState.recording;
                     } else {
-                      ref.watch(audioRecordingStateProvider.notifier).state = AudioRecordingState.canceling;
+                      ref.watch(audioRecordingStateProvider.notifier).state =
+                          AudioRecordingState.canceling;
                     }
                     audioOverlay.update();
                   },
                   onPointerCancel: (event) {
                     audioOverlay.removeAudio();
-                    ref.watch(audioRecordingStateProvider.notifier).state = AudioRecordingState.normal;
+                    ref.watch(audioRecordingStateProvider.notifier).state =
+                        AudioRecordingState.normal;
                   },
                   child: const LottieWidget(
                     scale: 3,
@@ -389,25 +429,33 @@ class _ChatAudioPageState extends ConsumerState<ChatAudioPage> {
 
   final player = AudioPlayer();
 
-  Future<void> sendMessage(AllModelBean model, AllModelBean textModel, String? text) async {
-    if (ref.watch(audioRecordingStateProvider.notifier).state == AudioRecordingState.normal) {
+  Future<void> sendMessage(
+      AllModelBean model, AllModelBean textModel, String? text) async {
+    if (ref.watch(audioRecordingStateProvider.notifier).state ==
+        AudioRecordingState.normal) {
       return;
     }
     ref.watch(chatAudioMessageProvider.notifier).state = text ?? "";
-    ref.watch(audioRecordingStateProvider.notifier).state = AudioRecordingState.sending;
+    ref.watch(audioRecordingStateProvider.notifier).state =
+        AudioRecordingState.sending;
     var userChatItem = ChatItem(
       type: ChatType.user.index,
       content: text,
       status: MessageStatus.success.index,
       parentID: specialGenerateAudioChatParentItemTime,
       images: [],
-      moduleName: ref.watch(currentGenerateAudioChatModelProvider.notifier).state?.model,
+      moduleName: ref
+          .watch(currentGenerateAudioChatModelProvider.notifier)
+          .state
+          ?.model,
       messageType: MessageType.common.index,
       moduleType: model.getDefaultModelType.id ?? "gpt-4",
       time: DateTime.now().millisecondsSinceEpoch,
     );
     await Future.delayed(const Duration(milliseconds: 50));
-    ref.watch(chatProvider(specialGenerateAudioChatParentItemTime).notifier).add(userChatItem);
+    ref
+        .watch(chatProvider(specialGenerateAudioChatParentItemTime).notifier)
+        .add(userChatItem);
 
     String result = "";
     var chatItem = ChatItem(
@@ -421,7 +469,9 @@ class _ChatAudioPageState extends ConsumerState<ChatAudioPage> {
       moduleType: model.defaultModelType?.id ?? "",
       time: DateTime.now().millisecondsSinceEpoch,
     );
-    var allChats = ref.watch(chatProvider(specialGenerateAudioChatParentItemTime).notifier).add(chatItem);
+    var allChats = ref
+        .watch(chatProvider(specialGenerateAudioChatParentItemTime).notifier)
+        .add(chatItem);
     await Future.delayed(const Duration(milliseconds: 50));
     try {
       var data = await API().generateContent(
@@ -434,64 +484,84 @@ class _ChatAudioPageState extends ConsumerState<ChatAudioPage> {
 
       chatItem.content = data.content;
       chatItem.status = MessageStatus.success.index;
-      ref.watch(chatProvider(specialGenerateAudioChatParentItemTime).notifier).update(chatItem);
+      ref
+          .watch(chatProvider(specialGenerateAudioChatParentItemTime).notifier)
+          .update(chatItem);
       if (data.content == null || data.content!.isEmpty) {
         throw Exception(S.current.generate_content_is_empty);
       }
-      if (ref.watch(audioRecordingStateProvider.notifier).state == AudioRecordingState.normal) {
+      if (ref.watch(audioRecordingStateProvider.notifier).state ==
+          AudioRecordingState.normal) {
         return;
       }
-      var tts = await API().text2TTS(ref.watch(currentGenerateAudioChatModelProvider.notifier).state!, data.content!,
+      var tts = await API().text2TTS(
+          ref.watch(currentGenerateAudioChatModelProvider.notifier).state!,
+          data.content!,
           ref.watch(talkerProvider.notifier).state);
-      if (ref.watch(audioRecordingStateProvider.notifier).state == AudioRecordingState.normal) {
+      if (ref.watch(audioRecordingStateProvider.notifier).state ==
+          AudioRecordingState.normal) {
         return;
       }
       ref.watch(chatAudioMessageProvider.notifier).state = data.content ?? "";
 
-      ref.watch(audioRecordingStateProvider.notifier).state = AudioRecordingState.speaking;
+      ref.watch(audioRecordingStateProvider.notifier).state =
+          AudioRecordingState.speaking;
 
       if (player.playing) {
         player.stop();
       }
       if (tts == null) {
-        ref.watch(audioRecordingStateProvider.notifier).state = AudioRecordingState.normal;
+        ref.watch(audioRecordingStateProvider.notifier).state =
+            AudioRecordingState.normal;
         return;
       }
       await player.setAudioSource(MyCustomSource(tts.readAsBytesSync()));
-      if (ref.watch(audioRecordingStateProvider.notifier).state == AudioRecordingState.normal) {
+      if (ref.watch(audioRecordingStateProvider.notifier).state ==
+          AudioRecordingState.normal) {
         return;
       }
       await player.play();
-      ref.watch(audioRecordingStateProvider.notifier).state = AudioRecordingState.normal;
+      ref.watch(audioRecordingStateProvider.notifier).state =
+          AudioRecordingState.normal;
     } catch (e) {
       String error = e.toString();
       if (e is RequestFailedException) {
         error = e.message;
       }
-      ref.watch(audioRecordingStateProvider.notifier).state = AudioRecordingState.normal;
+      ref.watch(audioRecordingStateProvider.notifier).state =
+          AudioRecordingState.normal;
       error.fail();
       chatItem.content = "";
       chatItem.status = MessageStatus.failed.index;
       userChatItem.status = MessageStatus.failed.index;
-      ref.watch(chatProvider(specialGenerateAudioChatParentItemTime).notifier).update(chatItem);
-      ref.watch(chatProvider(specialGenerateAudioChatParentItemTime).notifier).update(userChatItem);
+      ref
+          .watch(chatProvider(specialGenerateAudioChatParentItemTime).notifier)
+          .update(chatItem);
+      ref
+          .watch(chatProvider(specialGenerateAudioChatParentItemTime).notifier)
+          .update(userChatItem);
     }
   }
 
   Widget getLottie(AudioRecordingState status) {
     if (status == AudioRecordingState.recording) {
-      return Text(S.current.recording, style: Theme.of(context).textTheme.bodyMedium);
+      return Text(S.current.recording,
+          style: Theme.of(context).textTheme.bodyMedium);
     }
     if (status == AudioRecordingState.canceling) {
-      return Text(S.current.canceling, style: Theme.of(context).textTheme.bodyMedium);
+      return Text(S.current.canceling,
+          style: Theme.of(context).textTheme.bodyMedium);
     }
     if (status == AudioRecordingState.sending) {
-      return Text(S.current.sending_server, style: Theme.of(context).textTheme.bodyMedium);
+      return Text(S.current.sending_server,
+          style: Theme.of(context).textTheme.bodyMedium);
     }
     if (status == AudioRecordingState.speaking) {
-      return Text(S.current.is_responsing, style: Theme.of(context).textTheme.bodyMedium);
+      return Text(S.current.is_responsing,
+          style: Theme.of(context).textTheme.bodyMedium);
     }
-    return Text(S.current.hold_micro_phone_talk, style: Theme.of(context).textTheme.bodyMedium);
+    return Text(S.current.hold_micro_phone_talk,
+        style: Theme.of(context).textTheme.bodyMedium);
   }
 }
 

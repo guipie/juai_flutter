@@ -1,7 +1,4 @@
-import 'package:chat_bot/base/theme.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:chat_bot/constants/theme.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../base.dart';
@@ -11,7 +8,11 @@ class LottieWidget extends ConsumerWidget {
   final bool transformHitTests;
   final double width;
 
-  const LottieWidget({super.key, required this.scale, required this.transformHitTests, required this.width});
+  const LottieWidget(
+      {super.key,
+      required this.scale,
+      required this.transformHitTests,
+      required this.width});
 
   @override
   Widget build(BuildContext context, ref) {
@@ -41,7 +42,7 @@ class LottieWidget extends ConsumerWidget {
             child: Icon(
               Icons.mic,
               color: Colors.white,
-              size: width/2.8,
+              size: width / 2.8,
             ),
           ),
         ),

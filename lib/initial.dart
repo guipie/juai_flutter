@@ -1,4 +1,4 @@
-import 'package:chat_bot/base/db/db_base.dart';
+import 'package:chat_bot/services/db/db_base.dart';
 import 'package:chat_bot/utils/hive_box.dart';
 
 import 'base.dart';

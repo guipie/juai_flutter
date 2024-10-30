@@ -5,7 +5,7 @@ import 'package:chat_bot/base.dart';
 import 'package:chat_bot/base/components/chat_markdown.dart';
 import 'package:chat_bot/base/components/components.dart';
 import 'package:chat_bot/base/components/send_button.dart';
-import 'package:chat_bot/base/theme.dart';
+import 'package:chat_bot/constants/theme.dart';
 import 'package:chat_bot/hive_bean/generate_content.dart';
 import 'package:chat_bot/hive_bean/local_chat_history.dart';
 import 'package:chat_bot/hive_bean/supported_models.dart';
@@ -30,9 +30,9 @@ import 'package:share_plus/share_plus.dart';
 import '../../../base/api.dart';
 import '../../../base/components/autio_popover.dart';
 import '../../../base/components/screenshot_view.dart';
-import '../../../base/db/chat_item.dart';
 import '../../../base/providers.dart';
 import '../../../hive_bean/openai_bean.dart';
+import '../../../services/db/chat_item.dart';
 import '../chat_audio/chat_audio_page.dart';
 
 class ChatPage extends ConsumerStatefulWidget {

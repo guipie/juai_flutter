@@ -1,22 +1,22 @@
 import 'package:chat_bot/base.dart';
 import 'package:chat_bot/base/version_check.dart';
 import 'package:chat_bot/module/chat/chat_list_page.dart';
-import 'package:chat_bot/module/home/home_viewmodel.dart';
+import 'package:chat_bot/pages/home/home_viewmodel.dart';
 
-import '../../base/theme.dart';
 import '../../const.dart';
-import '../prompt/prompt_page.dart';
-import '../services/services_page.dart';
-import '../setting/setting_page.dart';
+import '../../constants/theme.dart';
+import '../../module/prompt/prompt_page.dart';
+import '../../module/services/services_page.dart';
+import '../../module/setting/setting_page.dart';
 
-class HomePage extends ConsumerStatefulWidget {
-  const HomePage({super.key});
+class HomePcPage extends ConsumerStatefulWidget {
+  const HomePcPage({super.key});
 
   @override
-  ConsumerState createState() => _HomePageState();
+  ConsumerState createState() => _HomePcPageState();
 }
 
-class _HomePageState extends ConsumerState<HomePage>
+class _HomePcPageState extends ConsumerState<HomePcPage>
     with WidgetsBindingObserver {
   @override
   void initState() {

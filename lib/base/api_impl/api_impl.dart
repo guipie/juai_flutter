@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:chat_bot/base.dart';
 import 'package:chat_bot/hive_bean/openai_bean.dart';
 import 'package:dart_openai/dart_openai.dart';
@@ -7,8 +5,8 @@ import 'package:dio/dio.dart';
 
 import '../../hive_bean/generate_content.dart';
 import '../../hive_bean/supported_models.dart';
+import '../../services/db/chat_item.dart';
 import '../api.dart';
-import '../db/chat_item.dart';
 
 abstract class APIImpl {
   Future<void> initAPI(AllModelBean bean);
@@ -86,13 +84,15 @@ abstract class APIImpl {
     }
 
     int k = 0;
-    while (requestParams.isNotEmpty && requestParams[k].role == ChatType.bot.index) {
+    while (requestParams.isNotEmpty &&
+        requestParams[k].role == ChatType.bot.index) {
       requestParams.removeAt(k);
     }
 
     //最后一条必须是bot
     int l = requestParams.length - 1;
-    while (requestParams.isNotEmpty && requestParams[l].role != ChatType.bot.index) {
+    while (requestParams.isNotEmpty &&
+        requestParams[l].role != ChatType.bot.index) {
       requestParams.removeAt(l);
       l = requestParams.length - 1;
     }
@@ -135,7 +135,8 @@ abstract class APIImpl {
     return requestParams;
   }
 
-  List<RequestParams> generateChatHistory(List<ChatItem> chatItems, bool withoutHistoryMessage) {
+  List<RequestParams> generateChatHistory(
+      List<ChatItem> chatItems, bool withoutHistoryMessage) {
     List<RequestParams> requestParams = [
       RequestParams(role: ChatType.user.index, content: [], images: []),
     ];
@@ -148,7 +149,9 @@ abstract class APIImpl {
 
     //去除content为空的内容，状态为失败的内容
     historyMessages.removeWhere((element) =>
-        element.content == null || element.content!.isEmpty || element.status != MessageStatus.success.index);
+        element.content == null ||
+        element.content!.isEmpty ||
+        element.status != MessageStatus.success.index);
 
     //去除掉第一条是bot类型的消息
     int i = 0;
@@ -175,7 +178,9 @@ abstract class APIImpl {
         requestParams.last.images.addAll(images ?? []);
       } else {
         requestParams.add(RequestParams(
-            role: historyMessages[j].type ?? 0, content: [historyMessages[j].content ?? ""], images: images ?? []));
+            role: historyMessages[j].type ?? 0,
+            content: [historyMessages[j].content ?? ""],
+            images: images ?? []));
       }
     }
 
@@ -185,13 +190,15 @@ abstract class APIImpl {
     // }
     //确保第一条role是user，最后一条也是user,如果不是，那就删了他
     int k = 0;
-    while (requestParams.isNotEmpty && requestParams[k].role == ChatType.bot.index) {
+    while (requestParams.isNotEmpty &&
+        requestParams[k].role == ChatType.bot.index) {
       requestParams.removeAt(k);
     }
 
     //最后一条必须是user
     int l = requestParams.length - 1;
-    while (requestParams.isNotEmpty && requestParams[l].role == ChatType.bot.index) {
+    while (requestParams.isNotEmpty &&
+        requestParams[l].role == ChatType.bot.index) {
       requestParams.removeAt(l);
       l = requestParams.length - 1;
     }
@@ -231,7 +238,8 @@ abstract class APIImpl {
         "avatarUrl": null,
         "items": params,
       };
-      var result = await dio.post("https://sharegpt.com/api/conversations", data: resultParams);
+      var result = await dio.post("https://sharegpt.com/api/conversations",
+          data: resultParams);
       eDismiss();
       if (result.statusCode == 200) {
         return "https://shareg.pt/${result.data["id"]}";

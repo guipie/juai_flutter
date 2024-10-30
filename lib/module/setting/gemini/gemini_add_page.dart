@@ -6,7 +6,7 @@ import 'package:flutter/cupertino.dart';
 import '../../../base.dart';
 import '../../../base/api.dart';
 import '../../../base/components/common_text_field.dart';
-import '../../../base/theme.dart';
+import '../../../constants/theme.dart';
 import '../../../hive_bean/local_chat_history.dart';
 import '../setting_page.dart';
 import 'gemini_viewmodel.dart';
@@ -36,9 +36,8 @@ class _GeminiAddPageState extends ConsumerState<GeminiAddPage> {
     time = openAi.time;
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       ref.watch(geminiApiServerHistoryProvider.notifier).add(openAi.apiServer);
-      ref
-          .watch(geminiApiServerAddressProvider.notifier)
-          .update((state) => openAi.apiServer ?? "https://generativelanguage.googleapis.com");
+      ref.watch(geminiApiServerAddressProvider.notifier).update((state) =>
+          openAi.apiServer ?? "https://generativelanguage.googleapis.com");
     });
   }
 
@@ -89,11 +88,15 @@ class _GeminiAddPageState extends ConsumerState<GeminiAddPage> {
               SettingWithTitle(
                 label: "API Key",
                 widget: CommonTextField(
-                    maxLine: 3, color: Theme.of(context).canvasColor, controller: controller, hintText: "API Key"),
+                    maxLine: 3,
+                    color: Theme.of(context).canvasColor,
+                    controller: controller,
+                    hintText: "API Key"),
               ),
               const SizedBox(height: 15),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -109,7 +112,8 @@ class _GeminiAddPageState extends ConsumerState<GeminiAddPage> {
                         ),
                         Builder(builder: (context) {
                           return Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 10),
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 10),
                               child: Icon(
                                 CupertinoIcons.add_circled,
                                 color: Theme.of(context).primaryColor,
@@ -128,50 +132,70 @@ class _GeminiAddPageState extends ConsumerState<GeminiAddPage> {
                                   ),
                                 ),
                                 builder: (context) {
-                                  TextEditingController serverNameController = TextEditingController();
+                                  TextEditingController serverNameController =
+                                      TextEditingController();
                                   return Card(
                                     color: ref.watch(themeProvider).xffF6F6F6(),
                                     child: Column(
                                       mainAxisSize: MainAxisSize.min,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
                                         const SizedBox(height: 20),
                                         Padding(
-                                          padding: const EdgeInsets.only(left: 10),
+                                          padding:
+                                              const EdgeInsets.only(left: 10),
                                           child: Text(
                                             "API Server",
-                                            style: Theme.of(context).textTheme.titleMedium,
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .titleMedium,
                                           ),
                                         ),
                                         Container(
                                           padding: const EdgeInsets.all(30),
                                           child: CommonTextField(
-                                              controller: serverNameController, hintText: S.current.hint_addServerDesc),
+                                              controller: serverNameController,
+                                              hintText:
+                                                  S.current.hint_addServerDesc),
                                         ),
                                         Container(
-                                          margin: const EdgeInsets.symmetric(horizontal: 30),
+                                          margin: const EdgeInsets.symmetric(
+                                              horizontal: 30),
                                           decoration: BoxDecoration(
-                                            color: Theme.of(context).primaryColor,
-                                            borderRadius: BorderRadius.circular(10),
+                                            color:
+                                                Theme.of(context).primaryColor,
+                                            borderRadius:
+                                                BorderRadius.circular(10),
                                           ),
                                           alignment: Alignment.center,
-                                          padding: const EdgeInsets.symmetric(vertical: 10),
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 10),
                                           child: Text(
                                             S.current.btn_add,
-                                            style: const TextStyle(color: Colors.white, fontSize: 16),
+                                            style: const TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 16),
                                           ),
                                         ).click(() {
-                                          if (serverNameController.text.trim().isEmpty) {
-                                            ("API Server ${S.current.cannot_empty}").fail();
+                                          if (serverNameController.text
+                                              .trim()
+                                              .isEmpty) {
+                                            ("API Server ${S.current.cannot_empty}")
+                                                .fail();
                                             return;
                                           }
                                           ref
-                                              .read(geminiApiServerHistoryProvider.notifier)
+                                              .read(
+                                                  geminiApiServerHistoryProvider
+                                                      .notifier)
                                               .add(serverNameController.text);
                                           F.pop();
                                         }),
                                         SizedBox(
-                                          height: MediaQuery.of(context).viewInsets.bottom,
+                                          height: MediaQuery.of(context)
+                                              .viewInsets
+                                              .bottom,
                                         ),
                                       ],
                                     ),
@@ -187,7 +211,8 @@ class _GeminiAddPageState extends ConsumerState<GeminiAddPage> {
                     Consumer(
                       builder: (context, ref, _) {
                         var list = ref.watch(geminiApiServerHistoryProvider);
-                        String server = ref.watch(geminiApiServerAddressProvider);
+                        String server =
+                            ref.watch(geminiApiServerAddressProvider);
                         return ListView.separated(
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
@@ -200,14 +225,18 @@ class _GeminiAddPageState extends ConsumerState<GeminiAddPage> {
                           },
                           itemBuilder: (context, index) {
                             return Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 0),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 15, vertical: 0),
                               decoration: BoxDecoration(
                                 color: Theme.of(context).cardColor,
                                 borderRadius: BorderRadius.circular(10),
                               ),
                               child: ListTile(
                                 onTap: () {
-                                  ref.watch(geminiApiServerAddressProvider.notifier).state = list[index];
+                                  ref
+                                      .watch(geminiApiServerAddressProvider
+                                          .notifier)
+                                      .state = list[index];
                                 },
                                 contentPadding: EdgeInsets.zero,
                                 dense: true,
@@ -216,7 +245,10 @@ class _GeminiAddPageState extends ConsumerState<GeminiAddPage> {
                                   style: TextStyle(
                                     color: server == list[index]
                                         ? Theme.of(context).primaryColor
-                                        : Theme.of(context).textTheme.titleSmall?.color,
+                                        : Theme.of(context)
+                                            .textTheme
+                                            .titleSmall
+                                            ?.color,
                                     fontSize: 14,
                                   ),
                                 ),
@@ -232,7 +264,11 @@ class _GeminiAddPageState extends ConsumerState<GeminiAddPage> {
                                             color: Colors.red,
                                             size: 16,
                                           ).click(() {
-                                            ref.read(geminiApiServerHistoryProvider.notifier).remove(list[index]);
+                                            ref
+                                                .read(
+                                                    geminiApiServerHistoryProvider
+                                                        .notifier)
+                                                .remove(list[index]);
                                           })
                                         : null),
                               ),
@@ -260,7 +296,8 @@ class _GeminiAddPageState extends ConsumerState<GeminiAddPage> {
               ).click(() async {
                 AllModelBean openAi = AllModelBean();
                 openAi.apiKey = controller.text;
-                openAi.apiServer = ref.watch(geminiApiServerAddressProvider.notifier).state;
+                openAi.apiServer =
+                    ref.watch(geminiApiServerAddressProvider.notifier).state;
                 openAi.model = APIType.gemini.code;
                 openAi.alias = aliasController.text;
                 var result = await API().validateApiKey(openAi);
@@ -309,14 +346,19 @@ class _GeminiAddPageState extends ConsumerState<GeminiAddPage> {
 
                 AllModelBean openAi = AllModelBean();
                 openAi.apiKey = controller.text.trim();
-                openAi.apiServer = ref.watch(geminiApiServerAddressProvider.notifier).state.trim();
+                openAi.apiServer = ref
+                    .watch(geminiApiServerAddressProvider.notifier)
+                    .state
+                    .trim();
                 openAi.model = APIType.gemini.code;
                 openAi.alias = aliasController.text.trim();
                 openAi.time = time ?? DateTime.now().millisecondsSinceEpoch;
 
                 try {
                   var result = await API().getSupportModules(openAi);
-                  supportedModels = result.map((e) => SupportedModels(id: e.id, ownedBy: e.ownedBy)).toList();
+                  supportedModels = result
+                      .map((e) => SupportedModels(id: e.id, ownedBy: e.ownedBy))
+                      .toList();
                 } catch (e) {}
 
                 if (supportedModels.isEmpty) {
@@ -325,15 +367,22 @@ class _GeminiAddPageState extends ConsumerState<GeminiAddPage> {
 
                 openAi.supportedModels = supportedModels;
 
-                if (supportedModels.where((element) => element.id?.contains("gemini-pro") == true).isNotEmpty) {
-                  openAi.defaultModelType =
-                      supportedModels.firstWhere((element) => element.id?.contains("gemini-pro") == true);
+                if (supportedModels
+                    .where(
+                        (element) => element.id?.contains("gemini-pro") == true)
+                    .isNotEmpty) {
+                  openAi.defaultModelType = supportedModels.firstWhere(
+                      (element) => element.id?.contains("gemini-pro") == true);
                 }
                 bool result;
                 if (widget.openAi?.time != null) {
-                  result =await ref.read(openAiListProvider(APIType.gemini).notifier).update(openAi);
+                  result = await ref
+                      .read(openAiListProvider(APIType.gemini).notifier)
+                      .update(openAi);
                 } else {
-                  result =await ref.read(openAiListProvider(APIType.gemini).notifier).add(openAi);
+                  result = await ref
+                      .read(openAiListProvider(APIType.gemini).notifier)
+                      .add(openAi);
                 }
                 if (result) {
                   S.current.save_success.success();
