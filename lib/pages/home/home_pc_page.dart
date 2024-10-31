@@ -72,11 +72,15 @@ class _HomePcPageState extends ConsumerState<HomePcPage>
           Container(
             width: 60,
             height: F.height,
-            color: Theme.of(context).colorScheme.onPrimary,
+            color: F.T.colorScheme.onPrimary,
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
+                10.height(),
                 const TDAvatar(
                   text: "A",
+                  size: TDAvatarSize.small,
+                  shape: TDAvatarShape.square,
                 ),
                 TDSideBar(
                   height: F.height / 2,
@@ -88,24 +92,27 @@ class _HomePcPageState extends ConsumerState<HomePcPage>
                       .map(
                         (ele) => TDSideBarItem(
                           value: ele.index,
-                          icon: ele.icon,
+                          icon: currentIndex == ele.index
+                              ? ele.checkedIcon
+                              : ele.icon,
                         ),
                       )
                       .toList(),
                   onSelected: (value) {
+                    value.v();
+                    ref
+                        .read(homeIndexProvider.notifier)
+                        .update((state) => value);
                     pageController.jumpToPage(value);
                   },
                   contentPadding:
                       const EdgeInsets.only(left: 36, top: 16, bottom: 16),
                 ),
-                const Expanded(
-                    child: Text(
-                  "313",
-                  style: TextStyle(color: Colors.amber),
-                )),
-                const Expanded(child: Text("313")),
-                const Expanded(child: Text("313")),
-                const Expanded(child: Text("313"))
+                Expanded(child: 10.height()),
+                IconButton(
+                  onPressed: () {},
+                  icon: const Icon(Icons.share),
+                ),
               ],
             ),
           ),

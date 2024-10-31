@@ -2,9 +2,7 @@ import 'package:chat_bot/models/home/menu_item.dart';
 
 import '../../base.dart';
 
-final homeIndexProvider = StateProvider<int>((ref) {
-  return 0;
-}, name: "homeIndex");
+final homeIndexProvider = StateProvider<int>((ref) => 0, name: "homeIndex");
 final menus = [
   MenuItem(
       S.current.home_chat, Icons.chat_bubble_outline, Icons.chat_bubble, 0),

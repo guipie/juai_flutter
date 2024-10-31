@@ -67,6 +67,12 @@ class TDInputView extends StatelessWidget {
   /// 文本对齐方向
   final TextAlign? textAlign;
 
+  /// 键盘动作类型
+  final TextInputAction? inputAction;
+
+  /// 点击输入框外部区域回调
+  final TapRegionCallback? onTapOutside;
+
   const TDInputView(
       {Key? key,
       required this.textStyle,
@@ -90,7 +96,9 @@ class TDInputView extends StatelessWidget {
       this.contentPadding = EdgeInsets.zero,
       this.isCollapsed = false,
       this.textAlign,
-      this.controller})
+      this.controller,
+      this.inputAction,
+      this.onTapOutside})
       : super(
           key: key,
         );
@@ -101,6 +109,7 @@ class TDInputView extends StatelessWidget {
       inputFormatters: inputFormatters,
       readOnly: readOnly,
       keyboardType: inputType,
+      textInputAction: inputAction,
       autofocus: autofocus,
       obscureText: obscureText,
       onEditingComplete: onEditingComplete,
@@ -112,6 +121,7 @@ class TDInputView extends StatelessWidget {
       maxLines: maxLines,
       minLines: minLines,
       maxLength: maxLength,
+      onTapOutside: onTapOutside,
       style: textStyle,
       textAlign: textAlign ?? TextAlign.start,
       buildCounter: _buildCounter,

@@ -64,6 +64,9 @@ dependencies:
   screenshot: ^3.0.0
   synchronized: any
   flutter_highlighter: ^0.1.1
+  freezed_annotation: ^2.4.4
+  json_annotation: ^4.9.0
+  easy_refresh:
 dev_dependencies:
   flutter_lints: ^2.0.0
   #flutter pub run flutter_launcher_icons
@@ -77,7 +80,8 @@ dev_dependencies:
   # import custom_lint too as riverpod_lint depends on it
   custom_lint:
   flutter_swiper_null_safety:
-  flutter_easyrefresh:
+  freezed: ^2.5.7
+  json_serializable: ^6.8.0
 
 flutter_launcher_icons:
   android: "launcher_icon"

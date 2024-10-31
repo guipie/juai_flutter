@@ -1,7 +1,7 @@
 import 'dart:math';
 
+import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_easyrefresh/easy_refresh.dart';
 
 import '../../../tdesign_flutter.dart';
 import '../../util/context_extension.dart';
@@ -9,7 +9,6 @@ import '../../util/context_extension.dart';
 /// TDesign刷新头部
 /// 结合EasyRefresh类实现下拉刷新,继承自Header类，字段含义与父类一致
 class TDRefreshHeader extends Header {
-
   TDRefreshHeader({
     this.key,
     double extent = 48.0,
@@ -21,15 +20,9 @@ class TDRefreshHeader extends Header {
     bool overScroll = true,
     this.loadingIcon = TDLoadingIcon.circle,
     this.backgroundColor,
-  }) : super(
-    extent: extent,
-    triggerDistance: triggerDistance,
-    float: float,
-    completeDuration: completeDuration,
-    enableHapticFeedback: enableHapticFeedback,
-    enableInfiniteRefresh: enableInfiniteRefresh,
-    overScroll: overScroll,
-  );
+    required super.triggerOffset,
+    required super.clamping,
+  });
 
   /// Key
   final Key? key;
@@ -41,39 +34,23 @@ class TDRefreshHeader extends Header {
   final Color? backgroundColor;
 
   @override
-  Widget contentBuilder(
-      BuildContext context,
-      RefreshMode refreshState,
-      double pulledExtent,
-      double refreshTriggerPullDistance,
-      double refreshIndicatorExtent,
-      AxisDirection axisDirection,
-      bool float,
-      Duration? completeDuration,
-      bool enableInfiniteRefresh,
-      bool success,
-      bool noMore) {
+  Widget build(BuildContext context, IndicatorState state) {
     // 不能为水平方向
     assert(
-        axisDirection == AxisDirection.down ||
-            axisDirection == AxisDirection.up,
+        state.axisDirection == AxisDirection.down ||
+            state.axisDirection == AxisDirection.up,
         'Widget cannot be horizontal');
     return TGIconHeaderWidget(
-      key: key,
-      loadingIcon: loadingIcon,
+        key: key,
+        loadingIcon: loadingIcon,
         backgroundColor: backgroundColor,
-        refreshState: refreshState,
-        refreshIndicatorExtent: refreshIndicatorExtent
-    );
+        refreshState: state.mode,
+        refreshIndicatorExtent: state.indicator.infiniteOffset ?? 10);
   }
 }
 
-
-
 /// 刷新头部组件
 class TGIconHeaderWidget extends StatefulWidget {
-
-
   /// loading样式
   final TDLoadingIcon loadingIcon;
 
@@ -81,7 +58,7 @@ class TGIconHeaderWidget extends StatefulWidget {
   final Color? backgroundColor;
 
   /// 刷新状态
-  final RefreshMode refreshState;
+  final IndicatorMode refreshState;
 
   /// 下拉高度
   final double refreshIndicatorExtent;
@@ -100,38 +77,43 @@ class TGIconHeaderWidget extends StatefulWidget {
   }
 }
 
-class TGIconHeaderWidgetState extends State<TGIconHeaderWidget> with TickerProviderStateMixin {
-
-  RefreshMode get _refreshState => widget.refreshState;
+class TGIconHeaderWidgetState extends State<TGIconHeaderWidget>
+    with TickerProviderStateMixin {
+  IndicatorMode get _refreshState => widget.refreshState;
 
   Widget _buildLoading() => TDLoading(
-    size: TDLoadingSize.medium,
-    icon: widget.loadingIcon,
-    iconColor: TDTheme.of(context).brandNormalColor,
-    axis: Axis.horizontal,
-    text: context.resource.refreshing,
-    textColor: TDTheme.of(context).fontGyColor3,
-  );
+        size: TDLoadingSize.medium,
+        icon: widget.loadingIcon,
+        iconColor: TDTheme.of(context).brandNormalColor,
+        axis: Axis.horizontal,
+        text: context.resource.refreshing,
+        textColor: TDTheme.of(context).fontGyColor3,
+      );
 
   Widget _buildInitial(BoxConstraints constraint) {
     return Opacity(
       opacity: min(constraint.maxHeight / 28, 1),
       child: Container(
         alignment: Alignment.center,
+        color: widget.backgroundColor,
         child: constraint.maxHeight < 48.0
             ? Container()
-            : TDText(context.resource.releaseRefresh,font: TDTheme.of(context).fontBodyMedium, textColor: TDTheme.of(context).fontGyColor3,),
-        color: widget.backgroundColor,
+            : TDText(
+                context.resource.releaseRefresh,
+                font: TDTheme.of(context).fontBodyMedium,
+                textColor: TDTheme.of(context).fontGyColor3,
+              ),
       ),
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    var isRefresh = _refreshState == RefreshMode.refresh ||
-        _refreshState == RefreshMode.armed;
+    var isRefresh = _refreshState == IndicatorMode.processing ||
+        _refreshState == IndicatorMode.armed;
 
-    var isInitial = _refreshState == RefreshMode.inactive || _refreshState == RefreshMode.drag;
+    var isInitial = _refreshState == IndicatorMode.inactive ||
+        _refreshState == IndicatorMode.drag;
 
     return Stack(
       children: <Widget>[
@@ -146,13 +128,13 @@ class TGIconHeaderWidgetState extends State<TGIconHeaderWidget> with TickerProvi
                 height: widget.refreshIndicatorExtent,
                 color: widget.backgroundColor,
                 child: Visibility(
-                  child: Container(
-                    child: _buildLoading(),
-                  ),
                   visible: isRefresh,
                   replacement: Visibility(
-                    child: _buildInitial(constraint),
                     visible: isInitial,
+                    child: _buildInitial(constraint),
+                  ),
+                  child: Container(
+                    child: _buildLoading(),
                   ),
                 )),
           ),

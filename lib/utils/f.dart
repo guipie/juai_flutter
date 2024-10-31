@@ -17,6 +17,8 @@ class _FImpl {
 
   static final _FImpl _singleton = _FImpl._internal();
 
+  get T => Theme.of(_navigatorKey.currentContext!);
+
   ///常用工具方法
   get width => MediaQuery.sizeOf(context).width;
 

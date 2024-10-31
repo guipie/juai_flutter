@@ -2,7 +2,8 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import '../../../tdesign_flutter.dart';
+
+import 'td_count_down_style.dart';
 
 Map<String, String> timeUnitMap = {
   'DD': '天',
@@ -119,8 +120,7 @@ class _TDCountDownState extends State<TDCountDown>
   Widget build(BuildContext context) {
     if (widget.content == 'default') {
       return Row(
-          mainAxisSize: MainAxisSize.min,
-          children: _buildTimeWidget(context));
+          mainAxisSize: MainAxisSize.min, children: _buildTimeWidget(context));
     }
     if (widget.content is Function) {
       return widget.content(_time);

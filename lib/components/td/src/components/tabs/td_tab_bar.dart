@@ -40,11 +40,13 @@ class TDTabBar extends StatefulWidget {
     this.showIndicator = false,
     this.dividerColor,
     this.dividerHeight = 0.5,
+    this.selectedBgColor,
+    this.unSelectedBgColor,
   })  : assert(
-          backgroundColor == null || decoration == null,
-          'Cannot provide both a backgroundColor and a decoration\n'
-          'To provide both, use "decoration: BoxDecoration(color: color)".',
-        ),
+  backgroundColor == null || decoration == null,
+  'Cannot provide both a backgroundColor and a decoration\n'
+      'To provide both, use "decoration: BoxDecoration(color: color)".',
+  ),
         super(key: key);
 
   /// tab数组
@@ -56,7 +58,7 @@ class TDTabBar extends StatefulWidget {
   /// tabBar修饰
   final Decoration? decoration;
 
-  /// tabBar背景色
+  /// tabBar背景色，当outlineType为card时控制选中tab颜色
   final Color? backgroundColor;
 
   /// tabBar下标颜色
@@ -116,6 +118,12 @@ class TDTabBar extends StatefulWidget {
   /// 分割线高度,小于等于0则不展示分割线
   final double dividerHeight;
 
+  /// 被选中背景色，只有outlineType为capsule时有效
+  final Color? selectedBgColor;
+
+  /// 未选中背景色，只有outlineType为capsule时有效
+  final Color? unSelectedBgColor;
+
   @override
   State<StatefulWidget> createState() => _TDTabBarState();
 }
@@ -133,13 +141,13 @@ class _TDTabBarState extends State<TDTabBar> {
           (widget.outlineType == TDTabBarOutlineType.card
               ? BoxDecoration(color: widget.backgroundColor)
               : BoxDecoration(
-                  color: widget.backgroundColor,
-                  border: widget.dividerHeight <= 0
-                      ? null
-                      : Border(
-                          bottom: BorderSide(
-                              color: widget.dividerColor ?? TDTheme.of(context).grayColor3,
-                              width: widget.dividerHeight)))),
+              color: widget.backgroundColor,
+              border: widget.dividerHeight <= 0
+                  ? null
+                  : Border(
+                  bottom: BorderSide(
+                      color: widget.dividerColor ?? TDTheme.of(context).grayColor3,
+                      width: widget.dividerHeight)))),
       child: TDHorizontalTabBar(
         physics: widget.physics,
         isScrollable: widget.isScrollable,
@@ -154,6 +162,9 @@ class _TDTabBarState extends State<TDTabBar> {
         indicatorPadding: widget.indicatorPadding ?? EdgeInsets.zero,
         outlineType: widget.outlineType,
         controller: widget.controller,
+        backgroundColor: widget.backgroundColor,
+        selectedBgColor: widget.selectedBgColor,
+        unSelectedBgColor: widget.unSelectedBgColor,
         onTap: (index) {
           widget.onTap?.call(index);
         },
@@ -178,10 +189,10 @@ class _TDTabBarState extends State<TDTabBar> {
   Decoration _getIndicator(BuildContext context) {
     return widget.showIndicator
         ? TDTabBarIndicator(
-            context: context,
-            indicatorHeight: widget.indicatorHeight,
-            indicatorWidth: widget.indicatorWidth,
-            indicatorColor: widget.indicatorColor)
+        context: context,
+        indicatorHeight: widget.indicatorHeight,
+        indicatorWidth: widget.indicatorWidth,
+        indicatorColor: widget.indicatorColor)
         : TDNoneIndicator();
   }
 }
