@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import '../generated/l10n.dart';
 import '../utils/sp_util.dart';
 
@@ -36,8 +37,9 @@ Locale getLocaleByDefaultCode() {
     }
   }
 
-  return S.delegate.supportedLocales
-      .firstWhere((element) => element.languageCode == resultCode, orElse: () => WidgetsBinding.instance.window.locale);
+  return S.delegate.supportedLocales.firstWhere(
+      (element) => element.languageCode == resultCode,
+      orElse: () => WidgetsBinding.instance.window.locale);
 }
 
 Locale getLocaleByCode(String code) {
@@ -53,8 +55,9 @@ Locale getLocaleByCode(String code) {
     }
   }
 
-  return S.delegate.supportedLocales
-      .firstWhere((element) => element.languageCode == resultCode, orElse: () => WidgetsBinding.instance.window.locale);
+  return S.delegate.supportedLocales.firstWhere(
+      (element) => element.languageCode == resultCode,
+      orElse: () => WidgetsBinding.instance.window.locale);
 }
 
 Map<String, String> getLocaleLanguages() {
@@ -96,7 +99,8 @@ String getLocaleNameByCode(String code) {
   return "English";
 }
 
-final globalLanguageProvider = StateNotifierProvider<GlobalLanguageModel, String>((ref) {
+final globalLanguageProvider =
+    StateNotifierProvider<GlobalLanguageModel, String>((ref) {
   return GlobalLanguageModel(HiveBox().globalLanguageCode);
 });
 
@@ -115,8 +119,10 @@ class GlobalLanguageModel extends StateNotifier<String> {
   }
 }
 
-final primaryColorProvider = StateNotifierProvider<PrimaryColorNotify, Color>((ref) {
-  return PrimaryColorNotify(Color(int.parse(HiveBox().primaryColor, radix: 16)));
+final primaryColorProvider =
+    StateNotifierProvider<PrimaryColorNotify, Color>((ref) {
+  return PrimaryColorNotify(
+      Color(int.parse(HiveBox().primaryColor, radix: 16)));
 });
 
 class PrimaryColorNotify extends StateNotifier<Color> {
@@ -125,7 +131,9 @@ class PrimaryColorNotify extends StateNotifier<Color> {
   void change(Color t) {
     if (t == state) return;
     state = t;
-    HiveBox().appConfig.put(HiveBox.cAppConfigPrimaryColor, t.value.toRadixString(16));
+    HiveBox()
+        .appConfig
+        .put(HiveBox.cAppConfigPrimaryColor, t.value.toRadixString(16));
   }
 
   Color get color => state;
@@ -161,7 +169,8 @@ BaseTheme _getThemeByType(int themeType) {
     case 1:
       return DarkTheme();
     case 2:
-      var brightness = SchedulerBinding.instance.platformDispatcher.platformBrightness;
+      var brightness =
+          SchedulerBinding.instance.platformDispatcher.platformBrightness;
       bool isDarkMode = brightness == Brightness.dark;
       if (isDarkMode) {
         return DarkTheme();
@@ -178,7 +187,8 @@ class ThemeViewModel extends StateNotifier<BaseTheme> {
     state = _getThemeByType(type);
   }
 
-  ThemeType get type => ThemeType.getType(SpUtil.getInt(spLightTheme, defValue: ThemeType.system.index));
+  ThemeType get type => ThemeType.getType(
+      SpUtil.getInt(spLightTheme, defValue: ThemeType.system.index));
 
   void change(int t) {
     state = _getThemeByType(t);
@@ -221,14 +231,12 @@ class LightTheme extends BaseTheme {
     return ThemeData.light().copyWith(
       colorScheme: ColorScheme.light(
         primary: primaryColor,
-        secondary: primaryColor,
-        surface: Colors.white,
-        background: const Color(0xffEDEDED),
+        onPrimary: primaryColor.withAlpha(10),
+        secondary: Colors.white,
+        onSecondary: Colors.white60,
+        surface: Colors.black,
+        onSurface: Colors.black54,
         error: const Color(0xffFF3B30),
-        onPrimary: Colors.white,
-        onSecondary: Colors.white,
-        onSurface: const Color(0xff181818),
-        onBackground: const Color(0xff181818),
         onError: Colors.white,
         brightness: Brightness.light,
       ),
@@ -384,14 +392,12 @@ class DarkTheme extends BaseTheme {
     return ThemeData.dark().copyWith(
       colorScheme: ColorScheme.dark(
           primary: primaryColor,
-          secondary: primaryColor,
-          surface: const Color(0xff2C2C2C),
-          background: const Color(0xffEDEDED),
+          onPrimary: primaryColor.withAlpha(10),
+          secondary: Colors.black,
+          onSecondary: Colors.black54,
+          surface: Colors.white,
+          onSurface: Colors.white60,
           error: const Color(0xffFF3B30),
-          onPrimary: Colors.white,
-          onSecondary: Colors.white,
-          onSurface: const Color(0xff1E201D),
-          onBackground: const Color(0xff1E201D),
           onError: Colors.white,
           brightness: Brightness.dark),
       scaffoldBackgroundColor: const Color(0xff111111),

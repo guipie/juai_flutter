@@ -72,12 +72,14 @@ class _HomePcPageState extends ConsumerState<HomePcPage>
           Container(
             width: 60,
             height: F.height,
-            color: const Color.fromRGBO(246, 246, 246, 1),
+            color: Theme.of(context).colorScheme.onPrimary,
             child: Column(
               children: [
-                const Expanded(child: Text("313")),
+                const TDAvatar(
+                  text: "A",
+                ),
                 TDSideBar(
-                  height: 500,
+                  height: F.height / 2,
                   style: TDSideBarStyle.outline,
                   value: currentIndex,
                   selectedColor: Theme.of(context).primaryColor,

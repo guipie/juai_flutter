@@ -188,45 +188,46 @@ class _TDSideBarState extends State<TDSideBar> {
   @override
   Widget build(BuildContext context) {
     return ConstrainedBox(
-        key: globalKey,
-        constraints: BoxConstraints(
-            minWidth: 106,
-            maxHeight: MediaQuery.of(context).size.height -
-                MediaQuery.of(context).padding.top),
-        child: SizedBox(
-            height: widget.height ?? MediaQuery.of(context).size.height,
-            child: MediaQuery.removePadding(
-                context: context,
-                removeTop: true,
-                removeBottom: true,
-                child: ListView.builder(
-                    itemCount: displayChildren.length,
-                    controller: _scrollerController,
-                    itemBuilder: (BuildContext context, int index) {
-                      var ele = displayChildren[index];
-
-                      return TDWrapSideBarItem(
-                        style: widget.style,
-                        value: ele.value,
-                        icon: ele.icon,
-                        disabled: ele.disabled ?? false,
-                        label: ele.label ?? '',
-                        badge: ele.badge,
-                        textStyle: ele.textStyle,
-                        selected: currentIndex == ele.index,
-                        selectedColor:widget.selectedColor,
-                        selectedTextStyle:widget.selectedTextStyle,
-                        contentPadding:widget.contentPadding,
-                        topAdjacent: currentIndex != null &&
-                            currentIndex! + 1 == ele.index,
-                        bottomAdjacent: currentIndex != null &&
-                            currentIndex! - 1 == ele.index,
-                        onTap: () {
-                          if (!(ele.disabled ?? false)) {
-                            onSelect(ele, isController: false);
-                          }
-                        },
-                      );
-                    }))));
+      key: globalKey,
+      constraints: const BoxConstraints(
+        minWidth: 60,
+      ),
+      child: SizedBox(
+        height: widget.height,
+        child: MediaQuery.removePadding(
+          context: context,
+          removeTop: true,
+          removeBottom: true,
+          child: ListView.builder(
+              itemCount: displayChildren.length,
+              controller: _scrollerController,
+              itemBuilder: (BuildContext context, int index) {
+                var ele = displayChildren[index];
+                return TDWrapSideBarItem(
+                  style: widget.style,
+                  value: ele.value,
+                  icon: ele.icon,
+                  disabled: ele.disabled ?? false,
+                  label: ele.label ?? '',
+                  badge: ele.badge,
+                  textStyle: ele.textStyle,
+                  selected: currentIndex == ele.index,
+                  selectedColor: widget.selectedColor,
+                  selectedTextStyle: widget.selectedTextStyle,
+                  contentPadding: widget.contentPadding,
+                  topAdjacent:
+                      currentIndex != null && currentIndex! + 1 == ele.index,
+                  bottomAdjacent:
+                      currentIndex != null && currentIndex! - 1 == ele.index,
+                  onTap: () {
+                    if (!(ele.disabled ?? false)) {
+                      onSelect(ele, isController: false);
+                    }
+                  },
+                );
+              }),
+        ),
+      ),
+    );
   }
 }

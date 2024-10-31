@@ -52,32 +52,24 @@ class TDWrapSideBarItem extends StatelessWidget {
   }
 
   Widget renderNormalItem(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-      ),
-      child: ConstrainedBox(
-        constraints: const BoxConstraints(minHeight: 56),
-        child: Container(
-          decoration: BoxDecoration(
-              color: selected
-                  ? Colors.white
-                  : const Color.fromRGBO(246, 246, 246, 1),
-              borderRadius: bottomAdjacent || topAdjacent
-                  ? bottomAdjacent
-                      ? const BorderRadius.only(bottomRight: Radius.circular(9))
-                      : const BorderRadius.only(topRight: Radius.circular(9))
-                  : null),
-          child: Row(
-            children: [
-              renderPreLine(context),
-              Expanded(
-                  child: Padding(
-                padding: contentPadding ?? const EdgeInsets.all(16),
-                child: renderMainContent(context),
-              ))
-            ],
-          ),
+    return ConstrainedBox(
+      constraints: const BoxConstraints(minHeight: 56),
+      child: Container(
+        decoration: BoxDecoration(
+            borderRadius: bottomAdjacent || topAdjacent
+                ? bottomAdjacent
+                    ? const BorderRadius.only(bottomRight: Radius.circular(9))
+                    : const BorderRadius.only(topRight: Radius.circular(9))
+                : null),
+        child: Row(
+          children: [
+            renderPreLine(context),
+            Expanded(
+                child: Padding(
+              padding: contentPadding ?? const EdgeInsets.all(12),
+              child: renderMainContent(context),
+            ))
+          ],
         ),
       ),
     );
@@ -86,10 +78,8 @@ class TDWrapSideBarItem extends StatelessWidget {
   Widget renderOutlineItem(BuildContext context) {
     return ConstrainedBox(
         constraints: const BoxConstraints(minHeight: 56),
-        child: Container(
+        child: SizedBox(
           height: 56,
-          decoration:
-              const BoxDecoration(color: Color.fromRGBO(246, 246, 246, 1)),
           child: Padding(
             padding: const EdgeInsets.all(8),
             child: Container(
@@ -97,7 +87,7 @@ class TDWrapSideBarItem extends StatelessWidget {
                   color: selected && !disabled ? Colors.white : null,
                   borderRadius: BorderRadius.circular(6)),
               child: Padding(
-                padding: const EdgeInsets.all(8),
+                padding: const EdgeInsets.all(6),
                 child: renderMainContent(context),
               ),
             ),
@@ -155,12 +145,13 @@ class TDWrapSideBarItem extends StatelessWidget {
                         ? selectedTextStyle?.color
                         : (selectedColor ??
                             TDTheme.of(context).brandNormalColor)
-                    : Colors.black,
+                    : Theme.of(context).colorScheme.onSurface,
           ),
         ));
   }
 
   Widget renderLabel(BuildContext context) {
+    if (label.isEmpty) return const SizedBox.shrink();
     return TDText.rich(
       TextSpan(
         children: [
@@ -172,11 +163,6 @@ class TDWrapSideBarItem extends StatelessWidget {
                 : textStyle,
             fontWeight:
                 selected && !disabled ? FontWeight.w600 : FontWeight.w400,
-            textColor: disabled
-                ? TDTheme.of(context).fontGyColor4
-                : selected
-                    ? selectedColor ?? TDTheme.of(context).brandNormalColor
-                    : Colors.black,
             forceVerticalCenter: true,
           )),
           WidgetSpan(
@@ -203,9 +189,9 @@ class TDWrapSideBarItem extends StatelessWidget {
         clipBehavior: Clip.none,
         children: [
           Positioned(
-            child: badge ?? Container(),
             left: 0,
             top: 0,
+            child: badge ?? Container(),
           ),
         ],
       ),
