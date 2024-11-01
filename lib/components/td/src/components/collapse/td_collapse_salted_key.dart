@@ -17,9 +17,6 @@ class TDCollapseSaltedKey<S, V> extends LocalKey {
   }
 
   @override
-  int get hashCode => hashValues(runtimeType, salt, value);
-
-  @override
   String toString() {
     final saltString = S == String ? '<\'$salt\'>' : '<$salt>';
     final valueString = V == String ? '<\'$value\'>' : '<$value>';

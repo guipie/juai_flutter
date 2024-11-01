@@ -1,10 +1,10 @@
 final data = [
   {
-    'index': 'A',
+    'index': '阿里',
     'children': ['阿坝', '阿拉善', '阿里', '安康', '安庆', '鞍山', '安顺', '安阳', '澳门'],
   },
   {
-    'index': 'B',
+    'index': 'O',
     'children': [
       '北京',
       '白银',
@@ -23,7 +23,7 @@ final data = [
     ],
   },
   {
-    'index': 'C',
+    'index': 'T',
     'children': [
       '重庆',
       '成都',

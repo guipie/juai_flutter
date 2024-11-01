@@ -2,11 +2,11 @@ import 'package:chat_bot/base.dart';
 import 'package:chat_bot/base/version_check.dart';
 import 'package:chat_bot/components/td/tdesign_flutter.dart';
 import 'package:chat_bot/module/chat/chat_list_page.dart';
+import 'package:chat_bot/pages/aimodel/aimodel_page.dart';
 import 'package:chat_bot/pages/home/home_viewmodel.dart';
 
 import '../../const.dart';
 import '../../constants/theme.dart';
-import '../../module/prompt/prompt_page.dart';
 import '../../module/services/services_page.dart';
 import '../../module/setting/setting_page.dart';
 
@@ -60,7 +60,7 @@ class _HomePcPageState extends ConsumerState<HomePcPage>
     final sideBarController = TDSideBarController();
     const pages = [
       ChatListPage(),
-      PromptPage(),
+      AiModelPage(),
       ServicesPage(),
       SettingPage(),
       SettingPage(),
@@ -92,14 +92,12 @@ class _HomePcPageState extends ConsumerState<HomePcPage>
                       .map(
                         (ele) => TDSideBarItem(
                           value: ele.index,
-                          icon: currentIndex == ele.index
-                              ? ele.checkedIcon
-                              : ele.icon,
+                          checkedIcon: ele.checkedIcon,
+                          icon: ele.icon,
                         ),
                       )
                       .toList(),
                   onSelected: (value) {
-                    value.v();
                     ref
                         .read(homeIndexProvider.notifier)
                         .update((state) => value);

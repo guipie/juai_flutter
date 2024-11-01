@@ -13,6 +13,7 @@ class SideItemProps {
   int value;
   bool? disabled;
   IconData? icon;
+  IconData? checkedIcon;
   String? label;
   TDBadge? badge;
   TextStyle? textStyle;
@@ -22,6 +23,7 @@ class SideItemProps {
       required this.index,
       this.disabled,
       this.icon,
+      this.checkedIcon,
       this.label,
       this.badge,
       this.textStyle});
@@ -41,8 +43,6 @@ class TDSideBar extends StatefulWidget {
     this.contentPadding,
     this.selectedTextStyle,
     this.style = TDSideBarStyle.normal,
-    this.loading,
-    this.loadingWidget,
   }) : super(key: key);
 
   /// 选项值
@@ -78,12 +78,6 @@ class TDSideBar extends StatefulWidget {
   /// 控制器
   final TDSideBarController? controller;
 
-  /// 加载效果
-  final bool? loading;
-
-  /// 自定义加载动画
-  final Widget? loadingWidget;
-
   @override
   State<TDSideBar> createState() => _TDSideBarState();
 }
@@ -95,7 +89,6 @@ class _TDSideBarState extends State<TDSideBar> {
   final _scrollerController = ScrollController();
   final GlobalKey globalKey = GlobalKey();
   final double itemHeight = 56.0;
-  bool _loading = false;
 
   // 查找某值对应项
   SideItemProps findSideItem(int value) {
@@ -139,14 +132,10 @@ class _TDSideBarState extends State<TDSideBar> {
   void initState() {
     super.initState();
 
-    _loading = widget.loading ?? widget.controller?.loading ?? false;
     // controller注册事件
     if (widget.controller != null) {
       widget.controller!.addListener(() {
         selectValue(widget.controller!.currentValue, needScroll: true);
-        _loading = widget.controller!.loading;
-        getDisplayChildren();
-        setState(() {});
       });
     }
 
@@ -158,6 +147,7 @@ class _TDSideBarState extends State<TDSideBar> {
             disabled: entry.value.disabled,
             value: entry.value.value,
             icon: entry.value.icon,
+            checkedIcon: entry.value.checkedIcon,
             label: entry.value.label,
             textStyle: entry.value.textStyle,
             badge: entry.value.badge))
@@ -176,38 +166,6 @@ class _TDSideBarState extends State<TDSideBar> {
       }
     } else {
       currentIndex = null;
-    }
-  }
-
-  void getDisplayChildren() {
-    if (widget.controller != null && widget.controller!.children.isNotEmpty) {
-      displayChildren = widget.controller!.children
-          .asMap()
-          .entries
-          .map((entry) => SideItemProps(
-              index: entry.key,
-              disabled: entry.value.disabled,
-              value: entry.value.value,
-              icon: entry.value.icon,
-              label: entry.value.label,
-              textStyle: entry.value.textStyle,
-              badge: entry.value.badge))
-          .toList();
-    } else if (widget.children.isNotEmpty) {
-      displayChildren = widget.children
-          .asMap()
-          .entries
-          .map((entry) => SideItemProps(
-              index: entry.key,
-              disabled: entry.value.disabled,
-              value: entry.value.value,
-              icon: entry.value.icon,
-              label: entry.value.label,
-              textStyle: entry.value.textStyle,
-              badge: entry.value.badge))
-          .toList();
-    } else {
-      displayChildren = [];
     }
   }
 
@@ -232,60 +190,47 @@ class _TDSideBarState extends State<TDSideBar> {
 
   @override
   Widget build(BuildContext context) {
-    if (_loading) {
-      widget.controller?.loading = true;
-      if (widget.loadingWidget != null) {
-        return widget.loadingWidget!;
-      }
-      return SizedBox(
-        width: MediaQuery.of(context).size.width,
-        child: const Align(
-          child:
-              TDLoading(icon: TDLoadingIcon.circle, size: TDLoadingSize.large),
-        ),
-      );
-    }
     return ConstrainedBox(
-        key: globalKey,
-        constraints: BoxConstraints(
-            minWidth: 106,
-            maxHeight: MediaQuery.of(context).size.height -
-                MediaQuery.of(context).padding.top),
-        child: SizedBox(
-            height: widget.height ?? MediaQuery.of(context).size.height,
-            child: MediaQuery.removePadding(
-                context: context,
-                removeTop: true,
-                removeBottom: true,
-                child: ListView.builder(
-                    physics: const ClampingScrollPhysics(),
-                    itemCount: displayChildren.length,
-                    controller: _scrollerController,
-                    itemBuilder: (BuildContext context, int index) {
-                      var ele = displayChildren[index];
-
-                      return TDWrapSideBarItem(
-                        style: widget.style,
-                        value: ele.value,
-                        icon: ele.icon,
-                        disabled: ele.disabled ?? false,
-                        label: ele.label ?? '',
-                        badge: ele.badge,
-                        textStyle: ele.textStyle,
-                        selected: currentIndex == ele.index,
-                        selectedColor: widget.selectedColor,
-                        selectedTextStyle: widget.selectedTextStyle,
-                        contentPadding: widget.contentPadding,
-                        topAdjacent: currentIndex != null &&
-                            currentIndex! + 1 == ele.index,
-                        bottomAdjacent: currentIndex != null &&
-                            currentIndex! - 1 == ele.index,
-                        onTap: () {
-                          if (!(ele.disabled ?? false)) {
-                            onSelect(ele, isController: false);
-                          }
-                        },
-                      );
-                    }))));
+      key: globalKey,
+      constraints: const BoxConstraints(
+        minWidth: 60,
+      ),
+      child: SizedBox(
+        height: widget.height,
+        child: MediaQuery.removePadding(
+          context: context,
+          removeTop: true,
+          removeBottom: true,
+          child: ListView.builder(
+              itemCount: displayChildren.length,
+              controller: _scrollerController,
+              itemBuilder: (BuildContext context, int index) {
+                var ele = displayChildren[index];
+                return TDWrapSideBarItem(
+                  style: widget.style,
+                  value: ele.value,
+                  icon: currentIndex == ele.index ? ele.checkedIcon : ele.icon,
+                  disabled: ele.disabled ?? false,
+                  label: ele.label ?? '',
+                  badge: ele.badge,
+                  textStyle: ele.textStyle,
+                  selected: currentIndex == ele.index,
+                  selectedColor: widget.selectedColor,
+                  selectedTextStyle: widget.selectedTextStyle,
+                  contentPadding: widget.contentPadding,
+                  topAdjacent:
+                      currentIndex != null && currentIndex! + 1 == ele.index,
+                  bottomAdjacent:
+                      currentIndex != null && currentIndex! - 1 == ele.index,
+                  onTap: () {
+                    if (!(ele.disabled ?? false)) {
+                      onSelect(ele, isController: false);
+                    }
+                  },
+                );
+              }),
+        ),
+      ),
+    );
   }
 }

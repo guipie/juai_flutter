@@ -10,6 +10,7 @@ class TDSideBarItem {
     this.badge,
     this.disabled = false,
     this.icon,
+    this.checkedIcon,
     this.textStyle,
     this.label = '',
     this.value = -1,
@@ -23,6 +24,7 @@ class TDSideBarItem {
 
   /// 图标
   final IconData? icon;
+  final IconData? checkedIcon;
 
   /// 标签
   final String label;
