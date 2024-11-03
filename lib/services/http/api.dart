@@ -9,7 +9,7 @@ class Api {
   static Http httpRequest = Http();
 
   /// get
-  static Future<ApiListRes<T>> getList<T>(
+  static Future<ApiRes<List<T>>> getList<T>(
     String path, {
     dynamic data, //数据
     Map<String, dynamic>? queryParameters,

@@ -68,15 +68,15 @@ class Http {
         options: options,
       );
       // 如果没有设置fromJsonT或者R是dynamic类型，直接返回响应数据
-      if (fromJsonT == null || T == dynamic || response.data is! Map<String, dynamic>) return ApiRes<T>.fromJson(response.data, fromJsonT!);
+      if (fromJsonT == null || T == dynamic || response.data is! Map<String, dynamic>) return ApiRes<T>.fromJson(response.data);
       Map<String, dynamic>? responseObject = response.data;
       if (response.statusCode == 200 && responseObject != null && responseObject.isEmpty == false) {
         switch (responseObject['code']) {
           case 200:
             if (T.toString().contains("list")) {
-              return ApiListRes<T>.fromJson(responseObject, fromJsonT);
+              // return ApiListRes<T>.fromJson(responseObject, fromJsonT);
             } else if (T.toString().contains("string")) {
-              return ApiRes<T>.fromJson(responseObject, fromJsonT);
+              // return ApiRes<T>.fromJson(responseObject, fromJsonT);
             } else {
               throw NotKnowResponseTypeException(-1, '未知响应类型【${T.toString()}】，请检查是否未正确设置响应类型！');
             }
