@@ -1,24 +1,23 @@
+import 'package:chat_bot/models/api_res.dart';
+
 import 'http.dart';
 
 /// 调用底层的request，重新提供get，post等方便方法
+/// https://juejin.cn/post/7366054366326194228#heading-16
 
 class Api {
-  static HttpRequest httpRequest = HttpRequest();
+  static Http httpRequest = Http();
 
   /// get
-  static Future get({
-    required String path,
+  static Future<ApiListRes<T>> getList<T>(
+    String path, {
+    dynamic data, //数据
     Map<String, dynamic>? queryParameters,
-    bool showLoading = true,
-    bool showErrorMessage = true,
-  }) {
-    return httpRequest.request(
-      path: path,
-      method: HttpMethod.get,
-      queryParameters: queryParameters,
-      showLoading: showLoading,
-      showErrorMessage: showErrorMessage,
-    );
+    bool showLoading = true, //加载过程
+    bool showErrorMessage = true, //返回数据
+    T Function(dynamic json)? fromJsonT,
+  }) async {
+    return await httpRequest.request<T>(path: path, method: HttpMethod.get, data: data, queryParameters: queryParameters, showLoading: showLoading, showErrorMessage: showErrorMessage, fromJsonT: fromJsonT);
   }
 
   /// post

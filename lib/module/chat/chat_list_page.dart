@@ -1,4 +1,5 @@
 import 'package:chat_bot/base.dart';
+import 'package:chat_bot/components/app_bar.dart';
 import 'package:chat_bot/components/common_dialog.dart';
 import 'package:chat_bot/constants/theme.dart';
 import 'package:chat_bot/module/chat/chat_audio/chat_audio_page.dart';
@@ -34,7 +35,7 @@ class _ChatPageState extends ConsumerState<ChatListPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(S.current.home_chat),
+        title: JuAppBar.baseBar(text: S.current.home_chat),
         actions: [
           //添加按钮
           PullDownButton(

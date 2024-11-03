@@ -1,3 +1,4 @@
+import 'package:chat_bot/services/http/api_exception.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
 
@@ -5,14 +6,14 @@ class ErrorInterceptor extends Interceptor {
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) async {
     /// 根据DioError创建HttpException
-    HttpException httpException = HttpException.create(err);
+    ApiException httpException = ApiException.from(err);
 
     /// dio默认的错误实例，如果是没有网络，只能得到一个未知错误，无法精准的得知是否是无网络的情况
     /// 这里对于断网的情况，给一个特殊的code和msg
     if (err.type == DioExceptionType.connectionError) {
       var connectivityResult = await (Connectivity().checkConnectivity());
       if (connectivityResult == ConnectivityResult.none) {
-        httpException = HttpException(code: -100, msg: 'None Network.');
+        httpException = ApiException(-100, 'None Network.');
       }
     }
 
@@ -67,54 +68,43 @@ class HttpException implements Exception {
             switch (statusCode) {
               case 400:
                 {
-                  return HttpException(
-                      code: statusCode, msg: 'Request syntax error');
+                  return HttpException(code: statusCode, msg: 'Request syntax error');
                 }
               case 401:
                 {
-                  return HttpException(
-                      code: statusCode, msg: 'Without permission');
+                  return HttpException(code: statusCode, msg: 'Without permission');
                 }
               case 403:
                 {
-                  return HttpException(
-                      code: statusCode, msg: 'Server rejects execution');
+                  return HttpException(code: statusCode, msg: 'Server rejects execution');
                 }
               case 404:
                 {
-                  return HttpException(
-                      code: statusCode, msg: 'Unable to connect to server');
+                  return HttpException(code: statusCode, msg: 'Unable to connect to server');
                 }
               case 405:
                 {
-                  return HttpException(
-                      code: statusCode, msg: 'The request method is disabled');
+                  return HttpException(code: statusCode, msg: 'The request method is disabled');
                 }
               case 500:
                 {
-                  return HttpException(
-                      code: statusCode, msg: 'Server internal error');
+                  return HttpException(code: statusCode, msg: 'Server internal error');
                 }
               case 502:
                 {
-                  return HttpException(
-                      code: statusCode, msg: 'Invalid request');
+                  return HttpException(code: statusCode, msg: 'Invalid request');
                 }
               case 503:
                 {
-                  return HttpException(
-                      code: statusCode, msg: 'The server is down.');
+                  return HttpException(code: statusCode, msg: 'The server is down.');
                 }
               case 505:
                 {
-                  return HttpException(
-                      code: statusCode, msg: 'HTTP requests are not supported');
+                  return HttpException(code: statusCode, msg: 'HTTP requests are not supported');
                 }
               default:
                 {
-                  return HttpException(
-                      code: statusCode,
-                      msg: error.response?.statusMessage ?? 'unknow error');
+                  return HttpException(code: statusCode, msg: error.response?.statusMessage ?? 'unknow error');
                 }
             }
           } on Exception catch (_) {

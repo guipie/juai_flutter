@@ -41,6 +41,7 @@ dependencies:
   just_audio: ^0.9.37
   # riverpod: ^2.5.1
   flutter_riverpod: ^2.6.1
+  riverpod_annotation:
   connectivity_plus: ^6.0.2
   share_plus: '7.2.2'
   record: ^5.0.5
@@ -64,10 +65,12 @@ dependencies:
   screenshot: ^3.0.0
   synchronized: any
   flutter_highlighter: ^0.1.1
-  freezed_annotation: ^2.4.4
   json_annotation: ^4.9.0
   easy_refresh:
+  freezed_annotation: ^2.4.4
+  visibility_detector: ^0.4.0+2
 dev_dependencies:
+  freezed: ^2.5.7
   flutter_lints: ^2.0.0
   #flutter pub run flutter_launcher_icons
   flutter_launcher_icons: "^0.13.1"
@@ -80,8 +83,7 @@ dev_dependencies:
   # import custom_lint too as riverpod_lint depends on it
   custom_lint:
   flutter_swiper_null_safety:
-  freezed: ^2.5.7
-  json_serializable: ^6.8.0
+  json_serializable:
 
 flutter_launcher_icons:
   android: "launcher_icon"
