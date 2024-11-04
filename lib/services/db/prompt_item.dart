@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:chat_bot/base.dart';
 import 'package:chat_bot/services/db/db_base.dart';
-import 'package:sqflite_common_ffi/sqflite_ffi.dart';
+import 'package:sqflite_common/sqlite_api.dart';
 
 import '../../constants/theme.dart';
 
@@ -90,21 +90,12 @@ class PromptItemProvider extends DbBase {
 
   //update
   Future<int> updateItem(PromptItem item) async {
-    return await super.database.update(tableName, item.toJson(),
-        where: '$columnTime = ?', whereArgs: [item.time]);
+    return await super.database.update(tableName, item.toJson(), where: '$columnTime = ?', whereArgs: [item.time]);
   }
 
   //list
   Future<List<PromptItem>> list() async {
-    List<Map<String, Object?>> maps = await super.database.query(tableName,
-        columns: [
-          columnTime,
-          columnAuthor,
-          columnTitle,
-          columnPrompt,
-          columnHint,
-          columnExtra
-        ]);
+    List<Map<String, Object?>> maps = await super.database.query(tableName, columns: [columnTime, columnAuthor, columnTitle, columnPrompt, columnHint, columnExtra]);
     var list = List.generate(maps.length, (i) {
       return PromptItem.fromJson(maps[i]);
     });
@@ -140,9 +131,7 @@ class PromptItemProvider extends DbBase {
 
   //delete
   Future<int> delete(int time) async {
-    return await super
-        .database
-        .delete(tableName, where: '$columnTime = ?', whereArgs: [time]);
+    return await super.database.delete(tableName, where: '$columnTime = ?', whereArgs: [time]);
   }
 
   //delete all

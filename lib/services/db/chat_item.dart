@@ -1,5 +1,5 @@
 import 'package:chat_bot/services/db/db_base.dart';
-import 'package:sqflite_common_ffi/sqflite_ffi.dart';
+import 'package:sqflite_common/sqlite_api.dart';
 
 const String columnTime = 'time';
 const String columnContent = 'content';
@@ -26,18 +26,7 @@ class ChatItem {
   int? messageType; //1.正常的消息，2 图片生成
   String? extra;
 
-  ChatItem(
-      {this.content,
-      this.time,
-      this.extra,
-      this.type,
-      this.moduleType,
-      this.moduleName,
-      this.requestID,
-      this.messageType,
-      this.images,
-      this.parentID,
-      this.status});
+  ChatItem({this.content, this.time, this.extra, this.type, this.moduleType, this.moduleName, this.requestID, this.messageType, this.images, this.parentID, this.status});
 
   Map<String, Object?> toMap() {
     var map = <String, Object?>{
@@ -71,30 +60,8 @@ class ChatItem {
     extra = map[columnExtra] as String?;
   }
 
-  ChatItem copyWidth(
-      {String? content,
-      int? time,
-      List<String>? images,
-      int? type,
-      int? moduleName,
-      String? moduleType,
-      int? messageType,
-      int? status,
-      int? requestID,
-      int? parentID,
-      String? extra}) {
-    return ChatItem(
-        content: content ?? this.content,
-        time: time ?? this.time,
-        images: images ?? this.images,
-        type: type ?? this.type,
-        moduleName: moduleName ?? this.moduleName,
-        moduleType: moduleType ?? this.moduleType,
-        messageType: messageType ?? this.messageType,
-        status: status ?? this.status,
-        requestID: requestID ?? this.requestID,
-        parentID: parentID ?? this.parentID,
-        extra: extra ?? this.extra);
+  ChatItem copyWidth({String? content, int? time, List<String>? images, int? type, int? moduleName, String? moduleType, int? messageType, int? status, int? requestID, int? parentID, String? extra}) {
+    return ChatItem(content: content ?? this.content, time: time ?? this.time, images: images ?? this.images, type: type ?? this.type, moduleName: moduleName ?? this.moduleName, moduleType: moduleType ?? this.moduleType, messageType: messageType ?? this.messageType, status: status ?? this.status, requestID: requestID ?? this.requestID, parentID: parentID ?? this.parentID, extra: extra ?? this.extra);
   }
 }
 
@@ -139,24 +106,7 @@ class ChatItemProvider extends DbBase {
 
   //获取最新的一条chatitem，根据parentID
   Future<ChatItem?> getLatestChatItem(int parentID) async {
-    List<Map<String, Object?>> maps = await super.database.query(tableName,
-        columns: [
-          columnContent,
-          columnImages,
-          columnModuleName,
-          columnModuleType,
-          columnParentID,
-          columnRequestID,
-          columnStatus,
-          columnMessageType,
-          columnTime,
-          columnType,
-          columnExtra
-        ],
-        where: '$columnParentID = ?',
-        whereArgs: [parentID],
-        orderBy: '$columnTime DESC',
-        limit: 1);
+    List<Map<String, Object?>> maps = await super.database.query(tableName, columns: [columnContent, columnImages, columnModuleName, columnModuleType, columnParentID, columnRequestID, columnStatus, columnMessageType, columnTime, columnType, columnExtra], where: '$columnParentID = ?', whereArgs: [parentID], orderBy: '$columnTime DESC', limit: 1);
     if (maps.isNotEmpty) {
       return ChatItem.fromMap(maps.first);
     }
@@ -164,22 +114,7 @@ class ChatItemProvider extends DbBase {
   }
 
   Future<List<ChatItem>> getChatItems(int parentID) async {
-    List<Map<String, Object?>> maps = await super.database.query(tableName,
-        columns: [
-          columnContent,
-          columnImages,
-          columnModuleName,
-          columnModuleType,
-          columnMessageType,
-          columnParentID,
-          columnRequestID,
-          columnStatus,
-          columnTime,
-          columnType,
-          columnExtra
-        ],
-        where: '$columnParentID = ?',
-        whereArgs: [parentID]);
+    List<Map<String, Object?>> maps = await super.database.query(tableName, columns: [columnContent, columnImages, columnModuleName, columnModuleType, columnMessageType, columnParentID, columnRequestID, columnStatus, columnTime, columnType, columnExtra], where: '$columnParentID = ?', whereArgs: [parentID]);
     if (maps.isNotEmpty) {
       return maps.map((e) => ChatItem.fromMap(e)).toList();
     }
@@ -187,23 +122,7 @@ class ChatItemProvider extends DbBase {
   }
 
   Future<ChatItem?> getChatItem(int time) async {
-    List<Map<String, Object?>> maps = await super.database.query(tableName,
-        columns: [
-          columnContent,
-          columnImages,
-          columnModuleName,
-          columnModuleType,
-          columnParentID,
-          columnRequestID,
-          columnStatus,
-          columnTime,
-          columnMessageType,
-          columnType,
-          columnTime,
-          columnExtra
-        ],
-        where: '$columnTime = ?',
-        whereArgs: [time]);
+    List<Map<String, Object?>> maps = await super.database.query(tableName, columns: [columnContent, columnImages, columnModuleName, columnModuleType, columnParentID, columnRequestID, columnStatus, columnTime, columnMessageType, columnType, columnTime, columnExtra], where: '$columnTime = ?', whereArgs: [time]);
     if (maps.isNotEmpty) {
       return ChatItem.fromMap(maps.first);
     }
@@ -212,27 +131,20 @@ class ChatItemProvider extends DbBase {
 
   //查询所有parentID的数据，然后全部删除
   Future<int> deleteAll(int parentID) async {
-    return await super
-        .database
-        .delete(tableName, where: '$columnParentID = ?', whereArgs: [parentID]);
+    return await super.database.delete(tableName, where: '$columnParentID = ?', whereArgs: [parentID]);
   }
 
   Future<int> delete(int time) async {
-    return await super
-        .database
-        .delete(tableName, where: '$columnTime = ?', whereArgs: [time]);
+    return await super.database.delete(tableName, where: '$columnTime = ?', whereArgs: [time]);
   }
 
   //通过requestID， 查询到对应的time，然后删除
   Future<int> deleteRequestIDByTime(int time) async {
-    return await super
-        .database
-        .delete(tableName, where: '$columnRequestID = ?', whereArgs: [time]);
+    return await super.database.delete(tableName, where: '$columnRequestID = ?', whereArgs: [time]);
   }
 
   Future<int> updateItem(ChatItem item) async {
-    return await super.database.update(tableName, item.toMap(),
-        where: '$columnTime = ?', whereArgs: [item.time]);
+    return await super.database.update(tableName, item.toMap(), where: '$columnTime = ?', whereArgs: [item.time]);
   }
 
   Future close() async {
@@ -240,9 +152,7 @@ class ChatItemProvider extends DbBase {
   }
 
   void updateStatus(int parentID, int i, int j) {
-    super.database.update(tableName, {columnStatus: j},
-        where: '$columnParentID = ? and $columnStatus = ?',
-        whereArgs: [parentID, i]);
+    super.database.update(tableName, {columnStatus: j}, where: '$columnParentID = ? and $columnStatus = ?', whereArgs: [parentID, i]);
   }
 
   @override

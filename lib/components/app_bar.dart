@@ -4,11 +4,12 @@ import 'package:chat_bot/base.dart';
 
 class JuAppBar {
   //获取半透明的Appbar
-  static Widget baseBar({
+  static PreferredSizeWidget baseBar({
     double appHeight = 50,
     Widget? title,
     String? text,
     Widget? leading,
+    Size? size,
     List<Widget>? actions,
     PreferredSize? bottom,
   }) {
@@ -16,26 +17,29 @@ class JuAppBar {
     if (actions != null) {
       actions.add(6.width());
     }
-    return getFilterWidget(
-      child: AppBar(
-        centerTitle: true,
-        elevation: 0,
-        shadowColor: F.T.colorScheme.onSecondary,
-        title: text == null
-            ? title
-            : Container(
-                padding: const EdgeInsets.symmetric(horizontal: 24),
-                child: Text(
-                  text,
+    return PreferredSize(
+      preferredSize: size ?? const Size.fromHeight(100),
+      child: getFilterWidget(
+        child: AppBar(
+          centerTitle: true,
+          elevation: 0,
+          shadowColor: F.T.colorScheme.onSecondary,
+          title: text == null
+              ? title
+              : Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 24),
+                  child: Text(
+                    text,
+                  ),
                 ),
-              ),
-        titleSpacing: 0,
-        toolbarHeight: appHeight,
-        leading: leading,
-        leadingWidth: 80,
-        actions: actions,
-        bottom: bottom,
-        //bottom: getTitle(context, "Chats"),
+          titleSpacing: 0,
+          toolbarHeight: appHeight,
+          leading: leading,
+          leadingWidth: 80,
+          actions: actions,
+          bottom: bottom,
+          //bottom: getTitle(context, "Chats"),
+        ),
       ),
     );
   }

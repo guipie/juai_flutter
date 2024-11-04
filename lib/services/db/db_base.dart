@@ -1,16 +1,19 @@
 import 'package:chat_bot/base.dart';
 import 'package:chat_bot/services/db/chat_item.dart';
+import 'package:chat_bot/services/db/db_coversation.dart';
 import 'package:chat_bot/services/db/db_dict.dart';
 import 'package:chat_bot/services/db/prompt_item.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:sqflite_common_ffi/sqflite_ffi.dart';
+import 'package:sqflite_common/sqflite.dart';
+export 'package:sqflite_common/sqlite_api.dart';
 
 class MyDbProvider {
   static void getInstance() {
     PromptItemProvider();
     DictProvider.getInstance();
     ChatItemProvider();
+    DbConversation();
   }
 }
 
@@ -45,23 +48,21 @@ abstract class DbBase {
 
   ///创建数据库
   Future<Database> _initDatabase() async {
-    sqfliteFfiInit();
-    var databaseFactory = databaseFactoryFfi;
     final Directory appDocumentsDir = await getApplicationDocumentsDirectory();
     String dbBasePath = join(appDocumentsDir.path, "databases", _dbName);
-    _database ??= await databaseFactory.openDatabase(dbBasePath,
-        options: OpenDatabaseOptions(
-          version: _newVersion,
-          onUpgrade: (db, old, newV) {
-            _oldVersion = old;
-          },
-          onDowngrade: (db, old, newV) {
-            _oldVersion = old;
-          },
-          onCreate: onCreate,
-          readOnly: false,
-          singleInstance: true,
-        ));
+    _database ??= await openDatabase(
+      dbBasePath,
+      version: _newVersion,
+      onUpgrade: (db, old, newV) {
+        _oldVersion = old;
+      },
+      onDowngrade: (db, old, newV) {
+        _oldVersion = old;
+      },
+      onCreate: onCreate,
+      readOnly: false,
+      singleInstance: true,
+    );
 
     onReload(_database!, _newVersion);
 
@@ -136,6 +137,42 @@ abstract class DbBase {
     """);
   }
 
+  ///新增表
+  createTable(Map<String, dynamic> json, {bool hasPrimaryKey = true, String? keyName}) async {
+    if (_database == null) {
+      await _initDatabase();
+    }
+    final StringBuffer sqlBuffer = StringBuffer("CREATE TABLE $tableName (");
+    json.forEach((key, value) {
+      sqlBuffer.write("$key ");
+      switch (value.runtimeType) {
+        case int:
+          sqlBuffer.write("INTEGER");
+          if (hasPrimaryKey == true && key.toLowerCase().contains(keyName ?? 'id')) {
+            sqlBuffer.write(" PRIMARY KEY AUTOINCREMENT");
+          }
+          break;
+        case String:
+          sqlBuffer.write("TEXT");
+          break;
+        case double:
+          sqlBuffer.write("REAL");
+          break;
+        case bool:
+          sqlBuffer.write("BOOLEAN");
+          break;
+        case DateTime:
+          sqlBuffer.write("DATETIME DEFAULT CURRENT_TIMESTAMP");
+          break;
+        default:
+          throw Exception("Unsupported data type: ${value.runtimeType}");
+      }
+      sqlBuffer.write(", ");
+    });
+    sqlBuffer.write(")");
+    _database!.execute(sqlBuffer.toString()).catchError((err) => err.e());
+  }
+
   ///删表
   dropTable() async {
     if (_database == null) {
@@ -169,8 +206,7 @@ abstract class DbBase {
   }
 
   ///修改数据
-  update(
-      Map<String, Object?> whereData, Map<String, Object?> updateData) async {
+  update(Map<String, Object?> whereData, Map<String, Object?> updateData) async {
     List<String> keys = whereData.keys.toList();
     List<String> where = [];
     for (int i = 0; i < keys.length; i++) {

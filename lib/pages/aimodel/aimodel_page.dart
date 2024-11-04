@@ -1,6 +1,5 @@
 import 'package:chat_bot/base.dart';
 import 'package:chat_bot/components/td/tdesign_flutter.dart';
-import 'package:chat_bot/models/aimodel/aimodel_models.dart';
 import 'package:chat_bot/pages/aimodel/providers/aimodel_provider.dart';
 
 class AiModelPage extends ConsumerWidget {
