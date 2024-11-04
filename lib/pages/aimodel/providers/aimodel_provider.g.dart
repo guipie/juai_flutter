@@ -6,7 +6,7 @@ part of 'aimodel_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$aiModelProviderHash() => r'b7f47907945049e665387d8a86504b1aeb13cde4';
+String _$aiModelProviderHash() => r'9f7d1dd4ad7bcae33a7554424096ffdf0b542a25';
 
 /// See also [AiModelProvider].
 @ProviderFor(AiModelProvider)

@@ -1,3 +1,4 @@
+import 'package:chat_bot/base.dart';
 import 'package:chat_bot/components/paging/paging_data.dart';
 import 'package:chat_bot/components/paging/paging_notifier_mixin.dart';
 import 'package:chat_bot/models/aimodel/aimodel_models.dart';
@@ -64,7 +65,7 @@ class AiModelProvider extends _$AiModelProvider with PagePagingNotifierMixin<AiM
 
   @override
   Future<PagePagingData<AiModel>> fetch({required int page}) async {
-    var models = await Api.getList<AiModel>(ApiModel.models, fromJsonT: (json) => AiModel.fromJson(json));
+    var models = await Api.get<List<AiModel>>(ApiModel.models, fromJsonT: AiModel.fromJson);
     return PagePagingData(items: models.result, hasMore: models.result.length > 100, page: page);
   }
 }

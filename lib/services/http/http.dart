@@ -2,7 +2,6 @@ import 'package:chat_bot/constants/config.dart';
 import 'package:chat_bot/models/api_res.dart';
 import 'package:chat_bot/services/http/api_exception.dart';
 import 'package:dio/dio.dart';
-import 'package:extended_image/extended_image.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 import 'interceptor.dart';
@@ -44,7 +43,7 @@ class Http {
     Map<String, dynamic>? queryParameters,
     bool showLoading = true, //加载过程
     bool showErrorMessage = true, //返回数据
-    T Function(dynamic json)? fromJsonT,
+    Function(Map<String, dynamic>)? fromJsonT,
   }) async {
     const Map methodValues = {HttpMethod.get: 'get', HttpMethod.post: 'post', HttpMethod.put: 'put', HttpMethod.delete: 'delete', HttpMethod.patch: 'patch', HttpMethod.head: 'head'};
 
@@ -67,19 +66,13 @@ class Http {
         queryParameters: queryParameters,
         options: options,
       );
-      // 如果没有设置fromJsonT或者R是dynamic类型，直接返回响应数据
-      if (fromJsonT == null || T == dynamic || response.data is! Map<String, dynamic>) return ApiRes<T>.fromJson(response.data);
+      // // 如果没有设置fromJsonT或者R是dynamic类型，直接返回响应数据
+      // if (fromJsonT == null || T == dynamic || response.data is! Map<String, dynamic>) ;
       Map<String, dynamic>? responseObject = response.data;
       if (response.statusCode == 200 && responseObject != null && responseObject.isEmpty == false) {
         switch (responseObject['code']) {
           case 200:
-            if (T.toString().contains("list")) {
-              // return ApiListRes<T>.fromJson(responseObject, fromJsonT);
-            } else if (T.toString().contains("string")) {
-              // return ApiRes<T>.fromJson(responseObject, fromJsonT);
-            } else {
-              throw NotKnowResponseTypeException(-1, '未知响应类型【${T.toString()}】，请检查是否未正确设置响应类型！');
-            }
+            return ApiRes<T>.fromJson(responseObject, fromJsonT);
           case 105:
             throw NeedLoginException(-1, "需要登录");
           case 219:

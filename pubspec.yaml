@@ -54,10 +54,10 @@ dependencies:
   flutter_gemini: ^2.0.3
   flutter_markdown: '0.6.20'
   loading_animation_widget: ^1.2.1
-  sqflite_common:
-  # sqflite: '2.4.0'
+  # sqflite_common:
   # sqlite3_flutter_libs: ^0.5.26
-  # sqflite_common_ffi:
+  sqflite: '2.4.0'
+  sqflite_common_ffi:
   path: ^1.8.3
   photo_view: ^0.15.0
   animated_text_kit: ^4.2.2

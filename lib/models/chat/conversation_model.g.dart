@@ -13,13 +13,13 @@ _$ConversationModelImpl _$$ConversationModelImplFromJson(
       name: json['Name'] as String?,
       avatar: json['Avatar'] as String?,
       desc: json['Desc'] as String?,
-      create: json['Create'] == null
+      createTime: json['CreateTime'] == null
           ? null
-          : DateTime.parse(json['Create'] as String),
+          : DateTime.parse(json['CreateTime'] as String),
       lastTime: json['LastTime'] == null
           ? null
           : DateTime.parse(json['LastTime'] as String),
-      isUnReadCnt: (json['IsUnReadCnt'] as num?)?.toInt(),
+      isUnReadCnt: (json['IsUnReadCnt'] as num?)?.toDouble(),
     );
 
 Map<String, dynamic> _$$ConversationModelImplToJson(
@@ -29,7 +29,7 @@ Map<String, dynamic> _$$ConversationModelImplToJson(
       'Name': instance.name,
       'Avatar': instance.avatar,
       'Desc': instance.desc,
-      'Create': instance.create?.toIso8601String(),
+      'CreateTime': instance.createTime?.toIso8601String(),
       'LastTime': instance.lastTime?.toIso8601String(),
       'IsUnReadCnt': instance.isUnReadCnt,
     };

@@ -1,18 +1,12 @@
-import 'package:json_annotation/json_annotation.dart';
-part 'api_res.g.dart';
-
-@JsonSerializable(createToJson: false)
 class ApiRes<T> extends Object {
-  @JsonKey(name: 'code')
   int code;
 
-  @JsonKey(name: 'type')
   String type;
 
-  @JsonKey(name: 'message')
   String message;
 
-  @JsonKey(fromJson: _apiResFromJson)
+  Object? extras;
+  DateTime time;
   T result;
 
   ApiRes(
@@ -20,24 +14,25 @@ class ApiRes<T> extends Object {
     this.type,
     this.message,
     this.result,
+    this.extras,
+    this.time,
   );
-  factory ApiRes.fromJson(Map<String, dynamic> srcJson) => _$ApiResFromJson(srcJson);
 
-  static T _apiResFromJson<T>(Object json) {
+  ApiRes.fromJson(Map<String, dynamic> srcJson, Function(Map<String, dynamic>)? func)
+      : code = (srcJson['code'] as num).toInt(),
+        type = srcJson['type'] as String,
+        message = srcJson['message'] as String,
+        result = _apiResFromJson(srcJson['result'], func),
+        extras = srcJson['extras'],
+        time = DateTime.parse(srcJson['time'] as String);
+
+  static T _apiResFromJson<T>(Object json, Function(Map<String, dynamic>)? func) {
     if (json is Map<String, dynamic>) {
-      if (T.toString() == 'AttentionEntity') {
-        ApiRes.fromJson(json) as T;
-      }
+      return func!(json);
     } else if (json is List) {
-      if (T.toString() == 'List') {
-        return json.map((e) => ApiRes.fromJson(e as Map<String, dynamic>)).toList() as T;
-      }
+      return json.map((e) => func!(e as Map<String, dynamic>)).toList() as T;
     }
-    throw ArgumentError.value(
-      json,
-      'json',
-      'Cannot convert the provided data.',
-    );
+    return json as T;
   }
 }
 

@@ -3,10 +3,10 @@ import 'package:chat_bot/services/db/chat_item.dart';
 import 'package:chat_bot/services/db/db_coversation.dart';
 import 'package:chat_bot/services/db/db_dict.dart';
 import 'package:chat_bot/services/db/prompt_item.dart';
+import 'package:extended_image/extended_image.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:sqflite_common/sqflite.dart';
-export 'package:sqflite_common/sqlite_api.dart';
+import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
 class MyDbProvider {
   static void getInstance() {
@@ -50,6 +50,13 @@ abstract class DbBase {
   Future<Database> _initDatabase() async {
     final Directory appDocumentsDir = await getApplicationDocumentsDirectory();
     String dbBasePath = join(appDocumentsDir.path, "databases", _dbName);
+    if (Platform.isWindows || Platform.isLinux) {
+      sqfliteFfiInit();
+      databaseFactory = databaseFactoryFfi;
+      dbBasePath = join(appDocumentsDir.path, "databases", _dbName);
+    } else {
+      dbBasePath = join(await getDatabasesPath(), _dbName);
+    }
     _database ??= await openDatabase(
       dbBasePath,
       version: _newVersion,
@@ -152,25 +159,25 @@ abstract class DbBase {
             sqlBuffer.write(" PRIMARY KEY AUTOINCREMENT");
           }
           break;
-        case String:
-          sqlBuffer.write("TEXT");
-          break;
         case double:
           sqlBuffer.write("REAL");
+          break;
+        case String:
+          sqlBuffer.write("TEXT");
           break;
         case bool:
           sqlBuffer.write("BOOLEAN");
           break;
-        case DateTime:
-          sqlBuffer.write("DATETIME DEFAULT CURRENT_TIMESTAMP");
-          break;
+        // case DateTime:
+        //   sqlBuffer.write("DATETIME DEFAULT CURRENT_TIMESTAMP");
+        //   break;
         default:
           throw Exception("Unsupported data type: ${value.runtimeType}");
       }
       sqlBuffer.write(", ");
     });
     sqlBuffer.write(")");
-    _database!.execute(sqlBuffer.toString()).catchError((err) => err.e());
+    _database!.execute(sqlBuffer.toString().replaceAll(", )", ")"));
   }
 
   ///删表

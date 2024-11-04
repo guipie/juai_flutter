@@ -9,13 +9,13 @@ class Api {
   static Http httpRequest = Http();
 
   /// get
-  static Future<ApiRes<List<T>>> getList<T>(
+  static Future<ApiRes<T>> get<T>(
     String path, {
     dynamic data, //数据
     Map<String, dynamic>? queryParameters,
     bool showLoading = true, //加载过程
     bool showErrorMessage = true, //返回数据
-    T Function(dynamic json)? fromJsonT,
+    Function(Map<String, dynamic>)? fromJsonT,
   }) async {
     return await httpRequest.request<T>(path: path, method: HttpMethod.get, data: data, queryParameters: queryParameters, showLoading: showLoading, showErrorMessage: showErrorMessage, fromJsonT: fromJsonT);
   }

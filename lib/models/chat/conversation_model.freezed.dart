@@ -24,9 +24,9 @@ mixin _$ConversationModel {
   String? get name => throw _privateConstructorUsedError;
   String? get avatar => throw _privateConstructorUsedError;
   String? get desc => throw _privateConstructorUsedError;
-  DateTime? get create => throw _privateConstructorUsedError;
+  DateTime? get createTime => throw _privateConstructorUsedError;
   DateTime? get lastTime => throw _privateConstructorUsedError;
-  int? get isUnReadCnt => throw _privateConstructorUsedError;
+  double? get isUnReadCnt => throw _privateConstructorUsedError;
 
   /// Serializes this ConversationModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -49,9 +49,9 @@ abstract class $ConversationModelCopyWith<$Res> {
       String? name,
       String? avatar,
       String? desc,
-      DateTime? create,
+      DateTime? createTime,
       DateTime? lastTime,
-      int? isUnReadCnt});
+      double? isUnReadCnt});
 }
 
 /// @nodoc
@@ -73,7 +73,7 @@ class _$ConversationModelCopyWithImpl<$Res, $Val extends ConversationModel>
     Object? name = freezed,
     Object? avatar = freezed,
     Object? desc = freezed,
-    Object? create = freezed,
+    Object? createTime = freezed,
     Object? lastTime = freezed,
     Object? isUnReadCnt = freezed,
   }) {
@@ -94,9 +94,9 @@ class _$ConversationModelCopyWithImpl<$Res, $Val extends ConversationModel>
           ? _value.desc
           : desc // ignore: cast_nullable_to_non_nullable
               as String?,
-      create: freezed == create
-          ? _value.create
-          : create // ignore: cast_nullable_to_non_nullable
+      createTime: freezed == createTime
+          ? _value.createTime
+          : createTime // ignore: cast_nullable_to_non_nullable
               as DateTime?,
       lastTime: freezed == lastTime
           ? _value.lastTime
@@ -105,7 +105,7 @@ class _$ConversationModelCopyWithImpl<$Res, $Val extends ConversationModel>
       isUnReadCnt: freezed == isUnReadCnt
           ? _value.isUnReadCnt
           : isUnReadCnt // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as double?,
     ) as $Val);
   }
 }
@@ -123,9 +123,9 @@ abstract class _$$ConversationModelImplCopyWith<$Res>
       String? name,
       String? avatar,
       String? desc,
-      DateTime? create,
+      DateTime? createTime,
       DateTime? lastTime,
-      int? isUnReadCnt});
+      double? isUnReadCnt});
 }
 
 /// @nodoc
@@ -145,7 +145,7 @@ class __$$ConversationModelImplCopyWithImpl<$Res>
     Object? name = freezed,
     Object? avatar = freezed,
     Object? desc = freezed,
-    Object? create = freezed,
+    Object? createTime = freezed,
     Object? lastTime = freezed,
     Object? isUnReadCnt = freezed,
   }) {
@@ -166,9 +166,9 @@ class __$$ConversationModelImplCopyWithImpl<$Res>
           ? _value.desc
           : desc // ignore: cast_nullable_to_non_nullable
               as String?,
-      create: freezed == create
-          ? _value.create
-          : create // ignore: cast_nullable_to_non_nullable
+      createTime: freezed == createTime
+          ? _value.createTime
+          : createTime // ignore: cast_nullable_to_non_nullable
               as DateTime?,
       lastTime: freezed == lastTime
           ? _value.lastTime
@@ -177,7 +177,7 @@ class __$$ConversationModelImplCopyWithImpl<$Res>
       isUnReadCnt: freezed == isUnReadCnt
           ? _value.isUnReadCnt
           : isUnReadCnt // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as double?,
     ));
   }
 }
@@ -190,7 +190,7 @@ class _$ConversationModelImpl implements _ConversationModel {
       this.name,
       this.avatar,
       this.desc,
-      this.create,
+      this.createTime,
       this.lastTime,
       this.isUnReadCnt});
 
@@ -206,15 +206,15 @@ class _$ConversationModelImpl implements _ConversationModel {
   @override
   final String? desc;
   @override
-  final DateTime? create;
+  final DateTime? createTime;
   @override
   final DateTime? lastTime;
   @override
-  final int? isUnReadCnt;
+  final double? isUnReadCnt;
 
   @override
   String toString() {
-    return 'ConversationModel(id: $id, name: $name, avatar: $avatar, desc: $desc, create: $create, lastTime: $lastTime, isUnReadCnt: $isUnReadCnt)';
+    return 'ConversationModel(id: $id, name: $name, avatar: $avatar, desc: $desc, createTime: $createTime, lastTime: $lastTime, isUnReadCnt: $isUnReadCnt)';
   }
 
   @override
@@ -226,7 +226,8 @@ class _$ConversationModelImpl implements _ConversationModel {
             (identical(other.name, name) || other.name == name) &&
             (identical(other.avatar, avatar) || other.avatar == avatar) &&
             (identical(other.desc, desc) || other.desc == desc) &&
-            (identical(other.create, create) || other.create == create) &&
+            (identical(other.createTime, createTime) ||
+                other.createTime == createTime) &&
             (identical(other.lastTime, lastTime) ||
                 other.lastTime == lastTime) &&
             (identical(other.isUnReadCnt, isUnReadCnt) ||
@@ -236,7 +237,7 @@ class _$ConversationModelImpl implements _ConversationModel {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-      runtimeType, id, name, avatar, desc, create, lastTime, isUnReadCnt);
+      runtimeType, id, name, avatar, desc, createTime, lastTime, isUnReadCnt);
 
   /// Create a copy of ConversationModel
   /// with the given fields replaced by the non-null parameter values.
@@ -261,9 +262,9 @@ abstract class _ConversationModel implements ConversationModel {
       final String? name,
       final String? avatar,
       final String? desc,
-      final DateTime? create,
+      final DateTime? createTime,
       final DateTime? lastTime,
-      final int? isUnReadCnt}) = _$ConversationModelImpl;
+      final double? isUnReadCnt}) = _$ConversationModelImpl;
 
   factory _ConversationModel.fromJson(Map<String, dynamic> json) =
       _$ConversationModelImpl.fromJson;
@@ -277,11 +278,11 @@ abstract class _ConversationModel implements ConversationModel {
   @override
   String? get desc;
   @override
-  DateTime? get create;
+  DateTime? get createTime;
   @override
   DateTime? get lastTime;
   @override
-  int? get isUnReadCnt;
+  double? get isUnReadCnt;
 
   /// Create a copy of ConversationModel
   /// with the given fields replaced by the non-null parameter values.

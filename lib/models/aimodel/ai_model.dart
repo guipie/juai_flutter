@@ -2,16 +2,26 @@ part of 'aimodel_models.dart';
 
 @JsonSerializable()
 class AiModel {
+  @JsonKey(name: 'modelId')
   String modelId;
+  @JsonKey(name: 'name')
   String name;
+  @JsonKey(name: 'shortName')
   String shortName;
+  @JsonKey(name: 'avatarUrl')
   String avatarUrl;
+  @JsonKey(name: 'modelType')
   int modelType;
+  @JsonKey(name: 'category')
   String category;
+  @JsonKey(name: 'maxToken')
   int maxToken;
-  String tags;
-  String desc;
-  String settings;
+  @JsonKey(name: 'tags')
+  String? tags;
+  @JsonKey(name: 'desc')
+  String? desc;
+  @JsonKey(name: 'settings')
+  String? settings;
   AiModel({
     required this.modelId,
     required this.name,
@@ -20,9 +30,9 @@ class AiModel {
     required this.modelType,
     required this.category,
     required this.maxToken,
-    required this.tags,
-    required this.desc,
-    required this.settings,
+    this.tags,
+    this.desc,
+    this.settings,
   });
   factory AiModel.fromJson(Map<String, dynamic> json) => _$AiModelFromJson(json);
   Map<String, dynamic> toJson() => _$AiModelToJson(this);
