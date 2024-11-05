@@ -2,6 +2,7 @@ import 'package:chat_bot/components/paging/paging_data.dart';
 import 'package:chat_bot/components/paging/paging_notifier_mixin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
 /// A generic widget for pagination.

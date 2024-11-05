@@ -41,6 +41,7 @@ dependencies:
   just_audio: ^0.9.37
   # riverpod: ^2.5.1
   flutter_riverpod: ^2.6.1
+  infinite_scroll_pagination:
   riverpod_annotation:
   connectivity_plus: ^6.0.2
   share_plus: '7.2.2'
