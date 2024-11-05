@@ -5,7 +5,7 @@ import 'package:chat_bot/base.dart';
 class JuAppBar {
   //获取半透明的Appbar
   static PreferredSizeWidget baseBar({
-    double appHeight = 50,
+    double appHeight = 40,
     Widget? title,
     String? text,
     Widget? leading,
@@ -18,22 +18,14 @@ class JuAppBar {
       actions.add(6.width());
     }
     return PreferredSize(
-      preferredSize: size ?? const Size.fromHeight(100),
+      preferredSize: size ?? Size.fromHeight(appHeight),
       child: getFilterWidget(
         child: AppBar(
           centerTitle: true,
           elevation: 0,
           shadowColor: F.T.colorScheme.onSecondary,
-          title: text == null
-              ? title
-              : Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 24),
-                  child: Text(
-                    text,
-                  ),
-                ),
+          title: text == null ? title : Text(text),
           titleSpacing: 0,
-          toolbarHeight: appHeight,
           leading: leading,
           leadingWidth: 80,
           actions: actions,

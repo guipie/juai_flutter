@@ -1,3 +1,4 @@
+import 'package:chat_bot/utils/f.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
@@ -120,7 +121,13 @@ class _RiverPagedBuilderState<PageKeyType, ItemType> extends ConsumerState<River
       noItemsFoundIndicatorBuilder: widget.noItemsFoundIndicatorBuilder != null ? (ctx) => widget.noItemsFoundIndicatorBuilder!(ctx, _pagingController) : null,
       newPageErrorIndicatorBuilder: widget.newPageErrorIndicatorBuilder != null ? (ctx) => widget.newPageErrorIndicatorBuilder!(ctx, _pagingController) : null,
       newPageProgressIndicatorBuilder: widget.newPageProgressIndicatorBuilder != null ? (ctx) => widget.newPageProgressIndicatorBuilder!(ctx, _pagingController) : null,
-      noMoreItemsIndicatorBuilder: widget.noMoreItemsIndicatorBuilder != null ? (ctx) => widget.noMoreItemsIndicatorBuilder!(ctx, _pagingController) : null,
+      noMoreItemsIndicatorBuilder: widget.noMoreItemsIndicatorBuilder != null
+          ? (ctx) => widget.noMoreItemsIndicatorBuilder!(ctx, _pagingController)
+          : (ctx) => Center(
+                  child: Text(
+                '我也是有底线的',
+                style: F.T.textTheme.bodySmall,
+              )),
     );
 
     // return a [PagedBuilder]
@@ -128,7 +135,10 @@ class _RiverPagedBuilderState<PageKeyType, ItemType> extends ConsumerState<River
 
     // Add pull to refresh functionality if specified
     if (widget.pullToRefresh) {
-      pagedBuilder = RefreshIndicator(onRefresh: () async => ref.refresh(_provider), child: pagedBuilder);
+      pagedBuilder = RefreshIndicator(
+        onRefresh: () async => ref.refresh(_provider),
+        child: pagedBuilder,
+      );
     }
 
     return pagedBuilder;

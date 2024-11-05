@@ -1,6 +1,7 @@
 import 'package:chat_bot/base.dart';
 import 'package:chat_bot/base/version_check.dart';
 import 'package:chat_bot/module/chat/chat_list_page.dart';
+import 'package:chat_bot/pages/chat/conversation_page.dart';
 import 'package:chat_bot/pages/home/home_viewmodel.dart';
 import 'package:chat_bot/pages/home/widgets.dart';
 
@@ -17,8 +18,7 @@ class HomePage extends ConsumerStatefulWidget {
   ConsumerState createState() => _HomePageState();
 }
 
-class _HomePageState extends ConsumerState<HomePage>
-    with WidgetsBindingObserver {
+class _HomePageState extends ConsumerState<HomePage> with WidgetsBindingObserver {
   @override
   void initState() {
     super.initState();
@@ -35,8 +35,7 @@ class _HomePageState extends ConsumerState<HomePage>
 
     var brightness = View.of(context).platformDispatcher.platformBrightness;
 
-    if (SpUtil.getInt(spLightTheme, defValue: ThemeType.system.index) !=
-        ThemeType.system.index) {
+    if (SpUtil.getInt(spLightTheme, defValue: ThemeType.system.index) != ThemeType.system.index) {
       return;
     }
 
@@ -62,7 +61,7 @@ class _HomePageState extends ConsumerState<HomePage>
       body: IndexedStack(
         index: currentIndex,
         children: const [
-          ChatListPage(),
+          ConversationPage(),
           PromptPage(),
           ServicesPage(),
           SettingPage(),
@@ -72,17 +71,13 @@ class _HomePageState extends ConsumerState<HomePage>
       bottomNavigationBar: Container(
         color: Colors.transparent,
         child: SizedBox(
-          height: kBottomNavigationBarHeight +
-              MediaQuery.paddingOf(context).bottom +
-              kBottomNavigationBarHeight / 2,
+          height: kBottomNavigationBarHeight + MediaQuery.paddingOf(context).bottom + kBottomNavigationBarHeight / 2,
           child: CustomPaint(
             painter: BottomNavPainter(
               bgColor: Theme.of(context).cardColor,
             ),
             child: Padding(
-              padding: EdgeInsets.only(
-                  bottom: MediaQuery.paddingOf(context).bottom,
-                  top: kBottomNavigationBarHeight / 2),
+              padding: EdgeInsets.only(bottom: MediaQuery.paddingOf(context).bottom, top: kBottomNavigationBarHeight / 2),
               child: Row(
                 children: [
                   ...menus

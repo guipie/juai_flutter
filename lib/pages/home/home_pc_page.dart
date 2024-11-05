@@ -3,6 +3,7 @@ import 'package:chat_bot/base/version_check.dart';
 import 'package:chat_bot/components/td/tdesign_flutter.dart';
 import 'package:chat_bot/module/chat/chat_list_page.dart';
 import 'package:chat_bot/pages/aimodel/aimodel_page.dart';
+import 'package:chat_bot/pages/chat/conversation_page.dart';
 import 'package:chat_bot/pages/home/home_viewmodel.dart';
 
 import '../../const.dart';
@@ -17,8 +18,7 @@ class HomePcPage extends ConsumerStatefulWidget {
   ConsumerState createState() => _HomePcPageState();
 }
 
-class _HomePcPageState extends ConsumerState<HomePcPage>
-    with WidgetsBindingObserver {
+class _HomePcPageState extends ConsumerState<HomePcPage> with WidgetsBindingObserver {
   @override
   void initState() {
     super.initState();
@@ -35,8 +35,7 @@ class _HomePcPageState extends ConsumerState<HomePcPage>
 
     var brightness = View.of(context).platformDispatcher.platformBrightness;
 
-    if (SpUtil.getInt(spLightTheme, defValue: ThemeType.system.index) !=
-        ThemeType.system.index) {
+    if (SpUtil.getInt(spLightTheme, defValue: ThemeType.system.index) != ThemeType.system.index) {
       return;
     }
 
@@ -59,7 +58,7 @@ class _HomePcPageState extends ConsumerState<HomePcPage>
     final pageController = PageController(initialPage: 0);
     final sideBarController = TDSideBarController();
     const pages = [
-      ChatListPage(),
+      ConversationPage(),
       AiModelPage(),
       ServicesPage(),
       SettingPage(),
@@ -98,13 +97,10 @@ class _HomePcPageState extends ConsumerState<HomePcPage>
                       )
                       .toList(),
                   onSelected: (value) {
-                    ref
-                        .read(homeIndexProvider.notifier)
-                        .update((state) => value);
+                    ref.read(homeIndexProvider.notifier).update((state) => value);
                     pageController.jumpToPage(value);
                   },
-                  contentPadding:
-                      const EdgeInsets.only(left: 36, top: 16, bottom: 16),
+                  contentPadding: const EdgeInsets.only(left: 36, top: 16, bottom: 16),
                 ),
                 Expanded(child: 10.height()),
                 IconButton(
