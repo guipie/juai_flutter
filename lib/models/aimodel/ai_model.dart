@@ -35,5 +35,6 @@ class AiModel {
     this.settings,
   });
   factory AiModel.fromJson(Map<String, dynamic> json) => _$AiModelFromJson(json);
+  List<AiModel> fromListJson(List<Map<String, dynamic>> json) => json.map((itemJson) => _$AiModelFromJson(itemJson)).toList();
   Map<String, dynamic> toJson() => _$AiModelToJson(this);
 }

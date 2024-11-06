@@ -15,7 +15,18 @@ class Api {
     Map<String, dynamic>? queryParameters,
     bool showLoading = true, //加载过程
     bool showErrorMessage = true, //返回数据
-    Function(Map<String, dynamic>)? fromJsonT,
+    Function(Object)? fromJsonT,
+  }) async {
+    return await httpRequest.request<T>(path: path, method: HttpMethod.get, data: data, queryParameters: queryParameters, showLoading: showLoading, showErrorMessage: showErrorMessage, fromJsonT: fromJsonT);
+  }
+
+  static Future<ApiListRes<T>> getList<T>(
+    String path, {
+    dynamic data, //数据
+    Map<String, dynamic>? queryParameters,
+    bool showLoading = true, //加载过程
+    bool showErrorMessage = true, //返回数据
+    Function(Object)? fromJsonT,
   }) async {
     return await httpRequest.request<T>(path: path, method: HttpMethod.get, data: data, queryParameters: queryParameters, showLoading: showLoading, showErrorMessage: showErrorMessage, fromJsonT: fromJsonT);
   }

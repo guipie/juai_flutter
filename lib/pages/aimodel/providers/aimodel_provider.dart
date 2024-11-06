@@ -65,7 +65,7 @@ class AiModelProvider extends _$AiModelProvider with PagePagingNotifierMixin<AiM
 
   @override
   Future<PagePagingData<AiModel>> fetch({required int page}) async {
-    var models = await Api.get<List<AiModel>>(ApiModel.models, fromJsonT: AiModel.fromJson);
-    return PagePagingData(items: models.result, hasMore: models.result.length > 100, page: page);
+    var models = await Api.get<List<AiModel>>(ApiModel.models, fromJsonT: (p0) => (p0 as List).map((m) => AiModel.fromJson(m)));
+    return PagePagingData(items: models.result ?? [], hasMore: (models.result ?? []).length > 100, page: page);
   }
 }

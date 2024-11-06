@@ -43,7 +43,7 @@ class Http {
     Map<String, dynamic>? queryParameters,
     bool showLoading = true, //加载过程
     bool showErrorMessage = true, //返回数据
-    Function(Map<String, dynamic>)? fromJsonT,
+    Function(Object)? fromJsonT,
   }) async {
     const Map methodValues = {HttpMethod.get: 'get', HttpMethod.post: 'post', HttpMethod.put: 'put', HttpMethod.delete: 'delete', HttpMethod.patch: 'patch', HttpMethod.head: 'head'};
 
@@ -72,7 +72,16 @@ class Http {
       if (response.statusCode == 200 && responseObject != null && responseObject.isEmpty == false) {
         switch (responseObject['code']) {
           case 200:
-            return ApiRes<T>.fromJson(responseObject, fromJsonT);
+            {
+              var result = responseObject['result'];
+              if (result is List) {
+                return ApiRes<T>.fromJson(
+                  responseObject,
+                  (json) => (json as List).map((item) => fromJsonT!(item)).toList(),
+                );
+              }
+              if (result is Map) return ApiRes<T>.fromJson(responseObject, fromJsonT!(result));
+            }
           case 105:
             throw NeedLoginException(-1, "需要登录");
           case 219:
