@@ -26,6 +26,7 @@
   "is_responsing": "The server is responding...",
   "hold_micro_phone_talk": "Hold the bottom microphone to talk",
   "generate_content_is_empty": "The generated content is empty",
+  "chat_content_need_add": "Click on the upper right corner to add various paintings, digital people",
   "can_not_get_voice_content": "No voice content recognized",
   "no_module_use": "No model available",
   "open_micro_permission": "Please enable recording permission",

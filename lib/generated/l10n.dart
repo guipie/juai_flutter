@@ -310,6 +310,16 @@ class S {
     );
   }
 
+  /// `Click on the upper right corner to add various paintings, digital people`
+  String get chat_content_need_add {
+    return Intl.message(
+      'Click on the upper right corner to add various paintings, digital people',
+      name: 'chat_content_need_add',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `No voice content recognized`
   String get can_not_get_voice_content {
     return Intl.message(

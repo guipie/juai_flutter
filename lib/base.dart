@@ -12,3 +12,4 @@ export 'package:chat_bot/components/app_bar.dart';
 export 'generated/l10n.dart';
 export 'utils/f.dart';
 export 'utils/util.dart';
+export 'package:chat_bot/constants/theme.dart';

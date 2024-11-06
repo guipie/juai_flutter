@@ -8,7 +8,6 @@ class ConversationNotifier extends PagedNotifier<int, ConversationModel> {
           load: _loadData,
           nextPageKeyBuilder: NextPageKeyBuilderDefault.mysqlPagination,
         );
-  int num = 1;
 
   static Future<List<ConversationModel>> _loadData(int page, int limit) async {
     await Future.delayed(const Duration(milliseconds: 2000));
@@ -17,8 +16,8 @@ class ConversationNotifier extends PagedNotifier<int, ConversationModel> {
         20,
         (index) => ConversationModel(
               id: index,
-              name: "测试${index + ((limit * page) - limit)} ",
-              desc: "My ${index + ((limit * page) - limit)} work",
+              name: "测$index试${index + ((limit * page) - limit)} ",
+              desc: F.randomAvatar,
               avatar: F.randomAvatar,
             ));
   }
@@ -30,3 +29,5 @@ class ConversationNotifier extends PagedNotifier<int, ConversationModel> {
 }
 
 final conversationProvider = StateNotifierProvider<ConversationNotifier, PagedState<int, ConversationModel>>((ref) => ConversationNotifier());
+
+final curConversationIndexProvider = StateProvider<int>((ref) => 0);

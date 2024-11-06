@@ -1,3 +1,4 @@
+import 'package:chat_bot/components/td/tdesign_flutter.dart';
 import 'package:chat_bot/utils/f.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -116,7 +117,18 @@ class _RiverPagedBuilderState<PageKeyType, ItemType> extends ConsumerState<River
     // Allow possibility to customize indicators
     final itemBuilder = PagedChildBuilderDelegate<ItemType>(
       itemBuilder: widget.itemBuilder,
-      firstPageErrorIndicatorBuilder: widget.firstPageErrorIndicatorBuilder != null ? (ctx) => widget.firstPageErrorIndicatorBuilder!(ctx, _pagingController) : null,
+      firstPageErrorIndicatorBuilder: widget.firstPageErrorIndicatorBuilder != null
+          ? (ctx) => widget.firstPageErrorIndicatorBuilder!(ctx, _pagingController)
+          : (ctx) => TDButton(
+                text: '出错了,点击重试..',
+                size: TDButtonSize.large,
+                type: TDButtonType.text,
+                shape: TDButtonShape.rectangle,
+                theme: TDButtonTheme.danger,
+                onTap: () async {
+                  return await ref.refresh(_provider);
+                },
+              ),
       firstPageProgressIndicatorBuilder: widget.firstPageProgressIndicatorBuilder != null ? (ctx) => widget.firstPageProgressIndicatorBuilder!(ctx, _pagingController) : null,
       noItemsFoundIndicatorBuilder: widget.noItemsFoundIndicatorBuilder != null ? (ctx) => widget.noItemsFoundIndicatorBuilder!(ctx, _pagingController) : null,
       newPageErrorIndicatorBuilder: widget.newPageErrorIndicatorBuilder != null ? (ctx) => widget.newPageErrorIndicatorBuilder!(ctx, _pagingController) : null,
@@ -126,7 +138,7 @@ class _RiverPagedBuilderState<PageKeyType, ItemType> extends ConsumerState<River
           : (ctx) => Center(
                   child: Text(
                 '我也是有底线的',
-                style: F.T.textTheme.bodySmall,
+                style: Theme.of(context).textTheme.bodySmall,
               )),
     );
 

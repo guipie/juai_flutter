@@ -37,9 +37,7 @@ Locale getLocaleByDefaultCode() {
     }
   }
 
-  return S.delegate.supportedLocales.firstWhere(
-      (element) => element.languageCode == resultCode,
-      orElse: () => WidgetsBinding.instance.window.locale);
+  return S.delegate.supportedLocales.firstWhere((element) => element.languageCode == resultCode, orElse: () => WidgetsBinding.instance.window.locale);
 }
 
 Locale getLocaleByCode(String code) {
@@ -55,9 +53,7 @@ Locale getLocaleByCode(String code) {
     }
   }
 
-  return S.delegate.supportedLocales.firstWhere(
-      (element) => element.languageCode == resultCode,
-      orElse: () => WidgetsBinding.instance.window.locale);
+  return S.delegate.supportedLocales.firstWhere((element) => element.languageCode == resultCode, orElse: () => WidgetsBinding.instance.window.locale);
 }
 
 Map<String, String> getLocaleLanguages() {
@@ -99,8 +95,7 @@ String getLocaleNameByCode(String code) {
   return "English";
 }
 
-final globalLanguageProvider =
-    StateNotifierProvider<GlobalLanguageModel, String>((ref) {
+final globalLanguageProvider = StateNotifierProvider<GlobalLanguageModel, String>((ref) {
   return GlobalLanguageModel(HiveBox().globalLanguageCode);
 });
 
@@ -119,10 +114,8 @@ class GlobalLanguageModel extends StateNotifier<String> {
   }
 }
 
-final primaryColorProvider =
-    StateNotifierProvider<PrimaryColorNotify, Color>((ref) {
-  return PrimaryColorNotify(
-      Color(int.parse(HiveBox().primaryColor, radix: 16)));
+final primaryColorProvider = StateNotifierProvider<PrimaryColorNotify, Color>((ref) {
+  return PrimaryColorNotify(Color(int.parse(HiveBox().primaryColor, radix: 16)));
 });
 
 class PrimaryColorNotify extends StateNotifier<Color> {
@@ -131,9 +124,7 @@ class PrimaryColorNotify extends StateNotifier<Color> {
   void change(Color t) {
     if (t == state) return;
     state = t;
-    HiveBox()
-        .appConfig
-        .put(HiveBox.cAppConfigPrimaryColor, t.value.toRadixString(16));
+    HiveBox().appConfig.put(HiveBox.cAppConfigPrimaryColor, t.value.toRadixString(16));
   }
 
   Color get color => state;
@@ -169,8 +160,7 @@ BaseTheme _getThemeByType(int themeType) {
     case 1:
       return DarkTheme();
     case 2:
-      var brightness =
-          SchedulerBinding.instance.platformDispatcher.platformBrightness;
+      var brightness = SchedulerBinding.instance.platformDispatcher.platformBrightness;
       bool isDarkMode = brightness == Brightness.dark;
       if (isDarkMode) {
         return DarkTheme();
@@ -187,8 +177,7 @@ class ThemeViewModel extends StateNotifier<BaseTheme> {
     state = _getThemeByType(type);
   }
 
-  ThemeType get type => ThemeType.getType(
-      SpUtil.getInt(spLightTheme, defValue: ThemeType.system.index));
+  ThemeType get type => ThemeType.getType(SpUtil.getInt(spLightTheme, defValue: ThemeType.system.index));
 
   void change(int t) {
     state = _getThemeByType(t);
@@ -251,15 +240,15 @@ class LightTheme extends BaseTheme {
       textTheme: const TextTheme(
         titleSmall: TextStyle(
           color: Color(0xff091807),
-          fontWeight: FontWeight.normal,
+          fontWeight: FontWeight.w500,
         ),
         titleMedium: TextStyle(
           color: Color(0xff091807),
-          fontWeight: FontWeight.normal,
+          fontWeight: FontWeight.w500,
         ),
         titleLarge: TextStyle(
           color: Color(0xff091807),
-          fontWeight: FontWeight.normal,
+          fontWeight: FontWeight.w500,
         ),
         bodyLarge: TextStyle(
           color: Color(0xff676767),
@@ -390,16 +379,7 @@ class DarkTheme extends BaseTheme {
   @override
   ThemeData theme(Color primaryColor) {
     return ThemeData.dark().copyWith(
-      colorScheme: ColorScheme.dark(
-          primary: primaryColor,
-          onPrimary: primaryColor.withAlpha(10),
-          secondary: Colors.black,
-          onSecondary: Colors.black87,
-          surface: Colors.white,
-          onSurface: Colors.white70,
-          error: const Color(0xffFF3B30),
-          onError: Colors.white,
-          brightness: Brightness.dark),
+      colorScheme: ColorScheme.dark(primary: primaryColor, onPrimary: primaryColor.withAlpha(10), secondary: Colors.black, onSecondary: Colors.black87, surface: Colors.white, onSurface: Colors.white70, error: const Color(0xffFF3B30), onError: Colors.white, brightness: Brightness.dark),
       scaffoldBackgroundColor: const Color(0xff111111),
       primaryColor: primaryColor,
       hoverColor: primaryColor,

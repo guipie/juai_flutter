@@ -23,7 +23,6 @@ class JuAppBar {
         child: AppBar(
           centerTitle: true,
           elevation: 0,
-          shadowColor: F.T.colorScheme.onSecondary,
           title: text == null ? title : Text(text),
           titleSpacing: 0,
           leading: leading,
@@ -52,7 +51,7 @@ class JuAppBar {
             sigmaY: sigmaY,
           ),
           child: Container(
-            color: hasColor ? F.T.colorScheme.onPrimary : null,
+            color: hasColor ? LightTheme().xff00ff() : null,
             padding: padding,
             child: child,
           )),

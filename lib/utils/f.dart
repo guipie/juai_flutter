@@ -17,8 +17,6 @@ class _FImpl {
 
   static final _FImpl _singleton = _FImpl._internal();
 
-  ThemeData get T => Theme.of(_navigatorKey.currentContext!);
-
   ///常用工具方法
   get width => MediaQuery.sizeOf(context).width;
 
@@ -136,7 +134,7 @@ class _FImpl {
     );
   }
 
-  String get randomAvatar => "https://avatars.githubusercontent.com/u/${Random(1000).nextInt(10000000)}";
+  String get randomAvatar => "https://avatars.githubusercontent.com/u/${Random(DateTime.now().millisecondsSinceEpoch).nextInt(1000000)}";
   String get randomPic => "https://api.multiavatar.com/${Random(1000).nextInt(10000000)}.png";
 }
 

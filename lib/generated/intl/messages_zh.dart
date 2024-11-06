@@ -30,7 +30,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "alias_repeat": MessageLookupByLibrary.simpleMessage("别名不可以重复"),
         "alias_required": MessageLookupByLibrary.simpleMessage("别名(必填)"),
         "apikey_repeat": MessageLookupByLibrary.simpleMessage("ApiKey不可以重复"),
-        "app_name": MessageLookupByLibrary.simpleMessage("ChatBot"),
+        "app_name": MessageLookupByLibrary.simpleMessage("聚AI"),
         "appearance": MessageLookupByLibrary.simpleMessage("外观"),
         "author": MessageLookupByLibrary.simpleMessage("作者"),
         "auto_title": MessageLookupByLibrary.simpleMessage("自动生成标题"),
@@ -43,6 +43,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "cancel": MessageLookupByLibrary.simpleMessage("取消"),
         "canceling": MessageLookupByLibrary.simpleMessage("正在取消..."),
         "cannot_empty": MessageLookupByLibrary.simpleMessage("不能为空"),
+        "chat_content_need_add":
+            MessageLookupByLibrary.simpleMessage("点击右上角添加各种绘画，数字人等"),
         "chat_setting": MessageLookupByLibrary.simpleMessage("聊天设置"),
         "clear_context": MessageLookupByLibrary.simpleMessage("清空上下文"),
         "confirm": MessageLookupByLibrary.simpleMessage("确定"),

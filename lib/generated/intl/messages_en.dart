@@ -51,6 +51,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "canceling": MessageLookupByLibrary.simpleMessage("canceling..."),
         "cannot_empty": MessageLookupByLibrary.simpleMessage("Cannot be empty"),
+        "chat_content_need_add": MessageLookupByLibrary.simpleMessage(
+            "Click on the upper right corner to add various paintings, digital people"),
         "chat_setting": MessageLookupByLibrary.simpleMessage("Chat Setting"),
         "clear_context": MessageLookupByLibrary.simpleMessage("Clear Context"),
         "confirm": MessageLookupByLibrary.simpleMessage("Confirm"),

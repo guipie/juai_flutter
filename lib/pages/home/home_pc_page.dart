@@ -1,9 +1,9 @@
 import 'package:chat_bot/base.dart';
 import 'package:chat_bot/base/version_check.dart';
 import 'package:chat_bot/components/td/tdesign_flutter.dart';
-import 'package:chat_bot/module/chat/chat_list_page.dart';
 import 'package:chat_bot/pages/aimodel/aimodel_page.dart';
 import 'package:chat_bot/pages/chat/conversation_page.dart';
+import 'package:chat_bot/pages/chat/conversation_pc_page.dart';
 import 'package:chat_bot/pages/home/home_viewmodel.dart';
 
 import '../../const.dart';
@@ -55,10 +55,10 @@ class _HomePcPageState extends ConsumerState<HomePcPage> with WidgetsBindingObse
   @override
   Widget build(BuildContext context) {
     var currentIndex = ref.watch(homeIndexProvider);
-    final pageController = PageController(initialPage: 0);
+    // final pageController = PageController(initialPage: 0);
     final sideBarController = TDSideBarController();
     const pages = [
-      ConversationPage(),
+      ConversationPcPage(),
       AiModelPage(),
       ServicesPage(),
       SettingPage(),
@@ -67,20 +67,22 @@ class _HomePcPageState extends ConsumerState<HomePcPage> with WidgetsBindingObse
     return Scaffold(
       extendBody: true,
       body: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
             width: 60,
             height: F.height,
-            color: F.T.colorScheme.onPrimary,
+            color: Theme.of(context).colorScheme.onPrimary,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 10.height(),
-                const TDAvatar(
-                  text: "A",
+                TDAvatar(
+                  avatarUrl: F.randomAvatar,
                   size: TDAvatarSize.small,
                   shape: TDAvatarShape.square,
                 ),
+                15.height(),
                 TDSideBar(
                   height: F.height / 2,
                   style: TDSideBarStyle.outline,
@@ -98,7 +100,7 @@ class _HomePcPageState extends ConsumerState<HomePcPage> with WidgetsBindingObse
                       .toList(),
                   onSelected: (value) {
                     ref.read(homeIndexProvider.notifier).update((state) => value);
-                    pageController.jumpToPage(value);
+                    // pageController.jumpToPage(value);
                   },
                   contentPadding: const EdgeInsets.only(left: 36, top: 16, bottom: 16),
                 ),
@@ -111,14 +113,9 @@ class _HomePcPageState extends ConsumerState<HomePcPage> with WidgetsBindingObse
             ),
           ),
           Expanded(
-            child: SizedBox(
-              height: double.infinity,
-              child: PageView(
-                controller: pageController,
-                scrollDirection: Axis.vertical,
-                physics: const NeverScrollableScrollPhysics(),
-                children: pages,
-              ),
+            child: IndexedStack(
+              index: currentIndex,
+              children: pages,
             ),
           )
         ],

@@ -1,6 +1,6 @@
 {
   "@@locale": "zh",
-  "app_name": "ChatBot",
+  "app_name": "聚AI",
   "home_chat": "聊天",
   "voiceChat": "语音聊天",
   "new_chat": "随便聊聊",
@@ -106,6 +106,7 @@
   "send": "发送",
   "yesterday": "昨天",
   "empty_content_need_add": "您还没有内容，快点击右上角添加吧",
+  "chat_content_need_add": "点击右上角添加各种绘画，数字人等",
   "author": "作者",
   "title": "标题",
   "add_prompt": "新增 AI 提示",
