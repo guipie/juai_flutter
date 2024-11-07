@@ -1,9 +1,10 @@
-import 'package:chat_bot/base.dart';
-import 'package:chat_bot/components/common_loading.dart';
-import 'package:chat_bot/components/riverpod_paging/paged_builder.dart';
-import 'package:chat_bot/pages/chat/providers/conversation_provider.dart';
-import 'package:chat_bot/pages/chat/widgets/conversation_widget.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+
+import '../../base.dart';
+import '../../components/common_loading.dart';
+import '../../components/riverpod_paging/paged_builder.dart';
+import 'providers/conversation_provider.dart';
+import 'widgets/conversation_widget.dart';
 
 class ConversationPcPage extends ConsumerWidget {
   const ConversationPcPage({super.key});
@@ -13,10 +14,14 @@ class ConversationPcPage extends ConsumerWidget {
     var currentIndex = ref.watch(curConversationIndexProvider);
     var pageController = PageController(initialPage: currentIndex);
     return Scaffold(
-      appBar: ConversationWidget.bulidAppBar(ref),
+      appBar: ConversationWidget.bulidAppBar(ref, context),
       body: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        SizedBox(
+        Container(
           width: 260,
+          decoration: BoxDecoration(
+            color: Theme.of(context).colorScheme.onSecondary,
+            border: Border(right: BorderSide(color: Theme.of(context).colorScheme.onPrimary, width: 1)),
+          ),
           child: RiverPagedBuilder<int, ConversationModel>(
             firstPageKey: 1,
             pullToRefresh: true,

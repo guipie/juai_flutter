@@ -18,18 +18,14 @@ class _MouseHoverWidgetState extends State<MouseHoverWidget> {
     return MouseRegion(
       onEnter: (_) => _mouseEnter(true),
       onExit: (_) => _mouseEnter(false),
-      child: AnimatedContainer(
-        width: 250,
-        height: 100,
-        duration: const Duration(milliseconds: 200),
-        color: _isHovering ? Colors.red : null,
+      child: Container(
+        color: _isHovering ? Theme.of(context).dividerTheme.color : null,
         child: widget.child,
       ),
     );
   }
 
   void _mouseEnter(bool hovering) {
-    "是否移入：$hovering".e();
     setState(() {
       _isHovering = hovering;
     });

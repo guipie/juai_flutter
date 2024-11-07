@@ -2,12 +2,10 @@ import 'package:chat_bot/base.dart';
 import 'package:chat_bot/base/version_check.dart';
 import 'package:chat_bot/components/td/tdesign_flutter.dart';
 import 'package:chat_bot/pages/aimodel/aimodel_page.dart';
-import 'package:chat_bot/pages/chat/conversation_page.dart';
 import 'package:chat_bot/pages/chat/conversation_pc_page.dart';
 import 'package:chat_bot/pages/home/home_viewmodel.dart';
 
 import '../../const.dart';
-import '../../constants/theme.dart';
 import '../../module/services/services_page.dart';
 import '../../module/setting/setting_page.dart';
 

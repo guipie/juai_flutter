@@ -106,6 +106,14 @@ flutter:
     - assets/command.json
     - assets/images/
     - assets/lottie/
+    - assets/tdesign/
+  fonts:
+    - family: TDIcons
+      fonts:
+        - asset: assets/tdesign/td_icons.ttf
+    - family: TCloudNumber
+      fonts:
+        - asset: assets/tdesign/TCloudNumberVF.ttf
 flutter_intl:
   enabled: true
 

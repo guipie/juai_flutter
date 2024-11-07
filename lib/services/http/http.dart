@@ -74,13 +74,15 @@ class Http {
           case 200:
             {
               var result = responseObject['result'];
+              var apiRes = ApiRes<T>.fromJson(responseObject);
               if (result is List) {
-                return ApiRes<T>.fromJson(
-                  responseObject,
-                  (json) => (json as List).map((item) => fromJsonT!(item)).toList(),
-                );
+                apiRes.result = (result).map((item) => fromJsonT!(item)).toList() as T;
+              } else if (result is Map) {
+                apiRes.result = fromJsonT!(result);
+              } else {
+                apiRes.result = result;
               }
-              if (result is Map) return ApiRes<T>.fromJson(responseObject, fromJsonT!(result));
+              return apiRes;
             }
           case 105:
             throw NeedLoginException(-1, "需要登录");

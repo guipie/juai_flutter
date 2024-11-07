@@ -1,11 +1,10 @@
-import 'package:chat_bot/base.dart';
-import 'package:chat_bot/components/mouse_hover.dart';
-import 'package:chat_bot/components/td/src/components/avatar/td_avatar.dart';
-import 'package:chat_bot/hive_bean/local_chat_history.dart';
-import 'package:chat_bot/module/chat/chat_list_view_model.dart';
-import 'package:chat_bot/pages/chat/chat_page.dart';
-import 'package:chat_bot/utils/hive_box.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
+import '../../../base.dart';
+import '../../../components/mouse_hover.dart';
+import '../../../components/td/tdesign_flutter.dart';
+import '../../../hive_bean/local_chat_history.dart';
+import '../../../module/chat/chat_list_view_model.dart';
+import '../chat_page.dart';
+import '../../../utils/hive_box.dart';
 import 'package:pull_down_button/pull_down_button.dart';
 
 class ConversationWidget {
@@ -16,7 +15,6 @@ class ConversationWidget {
     required Function(ConversationModel result) onClick,
   }) {
     return MouseHoverWidget(
-      hoverColor: ref.watch(themeProvider).pinedBgColor(),
       child: Slidable(
         endActionPane: ActionPane(
           motion: const BehindMotion(),
@@ -24,7 +22,7 @@ class ConversationWidget {
           children: [
             SlidableAction(
               onPressed: (context) {
-                debugPrint("SlidableAction-1");
+                debugPrint('SlidableAction-1');
               },
               backgroundColor: Theme.of(context).primaryColor,
               foregroundColor: Colors.white,
@@ -32,7 +30,7 @@ class ConversationWidget {
             ),
             SlidableAction(
               onPressed: (context) {
-                debugPrint("SlidableAction-2");
+                debugPrint('SlidableAction-2');
               },
               backgroundColor: Colors.red,
               icon: Icons.delete,
@@ -40,7 +38,7 @@ class ConversationWidget {
           ],
         ),
         child: Container(
-          color: ref.watch(themeProvider).unPinedBgColor(),
+          // color: ref.watch(themeProvider).unPinedBgColor(),
           padding: const EdgeInsets.symmetric(vertical: 2),
           child: ListTile(
             leading: TDAvatar(
@@ -66,14 +64,14 @@ class ConversationWidget {
                     border: Border.all(color: Theme.of(context).primaryColor, width: 1),
                   ),
                   child: Text(
-                    "模型类比",
+                    '模型类比',
                     style: Theme.of(context).textTheme.bodySmall?.copyWith(color: Theme.of(context).primaryColor, fontSize: 8),
                   ),
                 ),
               ],
             ),
             subtitle: Text(
-              "contentcontentcontent",
+              'contentcontentcontent',
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: Theme.of(context).textTheme.bodySmall?.copyWith(fontSize: 14),
@@ -93,9 +91,25 @@ class ConversationWidget {
     );
   }
 
-  static PreferredSizeWidget bulidAppBar(WidgetRef ref) {
+  static PreferredSizeWidget bulidAppBar(WidgetRef ref, BuildContext context, {Function(String)? onSearchTextChanged}) {
     return JuAppBar.baseBar(
       text: S.current.home_chat,
+      leadingWidth: 260,
+      leading: F.pc
+          ? SizedBox(
+              width: 260,
+              height: 60,
+              child: TDSearchBar(
+                placeHolder: '搜索搜索',
+                autoHeight: false,
+                backgroundColor: Theme.of(context).colorScheme.onSecondary,
+                style: TDSearchStyle.square,
+                onTextChanged: (String text) {
+                  onSearchTextChanged?.call(text);
+                },
+              ),
+            )
+          : null,
       actions: [
         //添加按钮
         PullDownButton(
@@ -131,16 +145,16 @@ class ConversationWidget {
                   .openAIConfig
                   .values
                   .map((e) => PullDownMenuItem(
-                        title: e.alias ?? "",
+                        title: e.alias ?? '',
                         onTap: () {
                           F
                               .push(ChatPage(
                                   showKeyboard: true,
                                   localChatHistory: ChatParentItem(
-                                    apiKey: e.apiKey ?? "",
+                                    apiKey: e.apiKey ?? '',
                                     id: DateTime.now().millisecondsSinceEpoch,
                                     moduleName: e.model,
-                                    moduleType: e.defaultModelType?.id ?? "gpt-4",
+                                    moduleType: e.defaultModelType?.id ?? 'gpt-4',
                                     title: S.current.new_chat,
                                   )))
                               .then((value) {
