@@ -1,5 +1,6 @@
-import 'package:chat_bot/const.dart';
-import 'package:chat_bot/utils/hive_box.dart';
+import '../components/td/tdesign_flutter.dart';
+import '../const.dart';
+import '../utils/hive_box.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -24,14 +25,14 @@ List<String> getSupportedLanguage() {
 }
 
 Locale getLocaleByDefaultCode() {
-  String code = HiveBox().globalLanguageCode;
-  String resultCode = code;
-  if (code == "auto") {
+  var code = HiveBox().globalLanguageCode;
+  var resultCode = code;
+  if (code == 'auto') {
     var defLan = WidgetsBinding.instance.window.locale.languageCode;
     if (getSupportedLanguage().contains(defLan)) {
       resultCode = defLan;
     } else {
-      if (defLan.startsWith("zh")) {
+      if (defLan.startsWith('zh')) {
         resultCode = 'zh';
       }
     }
@@ -41,13 +42,13 @@ Locale getLocaleByDefaultCode() {
 }
 
 Locale getLocaleByCode(String code) {
-  String resultCode = code;
-  if (code == "auto") {
+  var resultCode = code;
+  if (code == 'auto') {
     var defLan = WidgetsBinding.instance.window.locale.languageCode;
     if (getSupportedLanguage().contains(defLan)) {
       resultCode = defLan;
     } else {
-      if (defLan.startsWith("zh")) {
+      if (defLan.startsWith('zh')) {
         resultCode = 'zh';
       }
     }
@@ -57,7 +58,7 @@ Locale getLocaleByCode(String code) {
 }
 
 Map<String, String> getLocaleLanguages() {
-  String code = getLocaleByDefaultCode().languageCode;
+  var code = getLocaleByDefaultCode().languageCode;
 
   if (code == SupportedLanguage.en.code) {
     return supportedEnglishLanguages;
@@ -78,13 +79,13 @@ Map<String, String> getLocaleLanguages() {
 }
 
 String getLocaleNameByCode(String code) {
-  if (code == "auto") {
-    return "Auto";
+  if (code == 'auto') {
+    return 'Auto';
   }
 
   switch (code) {
     case 'en':
-      return "English";
+      return 'English';
     case 'ja':
       return '日本語';
     case 'zh':
@@ -92,7 +93,7 @@ String getLocaleNameByCode(String code) {
     case 'ko':
       return '한국인';
   }
-  return "English";
+  return 'English';
 }
 
 final globalLanguageProvider = StateNotifierProvider<GlobalLanguageModel, String>((ref) {
@@ -161,7 +162,7 @@ BaseTheme _getThemeByType(int themeType) {
       return DarkTheme();
     case 2:
       var brightness = SchedulerBinding.instance.platformDispatcher.platformBrightness;
-      bool isDarkMode = brightness == Brightness.dark;
+      var isDarkMode = brightness == Brightness.dark;
       if (isDarkMode) {
         return DarkTheme();
       }
@@ -173,7 +174,7 @@ BaseTheme _getThemeByType(int themeType) {
 
 class ThemeViewModel extends StateNotifier<BaseTheme> {
   ThemeViewModel(super.state) {
-    int type = SpUtil.getInt(spLightTheme, defValue: ThemeType.system.index);
+    var type = SpUtil.getInt(spLightTheme, defValue: ThemeType.system.index);
     state = _getThemeByType(type);
   }
 

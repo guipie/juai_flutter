@@ -1,11 +1,12 @@
-import 'package:chat_bot/base.dart';
-import 'package:chat_bot/base/version_check.dart';
-import 'package:chat_bot/components/td/tdesign_flutter.dart';
-import 'package:chat_bot/pages/aimodel/aimodel_page.dart';
-import 'package:chat_bot/pages/chat/conversation_pc_page.dart';
-import 'package:chat_bot/pages/home/home_viewmodel.dart';
+import '../../base.dart';
+import '../../base/version_check.dart';
+import '../../components/td/tdesign_flutter.dart';
+import '../aimodel/aimodel_page.dart';
+import '../chat/conversation_pc_page.dart';
+import 'home_viewmodel.dart';
 
 import '../../const.dart';
+import '../../module/prompt/prompt_page.dart';
 import '../../module/services/services_page.dart';
 import '../../module/setting/setting_page.dart';
 
@@ -59,7 +60,7 @@ class _HomePcPageState extends ConsumerState<HomePcPage> with WidgetsBindingObse
       ConversationPcPage(),
       AiModelPage(),
       ServicesPage(),
-      SettingPage(),
+      PromptPage(),
       SettingPage(),
     ];
     return Scaffold(

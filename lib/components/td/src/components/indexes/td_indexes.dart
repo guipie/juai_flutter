@@ -189,8 +189,7 @@ class _TDIndexesState extends State<TDIndexes> {
       if (contentRenderBox != null) {
         final contentHeight = contentRenderBox.size.height;
         final maxScrollExtent = _scrollController.position.maxScrollExtent;
-        final targetOffset =
-            contentRenderBox.localToGlobal(Offset(0, contentHeight), ancestor: context.findRenderObject());
+        final targetOffset = contentRenderBox.localToGlobal(Offset(0, contentHeight), ancestor: context.findRenderObject());
         final scrollOffset = targetOffset.dy + _scrollController.offset;
         _scrollController.jumpTo(min(maxScrollExtent, scrollOffset));
       }

@@ -1,17 +1,15 @@
-import 'package:chat_bot/pages/splash_page.dart';
-import 'package:chat_bot/utils/hive_box.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'base.dart';
 import 'base/riverpod/provider_log.dart';
-import 'constants/theme.dart';
 import 'initial.dart';
+import 'pages/splash_page.dart';
+import 'utils/hive_box.dart';
 
 ProviderContainer? globalRef;
 void main() async {
   await Initial.init();
-
-  S.load(getLocaleByCode(HiveBox().globalLanguageCode));
+  await S.load(getLocaleByCode(HiveBox().globalLanguageCode));
   globalRef = ProviderContainer(
     observers: [
       ProviderLogger(),
@@ -24,8 +22,7 @@ void main() async {
     ),
   );
   if (Platform.isAndroid) {
-    SystemUiOverlayStyle style =
-        const SystemUiOverlayStyle(statusBarColor: Colors.transparent);
+    var style = const SystemUiOverlayStyle(statusBarColor: Colors.transparent);
     SystemChrome.setSystemUIOverlayStyle(style);
   }
 }
@@ -41,8 +38,7 @@ class MyApp extends ConsumerWidget {
       key: ValueKey(globalLanguage),
       navigatorKey: F.navigatorKey,
       title: S.current.app_name,
-      localeResolutionCallback:
-          (Locale? locale, Iterable<Locale> supportedLocales) {
+      localeResolutionCallback: (Locale? locale, Iterable<Locale> supportedLocales) {
         if (locale != null) {
           return locale;
         }

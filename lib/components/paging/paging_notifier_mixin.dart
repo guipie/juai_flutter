@@ -1,6 +1,7 @@
-import 'package:chat_bot/components/paging/paging_data.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+
+import 'paging_data.dart';
 
 @internal
 abstract interface class PagingNotifierMixin<D extends PagingData<T>, T> {

@@ -80,9 +80,7 @@ class _TDCellGroupState extends State<TDCellGroup> {
             ),
           Flexible(
             child: Container(
-              padding: widget.theme == TDCellGroupTheme.cardTheme
-                  ? EdgeInsets.only(left: spacer16, right: spacer16)
-                  : EdgeInsets.zero,
+              padding: widget.theme == TDCellGroupTheme.cardTheme ? EdgeInsets.only(left: spacer16, right: spacer16) : EdgeInsets.zero,
               decoration: BoxDecoration(border: _getBordered(style), borderRadius: radius),
               child: ClipRRect(
                 borderRadius: radius,
