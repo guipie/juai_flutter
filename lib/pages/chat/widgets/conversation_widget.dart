@@ -1,11 +1,13 @@
+import 'package:pull_down_button/pull_down_button.dart';
+
 import '../../../base.dart';
 import '../../../components/mouse_hover.dart';
+import '../../../components/mouse_hover_item_Slidable.dart';
 import '../../../components/td/tdesign_flutter.dart';
 import '../../../hive_bean/local_chat_history.dart';
 import '../../../module/chat/chat_list_view_model.dart';
-import '../chat_page.dart';
 import '../../../utils/hive_box.dart';
-import 'package:pull_down_button/pull_down_button.dart';
+import '../chat_page.dart';
 
 class ConversationWidget {
   static Widget buildConversationItem(
@@ -14,80 +16,28 @@ class ConversationWidget {
     BuildContext context, {
     required Function(ConversationModel result) onClick,
   }) {
-    return MouseHoverWidget(
-      child: Slidable(
-        endActionPane: ActionPane(
-          motion: const BehindMotion(),
-          extentRatio: 0.4,
-          children: [
-            SlidableAction(
-              onPressed: (context) {
-                debugPrint('SlidableAction-1');
-              },
-              backgroundColor: Theme.of(context).primaryColor,
-              foregroundColor: Colors.white,
-              icon: Icons.push_pin_outlined,
-            ),
-            SlidableAction(
-              onPressed: (context) {
-                debugPrint('SlidableAction-2');
-              },
-              backgroundColor: Colors.red,
-              icon: Icons.delete,
-            ),
-          ],
+    return MouseHoverSlidableItem(
+      picUrl: item.avatar!,
+      title: item.name!,
+      subTitle: item.desc ?? '',
+      trailing: DateTime.now().millisecondsSinceEpoch.toYMDHM(),
+      actions: [
+        SlidableAction(
+          onPressed: (context) {
+            debugPrint('SlidableAction-1');
+          },
+          backgroundColor: Theme.of(context).primaryColor,
+          foregroundColor: Colors.white,
+          icon: Icons.push_pin_outlined,
         ),
-        child: Container(
-          // color: ref.watch(themeProvider).unPinedBgColor(),
-          padding: const EdgeInsets.symmetric(vertical: 2),
-          child: ListTile(
-            leading: TDAvatar(
-              size: TDAvatarSize.medium,
-              type: TDAvatarType.normal,
-              shape: TDAvatarShape.square,
-              avatarUrl: F.randomAvatar,
-            ),
-            title: Row(
-              children: [
-                Flexible(
-                  child: Text(
-                    item.name!,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: Theme.of(context).textTheme.titleSmall,
-                  ),
-                ),
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 2),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(3),
-                    border: Border.all(color: Theme.of(context).primaryColor, width: 1),
-                  ),
-                  child: Text(
-                    '模型类比',
-                    style: Theme.of(context).textTheme.bodySmall?.copyWith(color: Theme.of(context).primaryColor, fontSize: 8),
-                  ),
-                ),
-              ],
-            ),
-            subtitle: Text(
-              'contentcontentcontent',
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: Theme.of(context).textTheme.bodySmall?.copyWith(fontSize: 14),
-            ),
-            trailing: Text(
-              DateTime.now().millisecondsSinceEpoch.toYMDHM(),
-              style: TextStyle(
-                color: ref.watch(themeProvider).timeColor(),
-                fontSize: 12,
-              ),
-            ),
-          ),
+        SlidableAction(
+          onPressed: (context) {
+            debugPrint('SlidableAction-2');
+          },
+          backgroundColor: Colors.red,
+          icon: Icons.delete,
         ),
-      ).click(
-        () => onClick(item),
-      ),
+      ],
     );
   }
 

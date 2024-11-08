@@ -1,10 +1,11 @@
-import 'package:chat_bot/base.dart';
+import '../base.dart';
 import 'package:flutter/material.dart';
 
 class MouseHoverWidget extends StatefulWidget {
   final Color? hoverColor;
+  final Color? color;
   final Widget child;
-  const MouseHoverWidget({super.key, required this.child, this.hoverColor});
+  const MouseHoverWidget({super.key, required this.child, this.hoverColor, this.color});
 
   @override
   _MouseHoverWidgetState createState() => _MouseHoverWidgetState();
@@ -19,7 +20,7 @@ class _MouseHoverWidgetState extends State<MouseHoverWidget> {
       onEnter: (_) => _mouseEnter(true),
       onExit: (_) => _mouseEnter(false),
       child: Container(
-        color: _isHovering ? Theme.of(context).dividerTheme.color : null,
+        color: _isHovering ? (widget.hoverColor ?? Theme.of(context).dividerTheme.color) : widget.color,
         child: widget.child,
       ),
     );

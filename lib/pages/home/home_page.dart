@@ -1,15 +1,12 @@
-import 'package:chat_bot/base.dart';
-import 'package:chat_bot/base/version_check.dart';
-import 'package:chat_bot/module/chat/chat_list_page.dart';
-import 'package:chat_bot/pages/chat/conversation_page.dart';
-import 'package:chat_bot/pages/home/home_viewmodel.dart';
-import 'package:chat_bot/pages/home/widgets.dart';
-
+import '../../base.dart';
+import '../../base/version_check.dart';
 import '../../const.dart';
-import '../../constants/theme.dart';
 import '../../module/prompt/prompt_page.dart';
 import '../../module/services/services_page.dart';
 import '../../module/setting/setting_page.dart';
+import '../chat/conversation_page.dart';
+import 'home_viewmodel.dart';
+import 'widgets.dart';
 
 class HomePage extends ConsumerStatefulWidget {
   const HomePage({super.key});

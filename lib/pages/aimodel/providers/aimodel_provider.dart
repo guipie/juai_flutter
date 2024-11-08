@@ -15,8 +15,10 @@ class AiModelProvider extends _$AiModelProvider {
   Future<List<AiModel>> build() => fetch();
 
   Future<List<AiModel>> fetch() async {
-    var models = await Api.get<List<AiModel>, AiModel>(ApiModel.models, fromJsonT: AiModel.fromJson);
-    return models.result ?? [];
+    await Future.delayed(const Duration(seconds: 3));
+    var model = AiModel(modelId: 'id', name: '大模型', shortName: '模型', avatarUrl: F.randomAvatar, modelType: 1, category: '腾讯', maxToken: 22);
+    var models = List.generate(10, (index) => model); // await Api.get<List<AiModel>, AiModel>(ApiModel.models, fromJsonT: AiModel.fromJson);
+    return models;
   }
   // var result = <String, List<AiModel>>{};
   // for (var element in models.result ?? []) {

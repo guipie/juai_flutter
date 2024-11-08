@@ -1,12 +1,12 @@
-import 'package:chat_bot/base.dart';
-import 'package:chat_bot/components/riverpod_paging/paged_builder.dart';
-import 'package:chat_bot/hive_bean/local_chat_history.dart';
-import 'package:chat_bot/module/chat/chat_list_view_model.dart';
-import 'package:chat_bot/pages/chat/providers/conversation_provider.dart';
-import 'package:chat_bot/pages/chat/widgets/conversation_widget.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
+import '../../base.dart';
+import '../../components/riverpod_paging/paged_builder.dart';
+import '../../hive_bean/local_chat_history.dart';
+import '../../module/chat/chat_list_view_model.dart';
 import 'chat_page.dart';
+import 'providers/conversation_provider.dart';
+import 'widgets/conversation_widget.dart';
 
 class ConversationPage extends ConsumerWidget {
   const ConversationPage({super.key});
@@ -14,7 +14,7 @@ class ConversationPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      appBar: JuAppBar.baseBar(text: "会话"),
+      appBar: JuAppBar.baseBar(text: '会话'),
       body: RiverPagedBuilder<int, ConversationModel>(
         firstPageKey: 1,
         pullToRefresh: true,

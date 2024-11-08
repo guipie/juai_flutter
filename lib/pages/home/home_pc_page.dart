@@ -1,14 +1,13 @@
 import '../../base.dart';
 import '../../base/version_check.dart';
 import '../../components/td/tdesign_flutter.dart';
-import '../aimodel/aimodel_page.dart';
-import '../chat/conversation_pc_page.dart';
-import 'home_viewmodel.dart';
-
 import '../../const.dart';
 import '../../module/prompt/prompt_page.dart';
 import '../../module/services/services_page.dart';
 import '../../module/setting/setting_page.dart';
+import '../aimodel/aimodel_pc_page.dart';
+import '../chat/conversation_pc_page.dart';
+import 'home_viewmodel.dart';
 
 class HomePcPage extends ConsumerStatefulWidget {
   const HomePcPage({super.key});
@@ -58,7 +57,7 @@ class _HomePcPageState extends ConsumerState<HomePcPage> with WidgetsBindingObse
     final sideBarController = TDSideBarController();
     const pages = [
       ConversationPcPage(),
-      AiModelPage(),
+      AiModelPcPage(),
       ServicesPage(),
       PromptPage(),
       SettingPage(),
