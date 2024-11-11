@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:flutter_svg/svg.dart';
 
 import '../base.dart';
 import 'mouse_hover.dart';
@@ -8,7 +7,8 @@ import 'td/src/components/avatar/td_avatar.dart';
 
 @immutable
 class MouseHoverItem extends ConsumerWidget {
-  final String picUrl;
+  final String? leadingPicUrl;
+  final Widget? leadingWidget;
   final String title;
   final String? titleExtend;
   final String? subTitle;
@@ -18,9 +18,10 @@ class MouseHoverItem extends ConsumerWidget {
   final Widget? trailingWidget;
   MouseHoverItem({
     super.key,
-    this.titleExtend,
-    required this.picUrl,
     required this.title,
+    this.titleExtend,
+    this.leadingWidget,
+    this.leadingPicUrl,
     this.subTitle,
     this.onPressed,
     this.isShowDefaultTrailing = true,
@@ -53,18 +54,15 @@ class MouseHoverItem extends ConsumerWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 2),
         child: ListTile(
-          leading: picUrl.endsWith('.svg')
-              ? SvgPicture.asset(
-                  picUrl,
-                  width: 46,
-                )
-              : TDAvatar(
+          leading: leadingPicUrl.isNotEmpty()
+              ? TDAvatar(
                   size: TDAvatarSize.medium,
                   type: TDAvatarType.normal,
                   shape: TDAvatarShape.square,
-                  avatarUrl: picUrl.startsWith('http') ? picUrl : null,
-                  defaultUrl: (!picUrl.startsWith('http')) ? picUrl : '',
-                ),
+                  avatarUrl: leadingPicUrl!.startsWith('http') ? leadingPicUrl : null,
+                  defaultUrl: (!leadingPicUrl!.startsWith('http')) ? leadingPicUrl! : '',
+                )
+              : leadingWidget,
           title: Row(
             children: [
               Flexible(

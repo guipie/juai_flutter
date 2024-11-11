@@ -1,4 +1,5 @@
-part of 'aimodel_models.dart';
+import 'package:json_annotation/json_annotation.dart';
+part 'ai_model.g.dart';
 
 @JsonSerializable()
 class AiModel {

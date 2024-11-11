@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'aimodel_models.dart';
+part of 'ai_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator

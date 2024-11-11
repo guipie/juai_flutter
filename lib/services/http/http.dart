@@ -1,10 +1,9 @@
-import '../../constants/config.dart';
-import '../../models/aimodel/aimodel_models.dart';
-import '../../models/api_res.dart';
-import 'api_exception.dart';
 import 'package:dio/dio.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
+import '../../constants/config.dart';
+import '../../models/api_res.dart';
+import 'api_exception.dart';
 import 'interceptor.dart';
 
 class HttpOptions {
@@ -46,7 +45,7 @@ class Http {
     bool showErrorMessage = true, //返回数据
     Function(Map<String, dynamic>)? fromJsonT,
   }) async {
-    const Map methodValues = {HttpMethod.get: 'get', HttpMethod.post: 'post', HttpMethod.put: 'put', HttpMethod.delete: 'delete', HttpMethod.patch: 'patch', HttpMethod.head: 'head'};
+    const methodValues = {HttpMethod.get: 'get', HttpMethod.post: 'post', HttpMethod.put: 'put', HttpMethod.delete: 'delete', HttpMethod.patch: 'patch', HttpMethod.head: 'head'};
 
     //动态添加header头
     var headers = <String, dynamic>{};

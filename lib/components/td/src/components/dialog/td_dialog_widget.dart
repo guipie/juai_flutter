@@ -238,7 +238,7 @@ class HorizontalNormalButtons extends StatelessWidget {
               height: leftBtn.height,
               buttonTextFontWeight: leftBtn.fontWeight ?? FontWeight.w600,
               onPressed: () {
-                if(leftBtn.action != null){
+                if (leftBtn.action != null) {
                   leftBtn.action!();
                 } else {
                   Navigator.pop(context);
@@ -260,7 +260,7 @@ class HorizontalNormalButtons extends StatelessWidget {
               height: rightBtn.height,
               buttonTextFontWeight: rightBtn.fontWeight ?? FontWeight.w600,
               onPressed: () {
-                if(rightBtn.action != null) {
+                if (rightBtn.action != null) {
                   rightBtn.action!();
                 } else {
                   Navigator.pop(context);
@@ -307,7 +307,7 @@ class HorizontalTextButtons extends StatelessWidget {
                 height: leftBtn.height,
                 buttonTextFontWeight: leftBtn.fontWeight,
                 onPressed: () {
-                  if(leftBtn.action != null){
+                  if (leftBtn.action != null) {
                     leftBtn.action!();
                   } else {
                     Navigator.pop(context);
@@ -329,7 +329,7 @@ class HorizontalTextButtons extends StatelessWidget {
                 height: rightBtn.height,
                 buttonTextFontWeight: rightBtn.fontWeight ?? FontWeight.w600,
                 onPressed: () {
-                  if(rightBtn.action != null){
+                  if (rightBtn.action != null) {
                     rightBtn.action!();
                   } else {
                     Navigator.pop(context);

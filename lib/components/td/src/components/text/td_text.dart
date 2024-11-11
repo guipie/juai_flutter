@@ -213,10 +213,7 @@ class TDText extends StatelessWidget {
     }
     var realFontWeight = style?.fontWeight ?? fontWeight;
     // Flutter 3.0之后，iOS w500之下字体不生效，需要替换字体
-    if (PlatformUtil.isIOS &&
-        (styleFontFamily == null || styleFontFamily.isEmpty) &&
-        realFontWeight != null &&
-        realFontWeight.index <= FontWeight.w500.index) {
+    if (PlatformUtil.isIOS && (styleFontFamily == null || styleFontFamily.isEmpty) && realFontWeight != null && realFontWeight.index <= FontWeight.w500.index) {
       stylePackage = null;
       styleFontFamily = 'PingFang SC';
     }
@@ -316,8 +313,7 @@ class TDTextSpan extends TextSpan {
   }) : super(
           text: text,
           children: children,
-          style: _getTextStyle(
-              context, style, font, fontWeight, fontFamily, textColor, isTextThrough, lineThroughColor, package),
+          style: _getTextStyle(context, style, font, fontWeight, fontFamily, textColor, isTextThrough, lineThroughColor, package),
           recognizer: recognizer,
           mouseCursor: mouseCursor,
           onEnter: onEnter,
@@ -374,8 +370,7 @@ class TDTextConfiguration extends InheritedWidget {
   /// 全局字体,kTextNeedGlobalFontFamily=true时生效
   final FontFamily? globalFontFamily;
 
-  const TDTextConfiguration({Key? key, required Widget child, this.paddingConfig, this.globalFontFamily})
-      : super(key: key, child: child);
+  const TDTextConfiguration({Key? key, required Widget child, this.paddingConfig, this.globalFontFamily}) : super(key: key, child: child);
 
   @override
   bool updateShouldNotify(covariant TDTextConfiguration oldWidget) {
@@ -401,7 +396,7 @@ class TDTextPaddingConfig {
       return cache;
     }
     var paddingFont = fontSize * paddingRate;
-    var paddingLeading;
+    num paddingLeading;
     if (height < heightRate) {
       paddingLeading = 0;
     } else {

@@ -17,7 +17,7 @@ class ConversationWidget {
     required Function(ConversationModel result) onClick,
   }) {
     return MouseHoverSlidableItem(
-      picUrl: item.avatar!,
+      leadingPicUrl: item.avatar!,
       title: item.name!,
       subTitle: item.desc ?? '',
       trailing: DateTime.now().millisecondsSinceEpoch.toYMDHM(),
