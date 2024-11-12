@@ -10,29 +10,23 @@ import '../../../services/http/api.dart';
 part 'aimodel_provider.g.dart';
 
 @riverpod
-class AiModelProvider extends _$AiModelProvider {
+class AiModelNotifier extends _$AiModelNotifier with PagePagingNotifierMixin<AiModelSort> {
   @override
-  Future<List<AiModel>> build() => fetch();
+  Future<PagePagingData<AiModelSort>> build() => fetch(page: 1);
 
-  Future<List<AiModel>> fetch() async {
-    // await Future.delayed(const Duration(seconds: 3));
-    // var model = AiModel(modelId: 'id', name: '大模型', shortName: '模型', avatarUrl: F.randomAvatar, modelType: 1, category: '腾讯', maxToken: 22);
-    // var models = List.generate(10, (index) => model);
+  @override
+  Future<PagePagingData<AiModelSort>> fetch({required int page}) async {
     var models = await Api.get<List<AiModel>, AiModel>(ApiModel.models, fromJsonT: AiModel.fromJson);
-    return models.result ?? [];
+    var result = List<AiModelSort>.empty(growable: true);
+
+    for (var element in models.result ?? []) {
+      if (result.map((mm) => mm.key).contains(element.category)) {
+        var item = result.firstWhere((mm) => mm.key == element.category);
+        item.models.add(element);
+      } else {
+        result.add(AiModelSort(key: element.category, models: [element]));
+      }
+    }
+    return PagePagingData(items: result, hasMore: models.result?.length == 10, page: page + 1);
   }
 }
-
-final sortAiModelsProvider = Provider<Map<String, List<AiModel>>>((ref) {
-  // We obtain the list of all todos from the todosProvider
-  final models = ref.watch(aiModelProviderProvider);
-  var result = <String, List<AiModel>>{};
-  for (var element in models.value ?? []) {
-    if (result.keys.contains(element.category)) {
-      result[element.category]!.add(element);
-    } else {
-      result[element.category] = [element];
-    }
-  }
-  return result;
-});

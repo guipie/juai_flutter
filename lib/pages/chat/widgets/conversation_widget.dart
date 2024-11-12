@@ -1,13 +1,16 @@
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:pull_down_button/pull_down_button.dart';
 
 import '../../../base.dart';
 import '../../../components/mouse_hover.dart';
 import '../../../components/mouse_hover_item_Slidable.dart';
+import '../../../components/riverpod_paging/paged_builder.dart';
 import '../../../components/td/tdesign_flutter.dart';
 import '../../../hive_bean/local_chat_history.dart';
 import '../../../module/chat/chat_list_view_model.dart';
 import '../../../utils/hive_box.dart';
 import '../chat_page.dart';
+import '../providers/conversation_provider.dart';
 
 class ConversationWidget {
   static Widget buildConversationItem(
@@ -117,6 +120,23 @@ class ConversationWidget {
           },
         ),
       ],
+    );
+  }
+
+  static Widget buildConversations(WidgetRef ref) {
+    return RiverPagedBuilder<int, ConversationModel>(
+      firstPageKey: 1,
+      pullToRefresh: true,
+      provider: conversationProvider,
+      itemBuilder: (context, item, index) {
+        return ConversationWidget.buildConversationItem(
+          item,
+          ref,
+          context,
+          onClick: (current) {},
+        );
+      },
+      pagedBuilder: (controller, builder) => PagedListView(pagingController: controller, builderDelegate: builder),
     );
   }
 }

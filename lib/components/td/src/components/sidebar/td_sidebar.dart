@@ -15,18 +15,11 @@ class SideItemProps {
   IconData? icon;
   IconData? checkedIcon;
   String? label;
+  String? tips;
   TDBadge? badge;
   TextStyle? textStyle;
 
-  SideItemProps(
-      {required this.value,
-      required this.index,
-      this.disabled,
-      this.icon,
-      this.checkedIcon,
-      this.label,
-      this.badge,
-      this.textStyle});
+  SideItemProps({required this.value, required this.index, this.disabled, this.icon, this.checkedIcon, this.label, this.badge, this.textStyle, this.tips});
 }
 
 class TDSideBar extends StatefulWidget {
@@ -110,13 +103,9 @@ class _TDSideBarState extends State<TDSideBar> {
         var offset = _scrollerController.offset;
         var distance = item.index * itemHeight - offset;
         if (distance + itemHeight > height) {
-          _scrollerController.animateTo(offset + itemHeight,
-              duration: const Duration(milliseconds: 100),
-              curve: Curves.easeIn);
+          _scrollerController.animateTo(offset + itemHeight, duration: const Duration(milliseconds: 100), curve: Curves.easeIn);
         } else if (distance < 0) {
-          _scrollerController.animateTo(offset - itemHeight,
-              duration: const Duration(milliseconds: 100),
-              curve: Curves.easeIn);
+          _scrollerController.animateTo(offset - itemHeight, duration: const Duration(milliseconds: 100), curve: Curves.easeIn);
         }
       } catch (e) {
         print(e);
@@ -139,23 +128,9 @@ class _TDSideBarState extends State<TDSideBar> {
       });
     }
 
-    displayChildren = widget.children
-        .asMap()
-        .entries
-        .map((entry) => SideItemProps(
-            index: entry.key,
-            disabled: entry.value.disabled,
-            value: entry.value.value,
-            icon: entry.value.icon,
-            checkedIcon: entry.value.checkedIcon,
-            label: entry.value.label,
-            textStyle: entry.value.textStyle,
-            badge: entry.value.badge))
-        .toList();
+    displayChildren = widget.children.asMap().entries.map((entry) => SideItemProps(index: entry.key, disabled: entry.value.disabled, value: entry.value.value, icon: entry.value.icon, checkedIcon: entry.value.checkedIcon, label: entry.value.label, textStyle: entry.value.textStyle, badge: entry.value.badge, tips: entry.value.tips)).toList();
 
-    currentValue = widget.value ??
-        widget.defaultValue ??
-        (displayChildren.isNotEmpty ? displayChildren[0].value : null);
+    currentValue = widget.value ?? widget.defaultValue ?? (displayChildren.isNotEmpty ? displayChildren[0].value : null);
     if (currentValue != null) {
       try {
         final item = findSideItem(currentValue!);
@@ -202,11 +177,15 @@ class _TDSideBarState extends State<TDSideBar> {
           removeTop: true,
           removeBottom: true,
           child: ListView.builder(
-              itemCount: displayChildren.length,
-              controller: _scrollerController,
-              itemBuilder: (BuildContext context, int index) {
-                var ele = displayChildren[index];
-                return TDWrapSideBarItem(
+            itemCount: displayChildren.length,
+            controller: _scrollerController,
+            itemBuilder: (BuildContext context, int index) {
+              var ele = displayChildren[index];
+              return Tooltip(
+                message: ele.tips,
+                verticalOffset: 15,
+                showDuration: const Duration(seconds: 2),
+                child: TDWrapSideBarItem(
                   style: widget.style,
                   value: ele.value,
                   icon: currentIndex == ele.index ? ele.checkedIcon : ele.icon,
@@ -218,17 +197,17 @@ class _TDSideBarState extends State<TDSideBar> {
                   selectedColor: widget.selectedColor,
                   selectedTextStyle: widget.selectedTextStyle,
                   contentPadding: widget.contentPadding,
-                  topAdjacent:
-                      currentIndex != null && currentIndex! + 1 == ele.index,
-                  bottomAdjacent:
-                      currentIndex != null && currentIndex! - 1 == ele.index,
+                  topAdjacent: currentIndex != null && currentIndex! + 1 == ele.index,
+                  bottomAdjacent: currentIndex != null && currentIndex! - 1 == ele.index,
                   onTap: () {
                     if (!(ele.disabled ?? false)) {
                       onSelect(ele, isController: false);
                     }
                   },
-                );
-              }),
+                ),
+              );
+            },
+          ),
         ),
       ),
     );

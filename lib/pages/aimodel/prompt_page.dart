@@ -33,7 +33,6 @@ class _PromptPageState extends ConsumerState<PromptPage> {
                 if (index == widgetCount - 1) {
                   return endItemView;
                 }
-
                 // Otherwise, build a list tile for each sample item.
                 return ListTile(
                   key: ValueKey(data.items[index].id),

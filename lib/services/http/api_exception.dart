@@ -13,49 +13,49 @@ class ApiException implements Exception {
   factory ApiException.fromDioException(DioException exception) {
     switch (exception.type) {
       case DioExceptionType.connectionTimeout:
-        return BadRequestException(-1, "连接超时");
+        return BadRequestException(-1, '连接超时');
       case DioExceptionType.sendTimeout:
-        return BadRequestException(-1, "请求超时");
+        return BadRequestException(-1, '请求超时');
       case DioExceptionType.receiveTimeout:
-        return BadRequestException(-1, "响应超时");
+        return BadRequestException(-1, '响应超时');
       case DioExceptionType.cancel:
-        return BadRequestException(-1, "请求取消");
+        return BadRequestException(-1, '请求取消');
       case DioExceptionType.badResponse:
-        int? errorCode = exception.response?.statusCode;
+        var errorCode = exception.response?.statusCode;
         switch (errorCode) {
           case 400:
-            return BadRequestException(errorCode, "请求语法错误");
+            return BadRequestException(errorCode, '请求语法错误');
           case 401:
-            return UnauthorisedException(errorCode, "没有权限");
+            return UnauthorisedException(errorCode, '没有权限');
           case 403:
-            return UnauthorisedException(errorCode, "服务器拒绝执行");
+            return UnauthorisedException(errorCode, '服务器拒绝执行');
           case 404:
-            return UnauthorisedException(errorCode, "请求资源不存在");
+            return UnauthorisedException(errorCode, '请求资源不存在');
           case 405:
-            return UnauthorisedException(errorCode, "请求方法被禁止");
+            return UnauthorisedException(errorCode, '请求方法被禁止');
           case 500:
-            return UnauthorisedException(errorCode, "服务器内部错误");
+            return UnauthorisedException(errorCode, '服务器内部错误');
           case 502:
-            return UnauthorisedException(errorCode, "错误网关");
+            return UnauthorisedException(errorCode, '错误网关');
           case 503:
-            return UnauthorisedException(errorCode, "服务器异常");
+            return UnauthorisedException(errorCode, '服务器异常');
           case 504:
-            return UnauthorisedException(errorCode, "网关超时");
+            return UnauthorisedException(errorCode, '网关超时');
           case 505:
-            return UnauthorisedException(errorCode, "不支持HTTP协议请求");
+            return UnauthorisedException(errorCode, '不支持HTTP协议请求');
           default:
             return ApiException(errorCode, exception.response?.statusMessage ?? '未知错误');
         }
       case DioExceptionType.connectionError:
         if (exception.error is SocketException) {
-          return DisconnectException(-1, "网络未连接");
+          return DisconnectException(-1, '网络未连接');
         } else {
-          return ApiException(-1, "连接错误");
+          return ApiException(-1, '连接错误');
         }
       case DioExceptionType.badCertificate:
-        return ApiException(-1, "证书错误");
+        return ApiException(-1, '证书错误');
       case DioExceptionType.unknown:
-        return ApiException(-1, exception.error != null ? exception.error.toString() : "未知错误");
+        return ApiException(-1, exception.error != null ? exception.error.toString() : '未知错误');
     }
   }
 
@@ -66,7 +66,7 @@ class ApiException implements Exception {
     } else if (exception is ApiException) {
       return exception;
     } else {
-      return ApiException(-1, "未知错误")..stackInfo = exception.toString();
+      return ApiException(-1, '未知错误')..stackInfo = exception.toString();
     }
   }
 

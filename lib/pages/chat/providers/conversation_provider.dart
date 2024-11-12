@@ -1,6 +1,6 @@
-import 'package:chat_bot/base.dart';
-import 'package:chat_bot/components/riverpod_paging/paged_notifier.dart';
-import 'package:chat_bot/components/riverpod_paging/paged_state.dart';
+import '../../../base.dart';
+import '../../../components/riverpod_paging/paged_notifier.dart';
+import '../../../components/riverpod_paging/paged_state.dart';
 
 class ConversationNotifier extends PagedNotifier<int, ConversationModel> {
   ConversationNotifier()
@@ -16,7 +16,7 @@ class ConversationNotifier extends PagedNotifier<int, ConversationModel> {
         20,
         (index) => ConversationModel(
               id: index,
-              name: "测$index试${index + ((limit * page) - limit)} ",
+              name: '测$index试${index + ((limit * page) - limit)} ',
               desc: F.randomAvatar,
               avatar: F.randomAvatar,
             ));

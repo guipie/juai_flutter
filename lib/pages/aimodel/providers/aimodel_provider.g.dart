@@ -6,21 +6,22 @@ part of 'aimodel_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$aiModelProviderHash() => r'fc9825e257d2215fc4f0ec17802dd6fbdc0c611b';
+String _$aiModelNotifierHash() => r'0582bc8822f812421b7fda3c6f9a022b79a00fbe';
 
-/// See also [AiModelProvider].
-@ProviderFor(AiModelProvider)
-final aiModelProviderProvider =
-    AutoDisposeAsyncNotifierProvider<AiModelProvider, List<AiModel>>.internal(
-  AiModelProvider.new,
-  name: r'aiModelProviderProvider',
+/// See also [AiModelNotifier].
+@ProviderFor(AiModelNotifier)
+final aiModelNotifierProvider = AutoDisposeAsyncNotifierProvider<
+    AiModelNotifier, PagePagingData<AiModelSort>>.internal(
+  AiModelNotifier.new,
+  name: r'aiModelNotifierProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$aiModelProviderHash,
+      : _$aiModelNotifierHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$AiModelProvider = AutoDisposeAsyncNotifier<List<AiModel>>;
+typedef _$AiModelNotifier
+    = AutoDisposeAsyncNotifier<PagePagingData<AiModelSort>>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

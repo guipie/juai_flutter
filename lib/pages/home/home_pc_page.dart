@@ -7,6 +7,7 @@ import '../../module/services/services_page.dart';
 import '../../module/setting/setting_page.dart';
 import '../aimodel/aimodel_pc_page.dart';
 import '../chat/conversation_pc_page.dart';
+import '../square/square.dart';
 import 'home_viewmodel.dart';
 
 class HomePcPage extends ConsumerStatefulWidget {
@@ -58,7 +59,7 @@ class _HomePcPageState extends ConsumerState<HomePcPage> with WidgetsBindingObse
     const pages = [
       ConversationPcPage(),
       AiModelPcPage(),
-      ServicesPage(),
+      SquarePage(),
       PromptPage(),
       SettingPage(),
     ];
@@ -91,6 +92,7 @@ class _HomePcPageState extends ConsumerState<HomePcPage> with WidgetsBindingObse
                       .map(
                         (ele) => TDSideBarItem(
                           value: ele.index,
+                          tips: ele.label,
                           checkedIcon: ele.checkedIcon,
                           icon: ele.icon,
                         ),

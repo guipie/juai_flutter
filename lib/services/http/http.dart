@@ -84,7 +84,7 @@ class Http {
               }
               return apiRes;
             }
-          case 105:
+          case 401:
             throw NeedLoginException(-1, '需要登录');
           case 219:
             throw NeedLoginException(-1, '应用需要强更');

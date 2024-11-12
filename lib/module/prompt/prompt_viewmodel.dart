@@ -1,9 +1,8 @@
-import 'package:chat_bot/services/db/prompt_item.dart';
+import '../../services/db/prompt_item.dart';
 
 import '../../base.dart';
 
-final promptListProvider = StateNotifierProvider.autoDispose<PromptListNotify,
-    AsyncValue<List<PromptItem>>>((ref) {
+final promptListProvider = StateNotifierProvider.autoDispose<PromptListNotify, AsyncValue<List<PromptItem>>>((ref) {
   return PromptListNotify(const AsyncValue.loading());
 });
 

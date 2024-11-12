@@ -4,6 +4,7 @@ import '../../const.dart';
 import '../../module/prompt/prompt_page.dart';
 import '../../module/services/services_page.dart';
 import '../../module/setting/setting_page.dart';
+import '../aimodel/aimodel_page.dart';
 import '../chat/conversation_page.dart';
 import 'home_viewmodel.dart';
 import 'widgets.dart';
@@ -59,9 +60,9 @@ class _HomePageState extends ConsumerState<HomePage> with WidgetsBindingObserver
         index: currentIndex,
         children: const [
           ConversationPage(),
-          PromptPage(),
+          AiModelPage(),
           ServicesPage(),
-          SettingPage(),
+          ServicesPage(),
           SettingPage(),
         ],
       ),

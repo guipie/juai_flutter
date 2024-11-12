@@ -14,6 +14,7 @@ class TDSideBarItem {
     this.textStyle,
     this.label = '',
     this.value = -1,
+    this.tips,
   });
 
   /// 徽标
@@ -34,4 +35,5 @@ class TDSideBarItem {
 
   /// 值
   final int value;
+  final String? tips;
 }

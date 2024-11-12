@@ -1,27 +1,40 @@
-import 'package:chat_bot/services/http/api_exception.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
+
+import '../../base.dart';
+import 'api_exception.dart';
 
 class ErrorInterceptor extends Interceptor {
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) async {
     /// 根据DioError创建HttpException
-    ApiException httpException = ApiException.from(err);
+    var httpException = ApiException.from(err);
 
     /// dio默认的错误实例，如果是没有网络，只能得到一个未知错误，无法精准的得知是否是无网络的情况
     /// 这里对于断网的情况，给一个特殊的code和msg
     if (err.type == DioExceptionType.connectionError) {
       var connectivityResult = await (Connectivity().checkConnectivity());
-      if (connectivityResult == ConnectivityResult.none) {
+      if (connectivityResult.contains(ConnectivityResult.none)) {
         httpException = ApiException(-100, 'None Network.');
       }
     }
 
     /// 将自定义的HttpException
-    // err.error = httpException;
+    // err.err = httpException;
+    httpException.e();
 
     /// 调用父类，回到dio框架
-    super.onError(httpException as DioException, handler);
+    // super.onError(
+    //     DioException(
+    //       requestOptions: err.requestOptions,
+    //       response: err.response,
+    //       error: httpException,
+    //       type: err.type,
+    //       message: httpException.message,
+    //       stackTrace: err.stackTrace,
+    //     ),
+    //     handler);
+    handler.reject(DioException(requestOptions: err.requestOptions, response: err.response, error: httpException, type: err.type, message: httpException.message, stackTrace: err.stackTrace));
   }
 }
 
@@ -62,7 +75,7 @@ class HttpException implements Exception {
       case DioExceptionType.badResponse:
         {
           try {
-            int statusCode = error.response?.statusCode ?? 0;
+            var statusCode = error.response?.statusCode ?? 0;
             // String errMsg = error.response.statusMessage;
             // return ErrorEntity(code: errCode, message: errMsg);
             switch (statusCode) {

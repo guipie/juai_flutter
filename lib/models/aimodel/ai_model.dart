@@ -38,3 +38,9 @@ class AiModel {
   factory AiModel.fromJson(Map<String, dynamic> json) => _$AiModelFromJson(json);
   Map<String, dynamic> toJson() => _$AiModelToJson(this);
 }
+
+class AiModelSort {
+  String key;
+  List<AiModel> models;
+  AiModelSort({required this.key, required this.models});
+}

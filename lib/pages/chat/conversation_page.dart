@@ -15,27 +15,7 @@ class ConversationPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: JuAppBar.baseBar(text: '会话'),
-      body: RiverPagedBuilder<int, ConversationModel>(
-        firstPageKey: 1,
-        pullToRefresh: true,
-        provider: conversationProvider,
-        itemBuilder: (context, item, index) {
-          return ConversationWidget.buildConversationItem(
-            item,
-            ref,
-            context,
-            onClick: (current) {
-              var result = ChatParentItem();
-              ref.watch(chatParentListProvider.notifier).update(result);
-
-              F.push(ChatPage(localChatHistory: ChatParentItem())).then((value) {
-                ref.read(chatParentListProvider.notifier).load();
-              });
-            },
-          );
-        },
-        pagedBuilder: (controller, builder) => PagedListView(pagingController: controller, builderDelegate: builder),
-      ),
+      body: ConversationWidget.buildConversations(ref),
     );
   }
 }

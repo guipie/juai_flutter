@@ -26,7 +26,7 @@ dependencies:
   url_launcher: ^6.2.6
   dio: ^5.4.3+1
   image_picker: '1.0.8'
-  extended_image: ^8.2.0
+  extended_image: ^9.0.7
   flutter_slidable:
     git:
       url: https://github.com/letsar/flutter_slidable.git
@@ -71,6 +71,7 @@ dependencies:
   easy_refresh:
   freezed_annotation: ^2.4.4
   visibility_detector: ^0.4.0+2
+  flutter_staggered_grid_view:
 dev_dependencies:
   freezed: ^2.5.7
   flutter_lints: ^2.0.0

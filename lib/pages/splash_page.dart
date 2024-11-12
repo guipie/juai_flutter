@@ -1,7 +1,8 @@
-import 'package:chat_bot/pages/home/home_pc_page.dart';
+import 'home/home_pc_page.dart';
 
 import '../base.dart';
 import 'home/home_page.dart';
+import 'login/login_page.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -19,7 +20,7 @@ class _SplashPageState extends State<SplashPage> {
         if (F.mobile) {
           F.pushReplacementNoAnimation(const HomePage());
         } else {
-          F.pushReplacementNoAnimation(const HomePcPage());
+          F.pushReplacementNoAnimation(const LoginPage());
         }
       });
     });

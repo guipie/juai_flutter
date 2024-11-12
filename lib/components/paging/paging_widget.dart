@@ -50,7 +50,7 @@ final class PagingWidget<D extends PagingData<I>, I> extends ConsumerWidget {
                 onPressed: onPressed,
                 icon: const Icon(Icons.refresh),
               ),
-              Text(e.toString()),
+              Text(e.message ?? '出错了..'),
             ],
           ),
         );

@@ -22,20 +22,7 @@ class ConversationPcPage extends ConsumerWidget {
             color: Theme.of(context).colorScheme.onSecondary,
             border: Border(right: BorderSide(color: Theme.of(context).colorScheme.onPrimary, width: 1)),
           ),
-          child: RiverPagedBuilder<int, ConversationModel>(
-            firstPageKey: 1,
-            pullToRefresh: true,
-            provider: conversationProvider,
-            itemBuilder: (context, item, index) {
-              return ConversationWidget.buildConversationItem(
-                item,
-                ref,
-                context,
-                onClick: (current) {},
-              );
-            },
-            pagedBuilder: (controller, builder) => PagedListView(pagingController: controller, builderDelegate: builder),
-          ),
+          child: ConversationWidget.buildConversations(ref),
         ),
         Expanded(
           child: PageView.builder(
