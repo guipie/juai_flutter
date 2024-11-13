@@ -129,7 +129,7 @@ class ConversationWidget {
       pullToRefresh: true,
       provider: conversationProvider,
       itemBuilder: (context, item, index) {
-        return ConversationWidget.buildConversationItem(
+        return buildConversationItem(
           item,
           ref,
           context,

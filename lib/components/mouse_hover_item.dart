@@ -16,6 +16,7 @@ class MouseHoverItem extends ConsumerWidget {
   final bool isShowDefaultTrailing;
   final String? trailing;
   final Widget? trailingWidget;
+  final bool? isSelected;
   MouseHoverItem({
     super.key,
     required this.title,
@@ -26,6 +27,7 @@ class MouseHoverItem extends ConsumerWidget {
     this.onPressed,
     this.isShowDefaultTrailing = true,
     this.trailing,
+    this.isSelected,
     this.trailingWidget,
   });
 
@@ -49,10 +51,10 @@ class MouseHoverItem extends ConsumerWidget {
         size: 18,
       );
     return MouseHoverWidget(
-      hoverColor: ref.watch(themeProvider).pinedBgColor(),
-      color: ref.watch(themeProvider).divideBgColor(),
+      hoverColor: ref.watch(themeProvider).pinedBgColor().withOpacity(0.5),
+      color: isSelected == true ? ref.watch(themeProvider).pinedBgColor() : ref.watch(themeProvider).divideBgColor(),
       child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 2),
+        padding: const EdgeInsets.symmetric(vertical: 5),
         child: ListTile(
           leading: leadingPicUrl.isNotEmpty()
               ? TDAvatar(

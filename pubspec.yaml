@@ -27,6 +27,7 @@ dependencies:
   dio: ^5.4.3+1
   image_picker: '1.0.8'
   extended_image: ^9.0.7
+  cached_network_image:
   flutter_slidable:
     git:
       url: https://github.com/letsar/flutter_slidable.git

@@ -13,19 +13,21 @@ part 'prompt_provider.g.dart';
 String category(Ref ref) => '';
 
 @riverpod
-class PromptNotifier extends _$PromptNotifier with PagePagingNotifierMixin<Prompt> {
+class PromptNotifier extends _$PromptNotifier with CursorPagingNotifierMixin<Prompt> {
   @override
-  Future<PagePagingData<Prompt>> build() => fetch(page: 1);
+  Future<CursorPagingData<Prompt>> build() => fetch(cursor: null);
 
   @override
-  Future<PagePagingData<Prompt>> fetch({required int page}) async {
+  Future<CursorPagingData<Prompt>> fetch({
+    required String? cursor,
+  }) async {
     var lastCreatedAt = state.value?.items.last.createTime;
     var models = await Api.get<List<Prompt>, Prompt>(
       ApiModel.prompts,
-      queryParameters: {'type': ref.read(categoryProvider), 'lastCreate': lastCreatedAt},
+      queryParameters: {'category': ref.read(categoryProvider), 'lastCreate': lastCreatedAt},
       fromJsonT: Prompt.fromJson,
     );
-    return PagePagingData(items: models.result ?? [], hasMore: models.result?.length == 10, page: page + 1);
+    return CursorPagingData(items: models.result ?? [], hasMore: models.result?.length == 20, nextCursor: '10');
   }
 }
 

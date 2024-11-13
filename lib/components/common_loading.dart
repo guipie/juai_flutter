@@ -32,7 +32,7 @@ class EmptyData extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Image.asset("assets/images/empty.png", width: 96, height: 130, fit: BoxFit.cover),
+          Image.asset('assets/images/empty.png', width: 96, height: 130, fit: BoxFit.cover),
           Transform.translate(offset: const Offset(0, -10), child: Text(tips ?? S.current.empty_content_need_add, style: Theme.of(context).textTheme.bodySmall)),
         ],
       ),

@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:chat_bot/base.dart';
-import 'package:chat_bot/hive_bean/local_chat_history.dart';
+import '../base.dart';
+import '../hive_bean/local_chat_history.dart';
 import 'package:extended_image/extended_image.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
@@ -59,7 +59,7 @@ class ScreenShotChatPage extends ConsumerWidget {
                         maxWidth: F.width * 0.8,
                       ),
                       child: Text(
-                        result.title ?? "",
+                        result.title ?? '',
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: Theme.of(context).appBarTheme.titleTextStyle,
@@ -81,7 +81,7 @@ class ScreenShotChatPage extends ConsumerWidget {
                         ClipRRect(
                           borderRadius: BorderRadius.circular(10),
                           child: Image.asset(
-                            "assets/images/logo.png",
+                            'assets/images/logo.png',
                             width: 50,
                             height: 50,
                           ),
@@ -91,21 +91,16 @@ class ScreenShotChatPage extends ConsumerWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              "Made by CChatBot",
+                              'Made by CChatBot',
                               style: TextStyle(
                                 color: Theme.of(context).primaryColor,
                                 fontSize: 18,
                               ),
                             ),
                             Text(
-                              DateUtil.formatDateMs(
-                                  DateTime.now().millisecondsSinceEpoch,
-                                  format: DateFormats.y_mo_d_h_m),
+                              DateUtil.formatDateMs(DateTime.now().millisecondsSinceEpoch, format: DateFormats.y_mo_d_h_m),
                               style: TextStyle(
-                                color: Theme.of(context)
-                                    .textTheme
-                                    .bodyMedium
-                                    ?.color,
+                                color: Theme.of(context).textTheme.bodyMedium?.color,
                                 fontSize: 13,
                               ),
                             ),
@@ -155,8 +150,7 @@ class ScreenShotChatImagePage extends ConsumerWidget {
         }).toList();
 
         return MediaQuery(
-          data: MediaQuery.of(rootContext)
-              .copyWith(size: Size(F.width, F.height)),
+          data: MediaQuery.of(rootContext).copyWith(size: Size(F.width, F.height)),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(10),
             child: Container(
@@ -174,7 +168,7 @@ class ScreenShotChatImagePage extends ConsumerWidget {
                         maxWidth: F.width * 0.8,
                       ),
                       child: Text(
-                        result.title ?? "",
+                        result.title ?? '',
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: Theme.of(context).appBarTheme.titleTextStyle,
@@ -196,7 +190,7 @@ class ScreenShotChatImagePage extends ConsumerWidget {
                         ClipRRect(
                           borderRadius: BorderRadius.circular(10),
                           child: Image.asset(
-                            "assets/images/logo.png",
+                            'assets/images/logo.png',
                             width: 50,
                             height: 50,
                           ),
@@ -206,21 +200,16 @@ class ScreenShotChatImagePage extends ConsumerWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              "Made by CChatBot",
+                              'Made by CChatBot',
                               style: TextStyle(
                                 color: Theme.of(context).primaryColor,
                                 fontSize: 18,
                               ),
                             ),
                             Text(
-                              DateUtil.formatDateMs(
-                                  DateTime.now().millisecondsSinceEpoch,
-                                  format: DateFormats.y_mo_d_h_m),
+                              DateUtil.formatDateMs(DateTime.now().millisecondsSinceEpoch, format: DateFormats.y_mo_d_h_m),
                               style: TextStyle(
-                                color: Theme.of(context)
-                                    .textTheme
-                                    .bodyMedium
-                                    ?.color,
+                                color: Theme.of(context).textTheme.bodyMedium?.color,
                                 fontSize: 13,
                               ),
                             ),
@@ -269,12 +258,7 @@ class ScreenShotUserMessage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
-              if (chatItem.images != null &&
-                  chatItem.images!.isNotEmpty &&
-                  (chatItem.images!
-                          .where((element) => element.isEmpty)
-                          .length !=
-                      chatItem.images!.length))
+              if (chatItem.images != null && chatItem.images!.isNotEmpty && (chatItem.images!.where((element) => element.isEmpty).length != chatItem.images!.length))
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: Wrap(
@@ -283,9 +267,7 @@ class ScreenShotUserMessage extends StatelessWidget {
                     runAlignment: WrapAlignment.end,
                     direction: Axis.horizontal,
                     children: [
-                      ...chatItem.images!
-                          .where((element) => element.isNotEmpty)
-                          .map((e) {
+                      ...chatItem.images!.where((element) => element.isNotEmpty).map((e) {
                         return ClipRRect(
                           borderRadius: BorderRadius.circular(10),
                           child: Image.memory(
@@ -300,15 +282,9 @@ class ScreenShotUserMessage extends StatelessWidget {
                     ],
                   ),
                 ),
-              if (chatItem.images != null &&
-                  chatItem.images!.isNotEmpty &&
-                  (chatItem.images!
-                          .where((element) => element.isEmpty)
-                          .length !=
-                      chatItem.images!.length))
-                const SizedBox(height: 10),
+              if (chatItem.images != null && chatItem.images!.isNotEmpty && (chatItem.images!.where((element) => element.isEmpty).length != chatItem.images!.length)) const SizedBox(height: 10),
               Text(
-                chatItem.content ?? "",
+                chatItem.content ?? '',
                 style: const TextStyle(
                   color: Color(0xff091807),
                 ),
@@ -336,9 +312,8 @@ class ScreenShotBotMessage extends ConsumerWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            chatItem.moduleType?.replaceFirst("models/", "") ?? "",
-            style:
-                TextStyle(fontSize: 13, color: Theme.of(context).primaryColor),
+            chatItem.moduleType?.replaceFirst('models/', '') ?? '',
+            style: TextStyle(fontSize: 13, color: Theme.of(context).primaryColor),
           ),
           const SizedBox(height: 5),
           Container(
@@ -376,9 +351,9 @@ class ScreenShotBotMessage extends ConsumerWidget {
       );
     } else if (chatItem.status == MessageStatus.success.index) {
       //Markdown 适配暗黑主题
-      return ChatMarkDown(content: chatItem.content ?? "");
+      return ChatMarkDown(content: chatItem.content ?? '');
     } else if (chatItem.status == MessageStatus.failed.index) {
-      return ChatMarkDown(content: chatItem.content ?? "");
+      return ChatMarkDown(content: chatItem.content ?? '');
     } else {
       return Container(
         decoration: BoxDecoration(
@@ -391,7 +366,7 @@ class ScreenShotBotMessage extends ConsumerWidget {
         ),
         padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
         child: Text(
-          chatItem.content ?? "canceled by user",
+          chatItem.content ?? 'canceled by user',
           style: Theme.of(context).textTheme.titleMedium,
         ),
       );
@@ -400,7 +375,7 @@ class ScreenShotBotMessage extends ConsumerWidget {
 
   bool isMarkdown(String text) {
     // 定义一系列Markdown的正则表达式模式
-    final List<RegExp> markdownPatterns = [
+    final markdownPatterns = <RegExp>[
       RegExp(r'^\s*#', multiLine: true), // 标题
       RegExp(r'\*\*(.*?)\*\*'), // 加粗
       RegExp(r'\*(.*?)\*'), // 斜体
@@ -438,7 +413,7 @@ class ScreenShotAssistMessage extends StatelessWidget {
         ),
         padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
         child: Text(
-          chatItem.content ?? "",
+          chatItem.content ?? '',
           maxLines: 3,
           overflow: TextOverflow.ellipsis,
           style: Theme.of(context).textTheme.bodySmall,
@@ -466,12 +441,11 @@ class ScreenShotBotImageMessage extends ConsumerWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                chatItem.moduleType ?? "",
-                style: TextStyle(
-                    fontSize: 14, color: Theme.of(context).primaryColor),
+                chatItem.moduleType ?? '',
+                style: TextStyle(fontSize: 14, color: Theme.of(context).primaryColor),
               ),
               Text(
-                "  ${chatItem.time.toYMDHM()}",
+                '  ${chatItem.time.toYMDHM()}',
                 style: TextStyle(
                   color: Theme.of(context).textTheme.bodySmall?.color,
                   fontSize: 12,
@@ -514,14 +488,13 @@ class ScreenShotBotImageMessage extends ConsumerWidget {
           ),
         ),
       );
-    } else if (chatItem.status == MessageStatus.success.index &&
-        (chatItem.images?.isNotEmpty ?? false)) {
+    } else if (chatItem.status == MessageStatus.success.index && (chatItem.images?.isNotEmpty ?? false)) {
       return Hero(
-        tag: chatItem.images?.first ?? "",
+        tag: chatItem.images?.first ?? '',
         child: ClipRRect(
           borderRadius: BorderRadius.circular(15),
           child: ExtendedImage.network(
-            chatItem.images?.first ?? "",
+            chatItem.images?.first ?? '',
             width: MediaQuery.of(context).size.width * 0.7,
             height: MediaQuery.of(context).size.width * 0.7,
             fit: BoxFit.cover,
@@ -530,13 +503,13 @@ class ScreenShotBotImageMessage extends ConsumerWidget {
       );
     } else if (chatItem.status == MessageStatus.failed.index) {
       return ChatMarkDown(
-        content: chatItem.content ?? "",
+        content: chatItem.content ?? '',
       );
     } else {
       return Container(
         padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
         child: Text(
-          "canceled by user",
+          'canceled by user',
           style: Theme.of(context).textTheme.titleMedium,
         ),
       );
@@ -545,7 +518,7 @@ class ScreenShotBotImageMessage extends ConsumerWidget {
 
   bool isMarkdown(String text) {
     // 定义一系列Markdown的正则表达式模式
-    final List<RegExp> markdownPatterns = [
+    final markdownPatterns = <RegExp>[
       RegExp(r'^\s*#', multiLine: true), // 标题
       RegExp(r'\*\*(.*?)\*\*'), // 加粗
       RegExp(r'\*(.*?)\*'), // 斜体

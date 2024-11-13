@@ -223,7 +223,7 @@ class LightTheme extends BaseTheme {
         primary: primaryColor,
         onPrimary: primaryColor.withAlpha(10),
         secondary: Colors.white,
-        onSecondary: Colors.white70,
+        onSecondary: Colors.white60,
         surface: Colors.black,
         onSurface: Colors.black87,
         error: const Color(0xffFF3B30),

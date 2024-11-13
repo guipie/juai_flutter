@@ -1,5 +1,5 @@
-import 'package:chat_bot/components/td/tdesign_flutter.dart';
-import 'package:chat_bot/utils/f.dart';
+import '../td/tdesign_flutter.dart';
+import '../../utils/f.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';

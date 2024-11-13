@@ -38,9 +38,10 @@ class AimodelWidget {
                   fontSize: 16,
                 ),
                 MouseHoverItem(
+                  isSelected: true,
                   leadingWidget: Icon(
                     Icons.people,
-                    size: 36,
+                    size: 32,
                     color: Theme.of(context).colorScheme.primary,
                   ),
                   title: '数字人广场',
@@ -48,7 +49,7 @@ class AimodelWidget {
                 MouseHoverItem(
                   leadingWidget: Icon(
                     Icons.person,
-                    size: 36,
+                    size: 32,
                     color: Theme.of(context).colorScheme.primary,
                   ),
                   title: '我的数字人',
@@ -56,7 +57,7 @@ class AimodelWidget {
                 MouseHoverItem(
                   leadingWidget: Icon(
                     Icons.category,
-                    size: 36,
+                    size: 32,
                     color: Theme.of(context).colorScheme.primary,
                   ),
                   title: '我的收藏',
