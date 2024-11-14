@@ -25,25 +25,16 @@ class _PromptPageState extends ConsumerState<PromptPage> {
         futureRefreshable: promptNotifierProvider.future,
         notifierRefreshable: promptNotifierProvider.notifier,
         contentBuilder: (data, widgetCount, endItemView) {
-          return EasyRefresh(
-            onRefresh: () async => ref.refresh(promptNotifierProvider.future),
-            child: SingleChildScrollView(
-              controller: controller,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 12),
-                child: Wrap(
-                  spacing: 12,
-                  runSpacing: 12,
-                  children: data.items
-                      .map((m) => CardPic(
-                            m.avatar!.replaceAll('1', 'replace'),
-                            m.title!,
-                            titleCenter: true,
-                          ))
-                      .toList(),
-                ),
-              ),
-            ),
+          return Wrap(
+            spacing: 12,
+            runSpacing: 12,
+            children: data.items
+                .map((m) => CardPic(
+                      m.avatar!,
+                      m.title!,
+                      titleCenter: true,
+                    ))
+                .toList(),
           );
         },
       ),

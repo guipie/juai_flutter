@@ -221,7 +221,7 @@ class LightTheme extends BaseTheme {
     return ThemeData.light().copyWith(
       colorScheme: ColorScheme.light(
         primary: primaryColor,
-        onPrimary: primaryColor.withAlpha(10),
+        onPrimary: primaryColor.withAlpha(20),
         secondary: Colors.white,
         onSecondary: Colors.white60,
         surface: Colors.black,

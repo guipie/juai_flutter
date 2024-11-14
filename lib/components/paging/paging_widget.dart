@@ -1,3 +1,4 @@
+import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:visibility_detector/visibility_detector.dart';
@@ -80,9 +81,18 @@ final class PagingWidget<D extends PagingData<I>, I> extends ConsumerWidget {
                 _ => const SizedBox.shrink(),
               },
             );
-            return RefreshIndicator(
+            return EasyRefresh(
+              header: BezierCircleHeader(
+                triggerOffset: 80,
+                foregroundColor: Theme.of(context).scaffoldBackgroundColor,
+                backgroundColor: Theme.of(context).colorScheme.onPrimary,
+              ),
               onRefresh: () async => ref.refresh(futureRefreshable),
-              child: content,
+              onLoad: () async => ref.read(notifierRefreshable).loadNext(),
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.only(left: 16),
+                child: content,
+              ),
             );
           },
           // Loading state for the first page

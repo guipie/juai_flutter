@@ -22,12 +22,15 @@ class PromptNotifier extends _$PromptNotifier with CursorPagingNotifierMixin<Pro
     required String? cursor,
   }) async {
     var lastCreatedAt = state.value?.items.last.createTime;
+    if (cursor == null) {
+      lastCreatedAt = null;
+    }
     var models = await Api.get<List<Prompt>, Prompt>(
       ApiModel.prompts,
       queryParameters: {'category': ref.read(categoryProvider), 'lastCreate': lastCreatedAt},
       fromJsonT: Prompt.fromJson,
     );
-    return CursorPagingData(items: models.result ?? [], hasMore: models.result?.length == 20, nextCursor: '10');
+    return CursorPagingData(items: models.result ?? [], hasMore: models.result?.length == 20, nextCursor: ((state.value?.items.length ?? 0) + 20).toString());
   }
 }
 
