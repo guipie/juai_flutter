@@ -6,8 +6,14 @@ import '../../../components/paging/paging_notifier_mixin.dart';
 import '../../../models/aimodel/ai_model.dart';
 import '../../../services/http/address/modelai.dart';
 import '../../../services/http/api.dart';
+import '../prompt_page.dart';
 
 part 'aimodel_provider.g.dart';
+
+@Riverpod(keepAlive: true)
+initPcPage(Ref ref) {
+  return const PromptPage();
+}
 
 @riverpod
 class AiModelNotifier extends _$AiModelNotifier with PagePagingNotifierMixin<AiModelSort> {

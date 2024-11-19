@@ -15,6 +15,7 @@ class CardPic extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Card.filled(
+        elevation: 0.5,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

@@ -29,11 +29,14 @@ class _PromptPageState extends ConsumerState<PromptPage> {
             spacing: 12,
             runSpacing: 12,
             children: data.items
-                .map((m) => CardPic(
-                      m.avatar!,
-                      m.title!,
-                      titleCenter: true,
-                    ))
+                .map(
+                  (m) => CardPic(
+                    m.avatar!,
+                    m.title!,
+                    titleCenter: true,
+                    width: 220,
+                  ),
+                )
                 .toList(),
           );
         },

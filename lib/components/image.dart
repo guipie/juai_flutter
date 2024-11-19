@@ -10,12 +10,14 @@ class JuImage extends StatelessWidget {
   Widget build(BuildContext context) {
     return path.startsWith('http')
         ? CachedNetworkImage(
-            width: 200,
+            width: width,
             fit: BoxFit.fill,
-            scale: 0.8,
             imageUrl: path,
-            progressIndicatorBuilder: (context, url, downloadProgress) => const Center(
-              child: CircularProgressIndicator(),
+            progressIndicatorBuilder: (context, url, downloadProgress) => ConstrainedBox(
+              constraints: BoxConstraints(maxWidth: width, minHeight: 200),
+              child: const Center(
+                child: CircularProgressIndicator(),
+              ),
             ),
             errorWidget: (context, url, error) => Container(
               color: Theme.of(context).colorScheme.onSurface.withOpacity(0.1),
