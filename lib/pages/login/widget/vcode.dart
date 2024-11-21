@@ -1,22 +1,16 @@
 import '../../../base.dart';
 
-class PhoneWidget extends StatelessWidget {
-  const PhoneWidget({super.key});
+class VcodeWidget extends StatelessWidget {
+  const VcodeWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       decoration: InputDecoration(
-        hintText: S.current.phone,
-        filled: true,
-        fillColor: const Color(0xFFF5FCF9),
+        hintText: S.current.vcode,
         contentPadding: const EdgeInsets.symmetric(horizontal: 16.0 * 1.5, vertical: 16.0),
-        border: const OutlineInputBorder(
-          borderSide: BorderSide.none,
-          borderRadius: BorderRadius.all(Radius.circular(50)),
-        ),
       ),
-      keyboardType: TextInputType.phone,
+      keyboardType: TextInputType.number,
       forceErrorText: '错误',
       validator: (value) {
         if (value == null || value.isEmpty || value.length < 11) {

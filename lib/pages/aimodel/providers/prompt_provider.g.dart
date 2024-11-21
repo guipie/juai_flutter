@@ -22,7 +22,7 @@ final categoryProvider = AutoDisposeProvider<String>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef CategoryRef = AutoDisposeProviderRef<String>;
-String _$promptNotifierHash() => r'6cbca3497c3d4d19c99d650a98be544b47e3d75e';
+String _$promptNotifierHash() => r'6cfc5d13dcc94e1b30648a3869ddc6b0d7237002';
 
 /// See also [PromptNotifier].
 @ProviderFor(PromptNotifier)

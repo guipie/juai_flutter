@@ -4,6 +4,8 @@ import '../../components/td/tdesign_flutter.dart';
 import '../../constants/enums/user_enum.dart';
 import 'widget/password.dart';
 import 'widget/phone.dart';
+import 'widget/phone_vcode.dart';
+import 'widget/vcode.dart';
 
 class LoginPage extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
@@ -38,11 +40,18 @@ class LoginPage extends StatelessWidget {
                     key: _formKey,
                     child: Column(
                       children: [
-                        const PhoneWidget(),
-                        const PassWordWidget(),
+                        if (loginOpr == LoginOpr.login) ...[
+                          const PhoneWidget(),
+                          const PassWordWidget(),
+                        ],
+                        if (loginOpr != LoginOpr.login) ...[
+                          const PhoneVcodeWidget(),
+                          const VcodeWidget(),
+                        ],
                         ElevatedButton(
                           onPressed: () {
                             if (_formKey.currentState!.validate()) {
+                              '验证成功'.i();
                               _formKey.currentState!.save();
                               // Navigate to the main screen
                             }
@@ -64,7 +73,7 @@ class LoginPage extends StatelessWidget {
                           child: Text(
                             S.current.forget_password,
                             style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                                  color: Theme.of(context).textTheme.bodyLarge!.color!.withValues(alpha: 0.64),
+                                  color: Theme.of(context).textTheme.bodyLarge!.color!.withOpacity(0.64),
                                 ),
                           ),
                         ),
@@ -84,7 +93,7 @@ class LoginPage extends StatelessWidget {
                                 ],
                               ),
                               style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                                    color: Theme.of(context).textTheme.bodyLarge!.color!.withValues(alpha: 0.64),
+                                    color: Theme.of(context).textTheme.bodyLarge!.color!.withOpacity(0.64),
                                   ),
                             ),
                           ),

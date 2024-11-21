@@ -16,7 +16,6 @@ class Skeletons {
         padding: const EdgeInsets.all(8),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          spacing: 20,
           children: [
             for (int i = 1; i <= cardCount; i++)
               Container(
@@ -38,7 +37,6 @@ class Skeletons {
         padding: const EdgeInsets.all(8),
         child: const Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          spacing: 20,
         ),
       ),
     );
