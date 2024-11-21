@@ -133,5 +133,18 @@
   "please_input": "Please type",
   "custom": "Custom",
   "has_exist": "Already Exists",
-  "clear_context": "Clear Context"
+  "clear_context": "Clear Context",
+  "login": "Sign in",
+  "register": "Sign up",
+  "forget_password": "Forgot Password?",
+  "no_account": "Don’t have an account? ",
+  "have_account": "Have an account",
+  "phone": "phone number",
+  "pwd": "password",
+  "vcode": "verification code",
+  "confirm_pwd": "confirm password",
+  "pwd_format_error": "password format error",
+  "pwd_not_same": "password not same",
+  "login_success": "sign in success",
+  "register_success": "sign up success"
 }

@@ -26,6 +26,9 @@ class JuImage extends StatelessWidget {
               child: const Icon(Icons.error),
             ),
           )
-        : Image.asset(path);
+        : Image.asset(
+            path,
+            width: width,
+          );
   }
 }

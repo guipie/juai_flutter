@@ -73,6 +73,8 @@ dependencies:
   freezed_annotation: ^2.4.4
   visibility_detector: ^0.4.0+2
   flutter_staggered_grid_view:
+  flutter_screenutil:
+  shimmer:
 dev_dependencies:
   freezed: ^2.5.7
   flutter_lints: ^2.0.0

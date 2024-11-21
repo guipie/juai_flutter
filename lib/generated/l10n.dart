@@ -1389,6 +1389,136 @@ class S {
       args: [],
     );
   }
+
+  /// `Sign in`
+  String get login {
+    return Intl.message(
+      'Sign in',
+      name: 'login',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sign up`
+  String get register {
+    return Intl.message(
+      'Sign up',
+      name: 'register',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Forgot Password?`
+  String get forget_password {
+    return Intl.message(
+      'Forgot Password?',
+      name: 'forget_password',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Don’t have an account? `
+  String get no_account {
+    return Intl.message(
+      'Don’t have an account? ',
+      name: 'no_account',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Have an account`
+  String get have_account {
+    return Intl.message(
+      'Have an account',
+      name: 'have_account',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `phone number`
+  String get phone {
+    return Intl.message(
+      'phone number',
+      name: 'phone',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `password`
+  String get pwd {
+    return Intl.message(
+      'password',
+      name: 'pwd',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `verification code`
+  String get vcode {
+    return Intl.message(
+      'verification code',
+      name: 'vcode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `confirm password`
+  String get confirm_pwd {
+    return Intl.message(
+      'confirm password',
+      name: 'confirm_pwd',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `password format error`
+  String get pwd_format_error {
+    return Intl.message(
+      'password format error',
+      name: 'pwd_format_error',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `password not same`
+  String get pwd_not_same {
+    return Intl.message(
+      'password not same',
+      name: 'pwd_not_same',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `sign in success`
+  String get login_success {
+    return Intl.message(
+      'sign in success',
+      name: 'login_success',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `sign up success`
+  String get register_success {
+    return Intl.message(
+      'sign up success',
+      name: 'register_success',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

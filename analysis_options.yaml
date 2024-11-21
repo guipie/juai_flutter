@@ -39,6 +39,7 @@ analyzer:
     avoid_init_to_null: warning
     curly_braces_in_flow_control_structures: ignore
     invalid_annotation_target: ignore
+    always_put_control_body_on_new_line: ignore
 
 linter:
   # The lint rules applied to this project can be customized in the

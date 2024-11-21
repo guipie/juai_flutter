@@ -133,5 +133,18 @@
   "please_input": "请输入",
   "custom": "自定义",
   "has_exist": "已存在",
-  "clear_context": "清空上下文"
+  "clear_context": "清空上下文",
+  "login": "登录",
+  "register": "注册",
+  "forget_password": "忘记密码",
+  "no_account": "没有账号? ",
+  "have_account": "已经有账号",
+  "phone": "手机号",
+  "pwd": "密码",
+  "vcode": "验证码",
+  "confirm_pwd": "确认密码",
+  "pwd_format_error": "密码格式错误",
+  "pwd_not_same": "两次密码不一致",
+  "login_success": "登录成功",
+  "register_success": "注册成功"
 }

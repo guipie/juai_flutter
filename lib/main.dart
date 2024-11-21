@@ -34,34 +34,42 @@ class MyApp extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     var globalLanguage = ref.watch(globalLanguageProvider);
     var primaryColor = ref.watch(primaryColorProvider);
-    return MaterialApp(
-      key: ValueKey(globalLanguage),
-      navigatorKey: F.navigatorKey,
-      title: S.current.app_name,
-      localeResolutionCallback: (Locale? locale, Iterable<Locale> supportedLocales) {
-        if (locale != null) {
-          return locale;
-        }
-        return supportedLocales.first;
-      },
-      debugShowCheckedModeBanner: false,
-      theme: ref.watch(themeProvider).theme(primaryColor),
-      localizationsDelegates: const [
-        S.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-      ],
-      supportedLocales: S.delegate.supportedLocales,
-      home: const SplashPage(),
-      locale: getLocaleByCode(globalLanguage),
+    return ScreenUtilInit(
+      designSize: const Size(360, 690),
+      minTextAdapt: true,
+      splitScreenMode: true,
       builder: (context, child) {
-        return FlutterEasyLoading(
-            child: ScrollConfiguration(
-          behavior: const ScrollPhysicsConfig(),
-          child: child ?? Container(),
-        ));
+        return MaterialApp(
+          key: ValueKey(globalLanguage),
+          navigatorKey: F.navigatorKey,
+          title: S.current.app_name,
+          localeResolutionCallback: (Locale? locale, Iterable<Locale> supportedLocales) {
+            if (locale != null) {
+              return locale;
+            }
+            return supportedLocales.first;
+          },
+          debugShowCheckedModeBanner: false,
+          theme: ref.watch(themeProvider).theme(primaryColor),
+          localizationsDelegates: const [
+            S.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+          ],
+          supportedLocales: S.delegate.supportedLocales,
+          home: const SplashPage(),
+          locale: getLocaleByCode(globalLanguage),
+          builder: (context, child) {
+            return FlutterEasyLoading(
+                child: ScrollConfiguration(
+              behavior: const ScrollPhysicsConfig(),
+              child: child ?? Container(),
+            ));
+          },
+        );
       },
+      child: const Text('聚AI,一个就够了'),
     );
   }
 }

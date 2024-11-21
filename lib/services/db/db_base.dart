@@ -1,8 +1,8 @@
-import 'package:chat_bot/base.dart';
-import 'package:chat_bot/services/db/chat_item.dart';
-import 'package:chat_bot/services/db/db_coversation.dart';
-import 'package:chat_bot/services/db/db_dict.dart';
-import 'package:chat_bot/services/db/prompt_item.dart';
+import '../../base.dart';
+import 'chat_item.dart';
+import 'db_coversation.dart';
+import 'db_dict.dart';
+import 'prompt_item.dart';
 import 'package:extended_image/extended_image.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
@@ -18,7 +18,7 @@ class MyDbProvider {
 }
 
 abstract class DbBase {
-  static const String _dbName = "juai2.db";
+  static const String _dbName = 'juai2.db';
   static const int _newVersion = 1;
   static int _oldVersion = 0;
 
@@ -48,12 +48,13 @@ abstract class DbBase {
 
   ///创建数据库
   Future<Database> _initDatabase() async {
-    final Directory appDocumentsDir = await getApplicationDocumentsDirectory();
-    String dbBasePath = join(appDocumentsDir.path, "databases", _dbName);
+    final appDocumentsDir = await getApplicationDocumentsDirectory();
+    var dbBasePath = join(appDocumentsDir.path, 'databases', _dbName);
     if (Platform.isWindows || Platform.isLinux) {
+      databaseFactoryOrNull = null;
       sqfliteFfiInit();
       databaseFactory = databaseFactoryFfi;
-      dbBasePath = join(appDocumentsDir.path, "databases", _dbName);
+      dbBasePath = join(appDocumentsDir.path, 'databases', _dbName);
     } else {
       dbBasePath = join(await getDatabasesPath(), _dbName);
     }
@@ -82,8 +83,8 @@ abstract class DbBase {
 
     if (_oldVersion != 0) {
       if (_oldVersion > _newVersion) {
-        debugPrint("_oldVersion === $_oldVersion");
-        debugPrint("_newVersion === $_newVersion");
+        debugPrint('_oldVersion === $_oldVersion');
+        debugPrint('_newVersion === $_newVersion');
         //数据库降级了
         await onDowngrade(
           _database!,
@@ -91,8 +92,8 @@ abstract class DbBase {
           _newVersion,
         );
       } else if (_oldVersion < _newVersion) {
-        debugPrint("_oldVersion === $_oldVersion");
-        debugPrint("_newVersion === $_newVersion");
+        debugPrint('_oldVersion === $_oldVersion');
+        debugPrint('_newVersion === $_newVersion');
         //数据库升级了
         await onUpgrade(
           _database!,
@@ -119,16 +120,16 @@ abstract class DbBase {
     var result = await _database!.rawQuery("""
       SELECT sql FROM sqlite_master WHERE type='table' AND name='$tableName' COLLATE NOCASE limit 1
     """);
-    String sql = result[0]["sql"] as String;
-    int startIndex = sql.indexOf("(") + 1;
-    int endIndex = sql.indexOf(")");
+    var sql = result[0]['sql'] as String;
+    var startIndex = sql.indexOf('(') + 1;
+    var endIndex = sql.indexOf(')');
     sql = sql.substring(startIndex, endIndex);
 
-    List<String> sqlList = sql.split(",").map((e) => e.trim()).toList();
-    bool exists = false;
-    for (int j = 0; j < sqlList.length; j++) {
-      var rowStr = sqlList[j].trim().split(",").join("");
-      var colName = rowStr.split(" ")[0].trim();
+    var sqlList = sql.split(',').map((e) => e.trim()).toList();
+    var exists = false;
+    for (var j = 0; j < sqlList.length; j++) {
+      var rowStr = sqlList[j].trim().split(',').join('');
+      var colName = rowStr.split(' ')[0].trim();
       if (colName == columnName) {
         exists = true;
         break;
@@ -139,9 +140,9 @@ abstract class DbBase {
 
   ///新增列
   Future addColumn(String columnName, String type) async {
-    return await _database!.rawQuery("""
+    return await _database!.rawQuery('''
       ALTER TABLE $tableName ADD  $columnName $type
-    """);
+    ''');
   }
 
   ///新增表
@@ -149,35 +150,35 @@ abstract class DbBase {
     if (_database == null) {
       await _initDatabase();
     }
-    final StringBuffer sqlBuffer = StringBuffer("CREATE TABLE $tableName (");
+    final sqlBuffer = StringBuffer('CREATE TABLE $tableName (');
     json.forEach((key, value) {
-      sqlBuffer.write("$key ");
+      sqlBuffer.write('$key ');
       switch (value.runtimeType) {
         case int:
-          sqlBuffer.write("INTEGER");
+          sqlBuffer.write('INTEGER');
           if (hasPrimaryKey == true && key.toLowerCase().contains(keyName ?? 'id')) {
-            sqlBuffer.write(" PRIMARY KEY AUTOINCREMENT");
+            sqlBuffer.write(' PRIMARY KEY AUTOINCREMENT');
           }
           break;
         case double:
-          sqlBuffer.write("REAL");
+          sqlBuffer.write('REAL');
           break;
         case String:
-          sqlBuffer.write("TEXT");
+          sqlBuffer.write('TEXT');
           break;
         case bool:
-          sqlBuffer.write("BOOLEAN");
+          sqlBuffer.write('BOOLEAN');
           break;
         // case DateTime:
         //   sqlBuffer.write("DATETIME DEFAULT CURRENT_TIMESTAMP");
         //   break;
         default:
-          throw Exception("Unsupported data type: ${value.runtimeType}");
+          throw Exception('Unsupported data type: ${value.runtimeType}');
       }
-      sqlBuffer.write(", ");
+      sqlBuffer.write(', ');
     });
-    sqlBuffer.write(")");
-    _database!.execute(sqlBuffer.toString().replaceAll(", )", ")"));
+    sqlBuffer.write(')');
+    _database!.execute(sqlBuffer.toString().replaceAll(', )', ')'));
   }
 
   ///删表
@@ -185,9 +186,9 @@ abstract class DbBase {
     if (_database == null) {
       await _initDatabase();
     }
-    await _database!.execute("""
+    await _database!.execute('''
       drop table if exists $tableName;
-    """);
+    ''');
   }
 
   Database get database => _database!;
@@ -199,36 +200,36 @@ abstract class DbBase {
 
   ///删除数据
   remove(Map<String, Object?> json) async {
-    List<String> keys = json.keys.toList();
-    List<String> where = [];
-    for (int i = 0; i < keys.length; i++) {
-      String key = keys[i];
-      where.add("$key=${json[key]}");
+    var keys = json.keys.toList();
+    var where = <String>[];
+    for (var i = 0; i < keys.length; i++) {
+      var key = keys[i];
+      where.add('$key=${json[key]}');
     }
 
     return database.delete(
       tableName,
-      where: where.join(" and "),
+      where: where.join(' and '),
     );
   }
 
   ///修改数据
   update(Map<String, Object?> whereData, Map<String, Object?> updateData) async {
-    List<String> keys = whereData.keys.toList();
-    List<String> where = [];
-    for (int i = 0; i < keys.length; i++) {
-      String key = keys[i];
+    var keys = whereData.keys.toList();
+    var where = <String>[];
+    for (var i = 0; i < keys.length; i++) {
+      var key = keys[i];
       if (whereData[key].runtimeType == String) {
         where.add("$key='${whereData[key]}'");
       } else {
-        where.add("$key=${whereData[key]}");
+        where.add('$key=${whereData[key]}');
       }
     }
 
     return database.update(
       tableName,
       updateData,
-      where: where.isEmpty ? null : where.join(" and "),
+      where: where.isEmpty ? null : where.join(' and '),
     );
   }
 
@@ -241,22 +242,22 @@ abstract class DbBase {
     int? page,
     int? pageSize,
   }) async {
-    List<String> keys = where?.keys.toList() ?? [];
+    var keys = where?.keys.toList() ?? [];
 
-    List<String> whereList = [];
-    for (int i = 0; i < keys.length; i++) {
-      String key = keys[i];
+    var whereList = <String>[];
+    for (var i = 0; i < keys.length; i++) {
+      var key = keys[i];
       if (where![key].runtimeType == String) {
         whereList.add("$key='${where[key]}'");
       } else {
-        whereList.add("$key=${where[key]}");
+        whereList.add('$key=${where[key]}');
       }
     }
 
-    String sql = whereList.join(" and ");
-    String mapKey = "${tableName}_${sql}_page=${page}_pageSize=$pageSize";
+    var sql = whereList.join(' and ');
+    var mapKey = '${tableName}_${sql}_page=${page}_pageSize=$pageSize';
 
-    List data = sql.isEmpty ? [] : (_findCache[mapKey] ?? []);
+    var data = sql.isEmpty ? [] : (_findCache[mapKey] ?? []);
     if (data.isNotEmpty) {
       return _findCache[mapKey]!;
     }

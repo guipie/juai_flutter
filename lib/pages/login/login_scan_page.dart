@@ -1,7 +1,7 @@
 import '../../base.dart';
 
-class LoginPage extends ConsumerWidget {
-  const LoginPage({super.key});
+class LoginScanPage extends ConsumerWidget {
+  const LoginScanPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

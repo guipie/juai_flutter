@@ -56,6 +56,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "chat_setting": MessageLookupByLibrary.simpleMessage("Chat Setting"),
         "clear_context": MessageLookupByLibrary.simpleMessage("Clear Context"),
         "confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
+        "confirm_pwd": MessageLookupByLibrary.simpleMessage("confirm password"),
         "conform_resend": MessageLookupByLibrary.simpleMessage(
             "Are you sure you want to resend this message?"),
         "copy": MessageLookupByLibrary.simpleMessage("Copy"),
@@ -80,6 +81,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Please enter the service first and configure the service provider"),
         "feedback": MessageLookupByLibrary.simpleMessage("Feedback"),
         "feedback_question": MessageLookupByLibrary.simpleMessage("Feedback"),
+        "forget_password":
+            MessageLookupByLibrary.simpleMessage("Forgot Password?"),
         "function": MessageLookupByLibrary.simpleMessage("Function"),
         "gemini_setting": MessageLookupByLibrary.simpleMessage("Gemini Server"),
         "gemini_setting_desc": MessageLookupByLibrary.simpleMessage(
@@ -94,6 +97,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Failed to obtain the model. If you are sure that your Key can be used, please click Save directly."),
         "has_exist": MessageLookupByLibrary.simpleMessage("Already Exists"),
         "has_reduce": MessageLookupByLibrary.simpleMessage("Has been reduced"),
+        "have_account": MessageLookupByLibrary.simpleMessage("Have an account"),
         "hint_addServerDesc":
             MessageLookupByLibrary.simpleMessage("Type server address"),
         "hold_micro_phone_talk": MessageLookupByLibrary.simpleMessage(
@@ -118,6 +122,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "leave_send": MessageLookupByLibrary.simpleMessage("Leave Send"),
         "library": MessageLookupByLibrary.simpleMessage("Library"),
         "loading": MessageLookupByLibrary.simpleMessage("Loading..."),
+        "login": MessageLookupByLibrary.simpleMessage("Sign in"),
+        "login_success":
+            MessageLookupByLibrary.simpleMessage("sign in success"),
         "main_language": MessageLookupByLibrary.simpleMessage("English"),
         "model": MessageLookupByLibrary.simpleMessage("Model"),
         "models": MessageLookupByLibrary.simpleMessage("Model"),
@@ -126,6 +133,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "natural": MessageLookupByLibrary.simpleMessage("Natural"),
         "new_chat": MessageLookupByLibrary.simpleMessage("New Chat"),
         "new_version": MessageLookupByLibrary.simpleMessage("New version"),
+        "no_account":
+            MessageLookupByLibrary.simpleMessage("Don’t have an account? "),
         "no_audio_file":
             MessageLookupByLibrary.simpleMessage("Unable to obtain voice file"),
         "no_module_use":
@@ -147,12 +156,21 @@ class MessageLookup extends MessageLookupByLibrary {
         "org_notrequired":
             MessageLookupByLibrary.simpleMessage("Organization(optional)"),
         "other_set": MessageLookupByLibrary.simpleMessage("Other Settings"),
+        "phone": MessageLookupByLibrary.simpleMessage("phone number"),
         "pin": MessageLookupByLibrary.simpleMessage("Pin"),
         "please_input": MessageLookupByLibrary.simpleMessage("Please type"),
         "primary_color": MessageLookupByLibrary.simpleMessage("Primary Color"),
+        "pwd": MessageLookupByLibrary.simpleMessage("password"),
+        "pwd_format_error":
+            MessageLookupByLibrary.simpleMessage("password format error"),
+        "pwd_not_same":
+            MessageLookupByLibrary.simpleMessage("password not same"),
         "record_time_too_short":
             MessageLookupByLibrary.simpleMessage("Recording time is too short"),
         "recording": MessageLookupByLibrary.simpleMessage("recording..."),
+        "register": MessageLookupByLibrary.simpleMessage("Sign up"),
+        "register_success":
+            MessageLookupByLibrary.simpleMessage("sign up success"),
         "reminder": MessageLookupByLibrary.simpleMessage("Reminder"),
         "resend": MessageLookupByLibrary.simpleMessage("Resend"),
         "save": MessageLookupByLibrary.simpleMessage("Save"),
@@ -194,6 +212,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Validation fail"),
         "validate_success":
             MessageLookupByLibrary.simpleMessage("Validation success"),
+        "vcode": MessageLookupByLibrary.simpleMessage("verification code"),
         "version": MessageLookupByLibrary.simpleMessage("Version"),
         "vivid": MessageLookupByLibrary.simpleMessage("Vivid"),
         "voiceChat": MessageLookupByLibrary.simpleMessage("Voice Chat"),

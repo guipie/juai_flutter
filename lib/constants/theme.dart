@@ -232,7 +232,7 @@ class LightTheme extends BaseTheme {
       ),
       scaffoldBackgroundColor: const Color(0xffEDEDED),
       primaryColor: primaryColor,
-      hoverColor: primaryColor,
+      hoverColor: primaryColor.withAlpha(10),
       cardColor: Colors.white,
       canvasColor: Colors.white,
       cupertinoOverrideTheme: CupertinoThemeData(
@@ -383,7 +383,7 @@ class DarkTheme extends BaseTheme {
       colorScheme: ColorScheme.dark(primary: primaryColor, onPrimary: primaryColor.withAlpha(10), secondary: Colors.black, onSecondary: Colors.black87, surface: Colors.white, onSurface: Colors.white70, error: const Color(0xffFF3B30), onError: Colors.white, brightness: Brightness.dark),
       scaffoldBackgroundColor: const Color(0xff111111),
       primaryColor: primaryColor,
-      hoverColor: primaryColor,
+      hoverColor: primaryColor.withAlpha(10),
       cardColor: const Color(0xff2C2C2C),
       canvasColor: const Color(0xff2C2C2C),
       textTheme: const TextTheme(

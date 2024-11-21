@@ -1,7 +1,7 @@
 import '../base.dart';
 import 'home/home_page.dart';
 import 'home/home_pc_page.dart';
-import 'login/login_page.dart';
+import 'login/login_pwd_page.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -17,9 +17,9 @@ class _SplashPageState extends State<SplashPage> {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       Future.delayed(const Duration(milliseconds: 500), () {
         if (F.mobile) {
-          F.pushReplacementNoAnimation(const HomePage());
+          F.pushReplacementNoAnimation(LoginPage());
         } else {
-          F.pushReplacementNoAnimation(const HomePcPage());
+          F.pushReplacementNoAnimation(LoginPage());
         }
       });
     });
