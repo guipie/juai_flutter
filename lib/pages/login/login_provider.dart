@@ -1,4 +1,5 @@
 import '../../base.dart';
+import 'model/login_model.dart';
 
 part 'login_provider.g.dart';
 
@@ -28,4 +29,14 @@ class CountdownVcode extends _$CountdownVcode {
       }
     });
   }
+}
+
+@riverpod
+class LoginProvider extends _$LoginProvider {
+  @override
+  FutureOr<LoginModel> build() async {
+    return LoginModel('');
+  }
+
+  void setLoginPhone(String phone) {}
 }

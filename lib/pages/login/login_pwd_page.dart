@@ -7,13 +7,13 @@ import 'widget/phone.dart';
 import 'widget/phone_vcode.dart';
 import 'widget/vcode.dart';
 
-class LoginPage extends StatelessWidget {
-  final _formKey = GlobalKey<FormState>();
-
+class LoginPage extends ConsumerWidget {
   LoginPage({this.loginOpr = LoginOpr.login, super.key});
+
+  final _formKey = GlobalKey<FormState>();
   final LoginOpr loginOpr;
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     var text = S.current.login;
     if (loginOpr == LoginOpr.register)
       text = S.current.register;
@@ -38,6 +38,7 @@ class LoginPage extends StatelessWidget {
                   SizedBox(height: constraints.maxHeight * 0.05),
                   Form(
                     key: _formKey,
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
                     child: Column(
                       children: [
                         if (loginOpr == LoginOpr.login) ...[
@@ -66,18 +67,18 @@ class LoginPage extends StatelessWidget {
                           child: Text(S.current.login),
                         ),
                         const SizedBox(height: 16.0),
-                        TextButton(
-                          onPressed: () {
-                            F.push(LoginPage(loginOpr: LoginOpr.register));
-                          },
-                          child: Text(
-                            S.current.forget_password,
-                            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                                  color: Theme.of(context).textTheme.bodyLarge!.color!.withOpacity(0.64),
-                                ),
+                        if (loginOpr == LoginOpr.login) ...[
+                          TextButton(
+                            onPressed: () {
+                              F.push(LoginPage(loginOpr: LoginOpr.register));
+                            },
+                            child: Text(
+                              S.current.forget_password,
+                              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                                    color: Theme.of(context).textTheme.bodyLarge!.color!.withOpacity(0.64),
+                                  ),
+                            ),
                           ),
-                        ),
-                        if (loginOpr == LoginOpr.login)
                           TextButton(
                             onPressed: () {
                               F.push(LoginPage(loginOpr: LoginOpr.forget));
@@ -97,6 +98,7 @@ class LoginPage extends StatelessWidget {
                                   ),
                             ),
                           ),
+                        ],
                       ],
                     ),
                   ),
