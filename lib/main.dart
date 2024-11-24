@@ -1,4 +1,5 @@
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:window_manager/window_manager.dart';
 
 import 'base.dart';
 import 'base/riverpod/provider_log.dart';
@@ -10,6 +11,23 @@ ProviderContainer? globalRef;
 void main() async {
   await Initial.init();
   await S.load(getLocaleByCode(HiveBox().globalLanguageCode));
+  if (F.windows) {
+    debugPrint('IsWindows: ${F.windows}');
+    // 必须加上这一行。
+    await windowManager.ensureInitialized();
+    var windowOptions = const WindowOptions(
+      size: Size(980, 640),
+      minimumSize: Size(600, 400),
+      center: true,
+      backgroundColor: Colors.transparent,
+      skipTaskbar: false,
+      titleBarStyle: TitleBarStyle.normal,
+    );
+    await windowManager.waitUntilReadyToShow(windowOptions, () async {
+      await windowManager.show();
+      await windowManager.focus();
+    });
+  }
   globalRef = ProviderContainer(
     observers: [
       ProviderLogger(),

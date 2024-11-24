@@ -2,10 +2,13 @@ import 'package:easy_refresh/easy_refresh.dart';
 
 import '../../base.dart';
 import '../../components/card_pic.dart';
+import '../../components/mouse_hover_item.dart';
 import '../../components/paging/paging_widget.dart';
 import '../../components/riverpod_paging/paged_builder.dart';
+import '../../components/td/tdesign_flutter.dart';
 import '../../module/prompt/prompt_viewmodel.dart';
 import 'providers/prompt_provider.dart';
+import 'widget/aimodel_widget.dart';
 
 class PromptPage extends ConsumerStatefulWidget {
   const PromptPage({super.key});
@@ -19,7 +22,12 @@ class _PromptPageState extends ConsumerState<PromptPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: JuAppBar.baseBar(text: '智能数字人'),
+      appBar: JuAppBar.baseBar(
+        text: S.current.digitalMan + S.current.home_square,
+        actions: [
+          AimodelWidget.buildAddDigitaMan(context, ref),
+        ],
+      ),
       body: PagingWidget(
         provider: promptNotifierProvider,
         futureRefreshable: promptNotifierProvider.future,
@@ -30,11 +38,60 @@ class _PromptPageState extends ConsumerState<PromptPage> {
             runSpacing: 12,
             children: data.items
                 .map(
-                  (m) => CardPic(
-                    m.avatar!,
-                    m.title!,
-                    titleCenter: true,
-                    width: 220,
+                  (m) => SizedBox(
+                    width: 300,
+                    child: MouseHoverItem(
+                      leadingPicUrl: m.avatar!,
+                      title: m.title!,
+                      subTitle: m.initMessage,
+                      isShowDefaultTrailing: false,
+                      onTap: () {
+                        debugPrint('点击了${m.title}');
+                      },
+                      footerWidget: Padding(
+                        padding: const EdgeInsets.only(left: 15, right: 12, top: 6, bottom: 4),
+                        child: Wrap(
+                          crossAxisAlignment: WrapCrossAlignment.center,
+                          alignment: WrapAlignment.spaceBetween,
+                          spacing: 12,
+                          runSpacing: 6,
+                          children: [
+                            Text(
+                              '@${m.type}',
+                              style: Theme.of(context).textTheme.bodySmall,
+                            ),
+                            Icon(
+                              Icons.favorite_border_outlined,
+                              size: Theme.of(context).textTheme.bodySmall!.fontSize,
+                              color: Theme.of(context).textTheme.bodySmall!.color,
+                            ),
+                            ...(m.tags ?? '')
+                                .split(',')
+                                .map(
+                                  (x) => TDTag(
+                                    x,
+                                    padding: const EdgeInsets.only(top: 6, left: 5, right: 5),
+                                    isLight: true,
+                                    theme: TDTagTheme.success,
+                                    size: TDTagSize.small,
+                                  ),
+                                )
+                                .toList(),
+                            GestureDetector(
+                              onTap: () {
+                                debugPrint('chat');
+                              },
+                              child: TDTag(
+                                S.current.home_chat,
+                                padding: const EdgeInsets.only(top: 6, left: 6, right: 6),
+                                theme: TDTagTheme.success,
+                                size: TDTagSize.small,
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
                   ),
                 )
                 .toList(),

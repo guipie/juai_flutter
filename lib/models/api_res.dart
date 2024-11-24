@@ -27,6 +27,7 @@ class ApiRes<T> extends Object {
         extras = srcJson['extras'],
         time = DateTime.parse(srcJson['time'] as String);
 
+  bool get isSuccess => code == 200 && type == 'success';
   // static T _apiResFromJson<T>(Object json, Function(Object)? func) {
   //   if (json is Map<String, dynamic>) {
   //     return func!(json);

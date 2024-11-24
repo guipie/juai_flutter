@@ -22,12 +22,12 @@ final categoryProvider = AutoDisposeProvider<String>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef CategoryRef = AutoDisposeProviderRef<String>;
-String _$promptNotifierHash() => r'6cfc5d13dcc94e1b30648a3869ddc6b0d7237002';
+String _$promptNotifierHash() => r'824e0ff72ed4a81dde87ac76d16facb5e07580de';
 
 /// See also [PromptNotifier].
 @ProviderFor(PromptNotifier)
 final promptNotifierProvider = AutoDisposeAsyncNotifierProvider<PromptNotifier,
-    CursorPagingData<Prompt>>.internal(
+    PagePagingData<PromptRes>>.internal(
   PromptNotifier.new,
   name: r'promptNotifierProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -37,6 +37,6 @@ final promptNotifierProvider = AutoDisposeAsyncNotifierProvider<PromptNotifier,
   allTransitiveDependencies: null,
 );
 
-typedef _$PromptNotifier = AutoDisposeAsyncNotifier<CursorPagingData<Prompt>>;
+typedef _$PromptNotifier = AutoDisposeAsyncNotifier<PagePagingData<PromptRes>>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

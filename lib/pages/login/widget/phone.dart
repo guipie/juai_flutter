@@ -1,5 +1,5 @@
 import '../../../base.dart';
-import '../login_provider.dart';
+import '../provider/login_provider.dart';
 
 class PhoneWidget extends ConsumerWidget {
   const PhoneWidget({super.key});
@@ -8,7 +8,7 @@ class PhoneWidget extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     var loginModel = ref.watch(loginProviderProvider);
     return TextFormField(
-      controller: loginModel.value!.textPhoneController,
+      controller: loginModel.textPhoneController,
       decoration: InputDecoration(
         hintText: S.current.phone,
         filled: true,
@@ -20,16 +20,11 @@ class PhoneWidget extends ConsumerWidget {
         ),
       ),
       keyboardType: TextInputType.phone,
-      forceErrorText: loginModel.value?.validatorPhoneErrorText,
       validator: (value) {
-        if (value == null || value.isEmpty || value.length < 11) {
-          'Please enter your name'.i();
-          return 'Please enter your name';
+        if (value == null || value.isEmpty || !value.toRegMath(Regs.phoneRegExp)) {
+          return S.current.please_input + S.current.true_ + S.current.phone;
         }
         return null;
-      },
-      onSaved: (phone) {
-        phone.e();
       },
     );
   }

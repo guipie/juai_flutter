@@ -22,10 +22,11 @@ class _FImpl {
 
   get height => MediaQuery.sizeOf(context).height;
 
-  get mobile => Platform.isAndroid || Platform.isIOS;
-  get pc => !(Platform.isAndroid || Platform.isIOS);
+  bool get mobile => Platform.isAndroid || Platform.isIOS;
+  bool get pc => !(Platform.isAndroid || Platform.isIOS);
+  bool get windows => (Platform.isWindows || Platform.isLinux || Platform.isMacOS);
   String formatTime(int ms) {
-    return DateUtil.formatDateMs(ms, format: "yyyy-MM-dd HH:mm:ss");
+    return DateUtil.formatDateMs(ms, format: 'yyyy-MM-dd HH:mm:ss');
   }
 
   void hideKeyboard() {
@@ -45,6 +46,14 @@ class _FImpl {
   //replace
   Future<T?> pushReplacement<T extends Object?, TO extends Object?>(Widget page, {TO? result}) {
     return Navigator.of(context).pushReplacement(CupertinoPageRoute(builder: (context) => page), result: result);
+  }
+
+  Future<T?> pushAndRemoveUntil<T extends Object?, TO extends Object?>(Widget page, {TO? result}) {
+    return Navigator.of(context).pushAndRemoveUntil(CupertinoPageRoute(builder: (context) => page), (Route<dynamic> route) => false);
+  }
+
+  Future<T?> pushRoot<T extends Object?, TO extends Object?>(Widget page, {TO? result}) {
+    return Navigator.of(context).pushAndRemoveUntil(CupertinoPageRoute(builder: (context) => page), (Route<dynamic> route) => route.isFirst);
   }
 
   Future<T?> pushReplacementNoAnimation<T extends Object?, TO extends Object?>(Widget page, {TO? result}) {
@@ -134,8 +143,8 @@ class _FImpl {
     );
   }
 
-  String get randomAvatar => "https://avatars.githubusercontent.com/u/${Random(DateTime.now().millisecondsSinceEpoch).nextInt(1000000)}";
-  String get randomPic => "https://api.multiavatar.com/${Random(1000).nextInt(10000000)}.png";
+  String get randomAvatar => 'https://avatars.githubusercontent.com/u/${Random(DateTime.now().millisecondsSinceEpoch).nextInt(1000000)}';
+  String get randomPic => 'https://api.multiavatar.com/${Random(1000).nextInt(10000000)}.png';
 }
 
 //NoAnimationPageRoute

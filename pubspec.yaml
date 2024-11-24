@@ -75,6 +75,8 @@ dependencies:
   flutter_staggered_grid_view:
   flutter_screenutil:
   shimmer:
+  dart_sm: ^0.1.5
+  window_manager:
 dev_dependencies:
   freezed: ^2.5.7
   flutter_lints: ^2.0.0
@@ -110,8 +112,9 @@ flutter:
     - assets/command.json
     - assets/images/
     - assets/svgs/
-    - assets/lottie/
-    - assets/tdesign/
+    - assets/lottie/ 
+    - assets/tdesign/td_icons.ttf
+    - assets/tdesign/TCloudNumberVF.ttf
   fonts:
     - family: TDIcons
       fonts:

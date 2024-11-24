@@ -1,10 +1,10 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-part 'prompt.freezed.dart';
-part 'prompt.g.dart';
+part 'prompt_res_model.freezed.dart';
+part 'prompt_res_model.g.dart';
 
 @freezed
-class Prompt with _$Prompt {
-  const factory Prompt({
+class PromptRes with _$PromptRes {
+  const factory PromptRes({
     @JsonKey(name: 'id') int? id,
     @JsonKey(name: 'type') String? type,
     @JsonKey(name: 'title') String? title,
@@ -22,5 +22,5 @@ class Prompt with _$Prompt {
     @JsonKey(name: 'createTime') DateTime? createTime,
   }) = _Prompt;
 
-  factory Prompt.fromJson(Map<String, Object?> json) => _$PromptFromJson(json);
+  factory PromptRes.fromJson(Map<String, Object?> json) => _$PromptResFromJson(json);
 }

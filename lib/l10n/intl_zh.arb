@@ -146,5 +146,25 @@
   "pwd_format_error": "密码格式错误",
   "pwd_not_same": "两次密码不一致",
   "login_success": "登录成功",
-  "register_success": "注册成功"
+  "register_success": "注册成功",
+  "true_": "正确",
+  "error_": "错误",
+  "error_network": "网络错误",
+  "error_unknown": "未知错误",
+  "error_timeout": "请求超时",
+  "error_cancel": "取消请求",
+  "error_parse": "解析错误",
+  "error_format": "格式错误",
+  "error_null": "空数据",
+  "error_code": "错误码",
+  "error_msg": "错误信息",
+  "error_detail": "错误详情",
+  "error_detail_network_desc": "请检查网络是否正常，或检查是否开启代理",
+  "error_detail_desc": "如果问题仍然存在，请尝试重启应用",
+  "invitation_code": "邀请码",
+  "invitation_code_input": "请输入邀请码",
+  "invitation_code_desc": "邀请码用于邀请好友注册，注册后，好友注册成功后，您可以获得奖励。",
+  "digitalMan": "数字人",
+  "collect":"收藏"
+
 }

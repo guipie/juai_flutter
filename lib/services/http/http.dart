@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
+import '../../base.dart';
 import '../../constants/config.dart';
 import '../../models/api_res.dart';
 import 'api_exception.dart';
@@ -8,7 +9,7 @@ import 'interceptor.dart';
 
 class HttpOptions {
   //地址域名前缀
-  static const String baseUrl = '';
+  static const String baseUrl = Config.baseApiUrl;
   //单位时间是ms
   static const Duration connectTimeout = Duration(seconds: 10);
   static const Duration receiveTimeout = Duration(seconds: 10);
@@ -49,7 +50,8 @@ class Http {
 
     //动态添加header头
     var headers = <String, dynamic>{};
-    headers['version'] = '1.0.0';
+    headers['version'] = Config.appVersion;
+    headers['authorization'] = 'Bearer ${Config.token}';
 
     var options = Options(
       method: methodValues[method],
@@ -89,13 +91,18 @@ class Http {
           case 219:
             throw NeedLoginException(-1, '应用需要强更');
           default:
-            throw ApiException(responseObject['errorCode'], responseObject['errorMsg']);
+            throw ApiException(responseObject['code'], responseObject['message']);
         }
       } else {
         throw ApiException(-1, '错误响应格式');
       }
+    } on ApiException catch (error) {
+      var exception = ApiException.from(error);
+      (exception.message ?? 'error').fail();
+      throw exception;
     } on DioException catch (error) {
       var exception = ApiException.from(error);
+      (exception.message ?? 'error').fail();
       throw exception;
     }
   }

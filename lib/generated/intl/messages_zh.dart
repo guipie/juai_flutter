@@ -47,6 +47,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("点击右上角添加各种绘画，数字人等"),
         "chat_setting": MessageLookupByLibrary.simpleMessage("聊天设置"),
         "clear_context": MessageLookupByLibrary.simpleMessage("清空上下文"),
+        "collect": MessageLookupByLibrary.simpleMessage("收藏"),
         "confirm": MessageLookupByLibrary.simpleMessage("确定"),
         "confirm_pwd": MessageLookupByLibrary.simpleMessage("确认密码"),
         "conform_resend": MessageLookupByLibrary.simpleMessage("确定重新发送消息吗"),
@@ -58,6 +59,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "delete_config_reminder":
             MessageLookupByLibrary.simpleMessage("确定删除当前配置吗"),
         "delete_reminder": MessageLookupByLibrary.simpleMessage("确定删除这条消息吗？"),
+        "digitalMan": MessageLookupByLibrary.simpleMessage("数字人"),
         "download": MessageLookupByLibrary.simpleMessage("下载"),
         "download_fail": MessageLookupByLibrary.simpleMessage("下载失败"),
         "download_success": MessageLookupByLibrary.simpleMessage("下载成功"),
@@ -67,6 +69,21 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("您还没有内容，快点击右上角添加吧"),
         "enter_setting_init_server":
             MessageLookupByLibrary.simpleMessage("请先进入服务并配置服务商"),
+        "error_": MessageLookupByLibrary.simpleMessage("错误"),
+        "error_cancel": MessageLookupByLibrary.simpleMessage("取消请求"),
+        "error_code": MessageLookupByLibrary.simpleMessage("错误码"),
+        "error_detail": MessageLookupByLibrary.simpleMessage("错误详情"),
+        "error_detail_desc":
+            MessageLookupByLibrary.simpleMessage("如果问题仍然存在，请尝试重启应用"),
+        "error_detail_network_desc":
+            MessageLookupByLibrary.simpleMessage("请检查网络是否正常，或检查是否开启代理"),
+        "error_format": MessageLookupByLibrary.simpleMessage("格式错误"),
+        "error_msg": MessageLookupByLibrary.simpleMessage("错误信息"),
+        "error_network": MessageLookupByLibrary.simpleMessage("网络错误"),
+        "error_null": MessageLookupByLibrary.simpleMessage("空数据"),
+        "error_parse": MessageLookupByLibrary.simpleMessage("解析错误"),
+        "error_timeout": MessageLookupByLibrary.simpleMessage("请求超时"),
+        "error_unknown": MessageLookupByLibrary.simpleMessage("未知错误"),
         "feedback": MessageLookupByLibrary.simpleMessage("反馈"),
         "feedback_question": MessageLookupByLibrary.simpleMessage("问题反馈"),
         "forget_password": MessageLookupByLibrary.simpleMessage("忘记密码"),
@@ -96,6 +113,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "home_square": MessageLookupByLibrary.simpleMessage("广场"),
         "input_name": MessageLookupByLibrary.simpleMessage("请输入名称"),
         "input_text": MessageLookupByLibrary.simpleMessage("请输入内容"),
+        "invitation_code": MessageLookupByLibrary.simpleMessage("邀请码"),
+        "invitation_code_desc": MessageLookupByLibrary.simpleMessage(
+            "邀请码用于邀请好友注册，注册后，好友注册成功后，您可以获得奖励。"),
+        "invitation_code_input": MessageLookupByLibrary.simpleMessage("请输入邀请码"),
         "is_getting_modules": MessageLookupByLibrary.simpleMessage("正在获取模型..."),
         "is_responsing": MessageLookupByLibrary.simpleMessage("服务器正在回应..."),
         "language": MessageLookupByLibrary.simpleMessage("语言"),
@@ -173,6 +194,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "title_promot": MessageLookupByLibrary.simpleMessage(
             "使用四到五个字直接返回这句话的简要主题，不要解释、不要标点、不要语气词、不要多余文本，不要加粗，如果没有主题，请直接返回“闲聊”"),
         "translate": MessageLookupByLibrary.simpleMessage("翻译"),
+        "true_": MessageLookupByLibrary.simpleMessage("正确"),
         "tts": MessageLookupByLibrary.simpleMessage("朗读"),
         "unpin": MessageLookupByLibrary.simpleMessage("取消置顶"),
         "update_now": MessageLookupByLibrary.simpleMessage("去更新"),

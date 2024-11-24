@@ -1,13 +1,15 @@
 import '../../../base.dart';
+import '../provider/login_provider.dart';
 
-class PassWordWidget extends StatelessWidget {
+class PassWordWidget extends ConsumerWidget {
   const PassWordWidget({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 16.0),
       child: TextFormField(
+        controller: ref.read(loginProviderProvider).textPasswordController,
         obscureText: true,
         decoration: InputDecoration(
           hintText: S.current.pwd,
@@ -19,8 +21,11 @@ class PassWordWidget extends StatelessWidget {
             borderRadius: BorderRadius.all(Radius.circular(50)),
           ),
         ),
-        onSaved: (passaword) {
-          // Save it
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return S.current.please_input + S.current.pwd;
+          }
+          return null;
         },
       ),
     );

@@ -1,12 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'ai_model.dart';
+part of 'aimodel_res_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-AiModel _$AiModelFromJson(Map<String, dynamic> json) => AiModel(
+AiModelRes _$AiModelResFromJson(Map<String, dynamic> json) => AiModelRes(
       modelId: json['modelId'] as String,
       name: json['name'] as String,
       shortName: json['shortName'] as String,
@@ -19,7 +19,8 @@ AiModel _$AiModelFromJson(Map<String, dynamic> json) => AiModel(
       settings: json['settings'] as String?,
     );
 
-Map<String, dynamic> _$AiModelToJson(AiModel instance) => <String, dynamic>{
+Map<String, dynamic> _$AiModelResToJson(AiModelRes instance) =>
+    <String, dynamic>{
       'modelId': instance.modelId,
       'name': instance.name,
       'shortName': instance.shortName,

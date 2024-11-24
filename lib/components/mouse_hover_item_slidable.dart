@@ -12,11 +12,10 @@ class MouseHoverSlidableItem extends ConsumerWidget {
   final String? titleExtend;
   final String subTitle;
   final List<SlidableAction> actions;
-  void Function()? onPressed;
   final bool isShowDefaultTrailing;
   final String? trailing;
   final Widget? trailingWidget;
-  MouseHoverSlidableItem({
+  const MouseHoverSlidableItem({
     super.key,
     this.titleExtend,
     this.leadingPicUrl,
@@ -24,7 +23,6 @@ class MouseHoverSlidableItem extends ConsumerWidget {
     required this.title,
     required this.subTitle,
     required this.actions,
-    this.onPressed,
     this.isShowDefaultTrailing = true,
     this.trailing,
     this.trailingWidget,
@@ -46,11 +44,8 @@ class MouseHoverSlidableItem extends ConsumerWidget {
         subTitle: subTitle,
         trailing: trailing,
         trailingWidget: trailingWidget,
-        onPressed: onPressed,
         isShowDefaultTrailing: isShowDefaultTrailing,
       ),
-    ).click(
-      () => onPressed?.call(),
     );
   }
 }

@@ -5,7 +5,7 @@ import '../../components/td/tdesign_flutter.dart';
 import '../../components/text_search.dart';
 import '../../components/text_tips.dart';
 import '../../constants/assets.dart';
-import '../../models/aimodel/ai_model.dart';
+import 'model/aimodel_res_model.dart';
 import 'prompt_page.dart';
 import 'providers/aimodel_provider.dart';
 import 'widget/aimodel_widget.dart';

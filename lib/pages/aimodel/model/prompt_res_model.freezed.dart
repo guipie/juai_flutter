@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'prompt.dart';
+part of 'prompt_res_model.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,12 +14,12 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
-Prompt _$PromptFromJson(Map<String, dynamic> json) {
+PromptRes _$PromptResFromJson(Map<String, dynamic> json) {
   return _Prompt.fromJson(json);
 }
 
 /// @nodoc
-mixin _$Prompt {
+mixin _$PromptRes {
   @JsonKey(name: 'id')
   int? get id => throw _privateConstructorUsedError;
   @JsonKey(name: 'type')
@@ -51,19 +51,20 @@ mixin _$Prompt {
   @JsonKey(name: 'createTime')
   DateTime? get createTime => throw _privateConstructorUsedError;
 
-  /// Serializes this Prompt to a JSON map.
+  /// Serializes this PromptRes to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
-  /// Create a copy of Prompt
+  /// Create a copy of PromptRes
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $PromptCopyWith<Prompt> get copyWith => throw _privateConstructorUsedError;
+  $PromptResCopyWith<PromptRes> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $PromptCopyWith<$Res> {
-  factory $PromptCopyWith(Prompt value, $Res Function(Prompt) then) =
-      _$PromptCopyWithImpl<$Res, Prompt>;
+abstract class $PromptResCopyWith<$Res> {
+  factory $PromptResCopyWith(PromptRes value, $Res Function(PromptRes) then) =
+      _$PromptResCopyWithImpl<$Res, PromptRes>;
   @useResult
   $Res call(
       {@JsonKey(name: 'id') int? id,
@@ -84,16 +85,16 @@ abstract class $PromptCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$PromptCopyWithImpl<$Res, $Val extends Prompt>
-    implements $PromptCopyWith<$Res> {
-  _$PromptCopyWithImpl(this._value, this._then);
+class _$PromptResCopyWithImpl<$Res, $Val extends PromptRes>
+    implements $PromptResCopyWith<$Res> {
+  _$PromptResCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of Prompt
+  /// Create a copy of PromptRes
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -180,7 +181,7 @@ class _$PromptCopyWithImpl<$Res, $Val extends Prompt>
 }
 
 /// @nodoc
-abstract class _$$PromptImplCopyWith<$Res> implements $PromptCopyWith<$Res> {
+abstract class _$$PromptImplCopyWith<$Res> implements $PromptResCopyWith<$Res> {
   factory _$$PromptImplCopyWith(
           _$PromptImpl value, $Res Function(_$PromptImpl) then) =
       __$$PromptImplCopyWithImpl<$Res>;
@@ -206,13 +207,13 @@ abstract class _$$PromptImplCopyWith<$Res> implements $PromptCopyWith<$Res> {
 
 /// @nodoc
 class __$$PromptImplCopyWithImpl<$Res>
-    extends _$PromptCopyWithImpl<$Res, _$PromptImpl>
+    extends _$PromptResCopyWithImpl<$Res, _$PromptImpl>
     implements _$$PromptImplCopyWith<$Res> {
   __$$PromptImplCopyWithImpl(
       _$PromptImpl _value, $Res Function(_$PromptImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of Prompt
+  /// Create a copy of PromptRes
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -369,7 +370,7 @@ class _$PromptImpl implements _Prompt {
 
   @override
   String toString() {
-    return 'Prompt(id: $id, type: $type, title: $title, prompt: $prompt, maxContext: $maxContext, promptExtend: $promptExtend, avatar: $avatar, file: $file, initMessage: $initMessage, tags: $tags, model: $model, vendor: $vendor, category: $category, isGroup: $isGroup, createTime: $createTime)';
+    return 'PromptRes(id: $id, type: $type, title: $title, prompt: $prompt, maxContext: $maxContext, promptExtend: $promptExtend, avatar: $avatar, file: $file, initMessage: $initMessage, tags: $tags, model: $model, vendor: $vendor, category: $category, isGroup: $isGroup, createTime: $createTime)';
   }
 
   @override
@@ -419,7 +420,7 @@ class _$PromptImpl implements _Prompt {
       isGroup,
       createTime);
 
-  /// Create a copy of Prompt
+  /// Create a copy of PromptRes
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
@@ -435,7 +436,7 @@ class _$PromptImpl implements _Prompt {
   }
 }
 
-abstract class _Prompt implements Prompt {
+abstract class _Prompt implements PromptRes {
   const factory _Prompt(
       {@JsonKey(name: 'id') final int? id,
       @JsonKey(name: 'type') final String? type,
@@ -501,7 +502,7 @@ abstract class _Prompt implements Prompt {
   @JsonKey(name: 'createTime')
   DateTime? get createTime;
 
-  /// Create a copy of Prompt
+  /// Create a copy of PromptRes
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)

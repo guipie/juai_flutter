@@ -1,6 +1,6 @@
 import '../../../base.dart';
 import '../../../components/td/tdesign_flutter.dart';
-import '../login_provider.dart';
+import '../provider/login_provider.dart';
 
 class PhoneVcodeWidget extends ConsumerWidget {
   const PhoneVcodeWidget({super.key});
@@ -10,6 +10,8 @@ class PhoneVcodeWidget extends ConsumerWidget {
     final countdown = ref.watch(countdownVcodeProvider);
     return TDInput(
       type: TDInputType.normal,
+      controller: ref.watch(loginProviderProvider).textPhoneController,
+      maxLength: 14,
       hintText: S.current.phone,
       rightBtn: Container(
         padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -26,14 +28,14 @@ class PhoneVcodeWidget extends ConsumerWidget {
             ),
             countdown > 0
                 ? TDText(
-                    '${S.current.resend}(${ref.read(countdownVcodeProvider.notifier).countdownText})',
+                    '${S.current.resend}${60 - countdown}s',
                     textColor: TDTheme.of(context).fontGyColor4,
                   )
                 : TDText(S.current.send + S.current.vcode, textColor: TDTheme.of(context).brandNormalColor),
           ],
         ),
       ),
-      needClear: false,
+      needClear: true,
       onBtnTap: () => ref.read(countdownVcodeProvider.notifier).startCountdown(),
     );
   }

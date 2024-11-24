@@ -1,8 +1,8 @@
 import 'package:json_annotation/json_annotation.dart';
-part 'ai_model.g.dart';
+part 'aimodel_res_model.g.dart';
 
 @JsonSerializable()
-class AiModel {
+class AiModelRes {
   @JsonKey(name: 'modelId')
   String modelId;
   @JsonKey(name: 'name')
@@ -23,7 +23,7 @@ class AiModel {
   String? desc;
   @JsonKey(name: 'settings')
   String? settings;
-  AiModel({
+  AiModelRes({
     required this.modelId,
     required this.name,
     required this.shortName,
@@ -35,12 +35,12 @@ class AiModel {
     this.desc,
     this.settings,
   });
-  factory AiModel.fromJson(Map<String, dynamic> json) => _$AiModelFromJson(json);
-  Map<String, dynamic> toJson() => _$AiModelToJson(this);
+  factory AiModelRes.fromJson(Map<String, dynamic> json) => _$AiModelResFromJson(json);
+  Map<String, dynamic> toJson() => _$AiModelResToJson(this);
 }
 
 class AiModelSort {
   String key;
-  List<AiModel> models;
+  List<AiModelRes> models;
   AiModelSort({required this.key, required this.models});
 }

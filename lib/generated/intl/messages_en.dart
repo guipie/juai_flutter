@@ -55,6 +55,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Click on the upper right corner to add various paintings, digital people"),
         "chat_setting": MessageLookupByLibrary.simpleMessage("Chat Setting"),
         "clear_context": MessageLookupByLibrary.simpleMessage("Clear Context"),
+        "collect": MessageLookupByLibrary.simpleMessage("Collect"),
         "confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
         "confirm_pwd": MessageLookupByLibrary.simpleMessage("confirm password"),
         "conform_resend": MessageLookupByLibrary.simpleMessage(
@@ -68,6 +69,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Are you sure you want to delete this configuration?"),
         "delete_reminder": MessageLookupByLibrary.simpleMessage(
             "Are you sure you want to delete this message?"),
+        "digitalMan": MessageLookupByLibrary.simpleMessage("Digital Man"),
         "download": MessageLookupByLibrary.simpleMessage("Download"),
         "download_fail":
             MessageLookupByLibrary.simpleMessage("Download failed"),
@@ -79,6 +81,21 @@ class MessageLookup extends MessageLookupByLibrary {
             "The content is empty, please add content"),
         "enter_setting_init_server": MessageLookupByLibrary.simpleMessage(
             "Please enter the service first and configure the service provider"),
+        "error_": MessageLookupByLibrary.simpleMessage("error"),
+        "error_cancel": MessageLookupByLibrary.simpleMessage("error cancel"),
+        "error_code": MessageLookupByLibrary.simpleMessage("error code"),
+        "error_detail": MessageLookupByLibrary.simpleMessage("error detail"),
+        "error_detail_desc": MessageLookupByLibrary.simpleMessage(
+            "If the problem persists, try restarting the app"),
+        "error_detail_network_desc": MessageLookupByLibrary.simpleMessage(
+            "Please check if the network is normal"),
+        "error_format": MessageLookupByLibrary.simpleMessage("error format"),
+        "error_msg": MessageLookupByLibrary.simpleMessage("error message"),
+        "error_network": MessageLookupByLibrary.simpleMessage("error network"),
+        "error_null": MessageLookupByLibrary.simpleMessage("error null"),
+        "error_parse": MessageLookupByLibrary.simpleMessage("error parse"),
+        "error_timeout": MessageLookupByLibrary.simpleMessage("error timeout"),
+        "error_unknown": MessageLookupByLibrary.simpleMessage("error unknown"),
         "feedback": MessageLookupByLibrary.simpleMessage("Feedback"),
         "feedback_question": MessageLookupByLibrary.simpleMessage("Feedback"),
         "forget_password":
@@ -113,6 +130,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "input_name":
             MessageLookupByLibrary.simpleMessage("Please enter a name"),
         "input_text": MessageLookupByLibrary.simpleMessage("Type text here"),
+        "invitation_code":
+            MessageLookupByLibrary.simpleMessage("Invitation Code"),
+        "invitation_code_desc": MessageLookupByLibrary.simpleMessage(
+            "Invitation code is required for registration"),
+        "invitation_code_input": MessageLookupByLibrary.simpleMessage(
+            "Please enter invitation code"),
         "is_getting_modules":
             MessageLookupByLibrary.simpleMessage("Getting models..."),
         "is_responsing":
@@ -204,6 +227,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "title_promot": MessageLookupByLibrary.simpleMessage(
             "Use four to five words to directly return to the brief topic of this sentence. No explanations, no punctuation, no modal particles, no redundant text, and no bolding. If there is no topic, please directly return to \"small talk\""),
         "translate": MessageLookupByLibrary.simpleMessage("Translate"),
+        "true_": MessageLookupByLibrary.simpleMessage("true"),
         "tts": MessageLookupByLibrary.simpleMessage("Deacon"),
         "unpin": MessageLookupByLibrary.simpleMessage("Unpin"),
         "update_now": MessageLookupByLibrary.simpleMessage("Update now"),

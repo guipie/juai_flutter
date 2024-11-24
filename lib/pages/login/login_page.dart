@@ -2,22 +2,29 @@ import '../../base.dart';
 import '../../components/image.dart';
 import '../../components/td/tdesign_flutter.dart';
 import '../../constants/enums/user_enum.dart';
+import 'provider/login_provider.dart';
+import 'widget/invitation_code.dart';
 import 'widget/password.dart';
 import 'widget/phone.dart';
 import 'widget/phone_vcode.dart';
 import 'widget/vcode.dart';
 
-class LoginPage extends ConsumerWidget {
+class LoginPage extends ConsumerStatefulWidget {
   LoginPage({this.loginOpr = LoginOpr.login, super.key});
 
   final _formKey = GlobalKey<FormState>();
   final LoginOpr loginOpr;
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<ConsumerStatefulWidget> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends ConsumerState<LoginPage> {
+  @override
+  Widget build(BuildContext context) {
     var text = S.current.login;
-    if (loginOpr == LoginOpr.register)
+    if (widget.loginOpr == LoginOpr.register)
       text = S.current.register;
-    else if (loginOpr == LoginOpr.forget) text = S.current.forget_password;
+    else if (widget.loginOpr == LoginOpr.forget) text = S.current.forget_password;
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: JuAppBar.baseBar(text: text),
@@ -37,23 +44,27 @@ class LoginPage extends ConsumerWidget {
                   ),
                   SizedBox(height: constraints.maxHeight * 0.05),
                   Form(
-                    key: _formKey,
-                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    key: widget._formKey,
+                    autovalidateMode: AutovalidateMode.disabled,
                     child: Column(
                       children: [
-                        if (loginOpr == LoginOpr.login) ...[
+                        if (widget.loginOpr == LoginOpr.login) ...[
                           const PhoneWidget(),
                           const PassWordWidget(),
                         ],
-                        if (loginOpr != LoginOpr.login) ...[
+                        if (widget.loginOpr != LoginOpr.login) ...[
                           const PhoneVcodeWidget(),
                           const VcodeWidget(),
+                          const SizedBox(height: 16.0),
+                          const InvitationCodeWidget(),
+                          const SizedBox(height: 16.0),
                         ],
                         ElevatedButton(
                           onPressed: () {
-                            if (_formKey.currentState!.validate()) {
+                            if (widget._formKey.currentState!.validate()) {
                               '验证成功'.i();
-                              _formKey.currentState!.save();
+                              widget._formKey.currentState!.save();
+                              ref.read(loginProviderProvider.notifier).toLoginRegister(widget.loginOpr);
                               // Navigate to the main screen
                             }
                           },
@@ -64,13 +75,13 @@ class LoginPage extends ConsumerWidget {
                             minimumSize: const Size(double.infinity, 48),
                             shape: const StadiumBorder(),
                           ),
-                          child: Text(S.current.login),
+                          child: Text(widget.loginOpr == LoginOpr.login ? S.current.login : S.current.validate),
                         ),
                         const SizedBox(height: 16.0),
-                        if (loginOpr == LoginOpr.login) ...[
+                        if (widget.loginOpr == LoginOpr.login) ...[
                           TextButton(
                             onPressed: () {
-                              F.push(LoginPage(loginOpr: LoginOpr.register));
+                              F.push(LoginPage(loginOpr: LoginOpr.forget));
                             },
                             child: Text(
                               S.current.forget_password,
@@ -81,7 +92,7 @@ class LoginPage extends ConsumerWidget {
                           ),
                           TextButton(
                             onPressed: () {
-                              F.push(LoginPage(loginOpr: LoginOpr.forget));
+                              F.push(LoginPage(loginOpr: LoginOpr.register));
                             },
                             child: Text.rich(
                               TextSpan(

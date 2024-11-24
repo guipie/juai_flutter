@@ -12,24 +12,31 @@ class MouseHoverItem extends ConsumerWidget {
   final String title;
   final String? titleExtend;
   final String? subTitle;
-  void Function()? onPressed;
   final bool isShowDefaultTrailing;
   final String? trailing;
   final Widget? trailingWidget;
   final bool? isSelected;
-  MouseHoverItem({
+  final Widget? footerWidget;
+  final Widget? headWidget;
+  final bool isRadius;
+  final Function()? onTap;
+  const MouseHoverItem({
     super.key,
     required this.title,
     this.titleExtend,
     this.leadingWidget,
     this.leadingPicUrl,
     this.subTitle,
-    this.onPressed,
     this.isShowDefaultTrailing = true,
     this.trailing,
     this.isSelected,
     this.trailingWidget,
-  });
+    this.footerWidget,
+    this.headWidget,
+    this.onTap,
+    this.isRadius = true,
+  })  : assert(!(leadingPicUrl != null && leadingWidget != null)),
+        assert(!(trailingWidget != null && trailing != null));
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -51,58 +58,71 @@ class MouseHoverItem extends ConsumerWidget {
         size: 18,
       );
     return MouseHoverWidget(
-      hoverColor: ref.watch(themeProvider).pinedBgColor().withOpacity(0.5),
-      color: isSelected == true ? ref.watch(themeProvider).pinedBgColor() : ref.watch(themeProvider).divideBgColor(),
+      hoverColor: Theme.of(context).colorScheme.onSecondary,
+      color: isSelected == true ? ref.watch(themeProvider).pinedBgColor() : Theme.of(context).colorScheme.secondary,
+      onTap: onTap,
+      isRadius: isRadius,
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 5),
-        child: ListTile(
-          leading: leadingPicUrl.isNotEmpty()
-              ? TDAvatar(
-                  size: TDAvatarSize.medium,
-                  type: TDAvatarType.normal,
-                  shape: TDAvatarShape.square,
-                  avatarUrl: leadingPicUrl!.startsWith('http') ? leadingPicUrl : null,
-                  defaultUrl: (!leadingPicUrl!.startsWith('http')) ? leadingPicUrl! : '',
-                )
-              : leadingWidget,
-          title: Row(
-            children: [
-              Flexible(
-                child: Text(
-                  title,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        fontWeight: FontWeight.bold,
+        alignment: Alignment.topLeft,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            headWidget ?? const SizedBox.shrink(),
+            ListTile(
+              mouseCursor: SystemMouseCursors.click,
+              leading: leadingPicUrl.isNotEmpty()
+                  ? TDAvatar(
+                      size: TDAvatarSize.medium,
+                      type: TDAvatarType.normal,
+                      shape: TDAvatarShape.square,
+                      avatarUrl: leadingPicUrl!.startsWith('http') ? leadingPicUrl : null,
+                      defaultUrl: (!leadingPicUrl!.startsWith('http')) ? leadingPicUrl! : '',
+                    )
+                  : leadingWidget,
+              title: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Flexible(
+                    child: Text(
+                      title,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                            fontWeight: FontWeight.bold,
+                          ),
+                    ),
+                  ),
+                  if (titleExtend.isNotEmpty())
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 2),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(3),
+                        border: Border.all(color: Theme.of(context).primaryColor, width: 1),
                       ),
-                ),
+                      child: Text(
+                        titleExtend!,
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(color: Theme.of(context).primaryColor, fontSize: 8),
+                      ),
+                    ),
+                ],
               ),
-              if (titleExtend.isNotEmpty())
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 2),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(3),
-                    border: Border.all(color: Theme.of(context).primaryColor, width: 1),
-                  ),
-                  child: Text(
-                    titleExtend!,
-                    style: Theme.of(context).textTheme.bodySmall?.copyWith(color: Theme.of(context).primaryColor, fontSize: 8),
-                  ),
-                ),
-            ],
-          ),
-          subtitle: subTitle.isEmpty()
-              ? null
-              : Text(
-                  subTitle!,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: Theme.of(context).textTheme.bodySmall?.copyWith(fontSize: 13),
-                ),
-          trailing: trailingItem,
+              trailing: trailingItem,
+              subtitle: subTitle.isEmpty()
+                  ? null
+                  : Text(
+                      subTitle!,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(fontSize: 13),
+                    ),
+            ),
+            SizedBox(
+              width: double.infinity,
+              child: footerWidget ?? const SizedBox.shrink(),
+            ),
+          ],
         ),
-      ).click(
-        () => onPressed?.call(),
       ),
     );
   }

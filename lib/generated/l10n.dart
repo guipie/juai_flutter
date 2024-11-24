@@ -1519,6 +1519,196 @@ class S {
       args: [],
     );
   }
+
+  /// `true`
+  String get true_ {
+    return Intl.message(
+      'true',
+      name: 'true_',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `error`
+  String get error_ {
+    return Intl.message(
+      'error',
+      name: 'error_',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `error network`
+  String get error_network {
+    return Intl.message(
+      'error network',
+      name: 'error_network',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `error unknown`
+  String get error_unknown {
+    return Intl.message(
+      'error unknown',
+      name: 'error_unknown',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `error timeout`
+  String get error_timeout {
+    return Intl.message(
+      'error timeout',
+      name: 'error_timeout',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `error cancel`
+  String get error_cancel {
+    return Intl.message(
+      'error cancel',
+      name: 'error_cancel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `error parse`
+  String get error_parse {
+    return Intl.message(
+      'error parse',
+      name: 'error_parse',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `error format`
+  String get error_format {
+    return Intl.message(
+      'error format',
+      name: 'error_format',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `error null`
+  String get error_null {
+    return Intl.message(
+      'error null',
+      name: 'error_null',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `error code`
+  String get error_code {
+    return Intl.message(
+      'error code',
+      name: 'error_code',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `error message`
+  String get error_msg {
+    return Intl.message(
+      'error message',
+      name: 'error_msg',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `error detail`
+  String get error_detail {
+    return Intl.message(
+      'error detail',
+      name: 'error_detail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please check if the network is normal`
+  String get error_detail_network_desc {
+    return Intl.message(
+      'Please check if the network is normal',
+      name: 'error_detail_network_desc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `If the problem persists, try restarting the app`
+  String get error_detail_desc {
+    return Intl.message(
+      'If the problem persists, try restarting the app',
+      name: 'error_detail_desc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Invitation Code`
+  String get invitation_code {
+    return Intl.message(
+      'Invitation Code',
+      name: 'invitation_code',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter invitation code`
+  String get invitation_code_input {
+    return Intl.message(
+      'Please enter invitation code',
+      name: 'invitation_code_input',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Invitation code is required for registration`
+  String get invitation_code_desc {
+    return Intl.message(
+      'Invitation code is required for registration',
+      name: 'invitation_code_desc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Digital Man`
+  String get digitalMan {
+    return Intl.message(
+      'Digital Man',
+      name: 'digitalMan',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Collect`
+  String get collect {
+    return Intl.message(
+      'Collect',
+      name: 'collect',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

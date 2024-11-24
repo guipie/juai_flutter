@@ -1,26 +1,23 @@
 import '../base.dart';
 import 'home/home_page.dart';
 import 'home/home_pc_page.dart';
-import 'login/login_pwd_page.dart';
+import 'login/login_page.dart';
+import 'login/provider/user_provider.dart';
 
-class SplashPage extends StatefulWidget {
+class SplashPage extends ConsumerStatefulWidget {
   const SplashPage({super.key});
 
   @override
-  State<SplashPage> createState() => _SplashPageState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _SplashPageState();
 }
 
-class _SplashPageState extends State<SplashPage> {
+class _SplashPageState extends ConsumerState<SplashPage> {
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       Future.delayed(const Duration(milliseconds: 500), () {
-        if (F.mobile) {
-          F.pushReplacementNoAnimation(LoginPage());
-        } else {
-          F.pushReplacementNoAnimation(LoginPage());
-        }
+        ref.read(curentUserProvider.notifier).verifyLogin();
       });
     });
   }

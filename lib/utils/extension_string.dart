@@ -6,7 +6,7 @@ extension ExtensionString on String? {
     return this == null || this!.isEmpty;
   }
 
-  String string({String defaultValue = ""}) {
+  String string({String defaultValue = ''}) {
     return this ?? defaultValue;
   }
 
@@ -28,7 +28,7 @@ extension ExtensionString on String? {
 
   Widget toText({TextStyle? style, double? size, Color? color}) {
     return Text(
-      this ?? "",
+      this ?? '',
       style: style ??
           TextStyle(
             color: color,
@@ -72,7 +72,11 @@ extension ExtensionString on String? {
   }
 
   Widget action(VoidCallback onPressed, {TextStyle? style}) {
-    return (this ?? "").toText(style: style).padding(15.paddingHorizontal()).click(onPressed);
+    return (this ?? '').toText(style: style).padding(15.paddingHorizontal()).click(onPressed);
+  }
+
+  bool toRegMath(RegExp reg) {
+    return reg.hasMatch(this!);
   }
 }
 

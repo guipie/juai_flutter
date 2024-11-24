@@ -3,8 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
 
 class Skeletons {
-  static Widget card(
-    BuildContext context, {
+  static Widget rowCard({
     int cardCount = 1,
     double? h,
   }) {
@@ -29,15 +28,17 @@ class Skeletons {
     );
   }
 
-  static Widget listItem() {
+  static Widget card({
+    double width = 200,
+    double height = 200,
+  }) {
     return Shimmer.fromColors(
       baseColor: Colors.grey.shade300,
       highlightColor: Colors.grey.shade100,
       child: Container(
-        padding: const EdgeInsets.all(8),
-        child: const Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        ),
+        width: width,
+        height: height,
+        color: Colors.white,
       ),
     );
   }

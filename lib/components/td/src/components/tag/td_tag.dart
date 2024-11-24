@@ -5,27 +5,7 @@ import '../../../tdesign_flutter.dart';
 /// 支持样式：方形/圆角/半圆/带关闭图标
 ///
 class TDTag extends StatelessWidget {
-  const TDTag(this.text,
-      {this.theme,
-      this.icon,
-      this.iconWidget,
-      this.textColor,
-      this.backgroundColor,
-      this.font,
-      this.fontWeight,
-      this.style,
-      this.size = TDTagSize.medium,
-      this.padding,
-      this.forceVerticalCenter = true,
-      this.isOutline = false,
-      this.shape = TDTagShape.square,
-      this.isLight = false,
-      this.disable = false,
-      this.needCloseIcon = false,
-      this.onCloseTap,
-      this.overflow,
-      Key? key})
-      : super(key: key);
+  const TDTag(this.text, {this.theme, this.icon, this.iconWidget, this.textColor, this.backgroundColor, this.font, this.fontWeight, this.style, this.size = TDTagSize.medium, this.padding, this.forceVerticalCenter = true, this.isOutline = false, this.shape = TDTagShape.square, this.isLight = false, this.disable = false, this.needCloseIcon = false, this.onCloseTap, this.overflow, Key? key}) : super(key: key);
 
   /// 标签内容
   final String text;
@@ -130,29 +110,23 @@ class TDTag extends StatelessWidget {
 
     return Container(
       padding: padding ?? _getPadding(innerStyle.border),
-      decoration: BoxDecoration(
-          color: backgroundColor ?? innerStyle.getBackgroundColor,
-          border: Border.all(
-              width: innerStyle.border,
-              color: innerStyle.getBorderColor),
-          borderRadius: innerStyle.getBorderRadius),
+      decoration: BoxDecoration(color: backgroundColor ?? innerStyle.getBackgroundColor, border: Border.all(width: innerStyle.border, color: innerStyle.getBorderColor), borderRadius: innerStyle.getBorderRadius),
       child: child,
     );
   }
 
-  Widget? getIcon(TDTagStyle innerStyle){
-    if(iconWidget != null){
+  Widget? getIcon(TDTagStyle innerStyle) {
+    if (iconWidget != null) {
       return iconWidget;
     }
-    if(icon != null){
+    if (icon != null) {
       return RichText(
         overflow: TextOverflow.visible,
         text: TextSpan(
           text: String.fromCharCode(icon!.codePoint),
           style: TextStyle(
             inherit: false,
-            color:
-            innerStyle.textColor,
+            color: innerStyle.textColor,
             height: 1,
             fontSize: _getIconSize(),
             fontFamily: icon!.fontFamily,
@@ -168,14 +142,10 @@ class TDTag extends StatelessWidget {
     if (style != null) {
       return style!;
     }
-    if(disable){
+    if (disable) {
       return TDTagStyle.generateDisableSelectStyle(context, isOutline, shape);
     }
-    return isOutline
-        ? TDTagStyle.generateOutlineStyleByTheme(
-            context, theme, isLight, shape)
-        : TDTagStyle.generateFillStyleByTheme(
-            context, theme, isLight, shape);
+    return isOutline ? TDTagStyle.generateOutlineStyleByTheme(context, theme, isLight, shape) : TDTagStyle.generateFillStyleByTheme(context, theme, isLight, shape);
   }
 
   Font? _getFont(BuildContext context) {
@@ -243,4 +213,3 @@ class TDTag extends StatelessWidget {
     }
   }
 }
-

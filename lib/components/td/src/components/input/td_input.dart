@@ -83,14 +83,7 @@ class TDInput extends StatelessWidget {
         // leftLabel：左侧'标签文字'，一个字宽度16，最多一行展示5个字(5个字时，多一点荣誉)
         // leftIcon: 左侧icon，限制大小为24，再加上4dp的间距，即28
         // required: 是否必填的'*'标记，占位14（包括间距）
-        leftInfoWidth = leftInfoWidth ??
-            ((leftLabel == null && leftIcon == null && !(required ?? false))
-                ? 0
-                : ((leftLabel?.length == null ? 0 : leftLabel!.length) *
-                            (leftLabelStyle != null ? (leftLabelStyle.fontSize ?? 16) : 16) +
-                        1 +
-                        (leftIcon != null ? 1 : 0) * ((leftIcon is Icon) ? (leftIcon.size ?? 24) : 24)) +
-                    (required == true ? 1 : 0) * 14),
+        leftInfoWidth = leftInfoWidth ?? ((leftLabel == null && leftIcon == null && !(required ?? false)) ? 0 : ((leftLabel?.length == null ? 0 : leftLabel!.length) * (leftLabelStyle != null ? (leftLabelStyle.fontSize ?? 16) : 16) + 1 + (leftIcon != null ? 1 : 0) * ((leftIcon is Icon) ? (leftIcon.size ?? 24) : 24)) + (required == true ? 1 : 0) * 14),
         super(key: key);
 
   /// 输入框宽度(TDCardStyle时必须设置该参数)
@@ -305,10 +298,7 @@ class TDInput extends StatelessWidget {
                       visible: leftLabel != null,
                       child: Container(
                         constraints: BoxConstraints(maxWidth: _leftLabelWidth),
-                        padding: EdgeInsets.only(
-                            left: leftIcon != null ? (spacer.iconLabelSpace ?? 4) : 0,
-                            top: getInputPadding(),
-                            bottom: getInputPadding()),
+                        padding: EdgeInsets.only(left: leftIcon != null ? (spacer.iconLabelSpace ?? 4) : 0, top: getInputPadding(), bottom: getInputPadding()),
                         child: TDText(
                           leftLabel,
                           maxLines: 2,
@@ -364,15 +354,11 @@ class TDInput extends StatelessWidget {
                       cursorColor: cursorColor,
                       textInputBackgroundColor: textInputBackgroundColor,
                       controller: controller,
-                      contentPadding: contentPadding ??
-                          EdgeInsets.only(
-                              left: spacer.labelInputSpace ?? 16,
-                              right: spacer.inputRightSpace != null ? spacer.inputRightSpace! / 2 : 16,
-                              bottom: additionInfo != '' ? 4 : getInputPadding(),
-                              top: getInputPadding()),
+                      contentPadding: contentPadding ?? EdgeInsets.only(left: spacer.labelInputSpace ?? 16, right: spacer.inputRightSpace != null ? spacer.inputRightSpace! / 2 : 16, bottom: additionInfo != '' ? 4 : getInputPadding(), top: getInputPadding()),
                       inputAction: inputAction,
                     ),
                     Visibility(
+                      visible: additionInfo != '',
                       child: Padding(
                         padding: EdgeInsets.only(left: spacer.additionInfoSpace ?? 16, bottom: getInputPadding()),
                         child: TDText(
@@ -381,7 +367,6 @@ class TDInput extends StatelessWidget {
                           textColor: additionInfoColor ?? TDTheme.of(context).fontGyColor3,
                         ),
                       ),
-                      visible: additionInfo != '',
                     )
                   ],
                 ),
@@ -395,32 +380,27 @@ class TDInput extends StatelessWidget {
               ),
               Visibility(
                 visible: controller != null && controller!.text.isNotEmpty && needClear && rightWidget == null,
-                child: GestureDetector(
-                    child: Container(
-                      margin: EdgeInsets.only(
-                          left: spacer.inputRightSpace != null ? spacer.inputRightSpace! / 2 : 8,
-                          right: spacer.rightSpace ?? 16,
-                          top: additionInfo != '' ? getInputPadding() : 0),
-                      child: Icon(
-                        size: clearIconSize,
-                        TDIcons.close_circle_filled,
-                        color: clearBtnColor ?? TDTheme.of(context).fontGyColor3,
-                      ),
-                    ),
-                    onTap: onClearTap ??
-                        () {
-                          controller?.text = '';
-                        }),
                 replacement: Visibility(
                   visible: rightBtn != null,
                   child: GestureDetector(
                     onTap: onBtnTap,
                     child: Container(
-                      margin: EdgeInsets.only(
-                          left: spacer.inputRightSpace != null ? spacer.inputRightSpace! / 2 : 8,
-                          right: spacer.rightSpace ?? 16,
-                          top: additionInfo != '' ? getInputPadding() : 0),
+                      margin: EdgeInsets.only(left: spacer.inputRightSpace != null ? spacer.inputRightSpace! / 2 : 8, right: spacer.rightSpace ?? 16, top: additionInfo != '' ? getInputPadding() : 0),
                       child: rightBtn,
+                    ),
+                  ),
+                ),
+                child: GestureDetector(
+                  onTap: onClearTap ??
+                      () {
+                        controller?.text = '';
+                      },
+                  child: Container(
+                    margin: EdgeInsets.only(left: spacer.inputRightSpace != null ? spacer.inputRightSpace! / 2 : 8, right: spacer.rightSpace ?? 16, top: additionInfo != '' ? getInputPadding() : 0),
+                    child: Icon(
+                      size: clearIconSize,
+                      Icons.close_outlined,
+                      color: clearBtnColor ?? TDTheme.of(context).fontGyColor3,
                     ),
                   ),
                 ),
@@ -442,26 +422,17 @@ class TDInput extends StatelessWidget {
   }
 
   BoxDecoration? _getCardStylePreDecoration(BuildContext context) {
-    var cardStyleDecoration;
+    BoxDecoration? cardStyleDecoration;
     if (type == TDInputType.cardStyle) {
       switch (cardStyle) {
         case TDCardStyle.topText:
-          cardStyleDecoration = BoxDecoration(
-              color: Colors.white,
-              border: Border.all(color: TDTheme.of(context).grayColor4),
-              borderRadius: BorderRadius.circular(6));
+          cardStyleDecoration = BoxDecoration(color: Colors.white, border: Border.all(color: TDTheme.of(context).grayColor4), borderRadius: BorderRadius.circular(6));
           break;
         case TDCardStyle.topTextWithBlueBorder:
-          cardStyleDecoration = BoxDecoration(
-              color: Colors.white,
-              border: Border.all(color: TDTheme.of(context).brandNormalColor, width: 1.5),
-              borderRadius: BorderRadius.circular(6));
+          cardStyleDecoration = BoxDecoration(color: Colors.white, border: Border.all(color: TDTheme.of(context).brandNormalColor, width: 1.5), borderRadius: BorderRadius.circular(6));
           break;
         case TDCardStyle.errorStyle:
-          cardStyleDecoration = BoxDecoration(
-              color: Colors.white,
-              border: Border.all(color: TDTheme.of(context).errorColor6, width: 1.5),
-              borderRadius: BorderRadius.circular(6));
+          cardStyleDecoration = BoxDecoration(color: Colors.white, border: Border.all(color: TDTheme.of(context).errorColor6, width: 1.5), borderRadius: BorderRadius.circular(6));
           break;
         default:
           cardStyleDecoration = BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(6));
@@ -557,38 +528,38 @@ class TDInput extends StatelessWidget {
                         controller: controller,
                         contentPadding: contentPadding ??
                             EdgeInsets.only(
-                                left: spacer.labelInputSpace ?? 16,
-                                right: spacer.inputRightSpace != null ? spacer.inputRightSpace! / 2 : 8,
+                              left: spacer.labelInputSpace ?? 16,
+                              right: spacer.inputRightSpace != null ? spacer.inputRightSpace! / 2 : 8,
                             ),
                         inputAction: inputAction,
                       ),
                     ),
                     Visibility(
                       visible: controller != null && controller!.text.isNotEmpty && needClear,
-                      child: GestureDetector(
-                        child: Container(
-                          margin: EdgeInsets.only(
-                              left: spacer.inputRightSpace != null ? spacer.inputRightSpace! / 2 : 8,
-                              right: spacer.rightSpace ?? 16,
-                          ),
-                          child: Icon(
-                            size: clearIconSize,
-                            TDIcons.close_circle_filled,
-                            color: clearBtnColor ?? TDTheme.of(context).fontGyColor3,
-                          ),
-                        ),
-                        onTap: onClearTap,
-                      ),
                       replacement: Visibility(
                         visible: rightBtn != null,
                         child: GestureDetector(
                           onTap: onBtnTap,
                           child: Container(
                             margin: EdgeInsets.only(
-                                left: spacer.inputRightSpace != null ? spacer.inputRightSpace! / 2 : 8,
-                                right: spacer.rightSpace ?? 16,
+                              left: spacer.inputRightSpace != null ? spacer.inputRightSpace! / 2 : 8,
+                              right: spacer.rightSpace ?? 16,
                             ),
                             child: rightBtn,
+                          ),
+                        ),
+                      ),
+                      child: GestureDetector(
+                        onTap: onClearTap,
+                        child: Container(
+                          margin: EdgeInsets.only(
+                            left: spacer.inputRightSpace != null ? spacer.inputRightSpace! / 2 : 8,
+                            right: spacer.rightSpace ?? 16,
+                          ),
+                          child: Icon(
+                            size: clearIconSize,
+                            TDIcons.close_circle_filled,
+                            color: clearBtnColor ?? TDTheme.of(context).fontGyColor3,
                           ),
                         ),
                       ),
@@ -668,7 +639,7 @@ class TDInput extends StatelessWidget {
             alignment: Alignment.bottomRight,
             padding: const EdgeInsets.only(left: 16, right: 16, bottom: 12),
             child: TDText(
-              '${controller?.text.length}/${maxLength}',
+              '${controller?.text.length}/$maxLength',
               font: TDTheme.of(context).fontBodySmall,
               textColor: TDTheme.of(context).fontGyColor3,
             ),
@@ -692,8 +663,7 @@ class TDInput extends StatelessWidget {
               Visibility(
                 visible: leftLabel != null,
                 child: Padding(
-                  padding:
-                      EdgeInsets.only(left: leftLabelSpace ?? 16, top: getInputPadding(), bottom: getInputPadding()),
+                  padding: EdgeInsets.only(left: leftLabelSpace ?? 16, top: getInputPadding(), bottom: getInputPadding()),
                   child: leftInfoWidth != null
                       ? SizedBox(
                           width: _leftLabelWidth,
@@ -740,9 +710,7 @@ class TDInput extends StatelessWidget {
                     textInputBackgroundColor: textInputBackgroundColor,
                     controller: controller,
                     textAlign: textAlign,
-                    contentPadding: contentPadding ??
-                        EdgeInsets.only(
-                            right: spacer.inputRightSpace!, bottom: getInputPadding(), top: getInputPadding()),
+                    contentPadding: contentPadding ?? EdgeInsets.only(right: spacer.inputRightSpace!, bottom: getInputPadding(), top: getInputPadding()),
                     inputAction: inputAction,
                   ),
                 ),
@@ -784,8 +752,8 @@ class TDInput extends StatelessWidget {
   Widget build(BuildContext context) {
     var screenWidth = MediaQuery.of(context).size.width;
     return SizedBox(
-      child: buildInputView(context),
       width: width ?? screenWidth,
+      child: buildInputView(context),
     );
   }
 
@@ -799,9 +767,7 @@ class TDInput extends StatelessWidget {
             children: [
               Text(
                 cardStyleTopText ?? '',
-                style: TextStyle(
-                    fontSize: TDTheme.of(context).fontBodyMedium!.size,
-                    height: TDTheme.of(context).fontBodyMedium!.height),
+                style: TextStyle(fontSize: TDTheme.of(context).fontBodyMedium!.size, height: TDTheme.of(context).fontBodyMedium!.height),
               ),
               const SizedBox(
                 height: 8,
@@ -819,10 +785,7 @@ class TDInput extends StatelessWidget {
               ),
               Text(
                 cardStyleBottomText ?? '',
-                style: TextStyle(
-                    color: TDTheme.of(context).errorColor6,
-                    fontSize: TDTheme.of(context).fontBodySmall!.size,
-                    height: TDTheme.of(context).fontBodySmall!.height),
+                style: TextStyle(color: TDTheme.of(context).errorColor6, fontSize: TDTheme.of(context).fontBodySmall!.size, height: TDTheme.of(context).fontBodySmall!.height),
               ),
             ],
           ),
@@ -855,10 +818,7 @@ class Chinese2Formatter extends TextInputFormatter {
         }
         if (i > 0 && count + i > maxLength - 1) {
           var text = newValue.text.substring(0, i);
-          return newValue.copyWith(
-              text: text,
-              composing: TextRange.empty,
-              selection: TextSelection.fromPosition(TextPosition(offset: i, affinity: TextAffinity.downstream)));
+          return newValue.copyWith(text: text, composing: TextRange.empty, selection: TextSelection.fromPosition(TextPosition(offset: i, affinity: TextAffinity.downstream)));
         }
       }
     }

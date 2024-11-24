@@ -47,10 +47,10 @@ class ConversationWidget {
   static PreferredSizeWidget bulidAppBar(WidgetRef ref, BuildContext context, {Function(String)? onSearchTextChanged}) {
     return JuAppBar.baseBar(
       text: S.current.home_chat,
-      leadingWidth: 260,
+      leadingWidth: 240,
       leading: F.pc
           ? SizedBox(
-              width: 260,
+              width: 240,
               height: 60,
               child: TDSearchBar(
                 placeHolder: '搜索搜索',

@@ -208,6 +208,8 @@ abstract class BaseTheme {
 
   Color divideBgColor();
 
+  Color defaultBgColor();
+
   Color userSendMessageTextColor();
 
   static BaseTheme of(WidgetRef ref) {
@@ -219,11 +221,12 @@ class LightTheme extends BaseTheme {
   @override
   ThemeData theme(Color primaryColor) {
     return ThemeData.light().copyWith(
+      // extensions: [TDTheme.defaultData()],
       colorScheme: ColorScheme.light(
         primary: primaryColor,
         onPrimary: primaryColor.withAlpha(20),
         secondary: Colors.white,
-        onSecondary: Colors.white60,
+        onSecondary: Colors.white30,
         surface: Colors.black,
         onSurface: Colors.black87,
         error: const Color(0xffFF3B30),
@@ -373,6 +376,11 @@ class LightTheme extends BaseTheme {
   @override
   Color timeColor() {
     return const Color(0xff5B5B5B);
+  }
+
+  @override
+  Color defaultBgColor() {
+    return Colors.white;
   }
 }
 
@@ -527,5 +535,10 @@ class DarkTheme extends BaseTheme {
   @override
   Color timeColor() {
     return const Color(0xff5B5B5B);
+  }
+
+  @override
+  Color defaultBgColor() {
+    return Colors.black;
   }
 }

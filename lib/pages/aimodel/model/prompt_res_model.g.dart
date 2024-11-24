@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'prompt.dart';
+part of 'prompt_res_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator

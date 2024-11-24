@@ -1,12 +1,14 @@
 import '../../../base.dart';
 
 class LoginModel {
-  final String? validatorPhoneErrorText;
+  bool invitaionCodeShow;
   final TextEditingController textPhoneController;
   final TextEditingController textVcodeController;
   final TextEditingController textPasswordController;
-  LoginModel(this.validatorPhoneErrorText)
+  final TextEditingController textInvitationCodeController;
+  LoginModel({this.invitaionCodeShow = false})
       : textPhoneController = TextEditingController(),
         textVcodeController = TextEditingController(),
+        textInvitationCodeController = TextEditingController(),
         textPasswordController = TextEditingController();
 }

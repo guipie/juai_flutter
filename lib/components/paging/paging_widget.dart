@@ -90,7 +90,7 @@ final class PagingWidget<D extends PagingData<I>, I> extends ConsumerWidget {
               onRefresh: () async => ref.refresh(futureRefreshable),
               onLoad: () async => ref.read(notifierRefreshable).loadNext(),
               child: SingleChildScrollView(
-                padding: const EdgeInsets.only(left: 16),
+                padding: const EdgeInsets.only(left: 16, top: 10),
                 child: content,
               ),
             );
