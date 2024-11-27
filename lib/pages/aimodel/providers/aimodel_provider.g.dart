@@ -24,7 +24,7 @@ final aiModelDataNotifierProvider = AutoDisposeAsyncNotifierProvider<
 
 typedef _$AiModelDataNotifier
     = AutoDisposeAsyncNotifier<PagePagingData<AiModelSort>>;
-String _$aiModelProviderHash() => r'd98a311313605b68010df01b4821ef4b2c287bfd';
+String _$aiModelProviderHash() => r'fa6299ae748361b25113b312874e0a620d0fdc86';
 
 /// See also [AiModelProvider].
 @ProviderFor(AiModelProvider)

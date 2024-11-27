@@ -1,12 +1,11 @@
-import '../components/td/tdesign_flutter.dart';
-import '../const.dart';
-import '../utils/hive_box.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../const.dart';
 import '../generated/l10n.dart';
+import '../utils/hive_box.dart';
 import '../utils/sp_util.dart';
 
 enum SupportedLanguage {
@@ -224,6 +223,7 @@ class LightTheme extends BaseTheme {
       // extensions: [TDTheme.defaultData()],
       colorScheme: ColorScheme.light(
         primary: primaryColor,
+        primaryFixed: primaryColor.withOpacity(0.8),
         onPrimary: primaryColor.withAlpha(20),
         secondary: Colors.white,
         onSecondary: Colors.white30,
@@ -388,7 +388,18 @@ class DarkTheme extends BaseTheme {
   @override
   ThemeData theme(Color primaryColor) {
     return ThemeData.dark().copyWith(
-      colorScheme: ColorScheme.dark(primary: primaryColor, onPrimary: primaryColor.withAlpha(10), secondary: Colors.black, onSecondary: Colors.black87, surface: Colors.white, onSurface: Colors.white70, error: const Color(0xffFF3B30), onError: Colors.white, brightness: Brightness.dark),
+      colorScheme: ColorScheme.dark(
+        primary: primaryColor,
+        primaryFixed: primaryColor.withAlpha(80),
+        onPrimary: primaryColor.withAlpha(10),
+        secondary: Colors.black,
+        onSecondary: Colors.black87,
+        surface: Colors.white,
+        onSurface: Colors.white70,
+        error: const Color(0xffFF3B30),
+        onError: Colors.white,
+        brightness: Brightness.dark,
+      ),
       scaffoldBackgroundColor: const Color(0xff111111),
       primaryColor: primaryColor,
       hoverColor: primaryColor.withAlpha(10),

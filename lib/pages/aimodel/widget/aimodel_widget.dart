@@ -103,9 +103,11 @@ class AimodelWidget {
     );
   }
 
-  static Widget buildAddDigitaMan(BuildContext context, WidgetRef ref) {
+  static Widget buildAddDigitaMan(BuildContext context, WidgetRef ref, {Function()? onTap}) {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        onTap?.call();
+      },
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15),
         child: Icon(

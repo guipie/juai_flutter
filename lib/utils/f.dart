@@ -3,6 +3,11 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 
 import '../base.dart';
+import '../pages/chat/chat_page.dart';
+import '../pages/chat/conversation_pc_page.dart';
+import '../pages/chat/providers/conversation_provider.dart';
+import '../pages/home/home_pc_page.dart';
+import '../pages/home/home_provider.dart';
 import 'fimpl/animation_dialog.dart';
 import 'fimpl/special_routes.dart';
 
@@ -52,10 +57,6 @@ class _FImpl {
     return Navigator.of(context).pushAndRemoveUntil(CupertinoPageRoute(builder: (context) => page), (Route<dynamic> route) => false);
   }
 
-  Future<T?> pushRoot<T extends Object?, TO extends Object?>(Widget page, {TO? result}) {
-    return Navigator.of(context).pushAndRemoveUntil(CupertinoPageRoute(builder: (context) => page), (Route<dynamic> route) => route.isFirst);
-  }
-
   Future<T?> pushReplacementNoAnimation<T extends Object?, TO extends Object?>(Widget page, {TO? result}) {
     return Navigator.of(context).pushReplacement(NoAnimationPageRoute(builder: (context) => page), result: result);
   }
@@ -67,6 +68,11 @@ class _FImpl {
   //pop
   void pop<T extends Object?>([T? result]) {
     Navigator.of(context).pop(result);
+  }
+
+  void pushChat(WidgetRef ref, {Object? arguments}) {
+    ref.read(curConversationId.notifier).update((state) => 'fff');
+    ref.read(homeIndexProvider.notifier).update((state) => 0);
   }
 
   /// 常用工具方法 结束

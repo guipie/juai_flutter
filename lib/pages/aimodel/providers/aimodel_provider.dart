@@ -44,8 +44,10 @@ class AiModelProvider extends _$AiModelProvider {
   void setSelectedPrompt(int val) {
     state = AiModelModel(selectedPrompt: val);
     if (val == 1) {
-      ref.read(promptNotifierProvider.notifier).forceRefresh();
-    }
+      ref.read(categoryNotifierProvider.notifier).update('');
+    } else
+      ref.read(categoryNotifierProvider.notifier).update('my');
+    ref.read(promptNotifierProvider.notifier).forceRefresh();
   }
 
   void setSelectedAiModel(AiModelRes? val) {

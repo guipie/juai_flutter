@@ -11,6 +11,6 @@ class PageReq with _$PageReq {
     DateTime? lastCreate,
     String? searchKey,
   }) = _PageReq;
-
+  // 工厂构造函数
   factory PageReq.fromJson(Map<String, dynamic> json) => _$PageReqFromJson(json);
 }

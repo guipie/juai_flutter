@@ -1150,6 +1150,46 @@ class S {
     );
   }
 
+  /// `Please enter AI Prompt`
+  String get prompt_hint {
+    return Intl.message(
+      'Please enter AI Prompt',
+      name: 'prompt_hint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Example:Please help me create or optimize my resume based on the information I provided. The content produced and optimized must be centered around the information provided. The content must highlight personal highlights and characteristics, list past work experience in chronological order, quantify outstanding deeds and achievements at work through digitization and other methods, and the overall content It is required to be concise and easy to understand, with clear format and no grammatical errors。`
+  String get prompt_demo {
+    return Intl.message(
+      'Example:Please help me create or optimize my resume based on the information I provided. The content produced and optimized must be centered around the information provided. The content must highlight personal highlights and characteristics, list past work experience in chronological order, quantify outstanding deeds and achievements at work through digitization and other methods, and the overall content It is required to be concise and easy to understand, with clear format and no grammatical errors。',
+      name: 'prompt_demo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Greetings`
+  String get prompt_greeting {
+    return Intl.message(
+      'Greetings',
+      name: 'prompt_greeting',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Example: To convey your experience and skills clearly and effectively, please provide me with the following information: 1. The position/industry or future goals you want to apply for; 2. Educational background, such as school, degree, major, honors received, etc.; 3 . Your past and present work/internship experience, such as position, professional and project experience and performance results, etc.; 4. Your skills, expertise, language ability and professional qualifications, etc.`
+  String get prompt_greeting_demo {
+    return Intl.message(
+      'Example: To convey your experience and skills clearly and effectively, please provide me with the following information: 1. The position/industry or future goals you want to apply for; 2. Educational background, such as school, degree, major, honors received, etc.; 3 . Your past and present work/internship experience, such as position, professional and project experience and performance results, etc.; 4. Your skills, expertise, language ability and professional qualifications, etc.',
+      name: 'prompt_greeting_demo',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Text Parsing Model`
   String get text_parse_model {
     return Intl.message(
@@ -1705,6 +1745,26 @@ class S {
     return Intl.message(
       'Collect',
       name: 'collect',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `retry`
+  String get retry {
+    return Intl.message(
+      'retry',
+      name: 'retry',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `no data to refresh`
+  String get no_more_data {
+    return Intl.message(
+      'no data to refresh',
+      name: 'no_more_data',
       desc: '',
       args: [],
     );

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
+import '../../base.dart';
 import 'paging_data.dart';
 import 'paging_notifier_mixin.dart';
 
@@ -51,7 +52,7 @@ final class PagingWidget<D extends PagingData<I>, I> extends ConsumerWidget {
                 onPressed: onPressed,
                 icon: const Icon(Icons.refresh),
               ),
-              Text(e.message ?? '出错了..'),
+              Text(e.message ?? S.current.error_),
             ],
           ),
         );
@@ -87,10 +88,25 @@ final class PagingWidget<D extends PagingData<I>, I> extends ConsumerWidget {
                 foregroundColor: Theme.of(context).scaffoldBackgroundColor,
                 backgroundColor: Theme.of(context).colorScheme.onPrimary,
               ),
+              footer: BezierFooter(
+                foregroundColor: Theme.of(context).scaffoldBackgroundColor,
+                backgroundColor: Theme.of(context).colorScheme.onPrimary,
+                clamping: true,
+                showBalls: true,
+                spinInCenter: true,
+                onlySpin: true,
+                triggerOffset: 50,
+                spinWidget: data.hasMore
+                    ? null
+                    : Text(
+                        S.current.no_more_data,
+                        style: Theme.of(context).textTheme.bodySmall,
+                      ),
+              ),
               onRefresh: () async => ref.refresh(futureRefreshable),
-              onLoad: () async => ref.read(notifierRefreshable).loadNext(),
+              onLoad: () async => await ref.read(notifierRefreshable).loadNext(),
               child: SingleChildScrollView(
-                padding: const EdgeInsets.only(left: 16, top: 10),
+                padding: const EdgeInsets.only(left: 16, top: 10, bottom: 20),
                 child: content,
               ),
             );

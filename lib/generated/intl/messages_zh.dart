@@ -22,7 +22,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
-        "add_prompt": MessageLookupByLibrary.simpleMessage("新增 AI 提示"),
+        "add_prompt": MessageLookupByLibrary.simpleMessage("新增AI提示"),
         "alias_desc": MessageLookupByLibrary.simpleMessage("仅用于多个相同的服务商之间区分"),
         "alias_empty": MessageLookupByLibrary.simpleMessage("别名不能为空"),
         "alias_input": MessageLookupByLibrary.simpleMessage("请输入别名"),
@@ -137,6 +137,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "no_account": MessageLookupByLibrary.simpleMessage("没有账号? "),
         "no_audio_file": MessageLookupByLibrary.simpleMessage("无法获取到语音文件"),
         "no_module_use": MessageLookupByLibrary.simpleMessage("没有模型可用的模型"),
+        "no_more_data": MessageLookupByLibrary.simpleMessage("没啦，别试啦."),
         "not_support_tts":
             MessageLookupByLibrary.simpleMessage("您所添加的服务商不支持语音聊天"),
         "official": MessageLookupByLibrary.simpleMessage("官方"),
@@ -156,6 +157,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "pin": MessageLookupByLibrary.simpleMessage("置顶"),
         "please_input": MessageLookupByLibrary.simpleMessage("请输入"),
         "primary_color": MessageLookupByLibrary.simpleMessage("主题色"),
+        "prompt_demo": MessageLookupByLibrary.simpleMessage(
+            "示例:请根据我提供的信息，帮助我制作简历或优化简历。其中制作和优化的内容一定要围绕提供的信息进行，内容需突出个人亮点和特点，并按照时间顺序列出过往的工作经验，通过数据化等方式量化工作中的突出事迹和成绩，且整体内容要求简洁易懂、格式清晰，不能有语法错误。"),
+        "prompt_greeting": MessageLookupByLibrary.simpleMessage("问候语"),
+        "prompt_greeting_demo": MessageLookupByLibrary.simpleMessage(
+            "示例:为清晰有力地传达你的经验和技能，请为我提供以下信息： 1. 你想申请的职位/行业或未来目标； 2. 教育背景，如学校、学位、专业、获得荣誉等； 3. 你过去现在的工作/实习经历，如职位、职业和项目经验及业绩成果等； 4. 你的技能、特长、语言能力和专责资质等。"),
+        "prompt_hint": MessageLookupByLibrary.simpleMessage("提示词描述"),
         "pwd": MessageLookupByLibrary.simpleMessage("密码"),
         "pwd_format_error": MessageLookupByLibrary.simpleMessage("密码格式错误"),
         "pwd_not_same": MessageLookupByLibrary.simpleMessage("两次密码不一致"),
@@ -165,6 +172,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "register_success": MessageLookupByLibrary.simpleMessage("注册成功"),
         "reminder": MessageLookupByLibrary.simpleMessage("温馨提示"),
         "resend": MessageLookupByLibrary.simpleMessage("重新发送"),
+        "retry": MessageLookupByLibrary.simpleMessage("重试"),
         "save": MessageLookupByLibrary.simpleMessage("保存"),
         "save_fail": MessageLookupByLibrary.simpleMessage("保存失败"),
         "save_gallary": MessageLookupByLibrary.simpleMessage("保存到相册"),

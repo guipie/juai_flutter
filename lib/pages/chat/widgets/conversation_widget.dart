@@ -99,21 +99,7 @@ class ConversationWidget {
                   .values
                   .map((e) => PullDownMenuItem(
                         title: e.alias ?? '',
-                        onTap: () {
-                          F
-                              .push(ChatPage(
-                                  showKeyboard: true,
-                                  localChatHistory: ChatParentItem(
-                                    apiKey: e.apiKey ?? '',
-                                    id: DateTime.now().millisecondsSinceEpoch,
-                                    moduleName: e.model,
-                                    moduleType: e.defaultModelType?.id ?? 'gpt-4',
-                                    title: S.current.new_chat,
-                                  )))
-                              .then((value) {
-                            ref.read(chatParentListProvider.notifier).load();
-                          });
-                        },
+                        onTap: () {},
                       ))
                   .toList(),
             ];

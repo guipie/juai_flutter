@@ -162,6 +162,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Unable to obtain voice file"),
         "no_module_use":
             MessageLookupByLibrary.simpleMessage("No model available"),
+        "no_more_data":
+            MessageLookupByLibrary.simpleMessage("no data to refresh"),
         "not_support_tts": MessageLookupByLibrary.simpleMessage(
             "The current model does not support TTS"),
         "official": MessageLookupByLibrary.simpleMessage("Official"),
@@ -183,6 +185,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "pin": MessageLookupByLibrary.simpleMessage("Pin"),
         "please_input": MessageLookupByLibrary.simpleMessage("Please type"),
         "primary_color": MessageLookupByLibrary.simpleMessage("Primary Color"),
+        "prompt_demo": MessageLookupByLibrary.simpleMessage(
+            "Example:Please help me create or optimize my resume based on the information I provided. The content produced and optimized must be centered around the information provided. The content must highlight personal highlights and characteristics, list past work experience in chronological order, quantify outstanding deeds and achievements at work through digitization and other methods, and the overall content It is required to be concise and easy to understand, with clear format and no grammatical errors。"),
+        "prompt_greeting": MessageLookupByLibrary.simpleMessage("Greetings"),
+        "prompt_greeting_demo": MessageLookupByLibrary.simpleMessage(
+            "Example: To convey your experience and skills clearly and effectively, please provide me with the following information: 1. The position/industry or future goals you want to apply for; 2. Educational background, such as school, degree, major, honors received, etc.; 3 . Your past and present work/internship experience, such as position, professional and project experience and performance results, etc.; 4. Your skills, expertise, language ability and professional qualifications, etc."),
+        "prompt_hint":
+            MessageLookupByLibrary.simpleMessage("Please enter AI Prompt"),
         "pwd": MessageLookupByLibrary.simpleMessage("password"),
         "pwd_format_error":
             MessageLookupByLibrary.simpleMessage("password format error"),
@@ -196,6 +205,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("sign up success"),
         "reminder": MessageLookupByLibrary.simpleMessage("Reminder"),
         "resend": MessageLookupByLibrary.simpleMessage("Resend"),
+        "retry": MessageLookupByLibrary.simpleMessage("retry"),
         "save": MessageLookupByLibrary.simpleMessage("Save"),
         "save_fail": MessageLookupByLibrary.simpleMessage("Save fail"),
         "save_gallary": MessageLookupByLibrary.simpleMessage("Save to Gallery"),

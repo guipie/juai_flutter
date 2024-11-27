@@ -1,4 +1,4 @@
-import 'package:chat_bot/pages/home/home_viewmodel.dart';
+import 'home_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -37,13 +37,7 @@ class BottomNavItem extends ConsumerWidget {
               checked ? iconChecked : icon,
               color: checked ? Theme.of(context).primaryColor : null,
             ),
-            Text(label ?? '',
-                style: checked
-                    ? Theme.of(context)
-                        .textTheme
-                        .titleSmall!
-                        .copyWith(color: Theme.of(context).primaryColor)
-                    : Theme.of(context).textTheme.bodySmall),
+            Text(label ?? '', style: checked ? Theme.of(context).textTheme.titleSmall!.copyWith(color: Theme.of(context).primaryColor) : Theme.of(context).textTheme.bodySmall),
             // Container(
             //   decoration: BoxDecoration(
             //     color: checked
@@ -69,17 +63,13 @@ class BottomNavPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     //绘制矩形，然后顶部中间是个半圆
-    Paint paint = Paint()
+    var paint = Paint()
       ..color = bgColor
       ..style = PaintingStyle.fill;
 
-    canvas.drawRect(
-        Rect.fromLTRB(
-            0, kBottomNavigationBarHeight / 2, size.width, size.height),
-        paint);
+    canvas.drawRect(Rect.fromLTRB(0, kBottomNavigationBarHeight / 2, size.width, size.height), paint);
 
-    canvas.drawCircle(Offset(size.width / 2, kBottomNavigationBarHeight),
-        kBottomNavigationBarHeight / 1.35, paint);
+    canvas.drawCircle(Offset(size.width / 2, kBottomNavigationBarHeight), kBottomNavigationBarHeight / 1.35, paint);
   }
 
   @override

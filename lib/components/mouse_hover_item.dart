@@ -58,7 +58,7 @@ class MouseHoverItem extends ConsumerWidget {
         size: 18,
       );
     return MouseHoverWidget(
-      hoverColor: Theme.of(context).colorScheme.onSecondary,
+      hoverColor: isSelected == true ? null : Theme.of(context).colorScheme.onSecondary,
       color: isSelected == true ? ref.watch(themeProvider).pinedBgColor() : Theme.of(context).colorScheme.secondary,
       onTap: onTap,
       isRadius: isRadius,
@@ -71,15 +71,14 @@ class MouseHoverItem extends ConsumerWidget {
             headWidget ?? const SizedBox.shrink(),
             ListTile(
               mouseCursor: SystemMouseCursors.click,
-              leading: leadingPicUrl.isNotEmpty()
-                  ? TDAvatar(
-                      size: TDAvatarSize.medium,
-                      type: TDAvatarType.normal,
-                      shape: TDAvatarShape.square,
-                      avatarUrl: leadingPicUrl!.startsWith('http') ? leadingPicUrl : null,
-                      defaultUrl: (!leadingPicUrl!.startsWith('http')) ? leadingPicUrl! : '',
-                    )
-                  : leadingWidget,
+              leading: leadingWidget ??
+                  TDAvatar(
+                    size: TDAvatarSize.medium,
+                    type: TDAvatarType.normal,
+                    shape: TDAvatarShape.square,
+                    avatarUrl: leadingPicUrl!.startsWith('http') ? leadingPicUrl : null,
+                    defaultUrl: (!leadingPicUrl!.startsWith('http')) ? leadingPicUrl! : '',
+                  ),
               title: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [

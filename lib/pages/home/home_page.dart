@@ -6,7 +6,7 @@ import '../../module/services/services_page.dart';
 import '../../module/setting/setting_page.dart';
 import '../aimodel/aimodel_page.dart';
 import '../chat/conversation_page.dart';
-import 'home_viewmodel.dart';
+import 'home_provider.dart';
 import 'widgets.dart';
 
 class HomePage extends ConsumerStatefulWidget {

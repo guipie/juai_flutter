@@ -51,7 +51,7 @@ class Http {
     //动态添加header头
     var headers = <String, dynamic>{};
     headers['version'] = Config.appVersion;
-    headers['authorization'] = 'Bearer ${Config.token}';
+    headers['authorization'] = 'Bearer ${Config.accessToken}';
 
     var options = Options(
       method: methodValues[method],

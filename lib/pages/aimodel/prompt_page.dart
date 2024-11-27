@@ -7,6 +7,7 @@ import '../../components/paging/paging_widget.dart';
 import '../../components/riverpod_paging/paged_builder.dart';
 import '../../components/td/tdesign_flutter.dart';
 import '../../module/prompt/prompt_viewmodel.dart';
+import 'prompt_add_page.dart';
 import 'providers/prompt_provider.dart';
 import 'widget/aimodel_widget.dart';
 
@@ -25,7 +26,13 @@ class _PromptPageState extends ConsumerState<PromptPage> {
       appBar: JuAppBar.baseBar(
         text: S.current.digitalMan + S.current.home_square,
         actions: [
-          AimodelWidget.buildAddDigitaMan(context, ref),
+          AimodelWidget.buildAddDigitaMan(
+            context,
+            ref,
+            onTap: () {
+              F.push(const PromptAddPage());
+            },
+          ),
         ],
       ),
       body: PagingWidget(
@@ -43,7 +50,7 @@ class _PromptPageState extends ConsumerState<PromptPage> {
                     child: MouseHoverItem(
                       leadingPicUrl: m.avatar!,
                       title: m.title!,
-                      subTitle: m.initMessage,
+                      subTitle: m.initMessage.isEmpty() ? '...' : m.initMessage,
                       isShowDefaultTrailing: false,
                       onTap: () {
                         debugPrint('点击了${m.title}');
@@ -65,18 +72,19 @@ class _PromptPageState extends ConsumerState<PromptPage> {
                               size: Theme.of(context).textTheme.bodySmall!.fontSize,
                               color: Theme.of(context).textTheme.bodySmall!.color,
                             ),
-                            ...(m.tags ?? '')
-                                .split(',')
-                                .map(
-                                  (x) => TDTag(
-                                    x,
-                                    padding: const EdgeInsets.only(top: 6, left: 5, right: 5),
-                                    isLight: true,
-                                    theme: TDTagTheme.success,
-                                    size: TDTagSize.small,
-                                  ),
-                                )
-                                .toList(),
+                            if (m.tags.isNotEmpty())
+                              ...m.tags!
+                                  .split(',')
+                                  .map(
+                                    (x) => TDTag(
+                                      x,
+                                      padding: const EdgeInsets.only(top: 6, left: 5, right: 5),
+                                      isLight: true,
+                                      theme: TDTagTheme.success,
+                                      size: TDTagSize.small,
+                                    ),
+                                  )
+                                  .toList(),
                             GestureDetector(
                               onTap: () {
                                 debugPrint('chat');

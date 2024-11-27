@@ -6,23 +6,39 @@ part of 'prompt_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$categoryHash() => r'07d77b498b0130626bdb5f4af5726f65715d6a64';
+String _$categoryNotifierHash() => r'5ce4b6de390c2346a10d1bdcba1f712573f360d5';
 
-/// See also [category].
-@ProviderFor(category)
-final categoryProvider = AutoDisposeProvider<String>.internal(
-  category,
-  name: r'categoryProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$categoryHash,
+/// See also [CategoryNotifier].
+@ProviderFor(CategoryNotifier)
+final categoryNotifierProvider =
+    AutoDisposeNotifierProvider<CategoryNotifier, String>.internal(
+  CategoryNotifier.new,
+  name: r'categoryNotifierProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$categoryNotifierHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef CategoryRef = AutoDisposeProviderRef<String>;
-String _$promptNotifierHash() => r'824e0ff72ed4a81dde87ac76d16facb5e07580de';
+typedef _$CategoryNotifier = AutoDisposeNotifier<String>;
+String _$keywordNotifierHash() => r'14230746cde6f4eed2105179e39e2a206f1edba3';
+
+/// See also [KeywordNotifier].
+@ProviderFor(KeywordNotifier)
+final keywordNotifierProvider =
+    AutoDisposeNotifierProvider<KeywordNotifier, String>.internal(
+  KeywordNotifier.new,
+  name: r'keywordNotifierProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$keywordNotifierHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$KeywordNotifier = AutoDisposeNotifier<String>;
+String _$promptNotifierHash() => r'3d359963a2265325a27121b61e212ec0a16ca365';
 
 /// See also [PromptNotifier].
 @ProviderFor(PromptNotifier)

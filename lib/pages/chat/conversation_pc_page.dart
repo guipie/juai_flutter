@@ -3,6 +3,8 @@ import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import '../../base.dart';
 import '../../components/common_loading.dart';
 import '../../components/riverpod_paging/paged_builder.dart';
+import '../../components/td/tdesign_flutter.dart';
+import 'chat_page.dart';
 import 'providers/conversation_provider.dart';
 import 'widgets/conversation_widget.dart';
 
@@ -14,7 +16,7 @@ class ConversationPcPage extends ConsumerWidget {
     var currentIndex = ref.watch(curConversationIndexProvider);
     var pageController = PageController(initialPage: currentIndex);
     return Scaffold(
-      appBar: ConversationWidget.bulidAppBar(ref, context),
+      // appBar: ConversationWidget.bulidAppBar(ref, context),
       body: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -29,9 +31,11 @@ class ConversationPcPage extends ConsumerWidget {
           Expanded(
             child: PageView.builder(
               controller: pageController,
-              itemBuilder: (context, index) => EmptyData(
-                tips: S.current.chat_content_need_add,
-              ),
+              itemBuilder: (context, index) => ref.watch(curConversationId) != null
+                  ? const ChatPage()
+                  : EmptyData(
+                      tips: S.current.chat_content_need_add,
+                    ),
             ),
           ),
         ],

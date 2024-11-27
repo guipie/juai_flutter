@@ -15,7 +15,7 @@ class CurentUser extends _$CurentUser {
 
   void setUser(LoginResModel user) {
     SpUtil.putObject(CacheKeys.curUser, user);
-    Config.token = user.accessToken!;
+    Config.accessToken = user.accessToken!;
     state = user;
   }
 
@@ -34,7 +34,7 @@ class CurentUser extends _$CurentUser {
   Future<void> verifyLogin() async {
     var login = state.accessToken != null && (state.userId ?? 0) > 0 && state.phone!.isNotEmpty;
     if (login) {
-      Config.token = state.accessToken!;
+      Config.accessToken = state.accessToken!;
       await F.pushAndRemoveUntil(F.pc ? const HomePcPage() : const HomePage());
     } else
       await F.pushAndRemoveUntil(LoginPage());

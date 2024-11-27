@@ -29,7 +29,7 @@ class AiModelPcPage extends ConsumerWidget {
         body: Row(
           children: [
             Container(
-              width: 240,
+              width: 250,
               decoration: BoxDecoration(
                 color: Theme.of(context).colorScheme.onSecondary,
                 border: Border(right: BorderSide(color: Theme.of(context).colorScheme.onPrimary, width: 1)),
@@ -38,7 +38,17 @@ class AiModelPcPage extends ConsumerWidget {
             ),
             Expanded(
               child: PageView.builder(
-                itemBuilder: (context, index) => aimodelProvider.selectedPrompt > 0 ? const PromptPage() : AimodelDetailPage(aimodelProvider.selectedAiModel!),
+                itemBuilder: (context, index) => aimodelProvider.selectedPrompt > 0
+                    ? const PromptPage()
+                    : Container(
+                        alignment: Alignment.center,
+                        padding: const EdgeInsets.only(top: 50),
+                        color: Theme.of(context).colorScheme.onSecondary.withOpacity(0.7),
+                        child: SizedBox(
+                          width: 400,
+                          child: AimodelDetailPage(aimodelProvider.selectedAiModel!),
+                        ),
+                      ),
               ),
             ),
           ],

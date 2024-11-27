@@ -8,11 +8,10 @@ import '../../module/setting/setting_page.dart';
 import '../aimodel/aimodel_pc_page.dart';
 import '../chat/conversation_pc_page.dart';
 import '../square/square.dart';
-import 'home_viewmodel.dart';
+import 'home_provider.dart';
 
 class HomePcPage extends ConsumerStatefulWidget {
   const HomePcPage({super.key});
-
   @override
   ConsumerState createState() => _HomePcPageState();
 }
@@ -54,14 +53,12 @@ class _HomePcPageState extends ConsumerState<HomePcPage> with WidgetsBindingObse
   @override
   Widget build(BuildContext context) {
     var currentIndex = ref.watch(homeIndexProvider);
-    // final pageController = PageController(initialPage: 0);
-    final sideBarController = TDSideBarController();
-    const pages = [
-      ConversationPcPage(),
-      AiModelPcPage(),
-      SquarePage(),
-      PromptPage(),
-      SettingPage(),
+    var pages = [
+      const ConversationPcPage(),
+      const AiModelPcPage(),
+      const SquarePage(),
+      const PromptPage(),
+      const SettingPage(),
     ];
     return Scaffold(
       extendBody: true,
@@ -83,11 +80,12 @@ class _HomePcPageState extends ConsumerState<HomePcPage> with WidgetsBindingObse
                 ),
                 15.height(),
                 TDSideBar(
+                  key: widget.key,
                   height: F.height / 2,
                   style: TDSideBarStyle.outline,
                   value: currentIndex,
+                  defaultValue: currentIndex,
                   selectedColor: Theme.of(context).primaryColor,
-                  controller: sideBarController,
                   children: menus
                       .map(
                         (ele) => TDSideBarItem(

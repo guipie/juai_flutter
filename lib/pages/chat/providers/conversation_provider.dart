@@ -21,13 +21,10 @@ class ConversationNotifier extends PagedNotifier<int, ConversationModel> {
               avatar: F.randomAvatar,
             ));
   }
-  // @override
-  // build() {
-  //   var item = ConversationModel(name: '测试', avatar: F.randomAvatar);
-  //   return [item, item, item, item, item, item];
-  // }
 }
 
 final conversationProvider = StateNotifierProvider<ConversationNotifier, PagedState<int, ConversationModel>>((ref) => ConversationNotifier());
 
 final curConversationIndexProvider = StateProvider<int>((ref) => 0);
+
+final curConversationId = StateProvider<String?>((ref) => null, name: 'conversationId');
