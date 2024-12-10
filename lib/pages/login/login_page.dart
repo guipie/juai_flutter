@@ -36,7 +36,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
               child: Column(
                 children: [
                   SizedBox(height: constraints.maxHeight * 0.1),
-                  const JuImage(Assets.imageLogo),
+                  const JuImage(Assets.imageBgTm),
                   SizedBox(height: constraints.maxHeight * 0.1),
                   Text(
                     S.current.login,

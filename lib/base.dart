@@ -17,7 +17,7 @@ export '../../../constants/cache_key.dart';
 export '../../../constants/config.dart';
 export '../../../models/page_req.dart';
 export '../../../services/http/address/index.dart';
-export '../../../utils/extension_map.dart';
+export 'utils/extension/extension_map.dart';
 export '../../../utils/regs.dart';
 export '../../constants/constant.dart';
 export '../../services/http/api.dart';

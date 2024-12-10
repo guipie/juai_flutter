@@ -53,6 +53,8 @@ class _HomePcPageState extends ConsumerState<HomePcPage> with WidgetsBindingObse
   @override
   Widget build(BuildContext context) {
     var currentIndex = ref.watch(homeIndexProvider);
+    var controller = TDSideBarController();
+    controller.selectTo(currentIndex);
     var pages = [
       const ConversationPcPage(),
       const AiModelPcPage(),
@@ -80,11 +82,10 @@ class _HomePcPageState extends ConsumerState<HomePcPage> with WidgetsBindingObse
                 ),
                 15.height(),
                 TDSideBar(
-                  key: widget.key,
+                  controller: controller,
+                  value: currentIndex,
                   height: F.height / 2,
                   style: TDSideBarStyle.outline,
-                  value: currentIndex,
-                  defaultValue: currentIndex,
                   selectedColor: Theme.of(context).primaryColor,
                   children: menus
                       .map(

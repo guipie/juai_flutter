@@ -76,8 +76,8 @@ class MouseHoverItem extends ConsumerWidget {
                     size: TDAvatarSize.medium,
                     type: TDAvatarType.normal,
                     shape: TDAvatarShape.square,
-                    avatarUrl: leadingPicUrl!.startsWith('http') ? leadingPicUrl : null,
-                    defaultUrl: (!leadingPicUrl!.startsWith('http')) ? leadingPicUrl! : '',
+                    avatarUrl: leadingPicUrl != null && leadingPicUrl!.startsWith('http') ? leadingPicUrl : null,
+                    defaultUrl: Assets.imageAvatar,
                   ),
               title: Row(
                 mainAxisAlignment: MainAxisAlignment.start,

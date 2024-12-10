@@ -4,26 +4,34 @@ import 'package:pull_down_button/pull_down_button.dart';
 import '../../../base.dart';
 import '../../../components/mouse_hover.dart';
 import '../../../components/mouse_hover_item_Slidable.dart';
+import '../../../components/paging/paging_widget.dart';
 import '../../../components/riverpod_paging/paged_builder.dart';
 import '../../../components/td/tdesign_flutter.dart';
+import '../../../constants/enums/conversation_enum.dart';
 import '../../../hive_bean/local_chat_history.dart';
 import '../../../module/chat/chat_list_view_model.dart';
 import '../../../utils/hive_box.dart';
 import '../chat_page.dart';
+import '../model/conversation_item_model.dart';
 import '../providers/conversation_provider.dart';
 
 class ConversationWidget {
   static Widget buildConversationItem(
-    ConversationModel item,
+    ConversationItemModel item,
     WidgetRef ref,
     BuildContext context, {
     required Function(ConversationModel result) onClick,
   }) {
     return MouseHoverSlidableItem(
-      leadingPicUrl: item.avatar!,
-      title: item.name!,
+      leadingPicUrl: item.avatar,
+      title: item.title,
       subTitle: item.desc ?? '',
-      trailing: DateTime.now().millisecondsSinceEpoch.toYMDHM(),
+      isSelected: ref.read(curConversationId.notifier).state == item.id,
+      trailing: DateUtil.getTimePeriod(item.lastTime),
+      isRadius: false,
+      onTap: () {
+        F.pushChat(ref, ConversationEnum.chat, conversation: item);
+      },
       actions: [
         SlidableAction(
           onPressed: (context) {
@@ -32,13 +40,15 @@ class ConversationWidget {
           backgroundColor: Theme.of(context).primaryColor,
           foregroundColor: Colors.white,
           icon: Icons.push_pin_outlined,
+          padding: const EdgeInsets.symmetric(horizontal: 2),
         ),
         SlidableAction(
           onPressed: (context) {
-            debugPrint('SlidableAction-2');
+            ref.read(conversationDataNotifierProvider.notifier).deleteConversation(item.id!);
           },
           backgroundColor: Colors.red,
           icon: Icons.delete,
+          padding: const EdgeInsets.symmetric(horizontal: 2),
         ),
       ],
     );
@@ -109,20 +119,37 @@ class ConversationWidget {
     );
   }
 
-  static Widget buildConversations(WidgetRef ref) {
-    return RiverPagedBuilder<int, ConversationModel>(
-      firstPageKey: 1,
-      pullToRefresh: true,
-      provider: conversationProvider,
-      itemBuilder: (context, item, index) {
-        return buildConversationItem(
-          item,
-          ref,
-          context,
-          onClick: (current) {},
+  static Widget buildConversations(WidgetRef ref, BuildContext context) {
+    return PagingWidget(
+      padding: const EdgeInsets.all(0),
+      provider: conversationDataNotifierProvider,
+      futureRefreshable: conversationDataNotifierProvider.future,
+      notifierRefreshable: conversationDataNotifierProvider.notifier,
+      contentBuilder: (data, widgetCount, endItemView) {
+        return Column(
+          children: [
+            Container(
+              constraints: const BoxConstraints(maxHeight: 100),
+              child: TDSearchBar(
+                padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 4),
+                placeHolder: '搜索试试',
+                autoHeight: false,
+                backgroundColor: Theme.of(context).colorScheme.onSecondary,
+                style: TDSearchStyle.square,
+                onTextChanged: (String text) {},
+              ),
+            ),
+            ...data.items
+                .map((e) => buildConversationItem(
+                      e,
+                      ref,
+                      context,
+                      onClick: (result) {},
+                    ))
+                .toList(),
+          ],
         );
       },
-      pagedBuilder: (controller, builder) => PagedListView(pagingController: controller, builderDelegate: builder),
     );
   }
 }

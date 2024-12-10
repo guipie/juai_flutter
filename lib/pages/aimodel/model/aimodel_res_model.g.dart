@@ -7,6 +7,7 @@ part of 'aimodel_res_model.dart';
 // **************************************************************************
 
 AiModelRes _$AiModelResFromJson(Map<String, dynamic> json) => AiModelRes(
+      id: (json['id'] as num).toInt(),
       modelId: json['modelId'] as String,
       name: json['name'] as String,
       shortName: json['shortName'] as String,
@@ -21,6 +22,7 @@ AiModelRes _$AiModelResFromJson(Map<String, dynamic> json) => AiModelRes(
 
 Map<String, dynamic> _$AiModelResToJson(AiModelRes instance) =>
     <String, dynamic>{
+      'id': instance.id,
       'modelId': instance.modelId,
       'name': instance.name,
       'shortName': instance.shortName,

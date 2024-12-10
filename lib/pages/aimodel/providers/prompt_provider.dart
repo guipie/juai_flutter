@@ -1,12 +1,11 @@
 import '../../../base.dart';
 import '../../../components/paging/paging_data.dart';
 import '../../../components/paging/paging_notifier_mixin.dart';
-import '../../../components/riverpod_paging/paged_notifier_mixin.dart';
 import '../model/prompt_res_model.dart';
 
 part 'prompt_provider.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 class CategoryNotifier extends _$CategoryNotifier {
   @override
   String build() => '';

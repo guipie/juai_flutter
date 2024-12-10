@@ -3,6 +3,8 @@ part 'aimodel_res_model.g.dart';
 
 @JsonSerializable()
 class AiModelRes {
+  @JsonKey(name: 'id')
+  int id;
   @JsonKey(name: 'modelId')
   String modelId;
   @JsonKey(name: 'name')
@@ -24,6 +26,7 @@ class AiModelRes {
   @JsonKey(name: 'settings')
   String? settings;
   AiModelRes({
+    required this.id,
     required this.modelId,
     required this.name,
     required this.shortName,

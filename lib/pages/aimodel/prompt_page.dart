@@ -6,6 +6,7 @@ import '../../components/mouse_hover_item.dart';
 import '../../components/paging/paging_widget.dart';
 import '../../components/riverpod_paging/paged_builder.dart';
 import '../../components/td/tdesign_flutter.dart';
+import '../../constants/enums/conversation_enum.dart';
 import '../../module/prompt/prompt_viewmodel.dart';
 import 'prompt_add_page.dart';
 import 'providers/prompt_provider.dart';
@@ -87,7 +88,7 @@ class _PromptPageState extends ConsumerState<PromptPage> {
                                   .toList(),
                             GestureDetector(
                               onTap: () {
-                                debugPrint('chat');
+                                F.pushChat(ref, ConversationEnum.promptChat, promptRes: m);
                               },
                               child: TDTag(
                                 S.current.home_chat,

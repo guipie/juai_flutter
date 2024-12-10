@@ -77,8 +77,6 @@ class TDSideBar extends StatefulWidget {
 
 class _TDSideBarState extends State<TDSideBar> {
   late List<SideItemProps> displayChildren;
-  late int? currentValue;
-  late int? currentIndex;
   final _scrollerController = ScrollController();
   final GlobalKey globalKey = GlobalKey();
   final double itemHeight = 56.0;
@@ -111,10 +109,6 @@ class _TDSideBarState extends State<TDSideBar> {
         print(e);
       }
     }
-
-    if (item != null) {
-      onSelect(item, isController: true);
-    }
   }
 
   @override
@@ -129,38 +123,6 @@ class _TDSideBarState extends State<TDSideBar> {
     }
 
     displayChildren = widget.children.asMap().entries.map((entry) => SideItemProps(index: entry.key, disabled: entry.value.disabled, value: entry.value.value, icon: entry.value.icon, checkedIcon: entry.value.checkedIcon, label: entry.value.label, textStyle: entry.value.textStyle, badge: entry.value.badge, tips: entry.value.tips)).toList();
-
-    currentValue = widget.value ?? widget.defaultValue ?? (displayChildren.isNotEmpty ? displayChildren[0].value : null);
-    if (currentValue != null) {
-      try {
-        final item = findSideItem(currentValue!);
-        currentIndex = item.index;
-      } catch (e) {
-        currentIndex = null;
-        currentValue = null;
-      }
-    } else {
-      currentIndex = null;
-    }
-  }
-
-  // 选中某项
-  void onSelect(SideItemProps item, {isController = false}) {
-    if (currentIndex != item.index) {
-      if (isController) {
-        if (widget.onChanged != null) {
-          widget.onChanged!(item.value);
-        }
-      } else {
-        if (widget.onSelected != null) {
-          widget.onSelected!(item.value);
-        }
-      }
-
-      setState(() {
-        currentIndex = item.index;
-      });
-    }
   }
 
   @override
@@ -188,20 +150,20 @@ class _TDSideBarState extends State<TDSideBar> {
                 child: TDWrapSideBarItem(
                   style: widget.style,
                   value: ele.value,
-                  icon: currentIndex == ele.index ? ele.checkedIcon : ele.icon,
+                  icon: widget.value == ele.index ? ele.checkedIcon : ele.icon,
                   disabled: ele.disabled ?? false,
                   label: ele.label ?? '',
                   badge: ele.badge,
                   textStyle: ele.textStyle,
-                  selected: currentIndex == ele.index,
+                  selected: widget.value == ele.index,
                   selectedColor: widget.selectedColor,
                   selectedTextStyle: widget.selectedTextStyle,
                   contentPadding: widget.contentPadding,
-                  topAdjacent: currentIndex != null && currentIndex! + 1 == ele.index,
-                  bottomAdjacent: currentIndex != null && currentIndex! - 1 == ele.index,
+                  topAdjacent: widget.value != null && widget.value! + 1 == ele.index,
+                  bottomAdjacent: widget.value != null && widget.value! - 1 == ele.index,
                   onTap: () {
                     if (!(ele.disabled ?? false)) {
-                      onSelect(ele, isController: false);
+                      widget.onSelected?.call(ele.value);
                     }
                   },
                 ),

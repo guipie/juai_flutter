@@ -6,12 +6,12 @@ part of 'prompt_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$categoryNotifierHash() => r'5ce4b6de390c2346a10d1bdcba1f712573f360d5';
+String _$categoryNotifierHash() => r'033d12f8569ec60bf1e23b74e8afe71054b317da';
 
 /// See also [CategoryNotifier].
 @ProviderFor(CategoryNotifier)
 final categoryNotifierProvider =
-    AutoDisposeNotifierProvider<CategoryNotifier, String>.internal(
+    NotifierProvider<CategoryNotifier, String>.internal(
   CategoryNotifier.new,
   name: r'categoryNotifierProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -21,7 +21,7 @@ final categoryNotifierProvider =
   allTransitiveDependencies: null,
 );
 
-typedef _$CategoryNotifier = AutoDisposeNotifier<String>;
+typedef _$CategoryNotifier = Notifier<String>;
 String _$keywordNotifierHash() => r'14230746cde6f4eed2105179e39e2a206f1edba3';
 
 /// See also [KeywordNotifier].

@@ -42,11 +42,9 @@ class TDWrapSideBarItem extends StatelessWidget {
   static const preLineWidth = 3.0;
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return InkWell(
       onTap: onTap,
-      child: style == TDSideBarStyle.normal
-          ? renderNormalItem(context)
-          : renderOutlineItem(context),
+      child: style == TDSideBarStyle.normal ? renderNormalItem(context) : renderOutlineItem(context),
     );
   }
 
@@ -57,22 +55,14 @@ class TDWrapSideBarItem extends StatelessWidget {
       ),
       child: Container(
         decoration: BoxDecoration(
-            color: selected
-                ? Colors.white
-                : const Color.fromRGBO(243, 243, 243, 1),
+            color: selected ? Colors.white : const Color.fromRGBO(243, 243, 243, 1),
             borderRadius: bottomAdjacent || topAdjacent
                 ? bottomAdjacent
                     ? const BorderRadius.only(bottomRight: Radius.circular(9))
                     : const BorderRadius.only(topRight: Radius.circular(9))
                 : null),
         child: Row(
-          children: [
-            renderPreLine(context),
-            Expanded(
-                child: Padding(
-                    padding: contentPadding ?? const EdgeInsets.all(16),
-                    child: renderMainContent(context)))
-          ],
+          children: [renderPreLine(context), Expanded(child: Padding(padding: contentPadding ?? const EdgeInsets.all(16), child: renderMainContent(context)))],
         ),
       ),
     );
@@ -84,11 +74,7 @@ class TDWrapSideBarItem extends StatelessWidget {
         child: Container(
           padding: const EdgeInsets.all(10),
           child: Container(
-            decoration: BoxDecoration(
-                color: selected && !disabled
-                    ? Theme.of(context).colorScheme.onSecondary
-                    : null,
-                borderRadius: BorderRadius.circular(6)),
+            decoration: BoxDecoration(color: selected && !disabled ? Theme.of(context).colorScheme.onSecondary : null, borderRadius: BorderRadius.circular(6)),
             padding: const EdgeInsets.all(8),
             child: renderMainContent(context),
           ),
@@ -121,11 +107,7 @@ class TDWrapSideBarItem extends StatelessWidget {
           Container(
             width: preLineWidth,
             height: 14,
-            decoration: BoxDecoration(
-                color: selectedTextStyle != null
-                    ? selectedTextStyle?.color
-                    : (selectedColor ?? TDTheme.of(context).brandNormalColor),
-                borderRadius: BorderRadius.circular(4)),
+            decoration: BoxDecoration(color: selectedTextStyle != null ? selectedTextStyle?.color : (selectedColor ?? TDTheme.of(context).brandNormalColor), borderRadius: BorderRadius.circular(4)),
           )
         ],
       ),
@@ -145,8 +127,7 @@ class TDWrapSideBarItem extends StatelessWidget {
                 : selected
                     ? selectedTextStyle != null
                         ? selectedTextStyle?.color
-                        : (selectedColor ??
-                            TDTheme.of(context).brandNormalColor)
+                        : (selectedColor ?? TDTheme.of(context).brandNormalColor)
                     : Theme.of(context).colorScheme.onSurface,
           ),
         ));
@@ -159,11 +140,8 @@ class TDWrapSideBarItem extends StatelessWidget {
           WidgetSpan(
               child: TDText(
             label,
-            style: selected
-                ? (selectedTextStyle ?? TextStyle(color: selectedColor))
-                : textStyle,
-            fontWeight:
-                selected && !disabled ? FontWeight.w600 : FontWeight.w400,
+            style: selected ? (selectedTextStyle ?? TextStyle(color: selectedColor)) : textStyle,
+            fontWeight: selected && !disabled ? FontWeight.w600 : FontWeight.w400,
             textColor: disabled
                 ? TDTheme.of(context).fontGyColor4
                 : selected
@@ -178,11 +156,7 @@ class TDWrapSideBarItem extends StatelessWidget {
               height: 16,
               child: Stack(
                 clipBehavior: Clip.none,
-                children: [
-                  badge != null
-                      ? Positioned(top: -6, child: badge!)
-                      : Container()
-                ],
+                children: [badge != null ? Positioned(top: -6, child: badge!) : Container()],
               ),
             ))
         ],
@@ -198,9 +172,7 @@ class TDWrapSideBarItem extends StatelessWidget {
       height: 40,
       child: Stack(
         clipBehavior: Clip.none,
-        children: [
-          badge != null ? Positioned(top: -6, child: badge!) : Container()
-        ],
+        children: [badge != null ? Positioned(top: -6, child: badge!) : Container()],
       ),
     );
   }

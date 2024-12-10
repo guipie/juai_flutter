@@ -74,9 +74,9 @@ class _ChatPageState extends State<ChatPage> {
           ));
     });
     _inputController.clear();
-    Future(() {
-      PrimaryScrollController.of(context).jumpTo(0);
-    });
+    // Future(() {
+    //   PrimaryScrollController.of(context).jumpTo(0);
+    // });
   }
 
   Widget _buildMessageItem(int index) {
@@ -84,7 +84,7 @@ class _ChatPageState extends State<ChatPage> {
       builder: (context, constraints) {
         final themeData = Theme.of(context);
         final message = _messages[index];
-        final maxWidth = math.min(constraints.maxWidth - 124, 400.0);
+        final maxWidth = constraints.maxWidth - 90;
         Widget? imgWidget;
         Widget? msgWidget;
         var continuously = index != 0 && _messages[index - 1].own == message.own;
@@ -92,7 +92,7 @@ class _ChatPageState extends State<ChatPage> {
           imgWidget = LayoutBuilder(
             builder: (context, c) {
               return Container(
-                padding: const EdgeInsets.all(8),
+                padding: const EdgeInsets.all(6),
                 decoration: BoxDecoration(
                   color: themeData.colorScheme.tertiaryContainer,
                   borderRadius: const BorderRadius.all(Radius.circular(8)),
@@ -107,20 +107,18 @@ class _ChatPageState extends State<ChatPage> {
         }
         if (message.msg != null) {
           msgWidget = Container(
-            padding: const EdgeInsets.all(8),
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
             decoration: BoxDecoration(
-              color: message.own ? themeData.colorScheme.primaryContainer : themeData.colorScheme.tertiaryContainer,
-              borderRadius: BorderRadius.only(
-                topLeft: const Radius.circular(24),
-                topRight: const Radius.circular(24),
-                bottomLeft: Radius.circular(message.own || continuously ? 24 : 8),
-                bottomRight: Radius.circular(message.own && !continuously ? 8 : 24),
-              ),
+              color: message.own ? themeData.colorScheme.primary : themeData.colorScheme.tertiaryContainer,
+              borderRadius: BorderRadius.all(const Radius.circular(6)),
             ),
             constraints: BoxConstraints(
               maxWidth: maxWidth,
             ),
-            child: Text(message.msg!),
+            child: Text(
+              message.msg!,
+              style: TextStyle(color: Colors.black, fontSize: 6.sp),
+            ),
           );
         }
         Widget contentWidget = Column(

@@ -25,12 +25,14 @@ final class PagingWidget<D extends PagingData<I>, I> extends ConsumerWidget {
     required this.notifierRefreshable,
     required this.contentBuilder,
     this.showSecondPageError = true,
+    this.padding = const EdgeInsets.only(left: 16, top: 10, bottom: 20),
     super.key,
   });
 
   final ProviderListenable<AsyncValue<D>> provider;
   final Refreshable<Future<D>> futureRefreshable;
   final Refreshable<PagingNotifierMixin<D, I>> notifierRefreshable;
+  final EdgeInsetsGeometry padding;
 
   /// Specifies a function that returns a widget to display when data is available.
   /// endItemView is a widget to detect when the last displayed item is visible.
@@ -52,11 +54,10 @@ final class PagingWidget<D extends PagingData<I>, I> extends ConsumerWidget {
                 onPressed: onPressed,
                 icon: const Icon(Icons.refresh),
               ),
-              Text(e.message ?? S.current.error_),
+              Text((e?.message) ?? S.current.error_),
             ],
           ),
         );
-
     return ref.watch(provider).whenIgnorableError(
           data: (
             data, {
@@ -106,7 +107,7 @@ final class PagingWidget<D extends PagingData<I>, I> extends ConsumerWidget {
               onRefresh: () async => ref.refresh(futureRefreshable),
               onLoad: () async => await ref.read(notifierRefreshable).loadNext(),
               child: SingleChildScrollView(
-                padding: const EdgeInsets.only(left: 16, top: 10, bottom: 20),
+                padding: padding,
                 child: content,
               ),
             );

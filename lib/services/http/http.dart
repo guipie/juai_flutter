@@ -78,9 +78,17 @@ class Http {
               var result = responseObject['result'];
               var apiRes = ApiRes<T>.fromJson(responseObject);
               if (result is List) {
-                apiRes.result = (result).map((item) => fromJsonT!(item as Map<String, dynamic>) as M).toList() as T;
+                try {
+                  apiRes.result = (result).map((item) => fromJsonT!(item as Map<String, dynamic>) as M).toList() as T;
+                } catch (e) {
+                  throw ApiException(-1, '数据集合转换失败，请检查');
+                }
               } else if (result is Map) {
-                apiRes.result = fromJsonT!(result as Map<String, dynamic>) as T;
+                try {
+                  apiRes.result = fromJsonT!(result as Map<String, dynamic>) as T;
+                } catch (e) {
+                  throw ApiException(-1, '数据转换失败，请检查');
+                }
               } else {
                 apiRes.result = result;
               }

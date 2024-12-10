@@ -6,15 +6,20 @@ import 'td/src/components/avatar/td_avatar.dart';
 
 @immutable
 class MouseHoverSlidableItem extends ConsumerWidget {
+  final List<SlidableAction> actions;
   final String? leadingPicUrl;
   final Widget? leadingWidget;
   final String title;
   final String? titleExtend;
-  final String subTitle;
-  final List<SlidableAction> actions;
+  final String? subTitle;
   final bool isShowDefaultTrailing;
   final String? trailing;
   final Widget? trailingWidget;
+  final bool? isSelected;
+  final Widget? footerWidget;
+  final Widget? headWidget;
+  final bool? isRadius;
+  final Function()? onTap;
   const MouseHoverSlidableItem({
     super.key,
     this.titleExtend,
@@ -26,6 +31,11 @@ class MouseHoverSlidableItem extends ConsumerWidget {
     this.isShowDefaultTrailing = true,
     this.trailing,
     this.trailingWidget,
+    this.isSelected,
+    this.footerWidget,
+    this.headWidget,
+    this.isRadius,
+    this.onTap,
   });
 
   @override
@@ -42,9 +52,14 @@ class MouseHoverSlidableItem extends ConsumerWidget {
         title: title,
         titleExtend: titleExtend,
         subTitle: subTitle,
+        isShowDefaultTrailing: isShowDefaultTrailing,
         trailing: trailing,
         trailingWidget: trailingWidget,
-        isShowDefaultTrailing: isShowDefaultTrailing,
+        isSelected: isSelected,
+        footerWidget: footerWidget,
+        headWidget: headWidget,
+        isRadius: isRadius ?? false,
+        onTap: onTap,
       ),
     );
   }

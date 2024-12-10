@@ -2,6 +2,7 @@ import '../../base.dart';
 import '../../components/button/filled_btn.dart';
 import '../../components/form/label_text.dart';
 import '../../components/mouse_hover_item.dart';
+import '../../constants/enums/conversation_enum.dart';
 import 'model/aimodel_res_model.dart';
 
 class AimodelDetailPage extends ConsumerWidget {
@@ -30,7 +31,7 @@ class AimodelDetailPage extends ConsumerWidget {
         FilledBtnWidget(
           S.current.home_chat,
           size: const Size(50, 50),
-          onPressed: () => F.pushChat(ref),
+          onPressed: () => F.pushChat(ref, ConversationEnum.model, aiModelRes: detail),
         )
       ],
     );

@@ -3,8 +3,12 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 
 import '../base.dart';
+import '../constants/enums/conversation_enum.dart';
+import '../pages/aimodel/model/aimodel_res_model.dart';
+import '../pages/aimodel/model/prompt_res_model.dart';
 import '../pages/chat/chat_page.dart';
 import '../pages/chat/conversation_pc_page.dart';
+import '../pages/chat/model/conversation_item_model.dart';
 import '../pages/chat/providers/conversation_provider.dart';
 import '../pages/home/home_pc_page.dart';
 import '../pages/home/home_provider.dart';
@@ -70,9 +74,40 @@ class _FImpl {
     Navigator.of(context).pop(result);
   }
 
-  void pushChat(WidgetRef ref, {Object? arguments}) {
-    ref.read(curConversationId.notifier).update((state) => 'fff');
+  Future<void> pushChat(WidgetRef ref, ConversationEnum type, {ConversationItemModel? conversation, PromptRes? promptRes, AiModelRes? aiModelRes}) async {
     ref.read(homeIndexProvider.notifier).update((state) => 0);
+    var curId = DateTime.now().millisecondsSinceEpoch;
+    if (type == ConversationEnum.chat) {
+      ref.read(curConversationId.notifier).update((state) => conversation?.id ?? curId);
+      if (conversation == null)
+        await ref.read(conversationDataNotifierProvider.notifier).addConversation(ConversationItemModel(
+              id: curId,
+              title: S.current.new_chat,
+              desc: S.current.empty_content_need_add,
+              type: type,
+            ));
+    } else if (type == ConversationEnum.model && aiModelRes != null) {
+      ref.read(curConversationId.notifier).update((state) => curId);
+      await ref.read(conversationDataNotifierProvider.notifier).addConversation(ConversationItemModel(
+            id: curId,
+            title: aiModelRes.shortName,
+            desc: aiModelRes.desc,
+            avatar: aiModelRes.avatarUrl,
+            type: type,
+            relationId: aiModelRes.id,
+          ));
+    } else if (type == ConversationEnum.promptChat && promptRes != null) {
+      ref.read(curConversationId.notifier).update((state) => curId);
+      await ref.read(conversationDataNotifierProvider.notifier).addConversation(ConversationItemModel(
+            id: curId,
+            title: promptRes.title!,
+            desc: promptRes.initMessage,
+            avatar: promptRes.avatar,
+            type: type,
+            relationId: promptRes.id ?? 0,
+          ));
+    } else
+      throw Exception('type is not support');
   }
 
   /// 常用工具方法 结束

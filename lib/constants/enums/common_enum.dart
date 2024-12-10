@@ -1,0 +1,1 @@
+enum SequenceEnum { asc, desc }

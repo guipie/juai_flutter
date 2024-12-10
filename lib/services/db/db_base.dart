@@ -1,12 +1,13 @@
+import 'package:path/path.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:sqflite_common_ffi/sqflite_ffi.dart';
+
 import '../../base.dart';
+import '../../constants/enums/common_enum.dart';
 import 'chat_item.dart';
 import 'db_coversation.dart';
 import 'db_dict.dart';
 import 'prompt_item.dart';
-import 'package:extended_image/extended_image.dart';
-import 'package:path/path.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
 class MyDbProvider {
   static void getInstance() {
@@ -18,7 +19,7 @@ class MyDbProvider {
 }
 
 abstract class DbBase {
-  static const String _dbName = 'juai2.db';
+  static const String _dbName = 'juai202411302159.db';
   static const int _newVersion = 1;
   static int _oldVersion = 0;
 
@@ -156,7 +157,7 @@ abstract class DbBase {
       switch (value.runtimeType) {
         case int:
           sqlBuffer.write('INTEGER');
-          if (hasPrimaryKey == true && key.toLowerCase().contains(keyName ?? 'id')) {
+          if (hasPrimaryKey == true && key.toLowerCase() == (keyName ?? 'id')) {
             sqlBuffer.write(' PRIMARY KEY AUTOINCREMENT');
           }
           break;
@@ -164,21 +165,25 @@ abstract class DbBase {
           sqlBuffer.write('REAL');
           break;
         case String:
-          sqlBuffer.write('TEXT');
+          if (DateTime.tryParse(value) != null)
+            sqlBuffer.write('DATETIME DEFAULT CURRENT_TIMESTAMP');
+          else
+            sqlBuffer.write('TEXT');
           break;
         case bool:
-          sqlBuffer.write('BOOLEAN');
+          sqlBuffer.write('BOOLEAN DEFAULT false');
           break;
         // case DateTime:
         //   sqlBuffer.write("DATETIME DEFAULT CURRENT_TIMESTAMP");
         //   break;
         default:
-          throw Exception('Unsupported data type: ${value.runtimeType}');
+          sqlBuffer.write('TEXT');
+        // throw Exception('Unsupported data type: ${value.runtimeType}');
       }
       sqlBuffer.write(', ');
     });
     sqlBuffer.write(')');
-    _database!.execute(sqlBuffer.toString().replaceAll(', )', ')'));
+    await _database!.execute(sqlBuffer.toString().replaceAll(', )', ')'));
   }
 
   ///删表
@@ -195,7 +200,12 @@ abstract class DbBase {
 
   ///插入数据
   insert(Map<String, Object?> values) async {
-    return database.insert(tableName, values);
+    var insertData = <String, Object?>{};
+    for (var element in values.entries) {
+      if (element.value != null) insertData[element.key] = element.value;
+      if (element.value.runtimeType == bool) insertData[element.key] = element.value.toString().toUpperCase() == 'TRUE' ? 1 : 0;
+    }
+    return database.insert(tableName, insertData);
   }
 
   ///删除数据
@@ -239,11 +249,11 @@ abstract class DbBase {
   ///查找数据
   Future<List<Map<String, Object?>>> find({
     Map<String, dynamic>? where,
+    Map<String, SequenceEnum>? orderBy,
     int? page,
     int? pageSize,
   }) async {
     var keys = where?.keys.toList() ?? [];
-
     var whereList = <String>[];
     for (var i = 0; i < keys.length; i++) {
       var key = keys[i];
@@ -253,20 +263,27 @@ abstract class DbBase {
         whereList.add('$key=${where[key]}');
       }
     }
-
     var sql = whereList.join(' and ');
+
+    var ordeyBykeys = orderBy?.keys.toList() ?? [];
+    var orderByList = <String>[];
+    for (var i = 0; i < ordeyBykeys.length; i++) {
+      var key = ordeyBykeys[i];
+      orderByList.add('$key ${orderBy![key]!.name}');
+    }
+    var orderBysql = orderByList.join(' , ');
     var mapKey = '${tableName}_${sql}_page=${page}_pageSize=$pageSize';
 
     var data = sql.isEmpty ? [] : (_findCache[mapKey] ?? []);
     if (data.isNotEmpty) {
       return _findCache[mapKey]!;
     }
-
     var result = await database.query(
       tableName,
       where: sql.isEmpty ? null : sql,
       offset: page == null ? null : (page - 1) * (pageSize ?? 1),
       limit: pageSize,
+      orderBy: orderBysql.isEmpty ? null : orderBysql,
     );
     if (sql.isNotEmpty) {
       _findCache[mapKey] = result;

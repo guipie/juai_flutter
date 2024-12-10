@@ -1,30 +1,37 @@
 import '../../../base.dart';
-import '../../../components/riverpod_paging/paged_notifier.dart';
-import '../../../components/riverpod_paging/paged_state.dart';
+import '../../../components/paging/paging_data.dart';
+import '../../../components/paging/paging_notifier_mixin.dart';
+import '../../../services/db/db_coversation.dart';
+import '../model/conversation_item_model.dart';
 
-class ConversationNotifier extends PagedNotifier<int, ConversationModel> {
-  ConversationNotifier()
-      : super(
-          load: _loadData,
-          nextPageKeyBuilder: NextPageKeyBuilderDefault.mysqlPagination,
-        );
+part 'conversation_provider.g.dart';
 
-  static Future<List<ConversationModel>> _loadData(int page, int limit) async {
-    await Future.delayed(const Duration(milliseconds: 2000));
-    if (page > 3) return [];
-    return List.generate(
-        20,
-        (index) => ConversationModel(
-              id: index,
-              name: '测$index试${index + ((limit * page) - limit)} ',
-              desc: F.randomAvatar,
-              avatar: F.randomAvatar,
-            ));
+@riverpod
+class ConversationDataNotifier extends _$ConversationDataNotifier with PagePagingNotifierMixin<ConversationItemModel> {
+  @override
+  Future<PagePagingData<ConversationItemModel>> build() => fetch(page: 1);
+
+  @override
+  Future<PagePagingData<ConversationItemModel>> fetch({required int page}) async {
+    var models = await DbConversation().getConversations();
+    return PagePagingData(items: models, hasMore: false, page: page);
+  }
+
+  Future<void> deleteConversation(int id) async {
+    await DbConversation().deleteConversation(id);
+    state.whenData((value) {
+      var newValue = value.copyWith(items: value.items.where((element) => element.id != id).toList());
+      state = AsyncValue.data(newValue);
+    });
+  }
+
+  Future<void> addConversation(ConversationItemModel conversation) async {
+    await DbConversation().addConversation(conversation);
+    state.whenData((value) {
+      var newValue = value.copyWith(items: [conversation, ...value.items]);
+      state = AsyncValue.data(newValue);
+    });
   }
 }
 
-final conversationProvider = StateNotifierProvider<ConversationNotifier, PagedState<int, ConversationModel>>((ref) => ConversationNotifier());
-
-final curConversationIndexProvider = StateProvider<int>((ref) => 0);
-
-final curConversationId = StateProvider<String?>((ref) => null, name: 'conversationId');
+final curConversationId = StateProvider<int?>((ref) => null, name: 'conversationId');

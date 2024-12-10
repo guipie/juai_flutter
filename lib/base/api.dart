@@ -1,24 +1,23 @@
-import 'package:chat_bot/base.dart';
-import 'package:chat_bot/base/api_impl/ollama_impl.dart';
-import 'package:chat_bot/base/api_impl/zhipu_impl.dart';
-import 'package:chat_bot/hive_bean/generate_content.dart';
-import 'package:chat_bot/hive_bean/local_chat_history.dart';
-import 'package:chat_bot/hive_bean/openai_bean.dart';
-import 'package:chat_bot/hive_bean/supported_models.dart';
 import 'package:dart_openai/dart_openai.dart';
 
+import '../base.dart';
+import '../hive_bean/generate_content.dart';
+import '../hive_bean/local_chat_history.dart';
+import '../hive_bean/openai_bean.dart';
+import '../hive_bean/supported_models.dart';
 import '../services/db/chat_item.dart';
 import 'api_impl/api_impl.dart';
 import 'api_impl/chatgpt_impl.dart';
 import 'api_impl/gemini_impl.dart';
+import 'api_impl/ollama_impl.dart';
+import 'api_impl/zhipu_impl.dart';
 
 class RequestParams {
   final int role;
   final List<String> content;
   final List<String> images;
 
-  RequestParams(
-      {required this.role, required this.content, required this.images});
+  RequestParams({required this.role, required this.content, required this.images});
 
   @override
   String toString() {
@@ -44,36 +43,22 @@ class API extends APIImpl {
   };
 
   @override
-  Future<String> generateChatTitle(
-      String temperature,
-      AllModelBean bean,
-      String modelType,
-      List<ChatItem> originalChatItem,
-      List<RequestParams> chatItems) async {
+  Future<String> generateChatTitle(String temperature, AllModelBean bean, String modelType, List<ChatItem> originalChatItem, List<RequestParams> chatItems) async {
     var list = generateChatTitleListParams(originalChatItem);
 
-    return _apiImpl[bean.model ?? APIType.openAI.code]!.generateChatTitle(
-        temperature, bean, modelType, originalChatItem, list);
+    return _apiImpl[bean.model ?? APIType.openAI.code]!.generateChatTitle(temperature, bean, modelType, originalChatItem, list);
   }
 
   @override
-  Future<GenerateContentBean> generateContent(
-      double temperature,
-      AllModelBean bean,
-      String modelType,
-      List<ChatItem> originalChatItem,
-      List<RequestParams> chatItems) {
+  Future<GenerateContentBean> generateContent(double temperature, AllModelBean bean, String modelType, List<ChatItem> originalChatItem, List<RequestParams> chatItems) {
     var requestParams = generateChatHistory(originalChatItem, false);
 
-    return _apiImpl[bean.model ?? APIType.openAI.code]!.generateContent(
-        temperature, bean, modelType, originalChatItem, requestParams);
+    return _apiImpl[bean.model ?? APIType.openAI.code]!.generateContent(temperature, bean, modelType, originalChatItem, requestParams);
   }
 
   @override
-  Future<List<OpenAIImageData>> generateOpenAIImage(AllModelBean bean,
-      String prompt, OpenAIImageStyle style, OpenAIImageSize size) {
-    return _apiImpl[bean.model ?? APIType.openAI.code]!
-        .generateOpenAIImage(bean, prompt, style, size);
+  Future<List<OpenAIImageData>> generateOpenAIImage(AllModelBean bean, String prompt, OpenAIImageStyle style, OpenAIImageSize size) {
+    return _apiImpl[bean.model ?? APIType.openAI.code]!.generateOpenAIImage(bean, prompt, style, size);
   }
 
   @override
@@ -95,22 +80,14 @@ class API extends APIImpl {
     List<RequestParams> chatItems,
     bool withoutHistoryMessage,
   ) {
-    var requestParams =
-        generateChatHistory(originalChatItem, withoutHistoryMessage);
+    var requestParams = generateChatHistory(originalChatItem, withoutHistoryMessage);
 
-    return _apiImpl[bean.model ?? APIType.openAI.code]!.streamGenerateContent(
-        temperature,
-        bean,
-        modelType,
-        originalChatItem,
-        requestParams,
-        withoutHistoryMessage);
+    return _apiImpl[bean.model ?? APIType.openAI.code]!.streamGenerateContent(temperature, bean, modelType, originalChatItem, requestParams, withoutHistoryMessage);
   }
 
   @override
   Future<File?> text2TTS(AllModelBean bean, String content, String voice) {
-    return _apiImpl[bean.model ?? APIType.openAI.code]!
-        .text2TTS(bean, content, voice);
+    return _apiImpl[bean.model ?? APIType.openAI.code]!.text2TTS(bean, content, voice);
   }
 
   @override

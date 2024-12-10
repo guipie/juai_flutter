@@ -1,0 +1,24 @@
+// **************************************************************************
+// RiverpodGenerator
+// **************************************************************************
+
+String _$conversationDataNotifierHash() =>
+    r'7a284b6743e5b34e31452a0006e8e592558fe5c2';
+
+/// See also [ConversationDataNotifier].
+@ProviderFor(ConversationDataNotifier)
+final conversationDataNotifierProvider = AutoDisposeAsyncNotifierProvider<
+    ConversationDataNotifier, PagePagingData<ConversationItemModel>>.internal(
+  ConversationDataNotifier.new,
+  name: r'conversationDataNotifierProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$conversationDataNotifierHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$ConversationDataNotifier
+    = AutoDisposeAsyncNotifier<PagePagingData<ConversationItemModel>>;
+// ignore_for_file: type=lint
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

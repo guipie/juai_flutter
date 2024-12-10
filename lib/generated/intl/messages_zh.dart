@@ -66,7 +66,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "downloading": MessageLookupByLibrary.simpleMessage("下载中..."),
         "edit": MessageLookupByLibrary.simpleMessage("编辑"),
         "empty_content_need_add":
-            MessageLookupByLibrary.simpleMessage("您还没有内容，快点击右上角添加吧"),
+            MessageLookupByLibrary.simpleMessage("您还没有内容."),
         "enter_setting_init_server":
             MessageLookupByLibrary.simpleMessage("请先进入服务并配置服务商"),
         "error_": MessageLookupByLibrary.simpleMessage("错误"),
