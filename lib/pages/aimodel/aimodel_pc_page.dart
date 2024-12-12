@@ -6,9 +6,8 @@ import '../../components/text_search.dart';
 import '../../components/text_tips.dart';
 import '../../constants/assets.dart';
 import 'aimodel_detail_page.dart';
-import 'model/aimodel_res_model.dart';
 import 'prompt_page.dart';
-import 'providers/aimodel_provider.dart';
+import 'view_model/aimodel_view_model.dart';
 import 'widget/aimodel_widget.dart';
 
 class AiModelPcPage extends ConsumerWidget {
@@ -16,7 +15,7 @@ class AiModelPcPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var aimodelProvider = ref.watch(aiModelProviderProvider);
+    var aimodelProvider = ref.watch(currentAiModelNotifierProvider);
     return Scaffold(
         appBar: F.mobile
             ? JuAppBar.baseBar(
@@ -38,17 +37,17 @@ class AiModelPcPage extends ConsumerWidget {
             ),
             Expanded(
               child: PageView.builder(
-                itemBuilder: (context, index) => aimodelProvider.selectedPrompt > 0
-                    ? const PromptPage()
-                    : Container(
+                itemBuilder: (context, index) => aimodelProvider != null
+                    ? Container(
                         alignment: Alignment.center,
                         padding: const EdgeInsets.only(top: 50),
                         color: Theme.of(context).colorScheme.onSecondary.withOpacity(0.7),
                         child: SizedBox(
                           width: 400,
-                          child: AimodelDetailPage(aimodelProvider.selectedAiModel!),
+                          child: AimodelDetailPage(aimodelProvider),
                         ),
-                      ),
+                      )
+                    : const PromptPage(),
               ),
             ),
           ],

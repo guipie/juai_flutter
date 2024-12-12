@@ -9,7 +9,7 @@ import '../../components/td/tdesign_flutter.dart';
 import '../../constants/enums/conversation_enum.dart';
 import '../../module/prompt/prompt_viewmodel.dart';
 import 'prompt_add_page.dart';
-import 'providers/prompt_provider.dart';
+import 'view_model/prompt_view_model.dart';
 import 'widget/aimodel_widget.dart';
 
 class PromptPage extends ConsumerStatefulWidget {
@@ -37,9 +37,9 @@ class _PromptPageState extends ConsumerState<PromptPage> {
         ],
       ),
       body: PagingWidget(
-        provider: promptNotifierProvider,
-        futureRefreshable: promptNotifierProvider.future,
-        notifierRefreshable: promptNotifierProvider.notifier,
+        provider: promptVMProvider,
+        futureRefreshable: promptVMProvider.future,
+        notifierRefreshable: promptVMProvider.notifier,
         contentBuilder: (data, widgetCount, endItemView) {
           return Wrap(
             spacing: 12,

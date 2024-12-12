@@ -1,7 +1,7 @@
 import '../../base.dart';
 import '../../components/common_loading.dart';
 import 'chat_page.dart';
-import 'providers/conversation_provider.dart';
+import 'view_model/conversation_view_model.dart';
 import 'widgets/conversation_widget.dart';
 
 class ConversationPcPage extends ConsumerWidget {

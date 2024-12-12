@@ -1,19 +1,13 @@
-import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:pull_down_button/pull_down_button.dart';
 
 import '../../../base.dart';
-import '../../../components/mouse_hover.dart';
 import '../../../components/mouse_hover_item_Slidable.dart';
 import '../../../components/paging/paging_widget.dart';
-import '../../../components/riverpod_paging/paged_builder.dart';
 import '../../../components/td/tdesign_flutter.dart';
 import '../../../constants/enums/conversation_enum.dart';
-import '../../../hive_bean/local_chat_history.dart';
-import '../../../module/chat/chat_list_view_model.dart';
+import '../../../models/chat/conversation_item_model.dart';
 import '../../../utils/hive_box.dart';
-import '../chat_page.dart';
-import '../model/conversation_item_model.dart';
-import '../providers/conversation_provider.dart';
+import '../view_model/conversation_view_model.dart';
 
 class ConversationWidget {
   static Widget buildConversationItem(
@@ -44,7 +38,7 @@ class ConversationWidget {
         ),
         SlidableAction(
           onPressed: (context) {
-            ref.read(conversationDataNotifierProvider.notifier).deleteConversation(item.id!);
+            ref.read(conversationVmProvider.notifier).deleteConversation(item.id!);
           },
           backgroundColor: Colors.red,
           icon: Icons.delete,
@@ -122,9 +116,9 @@ class ConversationWidget {
   static Widget buildConversations(WidgetRef ref, BuildContext context) {
     return PagingWidget(
       padding: const EdgeInsets.all(0),
-      provider: conversationDataNotifierProvider,
-      futureRefreshable: conversationDataNotifierProvider.future,
-      notifierRefreshable: conversationDataNotifierProvider.notifier,
+      provider: conversationVmProvider,
+      futureRefreshable: conversationVmProvider.future,
+      notifierRefreshable: conversationVmProvider.notifier,
       contentBuilder: (data, widgetCount, endItemView) {
         return Column(
           children: [

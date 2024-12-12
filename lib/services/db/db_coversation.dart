@@ -3,7 +3,7 @@ import 'package:sqflite/sqlite_api.dart';
 import '../../base.dart';
 import '../../constants/enums/common_enum.dart';
 import '../../constants/enums/conversation_enum.dart';
-import '../../pages/chat/model/conversation_item_model.dart';
+import '../../models/chat/conversation_item_model.dart';
 import 'db_base.dart';
 
 class DbConversation extends DbBase {

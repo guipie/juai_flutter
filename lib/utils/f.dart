@@ -4,12 +4,12 @@ import 'package:flutter/cupertino.dart';
 
 import '../base.dart';
 import '../constants/enums/conversation_enum.dart';
-import '../pages/aimodel/model/aimodel_res_model.dart';
-import '../pages/aimodel/model/prompt_res_model.dart';
+import '../models/aimodel/aimodel_res_model.dart';
+import '../models/prompt/prompt_res_model.dart';
 import '../pages/chat/chat_page.dart';
 import '../pages/chat/conversation_pc_page.dart';
-import '../pages/chat/model/conversation_item_model.dart';
-import '../pages/chat/providers/conversation_provider.dart';
+import '../models/chat/conversation_item_model.dart';
+import '../pages/chat/view_model/conversation_view_model.dart';
 import '../pages/home/home_pc_page.dart';
 import '../pages/home/home_provider.dart';
 import 'fimpl/animation_dialog.dart';
@@ -80,7 +80,7 @@ class _FImpl {
     if (type == ConversationEnum.chat) {
       ref.read(curConversationId.notifier).update((state) => conversation?.id ?? curId);
       if (conversation == null)
-        await ref.read(conversationDataNotifierProvider.notifier).addConversation(ConversationItemModel(
+        await ref.read(conversationVmProvider.notifier).addConversation(ConversationItemModel(
               id: curId,
               title: S.current.new_chat,
               desc: S.current.empty_content_need_add,
@@ -88,7 +88,7 @@ class _FImpl {
             ));
     } else if (type == ConversationEnum.model && aiModelRes != null) {
       ref.read(curConversationId.notifier).update((state) => curId);
-      await ref.read(conversationDataNotifierProvider.notifier).addConversation(ConversationItemModel(
+      await ref.read(conversationVmProvider.notifier).addConversation(ConversationItemModel(
             id: curId,
             title: aiModelRes.shortName,
             desc: aiModelRes.desc,
@@ -98,7 +98,7 @@ class _FImpl {
           ));
     } else if (type == ConversationEnum.promptChat && promptRes != null) {
       ref.read(curConversationId.notifier).update((state) => curId);
-      await ref.read(conversationDataNotifierProvider.notifier).addConversation(ConversationItemModel(
+      await ref.read(conversationVmProvider.notifier).addConversation(ConversationItemModel(
             id: curId,
             title: promptRes.title!,
             desc: promptRes.initMessage,

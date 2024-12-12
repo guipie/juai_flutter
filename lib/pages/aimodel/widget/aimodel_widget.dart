@@ -3,17 +3,18 @@ import '../../../components/mouse_hover_item.dart';
 import '../../../components/paging/paging_widget.dart';
 import '../../../components/td/src/components/search/td_search_bar.dart';
 import '../../../components/text_tips.dart';
-import '../model/aimodel_res_model.dart';
-import '../providers/aimodel_provider.dart';
-import '../providers/prompt_provider.dart';
+import '../../../models/prompt/prompt_req_model.dart';
+import '../view_model/aimodel_view_model.dart';
+import '../view_model/prompt_view_model.dart';
 
 class AimodelWidget {
   static Widget buildBody(BuildContext context, WidgetRef ref) {
-    var aimodelProvider = ref.watch(aiModelProviderProvider);
+    var promptReqProvider = ref.watch(promptReqNotifierProvider);
+    var currentAiModelProvider = ref.watch(currentAiModelNotifierProvider);
     return PagingWidget(
-      provider: aiModelDataNotifierProvider,
-      futureRefreshable: aiModelDataNotifierProvider.future,
-      notifierRefreshable: aiModelDataNotifierProvider.notifier,
+      provider: aiModelVmProvider,
+      futureRefreshable: aiModelVmProvider.future,
+      notifierRefreshable: aiModelVmProvider.notifier,
       padding: const EdgeInsets.all(0),
       contentBuilder: (data, widgetCount, endItemView) {
         return Container(
@@ -39,9 +40,9 @@ class AimodelWidget {
                 fontSize: 16,
               ),
               MouseHoverItem(
-                isSelected: aimodelProvider.selectedPrompt == 1,
                 isRadius: false,
-                onTap: () => ref.read(aiModelProviderProvider.notifier).setSelectedPrompt(1),
+                isSelected: promptReqProvider.category == PromptReqCategoryType.all,
+                onTap: () => ref.read(promptVMProvider.notifier).promptMenuClick(PromptReqCategoryType.all),
                 leadingWidget: Icon(
                   Icons.people,
                   size: 32,
@@ -51,8 +52,8 @@ class AimodelWidget {
               ),
               MouseHoverItem(
                 isRadius: false,
-                isSelected: aimodelProvider.selectedPrompt == 2,
-                onTap: () => ref.read(aiModelProviderProvider.notifier).setSelectedPrompt(2),
+                isSelected: promptReqProvider.category == PromptReqCategoryType.my,
+                onTap: () => ref.read(promptVMProvider.notifier).promptMenuClick(PromptReqCategoryType.my),
                 leadingWidget: Icon(
                   Icons.person,
                   size: 32,
@@ -62,8 +63,8 @@ class AimodelWidget {
               ),
               MouseHoverItem(
                 isRadius: false,
-                isSelected: aimodelProvider.selectedPrompt == 3,
-                onTap: () => ref.read(aiModelProviderProvider.notifier).setSelectedPrompt(3),
+                isSelected: promptReqProvider.category == PromptReqCategoryType.collection,
+                onTap: () => ref.read(promptVMProvider.notifier).promptMenuClick(PromptReqCategoryType.collection),
                 leadingWidget: Icon(
                   Icons.category,
                   size: 32,
@@ -83,8 +84,8 @@ class AimodelWidget {
                     ...e.models.map(
                       (item) => MouseHoverItem(
                         isRadius: false,
-                        isSelected: aimodelProvider.selectedAiModel?.modelId == item.modelId,
-                        onTap: () => ref.read(aiModelProviderProvider.notifier).setSelectedAiModel(item),
+                        isSelected: currentAiModelProvider?.modelId == item.modelId,
+                        onTap: () => ref.read(currentAiModelNotifierProvider.notifier).update(item),
                         leadingPicUrl: item.avatarUrl,
                         title: item.name,
                         subTitle: item.desc,
