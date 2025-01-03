@@ -1,3 +1,5 @@
+import '../generated/l10n.dart';
+
 /// 一些常用格式参照。可以自定义格式，例如：'yyyy/MM/dd HH:mm:ss'，'yyyy/M/d HH:mm:ss'。
 /// 格式要求
 /// year -> yyyy/yy   month -> MM/M    day -> dd/d
@@ -257,6 +259,8 @@ class DateUtil {
     dateTime ??= DateTime.now();
     if (isToday(dateTime.millisecondsSinceEpoch))
       return formatDate(dateTime, format: 'HH:mm');
+    else if (isYesterday(dateTime, DateTime.now()))
+      return S.current.yesterday;
     else if (isWeek(dateTime.millisecondsSinceEpoch))
       return getWeekday(dateTime);
     else

@@ -3,7 +3,6 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'paging_data.dart';
 
-@internal
 abstract interface class PagingNotifierMixin<D extends PagingData<T>, T> {
   AsyncValue<D> get state;
   set state(AsyncValue<D> newState);

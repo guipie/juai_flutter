@@ -21,13 +21,13 @@ PromptRes _$PromptResFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$PromptRes {
   @JsonKey(name: 'id')
-  int? get id => throw _privateConstructorUsedError;
+  int get id => throw _privateConstructorUsedError;
   @JsonKey(name: 'type')
   String? get type => throw _privateConstructorUsedError;
   @JsonKey(name: 'title')
-  String? get title => throw _privateConstructorUsedError;
+  String get title => throw _privateConstructorUsedError;
   @JsonKey(name: 'prompt')
-  String? get prompt => throw _privateConstructorUsedError;
+  String get prompt => throw _privateConstructorUsedError;
   @JsonKey(name: 'maxContext')
   int? get maxContext => throw _privateConstructorUsedError;
   @JsonKey(name: 'promptExtend')
@@ -41,7 +41,7 @@ mixin _$PromptRes {
   @JsonKey(name: 'tags')
   String? get tags => throw _privateConstructorUsedError;
   @JsonKey(name: 'model')
-  String? get model => throw _privateConstructorUsedError;
+  String get model => throw _privateConstructorUsedError;
   @JsonKey(name: 'vendor')
   String? get vendor => throw _privateConstructorUsedError;
   @JsonKey(name: 'category')
@@ -67,17 +67,17 @@ abstract class $PromptResCopyWith<$Res> {
       _$PromptResCopyWithImpl<$Res, PromptRes>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'id') int? id,
+      {@JsonKey(name: 'id') int id,
       @JsonKey(name: 'type') String? type,
-      @JsonKey(name: 'title') String? title,
-      @JsonKey(name: 'prompt') String? prompt,
+      @JsonKey(name: 'title') String title,
+      @JsonKey(name: 'prompt') String prompt,
       @JsonKey(name: 'maxContext') int? maxContext,
       @JsonKey(name: 'promptExtend') String? promptExtend,
       @JsonKey(name: 'avatar') String? avatar,
       @JsonKey(name: 'file') String? file,
       @JsonKey(name: 'initMessage') String? initMessage,
       @JsonKey(name: 'tags') String? tags,
-      @JsonKey(name: 'model') String? model,
+      @JsonKey(name: 'model') String model,
       @JsonKey(name: 'vendor') String? vendor,
       @JsonKey(name: 'category') String? category,
       @JsonKey(name: 'isGroup') bool? isGroup,
@@ -99,39 +99,39 @@ class _$PromptResCopyWithImpl<$Res, $Val extends PromptRes>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
+    Object? id = null,
     Object? type = freezed,
-    Object? title = freezed,
-    Object? prompt = freezed,
+    Object? title = null,
+    Object? prompt = null,
     Object? maxContext = freezed,
     Object? promptExtend = freezed,
     Object? avatar = freezed,
     Object? file = freezed,
     Object? initMessage = freezed,
     Object? tags = freezed,
-    Object? model = freezed,
+    Object? model = null,
     Object? vendor = freezed,
     Object? category = freezed,
     Object? isGroup = freezed,
     Object? createTime = freezed,
   }) {
     return _then(_value.copyWith(
-      id: freezed == id
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as int,
       type: freezed == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String?,
-      title: freezed == title
+      title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
-              as String?,
-      prompt: freezed == prompt
+              as String,
+      prompt: null == prompt
           ? _value.prompt
           : prompt // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       maxContext: freezed == maxContext
           ? _value.maxContext
           : maxContext // ignore: cast_nullable_to_non_nullable
@@ -156,10 +156,10 @@ class _$PromptResCopyWithImpl<$Res, $Val extends PromptRes>
           ? _value.tags
           : tags // ignore: cast_nullable_to_non_nullable
               as String?,
-      model: freezed == model
+      model: null == model
           ? _value.model
           : model // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       vendor: freezed == vendor
           ? _value.vendor
           : vendor // ignore: cast_nullable_to_non_nullable
@@ -188,17 +188,17 @@ abstract class _$$PromptImplCopyWith<$Res> implements $PromptResCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'id') int? id,
+      {@JsonKey(name: 'id') int id,
       @JsonKey(name: 'type') String? type,
-      @JsonKey(name: 'title') String? title,
-      @JsonKey(name: 'prompt') String? prompt,
+      @JsonKey(name: 'title') String title,
+      @JsonKey(name: 'prompt') String prompt,
       @JsonKey(name: 'maxContext') int? maxContext,
       @JsonKey(name: 'promptExtend') String? promptExtend,
       @JsonKey(name: 'avatar') String? avatar,
       @JsonKey(name: 'file') String? file,
       @JsonKey(name: 'initMessage') String? initMessage,
       @JsonKey(name: 'tags') String? tags,
-      @JsonKey(name: 'model') String? model,
+      @JsonKey(name: 'model') String model,
       @JsonKey(name: 'vendor') String? vendor,
       @JsonKey(name: 'category') String? category,
       @JsonKey(name: 'isGroup') bool? isGroup,
@@ -218,39 +218,39 @@ class __$$PromptImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
+    Object? id = null,
     Object? type = freezed,
-    Object? title = freezed,
-    Object? prompt = freezed,
+    Object? title = null,
+    Object? prompt = null,
     Object? maxContext = freezed,
     Object? promptExtend = freezed,
     Object? avatar = freezed,
     Object? file = freezed,
     Object? initMessage = freezed,
     Object? tags = freezed,
-    Object? model = freezed,
+    Object? model = null,
     Object? vendor = freezed,
     Object? category = freezed,
     Object? isGroup = freezed,
     Object? createTime = freezed,
   }) {
     return _then(_$PromptImpl(
-      id: freezed == id
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as int,
       type: freezed == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String?,
-      title: freezed == title
+      title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
-              as String?,
-      prompt: freezed == prompt
+              as String,
+      prompt: null == prompt
           ? _value.prompt
           : prompt // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       maxContext: freezed == maxContext
           ? _value.maxContext
           : maxContext // ignore: cast_nullable_to_non_nullable
@@ -275,10 +275,10 @@ class __$$PromptImplCopyWithImpl<$Res>
           ? _value.tags
           : tags // ignore: cast_nullable_to_non_nullable
               as String?,
-      model: freezed == model
+      model: null == model
           ? _value.model
           : model // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       vendor: freezed == vendor
           ? _value.vendor
           : vendor // ignore: cast_nullable_to_non_nullable
@@ -303,17 +303,17 @@ class __$$PromptImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$PromptImpl implements _Prompt {
   _$PromptImpl(
-      {@JsonKey(name: 'id') this.id,
+      {@JsonKey(name: 'id') required this.id,
       @JsonKey(name: 'type') this.type,
-      @JsonKey(name: 'title') this.title,
-      @JsonKey(name: 'prompt') this.prompt,
+      @JsonKey(name: 'title') required this.title,
+      @JsonKey(name: 'prompt') required this.prompt,
       @JsonKey(name: 'maxContext') this.maxContext,
       @JsonKey(name: 'promptExtend') this.promptExtend,
       @JsonKey(name: 'avatar') this.avatar,
       @JsonKey(name: 'file') this.file,
       @JsonKey(name: 'initMessage') this.initMessage,
       @JsonKey(name: 'tags') this.tags,
-      @JsonKey(name: 'model') this.model,
+      @JsonKey(name: 'model') required this.model,
       @JsonKey(name: 'vendor') this.vendor,
       @JsonKey(name: 'category') this.category,
       @JsonKey(name: 'isGroup') this.isGroup,
@@ -324,16 +324,16 @@ class _$PromptImpl implements _Prompt {
 
   @override
   @JsonKey(name: 'id')
-  final int? id;
+  final int id;
   @override
   @JsonKey(name: 'type')
   final String? type;
   @override
   @JsonKey(name: 'title')
-  final String? title;
+  final String title;
   @override
   @JsonKey(name: 'prompt')
-  final String? prompt;
+  final String prompt;
   @override
   @JsonKey(name: 'maxContext')
   final int? maxContext;
@@ -354,7 +354,7 @@ class _$PromptImpl implements _Prompt {
   final String? tags;
   @override
   @JsonKey(name: 'model')
-  final String? model;
+  final String model;
   @override
   @JsonKey(name: 'vendor')
   final String? vendor;
@@ -438,17 +438,17 @@ class _$PromptImpl implements _Prompt {
 
 abstract class _Prompt implements PromptRes {
   factory _Prompt(
-      {@JsonKey(name: 'id') final int? id,
+      {@JsonKey(name: 'id') required final int id,
       @JsonKey(name: 'type') final String? type,
-      @JsonKey(name: 'title') final String? title,
-      @JsonKey(name: 'prompt') final String? prompt,
+      @JsonKey(name: 'title') required final String title,
+      @JsonKey(name: 'prompt') required final String prompt,
       @JsonKey(name: 'maxContext') final int? maxContext,
       @JsonKey(name: 'promptExtend') final String? promptExtend,
       @JsonKey(name: 'avatar') final String? avatar,
       @JsonKey(name: 'file') final String? file,
       @JsonKey(name: 'initMessage') final String? initMessage,
       @JsonKey(name: 'tags') final String? tags,
-      @JsonKey(name: 'model') final String? model,
+      @JsonKey(name: 'model') required final String model,
       @JsonKey(name: 'vendor') final String? vendor,
       @JsonKey(name: 'category') final String? category,
       @JsonKey(name: 'isGroup') final bool? isGroup,
@@ -458,16 +458,16 @@ abstract class _Prompt implements PromptRes {
 
   @override
   @JsonKey(name: 'id')
-  int? get id;
+  int get id;
   @override
   @JsonKey(name: 'type')
   String? get type;
   @override
   @JsonKey(name: 'title')
-  String? get title;
+  String get title;
   @override
   @JsonKey(name: 'prompt')
-  String? get prompt;
+  String get prompt;
   @override
   @JsonKey(name: 'maxContext')
   int? get maxContext;
@@ -488,7 +488,7 @@ abstract class _Prompt implements PromptRes {
   String? get tags;
   @override
   @JsonKey(name: 'model')
-  String? get model;
+  String get model;
   @override
   @JsonKey(name: 'vendor')
   String? get vendor;

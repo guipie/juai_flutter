@@ -35,6 +35,7 @@ mixin _$ConversationItemModel {
   int get unReadCnt => throw _privateConstructorUsedError;
   ConversationEnum get type => throw _privateConstructorUsedError;
   int get relationId => throw _privateConstructorUsedError;
+  String get model => throw _privateConstructorUsedError;
   String? get extens => throw _privateConstructorUsedError;
 
   /// Serializes this ConversationItemModel to a JSON map.
@@ -65,6 +66,7 @@ abstract class $ConversationItemModelCopyWith<$Res> {
       int unReadCnt,
       ConversationEnum type,
       int relationId,
+      String model,
       String? extens});
 }
 
@@ -95,6 +97,7 @@ class _$ConversationItemModelCopyWithImpl<$Res,
     Object? unReadCnt = null,
     Object? type = null,
     Object? relationId = null,
+    Object? model = null,
     Object? extens = freezed,
   }) {
     return _then(_value.copyWith(
@@ -142,6 +145,10 @@ class _$ConversationItemModelCopyWithImpl<$Res,
           ? _value.relationId
           : relationId // ignore: cast_nullable_to_non_nullable
               as int,
+      model: null == model
+          ? _value.model
+          : model // ignore: cast_nullable_to_non_nullable
+              as String,
       extens: freezed == extens
           ? _value.extens
           : extens // ignore: cast_nullable_to_non_nullable
@@ -171,6 +178,7 @@ abstract class _$$ConversationItemModelImplCopyWith<$Res>
       int unReadCnt,
       ConversationEnum type,
       int relationId,
+      String model,
       String? extens});
 }
 
@@ -199,6 +207,7 @@ class __$$ConversationItemModelImplCopyWithImpl<$Res>
     Object? unReadCnt = null,
     Object? type = null,
     Object? relationId = null,
+    Object? model = null,
     Object? extens = freezed,
   }) {
     return _then(_$ConversationItemModelImpl(
@@ -246,6 +255,10 @@ class __$$ConversationItemModelImplCopyWithImpl<$Res>
           ? _value.relationId
           : relationId // ignore: cast_nullable_to_non_nullable
               as int,
+      model: null == model
+          ? _value.model
+          : model // ignore: cast_nullable_to_non_nullable
+              as String,
       extens: freezed == extens
           ? _value.extens
           : extens // ignore: cast_nullable_to_non_nullable
@@ -271,6 +284,7 @@ class _$ConversationItemModelImpl
       this.unReadCnt = 0,
       required this.type,
       this.relationId = 0,
+      this.model = Constant.defaultModel,
       this.extens});
 
   factory _$ConversationItemModelImpl.fromJson(Map<String, dynamic> json) =>
@@ -304,11 +318,14 @@ class _$ConversationItemModelImpl
   @JsonKey()
   final int relationId;
   @override
+  @JsonKey()
+  final String model;
+  @override
   final String? extens;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'ConversationItemModel(id: $id, title: $title, desc: $desc, avatar: $avatar, createTime: $createTime, lastTime: $lastTime, draft: $draft, isTop: $isTop, unReadCnt: $unReadCnt, type: $type, relationId: $relationId, extens: $extens)';
+    return 'ConversationItemModel(id: $id, title: $title, desc: $desc, avatar: $avatar, createTime: $createTime, lastTime: $lastTime, draft: $draft, isTop: $isTop, unReadCnt: $unReadCnt, type: $type, relationId: $relationId, model: $model, extens: $extens)';
   }
 
   @override
@@ -327,6 +344,7 @@ class _$ConversationItemModelImpl
       ..add(DiagnosticsProperty('unReadCnt', unReadCnt))
       ..add(DiagnosticsProperty('type', type))
       ..add(DiagnosticsProperty('relationId', relationId))
+      ..add(DiagnosticsProperty('model', model))
       ..add(DiagnosticsProperty('extens', extens));
   }
 
@@ -350,13 +368,27 @@ class _$ConversationItemModelImpl
             (identical(other.type, type) || other.type == type) &&
             (identical(other.relationId, relationId) ||
                 other.relationId == relationId) &&
+            (identical(other.model, model) || other.model == model) &&
             (identical(other.extens, extens) || other.extens == extens));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, title, desc, avatar,
-      createTime, lastTime, draft, isTop, unReadCnt, type, relationId, extens);
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      title,
+      desc,
+      avatar,
+      createTime,
+      lastTime,
+      draft,
+      isTop,
+      unReadCnt,
+      type,
+      relationId,
+      model,
+      extens);
 
   /// Create a copy of ConversationItemModel
   /// with the given fields replaced by the non-null parameter values.
@@ -388,6 +420,7 @@ abstract class _ConversationItemModel implements ConversationItemModel {
       final int unReadCnt,
       required final ConversationEnum type,
       final int relationId,
+      final String model,
       final String? extens}) = _$ConversationItemModelImpl;
 
   factory _ConversationItemModel.fromJson(Map<String, dynamic> json) =
@@ -418,6 +451,8 @@ abstract class _ConversationItemModel implements ConversationItemModel {
   ConversationEnum get type;
   @override
   int get relationId;
+  @override
+  String get model;
   @override
   String? get extens;
 

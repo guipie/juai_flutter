@@ -22,7 +22,7 @@ final countdownVcodeProvider =
 );
 
 typedef _$CountdownVcode = AutoDisposeNotifier<int>;
-String _$loginProviderHash() => r'5ec1e59818d6d41cd5811f0525d2a0c1df81d7ee';
+String _$loginProviderHash() => r'803dd52a35f27c8282d23377281c0de30fbccd74';
 
 /// See also [LoginProvider].
 @ProviderFor(LoginProvider)

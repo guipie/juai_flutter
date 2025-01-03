@@ -1,8 +1,8 @@
-# Install script for directory: D:/work/chenyanyi/app/windows/flutter
+# Install script for directory: D:/work/chenyanyi/juai/windows/flutter
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "$<TARGET_FILE_DIR:chat_bot>")
+  set(CMAKE_INSTALL_PREFIX "$<TARGET_FILE_DIR:juai>")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 

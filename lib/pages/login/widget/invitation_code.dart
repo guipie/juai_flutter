@@ -1,5 +1,5 @@
 import '../../../base.dart';
-import '../../../components/td/tdesign_flutter.dart';
+import 'package:fluent_ui/fluent_ui.dart' as fl;
 import '../provider/login_provider.dart';
 import '../model/login_model.dart';
 
@@ -14,21 +14,16 @@ class InvitationCodeWidget extends ConsumerWidget {
       children: [
         if (loginModel.invitaionCodeShow)
           Expanded(
-            child: TDInput(
-              type: TDInputType.normal,
+            child: fl.TextBox(
               controller: ref.watch(loginProviderProvider).textVcodeController,
-              hintText: S.current.invitation_code_input,
-              needClear: false,
+              placeholder: S.current.invitation_code_input,
             ),
           ),
-        TDSwitch(
-          type: TDSwitchType.text,
-          isOn: loginModel.invitaionCodeShow,
-          openText: S.current.invitation_code,
-          closeText: S.current.invitation_code,
+        fl.ToggleSwitch(
+          checked: loginModel.invitaionCodeShow,
+          content: Text(S.current.invitation_code),
           onChanged: (value) {
             ref.read(loginProviderProvider.notifier).setInvitaionCode(value);
-            return false;
           },
         )
       ],

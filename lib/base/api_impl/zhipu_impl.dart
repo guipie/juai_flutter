@@ -1,114 +1,101 @@
 import 'dart:convert';
 
-import 'package:chat_bot/base.dart';
-import 'package:chat_bot/base/api.dart';
-import 'package:chat_bot/base/api_impl/api_impl.dart';
-import 'package:chat_bot/hive_bean/generate_content.dart';
-import 'package:chat_bot/hive_bean/openai_bean.dart';
-import 'package:chat_bot/hive_bean/supported_models.dart';
-import 'package:chat_bot/services/db/chat_item.dart';
+import '../../base.dart';
+import '../api.dart';
+import 'api_impl.dart';
+import '../../hive_bean/generate_content.dart';
+import '../../hive_bean/openai_bean.dart';
+import '../../hive_bean/supported_models.dart';
+import '../../services/db/chat_item.dart';
 import 'package:dart_openai/dart_openai.dart';
 import 'package:dio/dio.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 class ZhiPuImpl extends APIImpl {
   @override
-  Future<String> generateChatTitle(
-      String temperature,
-      AllModelBean bean,
-      String modelType,
-      List<ChatItem> originalChatItem,
-      List<RequestParams> chatItems) async {
-    Dio dio = initZhiQu(bean);
+  Future<String> generateChatTitle(String temperature, AllModelBean bean, String modelType, List<ChatItem> originalChatItem, List<RequestParams> chatItems) async {
+    var dio = initZhiQu(bean);
 
-    var response = await dio.post("/api/paas/v4/chat/completions", data: {
-      "model": modelType,
-      "messages": chatItems
+    var response = await dio.post('/api/paas/v4/chat/completions', data: {
+      'model': modelType,
+      'messages': chatItems
           .map((e) => {
-                "role": getZhiKuTypeByRole(e.role),
-                "content": e.content.join(","),
+                'role': getZhiKuTypeByRole(e.role),
+                'content': e.content.join(','),
               })
           .toList(),
-      "temperature": double.tryParse(temperature.toString()) ?? 1.0,
-      "stream": false,
+      'temperature': double.tryParse(temperature.toString()) ?? 1.0,
+      'stream': false,
     });
 
     if (response.statusCode == 200) {
-      return response.data["choices"][0]["message"]["content"];
+      return response.data['choices'][0]['message']['content'];
     } else {
-      throw Exception("result is empty");
+      throw Exception('result is empty');
     }
   }
 
   String getZhiKuTypeByRole(int role) {
     if (role == ChatType.user.code) {
-      return "user";
+      return 'user';
     }
 
     if (role == ChatType.system.code) {
-      return "system";
+      return 'system';
     }
 
-    return "assistant";
+    return 'assistant';
   }
 
   @override
-  Future<GenerateContentBean> generateContent(
-      double temperature,
-      AllModelBean bean,
-      String modelType,
-      List<ChatItem> originalChatItem,
-      List<RequestParams> chatItems) async {
-    Dio dio = initZhiQu(bean);
+  Future<GenerateContentBean> generateContent(double temperature, AllModelBean bean, String modelType, List<ChatItem> originalChatItem, List<RequestParams> chatItems) async {
+    var dio = initZhiQu(bean);
 
-    var response = await dio.post("/api/paas/v4/chat/completions", data: {
-      "model": modelType,
-      "messages": chatItems
+    var response = await dio.post('/api/paas/v4/chat/completions', data: {
+      'model': modelType,
+      'messages': chatItems
           .map((e) => {
-                "role": getZhiKuTypeByRole(e.role),
-                "content": e.content.join(","),
+                'role': getZhiKuTypeByRole(e.role),
+                'content': e.content.join(','),
               })
           .toList(),
-      "temperature": double.tryParse(temperature.toString()) ?? 1.0,
-      "stream": false,
+      'temperature': double.tryParse(temperature.toString()) ?? 1.0,
+      'stream': false,
     });
 
     if (response.statusCode == 200) {
-      String? data = response.data["choices"][0]["message"]["content"];
+      String? data = response.data['choices'][0]['message']['content'];
       return GenerateContentBean(content: data);
     } else {
-      throw Exception("result is empty");
+      throw Exception('result is empty');
     }
   }
 
   @override
-  Future<List<OpenAIImageData>> generateOpenAIImage(AllModelBean bean,
-      String prompt, OpenAIImageStyle style, OpenAIImageSize size) async {
+  Future<List<OpenAIImageData>> generateOpenAIImage(AllModelBean bean, String prompt, OpenAIImageStyle style, OpenAIImageSize size) async {
     try {
-      Dio dio = initZhiQu(bean);
+      var dio = initZhiQu(bean);
 
-      var response = await dio.post("/api/paas/v4/images/generations", data: {
-        "model": bean.getPaintModels.first.id,
-        "prompt": prompt,
+      var response = await dio.post('/api/paas/v4/images/generations', data: {
+        'model': bean.getPaintModels.first.id,
+        'prompt': prompt,
       });
 
       if (response.statusCode == 200) {
-        String? data = response.data["data"][0]["url"];
+        String? data = response.data['data'][0]['url'];
         return [OpenAIImageData(url: data, b64Json: '', revisedPrompt: '')];
       } else {
-        throw Exception("result is empty");
+        throw Exception('result is empty');
       }
     } on DioException catch (e) {
-      throw Exception(e.response?.data["error"]["message"]);
+      throw Exception(e.response?.data['error']['message']);
     }
   }
 
   @override
   Future<List<SupportedModels>> getSupportModules(AllModelBean bean) async {
     try {
-      return ["glm-4", "glm-4v", "glm-3-turbo", "cogview-3"]
-          .map((e) => SupportedModels(id: e, ownedBy: "zhiqu"))
-          .toList();
+      return ['glm-4', 'glm-4v', 'glm-3-turbo', 'cogview-3'].map((e) => SupportedModels(id: e, ownedBy: 'zhiqu')).toList();
     } on DioException catch (e) {
       e.message.fail();
       return [];
@@ -124,52 +111,39 @@ class ZhiPuImpl extends APIImpl {
   }
 
   @override
-  Future<Stream<GenerateContentBean>> streamGenerateContent(
-      String temperature,
-      AllModelBean bean,
-      String modelType,
-      List<ChatItem> originalChatItem,
-      List<RequestParams> chatItems,
-      bool withoutHistoryMessage) async {
-    return _streamGenerateContent(temperature, bean, modelType,
-        originalChatItem, chatItems, withoutHistoryMessage);
+  Future<Stream<GenerateContentBean>> streamGenerateContent(String temperature, AllModelBean bean, String modelType, List<ChatItem> originalChatItem, List<RequestParams> chatItems, bool withoutHistoryMessage) async {
+    return _streamGenerateContent(temperature, bean, modelType, originalChatItem, chatItems, withoutHistoryMessage);
   }
 
   final splitter = const LineSplitter();
 
-  Stream<GenerateContentBean> _streamGenerateContent(
-      String temperature,
-      AllModelBean bean,
-      String modelType,
-      List<ChatItem> originalChatItem,
-      List<RequestParams> chatItems,
-      bool withoutHistoryMessage) async* {
-    Dio dio = initZhiQu(bean, stream: true);
+  Stream<GenerateContentBean> _streamGenerateContent(String temperature, AllModelBean bean, String modelType, List<ChatItem> originalChatItem, List<RequestParams> chatItems, bool withoutHistoryMessage) async* {
+    var dio = initZhiQu(bean, stream: true);
 
-    var response = await dio.post("/api/paas/v4/chat/completions", data: {
-      "model": modelType,
-      "messages": chatItems
+    var response = await dio.post('/api/paas/v4/chat/completions', data: {
+      'model': modelType,
+      'messages': chatItems
           .map((e) => {
-                "role": getZhiKuTypeByRole(e.role),
-                "content": e.content.join(","),
+                'role': getZhiKuTypeByRole(e.role),
+                'content': e.content.join(','),
               })
           .toList(),
-      "temperature": double.tryParse(temperature.toString()) ?? 1.0,
-      "stream": true,
+      'temperature': double.tryParse(temperature.toString()) ?? 1.0,
+      'stream': true,
     });
     if (response.statusCode == 200) {
       final ResponseBody rb = response.data;
-      int index = 0;
-      String modelStr = '';
-      List<int> cacheUnits = [];
-      List<int> list = [];
+      var index = 0;
+      var modelStr = '';
+      var cacheUnits = <int>[];
+      var list = <int>[];
 
       await for (final itemList in rb.stream) {
         list = cacheUnits + itemList;
 
         cacheUnits.clear();
 
-        String res = "";
+        var res = '';
         try {
           res = utf8.decode(list);
         } catch (e) {
@@ -179,7 +153,7 @@ class ZhiPuImpl extends APIImpl {
 
         res = res.trim();
 
-        if (index == 0 && res.startsWith("[")) {
+        if (index == 0 && res.startsWith('[')) {
           res = res.replaceFirst('[', '');
         }
         if (res.startsWith(',')) {
@@ -198,16 +172,15 @@ class ZhiPuImpl extends APIImpl {
           modelStr += line;
 
           try {
-            if (modelStr.startsWith("data:")) {
-              modelStr = modelStr.replaceAll("data:", "").trim();
-              final content =
-                  (jsonDecode(modelStr)["choices"][0]["delta"]["content"]);
+            if (modelStr.startsWith('data:')) {
+              modelStr = modelStr.replaceAll('data:', '').trim();
+              final content = (jsonDecode(modelStr)['choices'][0]['delta']['content']);
               yield GenerateContentBean(content: content);
               modelStr = '';
             } else {
-              if (modelStr.startsWith("{") && modelStr.trim().endsWith("}")) {
+              if (modelStr.startsWith('{') && modelStr.trim().endsWith('}')) {
                 var result = jsonDecode(modelStr.trim());
-                yield GenerateContentBean(content: result["error"]["message"]);
+                yield GenerateContentBean(content: result['error']['message']);
               }
             }
           } catch (e) {
@@ -244,12 +217,12 @@ class ZhiPuImpl extends APIImpl {
 
   Dio initZhiQu(AllModelBean bean, {bool stream = false}) {
     return Dio(BaseOptions(
-      baseUrl: bean.apiServer ?? "",
+      baseUrl: bean.apiServer ?? '',
       connectTimeout: const Duration(minutes: 30),
       receiveTimeout: const Duration(minutes: 30),
       headers: {
-        "Content-Type": "application/json",
-        "Authorization": "Bearer ${bean.apiKey}",
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ${bean.apiKey}',
       },
       responseType: stream ? ResponseType.stream : ResponseType.json,
     ))

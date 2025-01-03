@@ -1,8 +1,10 @@
+import 'package:fluent_ui/fluent_ui.dart' as fl;
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:window_manager/window_manager.dart';
 
 import 'base.dart';
 import 'base/riverpod/provider_log.dart';
+import 'constants/theme.dart';
 import 'initial.dart';
 import 'pages/splash_page.dart';
 import 'utils/hive_box.dart';
@@ -57,7 +59,7 @@ class MyApp extends ConsumerWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (context, child) {
-        return MaterialApp(
+        return fl.FluentApp(
           key: ValueKey(globalLanguage),
           navigatorKey: F.navigatorKey,
           title: S.current.app_name,
@@ -79,11 +81,13 @@ class MyApp extends ConsumerWidget {
           home: const SplashPage(),
           locale: getLocaleByCode(globalLanguage),
           builder: (context, child) {
-            return FlutterEasyLoading(
-                child: ScrollConfiguration(
-              behavior: const ScrollPhysicsConfig(),
-              child: child ?? Container(),
-            ));
+            var item = FlutterEasyLoading(
+              child: ScrollConfiguration(
+                behavior: const ScrollPhysicsConfig(),
+                child: child ?? Container(),
+              ),
+            );
+            return item;
           },
         );
       },

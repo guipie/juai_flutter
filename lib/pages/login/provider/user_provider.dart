@@ -1,4 +1,5 @@
 import '../../../base.dart';
+import '../../aimodel/view_model/aimodel_view_model.dart';
 import '../../home/home_page.dart';
 import '../../home/home_pc_page.dart';
 import '../login_page.dart';
@@ -15,7 +16,8 @@ class CurentUser extends _$CurentUser {
 
   void setUser(LoginResModel user) {
     SpUtil.putObject(CacheKeys.curUser, user);
-    Config.accessToken = user.accessToken!;
+    SpUtil.putString(CacheKeys.accessToken, user.accessToken!);
+    SpUtil.putString(CacheKeys.refreshToken, user.refreshToken!);
     state = user;
   }
 
@@ -31,11 +33,15 @@ class CurentUser extends _$CurentUser {
     return state.userId;
   }
 
+  bool get isLogin => state.accessToken != null && (state.userId ?? 0) > 0 && (state.phone?.isNotEmpty ?? false);
+
   Future<void> verifyLogin() async {
-    var login = state.accessToken != null && (state.userId ?? 0) > 0 && state.phone!.isNotEmpty;
-    if (login) {
-      Config.accessToken = state.accessToken!;
-      await F.pushAndRemoveUntil(F.pc ? const HomePcPage() : const HomePage());
+    if (isLogin) {
+      ref.watch(aiModelVmProvider.notifier);
+      if (F.isRootPage)
+        F.pop();
+      else
+        await F.pushAndRemoveUntil(F.pc ? const HomePcPage() : const HomePage());
     } else
       await F.pushAndRemoveUntil(LoginPage());
   }

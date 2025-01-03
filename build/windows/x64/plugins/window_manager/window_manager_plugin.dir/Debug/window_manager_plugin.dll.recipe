@@ -2,13 +2,13 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
-      <FullPath>D:\work\chenyanyi\app\build\windows\x64\x64\Debug\ZERO_CHECK</FullPath>
+      <FullPath>D:\work\chenyanyi\juai\build\windows\x64\x64\Debug\ZERO_CHECK</FullPath>
     </ProjectOutput>
     <ProjectOutput>
-      <FullPath>D:\work\chenyanyi\app\build\windows\x64\flutter\x64\Debug\flutter_assemble</FullPath>
+      <FullPath>D:\work\chenyanyi\juai\build\windows\x64\flutter\x64\Debug\flutter_assemble</FullPath>
     </ProjectOutput>
     <ProjectOutput>
-      <FullPath>D:\work\chenyanyi\app\build\windows\x64\plugins\window_manager\Debug\window_manager_plugin.dll</FullPath>
+      <FullPath>D:\work\chenyanyi\juai\build\windows\x64\plugins\window_manager\Debug\window_manager_plugin.dll</FullPath>
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles />

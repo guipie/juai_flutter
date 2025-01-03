@@ -1,9 +1,10 @@
+import 'package:fluent_ui/fluent_ui.dart' as fl;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
 import '../base.dart';
+import 'image.dart';
 import 'mouse_hover.dart';
-import 'td/src/components/avatar/td_avatar.dart';
 
 @immutable
 class MouseHoverItem extends ConsumerWidget {
@@ -58,8 +59,8 @@ class MouseHoverItem extends ConsumerWidget {
         size: 18,
       );
     return MouseHoverWidget(
-      hoverColor: isSelected == true ? null : Theme.of(context).colorScheme.onSecondary,
-      color: isSelected == true ? ref.watch(themeProvider).pinedBgColor() : Theme.of(context).colorScheme.secondary,
+      hoverColor: isSelected == true ? ref.watch(themeProvider).pinedBgColor() : ref.watch(themeProvider).pinedBgColor().withOpacity(0.3),
+      color: isSelected == true ? ref.watch(themeProvider).pinedBgColor() : fl.FluentTheme.of(context).cardColor,
       onTap: onTap,
       isRadius: isRadius,
       child: Container(
@@ -71,14 +72,7 @@ class MouseHoverItem extends ConsumerWidget {
             headWidget ?? const SizedBox.shrink(),
             ListTile(
               mouseCursor: SystemMouseCursors.click,
-              leading: leadingWidget ??
-                  TDAvatar(
-                    size: TDAvatarSize.medium,
-                    type: TDAvatarType.normal,
-                    shape: TDAvatarShape.square,
-                    avatarUrl: leadingPicUrl != null && leadingPicUrl!.startsWith('http') ? leadingPicUrl : null,
-                    defaultUrl: Assets.imageAvatar,
-                  ),
+              leading: leadingWidget ?? JuImage(leadingPicUrl, width: 42, height: 42),
               title: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [

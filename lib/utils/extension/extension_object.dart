@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 
+import '../../services/http/interceptor/api_exception.dart';
+
 var _logger = Logger(
   printer: PrettyPrinter(
     methodCount: 2, // Number of method calls to be displayed
@@ -44,3 +46,5 @@ extension ExtensionLog on Object? {
     _logger.log(Level.fatal, this);
   }
 }
+
+extension ExtensionException on ApiException {}

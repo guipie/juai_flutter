@@ -1,4 +1,4 @@
-import 'package:chat_bot/constants/theme.dart';
+import '../constants/theme.dart';
 import 'package:lottie/lottie.dart';
 
 import '../base.dart';
@@ -8,11 +8,7 @@ class LottieWidget extends ConsumerWidget {
   final bool transformHitTests;
   final double width;
 
-  const LottieWidget(
-      {super.key,
-      required this.scale,
-      required this.transformHitTests,
-      required this.width});
+  const LottieWidget({super.key, required this.scale, required this.transformHitTests, required this.width});
 
   @override
   Widget build(BuildContext context, ref) {
@@ -23,13 +19,13 @@ class LottieWidget extends ConsumerWidget {
           scale: scale,
           transformHitTests: transformHitTests,
           child: Lottie.asset(
-            "assets/lottie/audio.json",
+            'assets/lottie/audio.json',
             width: width,
             delegates: LottieDelegates(
               values: [
                 ValueDelegate.color(
                   const [
-                    "**",
+                    '**',
                   ],
                   value: color,
                 ),

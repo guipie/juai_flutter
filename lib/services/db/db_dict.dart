@@ -1,5 +1,4 @@
-import 'package:chat_bot/services/db/db_base.dart';
-import 'package:sqflite_common/sqlite_api.dart';
+import 'db_base.dart';
 
 class DictProvider extends DbBase {
   DictProvider._();
@@ -12,16 +11,16 @@ class DictProvider extends DbBase {
   }
 
   @override
-  String tableName = "ju_dict"; //字典表
+  String tableName = 'ju_dict'; //字典表
 
   @override
   Future<void> onCreate(Database db, int version) async {
-    await db.execute("""
+    await db.execute('''
       CREATE TABLE $tableName (
         id integer primary key autoincrement,
         key TEXT,
         value TEXT 
       )
-    """);
+    ''');
   }
 }

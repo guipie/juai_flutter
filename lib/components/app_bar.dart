@@ -1,11 +1,12 @@
 import 'dart:ui';
 
-import 'package:chat_bot/base.dart';
+import '../base.dart';
+import '../pages/home/view_model/home_view_model.dart';
 
 class JuAppBar {
   //获取半透明的Appbar
-  static PreferredSizeWidget baseBar({
-    double appHeight = 40,
+  static PreferredSizeWidget? baseBar({
+    double appHeight = 30,
     Widget? title,
     String? text,
     Widget? leading,
@@ -14,7 +15,7 @@ class JuAppBar {
     List<Widget>? actions,
     PreferredSize? bottom,
   }) {
-    // assert(title != null && text != null, "title and text must be not null!");
+    assert(title != null || text != null, 'title and text must be not null!');
     if (actions != null) {
       actions.add(6.width());
     }

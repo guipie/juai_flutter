@@ -18,11 +18,12 @@ _$ConversationItemModelImpl _$$ConversationItemModelImplFromJson(
       lastTime: _$JsonConverterFromJson<String, DateTime>(
           json['LastTime'], const DateTimeConverter().fromJson),
       draft: json['Draft'] as String?,
-      isTop: _$JsonConverterFromJson<String, bool?>(
+      isTop: _$JsonConverterFromJson<String, bool>(
           json['IsTop'], const BoolConverter().fromJson),
       unReadCnt: (json['UnReadCnt'] as num?)?.toInt() ?? 0,
       type: $enumDecode(_$ConversationEnumEnumMap, json['Type']),
       relationId: (json['RelationId'] as num?)?.toInt() ?? 0,
+      model: json['Model'] as String? ?? Constant.defaultModel,
       extens: json['Extens'] as String?,
     );
 
@@ -38,10 +39,12 @@ Map<String, dynamic> _$$ConversationItemModelImplToJson(
       'LastTime': _$JsonConverterToJson<String, DateTime>(
           instance.lastTime, const DateTimeConverter().toJson),
       'Draft': instance.draft,
-      'IsTop': const BoolConverter().toJson(instance.isTop),
+      'IsTop': _$JsonConverterToJson<String, bool>(
+          instance.isTop, const BoolConverter().toJson),
       'UnReadCnt': instance.unReadCnt,
       'Type': _$ConversationEnumEnumMap[instance.type]!,
       'RelationId': instance.relationId,
+      'Model': instance.model,
       'Extens': instance.extens,
     };
 
@@ -53,7 +56,7 @@ Value? _$JsonConverterFromJson<Json, Value>(
 
 const _$ConversationEnumEnumMap = {
   ConversationEnum.chat: 'chat',
-  ConversationEnum.promptChat: 'promptChat',
+  ConversationEnum.prompt: 'prompt',
   ConversationEnum.model: 'model',
   ConversationEnum.group: 'group',
 };

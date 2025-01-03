@@ -2,46 +2,46 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
-      <FullPath>D:\work\chenyanyi\app\build\windows\x64\x64\Debug\ZERO_CHECK</FullPath>
+      <FullPath>D:\work\chenyanyi\juai\build\windows\x64\x64\Debug\ZERO_CHECK</FullPath>
     </ProjectOutput>
     <ProjectOutput>
-      <FullPath>D:\work\chenyanyi\app\build\windows\x64\flutter\x64\Debug\flutter_assemble</FullPath>
+      <FullPath>D:\work\chenyanyi\juai\build\windows\x64\flutter\x64\Debug\flutter_assemble</FullPath>
     </ProjectOutput>
     <ProjectOutput>
-      <FullPath>D:\work\chenyanyi\app\build\windows\x64\plugins\connectivity_plus\Debug\connectivity_plus_plugin.dll</FullPath>
+      <FullPath>D:\work\chenyanyi\juai\build\windows\x64\plugins\connectivity_plus\Debug\connectivity_plus_plugin.dll</FullPath>
     </ProjectOutput>
     <ProjectOutput>
-      <FullPath>D:\work\chenyanyi\app\build\windows\x64\plugins\file_selector_windows\Debug\file_selector_windows_plugin.dll</FullPath>
+      <FullPath>D:\work\chenyanyi\juai\build\windows\x64\plugins\file_selector_windows\Debug\file_selector_windows_plugin.dll</FullPath>
     </ProjectOutput>
     <ProjectOutput>
-      <FullPath>D:\work\chenyanyi\app\build\windows\x64\plugins\gal\Debug\gal_plugin.dll</FullPath>
+      <FullPath>D:\work\chenyanyi\juai\build\windows\x64\plugins\gal\Debug\gal_plugin.dll</FullPath>
     </ProjectOutput>
     <ProjectOutput>
-      <FullPath>D:\work\chenyanyi\app\build\windows\x64\plugins\permission_handler_windows\Debug\permission_handler_windows_plugin.dll</FullPath>
+      <FullPath>D:\work\chenyanyi\juai\build\windows\x64\plugins\permission_handler_windows\Debug\permission_handler_windows_plugin.dll</FullPath>
     </ProjectOutput>
     <ProjectOutput>
-      <FullPath>D:\work\chenyanyi\app\build\windows\x64\plugins\record_windows\Debug\record_windows_plugin.dll</FullPath>
+      <FullPath>D:\work\chenyanyi\juai\build\windows\x64\plugins\record_windows\Debug\record_windows_plugin.dll</FullPath>
     </ProjectOutput>
     <ProjectOutput>
-      <FullPath>D:\work\chenyanyi\app\build\windows\x64\plugins\screen_retriever_windows\Debug\screen_retriever_windows_plugin.dll</FullPath>
+      <FullPath>D:\work\chenyanyi\juai\build\windows\x64\plugins\screen_retriever_windows\Debug\screen_retriever_windows_plugin.dll</FullPath>
     </ProjectOutput>
     <ProjectOutput>
-      <FullPath>D:\work\chenyanyi\app\build\windows\x64\plugins\share_plus\Debug\share_plus_plugin.dll</FullPath>
+      <FullPath>D:\work\chenyanyi\juai\build\windows\x64\plugins\share_plus\Debug\share_plus_plugin.dll</FullPath>
     </ProjectOutput>
     <ProjectOutput>
-      <FullPath>D:\work\chenyanyi\app\build\windows\x64\plugins\url_launcher_windows\Debug\url_launcher_windows_plugin.dll</FullPath>
+      <FullPath>D:\work\chenyanyi\juai\build\windows\x64\plugins\url_launcher_windows\Debug\url_launcher_windows_plugin.dll</FullPath>
     </ProjectOutput>
     <ProjectOutput>
-      <FullPath>D:\work\chenyanyi\app\build\windows\x64\plugins\window_manager\Debug\window_manager_plugin.dll</FullPath>
+      <FullPath>D:\work\chenyanyi\juai\build\windows\x64\plugins\window_manager\Debug\window_manager_plugin.dll</FullPath>
     </ProjectOutput>
     <ProjectOutput>
-      <FullPath>D:\work\chenyanyi\app\build\windows\x64\runner\Debug\chat_bot.exe</FullPath>
+      <FullPath>D:\work\chenyanyi\juai\build\windows\x64\runner\Debug\juai.exe</FullPath>
     </ProjectOutput>
     <ProjectOutput>
-      <FullPath>D:\work\chenyanyi\app\build\windows\x64\x64\Debug\ALL_BUILD</FullPath>
+      <FullPath>D:\work\chenyanyi\juai\build\windows\x64\x64\Debug\ALL_BUILD</FullPath>
     </ProjectOutput>
     <ProjectOutput>
-      <FullPath>D:\work\chenyanyi\app\build\windows\x64\x64\Debug\INSTALL</FullPath>
+      <FullPath>D:\work\chenyanyi\juai\build\windows\x64\x64\Debug\INSTALL</FullPath>
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles />

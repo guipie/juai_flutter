@@ -1,9 +1,9 @@
 // import 'dart:async';
 // import 'dart:convert';
-// import 'package:chat_bot/hive_bean/local_chat_history.dart';
-// import 'package:chat_bot/hive_bean/openai_bean.dart';
-// import 'package:chat_bot/main.dart';
-// import 'package:chat_bot/module/setting/openai/openai_viewmodel.dart';
+// import 'package:juai/hive_bean/local_chat_history.dart';
+// import 'package:juai/hive_bean/openai_bean.dart';
+// import 'package:juai/main.dart';
+// import 'package:juai/module/setting/openai/openai_viewmodel.dart';
 // import 'package:icloud_storage/icloud_storage.dart';
 // import 'package:path_provider/path_provider.dart';
 

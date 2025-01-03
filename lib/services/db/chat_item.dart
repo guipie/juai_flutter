@@ -1,4 +1,4 @@
-import 'package:chat_bot/services/db/db_base.dart';
+import 'db_base.dart';
 import 'package:sqflite_common/sqlite_api.dart';
 
 const String columnTime = 'time';
@@ -33,7 +33,7 @@ class ChatItem {
       columnContent: content,
       columnTime: time,
       columnType: type,
-      columnImages: images?.join(","),
+      columnImages: images?.join(','),
       columnModuleName: moduleName,
       columnMessageType: messageType,
       columnModuleType: moduleType,
@@ -49,7 +49,7 @@ class ChatItem {
     content = map[columnContent] as String?;
     time = map[columnTime] as int?;
     type = map[columnType] as int?;
-    images = (map[columnImages] as String?)?.split(",");
+    images = (map[columnImages] as String?)?.split(',');
     moduleName = map[columnModuleName] as int?;
     moduleType = map[columnModuleType] as String?;
     messageType = map[columnMessageType] as int?;
@@ -106,7 +106,7 @@ class ChatItemProvider extends DbBase {
 
   //获取最新的一条chatitem，根据parentID
   Future<ChatItem?> getLatestChatItem(int parentID) async {
-    List<Map<String, Object?>> maps = await super.database.query(tableName, columns: [columnContent, columnImages, columnModuleName, columnModuleType, columnParentID, columnRequestID, columnStatus, columnMessageType, columnTime, columnType, columnExtra], where: '$columnParentID = ?', whereArgs: [parentID], orderBy: '$columnTime DESC', limit: 1);
+    var maps = await super.database.query(tableName, columns: [columnContent, columnImages, columnModuleName, columnModuleType, columnParentID, columnRequestID, columnStatus, columnMessageType, columnTime, columnType, columnExtra], where: '$columnParentID = ?', whereArgs: [parentID], orderBy: '$columnTime DESC', limit: 1);
     if (maps.isNotEmpty) {
       return ChatItem.fromMap(maps.first);
     }
@@ -114,15 +114,15 @@ class ChatItemProvider extends DbBase {
   }
 
   Future<List<ChatItem>> getChatItems(int parentID) async {
-    List<Map<String, Object?>> maps = await super.database.query(tableName, columns: [columnContent, columnImages, columnModuleName, columnModuleType, columnMessageType, columnParentID, columnRequestID, columnStatus, columnTime, columnType, columnExtra], where: '$columnParentID = ?', whereArgs: [parentID]);
+    var maps = await super.database.query(tableName, columns: [columnContent, columnImages, columnModuleName, columnModuleType, columnMessageType, columnParentID, columnRequestID, columnStatus, columnTime, columnType, columnExtra], where: '$columnParentID = ?', whereArgs: [parentID]);
     if (maps.isNotEmpty) {
-      return maps.map((e) => ChatItem.fromMap(e)).toList();
+      return maps.map(ChatItem.fromMap).toList();
     }
     return [];
   }
 
   Future<ChatItem?> getChatItem(int time) async {
-    List<Map<String, Object?>> maps = await super.database.query(tableName, columns: [columnContent, columnImages, columnModuleName, columnModuleType, columnParentID, columnRequestID, columnStatus, columnTime, columnMessageType, columnType, columnTime, columnExtra], where: '$columnTime = ?', whereArgs: [time]);
+    var maps = await super.database.query(tableName, columns: [columnContent, columnImages, columnModuleName, columnModuleType, columnParentID, columnRequestID, columnStatus, columnTime, columnMessageType, columnType, columnTime, columnExtra], where: '$columnTime = ?', whereArgs: [time]);
     if (maps.isNotEmpty) {
       return ChatItem.fromMap(maps.first);
     }

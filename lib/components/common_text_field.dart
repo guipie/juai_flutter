@@ -1,5 +1,5 @@
-import 'package:chat_bot/base.dart';
-import 'package:chat_bot/constants/theme.dart';
+import '../base.dart';
+import '../constants/theme.dart';
 import 'package:flutter/cupertino.dart';
 
 class CommonTextField extends ConsumerWidget {
@@ -11,15 +11,7 @@ class CommonTextField extends ConsumerWidget {
   final int? maxLength;
   final FocusNode? focusNode;
 
-  const CommonTextField(
-      {super.key,
-      this.focusNode,
-      this.minLine = 1,
-      required this.controller,
-      required this.hintText,
-      this.maxLength,
-      this.color,
-      this.maxLine = 1});
+  const CommonTextField({super.key, this.focusNode, this.minLine = 1, required this.controller, required this.hintText, this.maxLength, this.color, this.maxLine = 1});
 
   @override
   Widget build(BuildContext context, ref) {
@@ -38,7 +30,7 @@ class CommonTextField extends ConsumerWidget {
       style: Theme.of(context).textTheme.titleMedium,
       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
       decoration: BoxDecoration(
-        color: ref.watch(themeProvider).inputPanelBg(),
+        color: ref.watch(themeProvider).defaultBgColor(),
         borderRadius: BorderRadius.circular(5),
       ),
     );

@@ -10,13 +10,13 @@ PromptRepository promptRepository(Ref ref) {
 }
 
 class PromptRepository extends BaseRepository<PromptRes> {
-  PromptRepository() : super(listApi: AddressModelAi.prompts, fromJsonT: PromptRes.fromJson);
+  PromptRepository() : super(listApi: ApiModelAi.prompts, fromJsonT: PromptRes.fromJson);
 
   Future<List<PromptRes>> getListByCategory(PromptReq req) async {
     if (req.category == PromptReqCategoryType.all)
       return await getList(req: req.toJson());
     else if (req.category == PromptReqCategoryType.my)
-      return await getList(req: req.toJson(), apiUrl: AddressModelAi.myPrompts);
+      return await getList(req: req.toJson(), apiUrl: ApiModelAi.myPrompts);
     else
       throw Exception('not support');
   }

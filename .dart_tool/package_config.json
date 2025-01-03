@@ -356,6 +356,12 @@
       "languageVersion": "3.1"
     },
     {
+      "name": "fluent_ui",
+      "rootUri": "file:///C:/Users/Administrator/AppData/Local/Pub/Cache/hosted/pub.flutter-io.cn/fluent_ui-4.9.2",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
+    },
+    {
       "name": "flutter",
       "rootUri": "file:///C:/flutter/packages/flutter",
       "packageUri": "lib/",
@@ -378,6 +384,12 @@
       "rootUri": "file:///C:/Users/Administrator/AppData/Local/Pub/Cache/hosted/pub.flutter-io.cn/flutter_gemini-2.0.5",
       "packageUri": "lib/",
       "languageVersion": "3.0"
+    },
+    {
+      "name": "flutter_highlight",
+      "rootUri": "file:///C:/Users/Administrator/AppData/Local/Pub/Cache/hosted/pub.flutter-io.cn/flutter_highlight-0.7.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
     },
     {
       "name": "flutter_highlighter",
@@ -441,9 +453,9 @@
     },
     {
       "name": "flutter_markdown",
-      "rootUri": "file:///C:/Users/Administrator/AppData/Local/Pub/Cache/hosted/pub.flutter-io.cn/flutter_markdown-0.6.20",
+      "rootUri": "file:///C:/Users/Administrator/AppData/Local/Pub/Cache/hosted/pub.flutter-io.cn/flutter_markdown-0.7.4+3",
       "packageUri": "lib/",
-      "languageVersion": "3.2"
+      "languageVersion": "3.3"
     },
     {
       "name": "flutter_native_splash",
@@ -500,12 +512,6 @@
       "languageVersion": "3.2"
     },
     {
-      "name": "fluttertoast",
-      "rootUri": "file:///C:/Users/Administrator/AppData/Local/Pub/Cache/hosted/pub.flutter-io.cn/fluttertoast-8.2.8",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
       "name": "freezed",
       "rootUri": "file:///C:/Users/Administrator/AppData/Local/Pub/Cache/hosted/pub.flutter-io.cn/freezed-2.5.7",
       "packageUri": "lib/",
@@ -540,6 +546,12 @@
       "rootUri": "file:///C:/Users/Administrator/AppData/Local/Pub/Cache/hosted/pub.flutter-io.cn/graphs-2.3.2",
       "packageUri": "lib/",
       "languageVersion": "3.4"
+    },
+    {
+      "name": "highlight",
+      "rootUri": "file:///C:/Users/Administrator/AppData/Local/Pub/Cache/hosted/pub.flutter-io.cn/highlight-0.7.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
     },
     {
       "name": "highlighter",
@@ -752,6 +764,12 @@
       "languageVersion": "3.2"
     },
     {
+      "name": "markdown_widget",
+      "rootUri": "file:///C:/Users/Administrator/AppData/Local/Pub/Cache/git/markdown_widget-ed41a0ff76559bc4fabd2f218a4da89b6317bd4f/",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
+    },
+    {
       "name": "matcher",
       "rootUri": "file:///C:/Users/Administrator/AppData/Local/Pub/Cache/hosted/pub.flutter-io.cn/matcher-0.12.17",
       "packageUri": "lib/",
@@ -762,6 +780,12 @@
       "rootUri": "file:///C:/Users/Administrator/AppData/Local/Pub/Cache/hosted/pub.flutter-io.cn/material_color_utilities-0.11.1",
       "packageUri": "lib/",
       "languageVersion": "2.17"
+    },
+    {
+      "name": "math_expressions",
+      "rootUri": "file:///C:/Users/Administrator/AppData/Local/Pub/Cache/hosted/pub.flutter-io.cn/math_expressions-2.6.0",
+      "packageUri": "lib/",
+      "languageVersion": "3.1"
     },
     {
       "name": "meta",
@@ -950,6 +974,12 @@
       "languageVersion": "2.17"
     },
     {
+      "name": "recase",
+      "rootUri": "file:///C:/Users/Administrator/AppData/Local/Pub/Cache/hosted/pub.flutter-io.cn/recase-4.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "record",
       "rootUri": "file:///C:/Users/Administrator/AppData/Local/Pub/Cache/hosted/pub.flutter-io.cn/record-5.2.0",
       "packageUri": "lib/",
@@ -1066,6 +1096,18 @@
     {
       "name": "screenshot",
       "rootUri": "file:///C:/Users/Administrator/AppData/Local/Pub/Cache/hosted/pub.flutter-io.cn/screenshot-3.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "scroll_pos",
+      "rootUri": "file:///C:/Users/Administrator/AppData/Local/Pub/Cache/hosted/pub.flutter-io.cn/scroll_pos-0.5.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.15"
+    },
+    {
+      "name": "scroll_to_index",
+      "rootUri": "file:///C:/Users/Administrator/AppData/Local/Pub/Cache/hosted/pub.flutter-io.cn/scroll_to_index-3.0.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -1424,13 +1466,13 @@
       "languageVersion": "2.19"
     },
     {
-      "name": "chat_bot",
+      "name": "juai",
       "rootUri": "../",
       "packageUri": "lib/",
       "languageVersion": "3.2"
     }
   ],
-  "generated": "2024-12-10T12:14:17.083872Z",
+  "generated": "2025-01-03T14:56:55.352141Z",
   "generator": "pub",
   "generatorVersion": "3.5.4",
   "flutterRoot": "file:///C:/flutter",

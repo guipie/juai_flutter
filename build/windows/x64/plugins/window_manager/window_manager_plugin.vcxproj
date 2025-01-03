@@ -18,7 +18,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{8DB516C3-3EBA-38CD-A707-E57C1FF75A6A}</ProjectGuid>
+    <ProjectGuid>{7A98ABA0-B19A-3D28-9049-92415F2B4B7C}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <WindowsTargetPlatformVersion>10.0.22621.0</WindowsTargetPlatformVersion>
     <Platform>x64</Platform>
@@ -50,19 +50,19 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
     <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\work\chenyanyi\app\build\windows\x64\plugins\window_manager\Debug\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\work\chenyanyi\juai\build\windows\x64\plugins\window_manager\Debug\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">window_manager_plugin.dir\Debug\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">window_manager_plugin</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.dll</TargetExt>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</LinkIncremental>
     <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</GenerateManifest>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Profile|x64'">D:\work\chenyanyi\app\build\windows\x64\plugins\window_manager\Profile\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Profile|x64'">D:\work\chenyanyi\juai\build\windows\x64\plugins\window_manager\Profile\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Profile|x64'">window_manager_plugin.dir\Profile\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Profile|x64'">window_manager_plugin</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Profile|x64'">.dll</TargetExt>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Profile|x64'">false</LinkIncremental>
     <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Profile|x64'">true</GenerateManifest>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\work\chenyanyi\app\build\windows\x64\plugins\window_manager\Release\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\work\chenyanyi\juai\build\windows\x64\plugins\window_manager\Release\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">window_manager_plugin.dir\Release\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">window_manager_plugin</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.dll</TargetExt>
@@ -72,7 +72,7 @@
   <PropertyGroup />
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>D:\work\chenyanyi\app\windows\flutter\ephemeral;D:\work\chenyanyi\app\windows\flutter\ephemeral\cpp_client_wrapper\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\work\chenyanyi\juai\windows\flutter\ephemeral;D:\work\chenyanyi\juai\windows\flutter\ephemeral\cpp_client_wrapper\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -93,10 +93,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;_WINDOWS;_HAS_EXCEPTIONS=0;FLUTTER_PLUGIN_IMPL;_SILENCE_CXX17_CODECVT_HEADER_DEPRECATION_WARNING;UNICODE;_UNICODE;CMAKE_INTDIR=\"Debug\";window_manager_plugin_EXPORTS</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>D:\work\chenyanyi\app\windows\flutter\ephemeral;D:\work\chenyanyi\app\windows\flutter\ephemeral\cpp_client_wrapper\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\work\chenyanyi\juai\windows\flutter\ephemeral;D:\work\chenyanyi\juai\windows\flutter\ephemeral\cpp_client_wrapper\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>D:\work\chenyanyi\app\windows\flutter\ephemeral;D:\work\chenyanyi\app\windows\flutter\ephemeral\cpp_client_wrapper\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\work\chenyanyi\juai\windows\flutter\ephemeral;D:\work\chenyanyi\juai\windows\flutter\ephemeral\cpp_client_wrapper\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -104,13 +104,13 @@
       <ProxyFileName>%(Filename)_p.c</ProxyFileName>
     </Midl>
     <Link>
-      <AdditionalDependencies>..\..\flutter\Debug\flutter_wrapper_plugin.lib;D:\work\chenyanyi\app\windows\flutter\ephemeral\flutter_windows.dll.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalDependencies>..\..\flutter\Debug\flutter_wrapper_plugin.lib;D:\work\chenyanyi\juai\windows\flutter\ephemeral\flutter_windows.dll.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <ImportLibrary>D:/work/chenyanyi/app/build/windows/x64/plugins/window_manager/Debug/window_manager_plugin.lib</ImportLibrary>
-      <ProgramDataBaseFile>D:/work/chenyanyi/app/build/windows/x64/plugins/window_manager/Debug/window_manager_plugin.pdb</ProgramDataBaseFile>
+      <ImportLibrary>D:/work/chenyanyi/juai/build/windows/x64/plugins/window_manager/Debug/window_manager_plugin.lib</ImportLibrary>
+      <ProgramDataBaseFile>D:/work/chenyanyi/juai/build/windows/x64/plugins/window_manager/Debug/window_manager_plugin.pdb</ProgramDataBaseFile>
       <SubSystem>Console</SubSystem>
     </Link>
     <ProjectReference>
@@ -119,7 +119,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Profile|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>D:\work\chenyanyi\app\windows\flutter\ephemeral;D:\work\chenyanyi\app\windows\flutter\ephemeral\cpp_client_wrapper\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\work\chenyanyi\juai\windows\flutter\ephemeral;D:\work\chenyanyi\juai\windows\flutter\ephemeral\cpp_client_wrapper\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <DisableSpecificWarnings>"4100"</DisableSpecificWarnings>
       <ExceptionHandling>Sync</ExceptionHandling>
@@ -140,10 +140,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;_HAS_EXCEPTIONS=0;FLUTTER_PLUGIN_IMPL;_SILENCE_CXX17_CODECVT_HEADER_DEPRECATION_WARNING;UNICODE;_UNICODE;CMAKE_INTDIR=\"Profile\";window_manager_plugin_EXPORTS</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>D:\work\chenyanyi\app\windows\flutter\ephemeral;D:\work\chenyanyi\app\windows\flutter\ephemeral\cpp_client_wrapper\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\work\chenyanyi\juai\windows\flutter\ephemeral;D:\work\chenyanyi\juai\windows\flutter\ephemeral\cpp_client_wrapper\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>D:\work\chenyanyi\app\windows\flutter\ephemeral;D:\work\chenyanyi\app\windows\flutter\ephemeral\cpp_client_wrapper\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\work\chenyanyi\juai\windows\flutter\ephemeral;D:\work\chenyanyi\juai\windows\flutter\ephemeral\cpp_client_wrapper\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -151,13 +151,13 @@
       <ProxyFileName>%(Filename)_p.c</ProxyFileName>
     </Midl>
     <Link>
-      <AdditionalDependencies>..\..\flutter\Profile\flutter_wrapper_plugin.lib;D:\work\chenyanyi\app\windows\flutter\ephemeral\flutter_windows.dll.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalDependencies>..\..\flutter\Profile\flutter_wrapper_plugin.lib;D:\work\chenyanyi\juai\windows\flutter\ephemeral\flutter_windows.dll.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <ImportLibrary>D:/work/chenyanyi/app/build/windows/x64/plugins/window_manager/Profile/window_manager_plugin.lib</ImportLibrary>
-      <ProgramDataBaseFile>D:/work/chenyanyi/app/build/windows/x64/plugins/window_manager/Profile/window_manager_plugin.pdb</ProgramDataBaseFile>
+      <ImportLibrary>D:/work/chenyanyi/juai/build/windows/x64/plugins/window_manager/Profile/window_manager_plugin.lib</ImportLibrary>
+      <ProgramDataBaseFile>D:/work/chenyanyi/juai/build/windows/x64/plugins/window_manager/Profile/window_manager_plugin.pdb</ProgramDataBaseFile>
       <SubSystem>Console</SubSystem>
     </Link>
     <ProjectReference>
@@ -166,7 +166,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>D:\work\chenyanyi\app\windows\flutter\ephemeral;D:\work\chenyanyi\app\windows\flutter\ephemeral\cpp_client_wrapper\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\work\chenyanyi\juai\windows\flutter\ephemeral;D:\work\chenyanyi\juai\windows\flutter\ephemeral\cpp_client_wrapper\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <DisableSpecificWarnings>"4100"</DisableSpecificWarnings>
       <ExceptionHandling>Sync</ExceptionHandling>
@@ -187,10 +187,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;_HAS_EXCEPTIONS=0;FLUTTER_PLUGIN_IMPL;_SILENCE_CXX17_CODECVT_HEADER_DEPRECATION_WARNING;UNICODE;_UNICODE;CMAKE_INTDIR=\"Release\";window_manager_plugin_EXPORTS</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>D:\work\chenyanyi\app\windows\flutter\ephemeral;D:\work\chenyanyi\app\windows\flutter\ephemeral\cpp_client_wrapper\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\work\chenyanyi\juai\windows\flutter\ephemeral;D:\work\chenyanyi\juai\windows\flutter\ephemeral\cpp_client_wrapper\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>D:\work\chenyanyi\app\windows\flutter\ephemeral;D:\work\chenyanyi\app\windows\flutter\ephemeral\cpp_client_wrapper\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\work\chenyanyi\juai\windows\flutter\ephemeral;D:\work\chenyanyi\juai\windows\flutter\ephemeral\cpp_client_wrapper\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -198,13 +198,13 @@
       <ProxyFileName>%(Filename)_p.c</ProxyFileName>
     </Midl>
     <Link>
-      <AdditionalDependencies>..\..\flutter\Release\flutter_wrapper_plugin.lib;D:\work\chenyanyi\app\windows\flutter\ephemeral\flutter_windows.dll.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalDependencies>..\..\flutter\Release\flutter_wrapper_plugin.lib;D:\work\chenyanyi\juai\windows\flutter\ephemeral\flutter_windows.dll.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <ImportLibrary>D:/work/chenyanyi/app/build/windows/x64/plugins/window_manager/Release/window_manager_plugin.lib</ImportLibrary>
-      <ProgramDataBaseFile>D:/work/chenyanyi/app/build/windows/x64/plugins/window_manager/Release/window_manager_plugin.pdb</ProgramDataBaseFile>
+      <ImportLibrary>D:/work/chenyanyi/juai/build/windows/x64/plugins/window_manager/Release/window_manager_plugin.lib</ImportLibrary>
+      <ProgramDataBaseFile>D:/work/chenyanyi/juai/build/windows/x64/plugins/window_manager/Release/window_manager_plugin.pdb</ProgramDataBaseFile>
       <SubSystem>Console</SubSystem>
     </Link>
     <ProjectReference>
@@ -212,11 +212,11 @@
     </ProjectReference>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <CustomBuild Include="D:\work\chenyanyi\app\windows\flutter\ephemeral\.plugin_symlinks\window_manager\windows\CMakeLists.txt">
+    <CustomBuild Include="D:\work\chenyanyi\juai\windows\flutter\ephemeral\.plugin_symlinks\window_manager\windows\CMakeLists.txt">
       <UseUtf8Encoding>Always</UseUtf8Encoding>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule D:/work/chenyanyi/app/windows/flutter/ephemeral/.plugin_symlinks/window_manager/windows/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule D:/work/chenyanyi/juai/windows/flutter/ephemeral/.plugin_symlinks/window_manager/windows/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
-"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SD:/work/chenyanyi/app/windows -BD:/work/chenyanyi/app/build/windows/x64 --check-stamp-file D:/work/chenyanyi/app/build/windows/x64/plugins/window_manager/CMakeFiles/generate.stamp
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SD:/work/chenyanyi/juai/windows -BD:/work/chenyanyi/juai/build/windows/x64 --check-stamp-file D:/work/chenyanyi/juai/build/windows/x64/plugins/window_manager/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -225,11 +225,11 @@ exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\work\chenyanyi\app\build\windows\x64\plugins\window_manager\CMakeFiles\generate.stamp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\work\chenyanyi\juai\build\windows\x64\plugins\window_manager\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Profile|x64'">Building Custom Rule D:/work/chenyanyi/app/windows/flutter/ephemeral/.plugin_symlinks/window_manager/windows/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Profile|x64'">Building Custom Rule D:/work/chenyanyi/juai/windows/flutter/ephemeral/.plugin_symlinks/window_manager/windows/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Profile|x64'">setlocal
-"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SD:/work/chenyanyi/app/windows -BD:/work/chenyanyi/app/build/windows/x64 --check-stamp-file D:/work/chenyanyi/app/build/windows/x64/plugins/window_manager/CMakeFiles/generate.stamp
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SD:/work/chenyanyi/juai/windows -BD:/work/chenyanyi/juai/build/windows/x64 --check-stamp-file D:/work/chenyanyi/juai/build/windows/x64/plugins/window_manager/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -238,11 +238,11 @@ exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Profile|x64'">%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Profile|x64'">D:\work\chenyanyi\app\build\windows\x64\plugins\window_manager\CMakeFiles\generate.stamp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Profile|x64'">D:\work\chenyanyi\juai\build\windows\x64\plugins\window_manager\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Profile|x64'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule D:/work/chenyanyi/app/windows/flutter/ephemeral/.plugin_symlinks/window_manager/windows/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule D:/work/chenyanyi/juai/windows/flutter/ephemeral/.plugin_symlinks/window_manager/windows/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
-"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SD:/work/chenyanyi/app/windows -BD:/work/chenyanyi/app/build/windows/x64 --check-stamp-file D:/work/chenyanyi/app/build/windows/x64/plugins/window_manager/CMakeFiles/generate.stamp
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SD:/work/chenyanyi/juai/windows -BD:/work/chenyanyi/juai/build/windows/x64 --check-stamp-file D:/work/chenyanyi/juai/build/windows/x64/plugins/window_manager/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -251,29 +251,29 @@ exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\work\chenyanyi\app\build\windows\x64\plugins\window_manager\CMakeFiles\generate.stamp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\work\chenyanyi\juai\build\windows\x64\plugins\window_manager\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="D:\work\chenyanyi\app\windows\flutter\ephemeral\.plugin_symlinks\window_manager\windows\window_manager.cpp" />
-    <ClCompile Include="D:\work\chenyanyi\app\windows\flutter\ephemeral\.plugin_symlinks\window_manager\windows\window_manager_plugin.cpp" />
+    <ClCompile Include="D:\work\chenyanyi\juai\windows\flutter\ephemeral\.plugin_symlinks\window_manager\windows\window_manager.cpp" />
+    <ClCompile Include="D:\work\chenyanyi\juai\windows\flutter\ephemeral\.plugin_symlinks\window_manager\windows\window_manager_plugin.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="D:\work\chenyanyi\app\build\windows\x64\ZERO_CHECK.vcxproj">
-      <Project>{0EBD7D4E-2C5A-363A-9B72-AA2313E9B82F}</Project>
+    <ProjectReference Include="D:\work\chenyanyi\juai\build\windows\x64\ZERO_CHECK.vcxproj">
+      <Project>{F8E934E8-3B09-3EAE-8810-9FA64EFB9655}</Project>
       <Name>ZERO_CHECK</Name>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </ProjectReference>
-    <ProjectReference Include="D:\work\chenyanyi\app\build\windows\x64\flutter\flutter_assemble.vcxproj">
-      <Project>{0E1F448C-0FE3-3E14-9D92-D991B70404B2}</Project>
+    <ProjectReference Include="D:\work\chenyanyi\juai\build\windows\x64\flutter\flutter_assemble.vcxproj">
+      <Project>{91232732-024A-3864-95CF-ACBAA1B4C902}</Project>
       <Name>flutter_assemble</Name>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </ProjectReference>
-    <ProjectReference Include="D:\work\chenyanyi\app\build\windows\x64\flutter\flutter_wrapper_plugin.vcxproj">
-      <Project>{CEF2B2A4-090E-37F2-A800-03670B26FF53}</Project>
+    <ProjectReference Include="D:\work\chenyanyi\juai\build\windows\x64\flutter\flutter_wrapper_plugin.vcxproj">
+      <Project>{7A3A0076-5428-3DE9-9594-281D7541CF5E}</Project>
       <Name>flutter_wrapper_plugin</Name>
     </ProjectReference>
   </ItemGroup>

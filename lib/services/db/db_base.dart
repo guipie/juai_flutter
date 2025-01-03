@@ -1,25 +1,31 @@
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
-
 import '../../base.dart';
 import '../../constants/enums/common_enum.dart';
 import 'chat_item.dart';
+import 'db_aimodel.dart';
+import 'db_chat.dart';
 import 'db_coversation.dart';
+import 'db_coversation_prompt.dart';
 import 'db_dict.dart';
 import 'prompt_item.dart';
+
+export 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
 class MyDbProvider {
   static void getInstance() {
     PromptItemProvider();
     DictProvider.getInstance();
-    ChatItemProvider();
+    DbChat();
     DbConversation();
+    DbConversationAiModel();
+    DbConversationPrompt();
   }
 }
 
 abstract class DbBase {
-  static const String _dbName = 'juai202411302159.db';
+  static const String _dbName = 'juai010120.db';
   static const int _newVersion = 1;
   static int _oldVersion = 0;
 
@@ -197,15 +203,38 @@ abstract class DbBase {
   }
 
   Database get database => _database!;
+  _getIdVal(Map<String, Object?> values) {
+    return values.entries.firstWhere((element) => element.key.toLowerCase() == 'id', orElse: () => const MapEntry('id', 0)).value.toInt();
+  }
 
   ///插入数据
   insert(Map<String, Object?> values) async {
+    var idVal = _getIdVal(values);
+    if (idVal > 0 && await isExist({'id': _getIdVal(values)})) {
+      return 0;
+    }
     var insertData = <String, Object?>{};
     for (var element in values.entries) {
       if (element.value != null) insertData[element.key] = element.value;
       if (element.value.runtimeType == bool) insertData[element.key] = element.value.toString().toUpperCase() == 'TRUE' ? 1 : 0;
     }
     return database.insert(tableName, insertData);
+  }
+
+  insertOrUpdate(Map<String, Object?> values) async {
+    assert(values.keys.map((key) => key.toLowerCase()).contains('id'), 'no id');
+    // var insertData = <String, Object?>{};
+    // for (var element in values.entries) {
+    //   if (element.value != null) insertData[element.key] = element.value;
+    //   if (element.value.runtimeType == bool) insertData[element.key] = element.value.toString().toUpperCase() == 'TRUE' ? 1 : 0;
+    // }
+    var id = _getIdVal(values);
+    var model = await findById(id);
+    if (model != null) {
+      return database.update(tableName, values, where: 'id=$id');
+    } else {
+      return database.insert(tableName, values);
+    }
   }
 
   ///删除数据
@@ -216,11 +245,23 @@ abstract class DbBase {
       var key = keys[i];
       where.add('$key=${json[key]}');
     }
-
     return database.delete(
       tableName,
       where: where.join(' and '),
     );
+  }
+
+  removeById(int id) async {
+    var res = await database.delete(
+      tableName,
+      where: 'id=?',
+      whereArgs: [id],
+    );
+    return res;
+  }
+
+  removeAll() async {
+    return database.delete(tableName);
   }
 
   ///修改数据
@@ -243,8 +284,28 @@ abstract class DbBase {
     );
   }
 
+  updateById(int id, Map<String, Object?> updateData) async {
+    return database.update(
+      tableName,
+      updateData,
+      where: 'id=$id',
+    );
+  }
+
   ///缓存的数据
   static final Map<String, List<Map<String, Object?>>> _findCache = {};
+
+  ///根据id查询单个x
+  Future<Map<String, Object?>?> findById(int id) async {
+    var one = await find(where: {'id': id});
+    return one.isEmpty ? null : one.first;
+  }
+
+  //根据查询条件判断是否存储记录
+  Future<bool> isExist(Map<String, dynamic> where) async {
+    var one = await find(where: where);
+    return one.isNotEmpty;
+  }
 
   ///查找数据
   Future<List<Map<String, Object?>>> find({

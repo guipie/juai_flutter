@@ -1,7 +1,7 @@
-import 'package:chat_bot/base.dart';
-import 'package:chat_bot/base/api.dart';
-import 'package:chat_bot/hive_bean/generate_content.dart';
-import 'package:chat_bot/hive_bean/openai_bean.dart';
+import '../../base.dart';
+import '../api.dart';
+import '../../hive_bean/generate_content.dart';
+import '../../hive_bean/openai_bean.dart';
 import 'package:dart_openai/dart_openai.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -20,8 +20,8 @@ class ChatGPTImpl extends APIImpl {
 
   @override
   Future<void> initAPI(AllModelBean bean) async {
-    OpenAI.apiKey = bean.apiKey ?? "";
-    OpenAI.baseUrl = (bean.apiServer ?? "");
+    OpenAI.apiKey = bean.apiKey ?? '';
+    OpenAI.baseUrl = (bean.apiServer ?? '');
     OpenAI.organization = bean.organization;
     OpenAI.requestsTimeOut = const Duration(seconds: 6000);
     OpenAI.showLogs = true;
@@ -41,16 +41,8 @@ class ChatGPTImpl extends APIImpl {
         .map((e) => OpenAIChatCompletionChoiceMessageModel(
               role: getTypeByRole(e.role),
               content: [
-                ...e.content
-                    .map((e) =>
-                        OpenAIChatCompletionChoiceMessageContentItemModel.text(
-                            e))
-                    .toList(),
-                ...e.images
-                    .map((e) =>
-                        OpenAIChatCompletionChoiceMessageContentItemModel
-                            .imageBase64(e))
-                    .toList(),
+                ...e.content.map(OpenAIChatCompletionChoiceMessageContentItemModel.text).toList(),
+                ...e.images.map(OpenAIChatCompletionChoiceMessageContentItemModel.imageBase64).toList(),
               ],
             ))
         .toList();
@@ -65,8 +57,7 @@ class ChatGPTImpl extends APIImpl {
       temperature: temperature,
     ));
 
-    return GenerateContentBean(
-        content: result.choices.first.message.content?.first.text ?? "");
+    return GenerateContentBean(content: result.choices.first.message.content?.first.text ?? '');
   }
 
   OpenAIChatMessageRole getTypeByRole(int type) {
@@ -94,16 +85,8 @@ class ChatGPTImpl extends APIImpl {
           .map((e) => OpenAIChatCompletionChoiceMessageModel(
                 role: getTypeByRole(e.role),
                 content: [
-                  ...e.content
-                      .map((e) =>
-                          OpenAIChatCompletionChoiceMessageContentItemModel
-                              .text(e))
-                      .toList(),
-                  ...e.images
-                      .map((e) =>
-                          OpenAIChatCompletionChoiceMessageContentItemModel
-                              .imageBase64(e))
-                      .toList(),
+                  ...e.content.map(OpenAIChatCompletionChoiceMessageContentItemModel.text).toList(),
+                  ...e.images.map(OpenAIChatCompletionChoiceMessageContentItemModel.imageBase64).toList(),
                 ],
               ))
           .toList();
@@ -119,19 +102,17 @@ class ChatGPTImpl extends APIImpl {
         temperature: double.tryParse(temperature) ?? 1.0,
       )
           .map((event) {
-        var result = "";
+        var result = '';
 
         try {
-          if (event.choices.isNotEmpty &&
-              event.choices.first.delta.content != null) {
-            List<OpenAIChatCompletionChoiceMessageContentItemModel?>? content =
-                event.choices.first.delta.content;
+          if (event.choices.isNotEmpty && event.choices.first.delta.content != null) {
+            var content = event.choices.first.delta.content;
             content?.forEach((element) {
               try {
-                if (element?.type == "text") {
-                  result += element?.text ?? "";
-                } else if (element?.type == "image_url") {
-                  result += "![${element?.imageUrl}](${element?.imageUrl})";
+                if (element?.type == 'text') {
+                  result += element?.text ?? '';
+                } else if (element?.type == 'image_url') {
+                  result += '![${element?.imageUrl}](${element?.imageUrl})';
                 }
               } catch (e) {}
             });
@@ -145,12 +126,11 @@ class ChatGPTImpl extends APIImpl {
   }
 
   @override
-  Future<File?> text2TTS(
-      AllModelBean bean, String content, String voice) async {
+  Future<File?> text2TTS(AllModelBean bean, String content, String voice) async {
     try {
       initAPI(bean);
-      File speechFile = await OpenAI.instance.audio.createSpeech(
-        model: "tts-1",
+      var speechFile = await OpenAI.instance.audio.createSpeech(
+        model: 'tts-1',
         input: content,
         voice: voice.toLowerCase(),
         responseFormat: OpenAIAudioSpeechResponseFormat.mp3,
@@ -171,10 +151,9 @@ class ChatGPTImpl extends APIImpl {
   Future<String?> tts2Text(AllModelBean bean, String ttsFile) async {
     try {
       initAPI(bean);
-      OpenAIAudioModel transcription =
-          await OpenAI.instance.audio.createTranscription(
+      var transcription = await OpenAI.instance.audio.createTranscription(
         file: File(ttsFile),
-        model: bean.getWhisperModels.first.id ?? "",
+        model: bean.getWhisperModels.first.id ?? '',
         responseFormat: OpenAIAudioResponseFormat.text,
       );
       return transcription.text;
@@ -183,7 +162,7 @@ class ChatGPTImpl extends APIImpl {
       return null;
     } catch (e) {
       e.toString().fail();
-      return "";
+      return '';
     }
   }
 
@@ -191,7 +170,7 @@ class ChatGPTImpl extends APIImpl {
   Future<bool> validateApiKey(AllModelBean bean) async {
     try {
       initAPI(bean);
-      List<OpenAIModelModel> models = await OpenAI.instance.model.list();
+      var models = await OpenAI.instance.model.list();
 
       eDismiss();
       if (models.isNotEmpty) {
@@ -212,9 +191,7 @@ class ChatGPTImpl extends APIImpl {
   Future<List<SupportedModels>> getSupportModules(AllModelBean bean) async {
     try {
       initAPI(bean);
-      var result = (await OpenAI.instance.model.list())
-          .map((e) => SupportedModels(ownedBy: e.ownedBy, id: e.id))
-          .toList();
+      var result = (await OpenAI.instance.model.list()).map((e) => SupportedModels(ownedBy: e.ownedBy, id: e.id)).toList();
       eDismiss();
       return result;
     } on RequestFailedException catch (e) {
@@ -235,8 +212,8 @@ class ChatGPTImpl extends APIImpl {
   ) async {
     initAPI(bean);
 
-    OpenAIImageModel image = await OpenAI.instance.image.create(
-      model: "dall-e-3",
+    var image = await OpenAI.instance.image.create(
+      model: 'dall-e-3',
       prompt: prompt,
       n: 1,
       size: size,
@@ -245,9 +222,9 @@ class ChatGPTImpl extends APIImpl {
       responseFormat: OpenAIImageResponseFormat.url,
     );
 
-    List<OpenAIImageData> images = [];
+    var images = <OpenAIImageData>[];
 
-    for (int index = 0; index < image.data.length; index++) {
+    for (var index = 0; index < image.data.length; index++) {
       final currentItem = image.data[index];
       images.add(currentItem);
     }
@@ -271,15 +248,8 @@ class ChatGPTImpl extends APIImpl {
       final list = chatItems
           .where((element) => element.content.isNotEmpty)
           .map((e) => OpenAIChatCompletionChoiceMessageModel(
-                role: e.role == ChatType.user.index
-                    ? OpenAIChatMessageRole.user
-                    : OpenAIChatMessageRole.assistant,
-                content: e.content
-                    .map((e) =>
-                        OpenAIChatCompletionChoiceMessageContentItemModel.text(
-                          e,
-                        ))
-                    .toList(),
+                role: e.role == ChatType.user.index ? OpenAIChatMessageRole.user : OpenAIChatMessageRole.assistant,
+                content: e.content.map(OpenAIChatCompletionChoiceMessageContentItemModel.text).toList(),
               ))
           .toList();
 
@@ -300,7 +270,7 @@ class ChatGPTImpl extends APIImpl {
         presencePenalty: 0,
         temperature: double.tryParse(temperature) ?? 1.0,
       );
-      return result.choices.first.message.content?.first.text?.trim() ?? "";
+      return result.choices.first.message.content?.first.text?.trim() ?? '';
     } on RequestFailedException catch (e) {
       e.message.fail();
       return S.current.new_chat;

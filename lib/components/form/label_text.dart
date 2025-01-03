@@ -29,9 +29,8 @@ class _LabelTextWidgetState extends State<LabelTextWidget> {
     return Container(
       margin: const EdgeInsets.all(4),
       padding: const EdgeInsets.symmetric(vertical: 8),
-      decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.secondary,
-        borderRadius: const BorderRadius.all(Radius.circular(8)),
+      decoration: const BoxDecoration(
+        borderRadius: BorderRadius.all(Radius.circular(8)),
       ),
       child: InkWell(
         onTap: widget.onTap,

@@ -1,5 +1,4 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -176,9 +175,8 @@ class ThemeViewModel extends StateNotifier<BaseTheme> {
     var type = SpUtil.getInt(spLightTheme, defValue: ThemeType.system.index);
     state = _getThemeByType(type);
   }
-
   ThemeType get type => ThemeType.getType(SpUtil.getInt(spLightTheme, defValue: ThemeType.system.index));
-
+  bool get isDarkMode => type == ThemeType.dark;
   void change(int t) {
     state = _getThemeByType(t);
     SpUtil.putInt(
@@ -189,17 +187,15 @@ class ThemeViewModel extends StateNotifier<BaseTheme> {
 }
 
 abstract class BaseTheme {
-  ThemeData theme(Color primaryColor);
+  FluentThemeData theme(Color primaryColor);
 
   Color xff00ff();
 
   Color timeColor();
 
-  Color xffF4F4F6();
+  Color secondBgColor();
 
-  Color xffF6F6F6();
-
-  Color inputPanelBg();
+  Color secondColor();
 
   Color pinedBgColor();
 
@@ -218,118 +214,10 @@ abstract class BaseTheme {
 
 class LightTheme extends BaseTheme {
   @override
-  ThemeData theme(Color primaryColor) {
-    return ThemeData.light().copyWith(
-      // extensions: [TDTheme.defaultData()],
-      colorScheme: ColorScheme.light(
-        primary: primaryColor,
-        primaryFixed: primaryColor.withOpacity(0.8),
-        onPrimary: primaryColor.withAlpha(20),
-        secondary: Colors.white,
-        onSecondary: Colors.white30,
-        surface: Colors.black,
-        onSurface: Colors.black87,
-        error: const Color(0xffFF3B30),
-        onError: Colors.white,
-        brightness: Brightness.light,
-      ),
-      scaffoldBackgroundColor: const Color(0xffEDEDED),
-      primaryColor: primaryColor,
-      hoverColor: primaryColor.withAlpha(10),
-      cardColor: Colors.white,
-      canvasColor: Colors.white,
-      cupertinoOverrideTheme: CupertinoThemeData(
-        primaryColor: primaryColor,
-      ),
-      textTheme: const TextTheme(
-        titleSmall: TextStyle(
-          color: Color(0xff091807),
-          fontWeight: FontWeight.w500,
-        ),
-        titleMedium: TextStyle(
-          color: Color(0xff091807),
-          fontWeight: FontWeight.w500,
-        ),
-        titleLarge: TextStyle(
-          color: Color(0xff091807),
-          fontWeight: FontWeight.w500,
-        ),
-        bodyLarge: TextStyle(
-          color: Color(0xff676767),
-          fontSize: 18,
-        ),
-        bodyMedium: TextStyle(
-          color: Color(0xff676767),
-          fontSize: 16,
-        ),
-        bodySmall: TextStyle(
-          color: Color(0xff676767),
-          fontSize: 12,
-        ),
-      ),
-      cardTheme: CardTheme(
-        color: Colors.white,
-        elevation: 0,
-        margin: EdgeInsets.zero,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8),
-        ),
-      ),
-      dividerTheme: const DividerThemeData(
-        color: Color(0xffE7E7E7),
-        space: 1,
-        thickness: 1,
-        indent: 15,
-      ),
-      appBarTheme: const AppBarTheme(
-        //配置leading颜色
-        iconTheme: IconThemeData(
-          color: Color(0xff181818),
-          size: 18,
-        ),
-        scrolledUnderElevation: 0,
-        backgroundColor: Color(0xffEDEDED),
-        titleTextStyle: TextStyle(
-          color: Color(0xff181818),
-          fontSize: 18,
-          fontWeight: FontWeight.bold,
-        ),
-        elevation: 0.1,
-        centerTitle: true,
-        actionsIconTheme: IconThemeData(
-          color: Color(0xff181818),
-          size: 16,
-        ),
-      ),
-      highlightColor: Colors.transparent,
-      splashColor: Colors.transparent,
-      bottomNavigationBarTheme: BottomNavigationBarThemeData(
-        backgroundColor: const Color(0xffF6F6F7),
-        selectedItemColor: primaryColor,
-        unselectedItemColor: const Color(0xff181818),
-        selectedLabelStyle: TextStyle(
-          color: primaryColor,
-          fontSize: 12,
-        ),
-        unselectedLabelStyle: const TextStyle(
-          color: Color(0xff181818),
-          fontSize: 12,
-        ),
-        selectedIconTheme: IconThemeData(
-          color: primaryColor,
-          size: 22,
-        ),
-        unselectedIconTheme: const IconThemeData(
-          color: Color(0xff181818),
-          size: 22,
-        ),
-      ),
-      pageTransitionsTheme: const PageTransitionsTheme(
-        builders: {
-          TargetPlatform.android: CupertinoPageTransitionsBuilder(),
-          TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
-        },
-      ),
+  FluentThemeData theme(Color primaryColor) {
+    return FluentThemeData(
+      accentColor: Colors.green,
+      visualDensity: VisualDensity.standard,
     );
   }
 
@@ -339,18 +227,13 @@ class LightTheme extends BaseTheme {
   }
 
   @override
-  Color xffF4F4F6() {
-    return const Color(0xffF4F4F6);
+  Color secondBgColor() {
+    return const Color(0Xfffcfff5);
   }
 
   @override
-  Color xffF6F6F6() {
-    return const Color(0xffF6F6F6);
-  }
-
-  @override
-  Color inputPanelBg() {
-    return Colors.white;
+  Color secondColor() {
+    return const Color(0Xff70716d);
   }
 
   @override
@@ -370,7 +253,7 @@ class LightTheme extends BaseTheme {
 
   @override
   Color divideBgColor() {
-    return Colors.white;
+    return const Color(0Xffeef1e8);
   }
 
   @override
@@ -386,120 +269,12 @@ class LightTheme extends BaseTheme {
 
 class DarkTheme extends BaseTheme {
   @override
-  ThemeData theme(Color primaryColor) {
-    return ThemeData.dark().copyWith(
-      colorScheme: ColorScheme.dark(
-        primary: primaryColor,
-        primaryFixed: primaryColor.withAlpha(80),
-        onPrimary: primaryColor.withAlpha(10),
-        secondary: Colors.black,
-        onSecondary: Colors.black87,
-        surface: Colors.white,
-        onSurface: Colors.white70,
-        error: const Color(0xffFF3B30),
-        onError: Colors.white,
-        brightness: Brightness.dark,
-      ),
-      scaffoldBackgroundColor: const Color(0xff111111),
-      primaryColor: primaryColor,
-      hoverColor: primaryColor.withAlpha(10),
-      cardColor: const Color(0xff2C2C2C),
-      canvasColor: const Color(0xff2C2C2C),
-      textTheme: const TextTheme(
-        titleSmall: TextStyle(
-          color: Color(0xffD1D1D1),
-          fontSize: 14,
-          fontWeight: FontWeight.normal,
-        ),
-        titleMedium: TextStyle(
-          color: Color(0xffD1D1D1),
-          fontSize: 16,
-          fontWeight: FontWeight.normal,
-        ),
-        titleLarge: TextStyle(
-          color: Color(0xffD1D1D1),
-          fontSize: 18,
-          fontWeight: FontWeight.normal,
-        ),
-        bodyLarge: TextStyle(
-          color: Color(0xff5B5B5B),
-          fontSize: 18,
-        ),
-        bodyMedium: TextStyle(
-          color: Color(0xff5B5B5B),
-          fontSize: 16,
-        ),
-        bodySmall: TextStyle(
-          color: Color(0xff5B5B5B),
-          fontSize: 12,
-        ),
-      ),
-      cardTheme: CardTheme(
-        color: const Color(0xff191919),
-        elevation: 0,
-        margin: EdgeInsets.zero,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8),
-        ),
-      ),
-      dividerTheme: const DividerThemeData(
-        color: Color(0xff2A2A2A),
-        space: 1,
-        thickness: 1,
-        indent: 15,
-      ),
-      appBarTheme: const AppBarTheme(
-        //配置leading颜色
-        iconTheme: IconThemeData(
-          color: Color(0xffCFCFCF),
-          size: 18,
-        ),
-        scrolledUnderElevation: 0,
-        backgroundColor: Color(0xff1C1C1C),
-        titleTextStyle: TextStyle(
-          color: Color(0xffCFCFCF),
-          fontSize: 18,
-          fontWeight: FontWeight.bold,
-        ),
-        elevation: 0.1,
-        centerTitle: true,
-        actionsIconTheme: IconThemeData(
-          color: Color(0xffCFCFCF),
-          size: 16,
-        ),
-      ),
-      highlightColor: Colors.transparent,
-      splashColor: Colors.transparent,
-      cupertinoOverrideTheme: CupertinoThemeData(
-        primaryColor: primaryColor,
-      ),
-      bottomNavigationBarTheme: BottomNavigationBarThemeData(
-        backgroundColor: const Color(0xff1C1C1C),
-        selectedItemColor: primaryColor,
-        unselectedItemColor: const Color(0xffCFCFCF),
-        selectedLabelStyle: TextStyle(
-          color: primaryColor,
-          fontSize: 12,
-        ),
-        unselectedLabelStyle: const TextStyle(
-          color: Color(0xffCFCFCF),
-          fontSize: 12,
-        ),
-        selectedIconTheme: IconThemeData(
-          color: primaryColor,
-          size: 22,
-        ),
-        unselectedIconTheme: const IconThemeData(
-          color: Color(0xffCFCFCF),
-          size: 22,
-        ),
-      ),
-      pageTransitionsTheme: const PageTransitionsTheme(
-        builders: {
-          TargetPlatform.android: CupertinoPageTransitionsBuilder(),
-          TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
-        },
-      ),
+  FluentThemeData theme(Color primaryColor) {
+    return FluentThemeData(
+      brightness: Brightness.dark,
+      accentColor: Colors.green,
+      visualDensity: VisualDensity.standard,
+      scaffoldBackgroundColor: Colors.black,
     );
   }
 
@@ -509,18 +284,13 @@ class DarkTheme extends BaseTheme {
   }
 
   @override
-  Color xffF4F4F6() {
-    return const Color(0xffF4F4F6);
+  Color secondBgColor() {
+    return const Color(0Xff1c1c1b);
   }
 
   @override
-  Color xffF6F6F6() {
-    return const Color(0xff1C1C1C);
-  }
-
-  @override
-  Color inputPanelBg() {
-    return const Color(0xff282828);
+  Color secondColor() {
+    return const Color(0Xfffcfff5);
   }
 
   @override

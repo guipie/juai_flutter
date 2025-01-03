@@ -35,32 +35,31 @@ class SpUtil {
 
   /// get obj.
   static T? getObj<T>(String key, T Function(Map v) f, {T? defValue}) {
-    Map? map = getObject(key);
+    var map = getObject(key);
     return map == null ? defValue : f(map);
   }
 
   /// get object.
   static Map? getObject(String key) {
     if (_prefs == null) return null;
-    String? data = _prefs!.getString(key);
+    var data = _prefs!.getString(key);
     return (data == null || data.isEmpty) ? null : json.decode(data);
   }
 
   /// put object list.
   static Future<bool>? putObjectList(String key, List<Object> list) {
     if (_prefs == null) return null;
-    List<String> dataList = list.map((value) {
+    var dataList = list.map((value) {
       return json.encode(value);
     }).toList();
     return _prefs!.setStringList(key, dataList);
   }
 
   /// get obj list.
-  static List<T>? getObjList<T>(String key, T Function(Map v) f,
-      {List<T> defValue = const []}) {
-    List<Map>? dataList = getObjectList(key);
-    List<T>? list = dataList?.map((value) {
-      return f(value);
+  static List<T>? getObjList<T>(String key, T Function(Map<String, dynamic> v) f, {List<T> defValue = const []}) {
+    var dataList = getObjectList(key);
+    var list = dataList?.map((value) {
+      return f(value as Map<String, dynamic>);
     }).toList();
     return list ?? defValue;
   }
@@ -68,7 +67,7 @@ class SpUtil {
   /// get object list.
   static List<Map>? getObjectList(String key) {
     if (_prefs == null) return null;
-    List<String>? dataLis = _prefs!.getStringList(key);
+    var dataLis = _prefs!.getStringList(key);
     return dataLis?.map((value) {
       Map dataMap = json.decode(value);
       return dataMap;
@@ -76,9 +75,9 @@ class SpUtil {
   }
 
   /// get string.
-  static String getString(String key, {String defValue = ''}) {
+  static String getString(String key, {String defValue = '', String prefix = ''}) {
     if (_prefs == null) return defValue;
-    return _prefs!.getString(key) ?? defValue;
+    return prefix + (_prefs!.getString(key) ?? defValue);
   }
 
   /// put string.
@@ -124,8 +123,7 @@ class SpUtil {
   }
 
   /// get string list.
-  static List<String> getStringList(String key,
-      {List<String> defValue = const []}) {
+  static List<String> getStringList(String key, {List<String> defValue = const []}) {
     if (_prefs == null) return defValue;
     return _prefs!.getStringList(key) ?? defValue;
   }
@@ -146,6 +144,10 @@ class SpUtil {
   static bool haveKey(String key) {
     if (_prefs == null) return false;
     return _prefs!.getKeys().contains(key);
+  }
+
+  static bool haveNoKey(String key) {
+    return !haveKey(key);
   }
 
   /// get keys.

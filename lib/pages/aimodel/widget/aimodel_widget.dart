@@ -1,7 +1,6 @@
 import '../../../base.dart';
 import '../../../components/mouse_hover_item.dart';
 import '../../../components/paging/paging_widget.dart';
-import '../../../components/td/src/components/search/td_search_bar.dart';
 import '../../../components/text_tips.dart';
 import '../../../models/prompt/prompt_req_model.dart';
 import '../view_model/aimodel_view_model.dart';
@@ -24,17 +23,6 @@ class AimodelWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                constraints: const BoxConstraints(maxHeight: 80),
-                child: TDSearchBar(
-                  padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 4),
-                  placeHolder: '搜索试试',
-                  autoHeight: false,
-                  backgroundColor: Theme.of(context).colorScheme.onSecondary,
-                  style: TDSearchStyle.square,
-                  onTextChanged: (String text) {},
-                ),
-              ),
               TextTips(
                 S.current.digitalMan,
                 fontSize: 16,

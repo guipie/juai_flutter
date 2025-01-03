@@ -72,7 +72,7 @@ class ScreenShotChatPage extends ConsumerWidget {
                     alignment: Alignment.center,
                     padding: const EdgeInsets.symmetric(vertical: 10),
                     decoration: BoxDecoration(
-                      color: ref.watch(themeProvider).xffF6F6F6(),
+                      color: ref.watch(themeProvider).secondColor(),
                       borderRadius: BorderRadius.circular(5),
                     ),
                     child: Row(
@@ -181,7 +181,7 @@ class ScreenShotChatImagePage extends ConsumerWidget {
                     alignment: Alignment.center,
                     padding: const EdgeInsets.symmetric(vertical: 10),
                     decoration: BoxDecoration(
-                      color: ref.watch(themeProvider).xffF6F6F6(),
+                      color: ref.watch(themeProvider).secondColor(),
                       borderRadius: BorderRadius.circular(5),
                     ),
                     child: Row(

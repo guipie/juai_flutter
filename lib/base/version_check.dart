@@ -1,5 +1,5 @@
-import 'package:chat_bot/base.dart';
-import 'package:chat_bot/components/common_dialog.dart';
+import '../base.dart';
+import '../components/common_dialog.dart';
 import 'package:dio/dio.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -14,13 +14,12 @@ class VersionCheck {
   void checkLastedVersion(BuildContext context) async {
     try {
       if (!Platform.isAndroid) return;
-      PackageInfo packageInfo = await PackageInfo.fromPlatform();
-      int currentVersion = int.parse(packageInfo.buildNumber);
+      var packageInfo = await PackageInfo.fromPlatform();
+      var currentVersion = int.parse(packageInfo.buildNumber);
 
-      var result = await Dio().get(
-          "https://raw.githubusercontent.com/ChatBot-All/chatbot-app/main/version");
+      var result = await Dio().get('https://raw.githubusercontent.com/ChatBot-All/chatbot-app/main/version');
       if (result.statusCode == 200) {
-        int lastedVersion = int.tryParse(result.data) ?? currentVersion;
+        var lastedVersion = int.tryParse(result.data) ?? currentVersion;
         if (lastedVersion > currentVersion) {
           if (context.mounted) {
             showCommonDialog(
@@ -29,8 +28,7 @@ class VersionCheck {
               content: S.current.new_version,
               confirmText: S.current.update_now,
               confirmCallback: () {
-                launchUrl(Uri.parse(
-                    "https://github.com/ChatBot-All/chatbot-app/releases"));
+                launchUrl(Uri.parse('https://github.com/ChatBot-All/chatbot-app/releases'));
               },
             );
           }

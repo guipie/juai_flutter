@@ -18,7 +18,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{C8DBEABF-7997-385F-9E04-E9F1C3110D6A}</ProjectGuid>
+    <ProjectGuid>{02C5AB2A-FA56-3A0E-BD28-78DCB858441B}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <WindowsTargetPlatformVersion>10.0.22621.0</WindowsTargetPlatformVersion>
     <Platform>x64</Platform>
@@ -50,19 +50,19 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
     <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\work\chenyanyi\app\build\windows\x64\plugins\permission_handler_windows\Debug\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\work\chenyanyi\juai\build\windows\x64\plugins\permission_handler_windows\Debug\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">permission_handler_windows_plugin.dir\Debug\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">permission_handler_windows_plugin</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.dll</TargetExt>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</LinkIncremental>
     <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</GenerateManifest>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Profile|x64'">D:\work\chenyanyi\app\build\windows\x64\plugins\permission_handler_windows\Profile\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Profile|x64'">D:\work\chenyanyi\juai\build\windows\x64\plugins\permission_handler_windows\Profile\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Profile|x64'">permission_handler_windows_plugin.dir\Profile\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Profile|x64'">permission_handler_windows_plugin</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Profile|x64'">.dll</TargetExt>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Profile|x64'">false</LinkIncremental>
     <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Profile|x64'">true</GenerateManifest>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\work\chenyanyi\app\build\windows\x64\plugins\permission_handler_windows\Release\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\work\chenyanyi\juai\build\windows\x64\plugins\permission_handler_windows\Release\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">permission_handler_windows_plugin.dir\Release\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">permission_handler_windows_plugin</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.dll</TargetExt>
@@ -72,8 +72,8 @@
   <PropertyGroup />
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>D:\work\chenyanyi\app\windows\flutter\ephemeral;D:\work\chenyanyi\app\windows\flutter\ephemeral\cpp_client_wrapper\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <AdditionalOptions>%(AdditionalOptions) /external:I "D:/work/chenyanyi/app/build/windows/x64/include" /await</AdditionalOptions>
+      <AdditionalIncludeDirectories>D:\work\chenyanyi\juai\windows\flutter\ephemeral;D:\work\chenyanyi\juai\windows\flutter\ephemeral\cpp_client_wrapper\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /external:I "D:/work/chenyanyi/juai/build/windows/x64/include" /await</AdditionalOptions>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -95,10 +95,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;_WINDOWS;_HAS_EXCEPTIONS=0;FLUTTER_PLUGIN_IMPL;UNICODE;_UNICODE;CMAKE_INTDIR=\"Debug\";permission_handler_windows_plugin_EXPORTS</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>D:\work\chenyanyi\app\windows\flutter\ephemeral;D:\work\chenyanyi\app\windows\flutter\ephemeral\cpp_client_wrapper\include;D:\work\chenyanyi\app\build\windows\x64\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\work\chenyanyi\juai\windows\flutter\ephemeral;D:\work\chenyanyi\juai\windows\flutter\ephemeral\cpp_client_wrapper\include;D:\work\chenyanyi\juai\build\windows\x64\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>D:\work\chenyanyi\app\windows\flutter\ephemeral;D:\work\chenyanyi\app\windows\flutter\ephemeral\cpp_client_wrapper\include;D:\work\chenyanyi\app\build\windows\x64\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\work\chenyanyi\juai\windows\flutter\ephemeral;D:\work\chenyanyi\juai\windows\flutter\ephemeral\cpp_client_wrapper\include;D:\work\chenyanyi\juai\build\windows\x64\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -106,13 +106,13 @@
       <ProxyFileName>%(Filename)_p.c</ProxyFileName>
     </Midl>
     <Link>
-      <AdditionalDependencies>..\..\flutter\Debug\flutter_wrapper_plugin.lib;D:\work\chenyanyi\app\windows\flutter\ephemeral\flutter_windows.dll.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalDependencies>..\..\flutter\Debug\flutter_wrapper_plugin.lib;D:\work\chenyanyi\juai\windows\flutter\ephemeral\flutter_windows.dll.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <ImportLibrary>D:/work/chenyanyi/app/build/windows/x64/plugins/permission_handler_windows/Debug/permission_handler_windows_plugin.lib</ImportLibrary>
-      <ProgramDataBaseFile>D:/work/chenyanyi/app/build/windows/x64/plugins/permission_handler_windows/Debug/permission_handler_windows_plugin.pdb</ProgramDataBaseFile>
+      <ImportLibrary>D:/work/chenyanyi/juai/build/windows/x64/plugins/permission_handler_windows/Debug/permission_handler_windows_plugin.lib</ImportLibrary>
+      <ProgramDataBaseFile>D:/work/chenyanyi/juai/build/windows/x64/plugins/permission_handler_windows/Debug/permission_handler_windows_plugin.pdb</ProgramDataBaseFile>
       <SubSystem>Console</SubSystem>
     </Link>
     <ProjectReference>
@@ -121,8 +121,8 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Profile|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>D:\work\chenyanyi\app\windows\flutter\ephemeral;D:\work\chenyanyi\app\windows\flutter\ephemeral\cpp_client_wrapper\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <AdditionalOptions>%(AdditionalOptions) /external:I "D:/work/chenyanyi/app/build/windows/x64/include" /await</AdditionalOptions>
+      <AdditionalIncludeDirectories>D:\work\chenyanyi\juai\windows\flutter\ephemeral;D:\work\chenyanyi\juai\windows\flutter\ephemeral\cpp_client_wrapper\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /external:I "D:/work/chenyanyi/juai/build/windows/x64/include" /await</AdditionalOptions>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <DisableSpecificWarnings>"4100"</DisableSpecificWarnings>
       <ExceptionHandling>Sync</ExceptionHandling>
@@ -144,10 +144,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;_HAS_EXCEPTIONS=0;FLUTTER_PLUGIN_IMPL;UNICODE;_UNICODE;CMAKE_INTDIR=\"Profile\";permission_handler_windows_plugin_EXPORTS</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>D:\work\chenyanyi\app\windows\flutter\ephemeral;D:\work\chenyanyi\app\windows\flutter\ephemeral\cpp_client_wrapper\include;D:\work\chenyanyi\app\build\windows\x64\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\work\chenyanyi\juai\windows\flutter\ephemeral;D:\work\chenyanyi\juai\windows\flutter\ephemeral\cpp_client_wrapper\include;D:\work\chenyanyi\juai\build\windows\x64\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>D:\work\chenyanyi\app\windows\flutter\ephemeral;D:\work\chenyanyi\app\windows\flutter\ephemeral\cpp_client_wrapper\include;D:\work\chenyanyi\app\build\windows\x64\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\work\chenyanyi\juai\windows\flutter\ephemeral;D:\work\chenyanyi\juai\windows\flutter\ephemeral\cpp_client_wrapper\include;D:\work\chenyanyi\juai\build\windows\x64\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -155,13 +155,13 @@
       <ProxyFileName>%(Filename)_p.c</ProxyFileName>
     </Midl>
     <Link>
-      <AdditionalDependencies>..\..\flutter\Profile\flutter_wrapper_plugin.lib;D:\work\chenyanyi\app\windows\flutter\ephemeral\flutter_windows.dll.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalDependencies>..\..\flutter\Profile\flutter_wrapper_plugin.lib;D:\work\chenyanyi\juai\windows\flutter\ephemeral\flutter_windows.dll.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <ImportLibrary>D:/work/chenyanyi/app/build/windows/x64/plugins/permission_handler_windows/Profile/permission_handler_windows_plugin.lib</ImportLibrary>
-      <ProgramDataBaseFile>D:/work/chenyanyi/app/build/windows/x64/plugins/permission_handler_windows/Profile/permission_handler_windows_plugin.pdb</ProgramDataBaseFile>
+      <ImportLibrary>D:/work/chenyanyi/juai/build/windows/x64/plugins/permission_handler_windows/Profile/permission_handler_windows_plugin.lib</ImportLibrary>
+      <ProgramDataBaseFile>D:/work/chenyanyi/juai/build/windows/x64/plugins/permission_handler_windows/Profile/permission_handler_windows_plugin.pdb</ProgramDataBaseFile>
       <SubSystem>Console</SubSystem>
     </Link>
     <ProjectReference>
@@ -170,8 +170,8 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>D:\work\chenyanyi\app\windows\flutter\ephemeral;D:\work\chenyanyi\app\windows\flutter\ephemeral\cpp_client_wrapper\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <AdditionalOptions>%(AdditionalOptions) /external:I "D:/work/chenyanyi/app/build/windows/x64/include" /await</AdditionalOptions>
+      <AdditionalIncludeDirectories>D:\work\chenyanyi\juai\windows\flutter\ephemeral;D:\work\chenyanyi\juai\windows\flutter\ephemeral\cpp_client_wrapper\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /external:I "D:/work/chenyanyi/juai/build/windows/x64/include" /await</AdditionalOptions>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <DisableSpecificWarnings>"4100"</DisableSpecificWarnings>
       <ExceptionHandling>Sync</ExceptionHandling>
@@ -193,10 +193,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;_HAS_EXCEPTIONS=0;FLUTTER_PLUGIN_IMPL;UNICODE;_UNICODE;CMAKE_INTDIR=\"Release\";permission_handler_windows_plugin_EXPORTS</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>D:\work\chenyanyi\app\windows\flutter\ephemeral;D:\work\chenyanyi\app\windows\flutter\ephemeral\cpp_client_wrapper\include;D:\work\chenyanyi\app\build\windows\x64\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\work\chenyanyi\juai\windows\flutter\ephemeral;D:\work\chenyanyi\juai\windows\flutter\ephemeral\cpp_client_wrapper\include;D:\work\chenyanyi\juai\build\windows\x64\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>D:\work\chenyanyi\app\windows\flutter\ephemeral;D:\work\chenyanyi\app\windows\flutter\ephemeral\cpp_client_wrapper\include;D:\work\chenyanyi\app\build\windows\x64\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\work\chenyanyi\juai\windows\flutter\ephemeral;D:\work\chenyanyi\juai\windows\flutter\ephemeral\cpp_client_wrapper\include;D:\work\chenyanyi\juai\build\windows\x64\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -204,13 +204,13 @@
       <ProxyFileName>%(Filename)_p.c</ProxyFileName>
     </Midl>
     <Link>
-      <AdditionalDependencies>..\..\flutter\Release\flutter_wrapper_plugin.lib;D:\work\chenyanyi\app\windows\flutter\ephemeral\flutter_windows.dll.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalDependencies>..\..\flutter\Release\flutter_wrapper_plugin.lib;D:\work\chenyanyi\juai\windows\flutter\ephemeral\flutter_windows.dll.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <ImportLibrary>D:/work/chenyanyi/app/build/windows/x64/plugins/permission_handler_windows/Release/permission_handler_windows_plugin.lib</ImportLibrary>
-      <ProgramDataBaseFile>D:/work/chenyanyi/app/build/windows/x64/plugins/permission_handler_windows/Release/permission_handler_windows_plugin.pdb</ProgramDataBaseFile>
+      <ImportLibrary>D:/work/chenyanyi/juai/build/windows/x64/plugins/permission_handler_windows/Release/permission_handler_windows_plugin.lib</ImportLibrary>
+      <ProgramDataBaseFile>D:/work/chenyanyi/juai/build/windows/x64/plugins/permission_handler_windows/Release/permission_handler_windows_plugin.pdb</ProgramDataBaseFile>
       <SubSystem>Console</SubSystem>
     </Link>
     <ProjectReference>
@@ -218,11 +218,11 @@
     </ProjectReference>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <CustomBuild Include="D:\work\chenyanyi\app\windows\flutter\ephemeral\.plugin_symlinks\permission_handler_windows\windows\CMakeLists.txt">
+    <CustomBuild Include="D:\work\chenyanyi\juai\windows\flutter\ephemeral\.plugin_symlinks\permission_handler_windows\windows\CMakeLists.txt">
       <UseUtf8Encoding>Always</UseUtf8Encoding>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule D:/work/chenyanyi/app/windows/flutter/ephemeral/.plugin_symlinks/permission_handler_windows/windows/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule D:/work/chenyanyi/juai/windows/flutter/ephemeral/.plugin_symlinks/permission_handler_windows/windows/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
-"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SD:/work/chenyanyi/app/windows -BD:/work/chenyanyi/app/build/windows/x64 --check-stamp-file D:/work/chenyanyi/app/build/windows/x64/plugins/permission_handler_windows/CMakeFiles/generate.stamp
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SD:/work/chenyanyi/juai/windows -BD:/work/chenyanyi/juai/build/windows/x64 --check-stamp-file D:/work/chenyanyi/juai/build/windows/x64/plugins/permission_handler_windows/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -231,11 +231,11 @@ exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.28\Modules\ExternalProject\shared_internal_commands.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.28\Modules\FetchContent.cmake;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\work\chenyanyi\app\build\windows\x64\plugins\permission_handler_windows\CMakeFiles\generate.stamp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\work\chenyanyi\juai\build\windows\x64\plugins\permission_handler_windows\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Profile|x64'">Building Custom Rule D:/work/chenyanyi/app/windows/flutter/ephemeral/.plugin_symlinks/permission_handler_windows/windows/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Profile|x64'">Building Custom Rule D:/work/chenyanyi/juai/windows/flutter/ephemeral/.plugin_symlinks/permission_handler_windows/windows/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Profile|x64'">setlocal
-"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SD:/work/chenyanyi/app/windows -BD:/work/chenyanyi/app/build/windows/x64 --check-stamp-file D:/work/chenyanyi/app/build/windows/x64/plugins/permission_handler_windows/CMakeFiles/generate.stamp
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SD:/work/chenyanyi/juai/windows -BD:/work/chenyanyi/juai/build/windows/x64 --check-stamp-file D:/work/chenyanyi/juai/build/windows/x64/plugins/permission_handler_windows/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -244,11 +244,11 @@ exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Profile|x64'">C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.28\Modules\ExternalProject\shared_internal_commands.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.28\Modules\FetchContent.cmake;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Profile|x64'">D:\work\chenyanyi\app\build\windows\x64\plugins\permission_handler_windows\CMakeFiles\generate.stamp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Profile|x64'">D:\work\chenyanyi\juai\build\windows\x64\plugins\permission_handler_windows\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Profile|x64'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule D:/work/chenyanyi/app/windows/flutter/ephemeral/.plugin_symlinks/permission_handler_windows/windows/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule D:/work/chenyanyi/juai/windows/flutter/ephemeral/.plugin_symlinks/permission_handler_windows/windows/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
-"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SD:/work/chenyanyi/app/windows -BD:/work/chenyanyi/app/build/windows/x64 --check-stamp-file D:/work/chenyanyi/app/build/windows/x64/plugins/permission_handler_windows/CMakeFiles/generate.stamp
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SD:/work/chenyanyi/juai/windows -BD:/work/chenyanyi/juai/build/windows/x64 --check-stamp-file D:/work/chenyanyi/juai/build/windows/x64/plugins/permission_handler_windows/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -257,29 +257,29 @@ exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.28\Modules\ExternalProject\shared_internal_commands.cmake;C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.28\Modules\FetchContent.cmake;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\work\chenyanyi\app\build\windows\x64\plugins\permission_handler_windows\CMakeFiles\generate.stamp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\work\chenyanyi\juai\build\windows\x64\plugins\permission_handler_windows\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="D:\work\chenyanyi\app\windows\flutter\ephemeral\.plugin_symlinks\permission_handler_windows\windows\include\permission_handler_windows\permission_handler_windows_plugin.h" />
-    <ClCompile Include="D:\work\chenyanyi\app\windows\flutter\ephemeral\.plugin_symlinks\permission_handler_windows\windows\permission_handler_windows_plugin.cpp" />
+    <ClInclude Include="D:\work\chenyanyi\juai\windows\flutter\ephemeral\.plugin_symlinks\permission_handler_windows\windows\include\permission_handler_windows\permission_handler_windows_plugin.h" />
+    <ClCompile Include="D:\work\chenyanyi\juai\windows\flutter\ephemeral\.plugin_symlinks\permission_handler_windows\windows\permission_handler_windows_plugin.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="D:\work\chenyanyi\app\build\windows\x64\ZERO_CHECK.vcxproj">
-      <Project>{0EBD7D4E-2C5A-363A-9B72-AA2313E9B82F}</Project>
+    <ProjectReference Include="D:\work\chenyanyi\juai\build\windows\x64\ZERO_CHECK.vcxproj">
+      <Project>{F8E934E8-3B09-3EAE-8810-9FA64EFB9655}</Project>
       <Name>ZERO_CHECK</Name>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </ProjectReference>
-    <ProjectReference Include="D:\work\chenyanyi\app\build\windows\x64\flutter\flutter_assemble.vcxproj">
-      <Project>{0E1F448C-0FE3-3E14-9D92-D991B70404B2}</Project>
+    <ProjectReference Include="D:\work\chenyanyi\juai\build\windows\x64\flutter\flutter_assemble.vcxproj">
+      <Project>{91232732-024A-3864-95CF-ACBAA1B4C902}</Project>
       <Name>flutter_assemble</Name>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </ProjectReference>
-    <ProjectReference Include="D:\work\chenyanyi\app\build\windows\x64\flutter\flutter_wrapper_plugin.vcxproj">
-      <Project>{CEF2B2A4-090E-37F2-A800-03670B26FF53}</Project>
+    <ProjectReference Include="D:\work\chenyanyi\juai\build\windows\x64\flutter\flutter_wrapper_plugin.vcxproj">
+      <Project>{7A3A0076-5428-3DE9-9594-281D7541CF5E}</Project>
       <Name>flutter_wrapper_plugin</Name>
     </ProjectReference>
   </ItemGroup>

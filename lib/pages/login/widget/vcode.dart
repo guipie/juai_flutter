@@ -1,5 +1,6 @@
+import 'package:fluent_ui/fluent_ui.dart' as fl;
+
 import '../../../base.dart';
-import '../../../components/td/tdesign_flutter.dart';
 import '../provider/login_provider.dart';
 
 class VcodeWidget extends ConsumerStatefulWidget {
@@ -12,11 +13,9 @@ class VcodeWidget extends ConsumerStatefulWidget {
 class _VcodeWidgetState extends ConsumerState<VcodeWidget> {
   @override
   Widget build(BuildContext context) {
-    return TDInput(
-      type: TDInputType.normal,
+    return fl.TextBox(
       controller: ref.watch(loginProviderProvider).textVcodeController,
-      hintText: S.current.vcode,
-      needClear: true,
+      placeholder: S.current.vcode,
       onChanged: (text) {
         setState(() {});
       },

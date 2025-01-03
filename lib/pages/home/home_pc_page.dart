@@ -1,14 +1,15 @@
+import 'package:fluent_ui/fluent_ui.dart' as fl;
+import 'package:pull_down_button/pull_down_button.dart';
+
 import '../../base.dart';
 import '../../base/version_check.dart';
-import '../../components/td/tdesign_flutter.dart';
+import '../../components/image.dart';
+import '../../components/mouse_hover_item.dart';
 import '../../const.dart';
-import '../../module/prompt/prompt_page.dart';
-import '../../module/services/services_page.dart';
-import '../../module/setting/setting_page.dart';
-import '../aimodel/aimodel_pc_page.dart';
-import '../chat/conversation_pc_page.dart';
+import '../login/provider/user_provider.dart';
+import '../setting/setting_page.dart';
 import '../square/square.dart';
-import 'home_provider.dart';
+import 'view_model/home_view_model.dart';
 
 class HomePcPage extends ConsumerStatefulWidget {
   const HomePcPage({super.key});
@@ -52,71 +53,101 @@ class _HomePcPageState extends ConsumerState<HomePcPage> with WidgetsBindingObse
 
   @override
   Widget build(BuildContext context) {
-    var currentIndex = ref.watch(homeIndexProvider);
-    var controller = TDSideBarController();
-    controller.selectTo(currentIndex);
-    var pages = [
-      const ConversationPcPage(),
-      const AiModelPcPage(),
-      const SquarePage(),
-      const PromptPage(),
-      const SettingPage(),
-    ];
-    return Scaffold(
-      extendBody: true,
-      body: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            width: 60,
-            height: F.height,
-            color: Theme.of(context).colorScheme.onPrimary,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                10.height(),
-                TDAvatar(
-                  avatarUrl: F.randomAvatar,
-                  size: TDAvatarSize.small,
-                  shape: TDAvatarShape.square,
+    var currentIndex = ref.watch(homeVmProvider.select((value) => value.curTabIndex));
+    return fl.NavigationView(
+      appBar: fl.NavigationAppBar(
+          title: Row(
+            children: [
+              const Text('聚AI,一个就够了.'),
+              Expanded(
+                child: Center(
+                  child: Text(
+                    ref.watch(homeVmProvider.select((value) => value.homePcTitle)),
+                    style: Theme.of(context).textTheme.titleMedium,
+                  ),
                 ),
-                15.height(),
-                TDSideBar(
-                  controller: controller,
-                  value: currentIndex,
-                  height: F.height / 2,
-                  style: TDSideBarStyle.outline,
-                  selectedColor: Theme.of(context).primaryColor,
-                  children: menus
-                      .map(
-                        (ele) => TDSideBarItem(
-                          value: ele.index,
-                          tips: ele.label,
-                          checkedIcon: ele.checkedIcon,
-                          icon: ele.icon,
-                        ),
-                      )
-                      .toList(),
-                  onSelected: (value) {
-                    ref.read(homeIndexProvider.notifier).update((state) => value);
-                    // pageController.jumpToPage(value);
-                  },
-                  contentPadding: const EdgeInsets.only(left: 36, top: 16, bottom: 16),
-                ),
-                Expanded(child: 10.height()),
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(Icons.share),
-                ),
-              ],
+              )
+            ],
+          ),
+          leading: Center(
+            child: JuImage(
+              ref.read(curentUserProvider).avatar,
+              width: 36,
+              height: 36,
             ),
           ),
-          Expanded(
-            child: IndexedStack(
-              index: currentIndex,
-              children: pages,
+          actions: PullDownButton(
+            scrollController: ScrollController(),
+            menuOffset: 6,
+            position: PullDownMenuPosition.automatic,
+            buttonBuilder: (context, showMenu) {
+              return GestureDetector(
+                behavior: HitTestBehavior.opaque,
+                onTap: () {
+                  showMenu();
+                },
+                child: IconButton(
+                  icon: const Icon(Icons.add, size: 26),
+                  onPressed: () {
+                    showMenu();
+                  },
+                ),
+              );
+            },
+            itemBuilder: (context) {
+              return [
+                {'key': 1, 'val': S.current.new_chat},
+                {'key': 2, 'val': S.current.btn_add + S.current.digitalMan}
+              ]
+                  .map(
+                    (m) => PullDownMenuItem(
+                      title: m['val'].toString(),
+                      onTap: () {
+                        if (m['key'] == 1) {
+                        } else if (m['key'] == 2) {}
+                      },
+                      icon: Icons.chat_bubble_outline,
+                    ),
+                  )
+                  .toList();
+            },
+          )),
+      pane: fl.NavigationPane(
+        selected: currentIndex,
+        size: const fl.NavigationPaneSize(openWidth: 120),
+        onItemPressed: (index) {
+          // Do anything you want to do, such as:
+          // if (index == topIndex) {
+          //   if (displayMode == PaneDisplayMode.open) {
+          //     setState(() => this.displayMode = PaneDisplayMode.compact);
+          //   } else if (displayMode == PaneDisplayMode.compact) {
+          //     setState(() => this.displayMode = PaneDisplayMode.open);
+          //   }
+          // }
+        },
+        onChanged: (index) => ref.read(homeVmProvider.notifier).setCurTabIndex(index),
+        displayMode: fl.PaneDisplayMode.compact,
+        items: [
+          fl.PaneItemHeader(
+            header: const Text(
+              'Inputs',
             ),
-          )
+          ),
+          ...ref
+              .read(homeVmProvider)
+              .menus
+              .map((item) => fl.PaneItem(
+                    icon: Icon(item.icon),
+                    title: Text(item.label!),
+                    body: item.page,
+                  ))
+              .toList()
+        ],
+        footerItems: [
+          fl.PaneItemAction(
+            icon: const Icon(Icons.share),
+            onTap: () {},
+          ),
         ],
       ),
     );

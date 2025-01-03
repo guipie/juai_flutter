@@ -1,9 +1,9 @@
-import '../td/tdesign_flutter.dart';
-import '../../utils/f.dart';
+import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
+import '../../utils/f.dart';
 import 'paged_notifier_mixin.dart';
 import 'paged_state.dart';
 
@@ -119,15 +119,11 @@ class _RiverPagedBuilderState<PageKeyType, ItemType> extends ConsumerState<River
       itemBuilder: widget.itemBuilder,
       firstPageErrorIndicatorBuilder: widget.firstPageErrorIndicatorBuilder != null
           ? (ctx) => widget.firstPageErrorIndicatorBuilder!(ctx, _pagingController)
-          : (ctx) => TDButton(
-                text: '出错了,点击重试..',
-                size: TDButtonSize.large,
-                type: TDButtonType.text,
-                shape: TDButtonShape.rectangle,
-                theme: TDButtonTheme.danger,
-                onTap: () async {
+          : (ctx) => Button(
+                onPressed: () async {
                   return await ref.refresh(_provider);
                 },
+                child: const Text('出错了,点击重试..'),
               ),
       firstPageProgressIndicatorBuilder: widget.firstPageProgressIndicatorBuilder != null ? (ctx) => widget.firstPageProgressIndicatorBuilder!(ctx, _pagingController) : null,
       noItemsFoundIndicatorBuilder: widget.noItemsFoundIndicatorBuilder != null ? (ctx) => widget.noItemsFoundIndicatorBuilder!(ctx, _pagingController) : null,

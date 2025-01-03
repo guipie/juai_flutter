@@ -4,8 +4,9 @@ import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import '../../base.dart';
 import '../../constants/config.dart';
 import '../../models/api_res.dart';
-import 'api_exception.dart';
-import 'interceptor.dart';
+import 'interceptor/api_exception.dart';
+import 'interceptor/interceptor_cache.dart';
+import 'interceptor/interceptor_error.dart';
 
 class HttpOptions {
   //地址域名前缀
@@ -20,20 +21,35 @@ class Http {
   // 单例模式使用Http类，
   static final Http _instance = Http._internal();
 
+  /// 初始化dio
+  var options = BaseOptions(
+    connectTimeout: HttpOptions.connectTimeout,
+    receiveTimeout: HttpOptions.receiveTimeout,
+    sendTimeout: HttpOptions.sendTimeout,
+    baseUrl: Config.baseApiUrl,
+  );
+
   factory Http() => _instance;
+
+  /// 添加各种拦截器
+  _setInterceptors(Dio dio, bool isErrorToast) {
+    dio.interceptors.add(ErrorInterceptor(isErrorToast));
+    dio.interceptors.add(CacheInterceptor());
+    dio.interceptors.add(PrettyDioLogger(requestHeader: true, requestBody: true, responseHeader: false, responseBody: true));
+  }
+
+  Dio responseDio({bool isErrorToast = false}) {
+    var newDio = Dio(options);
+    _setInterceptors(newDio, isErrorToast);
+    return newDio;
+  }
 
   static late final Dio _dio;
 
   /// 内部构造方法
   Http._internal() {
-    /// 初始化dio
-    var options = BaseOptions(connectTimeout: HttpOptions.connectTimeout, receiveTimeout: HttpOptions.receiveTimeout, sendTimeout: HttpOptions.sendTimeout, baseUrl: Config.baseApiUrl);
-
     _dio = Dio(options);
-
-    /// 添加各种拦截器
-    _dio.interceptors.add(ErrorInterceptor());
-    _dio.interceptors.add(PrettyDioLogger(requestHeader: true, requestBody: true, responseHeader: true, responseBody: true));
+    _setInterceptors(_dio, false);
   }
 
   /// 封装request方法
@@ -45,19 +61,22 @@ class Http {
     bool showLoading = true, //加载过程
     bool showErrorMessage = true, //返回数据
     Function(Map<String, dynamic>)? fromJsonT,
+    Options? requestOptions,
   }) async {
-    const methodValues = {HttpMethod.get: 'get', HttpMethod.post: 'post', HttpMethod.put: 'put', HttpMethod.delete: 'delete', HttpMethod.patch: 'patch', HttpMethod.head: 'head'};
-
+    const methodValues = {
+      HttpMethod.get: 'get',
+      HttpMethod.post: 'post',
+      HttpMethod.put: 'put',
+      HttpMethod.delete: 'delete',
+      HttpMethod.patch: 'patch',
+      HttpMethod.head: 'head',
+    };
     //动态添加header头
-    var headers = <String, dynamic>{};
-    headers['version'] = Config.appVersion;
-    headers['authorization'] = 'Bearer ${Config.accessToken}';
-
-    var options = Options(
-      method: methodValues[method],
-      headers: headers,
-    );
-
+    requestOptions ??= Options();
+    requestOptions.method = methodValues[method];
+    requestOptions.headers ??= {};
+    requestOptions.headers!['version'] = Config.appVersion;
+    requestOptions.headers!['Authorization'] = SpUtil.getString(CacheKeys.accessToken, prefix: 'Bearer ');
     try {
       if (showLoading) {
         //EasyLoading.show(status: 'loading...');
@@ -66,7 +85,7 @@ class Http {
         path,
         data: data,
         queryParameters: queryParameters,
-        options: options,
+        options: requestOptions,
       );
       // // 如果没有设置fromJsonT或者R是dynamic类型，直接返回响应数据
       // if (fromJsonT == null || T == dynamic || response.data is! Map<String, dynamic>) ;
@@ -95,7 +114,9 @@ class Http {
               return apiRes;
             }
           case 401:
-            throw NeedLoginException(-1, '需要登录');
+            throw NeedLoginException(401, '需要登录');
+          case 403:
+            throw NeedLoginException(401, '暂无权限 ');
           case 219:
             throw NeedLoginException(-1, '应用需要强更');
           default:

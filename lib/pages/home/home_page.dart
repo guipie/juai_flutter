@@ -1,12 +1,10 @@
 import '../../base.dart';
 import '../../base/version_check.dart';
 import '../../const.dart';
-import '../../module/prompt/prompt_page.dart';
-import '../../module/services/services_page.dart';
-import '../../module/setting/setting_page.dart';
-import '../aimodel/aimodel_page.dart';
-import '../chat/conversation_page.dart';
-import 'home_provider.dart';
+import '../aimodel/view/aimodel_page.dart';
+import '../chat/view/conversation_page.dart';
+import '../setting/setting_page.dart';
+import 'view_model/home_view_model.dart';
 import 'widgets.dart';
 
 class HomePage extends ConsumerStatefulWidget {
@@ -52,8 +50,7 @@ class _HomePageState extends ConsumerState<HomePage> with WidgetsBindingObserver
 
   @override
   Widget build(BuildContext context) {
-    var currentIndex = ref.watch(homeIndexProvider);
-
+    var currentIndex = ref.watch(homeVmProvider.select((value) => value.curTabIndex));
     return Scaffold(
       extendBody: true,
       body: IndexedStack(
@@ -61,8 +58,8 @@ class _HomePageState extends ConsumerState<HomePage> with WidgetsBindingObserver
         children: const [
           ConversationPage(),
           AiModelPage(),
-          ServicesPage(),
-          ServicesPage(),
+          SettingPage(),
+          SettingPage(),
           SettingPage(),
         ],
       ),
@@ -78,7 +75,9 @@ class _HomePageState extends ConsumerState<HomePage> with WidgetsBindingObserver
               padding: EdgeInsets.only(bottom: MediaQuery.paddingOf(context).bottom, top: kBottomNavigationBarHeight / 2),
               child: Row(
                 children: [
-                  ...menus
+                  ...ref
+                      .read(homeVmProvider)
+                      .menus
                       .map((m) => Expanded(
                             child: BottomNavItem(
                               label: m.label,

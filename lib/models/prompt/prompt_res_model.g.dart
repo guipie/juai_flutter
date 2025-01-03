@@ -7,17 +7,17 @@ part of 'prompt_res_model.dart';
 // **************************************************************************
 
 _$PromptImpl _$$PromptImplFromJson(Map<String, dynamic> json) => _$PromptImpl(
-      id: (json['id'] as num?)?.toInt(),
+      id: (json['id'] as num).toInt(),
       type: json['type'] as String?,
-      title: json['title'] as String?,
-      prompt: json['prompt'] as String?,
+      title: json['title'] as String,
+      prompt: json['prompt'] as String,
       maxContext: (json['maxContext'] as num?)?.toInt(),
       promptExtend: json['promptExtend'] as String?,
       avatar: json['avatar'] as String?,
       file: json['file'] as String?,
       initMessage: json['initMessage'] as String?,
       tags: json['tags'] as String?,
-      model: json['model'] as String?,
+      model: json['model'] as String,
       vendor: json['vendor'] as String?,
       category: json['category'] as String?,
       isGroup: json['isGroup'] as bool?,

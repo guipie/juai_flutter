@@ -6,7 +6,7 @@ part 'paging_data.freezed.dart';
 ///
 /// This class provides a common interface for different types of paginated data,
 /// such as page-based, offset-based, and cursor-based pagination.
-@internal
+
 abstract interface class PagingData<T> {
   /// The list of items in the current page.
   List<T> get items;

@@ -53,7 +53,11 @@ extension ExtensionInt on int? {
 
 extension ExtensionObjInt on Object? {
   int toInt() {
-    return this == null ? 0 : toString().toInt();
+    return this == null || this == '' ? 0 : int.parse(toString());
+  }
+
+  BigInt toBigInt() {
+    return this == null || this == '' ? BigInt.parse('0') : BigInt.parse(toString());
   }
 }
 

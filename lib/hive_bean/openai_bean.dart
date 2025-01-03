@@ -1,6 +1,6 @@
-import 'package:chat_bot/const.dart';
-import 'package:chat_bot/hive_bean/supported_models.dart';
-import 'package:chat_bot/utils/hive_box.dart';
+import '../const.dart';
+import 'supported_models.dart';
+import '../utils/hive_box.dart';
 import 'package:hive/hive.dart';
 
 part 'openai_bean.g.dart';
@@ -22,23 +22,13 @@ class AllModelBean {
 
   SupportedModels get getDefaultModelType => defaultModelType ?? getTextModels.first;
 
-  List<SupportedModels> get getTextModels =>
-      supportedModels
-          ?.where((element) =>
-      element.id?.contains(ttsModelKey) == false &&
-          element.id?.contains(whisperModelKey) == false &&
-          paintModelKeys.contains(element.id) == false)
-          .toList() ??
-          [];
+  List<SupportedModels> get getTextModels => supportedModels?.where((element) => element.id?.contains(ttsModelKey) == false && element.id?.contains(whisperModelKey) == false && paintModelKeys.contains(element.id) == false).toList() ?? [];
 
-  List<SupportedModels> get getTTSModels =>
-      supportedModels?.where((element) => element.id?.contains(ttsModelKey) == true).toList() ?? [];
+  List<SupportedModels> get getTTSModels => supportedModels?.where((element) => element.id?.contains(ttsModelKey) == true).toList() ?? [];
 
-  List<SupportedModels> get getWhisperModels =>
-      supportedModels?.where((element) => element.id?.contains(whisperModelKey) == true).toList() ?? [];
+  List<SupportedModels> get getWhisperModels => supportedModels?.where((element) => element.id?.contains(whisperModelKey) == true).toList() ?? [];
 
-  List<SupportedModels> get getPaintModels =>
-      supportedModels?.where((element) => paintModelKeys.contains(element.id) == true).toList() ?? [];
+  List<SupportedModels> get getPaintModels => supportedModels?.where((element) => paintModelKeys.contains(element.id) == true).toList() ?? [];
 
   @HiveField(5)
   int? time;
@@ -49,16 +39,7 @@ class AllModelBean {
   @HiveField(6)
   List<SupportedModels>? supportedModels;
 
-  AllModelBean(
-      {this.apiKey,
-        this.model,
-        this.apiServer,
-        this.defaultModelType,
-        this.organization,
-        this.updateTime,
-        this.alias,
-        this.supportedModels,
-        this.time});
+  AllModelBean({this.apiKey, this.model, this.apiServer, this.defaultModelType, this.organization, this.updateTime, this.alias, this.supportedModels, this.time});
 
   //copyWith
   AllModelBean copyWith({
@@ -95,16 +76,14 @@ class AllModelBean {
       alias: json['alias'],
       updateTime: json['updateTime'],
       defaultModelType: json['defaultModelType'] != null ? SupportedModels.fromJson(json['defaultModelType']) : null,
-      supportedModels: json['supportedModels'] != null
-          ? (json['supportedModels'] as List).map((e) => SupportedModels.fromJson(e)).toList()
-          : null,
+      supportedModels: json['supportedModels'] != null ? (json['supportedModels'] as List).map((e) => SupportedModels.fromJson(e)).toList() : null,
       time: json['time'],
     );
   }
 
   //toJson
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
+    final data = <String, dynamic>{};
     data['apiKey'] = apiKey;
     data['model'] = model;
     data['apiServer'] = apiServer;
@@ -126,7 +105,7 @@ AllModelBean getDefaultChatModel() {
   var defaultApiKey = HiveBox().appConfig.get(HiveBox.cDefaultApiServerKey);
   if (defaultApiKey == null || defaultApiKey.isEmpty) {
     var result = HiveBox().openAIConfig.values.first;
-    HiveBox().appConfig.put(HiveBox.cDefaultApiServerKey, result.apiKey ?? "");
+    HiveBox().appConfig.put(HiveBox.cDefaultApiServerKey, result.apiKey ?? '');
     return result;
   } else {
     var model = getModelByApiKey(defaultApiKey);
@@ -142,58 +121,48 @@ String getDefaultApiKey() {
   var defaultApiKey = HiveBox().appConfig.get(HiveBox.cDefaultApiServerKey);
   if (defaultApiKey == null || defaultApiKey.isEmpty) {
     if (HiveBox().openAIConfig.values.isEmpty) {
-      return "";
+      return '';
     }
     var result = HiveBox().openAIConfig.values.first;
-    HiveBox().appConfig.put(HiveBox.cDefaultApiServerKey, result.apiKey ?? "");
-    return result.apiKey ?? "";
+    HiveBox().appConfig.put(HiveBox.cDefaultApiServerKey, result.apiKey ?? '');
+    return result.apiKey ?? '';
   } else {
     return defaultApiKey;
   }
 }
 
 AllModelBean getModelByApiKey(String apiKey) {
-  String key = apiKey;
+  var key = apiKey;
   if (key.isEmpty) {
     key = getDefaultApiKey();
   }
   //如果不存在就返回null
-  var model = HiveBox()
-      .openAIConfig
-      .values
-      .firstWhere((element) => element.apiKey == key, orElse: () => HiveBox().openAIConfig.values.first);
+  var model = HiveBox().openAIConfig.values.firstWhere((element) => element.apiKey == key, orElse: () => HiveBox().openAIConfig.values.first);
   return model;
 }
 
 String getSupportedModelByApiKey(String apiKey, {String? preModelType}) {
-  String key = apiKey;
+  var key = apiKey;
   if (key.isEmpty) {
     key = getDefaultApiKey();
   }
-  var model =
-  HiveBox().openAIConfig.values.firstWhere((element) => element.apiKey == key, orElse: () => AllModelBean());
+  var model = HiveBox().openAIConfig.values.firstWhere((element) => element.apiKey == key, orElse: AllModelBean.new);
 
   if (model.supportedModels == null || model.supportedModels!.isEmpty) {
-    return "gpt-4";
+    return 'gpt-4';
   }
 
   if (preModelType != null && model.supportedModels!.any((element) => element.id == preModelType)) {
     return preModelType;
   }
 
-  return model.getDefaultModelType.id ?? "gpt-4";
+  return model.getDefaultModelType.id ?? 'gpt-4';
 }
 
 bool isExistDallE3Models() {
-  return HiveBox()
-      .openAIConfig
-      .values
-      .any((element) => element.supportedModels?.any((element) => element.id == "dall-e-3") ?? false);
+  return HiveBox().openAIConfig.values.any((element) => element.supportedModels?.any((element) => element.id == 'dall-e-3') ?? false);
 }
 
 bool isExistTTSAndWhisperModels() {
-  return HiveBox()
-      .openAIConfig
-      .values
-      .any((element) => element.getWhisperModels.isNotEmpty && element.getTTSModels.isNotEmpty);
+  return HiveBox().openAIConfig.values.any((element) => element.getWhisperModels.isNotEmpty && element.getTTSModels.isNotEmpty);
 }

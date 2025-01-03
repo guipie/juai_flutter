@@ -3,7 +3,7 @@ import '../../base.dart';
 ///easyLoading 和 flutter_toast 扩展
 extension ExtensionString on String? {
   bool isEmpty() {
-    return this == null || this!.isEmpty;
+    return this == null || this!.trim().isEmpty;
   }
 
   String string({String defaultValue = ''}) {
@@ -57,7 +57,7 @@ extension ExtensionString on String? {
 
   void toast() {
     if (this == null) return;
-    Fluttertoast.showToast(msg: this!, gravity: ToastGravity.CENTER);
+    EasyLoading.showToast(this ?? 'warning');
   }
 
   void save2SP(String key) {

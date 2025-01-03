@@ -4,6 +4,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
 import '../../base.dart';
+import '../../pages/login/login_page.dart';
+import '../../pages/login/provider/user_provider.dart';
+import '../../services/http/interceptor/api_exception.dart';
 import 'paging_data.dart';
 import 'paging_notifier_mixin.dart';
 
@@ -119,7 +122,13 @@ final class PagingWidget<D extends PagingData<I>, I> extends ConsumerWidget {
             context,
             e,
             st,
-            () => ref.read(notifierRefreshable).forceRefresh(),
+            () async {
+              if (e is ApiException && e.code == 401) {
+                await F.push(LoginPage());
+                if (!ref.read(curentUserProvider.notifier).isLogin) return;
+              }
+              ref.read(notifierRefreshable).forceRefresh();
+            },
           ),
           // Prioritize data for errors on the second page and beyond
           skipErrorOnHasValue: true,

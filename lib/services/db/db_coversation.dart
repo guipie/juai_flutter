@@ -1,5 +1,3 @@
-import 'package:sqflite/sqlite_api.dart';
-
 import '../../base.dart';
 import '../../constants/enums/common_enum.dart';
 import '../../constants/enums/conversation_enum.dart';
@@ -12,7 +10,13 @@ class DbConversation extends DbBase {
 
   @override
   Future<void> onCreate(Database db, int version) async {
-    await super.createTable(ConversationItemModel(id: 0, title: '', type: ConversationEnum.chat, createTime: DateTime.now(), lastTime: DateTime.now()).toJson());
+    await super.createTable(ConversationItemModel(
+      id: 0,
+      title: '',
+      type: ConversationEnum.chat,
+      createTime: DateTime.now(),
+      lastTime: DateTime.now(),
+    ).toJson());
   }
 
   @override
@@ -27,7 +31,14 @@ class DbConversation extends DbBase {
     var data = await super.find(orderBy: {'lastTime': SequenceEnum.desc});
     var list = data.map(ConversationItemModel.fromJson).toList();
     if (list.isEmpty) {
-      var model = ConversationItemModel(id: 1, title: S.current.new_chat, desc: S.current.empty_content_need_add, type: ConversationEnum.chat);
+      var model = ConversationItemModel(
+        id: 1,
+        title: S.current.new_chat,
+        desc: S.current.empty_content_need_add,
+        type: ConversationEnum.chat,
+        model: Constant.defaultModel,
+        relationId: 0,
+      );
       await addConversation(model);
       return [model];
     }

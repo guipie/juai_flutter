@@ -1,6 +1,7 @@
-import 'home_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import 'view_model/home_view_model.dart';
 
 class BottomNavItem extends ConsumerWidget {
   final bool checked;
@@ -24,7 +25,7 @@ class BottomNavItem extends ConsumerWidget {
   Widget build(BuildContext context, ref) {
     return GestureDetector(
       onTap: () {
-        ref.read(homeIndexProvider.notifier).update((state) => index);
+        ref.read(homeVmProvider.notifier).setCurTabIndex(index);
         click?.call();
       },
       behavior: HitTestBehavior.opaque,

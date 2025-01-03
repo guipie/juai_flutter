@@ -1,7 +1,5 @@
 import '../../../base.dart';
-import '../../../components/paging/paging_data.dart';
-import '../../../components/paging/paging_notifier_mixin.dart';
-import '../../../models/aimodel/aimodel_model.dart';
+import '../../../constants/sp_kes.dart';
 import '../../../models/aimodel/aimodel_res_model.dart';
 import '../../../repositories/aimodel_repository.dart';
 import 'prompt_view_model.dart';

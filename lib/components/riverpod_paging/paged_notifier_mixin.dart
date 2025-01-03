@@ -1,4 +1,4 @@
-import 'package:chat_bot/components/riverpod_paging/paged_state.dart';
+import 'paged_state.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 /// [PagedNotifierMixin] is a mixin that ensure the StateNotifier will implement the right load method

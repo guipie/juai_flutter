@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:chat_bot/base.dart';
-import 'package:chat_bot/services/db/db_base.dart';
+import '../../base.dart';
+import 'db_base.dart';
 import 'package:sqflite_common/sqlite_api.dart';
 
 import '../../constants/theme.dart';
@@ -95,7 +95,7 @@ class PromptItemProvider extends DbBase {
 
   //list
   Future<List<PromptItem>> list() async {
-    List<Map<String, Object?>> maps = await super.database.query(tableName, columns: [columnTime, columnAuthor, columnTitle, columnPrompt, columnHint, columnExtra]);
+    var maps = await super.database.query(tableName, columns: [columnTime, columnAuthor, columnTitle, columnPrompt, columnHint, columnExtra]);
     var list = List.generate(maps.length, (i) {
       return PromptItem.fromJson(maps[i]);
     });
@@ -104,7 +104,7 @@ class PromptItemProvider extends DbBase {
 
     var languageCode = getLocaleByDefaultCode().languageCode;
 
-    String file = 'command.json';
+    var file = 'command.json';
     if (languageCode == SupportedLanguage.zh.code) {
       file = 'command.json';
     } else if (languageCode == SupportedLanguage.en.code) {
@@ -118,8 +118,8 @@ class PromptItemProvider extends DbBase {
     var json = await rootBundle.loadString('assets/$file');
     var defaultPrompt = (jsonDecode(json) as List)
         .map((e) => PromptItem(
-              title: e["title"],
-              prompt: e["content"],
+              title: e['title'],
+              prompt: e['content'],
               time: 0,
             ))
         .toList();

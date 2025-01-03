@@ -1,10 +1,10 @@
 import 'dart:convert';
 
-import 'package:chat_bot/base/api.dart';
-import 'package:chat_bot/base/api_impl/api_impl.dart';
-import 'package:chat_bot/hive_bean/generate_content.dart';
-import 'package:chat_bot/hive_bean/openai_bean.dart';
-import 'package:chat_bot/hive_bean/supported_models.dart';
+import '../api.dart';
+import 'api_impl.dart';
+import '../../hive_bean/generate_content.dart';
+import '../../hive_bean/openai_bean.dart';
+import '../../hive_bean/supported_models.dart';
 import 'package:dart_openai/dart_openai.dart';
 import 'package:flutter_gemini/flutter_gemini.dart';
 
@@ -29,15 +29,10 @@ class GeminiImpl extends APIImpl {
   ) async {
     initAPI(bean);
 
-    var contents = chatItems
-        .map((e) => Content(
-            parts: e.content.map((e) => Parts(text: e)).toList(),
-            role: e.role != ChatType.bot.index ? 'user' : 'model'))
-        .toList();
+    var contents = chatItems.map((e) => Content(parts: e.content.map((e) => Parts(text: e)).toList(), role: e.role != ChatType.bot.index ? 'user' : 'model')).toList();
 
     var content = (await Gemini.instance.chat(contents, modelName: modelType));
-    return GenerateContentBean(
-        content: content?.content?.parts?.last.text ?? '');
+    return GenerateContentBean(content: content?.content?.parts?.last.text ?? '');
   }
 
   @override
@@ -47,9 +42,7 @@ class GeminiImpl extends APIImpl {
       await Future.delayed(const Duration(milliseconds: 100));
       var models = await Gemini.instance.listModels();
       eDismiss();
-      return models
-          .map((e) => SupportedModels(ownedBy: e.version, id: e.name))
-          .toList();
+      return models.map((e) => SupportedModels(ownedBy: e.version, id: e.name)).toList();
     } on RequestFailedException catch (e) {
       e.message.fail();
       return [];
@@ -62,8 +55,8 @@ class GeminiImpl extends APIImpl {
   @override
   Future<void> initAPI(AllModelBean bean) async {
     Gemini.init(
-      apiKey: bean.apiKey ?? "",
-      baseURL: "${bean.apiServer}/",
+      apiKey: bean.apiKey ?? '',
+      baseURL: '${bean.apiServer}/',
       enableDebugging: kDebugMode,
     );
   }
@@ -78,31 +71,21 @@ class GeminiImpl extends APIImpl {
     bool withoutHistoryMessage,
   ) async {
     initAPI(bean);
-    RequestParams lastOneMessage = chatItems.last;
-    if (lastOneMessage.images.isNotEmpty &&
-        lastOneMessage.images
-            .where((element) => element.isNotEmpty)
-            .isNotEmpty) {
+    var lastOneMessage = chatItems.last;
+    if (lastOneMessage.images.isNotEmpty && lastOneMessage.images.where((element) => element.isNotEmpty).isNotEmpty) {
       return Stream.fromFuture(Gemini.instance
           .textAndImage(
         text: lastOneMessage.content.last,
         modelName: modelType,
-        images: lastOneMessage.images.map((e) => base64Decode(e)).toList(),
+        images: lastOneMessage.images.map(base64Decode).toList(),
       )
           .then((value) {
-        return GenerateContentBean(
-            content: value?.content?.parts?.last.text ?? '');
+        return GenerateContentBean(content: value?.content?.parts?.last.text ?? '');
       }));
     } else {
-      var contents = chatItems
-          .map((e) => Content(
-              parts: e.content.map((e) => Parts(text: e)).toList(),
-              role: e.role != ChatType.bot.index ? 'user' : 'model'))
-          .toList();
+      var contents = chatItems.map((e) => Content(parts: e.content.map((e) => Parts(text: e)).toList(), role: e.role != ChatType.bot.index ? 'user' : 'model')).toList();
 
-      return Gemini.instance.streamChat(contents, modelName: modelType).map(
-          (event) =>
-              GenerateContentBean(content: event.content?.parts?.last.text));
+      return Gemini.instance.streamChat(contents, modelName: modelType).map((event) => GenerateContentBean(content: event.content?.parts?.last.text));
     }
   }
 
@@ -119,9 +102,9 @@ class GeminiImpl extends APIImpl {
   @override
   Future<bool> validateApiKey(AllModelBean bean) async {
     try {
-      Gemini gemini = Gemini.init(
-        apiKey: bean.apiKey ?? "",
-        baseURL: "${bean.apiServer}/",
+      var gemini = Gemini.init(
+        apiKey: bean.apiKey ?? '',
+        baseURL: '${bean.apiServer}/',
         enableDebugging: kDebugMode,
       );
       await Future.delayed(const Duration(milliseconds: 100));
@@ -138,8 +121,7 @@ class GeminiImpl extends APIImpl {
   }
 
   @override
-  Future<List<OpenAIImageData>> generateOpenAIImage(AllModelBean bean,
-      String prompt, OpenAIImageStyle style, OpenAIImageSize size) {
+  Future<List<OpenAIImageData>> generateOpenAIImage(AllModelBean bean, String prompt, OpenAIImageStyle style, OpenAIImageSize size) {
     throw UnimplementedError();
   }
 
@@ -152,9 +134,9 @@ class GeminiImpl extends APIImpl {
     List<RequestParams> chatItems,
   ) async {
     try {
-      Gemini gemini = Gemini.init(
-        apiKey: bean.apiKey ?? "",
-        baseURL: "${bean.apiServer}/",
+      var gemini = Gemini.init(
+        apiKey: bean.apiKey ?? '',
+        baseURL: '${bean.apiServer}/',
         enableDebugging: kDebugMode,
         generationConfig: GenerationConfig(
           temperature: double.tryParse(temperature) ?? 1.0,
@@ -171,14 +153,10 @@ class GeminiImpl extends APIImpl {
         images: [],
       ));
 
-      var contents = chatItems
-          .map((e) => Content(
-              parts: e.content.map((e) => Parts(text: e)).toList(),
-              role: e.role != ChatType.bot.index ? 'user' : 'model'))
-          .toList();
+      var contents = chatItems.map((e) => Content(parts: e.content.map((e) => Parts(text: e)).toList(), role: e.role != ChatType.bot.index ? 'user' : 'model')).toList();
 
       var result = await gemini.chat(contents, modelName: modelType);
-      return result?.content?.parts?.last.text ?? "";
+      return result?.content?.parts?.last.text ?? '';
     } on RequestFailedException catch (e) {
       e.message.fail();
       return S.current.new_chat;

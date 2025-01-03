@@ -1,101 +1,89 @@
 import 'dart:convert';
 
-import 'package:chat_bot/base.dart';
-import 'package:chat_bot/base/api.dart';
-import 'package:chat_bot/base/api_impl/api_impl.dart';
-import 'package:chat_bot/hive_bean/generate_content.dart';
-import 'package:chat_bot/hive_bean/openai_bean.dart';
-import 'package:chat_bot/hive_bean/supported_models.dart';
-import 'package:chat_bot/services/db/chat_item.dart';
+import '../../base.dart';
+import '../api.dart';
+import 'api_impl.dart';
+import '../../hive_bean/generate_content.dart';
+import '../../hive_bean/openai_bean.dart';
+import '../../hive_bean/supported_models.dart';
+import '../../services/db/chat_item.dart';
 import 'package:dart_openai/dart_openai.dart';
 import 'package:dio/dio.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 class OllamaImpl extends APIImpl {
   @override
-  Future<String> generateChatTitle(
-      String temperature,
-      AllModelBean bean,
-      String modelType,
-      List<ChatItem> originalChatItem,
-      List<RequestParams> chatItems) async {
-    Dio dio = initOllama(bean);
+  Future<String> generateChatTitle(String temperature, AllModelBean bean, String modelType, List<ChatItem> originalChatItem, List<RequestParams> chatItems) async {
+    var dio = initOllama(bean);
 
-    var response = await dio.post("/api/chat", data: {
-      "model": modelType,
-      "messages": [
+    var response = await dio.post('/api/chat', data: {
+      'model': modelType,
+      'messages': [
         ...chatItems
             .map((e) => {
-                  "role": e.role == ChatType.bot.index ? "assistant" : "user",
-                  "content": e.content.join(","),
+                  'role': e.role == ChatType.bot.index ? 'assistant' : 'user',
+                  'content': e.content.join(','),
                 })
             .toList(),
-        {"role": "user", "content": S.current.title_promot},
+        {'role': 'user', 'content': S.current.title_promot},
       ],
-      "stream": false,
-      "options": {
-        "seed": 101,
-        "temperature": double.tryParse(temperature) ?? 0.5,
+      'stream': false,
+      'options': {
+        'seed': 101,
+        'temperature': double.tryParse(temperature) ?? 0.5,
       }
     });
 
     if (response.statusCode == 200) {
-      return response.data["message"]["content"] ?? "";
+      return response.data['message']['content'] ?? '';
     } else {
-      throw Exception("result is empty");
+      throw Exception('result is empty');
     }
   }
 
   @override
-  Future<GenerateContentBean> generateContent(
-      double temperature,
-      AllModelBean bean,
-      String modelType,
-      List<ChatItem> originalChatItem,
-      List<RequestParams> chatItems) async {
-    Dio dio = initOllama(bean);
+  Future<GenerateContentBean> generateContent(double temperature, AllModelBean bean, String modelType, List<ChatItem> originalChatItem, List<RequestParams> chatItems) async {
+    var dio = initOllama(bean);
 
-    var response = await dio.post("/api/chat", data: {
-      "model": modelType,
-      "messages": chatItems
+    var response = await dio.post('/api/chat', data: {
+      'model': modelType,
+      'messages': chatItems
           .map((e) => {
-                "role": e.role == ChatType.bot.index ? "assistant" : "user",
-                "content": e.content.join(","),
+                'role': e.role == ChatType.bot.index ? 'assistant' : 'user',
+                'content': e.content.join(','),
               })
           .toList(),
-      "stream": false,
-      "options": {
-        "temperature": temperature,
+      'stream': false,
+      'options': {
+        'temperature': temperature,
       }
     });
 
     if (response.statusCode == 200) {
-      return GenerateContentBean(
-          content: response.data["message"]["content"] ?? "");
+      return GenerateContentBean(content: response.data['message']['content'] ?? '');
     } else {
-      throw Exception("result is empty");
+      throw Exception('result is empty');
     }
   }
 
   @override
-  Future<List<OpenAIImageData>> generateOpenAIImage(AllModelBean bean,
-      String prompt, OpenAIImageStyle style, OpenAIImageSize size) {
+  Future<List<OpenAIImageData>> generateOpenAIImage(AllModelBean bean, String prompt, OpenAIImageStyle style, OpenAIImageSize size) {
     throw UnimplementedError();
   }
 
   @override
   Future<List<SupportedModels>> getSupportModules(AllModelBean bean) async {
     try {
-      Dio dio = initOllama(bean);
+      var dio = initOllama(bean);
 
-      var response = await dio.get("/api/tags");
+      var response = await dio.get('/api/tags');
       if (response.statusCode == 200) {
-        var models = response.data["models"] as List?;
+        var models = response.data['models'] as List?;
 
         return models
                 ?.map<SupportedModels>((e) => SupportedModels(
-                      id: e["model"],
-                      ownedBy: e["name"],
+                      id: e['model'],
+                      ownedBy: e['name'],
                     ))
                 .toList() ??
             [];
@@ -117,55 +105,42 @@ class OllamaImpl extends APIImpl {
   }
 
   @override
-  Future<Stream<GenerateContentBean>> streamGenerateContent(
-      String temperature,
-      AllModelBean bean,
-      String modelType,
-      List<ChatItem> originalChatItem,
-      List<RequestParams> chatItems,
-      bool withoutHistoryMessage) async {
-    return _streamGenerateContent(temperature, bean, modelType,
-        originalChatItem, chatItems, withoutHistoryMessage);
+  Future<Stream<GenerateContentBean>> streamGenerateContent(String temperature, AllModelBean bean, String modelType, List<ChatItem> originalChatItem, List<RequestParams> chatItems, bool withoutHistoryMessage) async {
+    return _streamGenerateContent(temperature, bean, modelType, originalChatItem, chatItems, withoutHistoryMessage);
   }
 
   final splitter = const LineSplitter();
 
-  Stream<GenerateContentBean> _streamGenerateContent(
-      String temperature,
-      AllModelBean bean,
-      String modelType,
-      List<ChatItem> originalChatItem,
-      List<RequestParams> chatItems,
-      bool withoutHistoryMessage) async* {
-    Dio dio = initOllama(bean, stream: true);
+  Stream<GenerateContentBean> _streamGenerateContent(String temperature, AllModelBean bean, String modelType, List<ChatItem> originalChatItem, List<RequestParams> chatItems, bool withoutHistoryMessage) async* {
+    var dio = initOllama(bean, stream: true);
 
-    var response = await dio.post("/api/chat", data: {
-      "model": modelType,
-      "messages": chatItems
+    var response = await dio.post('/api/chat', data: {
+      'model': modelType,
+      'messages': chatItems
           .map((e) => {
-                "role": e.role == ChatType.bot.index ? "assistant" : "user",
-                "content": e.content.join(","),
+                'role': e.role == ChatType.bot.index ? 'assistant' : 'user',
+                'content': e.content.join(','),
               })
           .toList(),
-      "stream": true,
-      "options": {
-        "temperature": double.tryParse(temperature) ?? 0.5,
+      'stream': true,
+      'options': {
+        'temperature': double.tryParse(temperature) ?? 0.5,
       }
     });
 
     if (response.statusCode == 200) {
       final ResponseBody rb = response.data;
-      int index = 0;
-      String modelStr = '';
-      List<int> cacheUnits = [];
-      List<int> list = [];
+      var index = 0;
+      var modelStr = '';
+      var cacheUnits = <int>[];
+      var list = <int>[];
 
       await for (final itemList in rb.stream) {
         list = cacheUnits + itemList;
 
         cacheUnits.clear();
 
-        String res = "";
+        var res = '';
         try {
           res = utf8.decode(list);
         } catch (e) {
@@ -175,7 +150,7 @@ class OllamaImpl extends APIImpl {
 
         res = res.trim();
 
-        if (index == 0 && res.startsWith("[")) {
+        if (index == 0 && res.startsWith('[')) {
           res = res.replaceFirst('[', '');
         }
         if (res.startsWith(',')) {
@@ -193,7 +168,7 @@ class OllamaImpl extends APIImpl {
           }
           modelStr += line;
           try {
-            final content = (jsonDecode(modelStr)["message"]["content"]);
+            final content = (jsonDecode(modelStr)['message']['content']);
             yield GenerateContentBean(content: content);
             modelStr = '';
           } catch (e) {
@@ -218,12 +193,12 @@ class OllamaImpl extends APIImpl {
   @override
   Future<bool> validateApiKey(AllModelBean bean) async {
     try {
-      Dio dio = initOllama(bean);
+      var dio = initOllama(bean);
 
-      var response = await dio.get("/api/tags");
+      var response = await dio.get('/api/tags');
 
       if (response.statusCode == 200) {
-        return (response.data["models"] as List?)?.isNotEmpty ?? false;
+        return (response.data['models'] as List?)?.isNotEmpty ?? false;
       } else {
         return false;
       }
@@ -238,11 +213,11 @@ class OllamaImpl extends APIImpl {
 
   Dio initOllama(AllModelBean bean, {bool stream = false}) {
     return Dio(BaseOptions(
-      baseUrl: bean.apiKey ?? "",
+      baseUrl: bean.apiKey ?? '',
       connectTimeout: const Duration(minutes: 30),
       receiveTimeout: const Duration(minutes: 30),
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       responseType: stream ? ResponseType.stream : ResponseType.json,
     ))

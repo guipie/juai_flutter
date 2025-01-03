@@ -1,5 +1,9 @@
 import 'package:json_annotation/json_annotation.dart';
 
+import '../../constants/enums/enum_base.dart';
+import '../../services/db/db_base.dart';
+import '../util.dart';
+
 // 定义一个JsonConverter实现类，用于转换DateTime数据类型。
 class DateTimeConverter implements JsonConverter<DateTime, String> {
   const DateTimeConverter();
@@ -16,7 +20,7 @@ class DateTimeConverter implements JsonConverter<DateTime, String> {
   }
 }
 
-class BoolConverter implements JsonConverter<bool?, String> {
+class BoolConverter implements JsonConverter<bool, String> {
   const BoolConverter();
 
   @override
@@ -33,18 +37,18 @@ class BoolConverter implements JsonConverter<bool?, String> {
   }
 }
 
-class EnumConverter<T> implements JsonConverter<T, String> {
+class EnumConverter<Enum> implements JsonConverter<Enum, String> {
   const EnumConverter(this.values);
 
-  final List<T> values;
+  final List<Enum> values;
 
   @override
-  T fromJson(String json) {
-    return values.firstWhere((e) => e.toString() == json);
+  Enum fromJson(String json) {
+    return values.firstWhere((e) => e == json);
   }
 
   @override
-  String toJson(T object) {
+  String toJson(Enum object) {
     return object.toString();
   }
 }

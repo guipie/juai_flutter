@@ -1,24 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="D:\work\chenyanyi\app\windows\flutter\ephemeral\.plugin_symlinks\permission_handler_windows\windows\permission_handler_windows_plugin.cpp">
+    <ClCompile Include="D:\work\chenyanyi\juai\windows\flutter\ephemeral\.plugin_symlinks\permission_handler_windows\windows\permission_handler_windows_plugin.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="D:\work\chenyanyi\app\windows\flutter\ephemeral\.plugin_symlinks\permission_handler_windows\windows\include\permission_handler_windows\permission_handler_windows_plugin.h">
+    <ClInclude Include="D:\work\chenyanyi\juai\windows\flutter\ephemeral\.plugin_symlinks\permission_handler_windows\windows\include\permission_handler_windows\permission_handler_windows_plugin.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="D:\work\chenyanyi\app\windows\flutter\ephemeral\.plugin_symlinks\permission_handler_windows\windows\CMakeLists.txt" />
+    <CustomBuild Include="D:\work\chenyanyi\juai\windows\flutter\ephemeral\.plugin_symlinks\permission_handler_windows\windows\CMakeLists.txt" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">
-      <UniqueIdentifier>{EC9C83A7-5C8B-3B5F-8A7F-2AACC90FA3AF}</UniqueIdentifier>
+      <UniqueIdentifier>{50732F1F-CDE3-3926-8808-EFE6A883CEEE}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files">
-      <UniqueIdentifier>{5AD7F1E2-0627-3B48-841B-DFF1553DB44A}</UniqueIdentifier>
+      <UniqueIdentifier>{A7FEE2DC-7EC4-3EEA-B137-C73B13379A8A}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

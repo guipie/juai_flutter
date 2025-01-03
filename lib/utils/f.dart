@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
@@ -5,13 +6,16 @@ import 'package:flutter/cupertino.dart';
 import '../base.dart';
 import '../constants/enums/conversation_enum.dart';
 import '../models/aimodel/aimodel_res_model.dart';
-import '../models/prompt/prompt_res_model.dart';
-import '../pages/chat/chat_page.dart';
-import '../pages/chat/conversation_pc_page.dart';
 import '../models/chat/conversation_item_model.dart';
+import '../models/prompt/prompt_res_model.dart';
+import '../pages/chat/view/chat_page.dart';
+import '../pages/chat/view/conversation_pc_page.dart';
+import '../pages/chat/view_model/conversation_state_view_model.dart';
 import '../pages/chat/view_model/conversation_view_model.dart';
 import '../pages/home/home_pc_page.dart';
-import '../pages/home/home_provider.dart';
+import '../pages/home/view_model/home_view_model.dart';
+import '../services/db/db_aimodel.dart';
+import '../services/db/db_coversation_prompt.dart';
 import 'fimpl/animation_dialog.dart';
 import 'fimpl/special_routes.dart';
 
@@ -42,6 +46,7 @@ class _FImpl {
     FocusScope.of(context).requestFocus(FocusNode());
   }
 
+  bool get isRootPage => ModalRoute.of(context)?.isCurrent ?? false;
   Future<T?> push<T extends Object?>(Widget page) {
     return Navigator.of(context).push(CupertinoPageRoute(builder: (context) => page));
   }
@@ -75,39 +80,44 @@ class _FImpl {
   }
 
   Future<void> pushChat(WidgetRef ref, ConversationEnum type, {ConversationItemModel? conversation, PromptRes? promptRes, AiModelRes? aiModelRes}) async {
-    ref.read(homeIndexProvider.notifier).update((state) => 0);
-    var curId = DateTime.now().millisecondsSinceEpoch;
+    ref.read(homeVmProvider.notifier).setCurTabIndex(0);
+    var title = '', desc = '', avatar = '', model = '';
+    var relationId = 0;
+    var id = conversation?.id ?? DateTime.now().microsecondsSinceEpoch;
     if (type == ConversationEnum.chat) {
-      ref.read(curConversationId.notifier).update((state) => conversation?.id ?? curId);
-      if (conversation == null)
-        await ref.read(conversationVmProvider.notifier).addConversation(ConversationItemModel(
-              id: curId,
-              title: S.current.new_chat,
-              desc: S.current.empty_content_need_add,
-              type: type,
-            ));
-    } else if (type == ConversationEnum.model && aiModelRes != null) {
-      ref.read(curConversationId.notifier).update((state) => curId);
-      await ref.read(conversationVmProvider.notifier).addConversation(ConversationItemModel(
-            id: curId,
-            title: aiModelRes.shortName,
-            desc: aiModelRes.desc,
-            avatar: aiModelRes.avatarUrl,
-            type: type,
-            relationId: aiModelRes.id,
-          ));
-    } else if (type == ConversationEnum.promptChat && promptRes != null) {
-      ref.read(curConversationId.notifier).update((state) => curId);
-      await ref.read(conversationVmProvider.notifier).addConversation(ConversationItemModel(
-            id: curId,
-            title: promptRes.title!,
-            desc: promptRes.initMessage,
-            avatar: promptRes.avatar,
-            type: type,
-            relationId: promptRes.id ?? 0,
-          ));
+      if (conversation == null) {
+        title = S.current.new_chat;
+        desc = S.current.empty_content_need_add;
+        model = Constant.defaultModel;
+      }
+    } else if (type == ConversationEnum.model && (conversation != null || aiModelRes != null)) {
+      aiModelRes ??= await DbConversationAiModel().getModel(conversation!.model);
+      title = aiModelRes.shortName;
+      desc = aiModelRes.desc ?? S.current.empty_content_need_add;
+      avatar = aiModelRes.avatarUrl;
+      relationId = aiModelRes.id;
+      model = aiModelRes.name;
+    } else if (type == ConversationEnum.prompt && (conversation != null || promptRes != null)) {
+      promptRes ??= await DbConversationPrompt().getPrompt(conversation!.relationId);
+      title = promptRes!.title;
+      desc = promptRes.initMessage ?? S.current.empty_content_need_add;
+      avatar = promptRes.avatar ?? '';
+      relationId = promptRes.id;
+      model = promptRes.model;
     } else
       throw Exception('type is not support');
+    var current = conversation ??
+        ConversationItemModel(
+          id: id,
+          title: title,
+          desc: desc,
+          avatar: avatar,
+          type: type,
+          model: model,
+          relationId: relationId,
+        );
+
+    await ref.read(conversationStateVmProvider.notifier).setCurrent(current, promptRes);
   }
 
   /// 常用工具方法 结束

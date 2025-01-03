@@ -1,6 +1,6 @@
-import 'package:chat_bot/services/db/db_base.dart';
-import 'package:chat_bot/services/http/http.dart';
-import 'package:chat_bot/utils/hive_box.dart';
+import 'services/db/db_base.dart';
+import 'services/http/http.dart';
+import 'utils/hive_box.dart';
 
 import 'base.dart';
 
