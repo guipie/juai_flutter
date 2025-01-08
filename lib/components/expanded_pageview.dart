@@ -1,4 +1,4 @@
-import '../base.dart';
+import '../base/base.dart';
 
 /// PageView 支持自使用高度
 class ExpandablePageView extends StatefulWidget {
@@ -15,8 +15,7 @@ class ExpandablePageView extends StatefulWidget {
   State<ExpandablePageView> createState() => _ExpandablePageViewState();
 }
 
-class _ExpandablePageViewState extends State<ExpandablePageView>
-    with TickerProviderStateMixin {
+class _ExpandablePageViewState extends State<ExpandablePageView> with TickerProviderStateMixin {
   late List<double> _heights;
   int _currentPage = 0;
 
@@ -51,7 +50,7 @@ class _ExpandablePageViewState extends State<ExpandablePageView>
         controller: widget.pageController,
         children: _sizeReportingChildren
             .asMap() //
-            .map((index, child) => MapEntry(index, child))
+            .map(MapEntry.new)
             .values
             .toList(),
       ),
@@ -69,8 +68,7 @@ class _ExpandablePageViewState extends State<ExpandablePageView>
             maxHeight: double.infinity,
             alignment: Alignment.topCenter,
             child: SizeReportingWidget(
-              onSizeChange: (size) =>
-                  setState(() => _heights[index] = size.height),
+              onSizeChange: (size) => setState(() => _heights[index] = size.height),
               child: Align(child: child),
             ),
           ),

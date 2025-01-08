@@ -2,7 +2,7 @@ import 'services/db/db_base.dart';
 import 'services/http/http.dart';
 import 'utils/hive_box.dart';
 
-import 'base.dart';
+import 'base/base.dart';
 
 class Initial {
   static Future<void> init() async {

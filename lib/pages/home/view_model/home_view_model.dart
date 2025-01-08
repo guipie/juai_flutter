@@ -1,5 +1,5 @@
 import 'package:fluent_ui/fluent_ui.dart';
-import '../../../base.dart';
+import '../../../base/base.dart';
 import '../state/home_state.dart';
 
 part 'home_view_model.g.dart';

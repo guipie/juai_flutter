@@ -3,7 +3,7 @@ import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 
-import '../base.dart';
+import '../base/base.dart';
 import '../constants/enums/conversation_enum.dart';
 import '../models/aimodel/aimodel_res_model.dart';
 import '../models/chat/conversation_item_model.dart';
@@ -118,6 +118,7 @@ class _FImpl {
         );
 
     await ref.read(conversationStateVmProvider.notifier).setCurrent(current, promptRes);
+    if (F.mobile) await F.push(ChatPage(cur: ref.read(conversationStateVmProvider)));
   }
 
   /// 常用工具方法 结束

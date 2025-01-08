@@ -1,4 +1,4 @@
-import '../../../base.dart';
+import '../../../base/base.dart';
 import '../provider/login_provider.dart';
 
 class PassWordWidget extends ConsumerWidget {
@@ -15,7 +15,7 @@ class PassWordWidget extends ConsumerWidget {
           hintText: S.current.pwd,
           filled: true,
           fillColor: const Color(0xFFF5FCF9),
-          contentPadding: const EdgeInsets.symmetric(horizontal: 16.0 * 1.5, vertical: 16.0),
+          contentPadding: const EdgeInsets.symmetric(horizontal: 16.0 * 1.5, vertical: 8.0),
           border: const OutlineInputBorder(
             borderSide: BorderSide.none,
             borderRadius: BorderRadius.all(Radius.circular(50)),

@@ -1,3 +1,4 @@
+import 'package:fluent_ui/fluent_ui.dart' as fl;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -36,9 +37,9 @@ class BottomNavItem extends ConsumerWidget {
           children: [
             Icon(
               checked ? iconChecked : icon,
-              color: checked ? Theme.of(context).primaryColor : null,
+              color: checked ? fl.FluentTheme.of(context).accentColor : null,
             ),
-            Text(label ?? '', style: checked ? Theme.of(context).textTheme.titleSmall!.copyWith(color: Theme.of(context).primaryColor) : Theme.of(context).textTheme.bodySmall),
+            Text(label ?? '', style: checked ? Theme.of(context).textTheme.titleSmall!.copyWith(color: fl.FluentTheme.of(context).accentColor) : Theme.of(context).textTheme.bodySmall),
             // Container(
             //   decoration: BoxDecoration(
             //     color: checked

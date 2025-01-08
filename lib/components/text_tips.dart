@@ -1,4 +1,4 @@
-import '../base.dart';
+import '../base/base.dart';
 
 class TextTips extends StatelessWidget {
   const TextTips(this.text, {super.key, this.fontSize, this.padding});

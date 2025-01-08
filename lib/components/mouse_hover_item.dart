@@ -2,8 +2,8 @@ import 'package:fluent_ui/fluent_ui.dart' as fl;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
-import '../base.dart';
-import 'image.dart';
+import '../base/base.dart';
+import 'image/image.dart';
 import 'mouse_hover.dart';
 
 @immutable
@@ -59,7 +59,7 @@ class MouseHoverItem extends ConsumerWidget {
         size: 18,
       );
     return MouseHoverWidget(
-      hoverColor: isSelected == true ? ref.watch(themeProvider).pinedBgColor() : ref.watch(themeProvider).pinedBgColor().withOpacity(0.3),
+      hoverColor: ref.watch(themeProvider).pinedBgColor().withOpacity(0.5),
       color: isSelected == true ? ref.watch(themeProvider).pinedBgColor() : fl.FluentTheme.of(context).cardColor,
       onTap: onTap,
       isRadius: isRadius,

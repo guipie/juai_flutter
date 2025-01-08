@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
-import '../../base.dart';
+import '../../base/base.dart';
 
 class SquarePage extends ConsumerWidget {
   const SquarePage({super.key});

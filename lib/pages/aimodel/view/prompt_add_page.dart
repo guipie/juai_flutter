@@ -1,9 +1,9 @@
-import '../../../base.dart';
+import '../../../base/base.dart';
 import '../../../components/button/filled_btn.dart';
 import '../../../components/form/label_input.dart';
 import '../../../components/form/label_input_multi.dart';
 import '../../../components/form/label_text.dart';
-import '../../../components/image.dart';
+import '../../../components/image/image.dart';
 import '../../../components/mouse_hover_item.dart';
 
 class PromptAddPage extends ConsumerWidget {

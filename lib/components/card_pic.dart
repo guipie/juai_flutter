@@ -1,5 +1,5 @@
-import '../base.dart';
-import 'image.dart';
+import '../base/base.dart';
+import 'image/image.dart';
 
 class CardPic extends StatelessWidget {
   const CardPic(this.path, this.title, {super.key, this.onTap, this.subTitle, this.footer, this.titleCenter, this.width = 200});

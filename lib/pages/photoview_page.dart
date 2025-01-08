@@ -1,6 +1,6 @@
 import 'package:extended_image/extended_image.dart';
 
-import '../base.dart';
+import '../base/base.dart';
 
 class SlidePage extends StatefulWidget {
   const SlidePage({super.key, this.url, this.headers = const <String, String>{}});
@@ -24,7 +24,7 @@ class _SlidePageState extends State<SlidePage> {
         slideAxis: SlideAxis.both,
         slideType: SlideType.onlyImage,
         slidePageBackgroundHandler: (Offset offset, Size pageSize) {
-          double opacity = (1 - offset.distance / pageSize.shortestSide);
+          var opacity = (1 - offset.distance / pageSize.shortestSide);
           if (opacity < 0) {
             opacity = 0;
           }
@@ -36,48 +36,42 @@ class _SlidePageState extends State<SlidePage> {
         child: GestureDetector(
           child: widget.url == 'This is an video'
               ? ExtendedImageSlidePageHandler(
-            child: Material(
-              child: Container(
-                alignment: Alignment.center,
-                color: Colors.yellow,
-                child: const Text('This is an video'),
-              ),
-            ),
-            heroBuilderForSlidingPage: (Widget result) {
-              return Hero(
-                tag: widget.url!,
-                child: result,
-                flightShuttleBuilder: (BuildContext flightContext,
-                    Animation<double> animation,
-                    HeroFlightDirection flightDirection,
-                    BuildContext fromHeroContext,
-                    BuildContext toHeroContext) {
-                  final Hero hero = (flightDirection == HeroFlightDirection.pop
-                      ? fromHeroContext.widget
-                      : toHeroContext.widget) as Hero;
+                  child: Material(
+                    child: Container(
+                      alignment: Alignment.center,
+                      color: Colors.yellow,
+                      child: const Text('This is an video'),
+                    ),
+                  ),
+                  heroBuilderForSlidingPage: (Widget result) {
+                    return Hero(
+                      tag: widget.url!,
+                      child: result,
+                      flightShuttleBuilder: (BuildContext flightContext, Animation<double> animation, HeroFlightDirection flightDirection, BuildContext fromHeroContext, BuildContext toHeroContext) {
+                        final hero = (flightDirection == HeroFlightDirection.pop ? fromHeroContext.widget : toHeroContext.widget) as Hero;
 
-                  return hero.child;
-                },
-              );
-            },
-          )
+                        return hero.child;
+                      },
+                    );
+                  },
+                )
               : HeroWidget(
-            tag: widget.url!,
-            slideType: SlideType.onlyImage,
-            slidePagekey: slidePagekey,
-            child: widget.url!.startsWith("assets/")
-                ? ExtendedImage.asset(
-              widget.url!,
-              enableSlideOutPage: true,
-              mode: ExtendedImageMode.gesture,
-            )
-                : ExtendedImage.network(
-              widget.url!,
-              headers: widget.headers,
-              enableSlideOutPage: true,
-              mode: ExtendedImageMode.gesture,
-            ),
-          ),
+                  tag: widget.url!,
+                  slideType: SlideType.onlyImage,
+                  slidePagekey: slidePagekey,
+                  child: widget.url!.startsWith('assets/')
+                      ? ExtendedImage.asset(
+                          widget.url!,
+                          enableSlideOutPage: true,
+                          mode: ExtendedImageMode.gesture,
+                        )
+                      : ExtendedImage.network(
+                          widget.url!,
+                          headers: widget.headers,
+                          enableSlideOutPage: true,
+                          mode: ExtendedImageMode.gesture,
+                        ),
+                ),
           onTap: () {
             slidePagekey.currentState!.popPage();
             Navigator.pop(context);
@@ -119,25 +113,21 @@ class _HeroWidgetState extends State<HeroWidget> {
         return _rectTween!;
       },
       // make hero better when slide out
-      flightShuttleBuilder: (BuildContext flightContext, Animation<double> animation,
-          HeroFlightDirection flightDirection, BuildContext fromHeroContext, BuildContext toHeroContext) {
+      flightShuttleBuilder: (BuildContext flightContext, Animation<double> animation, HeroFlightDirection flightDirection, BuildContext fromHeroContext, BuildContext toHeroContext) {
         // make hero more smoothly
-        final Hero hero =
-        (flightDirection == HeroFlightDirection.pop ? fromHeroContext.widget : toHeroContext.widget) as Hero;
+        final hero = (flightDirection == HeroFlightDirection.pop ? fromHeroContext.widget : toHeroContext.widget) as Hero;
         if (_rectTween == null) {
           return hero;
         }
 
         if (flightDirection == HeroFlightDirection.pop) {
-          final bool fixTransform = widget.slideType == SlideType.onlyImage &&
-              (widget.slidePagekey.currentState!.offset != Offset.zero ||
-                  widget.slidePagekey.currentState!.scale != 1.0);
+          final fixTransform = widget.slideType == SlideType.onlyImage && (widget.slidePagekey.currentState!.offset != Offset.zero || widget.slidePagekey.currentState!.scale != 1.0);
 
-          final Widget toHeroWidget = (toHeroContext.widget as Hero).child;
+          final toHeroWidget = (toHeroContext.widget as Hero).child;
           return AnimatedBuilder(
             animation: animation,
             builder: (BuildContext buildContext, Widget? child) {
-              Widget animatedBuilderChild = hero.child;
+              var animatedBuilderChild = hero.child;
 
               // make hero more smoothly
               animatedBuilderChild = Stack(
@@ -163,11 +153,9 @@ class _HeroWidgetState extends State<HeroWidget> {
 
               // fix transform when slide out
               if (fixTransform) {
-                final Tween<Offset> offsetTween =
-                Tween<Offset>(begin: Offset.zero, end: widget.slidePagekey.currentState!.offset);
+                final offsetTween = Tween<Offset>(begin: Offset.zero, end: widget.slidePagekey.currentState!.offset);
 
-                final Tween<double> scaleTween =
-                Tween<double>(begin: 1.0, end: widget.slidePagekey.currentState!.scale);
+                final scaleTween = Tween<double>(begin: 1.0, end: widget.slidePagekey.currentState!.scale);
                 animatedBuilderChild = Transform.translate(
                   offset: offsetTween.evaluate(animation),
                   child: Transform.scale(

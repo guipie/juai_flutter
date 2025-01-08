@@ -1,13 +1,12 @@
-import '../../base.dart';
-import '../../base_page.dart';
-import '../../components/image.dart';
+import '../../base/base.dart';
+import '../../base/base_page.dart';
+import '../../components/image/image.dart';
 import '../../constants/enums/user_enum.dart';
 import '../home/view_model/home_view_model.dart';
 import 'provider/login_provider.dart';
 import 'widget/invitation_code.dart';
 import 'widget/password.dart';
 import 'widget/phone.dart';
-import 'widget/phone_vcode.dart';
 import 'widget/vcode.dart';
 
 class LoginPage extends BasePage {
@@ -51,7 +50,9 @@ class LoginPage extends BasePage {
                         const PassWordWidget(),
                       ],
                       if (loginOpr != LoginOpr.login) ...[
-                        const PhoneVcodeWidget(),
+                        const PhoneWidget(
+                          isVcode: true,
+                        ),
                         const VcodeWidget(),
                         const SizedBox(height: 16.0),
                         const InvitationCodeWidget(),
@@ -111,7 +112,7 @@ class LoginPage extends BasePage {
                       if (loginOpr != LoginOpr.login)
                         TextButton(
                           onPressed: () {
-                            F.push(LoginPage(loginOpr: LoginOpr.login));
+                            F.pushAndRemoveUntil(LoginPage(loginOpr: LoginOpr.login));
                           },
                           child: Text(
                             '${S.current.have_account},${S.current.login}',

@@ -1,4 +1,4 @@
-import '../base.dart';
+import '../base/base.dart';
 import 'package:flutter/material.dart';
 
 class MouseHoverWidget extends StatefulWidget {

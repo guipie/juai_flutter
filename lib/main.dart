@@ -2,8 +2,8 @@ import 'package:fluent_ui/fluent_ui.dart' as fl;
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:window_manager/window_manager.dart';
 
-import 'base.dart';
-import 'base/riverpod/provider_log.dart';
+import 'base/base.dart';
+import 'services/riverpod/provider_log.dart';
 import 'constants/theme.dart';
 import 'initial.dart';
 import 'pages/splash_page.dart';

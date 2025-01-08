@@ -1,8 +1,14 @@
-import '../../../base.dart';
+import 'package:fluent_ui/fluent_ui.dart' as fl;
+
+import '../../../base/base.dart';
+import '../../../components/image/avatar.dart';
 import '../../../components/mouse_hover_item.dart';
 import '../../../components/paging/paging_widget.dart';
 import '../../../components/text_tips.dart';
+import '../../../models/aimodel/aimodel_res_model.dart';
 import '../../../models/prompt/prompt_req_model.dart';
+import '../../chat/view_model/conversation_state_view_model.dart';
+import '../../chat/view_model/conversation_view_model.dart';
 import '../view_model/aimodel_view_model.dart';
 import '../view_model/prompt_view_model.dart';
 
@@ -102,6 +108,50 @@ class AimodelWidget {
           color: Theme.of(context).appBarTheme.actionsIconTheme?.color,
           size: 22,
         ),
+      ),
+    );
+  }
+
+  static Widget buildOptions(BuildContext context, WidgetRef ref, AiModelRes curModel, {Function()? onTap}) {
+    final itemsController = fl.FlyoutController();
+    return fl.FlyoutTarget(
+      controller: itemsController,
+      child: JuAvatar(
+        curModel.avatarUrl,
+        onTap: () {
+          itemsController.showFlyout(
+            autoModeConfiguration: fl.FlyoutAutoConfiguration(
+              preferredMode: fl.FlyoutPlacementMode.topCenter,
+            ),
+            barrierDismissible: true,
+            dismissOnPointerMoveAway: false,
+            dismissWithEsc: true,
+            navigatorKey: GlobalKey<NavigatorState>().currentState,
+            builder: (context) {
+              return fl.MenuFlyout(
+                items: [
+                  for (var item in ref.watch(aiModelVmProvider).value!.items) ...[
+                    fl.MenuFlyoutItem(
+                      leading: Text(item.key),
+                      text: Text(item.models.length.toString()),
+                      onPressed: null,
+                    ),
+                    for (var model in item.models)
+                      fl.ToggleMenuFlyoutItem(
+                        text: Text(model.name),
+                        trailing: JuAvatar(model.avatarUrl),
+                        value: model.name == curModel.name,
+                        onChanged: (v) {
+                          ref.read(conversationStateVmProvider.notifier).setCurrentModel(model);
+                          F.pop();
+                        },
+                      )
+                  ],
+                ],
+              );
+            },
+          );
+        },
       ),
     );
   }

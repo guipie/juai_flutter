@@ -1,5 +1,5 @@
 import 'package:flutter_slidable/flutter_slidable.dart';
-import '../base.dart';
+import '../base/base.dart';
 import 'mouse_hover.dart';
 import 'mouse_hover_item.dart';
 

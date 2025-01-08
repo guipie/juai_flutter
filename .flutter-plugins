@@ -1,17 +1,9 @@
 # This is a generated file; do not edit or check into version control.
-audio_session=C:\\Users\\Administrator\\AppData\\Local\\Pub\\Cache\\hosted\\pub.flutter-io.cn\\audio_session-0.1.21\\
 connectivity_plus=C:\\Users\\Administrator\\AppData\\Local\\Pub\\Cache\\hosted\\pub.flutter-io.cn\\connectivity_plus-6.1.0\\
 file_selector_linux=C:\\Users\\Administrator\\AppData\\Local\\Pub\\Cache\\hosted\\pub.flutter-io.cn\\file_selector_linux-0.9.3+2\\
 file_selector_macos=C:\\Users\\Administrator\\AppData\\Local\\Pub\\Cache\\hosted\\pub.flutter-io.cn\\file_selector_macos-0.9.4+2\\
 file_selector_windows=C:\\Users\\Administrator\\AppData\\Local\\Pub\\Cache\\hosted\\pub.flutter-io.cn\\file_selector_windows-0.9.3+3\\
-flutter_image_compress=C:\\Users\\Administrator\\AppData\\Local\\Pub\\Cache\\hosted\\pub.flutter-io.cn\\flutter_image_compress-2.3.0\\
-flutter_image_compress_common=C:\\Users\\Administrator\\AppData\\Local\\Pub\\Cache\\hosted\\pub.flutter-io.cn\\flutter_image_compress_common-1.0.5\\
-flutter_image_compress_macos=C:\\Users\\Administrator\\AppData\\Local\\Pub\\Cache\\hosted\\pub.flutter-io.cn\\flutter_image_compress_macos-1.0.2\\
-flutter_image_compress_ohos=C:\\Users\\Administrator\\AppData\\Local\\Pub\\Cache\\hosted\\pub.flutter-io.cn\\flutter_image_compress_ohos-0.0.3\\
-flutter_image_compress_web=C:\\Users\\Administrator\\AppData\\Local\\Pub\\Cache\\hosted\\pub.flutter-io.cn\\flutter_image_compress_web-0.1.4+1\\
-flutter_native_splash=C:\\Users\\Administrator\\AppData\\Local\\Pub\\Cache\\hosted\\pub.flutter-io.cn\\flutter_native_splash-2.4.3\\
 flutter_plugin_android_lifecycle=C:\\Users\\Administrator\\AppData\\Local\\Pub\\Cache\\hosted\\pub.flutter-io.cn\\flutter_plugin_android_lifecycle-2.0.23\\
-gal=C:\\Users\\Administrator\\AppData\\Local\\Pub\\Cache\\hosted\\pub.flutter-io.cn\\gal-2.3.0\\
 image_picker=C:\\Users\\Administrator\\AppData\\Local\\Pub\\Cache\\hosted\\pub.flutter-io.cn\\image_picker-1.0.8\\
 image_picker_android=C:\\Users\\Administrator\\AppData\\Local\\Pub\\Cache\\hosted\\pub.flutter-io.cn\\image_picker_android-0.8.12+18\\
 image_picker_for_web=C:\\Users\\Administrator\\AppData\\Local\\Pub\\Cache\\hosted\\pub.flutter-io.cn\\image_picker_for_web-3.0.6\\
@@ -19,8 +11,6 @@ image_picker_ios=C:\\Users\\Administrator\\AppData\\Local\\Pub\\Cache\\hosted\\p
 image_picker_linux=C:\\Users\\Administrator\\AppData\\Local\\Pub\\Cache\\hosted\\pub.flutter-io.cn\\image_picker_linux-0.2.1+1\\
 image_picker_macos=C:\\Users\\Administrator\\AppData\\Local\\Pub\\Cache\\hosted\\pub.flutter-io.cn\\image_picker_macos-0.2.1+1\\
 image_picker_windows=C:\\Users\\Administrator\\AppData\\Local\\Pub\\Cache\\hosted\\pub.flutter-io.cn\\image_picker_windows-0.2.1+1\\
-just_audio=C:\\Users\\Administrator\\AppData\\Local\\Pub\\Cache\\hosted\\pub.flutter-io.cn\\just_audio-0.9.42\\
-just_audio_web=C:\\Users\\Administrator\\AppData\\Local\\Pub\\Cache\\hosted\\pub.flutter-io.cn\\just_audio_web-0.4.13\\
 package_info_plus=C:\\Users\\Administrator\\AppData\\Local\\Pub\\Cache\\hosted\\pub.flutter-io.cn\\package_info_plus-8.1.1\\
 path_provider=C:\\Users\\Administrator\\AppData\\Local\\Pub\\Cache\\hosted\\pub.flutter-io.cn\\path_provider-2.1.5\\
 path_provider_android=C:\\Users\\Administrator\\AppData\\Local\\Pub\\Cache\\hosted\\pub.flutter-io.cn\\path_provider_android-2.2.15\\

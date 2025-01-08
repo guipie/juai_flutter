@@ -1,7 +1,7 @@
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
-import '../../base.dart';
+import '../../base/base.dart';
 import '../../constants/enums/common_enum.dart';
 import 'chat_item.dart';
 import 'db_aimodel.dart';

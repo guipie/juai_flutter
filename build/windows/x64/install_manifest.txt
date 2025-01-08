@@ -29,7 +29,6 @@ D:/work/chenyanyi/juai/build/windows/x64/runner/Debug/data/flutter_assets/assets
 D:/work/chenyanyi/juai/build/windows/x64/runner/Debug/data/flutter_assets/assets/images/juai-bg-tm.png
 D:/work/chenyanyi/juai/build/windows/x64/runner/Debug/data/flutter_assets/assets/images/juai-bg.png
 D:/work/chenyanyi/juai/build/windows/x64/runner/Debug/data/flutter_assets/assets/images/kimi.png
-D:/work/chenyanyi/juai/build/windows/x64/runner/Debug/data/flutter_assets/assets/images/logo.png
 D:/work/chenyanyi/juai/build/windows/x64/runner/Debug/data/flutter_assets/assets/images/logo.webp
 D:/work/chenyanyi/juai/build/windows/x64/runner/Debug/data/flutter_assets/assets/images/media_result_20241120_1527c40f-34e0-4dd0-a190-3e1f854de5de.png
 D:/work/chenyanyi/juai/build/windows/x64/runner/Debug/data/flutter_assets/assets/images/minimax.png
@@ -43,8 +42,11 @@ D:/work/chenyanyi/juai/build/windows/x64/runner/Debug/data/flutter_assets/assets
 D:/work/chenyanyi/juai/build/windows/x64/runner/Debug/data/flutter_assets/assets/lottie/sending.json
 D:/work/chenyanyi/juai/build/windows/x64/runner/Debug/data/flutter_assets/assets/lottie/speaking.json
 D:/work/chenyanyi/juai/build/windows/x64/runner/Debug/data/flutter_assets/assets/svgs/aimodel.svg
-D:/work/chenyanyi/juai/build/windows/x64/runner/Debug/data/flutter_assets/assets/tdesign/TCloudNumberVF.ttf
-D:/work/chenyanyi/juai/build/windows/x64/runner/Debug/data/flutter_assets/assets/tdesign/td_icons.ttf
+D:/work/chenyanyi/juai/build/windows/x64/runner/Debug/data/flutter_assets/assets/svgs/dongtai.svg
+D:/work/chenyanyi/juai/build/windows/x64/runner/Debug/data/flutter_assets/assets/svgs/home.svg
+D:/work/chenyanyi/juai/build/windows/x64/runner/Debug/data/flutter_assets/assets/svgs/hudong.svg
+D:/work/chenyanyi/juai/build/windows/x64/runner/Debug/data/flutter_assets/assets/svgs/token.svg
+D:/work/chenyanyi/juai/build/windows/x64/runner/Debug/data/flutter_assets/assets/svgs/tuiguang.svg
 D:/work/chenyanyi/juai/build/windows/x64/runner/Debug/data/flutter_assets/FontManifest.json
 D:/work/chenyanyi/juai/build/windows/x64/runner/Debug/data/flutter_assets/fonts/MaterialIcons-Regular.otf
 D:/work/chenyanyi/juai/build/windows/x64/runner/Debug/data/flutter_assets/kernel_blob.bin

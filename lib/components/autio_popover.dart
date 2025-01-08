@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:lottie/lottie.dart';
 
-import '../base.dart';
+import '../base/base.dart';
 
 class AudioPopOver extends StatefulWidget {
   const AudioPopOver({super.key});
@@ -10,8 +10,7 @@ class AudioPopOver extends StatefulWidget {
   State<AudioPopOver> createState() => _AudioPopOverState();
 }
 
-class _AudioPopOverState extends State<AudioPopOver>
-    with SingleTickerProviderStateMixin {
+class _AudioPopOverState extends State<AudioPopOver> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animation;
 
@@ -19,8 +18,7 @@ class _AudioPopOverState extends State<AudioPopOver>
   void initState() {
     super.initState();
 
-    _controller = AnimationController(
-        vsync: this, duration: const Duration(milliseconds: 100));
+    _controller = AnimationController(vsync: this, duration: const Duration(milliseconds: 100));
 
     _animation = Tween<double>(begin: 50, end: 200).animate(_controller);
 
@@ -51,9 +49,7 @@ class _AudioPopOverState extends State<AudioPopOver>
             children: [
               CustomPaint(
                 painter: AudioAnimationBgPainter(
-                  color: state == AudioRecordingState.canceling
-                      ? const Color(0xffFB5151)
-                      : Theme.of(context).primaryColor,
+                  color: state == AudioRecordingState.canceling ? const Color(0xffFB5151) : Theme.of(context).primaryColor,
                 ),
                 child: AnimatedSize(
                   duration: const Duration(milliseconds: 200),
@@ -61,10 +57,8 @@ class _AudioPopOverState extends State<AudioPopOver>
                   child: Padding(
                     padding: const EdgeInsets.only(bottom: 10),
                     child: Lottie.asset(
-                      "assets/lottie/recording.json",
-                      width: state == AudioRecordingState.canceling
-                          ? 150
-                          : F.width / 2.1,
+                      'assets/lottie/recording.json',
+                      width: state == AudioRecordingState.canceling ? 150 : F.width / 2.1,
                       height: 80,
                     ),
                   ),
@@ -72,9 +66,7 @@ class _AudioPopOverState extends State<AudioPopOver>
               ),
               const SizedBox(height: 40),
               Text(
-                state == AudioRecordingState.canceling
-                    ? S.current.leave_cancel
-                    : "",
+                state == AudioRecordingState.canceling ? S.current.leave_cancel : '',
                 style: const TextStyle(
                   color: Colors.grey,
                   fontSize: 14,
@@ -92,22 +84,16 @@ class _AudioPopOverState extends State<AudioPopOver>
                       duration: const Duration(milliseconds: 200),
                       child: Container(
                         width: state == AudioRecordingState.recording ? 50 : 80,
-                        height:
-                            state == AudioRecordingState.recording ? 50 : 80,
+                        height: state == AudioRecordingState.recording ? 50 : 80,
                         decoration: BoxDecoration(
-                          color: state == AudioRecordingState.recording
-                              ? const Color(0xff3D3A3D)
-                              : Colors.white,
+                          color: state == AudioRecordingState.recording ? const Color(0xff3D3A3D) : Colors.white,
                           borderRadius: BorderRadius.circular(100),
                         ),
                         alignment: Alignment.center,
                         child: Icon(
                           CupertinoIcons.clear,
-                          color: state == AudioRecordingState.recording
-                              ? Colors.grey
-                              : Theme.of(context).textTheme.titleMedium?.color,
-                          size:
-                              state == AudioRecordingState.recording ? 25 : 25,
+                          color: state == AudioRecordingState.recording ? Colors.grey : Theme.of(context).textTheme.titleMedium?.color,
+                          size: state == AudioRecordingState.recording ? 25 : 25,
                         ),
                       ),
                     ),
@@ -118,9 +104,7 @@ class _AudioPopOverState extends State<AudioPopOver>
               Transform.translate(
                 offset: const Offset(0, 30),
                 child: Text(
-                  state == AudioRecordingState.recording
-                      ? S.current.leave_send
-                      : "",
+                  state == AudioRecordingState.recording ? S.current.leave_send : '',
                   style: const TextStyle(
                     color: Colors.grey,
                     fontSize: 14,
@@ -140,14 +124,10 @@ class _AudioPopOverState extends State<AudioPopOver>
                           painter: AudioLayoutPainter(),
                           child: Center(
                             child: Padding(
-                              padding: EdgeInsets.only(
-                                  top: MediaQuery.paddingOf(context).bottom),
+                              padding: EdgeInsets.only(top: MediaQuery.paddingOf(context).bottom),
                               child: Icon(
                                 CupertinoIcons.dot_radiowaves_right,
-                                color: Theme.of(context)
-                                    .textTheme
-                                    .bodyMedium
-                                    ?.color,
+                                color: Theme.of(context).textTheme.bodyMedium?.color,
                                 size: 30,
                               ),
                             ),
@@ -214,10 +194,7 @@ class AudioAnimationBgPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     painter.color = color;
-    canvas.drawRRect(
-        RRect.fromLTRBR(
-            0, 0, size.width, size.height - 10, const Radius.circular(15)),
-        painter);
+    canvas.drawRRect(RRect.fromLTRBR(0, 0, size.width, size.height - 10, const Radius.circular(15)), painter);
 
     //在底部，中间绘制一个倒三角,三角形要有圆角
     var path = Path()
@@ -236,11 +213,10 @@ class AudioAnimationBgPainter extends CustomPainter {
 }
 
 final chatAudioMessageProvider = StateProvider.autoDispose<String>((ref) {
-  return "";
+  return '';
 });
 
-final audioRecordingStateProvider =
-    StateProvider.autoDispose<AudioRecordingState>((ref) {
+final audioRecordingStateProvider = StateProvider.autoDispose<AudioRecordingState>((ref) {
   return AudioRecordingState.normal;
 });
 

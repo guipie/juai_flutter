@@ -1,4 +1,4 @@
-import '../../base.dart';
+import '../../base/base.dart';
 
 class FilledBtnWidget extends StatelessWidget {
   const FilledBtnWidget(this.text, {this.onPressed, super.key, this.size = const Size(40, 40)});

@@ -1,7 +1,7 @@
 import '../constants/theme.dart';
 import 'package:lottie/lottie.dart';
 
-import '../base.dart';
+import '../base/base.dart';
 
 class LottieWidget extends ConsumerWidget {
   final double scale;

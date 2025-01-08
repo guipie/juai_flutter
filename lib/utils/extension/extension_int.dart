@@ -1,6 +1,8 @@
-import '../../base.dart';
+import '../../base/base.dart';
 
 extension ExtensionInt on int? {
+  double get wf => F.pc ? toInt().toDouble() : 1.sw;
+
   SizedBox width() {
     return SizedBox(width: toInt().toDouble());
   }

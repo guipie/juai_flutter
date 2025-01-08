@@ -3,7 +3,7 @@ import 'dart:math';
 
 import 'package:dio/dio.dart';
 
-import '../../../base.dart';
+import '../../../base/base.dart';
 import '../../../constants/enums/conversation_enum.dart';
 import '../../../models/chat/chat_item_model.dart';
 import '../../../models/chat/request/chat_req_dto.dart';

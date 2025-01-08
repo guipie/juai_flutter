@@ -1,4 +1,4 @@
-import '../../base.dart';
+import '../../base/base.dart';
 
 enum EDialogTransition {
   scale,
@@ -35,8 +35,8 @@ class Rotation3DTransition extends AnimatedWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double turnsValue = turns.value;
-    final Matrix4 transform = Matrix4.identity()
+    final turnsValue = turns.value;
+    final transform = Matrix4.identity()
       ..setEntry(3, 2, 0.0006)
       ..rotateY(turnsValue);
     return Transform(
@@ -60,8 +60,7 @@ Future<T?> generalDialog<T>({
   RouteSettings? routeSettings,
 }) {
   assert(!barrierDismissible || barrierLabel != null);
-  final nav = navigatorKey?.currentState ??
-      Navigator.of(context, rootNavigator: true); //overlay context will always return the root navigator
+  final nav = navigatorKey?.currentState ?? Navigator.of(context, rootNavigator: true); //overlay context will always return the root navigator
   return nav.push<T>(
     FDialogRoute<T>(
       pageBuilder: pageBuilder,
@@ -121,8 +120,7 @@ class FDialogRoute<T> extends PopupRoute<T> {
   }
 
   @override
-  Widget buildTransitions(
-      BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation, Widget child) {
+  Widget buildTransitions(BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation, Widget child) {
     if (_transitionBuilder == null) {
       return FadeTransition(
           opacity: CurvedAnimation(

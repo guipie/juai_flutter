@@ -109,9 +109,9 @@
   "tts": "Deacon",
   "author": "Author",
   "title": "Title",
-  "add_prompt": "Add AI Prompt", 
+  "add_prompt": "Add AI Prompt",
   "prompt_hint": "Please enter AI Prompt",
-  "prompt_demo":"Example:Please help me create or optimize my resume based on the information I provided. The content produced and optimized must be centered around the information provided. The content must highlight personal highlights and characteristics, list past work experience in chronological order, quantify outstanding deeds and achievements at work through digitization and other methods, and the overall content It is required to be concise and easy to understand, with clear format and no grammatical errors。", 
+  "prompt_demo": "Example:Please help me create or optimize my resume based on the information I provided. The content produced and optimized must be centered around the information provided. The content must highlight personal highlights and characteristics, list past work experience in chronological order, quantify outstanding deeds and achievements at work through digitization and other methods, and the overall content It is required to be concise and easy to understand, with clear format and no grammatical errors。",
   "prompt_greeting": "Greetings",
   "prompt_greeting_demo": "Example: To convey your experience and skills clearly and effectively, please provide me with the following information: 1. The position/industry or future goals you want to apply for; 2. Educational background, such as school, degree, major, honors received, etc.; 3 . Your past and present work/internship experience, such as position, professional and project experience and performance results, etc.; 4. Your skills, expertise, language ability and professional qualifications, etc.",
   "text_parse_model": "Text Parsing Model",
@@ -168,8 +168,9 @@
   "invitation_code": "Invitation Code",
   "invitation_code_input": "Please enter invitation code",
   "invitation_code_desc": "Invitation code is required for registration",
-  "digitalMan": "Digital Man", 
-  "collect":"Collect", 
+  "digitalMan": "Digital Man",
+  "collect": "Collect",
   "retry": "retry",
-  "no_more_data": "no data to refresh"
+  "no_more_data": "no data to refresh",
+  "ju_switch": "switch"
 }

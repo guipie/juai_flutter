@@ -1,14 +1,16 @@
-import '../../../base.dart';
+import '../../../base/base.dart';
+import '../../../base/base_page.dart';
 import '../widgets/conversation_widget.dart';
 
-class ConversationPage extends ConsumerWidget {
+class ConversationPage extends BasePage {
   const ConversationPage({super.key});
+  @override
+  Widget buildBody(BuildContext context, WidgetRef ref) {
+    // TODO: implement buildBody
+    return ConversationWidget.buildConversations(ref, context);
+  }
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return Scaffold(
-      appBar: JuAppBar.baseBar(text: '会话'),
-      body: ConversationWidget.buildConversations(ref, context),
-    );
-  }
+  // TODO: implement title
+  String get title => '会话';
 }

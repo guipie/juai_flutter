@@ -140,6 +140,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Getting models..."),
         "is_responsing":
             MessageLookupByLibrary.simpleMessage("The server is responding..."),
+        "ju_switch": MessageLookupByLibrary.simpleMessage("switch"),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
         "leave_cancel": MessageLookupByLibrary.simpleMessage("Leave Cancel"),
         "leave_send": MessageLookupByLibrary.simpleMessage("Leave Send"),

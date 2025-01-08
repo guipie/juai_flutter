@@ -1,4 +1,4 @@
-import '../../../base.dart';
+import '../../../base/base.dart';
 
 class LoginModel {
   bool invitaionCodeShow;

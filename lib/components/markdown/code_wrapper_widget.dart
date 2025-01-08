@@ -1,5 +1,9 @@
+import 'package:fluent_ui/fluent_ui.dart' as fl;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
+import '../../base/base.dart';
+import '../skeleton.dart';
 
 class CodeWrapperWidget extends StatefulWidget {
   final Widget child;
@@ -24,7 +28,6 @@ class _PreWrapperState extends State<CodeWrapperWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
     return Stack(
       children: [
         widget.child,
@@ -36,13 +39,14 @@ class _PreWrapperState extends State<CodeWrapperWidget> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 if (widget.language.isNotEmpty)
-                  SelectionContainer.disabled(
-                      child: Container(
-                    margin: const EdgeInsets.only(right: 2),
-                    padding: const EdgeInsets.all(2),
-                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(4), border: Border.all(width: 0.5, color: isDark ? Colors.white : Colors.black)),
-                    child: Text(widget.language),
-                  )),
+                  fl.Button(
+                    onPressed: null,
+                    child: Text(
+                      widget.language,
+                      style: const TextStyle(fontSize: 9),
+                    ),
+                  ),
+                4.width(),
                 InkWell(
                   child: AnimatedSwitcher(
                     duration: const Duration(milliseconds: 200),

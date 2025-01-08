@@ -119,6 +119,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "invitation_code_input": MessageLookupByLibrary.simpleMessage("请输入邀请码"),
         "is_getting_modules": MessageLookupByLibrary.simpleMessage("正在获取模型..."),
         "is_responsing": MessageLookupByLibrary.simpleMessage("服务器正在回应..."),
+        "ju_switch": MessageLookupByLibrary.simpleMessage("切换"),
         "language": MessageLookupByLibrary.simpleMessage("语言"),
         "leave_cancel": MessageLookupByLibrary.simpleMessage("松开 取消"),
         "leave_send": MessageLookupByLibrary.simpleMessage("松开 发送"),

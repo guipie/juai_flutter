@@ -1,4 +1,4 @@
-import '../base.dart';
+import '../base/base.dart';
 
 class TextSearchBox extends StatefulWidget {
   const TextSearchBox({super.key, this.onChanged, this.onSubmitted, this.hintText});

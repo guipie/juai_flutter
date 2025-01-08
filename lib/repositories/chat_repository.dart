@@ -3,11 +3,11 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 
-import '../base.dart';
+import '../base/base.dart';
 import '../models/chat/chat_item_model.dart';
 import '../models/chat/request/chat_req_dto.dart';
 import '../services/http/apis/chat.dart';
-import 'base_repository.dart';
+import '../base/base_repository.dart';
 part 'chat_repository.g.dart';
 
 @Riverpod(keepAlive: true)

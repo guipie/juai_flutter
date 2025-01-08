@@ -1,9 +1,9 @@
 import 'package:fluent_ui/fluent_ui.dart' as fl;
 import 'package:pull_down_button/pull_down_button.dart';
 
-import '../../base.dart';
+import '../../base/base.dart';
 import '../../base/version_check.dart';
-import '../../components/image.dart';
+import '../../components/image/image.dart';
 import '../../components/mouse_hover_item.dart';
 import '../../const.dart';
 import '../login/provider/user_provider.dart';

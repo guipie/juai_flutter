@@ -1,14 +1,15 @@
-import '../../../base.dart';
+import '../../../base/base.dart';
+import '../../../base/base_page.dart';
 import '../widget/aimodel_widget.dart';
 
-class AiModelPage extends ConsumerWidget {
+class AiModelPage extends BasePage {
   const AiModelPage({super.key});
+  @override
+  Widget buildBody(BuildContext context, WidgetRef ref) {
+    return AimodelWidget.buildBody(context, ref);
+  }
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return Scaffold(
-      appBar: JuAppBar.baseBar(text: 'AI模型'),
-      body: AimodelWidget.buildBody(context, ref),
-    );
-  }
+  // TODO: implement title
+  String get title => S.current.digitalMan + S.current.home_model;
 }

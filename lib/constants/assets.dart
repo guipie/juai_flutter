@@ -7,5 +7,11 @@ class Assets {
   static const String imageBg = '$_imagePath/juai-bg.png';
   static const String imageBgTm = '$_imagePath/juai-bg-tm.png';
   static const String imageAvatar = '$_imagePath/juai-1024.png';
+  static const String imageZhifubao = '$_imagePath/ali.jpg';
+
+  /* svg  */
   static const String svgAimodel = '$_svgPath/aimodel.svg';
+  static const String svgTuiguang = '$_svgPath/tuiguang.svg';
+  static const String svgToken = '$_svgPath/token.svg';
+  static const String svgDongtai = '$_svgPath/dongtai.svg';
 }

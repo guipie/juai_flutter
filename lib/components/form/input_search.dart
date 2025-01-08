@@ -1,4 +1,4 @@
-import '../../base.dart';
+import '../../base/base.dart';
 
 class InputSearchWidget extends StatefulWidget {
   const InputSearchWidget({super.key});

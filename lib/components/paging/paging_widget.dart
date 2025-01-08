@@ -1,9 +1,10 @@
 import 'package:easy_refresh/easy_refresh.dart';
+import 'package:fluent_ui/fluent_ui.dart' as fl;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
-import '../../base.dart';
+import '../../base/base.dart';
 import '../../pages/login/login_page.dart';
 import '../../pages/login/provider/user_provider.dart';
 import '../../services/http/interceptor/api_exception.dart';
@@ -88,18 +89,18 @@ final class PagingWidget<D extends PagingData<I>, I> extends ConsumerWidget {
             );
             return EasyRefresh(
               header: BezierCircleHeader(
-                triggerOffset: 80,
-                foregroundColor: Theme.of(context).scaffoldBackgroundColor,
-                backgroundColor: Theme.of(context).colorScheme.onPrimary,
+                triggerOffset: 40,
+                foregroundColor: fl.FluentTheme.of(context).accentColor,
+                backgroundColor: fl.FluentTheme.of(context).scaffoldBackgroundColor.withOpacity(0.4),
               ),
               footer: BezierFooter(
-                foregroundColor: Theme.of(context).scaffoldBackgroundColor,
-                backgroundColor: Theme.of(context).colorScheme.onPrimary,
+                triggerOffset: 40,
+                foregroundColor: fl.FluentTheme.of(context).accentColor,
+                backgroundColor: fl.FluentTheme.of(context).scaffoldBackgroundColor.withOpacity(0.4),
                 clamping: true,
                 showBalls: true,
                 spinInCenter: true,
                 onlySpin: true,
-                triggerOffset: 50,
                 spinWidget: data.hasMore
                     ? null
                     : Text(
@@ -109,9 +110,20 @@ final class PagingWidget<D extends PagingData<I>, I> extends ConsumerWidget {
               ),
               onRefresh: () async => ref.refresh(futureRefreshable),
               onLoad: () async => await ref.read(notifierRefreshable).loadNext(),
-              child: SingleChildScrollView(
-                padding: padding,
-                child: content,
+              child: LayoutBuilder(
+                builder: (BuildContext context, BoxConstraints constraints) {
+                  return ConstrainedBox(
+                    constraints: BoxConstraints(
+                      minHeight: constraints.maxHeight - 50,
+                    ),
+                    child: IntrinsicHeight(
+                      child: SingleChildScrollView(
+                        padding: padding,
+                        child: content,
+                      ),
+                    ),
+                  );
+                },
               ),
             );
           },

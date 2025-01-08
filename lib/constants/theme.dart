@@ -207,6 +207,23 @@ abstract class BaseTheme {
 
   Color userSendMessageTextColor();
 
+  ///  fontSize 最小文字
+  double fsXs = 10;
+
+  /// fontSize sm 次要文字
+  double fsSm = 12;
+
+  /// fontSize base
+  double fsBase = 14;
+
+  /// fontSize l 小标题
+  double fsL = 16;
+
+  /// fontSize xl 标题
+  double fsXl = 18;
+  double fsXll = 24;
+  double fsXlll = 36;
+
   static BaseTheme of(WidgetRef ref) {
     return ref.watch(themeProvider);
   }
@@ -216,8 +233,17 @@ class LightTheme extends BaseTheme {
   @override
   FluentThemeData theme(Color primaryColor) {
     return FluentThemeData(
-      accentColor: Colors.green,
+      accentColor: primaryColor.toAccentColor(),
       visualDensity: VisualDensity.standard,
+      scaffoldBackgroundColor: Colors.grey[30],
+      cardColor: const Color(0xffF8F8FF),
+      dividerTheme: const DividerThemeData(
+        thickness: 0.5,
+        horizontalMargin: EdgeInsets.symmetric(vertical: 8),
+        decoration: BoxDecoration(
+          color: Color(0Xffeef1e8),
+        ),
+      ),
     );
   }
 
@@ -274,7 +300,7 @@ class DarkTheme extends BaseTheme {
       brightness: Brightness.dark,
       accentColor: Colors.green,
       visualDensity: VisualDensity.standard,
-      scaffoldBackgroundColor: Colors.black,
+      scaffoldBackgroundColor: Colors.grey[200],
     );
   }
 

@@ -1,8 +1,7 @@
-import '../base.dart';
+import 'base.dart';
 import '../utils/hive_box.dart';
 
-final autoGenerateTitleProvider =
-    StateNotifierProvider<AutoGenerateTitleNotify, bool>((ref) {
+final autoGenerateTitleProvider = StateNotifierProvider<AutoGenerateTitleNotify, bool>((ref) {
   return AutoGenerateTitleNotify(false);
 });
 
@@ -19,8 +18,7 @@ class AutoGenerateTitleNotify extends StateNotifier<bool> {
   }
 
   void load() {
-    state = bool.parse(
-        HiveBox().appConfig.get(HiveBox.cAppConfigAutoGenerateTitle) ?? "true");
+    state = bool.parse(HiveBox().appConfig.get(HiveBox.cAppConfigAutoGenerateTitle) ?? 'true');
   }
 }
 
@@ -42,13 +40,11 @@ class OpenICloudNotify extends StateNotifier<bool> {
   }
 
   void load() {
-    state = bool.parse(
-        HiveBox().appConfig.get(HiveBox.cAppConfigOpenICloud) ?? "false");
+    state = bool.parse(HiveBox().appConfig.get(HiveBox.cAppConfigOpenICloud) ?? 'false');
   }
 }
 
-final defaultTemperatureProvider =
-    StateNotifierProvider<DefaultTemperatureNotify, String>((ref) {
+final defaultTemperatureProvider = StateNotifierProvider<DefaultTemperatureNotify, String>((ref) {
   return DefaultTemperatureNotify(HiveBox().temperature);
 });
 
@@ -68,11 +64,10 @@ class DefaultTemperatureNotify extends StateNotifier<String> {
 }
 
 final versionProvider = StateProvider<String>((ref) {
-  return "";
+  return '';
 });
 
-final fromLanguageProvider =
-    StateNotifierProvider<FromLanguageNotify, String>((ref) {
+final fromLanguageProvider = StateNotifierProvider<FromLanguageNotify, String>((ref) {
   return FromLanguageNotify(HiveBox().fromLanguage);
 });
 
@@ -91,8 +86,7 @@ class FromLanguageNotify extends StateNotifier<String> {
   }
 }
 
-final toLanguageProvider =
-    StateNotifierProvider<ToLanguageNotify, String>((ref) {
+final toLanguageProvider = StateNotifierProvider<ToLanguageNotify, String>((ref) {
   return ToLanguageNotify(HiveBox().toLanguage);
 });
 

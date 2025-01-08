@@ -1,4 +1,4 @@
-import '../base.dart';
+import '../base/base.dart';
 
 class PageReq {
   final int page;

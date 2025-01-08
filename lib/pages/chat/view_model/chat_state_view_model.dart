@@ -1,4 +1,4 @@
-import '../../../base.dart';
+import '../../../base/base.dart';
 import '../../../models/chat/response/chat_res_dto.dart';
 import '../state/chat_state.dart';
 part 'chat_state_view_model.g.dart';

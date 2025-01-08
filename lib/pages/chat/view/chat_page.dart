@@ -3,12 +3,15 @@ import 'dart:math' as math;
 import 'package:easy_refresh/easy_refresh.dart';
 import 'package:fluent_ui/fluent_ui.dart' as fl;
 
-import '../../../base.dart';
-import '../../../base_page.dart';
+import '../../../base/base.dart';
+import '../../../base/base_page.dart';
 import '../../../components/button/button_send.dart';
-import '../../../components/image.dart';
+import '../../../components/form/icon_button.dart';
+import '../../../components/image/avatar.dart';
+import '../../../components/image/image.dart';
 import '../../../constants/enums/conversation_enum.dart';
 import '../../../models/chat/chat_item_model.dart';
+import '../../aimodel/widget/aimodel_widget.dart';
 import '../../home/view_model/home_view_model.dart';
 import '../../login/provider/login_provider.dart';
 import '../../login/provider/user_provider.dart';
@@ -20,8 +23,8 @@ import '../view_model/conversation_view_model.dart';
 import '../widgets/chat_widget.dart';
 
 class ChatPage extends BasePage {
-  ChatPage({super.key});
-  late ConversationState? cur;
+  ChatPage({super.key, this.cur});
+  ConversationState? cur;
   @override
   String get title => cur?.current?.title ?? '';
   final _listenable = IndicatorStateListenable();
@@ -111,57 +114,71 @@ class ChatPage extends BasePage {
           ),
         ),
         Container(
-          padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 4),
+          padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 0),
           decoration: BoxDecoration(
-            color: themeData.secondBgColor(),
-            border: Border(
-              top: BorderSide(
-                color: themeData.pinedBgColor(),
-                width: 1,
-              ),
+            color: fl.FluentTheme.of(context).scaffoldBackgroundColor.withOpacity(0.3),
+            borderRadius: BorderRadius.circular(4),
+            border: Border.all(
+              color: themeData.pinedBgColor(),
+              width: 1,
             ),
           ),
-          child: fl.Stack(
-            alignment: Alignment.centerLeft,
+          child: fl.Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              fl.Wrap(
+                spacing: 0,
+                crossAxisAlignment: WrapCrossAlignment.center,
+                children: [
+                  Tooltip(
+                    message: S.current.ju_switch + S.current.models,
+                    child: AimodelWidget.buildOptions(
+                      context,
+                      ref,
+                      cur!.aiModel!,
+                    ),
+                  ),
+                  Tooltip(
+                    message: S.current.clear_context,
+                    child: fl.IconButton(
+                      icon: fl.Icon(
+                        Icons.clear_all_outlined,
+                        size: 24,
+                        color: themeData.secondColor(),
+                      ),
+                      onPressed: () {},
+                    ),
+                  ),
+                ],
+              ),
               Container(
-                margin: const EdgeInsets.symmetric(horizontal: 2, vertical: 30),
+                margin: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+                decoration: BoxDecoration(
+                  color: fl.FluentTheme.of(context).scaffoldBackgroundColor,
+                  borderRadius: BorderRadius.circular(4),
+                  border: Border.all(
+                    color: themeData.pinedBgColor(),
+                    width: 1,
+                  ),
+                ),
                 child: TextField(
                   autofocus: true,
                   controller: inputController,
                   minLines: F.pc ? 4 : 1,
-                  maxLines: 8,
+                  maxLines: 4,
                   cursorColor: fl.FluentTheme.of(context).accentColor,
                   decoration: InputDecoration(
                     isDense: true, // 减少额外填充
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8),
+                    border: const OutlineInputBorder(
                       borderSide: BorderSide.none,
                     ),
                     hintText: '请输入您的问题',
-                    suffixIcon: F.mobile ? sendBtn : null,
-                    hoverColor: Colors.transparent,
+                    suffix: sendBtn,
+                    hoverColor: fl.FluentTheme.of(context).activeColor,
                   ),
                   enabled: true,
                   onSubmitted: (_) => ref.read(chatVmProvider.notifier).sendMsg(inputController.text),
-                ),
-              ),
-              if (F.pc)
-                fl.Positioned(
-                  bottom: 2,
-                  right: 8,
-                  child: sendBtn,
-                ),
-              Positioned(
-                top: 0,
-                right: 1,
-                child: IconButton(
-                  icon: Icon(
-                    Icons.psychology_outlined,
-                    size: 24,
-                    color: themeData.secondColor(),
-                  ),
-                  onPressed: () {},
                 ),
               ),
             ],

@@ -1,7 +1,7 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
 
-import '../../../base.dart';
+import '../../../base/base.dart';
 import 'api_exception.dart';
 
 class ErrorInterceptor extends Interceptor {

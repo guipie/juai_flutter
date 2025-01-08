@@ -1,12 +1,14 @@
 import 'dart:ui';
 
-import '../base.dart';
+import 'package:fluent_ui/fluent_ui.dart';
+
+import '../base/base.dart';
 import '../pages/home/view_model/home_view_model.dart';
 
 class JuAppBar {
   //获取半透明的Appbar
   static PreferredSizeWidget? baseBar({
-    double appHeight = 30,
+    double appHeight = 50,
     Widget? title,
     String? text,
     Widget? leading,
@@ -28,7 +30,7 @@ class JuAppBar {
           title: text == null ? title : Text(text),
           titleSpacing: 0,
           leading: leading,
-          leadingWidth: leadingWidth ?? 80,
+          leadingWidth: leadingWidth ?? 40,
           actions: actions,
           bottom: bottom,
           //bottom: getTitle(context, "Chats"),
@@ -42,21 +44,17 @@ class JuAppBar {
     Widget? child,
     double sigmaX = 12,
     double sigmaY = 12,
-    bool hasColor = true, //是否具备颜色
     EdgeInsets? padding,
   }) {
     return ClipRect(
       //背景模糊化
       child: BackdropFilter(
-          filter: ImageFilter.blur(
-            sigmaX: sigmaX,
-            sigmaY: sigmaY,
-          ),
-          child: Container(
-            color: hasColor ? LightTheme().xff00ff() : null,
-            padding: padding,
-            child: child,
-          )),
+        filter: ImageFilter.blur(
+          sigmaX: sigmaX,
+          sigmaY: sigmaY,
+        ),
+        child: child,
+      ),
     );
   }
 }

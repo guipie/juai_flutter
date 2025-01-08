@@ -1,4 +1,4 @@
-import '../base.dart';
+import 'base.dart';
 import '../components/common_dialog.dart';
 import 'package:dio/dio.dart';
 import 'package:package_info_plus/package_info_plus.dart';

@@ -1,16 +1,11 @@
-import 'package:easy_refresh/easy_refresh.dart';
 import 'package:fluent_ui/fluent_ui.dart' as fl;
 
-import '../../../base.dart';
-import '../../../base_page.dart';
-import '../../../components/card_pic.dart';
+import '../../../base/base.dart';
+import '../../../base/base_page.dart';
 import '../../../components/mouse_hover_item.dart';
 import '../../../components/paging/paging_widget.dart';
-import '../../../components/riverpod_paging/paged_builder.dart';
 import '../../../constants/enums/conversation_enum.dart';
-import 'prompt_add_page.dart';
 import '../view_model/prompt_view_model.dart';
-import '../widget/aimodel_widget.dart';
 
 class PromptPage extends BasePage {
   const PromptPage({super.key});
@@ -22,14 +17,15 @@ class PromptPage extends BasePage {
       provider: promptVMProvider,
       futureRefreshable: promptVMProvider.future,
       notifierRefreshable: promptVMProvider.notifier,
+      padding: const fl.EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       contentBuilder: (data, widgetCount, endItemView) {
         return Wrap(
-          spacing: 12,
           runSpacing: 12,
+          spacing: 10,
           children: data.items
               .map(
                 (m) => SizedBox(
-                  width: 300,
+                  width: 300.wf,
                   child: MouseHoverItem(
                     isRadius: true,
                     leadingPicUrl: m.avatar!,

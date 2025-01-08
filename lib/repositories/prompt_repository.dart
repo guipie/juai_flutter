@@ -1,7 +1,7 @@
-import '../base.dart';
+import '../base/base.dart';
 import '../models/prompt/prompt_req_model.dart';
 import '../models/prompt/prompt_res_model.dart';
-import 'base_repository.dart';
+import '../base/base_repository.dart';
 part 'prompt_repository.g.dart';
 
 @Riverpod(keepAlive: true)

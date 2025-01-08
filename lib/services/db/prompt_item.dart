@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import '../../base.dart';
+import '../../base/base.dart';
 import 'db_base.dart';
 import 'package:sqflite_common/sqlite_api.dart';
 

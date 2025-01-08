@@ -1,10 +1,9 @@
-import '../../../base.dart';
-import '../../../base_page.dart';
+import '../../../base/base.dart';
+import '../../../base/base_page.dart';
 import '../../../components/common_loading.dart';
-import 'chat_page.dart';
 import '../view_model/conversation_state_view_model.dart';
-import '../view_model/conversation_view_model.dart';
 import '../widgets/conversation_widget.dart';
+import 'chat_page.dart';
 
 class ConversationPcPage extends BasePage {
   const ConversationPcPage({super.key});

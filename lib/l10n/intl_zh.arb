@@ -171,5 +171,6 @@
   "digitalMan": "数字人",
   "collect": "收藏",
   "retry": "重试",
-  "no_more_data": "没啦，别试啦."
+  "no_more_data": "没啦，别试啦.",
+  "ju_switch": "切换"
 }

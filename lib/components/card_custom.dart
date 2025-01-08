@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
-import '../base.dart';
+import '../base/base.dart';
 import 'mouse_hover.dart';
 
 class CardCustom extends ConsumerWidget {

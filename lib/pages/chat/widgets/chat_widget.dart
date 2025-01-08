@@ -1,8 +1,9 @@
 import 'package:fluent_ui/fluent_ui.dart' as fl;
 import 'package:markdown_widget/markdown_widget.dart';
 
-import '../../../base.dart';
-import '../../../components/image.dart';
+import '../../../base/base.dart';
+import '../../../components/image/avatar.dart';
+import '../../../components/image/image.dart';
 import '../../../components/markdown/code_wrapper_widget.dart';
 import '../../../constants/enums/conversation_enum.dart';
 import '../../../models/chat/chat_item_model.dart';
@@ -29,12 +30,12 @@ Widget chatItemText(BuildContext context, ChatItemModel item, String? avatar) {
             ),
             child: Text(
               item.sendMsg,
-              style: TextStyle(fontSize: 6.sp),
+              style: const TextStyle(fontSize: 16),
             ),
           ),
           Padding(
             padding: const EdgeInsets.only(left: 8),
-            child: JuImage(avatar, width: 36, height: 36),
+            child: JuAvatar(avatar),
           ),
         ],
       ),
@@ -60,7 +61,7 @@ Widget chatItemMdReceive(
         children: [
           Padding(
             padding: const EdgeInsets.only(right: 8),
-            child: JuImage(avatar, width: 36, height: 36),
+            child: JuAvatar(avatar),
           ),
           SelectionArea(
             child: Container(
@@ -69,14 +70,11 @@ Widget chatItemMdReceive(
                 color: themeData.micaBackgroundColor,
                 borderRadius: const BorderRadius.all(Radius.circular(6)),
               ),
-              constraints: fl.BoxConstraints(minWidth: 120, maxWidth: maxWidth),
+              constraints: fl.BoxConstraints(minWidth: 20, maxWidth: maxWidth),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
                 children: [
-                  // Markdown(
-                  //   selectable: true,
-                  //   data: item.receiveMsg,
-                  // ),
                   ...MarkdownGenerator().buildWidgets(
                     item.receiveMsg,
                     config: config.copy(
@@ -100,9 +98,9 @@ Widget chatItemMdReceive(
                       ],
                     ),
                   ),
-                  // fl.Text(item.receiveMsg),
-                  fl.Row(
-                    mainAxisAlignment: fl.MainAxisAlignment.end,
+                  Wrap(
+                    spacing: 2,
+                    crossAxisAlignment: WrapCrossAlignment.center,
                     children: [
                       if (ChatResStatusEnum.isError(item.status))
                         fl.Tooltip(
@@ -125,7 +123,6 @@ Widget chatItemMdReceive(
                           height: 26,
                           child: const fl.ProgressRing(),
                         ),
-                      6.width(),
                       fl.DropDownButton(
                         title: const Icon(Icons.more_horiz_outlined),
                         buttonBuilder: (context, onOpen) {
@@ -145,9 +142,9 @@ Widget chatItemMdReceive(
                             onPressed: () => ref.read(chatVmProvider.notifier).sendMsg(item.sendMsg, chatDbId: item.id),
                           ),
                         ],
-                      )
+                      ),
                     ],
-                  )
+                  ),
                 ],
               ),
             ),

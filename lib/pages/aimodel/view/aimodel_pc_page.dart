@@ -1,13 +1,11 @@
-import '../../../base.dart';
-import '../../../base_page.dart';
-import '../../../components/mouse_hover_item.dart';
-import '../../../components/text_search.dart';
-import '../../../components/text_tips.dart';
-import '../../../constants/assets.dart';
-import 'aimodel_detail_page.dart';
-import 'prompt_page.dart';
+import 'package:fluent_ui/fluent_ui.dart';
+
+import '../../../base/base.dart';
+import '../../../base/base_page.dart';
 import '../view_model/aimodel_view_model.dart';
 import '../widget/aimodel_widget.dart';
+import 'aimodel_detail_page.dart';
+import 'prompt_page.dart';
 
 class AiModelPcPage extends BasePage {
   const AiModelPcPage({super.key});

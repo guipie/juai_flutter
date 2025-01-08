@@ -1,6 +1,4 @@
-import 'package:loading_animation_widget/loading_animation_widget.dart';
-
-import '../base.dart';
+import '../base/base.dart';
 
 class CommonLoading extends StatelessWidget {
   const CommonLoading({super.key});
@@ -11,12 +9,9 @@ class CommonLoading extends StatelessWidget {
       child: Container(
         width: MediaQuery.of(context).size.width * 0.2,
         alignment: Alignment.center,
-        child: SizedBox(
+        child: const SizedBox(
           width: 40,
-          child: LoadingAnimationWidget.progressiveDots(
-            color: Theme.of(context).primaryColor,
-            size: 40,
-          ),
+          child: CircularProgressIndicator(),
         ),
       ),
     );

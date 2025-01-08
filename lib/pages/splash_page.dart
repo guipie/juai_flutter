@@ -1,4 +1,4 @@
-import '../base.dart';
+import '../base/base.dart';
 import 'home/home_page.dart';
 import 'home/home_pc_page.dart';
 import 'login/login_page.dart';

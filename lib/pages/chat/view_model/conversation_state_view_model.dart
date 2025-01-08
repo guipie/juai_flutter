@@ -1,4 +1,5 @@
-import '../../../base.dart';
+import '../../../base/base.dart';
+import '../../../models/aimodel/aimodel_res_model.dart';
 import '../../../models/chat/conversation_item_model.dart';
 import '../../../models/prompt/prompt_res_model.dart';
 import '../../../services/db/db_aimodel.dart';
@@ -14,6 +15,10 @@ class ConversationStateVm extends _$ConversationStateVm {
   @override
   ConversationState build() {
     return ConversationState();
+  }
+
+  void setCurrentModel(AiModelRes model) {
+    state = state.copyWith(aiModel_: model);
   }
 
   Future<void> setCurrent(ConversationItemModel current, PromptRes? prompt) async {

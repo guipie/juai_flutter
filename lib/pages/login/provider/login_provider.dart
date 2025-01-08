@@ -1,6 +1,6 @@
 import 'package:dart_sm/dart_sm.dart';
 
-import '../../../base.dart';
+import '../../../base/base.dart';
 import '../../../constants/enums/user_enum.dart';
 import '../../home/home_page.dart';
 import '../../splash_page.dart';

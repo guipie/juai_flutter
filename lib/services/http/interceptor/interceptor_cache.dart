@@ -3,7 +3,7 @@
  */
 import 'package:dio/dio.dart';
 
-import '../../../base.dart';
+import '../../../base/base.dart';
 import '../../../components/mouse_hover_item.dart';
 
 class CacheInterceptor extends Interceptor {

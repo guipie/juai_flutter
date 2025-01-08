@@ -1,4 +1,4 @@
-import '../../base.dart';
+import '../../base/base.dart';
 
 ///easyLoading 和 flutter_toast 扩展
 extension ExtensionString on String? {

@@ -2,9 +2,9 @@ import 'package:fluent_ui/fluent_ui.dart' as fl;
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:pull_down_button/pull_down_button.dart';
 
-import '../../../base.dart';
+import '../../../base/base.dart';
 import '../../../components/form/input_search.dart';
-import '../../../components/image.dart';
+import '../../../components/image/image.dart';
 import '../../../components/paging/paging_widget.dart';
 import '../../../models/chat/conversation_item_model.dart';
 import '../../../utils/hive_box.dart';
@@ -19,65 +19,78 @@ class ConversationWidget {
     VoidCallback? onClick,
   }) {
     return Slidable(
-        endActionPane: ActionPane(
-          motion: const BehindMotion(),
-          extentRatio: 0.4,
+      endActionPane: ActionPane(
+        motion: const BehindMotion(),
+        extentRatio: 0.4,
+        children: [
+          SlidableAction(
+            onPressed: (context) {
+              debugPrint('SlidableAction-1');
+            },
+            backgroundColor: Theme.of(context).primaryColor,
+            foregroundColor: Colors.white,
+            icon: Icons.push_pin_outlined,
+            padding: const EdgeInsets.symmetric(horizontal: 2),
+          ),
+          SlidableAction(
+            onPressed: (context) {
+              ref.read(conversationVmProvider.notifier).deleteConversation(item.id!);
+            },
+            backgroundColor: Colors.red,
+            icon: Icons.delete,
+            padding: const EdgeInsets.symmetric(horizontal: 2),
+          ),
+        ],
+      ),
+      child: fl.ListTile.selectable(
+        leading: JuImage(
+          item.avatar,
+          width: 42,
+          height: 42,
+        ),
+        title: fl.Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            SlidableAction(
-              onPressed: (context) {
-                debugPrint('SlidableAction-1');
-              },
-              backgroundColor: Theme.of(context).primaryColor,
-              foregroundColor: Colors.white,
-              icon: Icons.push_pin_outlined,
-              padding: const EdgeInsets.symmetric(horizontal: 2),
-            ),
-            SlidableAction(
-              onPressed: (context) {
-                ref.read(conversationVmProvider.notifier).deleteConversation(item.id!);
-              },
-              backgroundColor: Colors.red,
-              icon: Icons.delete,
-              padding: const EdgeInsets.symmetric(horizontal: 2),
-            ),
+            fl.Text(item.title),
+            fl.Text(
+              DateUtil.getTimePeriod(item.lastTime),
+              style: TextStyle(
+                color: ref.watch(themeProvider).timeColor(),
+                fontSize: 10,
+              ),
+            )
           ],
         ),
-        child: fl.ListTile.selectable(
-          leading: JuImage(
-            item.avatar,
-            width: 42,
-            height: 42,
+        subtitle: Container(
+          width: double.infinity,
+          padding: const EdgeInsets.only(bottom: 8),
+          decoration: BoxDecoration(
+            border: Border(
+              bottom: BorderSide(
+                width: 0.5,
+                color: ref.watch(themeProvider).divideBgColor(),
+              ),
+            ),
           ),
-          title: fl.Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              fl.Text(item.title),
-              fl.Text(
-                DateUtil.getTimePeriod(item.lastTime),
-                style: TextStyle(
-                  color: ref.watch(themeProvider).timeColor(),
-                  fontSize: 10,
-                ),
-              )
-            ],
-          ),
-          subtitle: fl.Text(
+          child: fl.Text(
             item.desc ?? '',
-            maxLines: 2,
+            maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: TextStyle(
               color: ref.watch(themeProvider).timeColor(),
               fontSize: 12,
             ),
           ),
-          selectionMode: fl.ListTileSelectionMode.single,
-          selected: ref.watch(conversationStateVmProvider).current?.id == item.id,
-          onPressed: () {
-            F.pushChat(ref, item.type, conversation: item);
-            onClick?.call();
-          },
-          cursor: SystemMouseCursors.click,
-        ));
+        ),
+        selectionMode: fl.ListTileSelectionMode.single,
+        selected: ref.watch(conversationStateVmProvider).current?.id == item.id,
+        onPressed: () {
+          F.pushChat(ref, item.type, conversation: item);
+          onClick?.call();
+        },
+        cursor: SystemMouseCursors.click,
+      ),
+    );
     // return MouseHoverSlidableItem(
     //   leadingPicUrl: ,
     //   title: item.title,
@@ -182,11 +195,13 @@ class ConversationWidget {
         return Column(
           children: [
             ...data.items
-                .map((e) => buildConversationItem(
-                      e,
-                      ref,
-                      context,
-                    ))
+                .map(
+                  (e) => buildConversationItem(
+                    e,
+                    ref,
+                    context,
+                  ),
+                )
                 .toList(),
           ],
         );

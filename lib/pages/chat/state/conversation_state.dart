@@ -14,14 +14,14 @@ class ConversationState {
   final PromptRes? prompt;
 
   ConversationState copyWith({
-    ConversationItemModel? current,
-    List<ConversationItemModel>? conversations,
-    PromptRes? prompt,
+    ConversationItemModel? current_,
+    AiModelRes? aiModel_,
+    PromptRes? prompt_,
   }) {
     return ConversationState(
-      current: current ?? this.current,
-      aiModel: aiModel ?? aiModel,
-      prompt: prompt ?? this.prompt,
+      current: current_ ?? current,
+      aiModel: aiModel_ ?? aiModel,
+      prompt: prompt_ ?? prompt,
     );
   }
 }

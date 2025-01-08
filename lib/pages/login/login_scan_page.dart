@@ -1,4 +1,4 @@
-import '../../base.dart';
+import '../../base/base.dart';
 
 class LoginScanPage extends ConsumerWidget {
   const LoginScanPage({super.key});

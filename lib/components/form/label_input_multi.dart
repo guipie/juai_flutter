@@ -1,4 +1,4 @@
-import '../../base.dart';
+import '../../base/base.dart';
 
 class LabelInputMultiWidget extends StatefulWidget {
   const LabelInputMultiWidget(this.label, {this.hintText, super.key});

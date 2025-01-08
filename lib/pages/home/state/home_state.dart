@@ -1,4 +1,4 @@
-import '../../../base.dart';
+import '../../../base/base.dart';
 import '../../aimodel/view/aimodel_pc_page.dart';
 import '../../aimodel/view/prompt_page.dart';
 import '../../chat/view/conversation_pc_page.dart';

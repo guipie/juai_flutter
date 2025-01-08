@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 
-import '../../base.dart';
+import '../../base/base.dart';
 import '../../models/api_res.dart';
 
 import 'http.dart';

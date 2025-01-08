@@ -1769,6 +1769,16 @@ class S {
       args: [],
     );
   }
+
+  /// `switch`
+  String get ju_switch {
+    return Intl.message(
+      'switch',
+      name: 'ju_switch',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

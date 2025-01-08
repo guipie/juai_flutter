@@ -1,4 +1,4 @@
-import '../../base.dart';
+import '../../base/base.dart';
 import '../../base/version_check.dart';
 import '../../const.dart';
 import '../aimodel/view/aimodel_page.dart';
@@ -64,71 +64,25 @@ class _HomePageState extends ConsumerState<HomePage> with WidgetsBindingObserver
         ],
       ),
       bottomNavigationBar: Container(
-        color: Colors.transparent,
+        color: ref.watch(themeProvider).secondBgColor(),
         child: SizedBox(
-          height: kBottomNavigationBarHeight + MediaQuery.paddingOf(context).bottom + kBottomNavigationBarHeight / 2,
-          child: CustomPaint(
-            painter: BottomNavPainter(
-              bgColor: Theme.of(context).cardColor,
-            ),
-            child: Padding(
-              padding: EdgeInsets.only(bottom: MediaQuery.paddingOf(context).bottom, top: kBottomNavigationBarHeight / 2),
-              child: Row(
-                children: [
-                  ...ref
-                      .read(homeVmProvider)
-                      .menus
-                      .map((m) => Expanded(
-                            child: BottomNavItem(
-                              label: m.label,
-                              index: m.index,
-                              checked: currentIndex == m.index,
-                              icon: m.icon,
-                              iconChecked: m.checkedIcon,
-                            ),
-                          ))
-                      .toList(),
-                  // GestureDetector(
-                  //   onTap: () {
-                  //     if (!isExistModels()) {
-                  //       showCommonDialog(
-                  //         context,
-                  //         title: S.current.reminder,
-                  //         content: S.current.enter_setting_init_server,
-                  //         hideCancelBtn: true,
-                  //         autoPop: true,
-                  //         confirmText: S.current.yes_know,
-                  //         confirmCallback: () {},
-                  //       );
-                  //       return;
-                  //     }
-                  //     if (!isExistTTSAndWhisperModels()) {
-                  //       showCommonDialog(
-                  //         context,
-                  //         title: S.current.reminder,
-                  //         content: S.current.not_support_tts,
-                  //         hideCancelBtn: true,
-                  //         autoPop: true,
-                  //         confirmText: S.current.yes_know,
-                  //         confirmCallback: () {},
-                  //       );
-                  //       return;
-                  //     }
-                  //     F.push(const ChatAudioPage()).then((value) {
-                  //       ChatItemProvider()
-                  //           .deleteAll(specialGenerateAudioChatParentItemTime);
-                  //     });
-                  //   },
-                  //   behavior: HitTestBehavior.opaque,
-                  //   child: const LottieWidget(
-                  //     scale: 2.4,
-                  //     transformHitTests: false,
-                  //     width: 80,
-                  //   ),
-                  // ),
-                ],
-              ),
-            ),
+          height: kBottomNavigationBarHeight,
+          child: Row(
+            children: [
+              ...ref
+                  .read(homeVmProvider)
+                  .menus
+                  .map((m) => Expanded(
+                        child: BottomNavItem(
+                          label: m.label,
+                          index: m.index,
+                          checked: currentIndex == m.index,
+                          icon: m.icon,
+                          iconChecked: m.checkedIcon,
+                        ),
+                      ))
+                  .toList(),
+            ],
           ),
         ),
       ),

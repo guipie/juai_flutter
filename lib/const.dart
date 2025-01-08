@@ -1,18 +1,18 @@
-import 'base.dart';
+import 'base/base.dart';
 
 bool isDebug = !kReleaseMode;
 bool isAndroid = Platform.isAndroid;
 bool isIOS = Platform.isIOS;
 bool productMode = false;
 
-const ttsModelKey = "tts-";
-const whisperModelKey = "whisper-";
+const ttsModelKey = 'tts-';
+const whisperModelKey = 'whisper-';
 const paintModelKeys = [
-  "dall-e-3",
-  "cogview-3",
-  "wanx-v1",
+  'dall-e-3',
+  'cogview-3',
+  'wanx-v1',
 ];
-const spLightTheme = "lightTheme";
+const spLightTheme = 'lightTheme';
 
 Map<String, String> supportedLanguages = <String, String>{
   'zh-Hans': '中文简体',

@@ -1,4 +1,4 @@
-import '../../base.dart';
+import '../../base/base.dart';
 import '../../constants/enums/conversation_enum.dart';
 import '../../utils/extension/extension_json_converter.dart';
 import '../prompt/prompt_res_model.dart';

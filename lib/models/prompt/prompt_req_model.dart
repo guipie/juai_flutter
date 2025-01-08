@@ -1,4 +1,4 @@
-import '../../base.dart';
+import '../../base/base.dart';
 part 'prompt_req_model.freezed.dart';
 part 'prompt_req_model.g.dart';
 
