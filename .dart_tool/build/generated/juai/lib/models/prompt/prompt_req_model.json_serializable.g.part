@@ -4,24 +4,24 @@
 
 _$PromptReqImpl _$$PromptReqImplFromJson(Map<String, dynamic> json) =>
     _$PromptReqImpl(
-      page: (json['Page'] as num?)?.toInt() ?? 1,
-      pageSize: (json['PageSize'] as num?)?.toInt() ?? 10,
-      lastCreate: json['LastCreate'] == null
+      page: (json['page'] as num?)?.toInt() ?? 1,
+      pageSize: (json['pageSize'] as num?)?.toInt() ?? 10,
+      lastCreate: json['lastCreate'] == null
           ? null
-          : DateTime.parse(json['LastCreate'] as String),
-      searchKey: json['SearchKey'] as String?,
+          : DateTime.parse(json['lastCreate'] as String),
+      searchKey: json['searchKey'] as String?,
       category: $enumDecodeNullable(
-              _$PromptReqCategoryTypeEnumMap, json['Category']) ??
+              _$PromptReqCategoryTypeEnumMap, json['category']) ??
           PromptReqCategoryType.all,
     );
 
 Map<String, dynamic> _$$PromptReqImplToJson(_$PromptReqImpl instance) =>
     <String, dynamic>{
-      'Page': instance.page,
-      'PageSize': instance.pageSize,
-      'LastCreate': instance.lastCreate?.toIso8601String(),
-      'SearchKey': instance.searchKey,
-      'Category': _$PromptReqCategoryTypeEnumMap[instance.category]!,
+      'page': instance.page,
+      'pageSize': instance.pageSize,
+      'lastCreate': instance.lastCreate?.toIso8601String(),
+      'searchKey': instance.searchKey,
+      'category': _$PromptReqCategoryTypeEnumMap[instance.category]!,
     };
 
 const _$PromptReqCategoryTypeEnumMap = {

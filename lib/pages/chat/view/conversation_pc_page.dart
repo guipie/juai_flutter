@@ -20,7 +20,6 @@ class ConversationPcPage extends BasePage {
           width: 250,
           height: double.infinity,
           decoration: BoxDecoration(
-            color: ref.watch(themeProvider).secondBgColor(),
             border: Border(
               right: BorderSide(
                 color: ref.watch(themeProvider).divideBgColor(),

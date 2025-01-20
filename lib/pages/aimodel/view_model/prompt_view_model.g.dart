@@ -1,5 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
+// ignore_for_file: lint_a, lint_b
+
 part of 'prompt_view_model.dart';
 
 // **************************************************************************
@@ -22,7 +24,7 @@ final promptReqNotifierProvider =
 );
 
 typedef _$PromptReqNotifier = Notifier<PromptReq>;
-String _$promptVMHash() => r'ab06e6ff54c334122dd310a02b4b9c472f8eaeee';
+String _$promptVMHash() => r'9c97b08059a29dbd781537ba4d17d5983009a455';
 
 /// See also [PromptVM].
 @ProviderFor(PromptVM)

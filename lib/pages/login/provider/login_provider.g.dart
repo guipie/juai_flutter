@@ -1,5 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
+// ignore_for_file: lint_a, lint_b
+
 part of 'login_provider.dart';
 
 // **************************************************************************
@@ -22,7 +24,7 @@ final countdownVcodeProvider =
 );
 
 typedef _$CountdownVcode = AutoDisposeNotifier<int>;
-String _$loginProviderHash() => r'803dd52a35f27c8282d23377281c0de30fbccd74';
+String _$loginProviderHash() => r'f7f4d1c1b53903b43e9fd1a4c7d2d86914b5ee11';
 
 /// See also [LoginProvider].
 @ProviderFor(LoginProvider)

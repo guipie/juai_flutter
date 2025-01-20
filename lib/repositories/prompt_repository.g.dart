@@ -1,5 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
+// ignore_for_file: lint_a, lint_b
+
 part of 'prompt_repository.dart';
 
 // **************************************************************************

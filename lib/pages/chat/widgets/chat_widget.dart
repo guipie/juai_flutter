@@ -7,6 +7,7 @@ import '../../../components/image/image.dart';
 import '../../../components/markdown/code_wrapper_widget.dart';
 import '../../../constants/enums/conversation_enum.dart';
 import '../../../models/chat/chat_item_model.dart';
+import '../../login/login_page.dart';
 import '../view_model/chat_view_model.dart';
 import '../view_model/conversation_view_model.dart';
 
@@ -102,7 +103,7 @@ Widget chatItemMdReceive(
                     spacing: 2,
                     crossAxisAlignment: WrapCrossAlignment.center,
                     children: [
-                      if (ChatResStatusEnum.isError(item.status))
+                      if (item.status == ChatResStatusEnum.error)
                         fl.Tooltip(
                           message: S.current.retry,
                           useMousePosition: false,
@@ -122,6 +123,13 @@ Widget chatItemMdReceive(
                           width: 26,
                           height: 26,
                           child: const fl.ProgressRing(),
+                        ),
+                      if (item.status == ChatResStatusEnum.auth)
+                        fl.Button(
+                          onPressed: () {
+                            F.pushAndRemoveUntil(LoginPage());
+                          },
+                          child: fl.Text(S.current.login),
                         ),
                       fl.DropDownButton(
                         title: const Icon(Icons.more_horiz_outlined),

@@ -2,7 +2,7 @@
 // RiverpodGenerator
 // **************************************************************************
 
-String _$chatVmHash() => r'471c432bfd4d96eb5d2ef03c2d842e662abe905d';
+String _$chatVmHash() => r'176b1654c1955633fb8f637b7eedd4b2ea5c999e';
 
 /// See also [ChatVm].
 @ProviderFor(ChatVm)

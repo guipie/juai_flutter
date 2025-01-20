@@ -1,36 +1,66 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
+// ignore_for_file: lint_a, lint_b
+
 part of 'aimodel_res_model.dart';
+
+// **************************************************************************
+// DBGenerator
+// **************************************************************************
+
+String get createTableSql =>
+    "CREATE TABLE IF NOT EXISTS ai_model_res (  'id','model_id','name','avatar_url','model_type','service','service_url')";
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-AiModelRes _$AiModelResFromJson(Map<String, dynamic> json) => AiModelRes(
+_$AiModelResImpl _$$AiModelResImplFromJson(Map<String, dynamic> json) =>
+    _$AiModelResImpl(
       id: (json['id'] as num).toInt(),
       modelId: json['modelId'] as String,
       name: json['name'] as String,
-      shortName: json['shortName'] as String,
       avatarUrl: json['avatarUrl'] as String,
       modelType: (json['modelType'] as num).toInt(),
-      category: json['category'] as String,
-      maxToken: (json['maxToken'] as num).toInt(),
-      tags: json['tags'] as String?,
+      service: json['service'] as String,
+      serviceUrl: json['serviceUrl'] as String?,
+      shortName: json['shortName'] as String?,
+      url: json['url'] as String?,
       desc: json['desc'] as String?,
-      settings: json['settings'] as String?,
+      createTime: json['createTime'] as String?,
+      updateTime: json['updateTime'] as String?,
+      createUserId: (json['createUserId'] as num?)?.toInt(),
+      updateUserId: (json['updateUserId'] as num?)?.toInt(),
+      isDelete: json['isDelete'] as bool?,
+      inputToken: (json['inputToken'] as num?)?.toInt(),
+      outputToken: (json['outputToken'] as num?)?.toInt(),
+      inputYuan: (json['inputYuan'] as num?)?.toInt(),
+      outputYuan: (json['outputYuan'] as num?)?.toInt(),
+      tags: json['tags'] as String?,
+      sequence: (json['sequence'] as num?)?.toInt(),
     );
 
-Map<String, dynamic> _$AiModelResToJson(AiModelRes instance) =>
+Map<String, dynamic> _$$AiModelResImplToJson(_$AiModelResImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'modelId': instance.modelId,
       'name': instance.name,
-      'shortName': instance.shortName,
       'avatarUrl': instance.avatarUrl,
       'modelType': instance.modelType,
-      'category': instance.category,
-      'maxToken': instance.maxToken,
-      'tags': instance.tags,
+      'service': instance.service,
+      'serviceUrl': instance.serviceUrl,
+      'shortName': instance.shortName,
+      'url': instance.url,
       'desc': instance.desc,
-      'settings': instance.settings,
+      'createTime': instance.createTime,
+      'updateTime': instance.updateTime,
+      'createUserId': instance.createUserId,
+      'updateUserId': instance.updateUserId,
+      'isDelete': instance.isDelete,
+      'inputToken': instance.inputToken,
+      'outputToken': instance.outputToken,
+      'inputYuan': instance.inputYuan,
+      'outputYuan': instance.outputYuan,
+      'tags': instance.tags,
+      'sequence': instance.sequence,
     };

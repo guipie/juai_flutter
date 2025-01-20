@@ -30,18 +30,6 @@ class DbConversation extends DbBase {
   Future<List<ConversationItemModel>> getConversations() async {
     var data = await super.find(orderBy: {'lastTime': SequenceEnum.desc});
     var list = data.map(ConversationItemModel.fromJson).toList();
-    if (list.isEmpty) {
-      var model = ConversationItemModel(
-        id: 1,
-        title: S.current.new_chat,
-        desc: S.current.empty_content_need_add,
-        type: ConversationEnum.chat,
-        model: Constant.defaultModel,
-        relationId: 0,
-      );
-      await addConversation(model);
-      return [model];
-    }
     return list;
   }
 

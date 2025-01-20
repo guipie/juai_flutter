@@ -57,7 +57,7 @@ class LoginProvider extends _$LoginProvider {
       req = req.copyWith(code: state.textVcodeController.text);
       req = req.copyWith(u: state.textInvitationCodeController.text);
     }
-    var loginReponse = await Api.post<LoginResModel>(ApiUser.login, data: req.toJson(), fromJsonT: LoginResModel.fromJson);
+    var loginReponse = await Api.post<LoginResModel>(ApisUser.login, data: req.toJson(), fromJsonT: LoginResModel.fromJson);
     if (loginReponse.isSuccess && loginReponse.result!.accessToken!.isNotEmpty) {
       ref.read(curentUserProvider.notifier).setUser(loginReponse.result!);
       await ref.read(curentUserProvider.notifier).verifyLogin();

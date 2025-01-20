@@ -1,5 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
+// ignore_for_file: lint_a, lint_b
+
 part of 'chat_req_dto.dart';
 
 // **************************************************************************
@@ -8,24 +10,24 @@ part of 'chat_req_dto.dart';
 
 _$ChatReqDtoImpl _$$ChatReqDtoImplFromJson(Map<String, dynamic> json) =>
     _$ChatReqDtoImpl(
-      conversationId: (json['ConversationId'] as num).toInt(),
-      message: json['Message'] as String,
-      model: json['Model'] as String,
-      chatDbId: (json['ChatDbId'] as num?)?.toInt(),
-      rolePrompt: json['RolePrompt'] as String?,
-      maxContext: (json['MaxContext'] as num?)?.toInt(),
-      useAsyncDb: json['UseAsyncDb'] as bool? ?? false,
-      options: json['Options'] as Map<String, dynamic>?,
+      conversationId: (json['conversationId'] as num).toInt(),
+      message: json['message'] as String,
+      model: json['model'] as String,
+      chatDbId: (json['chatDbId'] as num?)?.toInt(),
+      rolePrompt: json['rolePrompt'] as String?,
+      maxContext: (json['maxContext'] as num?)?.toInt(),
+      useAsyncDb: json['useAsyncDb'] as bool? ?? false,
+      options: json['options'] as Map<String, dynamic>?,
     );
 
 Map<String, dynamic> _$$ChatReqDtoImplToJson(_$ChatReqDtoImpl instance) =>
     <String, dynamic>{
-      'ConversationId': instance.conversationId,
-      'Message': instance.message,
-      'Model': instance.model,
-      'ChatDbId': instance.chatDbId,
-      'RolePrompt': instance.rolePrompt,
-      'MaxContext': instance.maxContext,
-      'UseAsyncDb': instance.useAsyncDb,
-      'Options': instance.options,
+      'conversationId': instance.conversationId,
+      'message': instance.message,
+      'model': instance.model,
+      'chatDbId': instance.chatDbId,
+      'rolePrompt': instance.rolePrompt,
+      'maxContext': instance.maxContext,
+      'useAsyncDb': instance.useAsyncDb,
+      'options': instance.options,
     };

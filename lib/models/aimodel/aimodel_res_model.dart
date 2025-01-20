@@ -1,45 +1,40 @@
-import 'package:json_annotation/json_annotation.dart';
+import 'package:annotations/src/db_annotation.dart';
+import 'package:flutter/foundation.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+
+import '../../base/base.dart';
+
+part 'aimodel_res_model.freezed.dart';
 part 'aimodel_res_model.g.dart';
 
-@JsonSerializable()
-class AiModelRes {
-  @JsonKey(name: 'id')
-  int id;
-  @JsonKey(name: 'modelId')
-  String modelId;
-  @JsonKey(name: 'name')
-  String name;
-  @JsonKey(name: 'shortName')
-  String shortName;
-  @JsonKey(name: 'avatarUrl')
-  String avatarUrl;
-  @JsonKey(name: 'modelType')
-  int modelType;
-  @JsonKey(name: 'category')
-  String category;
-  @JsonKey(name: 'maxToken')
-  int maxToken;
-  @JsonKey(name: 'tags')
-  String? tags;
-  @JsonKey(name: 'desc')
-  String? desc;
-  @JsonKey(name: 'settings')
-  String? settings;
-  AiModelRes({
-    required this.id,
-    required this.modelId,
-    required this.name,
-    required this.shortName,
-    required this.avatarUrl,
-    required this.modelType,
-    required this.category,
-    required this.maxToken,
-    this.tags,
-    this.desc,
-    this.settings,
-  });
-  factory AiModelRes.fromJson(Map<String, dynamic> json) => _$AiModelResFromJson(json);
-  Map<String, dynamic> toJson() => _$AiModelResToJson(this);
+@freezed
+@JuTable(dbName: 'ai_model_res')
+class AiModelRes with _$AiModelRes {
+  const factory AiModelRes({
+    @JuColumn(name: 'id', primaryKey: true) required int id,
+    @JuColumn(name: 'model_id') required String modelId,
+    @JuColumn(name: 'name') required String name,
+    @JuColumn(name: 'avatar_url') required String avatarUrl,
+    @JuColumn(name: 'model_type') required int modelType,
+    @JuColumn(name: 'service') required String service,
+    @JuColumn(name: 'service_url') String? serviceUrl,
+    String? shortName,
+    String? url,
+    String? desc,
+    String? createTime,
+    String? updateTime,
+    int? createUserId,
+    int? updateUserId,
+    bool? isDelete,
+    int? inputToken,
+    int? outputToken,
+    int? inputYuan,
+    int? outputYuan,
+    String? tags,
+    int? sequence,
+  }) = _AiModelRes;
+
+  factory AiModelRes.fromJson(Map<String, Object?> json) => _$AiModelResFromJson(json);
 }
 
 class AiModelSort {

@@ -97,6 +97,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "generate_image_fail": MessageLookupByLibrary.simpleMessage("图片生成失败"),
         "getmodules_fail": MessageLookupByLibrary.simpleMessage(
             "获取模型失败,如果确定你的Key可以使用，请直接点击保存"),
+        "group_chat": MessageLookupByLibrary.simpleMessage("群聊"),
         "has_exist": MessageLookupByLibrary.simpleMessage("已存在"),
         "has_reduce": MessageLookupByLibrary.simpleMessage("开启后会有部分损耗"),
         "have_account": MessageLookupByLibrary.simpleMessage("已经有账号"),

@@ -1,0 +1,1 @@
+flutter create --template=package annotations

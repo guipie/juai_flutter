@@ -1,5 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
+// ignore_for_file: lint_a, lint_b
+
 part of 'aimodel_view_model.dart';
 
 // **************************************************************************
@@ -7,7 +9,7 @@ part of 'aimodel_view_model.dart';
 // **************************************************************************
 
 String _$currentAiModelNotifierHash() =>
-    r'7e8e4f90ddc313eb257de69661b3aa1aca23fb92';
+    r'118adb91125b3d7eb9a3ffd38061cdda80f7af9a';
 
 /// See also [CurrentAiModelNotifier].
 @ProviderFor(CurrentAiModelNotifier)

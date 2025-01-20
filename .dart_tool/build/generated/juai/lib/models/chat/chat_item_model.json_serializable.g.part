@@ -4,44 +4,44 @@
 
 _$ChatItemModelImpl _$$ChatItemModelImplFromJson(Map<String, dynamic> json) =>
     _$ChatItemModelImpl(
-      id: (json['Id'] as num?)?.toInt(),
-      conversationId: (json['ConversationId'] as num).toInt(),
-      sendMsg: json['SendMsg'] as String,
-      receiveMsg: json['ReceiveMsg'] as String,
-      msgType: $enumDecode(_$MsgTypeEnumEnumMap, json['MsgType']),
-      sendId: (json['SendId'] as num).toInt(),
-      receiveId: (json['ReceiveId'] as num).toInt(),
-      desc: json['Desc'] as String?,
+      id: (json['id'] as num?)?.toInt(),
+      conversationId: (json['conversationId'] as num).toInt(),
+      sendMsg: json['sendMsg'] as String,
+      receiveMsg: json['receiveMsg'] as String,
+      msgType: $enumDecode(_$MsgTypeEnumEnumMap, json['msgType']),
+      sendId: (json['sendId'] as num).toInt(),
+      receiveId: (json['receiveId'] as num).toInt(),
+      desc: json['desc'] as String?,
       createTime: _$JsonConverterFromJson<String, DateTime>(
-          json['CreateTime'], const DateTimeConverter().fromJson),
+          json['createTime'], const DateTimeConverter().fromJson),
       lastTime: _$JsonConverterFromJson<String, DateTime>(
-          json['LastTime'], const DateTimeConverter().fromJson),
-      type: $enumDecode(_$ConversationEnumEnumMap, json['Type']),
-      relationId: (json['RelationId'] as num?)?.toInt() ?? 0,
+          json['lastTime'], const DateTimeConverter().fromJson),
+      type: $enumDecode(_$ConversationEnumEnumMap, json['type']),
+      relationId: (json['relationId'] as num?)?.toInt() ?? 0,
       status: json['status'] == null
           ? ChatResStatusEnum.error
           : ChatResStatusEnum.fromJson((json['status'] as num).toInt()),
-      extens: json['Extens'] as String?,
+      extens: json['extens'] as String?,
     );
 
 Map<String, dynamic> _$$ChatItemModelImplToJson(_$ChatItemModelImpl instance) =>
     <String, dynamic>{
-      'Id': instance.id,
-      'ConversationId': instance.conversationId,
-      'SendMsg': instance.sendMsg,
-      'ReceiveMsg': instance.receiveMsg,
-      'MsgType': _$MsgTypeEnumEnumMap[instance.msgType]!,
-      'SendId': instance.sendId,
-      'ReceiveId': instance.receiveId,
-      'Desc': instance.desc,
-      'CreateTime': _$JsonConverterToJson<String, DateTime>(
+      'id': instance.id,
+      'conversationId': instance.conversationId,
+      'sendMsg': instance.sendMsg,
+      'receiveMsg': instance.receiveMsg,
+      'msgType': _$MsgTypeEnumEnumMap[instance.msgType]!,
+      'sendId': instance.sendId,
+      'receiveId': instance.receiveId,
+      'desc': instance.desc,
+      'createTime': _$JsonConverterToJson<String, DateTime>(
           instance.createTime, const DateTimeConverter().toJson),
-      'LastTime': _$JsonConverterToJson<String, DateTime>(
+      'lastTime': _$JsonConverterToJson<String, DateTime>(
           instance.lastTime, const DateTimeConverter().toJson),
-      'Type': _$ConversationEnumEnumMap[instance.type]!,
-      'RelationId': instance.relationId,
+      'type': _$ConversationEnumEnumMap[instance.type]!,
+      'relationId': instance.relationId,
       'status': ChatResStatusEnum.toJson(instance.status),
-      'Extens': instance.extens,
+      'extens': instance.extens,
     };
 
 const _$MsgTypeEnumEnumMap = {

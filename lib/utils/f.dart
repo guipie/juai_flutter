@@ -92,11 +92,11 @@ class _FImpl {
       }
     } else if (type == ConversationEnum.model && (conversation != null || aiModelRes != null)) {
       aiModelRes ??= await DbConversationAiModel().getModel(conversation!.model);
-      title = aiModelRes.shortName;
+      title = aiModelRes.name;
       desc = aiModelRes.desc ?? S.current.empty_content_need_add;
       avatar = aiModelRes.avatarUrl;
       relationId = aiModelRes.id;
-      model = aiModelRes.name;
+      model = aiModelRes.modelId;
     } else if (type == ConversationEnum.prompt && (conversation != null || promptRes != null)) {
       promptRes ??= await DbConversationPrompt().getPrompt(conversation!.relationId);
       title = promptRes!.title;

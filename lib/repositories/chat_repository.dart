@@ -4,10 +4,12 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 
 import '../base/base.dart';
+import '../base/base_repository.dart';
+import '../constants/enums/conversation_enum.dart';
 import '../models/chat/chat_item_model.dart';
 import '../models/chat/request/chat_req_dto.dart';
+import '../models/chat/response/chat_res_dto.dart';
 import '../services/http/apis/chat.dart';
-import '../base/base_repository.dart';
 part 'chat_repository.g.dart';
 
 @Riverpod(keepAlive: true)
@@ -18,13 +20,13 @@ ChatRepository chatRepository(Ref ref) {
 class ChatRepository extends BaseRepository<Object> {
   Future<void> chat(
     ChatReqDto req, {
-    required Function(String) receive,
+    required Function(ChatResDto) receive,
     Function? error,
     Function(dynamic)? complete,
     CancelToken? cancelToken,
   }) async {
     var response = await Api.response<ResponseBody>(
-      ApiChat.openaiChat,
+      ApisChat.baseChat,
       options: Options(
         responseType: ResponseType.stream,
         headers: {'Accept': 'text/event-stream'},
@@ -40,8 +42,15 @@ class ChatRepository extends BaseRepository<Object> {
     StreamSubscription? subscription;
     subscription = stream.listen(
       (line) {
-        var data = utf8.decode(line, allowMalformed: true).trimRight();
-        receive(data);
+        var data = utf8.decode(line, allowMalformed: true).trim();
+        Map<String, dynamic> mapData = jsonDecode(data);
+        if (mapData.keys.contains('code')) {
+          receive(ChatResDto(conversationId: req.conversationId, chatDbId: req.chatDbId ?? 0, status: ChatResStatusEnum.auth, text: mapData['message']));
+        } else if (mapData.keys.contains('conversationId')) {
+          receive(ChatResDto.fromJson(jsonDecode(data)));
+        } else {
+          receive(ChatResDto(conversationId: req.conversationId, chatDbId: req.chatDbId ?? 0, status: ChatResStatusEnum.error, text: '未知错误，联系作者'));
+        }
       },
       onDone: () async {
         complete?.call('complete');

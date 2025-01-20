@@ -12,20 +12,11 @@ class DbConversationAiModel extends DbBase {
 
   @override
   Future<void> onCreate(Database db, int version) async {
-    await super.createTable(AiModelRes(
-      id: 0,
-      modelId: '',
-      name: '',
-      shortName: '',
-      avatarUrl: '',
-      modelType: 0,
-      category: '',
-      maxToken: 0,
-    ).toJson());
+    await super.createTable(const AiModelRes(id: 0, modelId: '', name: '', avatarUrl: '', modelType: 0, service: '', serviceUrl: '').toJson());
   }
 
-  Future<AiModelRes> getModel(String name) async {
-    var data = await super.find(where: {'name': name});
+  Future<AiModelRes> getModel(String model) async {
+    var data = await super.find(where: {'modelId': model});
     return AiModelRes.fromJson(data.first);
   }
 

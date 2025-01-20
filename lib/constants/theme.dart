@@ -237,6 +237,7 @@ class LightTheme extends BaseTheme {
       visualDensity: VisualDensity.standard,
       scaffoldBackgroundColor: Colors.grey[30],
       cardColor: const Color(0xffF8F8FF),
+      iconTheme: IconThemeData(color: Colors.grey[120], size: 24, opacity: 0.8),
       dividerTheme: const DividerThemeData(
         thickness: 0.5,
         horizontalMargin: EdgeInsets.symmetric(vertical: 8),

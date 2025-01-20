@@ -112,19 +112,21 @@ class _HomePcPageState extends ConsumerState<HomePcPage> with WidgetsBindingObse
                   .toList();
             },
           )),
+      paneBodyBuilder: (item, body) {
+        return AnimatedSwitcher(
+          transitionBuilder: (child, animation) {
+            return fl.DrillInPageTransition(animation: animation, child: child);
+          },
+          duration: const Duration(seconds: 2),
+          child: IndexedStack(
+            index: currentIndex,
+            children: [...ref.read(homeVmProvider).menus.map((item) => item.page).toList()],
+          ),
+        );
+      },
       pane: fl.NavigationPane(
         selected: currentIndex,
         size: const fl.NavigationPaneSize(openWidth: 120),
-        onItemPressed: (index) {
-          // Do anything you want to do, such as:
-          // if (index == topIndex) {
-          //   if (displayMode == PaneDisplayMode.open) {
-          //     setState(() => this.displayMode = PaneDisplayMode.compact);
-          //   } else if (displayMode == PaneDisplayMode.compact) {
-          //     setState(() => this.displayMode = PaneDisplayMode.open);
-          //   }
-          // }
-        },
         onChanged: (index) => ref.read(homeVmProvider.notifier).setCurTabIndex(index),
         displayMode: fl.PaneDisplayMode.compact,
         items: [
@@ -139,7 +141,7 @@ class _HomePcPageState extends ConsumerState<HomePcPage> with WidgetsBindingObse
               .map((item) => fl.PaneItem(
                     icon: Icon(item.icon),
                     title: Text(item.label!),
-                    body: item.page,
+                    body: const SizedBox.shrink(),
                   ))
               .toList()
         ],

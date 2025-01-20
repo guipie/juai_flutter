@@ -92,9 +92,8 @@ class ChatVm extends _$ChatVm {
       await ref.read(chatRepositoryProvider).chat(
         ChatReqDto(conversationId: cur.current!.id!, chatDbId: chatDbId, message: sendMsg, model: cur.current!.model),
         cancelToken: _cancelToken,
-        receive: (data) {
-          debugPrint('收到数据：$data');
-          var receiveChat = ChatResDto.fromJson(jsonDecode(data));
+        receive: (receiveChat) {
+          debugPrint('收到数据：${receiveChat.toJson()}');
           updateReceiveMsg(receiveChat.chatDbId, receiveChat.text!.isEmpty ? receiveChat.msg! : receiveChat.text!, receiveChat.status);
         },
         error: (err) {

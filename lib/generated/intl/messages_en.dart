@@ -112,6 +112,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Generate image fail"),
         "getmodules_fail": MessageLookupByLibrary.simpleMessage(
             "Failed to obtain the model. If you are sure that your Key can be used, please click Save directly."),
+        "group_chat": MessageLookupByLibrary.simpleMessage("Multi chat room"),
         "has_exist": MessageLookupByLibrary.simpleMessage("Already Exists"),
         "has_reduce": MessageLookupByLibrary.simpleMessage("Has been reduced"),
         "have_account": MessageLookupByLibrary.simpleMessage("Have an account"),

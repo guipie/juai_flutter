@@ -1,5 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
+// ignore_for_file: lint_a, lint_b
+
 part of 'conversation_state_view_model.dart';
 
 // **************************************************************************
@@ -7,7 +9,7 @@ part of 'conversation_state_view_model.dart';
 // **************************************************************************
 
 String _$conversationStateVmHash() =>
-    r'176bf3b32fb7abd468d971ebb18061246ae17fb9';
+    r'4c7a210d08adf0177293bfaaf88ac53e97c8e0d1';
 
 /// See also [ConversationStateVm].
 @ProviderFor(ConversationStateVm)

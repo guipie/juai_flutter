@@ -41,7 +41,7 @@ class _LabelTextWidgetState extends State<LabelTextWidget> {
             2.width(),
             Text(
               widget.label,
-              style: widget.weakenLabel ? Theme.of(context).textTheme.titleMedium!.copyWith(color: Theme.of(context).textTheme.titleMedium!.color!.withOpacity(0.6)) : Theme.of(context).textTheme.titleMedium,
+              style: widget.weakenLabel ? Theme.of(context).textTheme.bodyMedium!.copyWith(color: Theme.of(context).textTheme.bodyMedium!.color!.withOpacity(0.6)) : Theme.of(context).textTheme.bodyMedium,
             ),
             const Spacer(),
             Padding(

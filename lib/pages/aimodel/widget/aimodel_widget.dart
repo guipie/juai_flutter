@@ -5,6 +5,7 @@ import '../../../components/image/avatar.dart';
 import '../../../components/mouse_hover_item.dart';
 import '../../../components/paging/paging_widget.dart';
 import '../../../components/text_tips.dart';
+import '../../../constants/enums/widget_enum.dart';
 import '../../../models/aimodel/aimodel_res_model.dart';
 import '../../../models/prompt/prompt_req_model.dart';
 import '../../chat/view_model/conversation_state_view_model.dart';
@@ -118,6 +119,7 @@ class AimodelWidget {
       controller: itemsController,
       child: JuAvatar(
         curModel.avatarUrl,
+        size: WSize.small,
         onTap: () {
           itemsController.showFlyout(
             autoModeConfiguration: fl.FlyoutAutoConfiguration(

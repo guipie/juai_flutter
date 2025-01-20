@@ -1,0 +1,11 @@
+builders:
+  db:
+    # builder 所在處
+    import: 'package:annotations/builder.dart' 
+    # 有哪些 builder 方法
+    builder_factories: ["dbBuilder"]
+    # 生成的新文件后缀
+    build_extensions: {".dart": ['db.g.part']}
+    auto_apply: dependents
+    build_to: cache
+    applies_builders: ["source_gen|combining_builder"]

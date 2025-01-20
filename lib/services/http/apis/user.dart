@@ -2,6 +2,6 @@ library adress;
 
 part 'modelai.dart';
 
-class ApiUser {
+class ApisUser {
   static String login = '/app/api/userLogin/loginRegister/false';
 }

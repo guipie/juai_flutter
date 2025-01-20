@@ -25,7 +25,7 @@ class MyDbProvider {
 }
 
 abstract class DbBase {
-  static const String _dbName = 'juai010120.db';
+  static const String _dbName = 'juai011522.db';
   static const int _newVersion = 1;
   static int _oldVersion = 0;
 
@@ -160,7 +160,7 @@ abstract class DbBase {
     final sqlBuffer = StringBuffer('CREATE TABLE $tableName (');
     json.forEach((key, value) {
       sqlBuffer.write('$key ');
-      switch (value.runtimeType) {
+      switch (value.z) {
         case int:
           sqlBuffer.write('INTEGER');
           if (hasPrimaryKey == true && key.toLowerCase() == (keyName ?? 'id')) {

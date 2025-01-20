@@ -1,12 +1,14 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
+// ignore_for_file: lint_a, lint_b
+
 part of 'chat_view_model.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$chatVmHash() => r'471c432bfd4d96eb5d2ef03c2d842e662abe905d';
+String _$chatVmHash() => r'176b1654c1955633fb8f637b7eedd4b2ea5c999e';
 
 /// See also [ChatVm].
 @ProviderFor(ChatVm)

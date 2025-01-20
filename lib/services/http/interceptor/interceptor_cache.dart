@@ -12,7 +12,7 @@ class CacheInterceptor extends Interceptor {
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
     final response = _cache[options.uri];
-    if (response != null && response.data != null && response.data['code'] == 200) {
+    if (options.method.toLowerCase() == 'get' && response != null && response.data != null && response.data['code'] == 200) {
       // 如果缓存中存在响应，则直接返回缓存的响应
       handler.resolve(response);
     } else {

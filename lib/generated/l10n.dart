@@ -90,6 +90,16 @@ class S {
     );
   }
 
+  /// `Multi chat room`
+  String get group_chat {
+    return Intl.message(
+      'Multi chat room',
+      name: 'group_chat',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Library`
   String get home_factory {
     return Intl.message(

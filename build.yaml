@@ -1,21 +1,33 @@
 targets:
   $default:
     builders:
-      json_serializable:
+      freezed|freezed:
         options:
-          # Options configure how source code is generated for every
-          # `@JsonSerializable`-annotated class in the package.
-          #
-          # The default value for each is listed.
+          format: false
+          copy_with: true
+          equal: false
+          map: false
+      json_serializable|json_serializable:
+        options:
           any_map: false
           checked: false
-          constructor: ""
           create_factory: true
           create_field_map: false
           create_to_json: true
           disallow_unrecognized_keys: false
           explicit_to_json: false
-          field_rename: pascal
+          field_rename: none
           generic_argument_factories: false
           ignore_unannotated: false
           include_if_null: true
+#COUSTOM
+      annotations:
+        generate_for:
+          - lib/*.dart
+      # The end-user of a builder which applies "source_gen|combining_builder"
+      # may configure the builder to ignore specific lints for their project
+      source_gen|combining_builder:
+        options:
+          ignore_for_file:
+          - lint_a
+          - lint_b

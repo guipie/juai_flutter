@@ -22,7 +22,7 @@ class AiModelPcPage extends BasePage {
         Container(
           width: 250,
           decoration: BoxDecoration(
-            border: Border(right: BorderSide(color: Theme.of(context).colorScheme.onPrimary, width: 1)),
+            border: Border(right: BorderSide(color: ref.watch(themeProvider).divideBgColor(), width: 1)),
           ),
           child: AimodelWidget.buildBody(context, ref),
         ),
@@ -31,7 +31,6 @@ class AiModelPcPage extends BasePage {
             itemBuilder: (context, index) => aimodelProvider != null
                 ? Container(
                     alignment: Alignment.center,
-                    padding: const EdgeInsets.only(top: 50),
                     child: SizedBox(
                       width: 400,
                       child: AimodelDetailPage(aimodelProvider),

@@ -87,7 +87,7 @@ final class PagingWidget<D extends PagingData<I>, I> extends ConsumerWidget {
                 _ => const SizedBox.shrink(),
               },
             );
-            return EasyRefresh(
+            return EasyRefresh.builder(
               header: BezierCircleHeader(
                 triggerOffset: 40,
                 foregroundColor: fl.FluentTheme.of(context).accentColor,
@@ -110,21 +110,12 @@ final class PagingWidget<D extends PagingData<I>, I> extends ConsumerWidget {
               ),
               onRefresh: () async => ref.refresh(futureRefreshable),
               onLoad: () async => await ref.read(notifierRefreshable).loadNext(),
-              child: LayoutBuilder(
-                builder: (BuildContext context, BoxConstraints constraints) {
-                  return ConstrainedBox(
-                    constraints: BoxConstraints(
-                      minHeight: constraints.maxHeight - 50,
-                    ),
-                    child: IntrinsicHeight(
-                      child: SingleChildScrollView(
-                        padding: padding,
-                        child: content,
-                      ),
-                    ),
-                  );
-                },
-              ),
+              childBuilder: (BuildContext context, ScrollPhysics physics) {
+                return SingleChildScrollView(
+                  padding: padding,
+                  child: content,
+                );
+              },
             );
           },
           // Loading state for the first page

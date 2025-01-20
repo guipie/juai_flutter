@@ -82,7 +82,6 @@ class ChatPage extends BasePage {
       children: [
         Expanded(
           child: EasyRefresh(
-            scrollController: ScrollController(),
             triggerAxis: Axis.vertical,
             clipBehavior: Clip.none,
             onRefresh: () {},
@@ -127,21 +126,29 @@ class ChatPage extends BasePage {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              fl.Wrap(
-                spacing: 0,
-                crossAxisAlignment: WrapCrossAlignment.center,
-                children: [
-                  Tooltip(
-                    message: S.current.ju_switch + S.current.models,
-                    child: AimodelWidget.buildOptions(
-                      context,
-                      ref,
-                      cur!.aiModel!,
+              fl.CommandBar(
+                overflowBehavior: fl.CommandBarOverflowBehavior.wrap,
+                primaryItems: [
+                  fl.CommandBarBuilderItem(
+                    builder: (context, mode, w) => Tooltip(
+                      message: S.current.ju_switch + S.current.models,
+                      child: w,
+                    ),
+                    wrappedItem: fl.CommandBarButton(
+                      icon: AimodelWidget.buildOptions(
+                        context,
+                        ref,
+                        cur!.aiModel!,
+                      ),
+                      onPressed: null,
                     ),
                   ),
-                  Tooltip(
-                    message: S.current.clear_context,
-                    child: fl.IconButton(
+                  fl.CommandBarBuilderItem(
+                    builder: (context, mode, w) => Tooltip(
+                      message: S.current.clear_context,
+                      child: w,
+                    ),
+                    wrappedItem: fl.CommandBarButton(
                       icon: fl.Icon(
                         Icons.clear_all_outlined,
                         size: 24,

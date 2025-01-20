@@ -1,5 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
+// ignore_for_file: lint_a, lint_b
+
 part of 'conversation_item_model.dart';
 
 // **************************************************************************
@@ -9,43 +11,43 @@ part of 'conversation_item_model.dart';
 _$ConversationItemModelImpl _$$ConversationItemModelImplFromJson(
         Map<String, dynamic> json) =>
     _$ConversationItemModelImpl(
-      id: (json['Id'] as num?)?.toInt(),
-      title: json['Title'] as String,
-      desc: json['Desc'] as String?,
-      avatar: json['Avatar'] as String?,
+      id: (json['id'] as num?)?.toInt(),
+      title: json['title'] as String,
+      desc: json['desc'] as String?,
+      avatar: json['avatar'] as String?,
       createTime: _$JsonConverterFromJson<String, DateTime>(
-          json['CreateTime'], const DateTimeConverter().fromJson),
+          json['createTime'], const DateTimeConverter().fromJson),
       lastTime: _$JsonConverterFromJson<String, DateTime>(
-          json['LastTime'], const DateTimeConverter().fromJson),
-      draft: json['Draft'] as String?,
+          json['lastTime'], const DateTimeConverter().fromJson),
+      draft: json['draft'] as String?,
       isTop: _$JsonConverterFromJson<String, bool>(
-          json['IsTop'], const BoolConverter().fromJson),
-      unReadCnt: (json['UnReadCnt'] as num?)?.toInt() ?? 0,
-      type: $enumDecode(_$ConversationEnumEnumMap, json['Type']),
-      relationId: (json['RelationId'] as num?)?.toInt() ?? 0,
-      model: json['Model'] as String? ?? Constant.defaultModel,
-      extens: json['Extens'] as String?,
+          json['isTop'], const BoolConverter().fromJson),
+      unReadCnt: (json['unReadCnt'] as num?)?.toInt() ?? 0,
+      type: $enumDecode(_$ConversationEnumEnumMap, json['type']),
+      relationId: (json['relationId'] as num?)?.toInt() ?? 0,
+      model: json['model'] as String? ?? Constant.defaultModel,
+      extens: json['extens'] as String?,
     );
 
 Map<String, dynamic> _$$ConversationItemModelImplToJson(
         _$ConversationItemModelImpl instance) =>
     <String, dynamic>{
-      'Id': instance.id,
-      'Title': instance.title,
-      'Desc': instance.desc,
-      'Avatar': instance.avatar,
-      'CreateTime': _$JsonConverterToJson<String, DateTime>(
+      'id': instance.id,
+      'title': instance.title,
+      'desc': instance.desc,
+      'avatar': instance.avatar,
+      'createTime': _$JsonConverterToJson<String, DateTime>(
           instance.createTime, const DateTimeConverter().toJson),
-      'LastTime': _$JsonConverterToJson<String, DateTime>(
+      'lastTime': _$JsonConverterToJson<String, DateTime>(
           instance.lastTime, const DateTimeConverter().toJson),
-      'Draft': instance.draft,
-      'IsTop': _$JsonConverterToJson<String, bool>(
+      'draft': instance.draft,
+      'isTop': _$JsonConverterToJson<String, bool>(
           instance.isTop, const BoolConverter().toJson),
-      'UnReadCnt': instance.unReadCnt,
-      'Type': _$ConversationEnumEnumMap[instance.type]!,
-      'RelationId': instance.relationId,
-      'Model': instance.model,
-      'Extens': instance.extens,
+      'unReadCnt': instance.unReadCnt,
+      'type': _$ConversationEnumEnumMap[instance.type]!,
+      'relationId': instance.relationId,
+      'model': instance.model,
+      'extens': instance.extens,
     };
 
 Value? _$JsonConverterFromJson<Json, Value>(

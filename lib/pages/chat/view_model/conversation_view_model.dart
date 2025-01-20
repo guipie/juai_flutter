@@ -8,15 +8,41 @@ import 'conversation_state_view_model.dart';
 
 part 'conversation_view_model.g.dart';
 
+var searchTextPorvider = StateProvider<String>((ref) => '');
+
 @riverpod
 class ConversationVm extends _$ConversationVm with PagePagingNotifierMixin<ConversationItemModel> {
   @override
   Future<PagePagingData<ConversationItemModel>> build() => fetch(page: 1);
 
+  late List<ConversationItemModel> initChats;
   @override
   Future<PagePagingData<ConversationItemModel>> fetch({required int page}) async {
-    var chats = await DbConversation().getConversations();
+    var chats = initChats = await DbConversation().getConversations();
+    if (chats.isEmpty) {
+      await addRandomChat();
+      chats = initChats = state.value?.items ?? [];
+    }
     return PagePagingData(items: chats, hasMore: false, page: page);
+  }
+
+  Future<void> addRandomChat() async {
+    var model = ConversationItemModel(
+      id: DateTime.now().millisecondsSinceEpoch,
+      title: S.current.new_chat,
+      desc: S.current.empty_content_need_add,
+      type: ConversationEnum.chat,
+      model: Constant.defaultModel,
+      relationId: 0,
+    );
+    await addConversation(model, null);
+  }
+
+  void search(String text) {
+    state.whenData((value) {
+      var newValue = value.copyWith(items: initChats.where((element) => element.title.contains(text)).toList());
+      state = AsyncValue.data(newValue);
+    });
   }
 
   Future<void> deleteConversation(int id) async {
