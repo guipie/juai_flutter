@@ -30,7 +30,7 @@ class PromptPage extends BasePage {
                     isRadius: true,
                     leadingPicUrl: m.avatar!,
                     title: m.title,
-                    subTitle: m.initMessage.isEmpty() ? '...' : m.initMessage,
+                    subTitle: m.initMessage.isEmptyJu() ? '...' : m.initMessage,
                     isShowDefaultTrailing: false,
                     onTap: () {
                       debugPrint('点击了${m.title}');
@@ -52,7 +52,7 @@ class PromptPage extends BasePage {
                             size: Theme.of(context).textTheme.bodySmall!.fontSize,
                             color: Theme.of(context).textTheme.bodySmall!.color,
                           ),
-                          if (m.tags.isNotEmpty())
+                          if (m.tags.isNotEmptyJu())
                             ...m.tags!
                                 .split(',')
                                 .map(

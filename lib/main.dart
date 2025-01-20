@@ -3,10 +3,9 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:window_manager/window_manager.dart';
 
 import 'base/base.dart';
-import 'services/riverpod/provider_log.dart';
-import 'constants/theme.dart';
 import 'initial.dart';
 import 'pages/splash_page.dart';
+import 'services/riverpod/provider_log.dart';
 import 'utils/hive_box.dart';
 
 ProviderContainer? globalRef;

@@ -64,7 +64,7 @@ class CardCustom extends ConsumerWidget {
                               ),
                         ),
                       ),
-                      if (titleExtend.isNotEmpty())
+                      if (titleExtend.isNotEmptyJu())
                         Padding(
                           padding: const EdgeInsets.only(bottom: 2),
                           child: Text(

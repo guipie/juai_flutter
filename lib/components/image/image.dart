@@ -56,7 +56,7 @@ class JuImage extends StatelessWidget {
                       ),
                     )
                   : Image.asset(
-                      (path.isEmpty() ? Assets.imageAvatar : path!),
+                      (path.isEmptyJu() ? Assets.imageAvatar : path!),
                       width: width,
                     ),
             ),

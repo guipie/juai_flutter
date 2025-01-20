@@ -21,7 +21,7 @@ return _AiModelRes.fromJson(json);
 /// @nodoc
 mixin _$AiModelRes {
 
-@JuColumn(name: 'id', primaryKey: true) int get id => throw _privateConstructorUsedError;@JuColumn(name: 'model_id') String get modelId => throw _privateConstructorUsedError;@JuColumn(name: 'name') String get name => throw _privateConstructorUsedError;@JuColumn(name: 'avatar_url') String get avatarUrl => throw _privateConstructorUsedError;@JuColumn(name: 'model_type') int get modelType => throw _privateConstructorUsedError;@JuColumn(name: 'service') String get service => throw _privateConstructorUsedError;@JuColumn(name: 'service_url') String? get serviceUrl => throw _privateConstructorUsedError; String? get shortName => throw _privateConstructorUsedError; String? get url => throw _privateConstructorUsedError; String? get desc => throw _privateConstructorUsedError; String? get createTime => throw _privateConstructorUsedError; String? get updateTime => throw _privateConstructorUsedError; int? get createUserId => throw _privateConstructorUsedError; int? get updateUserId => throw _privateConstructorUsedError; bool? get isDelete => throw _privateConstructorUsedError; int? get inputToken => throw _privateConstructorUsedError; int? get outputToken => throw _privateConstructorUsedError; int? get inputYuan => throw _privateConstructorUsedError; int? get outputYuan => throw _privateConstructorUsedError; String? get tags => throw _privateConstructorUsedError; int? get sequence => throw _privateConstructorUsedError;
+@JuColumn(primaryKey: true, type: ColumnType.integer) int get id => throw _privateConstructorUsedError;@JuColumn(nullable: false, unique: true) String get modelId => throw _privateConstructorUsedError;@JuColumn(nullable: false, unique: true) String get name => throw _privateConstructorUsedError;@JuColumn(nullable: false) String get avatarUrl => throw _privateConstructorUsedError;@JuColumn(nullable: false, type: ColumnType.integer) int get modelType => throw _privateConstructorUsedError;@JuColumn(nullable: false) String get service => throw _privateConstructorUsedError;@JuColumn() String? get serviceUrl => throw _privateConstructorUsedError;@JuColumn() String? get shortName => throw _privateConstructorUsedError;@JuColumn() String? get url => throw _privateConstructorUsedError;@JuColumn() String? get desc => throw _privateConstructorUsedError;@JuColumn(type: ColumnType.date) DateTime? get createTime => throw _privateConstructorUsedError;@JuColumn(type: ColumnType.date) DateTime? get updateTime => throw _privateConstructorUsedError; int? get createUserId => throw _privateConstructorUsedError; int? get updateUserId => throw _privateConstructorUsedError;@JuColumn(type: ColumnType.bool) bool? get isDelete => throw _privateConstructorUsedError;@JuColumn(type: ColumnType.integer) int? get inputToken => throw _privateConstructorUsedError;@JuColumn(type: ColumnType.integer) int? get outputToken => throw _privateConstructorUsedError;@JuColumn(type: ColumnType.real) int? get inputYuan => throw _privateConstructorUsedError;@JuColumn(type: ColumnType.real) int? get outputYuan => throw _privateConstructorUsedError;@JuColumn() String? get tags => throw _privateConstructorUsedError;@JuColumn(type: ColumnType.integer) int? get sequence => throw _privateConstructorUsedError;
 
 
 
@@ -42,7 +42,7 @@ abstract class $AiModelResCopyWith<$Res>  {
   factory $AiModelResCopyWith(AiModelRes value, $Res Function(AiModelRes) then) = _$AiModelResCopyWithImpl<$Res, AiModelRes>;
 @useResult
 $Res call({
-@JuColumn(name: 'id', primaryKey: true) int id,@JuColumn(name: 'model_id') String modelId,@JuColumn(name: 'name') String name,@JuColumn(name: 'avatar_url') String avatarUrl,@JuColumn(name: 'model_type') int modelType,@JuColumn(name: 'service') String service,@JuColumn(name: 'service_url') String? serviceUrl, String? shortName, String? url, String? desc, String? createTime, String? updateTime, int? createUserId, int? updateUserId, bool? isDelete, int? inputToken, int? outputToken, int? inputYuan, int? outputYuan, String? tags, int? sequence
+@JuColumn(primaryKey: true, type: ColumnType.integer) int id,@JuColumn(nullable: false, unique: true) String modelId,@JuColumn(nullable: false, unique: true) String name,@JuColumn(nullable: false) String avatarUrl,@JuColumn(nullable: false, type: ColumnType.integer) int modelType,@JuColumn(nullable: false) String service,@JuColumn() String? serviceUrl,@JuColumn() String? shortName,@JuColumn() String? url,@JuColumn() String? desc,@JuColumn(type: ColumnType.date) DateTime? createTime,@JuColumn(type: ColumnType.date) DateTime? updateTime, int? createUserId, int? updateUserId,@JuColumn(type: ColumnType.bool) bool? isDelete,@JuColumn(type: ColumnType.integer) int? inputToken,@JuColumn(type: ColumnType.integer) int? outputToken,@JuColumn(type: ColumnType.real) int? inputYuan,@JuColumn(type: ColumnType.real) int? outputYuan,@JuColumn() String? tags,@JuColumn(type: ColumnType.integer) int? sequence
 });
 
 
@@ -73,8 +73,8 @@ as String?,shortName: freezed == shortName ? _value.shortName : shortName // ign
 as String?,url: freezed == url ? _value.url : url // ignore: cast_nullable_to_non_nullable
 as String?,desc: freezed == desc ? _value.desc : desc // ignore: cast_nullable_to_non_nullable
 as String?,createTime: freezed == createTime ? _value.createTime : createTime // ignore: cast_nullable_to_non_nullable
-as String?,updateTime: freezed == updateTime ? _value.updateTime : updateTime // ignore: cast_nullable_to_non_nullable
-as String?,createUserId: freezed == createUserId ? _value.createUserId : createUserId // ignore: cast_nullable_to_non_nullable
+as DateTime?,updateTime: freezed == updateTime ? _value.updateTime : updateTime // ignore: cast_nullable_to_non_nullable
+as DateTime?,createUserId: freezed == createUserId ? _value.createUserId : createUserId // ignore: cast_nullable_to_non_nullable
 as int?,updateUserId: freezed == updateUserId ? _value.updateUserId : updateUserId // ignore: cast_nullable_to_non_nullable
 as int?,isDelete: freezed == isDelete ? _value.isDelete : isDelete // ignore: cast_nullable_to_non_nullable
 as bool?,inputToken: freezed == inputToken ? _value.inputToken : inputToken // ignore: cast_nullable_to_non_nullable
@@ -95,7 +95,7 @@ abstract class _$$AiModelResImplCopyWith<$Res> implements $AiModelResCopyWith<$R
   factory _$$AiModelResImplCopyWith(_$AiModelResImpl value, $Res Function(_$AiModelResImpl) then) = __$$AiModelResImplCopyWithImpl<$Res>;
 @override @useResult
 $Res call({
-@JuColumn(name: 'id', primaryKey: true) int id,@JuColumn(name: 'model_id') String modelId,@JuColumn(name: 'name') String name,@JuColumn(name: 'avatar_url') String avatarUrl,@JuColumn(name: 'model_type') int modelType,@JuColumn(name: 'service') String service,@JuColumn(name: 'service_url') String? serviceUrl, String? shortName, String? url, String? desc, String? createTime, String? updateTime, int? createUserId, int? updateUserId, bool? isDelete, int? inputToken, int? outputToken, int? inputYuan, int? outputYuan, String? tags, int? sequence
+@JuColumn(primaryKey: true, type: ColumnType.integer) int id,@JuColumn(nullable: false, unique: true) String modelId,@JuColumn(nullable: false, unique: true) String name,@JuColumn(nullable: false) String avatarUrl,@JuColumn(nullable: false, type: ColumnType.integer) int modelType,@JuColumn(nullable: false) String service,@JuColumn() String? serviceUrl,@JuColumn() String? shortName,@JuColumn() String? url,@JuColumn() String? desc,@JuColumn(type: ColumnType.date) DateTime? createTime,@JuColumn(type: ColumnType.date) DateTime? updateTime, int? createUserId, int? updateUserId,@JuColumn(type: ColumnType.bool) bool? isDelete,@JuColumn(type: ColumnType.integer) int? inputToken,@JuColumn(type: ColumnType.integer) int? outputToken,@JuColumn(type: ColumnType.real) int? inputYuan,@JuColumn(type: ColumnType.real) int? outputYuan,@JuColumn() String? tags,@JuColumn(type: ColumnType.integer) int? sequence
 });
 
 
@@ -123,8 +123,8 @@ as String?,shortName: freezed == shortName ? _value.shortName : shortName // ign
 as String?,url: freezed == url ? _value.url : url // ignore: cast_nullable_to_non_nullable
 as String?,desc: freezed == desc ? _value.desc : desc // ignore: cast_nullable_to_non_nullable
 as String?,createTime: freezed == createTime ? _value.createTime : createTime // ignore: cast_nullable_to_non_nullable
-as String?,updateTime: freezed == updateTime ? _value.updateTime : updateTime // ignore: cast_nullable_to_non_nullable
-as String?,createUserId: freezed == createUserId ? _value.createUserId : createUserId // ignore: cast_nullable_to_non_nullable
+as DateTime?,updateTime: freezed == updateTime ? _value.updateTime : updateTime // ignore: cast_nullable_to_non_nullable
+as DateTime?,createUserId: freezed == createUserId ? _value.createUserId : createUserId // ignore: cast_nullable_to_non_nullable
 as int?,updateUserId: freezed == updateUserId ? _value.updateUserId : updateUserId // ignore: cast_nullable_to_non_nullable
 as int?,isDelete: freezed == isDelete ? _value.isDelete : isDelete // ignore: cast_nullable_to_non_nullable
 as bool?,inputToken: freezed == inputToken ? _value.inputToken : inputToken // ignore: cast_nullable_to_non_nullable
@@ -144,31 +144,31 @@ as int?,
 @JsonSerializable()
 
 class _$AiModelResImpl  with DiagnosticableTreeMixin implements _AiModelRes {
-  const _$AiModelResImpl({@JuColumn(name: 'id', primaryKey: true) required this.id, @JuColumn(name: 'model_id') required this.modelId, @JuColumn(name: 'name') required this.name, @JuColumn(name: 'avatar_url') required this.avatarUrl, @JuColumn(name: 'model_type') required this.modelType, @JuColumn(name: 'service') required this.service, @JuColumn(name: 'service_url') this.serviceUrl, this.shortName, this.url, this.desc, this.createTime, this.updateTime, this.createUserId, this.updateUserId, this.isDelete, this.inputToken, this.outputToken, this.inputYuan, this.outputYuan, this.tags, this.sequence});
+  const _$AiModelResImpl({@JuColumn(primaryKey: true, type: ColumnType.integer) required this.id, @JuColumn(nullable: false, unique: true) required this.modelId, @JuColumn(nullable: false, unique: true) required this.name, @JuColumn(nullable: false) required this.avatarUrl, @JuColumn(nullable: false, type: ColumnType.integer) required this.modelType, @JuColumn(nullable: false) required this.service, @JuColumn() this.serviceUrl, @JuColumn() this.shortName, @JuColumn() this.url, @JuColumn() this.desc, @JuColumn(type: ColumnType.date) this.createTime, @JuColumn(type: ColumnType.date) this.updateTime, this.createUserId, this.updateUserId, @JuColumn(type: ColumnType.bool) this.isDelete, @JuColumn(type: ColumnType.integer) this.inputToken, @JuColumn(type: ColumnType.integer) this.outputToken, @JuColumn(type: ColumnType.real) this.inputYuan, @JuColumn(type: ColumnType.real) this.outputYuan, @JuColumn() this.tags, @JuColumn(type: ColumnType.integer) this.sequence});
 
   factory _$AiModelResImpl.fromJson(Map<String, dynamic> json) => _$$AiModelResImplFromJson(json);
 
-@override@JuColumn(name: 'id', primaryKey: true) final  int id;
-@override@JuColumn(name: 'model_id') final  String modelId;
-@override@JuColumn(name: 'name') final  String name;
-@override@JuColumn(name: 'avatar_url') final  String avatarUrl;
-@override@JuColumn(name: 'model_type') final  int modelType;
-@override@JuColumn(name: 'service') final  String service;
-@override@JuColumn(name: 'service_url') final  String? serviceUrl;
-@override final  String? shortName;
-@override final  String? url;
-@override final  String? desc;
-@override final  String? createTime;
-@override final  String? updateTime;
+@override@JuColumn(primaryKey: true, type: ColumnType.integer) final  int id;
+@override@JuColumn(nullable: false, unique: true) final  String modelId;
+@override@JuColumn(nullable: false, unique: true) final  String name;
+@override@JuColumn(nullable: false) final  String avatarUrl;
+@override@JuColumn(nullable: false, type: ColumnType.integer) final  int modelType;
+@override@JuColumn(nullable: false) final  String service;
+@override@JuColumn() final  String? serviceUrl;
+@override@JuColumn() final  String? shortName;
+@override@JuColumn() final  String? url;
+@override@JuColumn() final  String? desc;
+@override@JuColumn(type: ColumnType.date) final  DateTime? createTime;
+@override@JuColumn(type: ColumnType.date) final  DateTime? updateTime;
 @override final  int? createUserId;
 @override final  int? updateUserId;
-@override final  bool? isDelete;
-@override final  int? inputToken;
-@override final  int? outputToken;
-@override final  int? inputYuan;
-@override final  int? outputYuan;
-@override final  String? tags;
-@override final  int? sequence;
+@override@JuColumn(type: ColumnType.bool) final  bool? isDelete;
+@override@JuColumn(type: ColumnType.integer) final  int? inputToken;
+@override@JuColumn(type: ColumnType.integer) final  int? outputToken;
+@override@JuColumn(type: ColumnType.real) final  int? inputYuan;
+@override@JuColumn(type: ColumnType.real) final  int? outputYuan;
+@override@JuColumn() final  String? tags;
+@override@JuColumn(type: ColumnType.integer) final  int? sequence;
 
 @override
 String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
@@ -206,12 +206,12 @@ Map<String, dynamic> toJson() {
 
 
 abstract class _AiModelRes implements AiModelRes {
-  const factory _AiModelRes({@JuColumn(name: 'id', primaryKey: true) required final  int id, @JuColumn(name: 'model_id') required final  String modelId, @JuColumn(name: 'name') required final  String name, @JuColumn(name: 'avatar_url') required final  String avatarUrl, @JuColumn(name: 'model_type') required final  int modelType, @JuColumn(name: 'service') required final  String service, @JuColumn(name: 'service_url') final  String? serviceUrl, final  String? shortName, final  String? url, final  String? desc, final  String? createTime, final  String? updateTime, final  int? createUserId, final  int? updateUserId, final  bool? isDelete, final  int? inputToken, final  int? outputToken, final  int? inputYuan, final  int? outputYuan, final  String? tags, final  int? sequence}) = _$AiModelResImpl;
+  const factory _AiModelRes({@JuColumn(primaryKey: true, type: ColumnType.integer) required final  int id, @JuColumn(nullable: false, unique: true) required final  String modelId, @JuColumn(nullable: false, unique: true) required final  String name, @JuColumn(nullable: false) required final  String avatarUrl, @JuColumn(nullable: false, type: ColumnType.integer) required final  int modelType, @JuColumn(nullable: false) required final  String service, @JuColumn() final  String? serviceUrl, @JuColumn() final  String? shortName, @JuColumn() final  String? url, @JuColumn() final  String? desc, @JuColumn(type: ColumnType.date) final  DateTime? createTime, @JuColumn(type: ColumnType.date) final  DateTime? updateTime, final  int? createUserId, final  int? updateUserId, @JuColumn(type: ColumnType.bool) final  bool? isDelete, @JuColumn(type: ColumnType.integer) final  int? inputToken, @JuColumn(type: ColumnType.integer) final  int? outputToken, @JuColumn(type: ColumnType.real) final  int? inputYuan, @JuColumn(type: ColumnType.real) final  int? outputYuan, @JuColumn() final  String? tags, @JuColumn(type: ColumnType.integer) final  int? sequence}) = _$AiModelResImpl;
   
 
   factory _AiModelRes.fromJson(Map<String, dynamic> json) = _$AiModelResImpl.fromJson;
 
-@override@JuColumn(name: 'id', primaryKey: true) int get id;@override@JuColumn(name: 'model_id') String get modelId;@override@JuColumn(name: 'name') String get name;@override@JuColumn(name: 'avatar_url') String get avatarUrl;@override@JuColumn(name: 'model_type') int get modelType;@override@JuColumn(name: 'service') String get service;@override@JuColumn(name: 'service_url') String? get serviceUrl;@override String? get shortName;@override String? get url;@override String? get desc;@override String? get createTime;@override String? get updateTime;@override int? get createUserId;@override int? get updateUserId;@override bool? get isDelete;@override int? get inputToken;@override int? get outputToken;@override int? get inputYuan;@override int? get outputYuan;@override String? get tags;@override int? get sequence;
+@override@JuColumn(primaryKey: true, type: ColumnType.integer) int get id;@override@JuColumn(nullable: false, unique: true) String get modelId;@override@JuColumn(nullable: false, unique: true) String get name;@override@JuColumn(nullable: false) String get avatarUrl;@override@JuColumn(nullable: false, type: ColumnType.integer) int get modelType;@override@JuColumn(nullable: false) String get service;@override@JuColumn() String? get serviceUrl;@override@JuColumn() String? get shortName;@override@JuColumn() String? get url;@override@JuColumn() String? get desc;@override@JuColumn(type: ColumnType.date) DateTime? get createTime;@override@JuColumn(type: ColumnType.date) DateTime? get updateTime;@override int? get createUserId;@override int? get updateUserId;@override@JuColumn(type: ColumnType.bool) bool? get isDelete;@override@JuColumn(type: ColumnType.integer) int? get inputToken;@override@JuColumn(type: ColumnType.integer) int? get outputToken;@override@JuColumn(type: ColumnType.real) int? get inputYuan;@override@JuColumn(type: ColumnType.real) int? get outputYuan;@override@JuColumn() String? get tags;@override@JuColumn(type: ColumnType.integer) int? get sequence;
 /// Create a copy of AiModelRes
 /// with the given fields replaced by the non-null parameter values.
 @override @JsonKey(includeFromJson: false, includeToJson: false)

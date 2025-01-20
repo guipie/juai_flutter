@@ -9,7 +9,7 @@ part of 'aimodel_res_model.dart';
 // **************************************************************************
 
 String get createTableSql =>
-    "CREATE TABLE IF NOT EXISTS ai_model_res (  'id','model_id','name','avatar_url','model_type','service','service_url')";
+    'CREATE TABLE IF NOT EXISTS ai_model_res (  id INTEGER   PRIMARY KEY AUTOINCREMENT  ,modelId TEXT   NOT NULL   UNIQUE  ,name TEXT   NOT NULL   UNIQUE  ,avatarUrl TEXT   NOT NULL    ,modelType INTEGER  NOT NULL   ,service TEXT   NOT NULL    ,serviceUrl TEXT      ,shortName TEXT      ,url TEXT      ,desc TEXT      ,createTime TIMESTAMP      DEFAULT CURRENT_TIMESTAMP ,updateTime TIMESTAMP      DEFAULT CURRENT_TIMESTAMP ,isDelete INTEGER   CHECK(isDelete=0 OR isDelete=1),inputToken INTEGER    ,outputToken INTEGER    ,inputYuan REAL    ,outputYuan REAL    ,tags TEXT      ,sequence INTEGER    )';
 
 // **************************************************************************
 // JsonSerializableGenerator
@@ -27,8 +27,12 @@ _$AiModelResImpl _$$AiModelResImplFromJson(Map<String, dynamic> json) =>
       shortName: json['shortName'] as String?,
       url: json['url'] as String?,
       desc: json['desc'] as String?,
-      createTime: json['createTime'] as String?,
-      updateTime: json['updateTime'] as String?,
+      createTime: json['createTime'] == null
+          ? null
+          : DateTime.parse(json['createTime'] as String),
+      updateTime: json['updateTime'] == null
+          ? null
+          : DateTime.parse(json['updateTime'] as String),
       createUserId: (json['createUserId'] as num?)?.toInt(),
       updateUserId: (json['updateUserId'] as num?)?.toInt(),
       isDelete: json['isDelete'] as bool?,
@@ -52,8 +56,8 @@ Map<String, dynamic> _$$AiModelResImplToJson(_$AiModelResImpl instance) =>
       'shortName': instance.shortName,
       'url': instance.url,
       'desc': instance.desc,
-      'createTime': instance.createTime,
-      'updateTime': instance.updateTime,
+      'createTime': instance.createTime?.toIso8601String(),
+      'updateTime': instance.updateTime?.toIso8601String(),
       'createUserId': instance.createUserId,
       'updateUserId': instance.updateUserId,
       'isDelete': instance.isDelete,

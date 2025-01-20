@@ -76,7 +76,7 @@ class ChatPage extends BasePage {
             onPressed: () => ref.read(chatVmProvider.notifier).cancelSendMsg(),
           )
         : ButtonSend(
-            onPressed: chatState.sendMsg.isEmpty() ? null : () => ref.read(chatVmProvider.notifier).sendMsg(inputController.text),
+            onPressed: chatState.sendMsg.isEmptyJu() ? null : () => ref.read(chatVmProvider.notifier).sendMsg(inputController.text),
           );
     return Column(
       children: [

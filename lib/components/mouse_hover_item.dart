@@ -44,7 +44,7 @@ class MouseHoverItem extends ConsumerWidget {
     Widget trailingItem = const SizedBox.shrink();
     if (trailingWidget != null)
       trailingItem = trailingWidget!;
-    else if (trailing.isNotEmpty())
+    else if (trailing.isNotEmptyJu())
       trailingItem = Text(
         trailing!,
         style: TextStyle(
@@ -86,7 +86,7 @@ class MouseHoverItem extends ConsumerWidget {
                           ),
                     ),
                   ),
-                  if (titleExtend.isNotEmpty())
+                  if (titleExtend.isNotEmptyJu())
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 2),
                       decoration: BoxDecoration(
@@ -101,7 +101,7 @@ class MouseHoverItem extends ConsumerWidget {
                 ],
               ),
               trailing: trailingItem,
-              subtitle: subTitle.isEmpty()
+              subtitle: subTitle.isEmptyJu()
                   ? null
                   : Text(
                       subTitle!,

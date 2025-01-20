@@ -2,7 +2,7 @@ import '../../base/base.dart';
 
 ///easyLoading 和 flutter_toast 扩展
 extension ExtensionString on String? {
-  bool isEmpty() {
+  bool isEmptyJu() {
     return this == null || this!.trim().isEmpty;
   }
 
@@ -10,8 +10,8 @@ extension ExtensionString on String? {
     return this ?? defaultValue;
   }
 
-  bool isNotEmpty() {
-    return !isEmpty();
+  bool isNotEmptyJu() {
+    return !isEmptyJu();
   }
 
   void loading() {
