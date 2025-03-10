@@ -1,13 +1,15 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 
 import '../base/base.dart';
 import '../constants/enums/conversation_enum.dart';
-import '../models/aimodel/aimodel_res_model.dart';
-import '../models/chat/conversation_item_model.dart';
+import '../models/aimodel/aimodel_model.dart';
+import '../models/chat/conversation_model.dart';
 import '../models/prompt/prompt_res_model.dart';
+import '../pages/aimodel/view_model/aimodel_state_view_model.dart';
 import '../pages/chat/view/chat_page.dart';
 import '../pages/chat/view/conversation_pc_page.dart';
 import '../pages/chat/view_model/conversation_state_view_model.dart';
@@ -35,9 +37,10 @@ class _FImpl {
 
   get height => MediaQuery.sizeOf(context).height;
 
-  bool get mobile => Platform.isAndroid || Platform.isIOS;
-  bool get pc => !(Platform.isAndroid || Platform.isIOS);
-  bool get windows => (Platform.isWindows || Platform.isLinux || Platform.isMacOS);
+  bool get web => kIsWeb;
+  bool get mobile => !kIsWeb && (Platform.isAndroid || Platform.isIOS);
+  bool get pc => kIsWeb || !(Platform.isAndroid || Platform.isIOS);
+  bool get desktop => !kIsWeb && (Platform.isWindows || Platform.isLinux || Platform.isMacOS);
   String formatTime(int ms) {
     return DateUtil.formatDateMs(ms, format: 'yyyy-MM-dd HH:mm:ss');
   }
@@ -79,45 +82,17 @@ class _FImpl {
     Navigator.of(context).pop(result);
   }
 
-  Future<void> pushChat(WidgetRef ref, ConversationEnum type, {ConversationItemModel? conversation, PromptRes? promptRes, AiModelRes? aiModelRes}) async {
+  Future<void> pushChat(WidgetRef ref, {ConversationModel? conversation, PromptRes? promptRes, AiModel? aiModelRes}) async {
     ref.read(homeVmProvider.notifier).setCurTabIndex(0);
-    var title = '', desc = '', avatar = '', model = '';
-    var relationId = 0;
-    var id = conversation?.id ?? DateTime.now().microsecondsSinceEpoch;
-    if (type == ConversationEnum.chat) {
-      if (conversation == null) {
-        title = S.current.new_chat;
-        desc = S.current.empty_content_need_add;
-        model = Constant.defaultModel;
-      }
-    } else if (type == ConversationEnum.model && (conversation != null || aiModelRes != null)) {
-      aiModelRes ??= await DbConversationAiModel().getModel(conversation!.model);
-      title = aiModelRes.name;
-      desc = aiModelRes.desc ?? S.current.empty_content_need_add;
-      avatar = aiModelRes.avatarUrl;
-      relationId = aiModelRes.id;
-      model = aiModelRes.modelId;
-    } else if (type == ConversationEnum.prompt && (conversation != null || promptRes != null)) {
-      promptRes ??= await DbConversationPrompt().getPrompt(conversation!.relationId);
-      title = promptRes!.title;
-      desc = promptRes.initMessage ?? S.current.empty_content_need_add;
-      avatar = promptRes.avatar ?? '';
-      relationId = promptRes.id;
-      model = promptRes.model;
-    } else
-      throw Exception('type is not support');
-    var current = conversation ??
-        ConversationItemModel(
-          id: id,
-          title: title,
-          desc: desc,
-          avatar: avatar,
-          type: type,
-          model: model,
-          relationId: relationId,
-        );
-
-    await ref.read(conversationStateVmProvider.notifier).setCurrent(current, promptRes);
+    conversation ??= await ref.read(conversationVmProvider.notifier).getRandomChat();
+    if (aiModelRes != null) {
+      // aiModelRes ??= await ref.read(aimodelStateViewModelProvider.notifier).getAimodel(aiModelRes.modelId);
+      conversation = conversation.copyWith(title: aiModelRes.name, desc: aiModelRes.desc ?? S.current.empty_content_need_add, avatar: aiModelRes.avatarUrl, model: aiModelRes.modelId);
+    } else if (promptRes != null) {
+      // promptRes ??= await DbPrompt().getPrompt(conversation!.relationId);
+      conversation = conversation.copyWith(title: promptRes.title, desc: promptRes.initMessage ?? S.current.empty_content_need_add, avatar: promptRes.avatar ?? '', model: promptRes.model, promptJson: jsonEncode(promptRes.toJson()));
+    }
+    await ref.read(conversationStateVmProvider.notifier).setCurrent(conversation, promptRes);
     if (F.mobile) await F.push(ChatPage(cur: ref.read(conversationStateVmProvider)));
   }
 

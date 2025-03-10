@@ -2,7 +2,7 @@
 // RiverpodGenerator
 // **************************************************************************
 
-String _$promptReqNotifierHash() => r'b2dcd8a7e57a34f14dec54209b6b870d0b4a5430';
+String _$promptReqNotifierHash() => r'991a993f06bc55ae8950a3e0983a3a826bba6771';
 
 /// See also [PromptReqNotifier].
 @ProviderFor(PromptReqNotifier)
@@ -18,7 +18,7 @@ final promptReqNotifierProvider =
 );
 
 typedef _$PromptReqNotifier = Notifier<PromptReq>;
-String _$promptVMHash() => r'9c97b08059a29dbd781537ba4d17d5983009a455';
+String _$promptVMHash() => r'30b909853f63d74fac1c6e600b22a0839536ae5c';
 
 /// See also [PromptVM].
 @ProviderFor(PromptVM)

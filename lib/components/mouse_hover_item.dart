@@ -54,7 +54,7 @@ class MouseHoverItem extends ConsumerWidget {
       );
     else if (isShowDefaultTrailing)
       trailingItem = Icon(
-        CupertinoIcons.right_chevron,
+        Icons.chevron_right_outlined,
         color: Theme.of(context).textTheme.titleSmall?.color,
         size: 18,
       );

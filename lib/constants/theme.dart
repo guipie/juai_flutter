@@ -302,6 +302,12 @@ class DarkTheme extends BaseTheme {
       accentColor: Colors.green,
       visualDensity: VisualDensity.standard,
       scaffoldBackgroundColor: Colors.grey[200],
+      dividerTheme: const DividerThemeData(
+        horizontalMargin: EdgeInsets.symmetric(vertical: 8),
+        decoration: BoxDecoration(
+          color: Color(0xff191919),
+        ),
+      ),
     );
   }
 

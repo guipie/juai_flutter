@@ -1,3 +1,5 @@
+import 'package:fluent_ui/fluent_ui.dart' as fl;
+
 import '../../base/base.dart';
 import '../../base/base_page.dart';
 import '../../components/image/image.dart';
@@ -23,17 +25,18 @@ class LoginPage extends BasePage {
 
   @override
   Widget buildBody(BuildContext context, WidgetRef ref) {
-    return SafeArea(
-      child: LayoutBuilder(
-        builder: (context, constraints) {
-          return SingleChildScrollView(
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        return Container(
+          color: fl.FluentTheme.of(context).scaffoldBackgroundColor,
+          child: SingleChildScrollView(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Column(
               mainAxisSize: MainAxisSize.min, // 设置 mainAxisSize 为 min
               children: [
                 SizedBox(height: constraints.maxHeight * 0.1),
                 const JuImage(Assets.imageBgTm),
-                SizedBox(height: constraints.maxHeight * 0.1),
+                // SizedBox(height: constraints.maxHeight * 0.1),
                 Text(
                   _curTitle,
                   style: Theme.of(context).textTheme.headlineSmall!.copyWith(fontWeight: FontWeight.bold),
@@ -58,7 +61,7 @@ class LoginPage extends BasePage {
                         const InvitationCodeWidget(),
                         const SizedBox(height: 16.0),
                       ],
-                      ElevatedButton(
+                      ElevatedButton.icon(
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
                             '验证成功'.i();
@@ -69,14 +72,24 @@ class LoginPage extends BasePage {
                         },
                         style: ElevatedButton.styleFrom(
                           elevation: 0,
-                          backgroundColor: const Color(0xFF00BF6D),
+                          backgroundColor: const Color(0xFF00BF6D).withAlpha(ref.watch(loginProviderProvider).isLogining ? 120 : 255),
                           foregroundColor: Colors.white,
                           minimumSize: const Size(double.infinity, 48),
                           shape: const StadiumBorder(),
                         ),
-                        child: Text(loginOpr == LoginOpr.login ? S.current.login : S.current.validate),
+                        icon: ref.watch(loginProviderProvider).isLogining
+                            ? SizedBox(
+                                height: 16,
+                                width: 16,
+                                child: CircularProgressIndicator(
+                                  backgroundColor: Theme.of(context).primaryColor,
+                                  valueColor: AlwaysStoppedAnimation<Color>(Theme.of(context).primaryColorDark),
+                                ),
+                              )
+                            : null,
+                        label: Text(loginOpr == LoginOpr.login ? S.current.login : S.current.validate),
                       ),
-                      const SizedBox(height: 16.0),
+                      const SizedBox(height: 9.0),
                       if (loginOpr == LoginOpr.login) ...[
                         TextButton(
                           onPressed: () {
@@ -104,7 +117,7 @@ class LoginPage extends BasePage {
                               ],
                             ),
                             style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                                  color: Theme.of(context).textTheme.bodyLarge!.color!.withOpacity(0.64),
+                                  color: Theme.of(context).textTheme.bodyLarge!.color!.withAlpha(64),
                                 ),
                           ),
                         ),
@@ -117,7 +130,7 @@ class LoginPage extends BasePage {
                           child: Text(
                             '${S.current.have_account},${S.current.login}',
                             style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                                  color: Theme.of(context).textTheme.bodyLarge!.color!.withOpacity(0.64),
+                                  color: Theme.of(context).textTheme.bodyLarge!.color!.withAlpha(64),
                                 ),
                           ),
                         ),
@@ -126,9 +139,9 @@ class LoginPage extends BasePage {
                 ),
               ],
             ),
-          );
-        },
-      ),
+          ),
+        );
+      },
     );
   }
 

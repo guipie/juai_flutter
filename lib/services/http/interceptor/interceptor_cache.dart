@@ -9,17 +9,17 @@ import '../../../components/mouse_hover_item.dart';
 class CacheInterceptor extends Interceptor {
   final _cache = <Uri, Response>{};
 
-  @override
-  void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
-    final response = _cache[options.uri];
-    if (options.method.toLowerCase() == 'get' && response != null && response.data != null && response.data['code'] == 200) {
-      // 如果缓存中存在响应，则直接返回缓存的响应
-      handler.resolve(response);
-    } else {
-      // 否则，继续发送请求
-      handler.next(options);
-    }
-  }
+  // @override
+  // void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
+  //   final response = _cache[options.uri];
+  //   if (options.method.toLowerCase() == 'get' && response != null && response.data != null && response.data['code'] == 200) {
+  //     // 如果缓存中存在响应，则直接返回缓存的响应
+  //     handler.resolve(response);
+  //   } else {
+  //     // 否则，继续发送请求
+  //     handler.next(options);
+  //   }
+  // }
 
   @override
   void onResponse(Response response, ResponseInterceptorHandler handler) {

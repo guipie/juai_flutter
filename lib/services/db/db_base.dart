@@ -1,9 +1,13 @@
+import 'dart:async';
+
 import 'package:path/path.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:sqflite_common_ffi/sqflite_ffi.dart';
+import 'package:sqflite_common_ffi_web/sqflite_ffi_web.dart';
 import '../../base/base.dart';
 import '../../constants/enums/common_enum.dart';
-import 'chat_item.dart';
+import '../../constants/enums/conversation_enum.dart';
+import '../../models/aimodel/aimodel_model.dart';
+import '../../utils/helper/my_path_provider.dart';
+import '../../utils/helper/path.dart';
 import 'db_aimodel.dart';
 import 'db_chat.dart';
 import 'db_coversation.dart';
@@ -12,6 +16,7 @@ import 'db_dict.dart';
 import 'prompt_item.dart';
 
 export 'package:sqflite_common_ffi/sqflite_ffi.dart';
+import 'package:sqflite/sqflite.dart' as sqflite;
 
 class MyDbProvider {
   static void getInstance() {
@@ -19,13 +24,13 @@ class MyDbProvider {
     DictProvider.getInstance();
     DbChat();
     DbConversation();
-    DbConversationAiModel();
-    DbConversationPrompt();
+    DbAiModel();
+    DbPrompt();
   }
 }
 
 abstract class DbBase {
-  static const String _dbName = 'juai011522.db';
+  static const String _dbName = DbTables.dbName;
   static const int _newVersion = 1;
   static int _oldVersion = 0;
 
@@ -50,33 +55,39 @@ abstract class DbBase {
   onDowngrade(Database db, int oldVersion, int newVersion) {}
 
   DbBase() {
-    _initDatabase();
+    _database ?? _initDatabase();
   }
 
   ///创建数据库
   Future<Database> _initDatabase() async {
-    final appDocumentsDir = await getApplicationDocumentsDirectory();
-    var dbBasePath = join(appDocumentsDir.path, 'databases', _dbName);
-    if (Platform.isWindows || Platform.isLinux) {
-      databaseFactoryOrNull = null;
-      sqfliteFfiInit();
-      databaseFactory = databaseFactoryFfi;
-      dbBasePath = join(appDocumentsDir.path, 'databases', _dbName);
+    if (kIsWeb) {
+      databaseFactory = databaseFactoryFfiWeb;
     } else {
-      dbBasePath = join(await getDatabasesPath(), _dbName);
+      if (F.desktop) {
+        sqfliteFfiInit();
+        databaseFactory = databaseFactoryFfi;
+        var path = absolute(join(PathHelper().getHomePath, 'databases'));
+        await databaseFactory.setDatabasesPath(path);
+      }
     }
-    _database ??= await openDatabase(
-      dbBasePath,
-      version: _newVersion,
-      onUpgrade: (db, old, newV) {
-        _oldVersion = old;
-      },
-      onDowngrade: (db, old, newV) {
-        _oldVersion = old;
-      },
-      onCreate: onCreate,
-      readOnly: false,
-      singleInstance: true,
+    unawaited(databaseFactory.getDatabasesPath().then((value) {
+      debugPrint('sqlite地址：=== $value');
+    }));
+    // 数据库连接
+    _database ??= await databaseFactory.openDatabase(
+      _dbName,
+      options: OpenDatabaseOptions(
+        version: _newVersion,
+        onUpgrade: (db, old, newV) {
+          _oldVersion = old;
+        },
+        onDowngrade: (db, old, newV) {
+          _oldVersion = old;
+        },
+        onCreate: onCreate,
+        readOnly: false,
+        singleInstance: true,
+      ),
     );
 
     onReload(_database!, _newVersion);
@@ -109,9 +120,13 @@ abstract class DbBase {
         );
       }
     }
-
     return _database!;
   }
+
+  // Future<bool> addDiffColumns() async {
+
+  //   return true;
+  // }
 
   ///表是否存在
   Future<bool> tableExists() async {
@@ -123,26 +138,16 @@ abstract class DbBase {
   }
 
   ///表列是否存在
-  Future<bool> columnExists(String columnName) async {
-    var result = await _database!.rawQuery("""
-      SELECT sql FROM sqlite_master WHERE type='table' AND name='$tableName' COLLATE NOCASE limit 1
-    """);
-    var sql = result[0]['sql'] as String;
-    var startIndex = sql.indexOf('(') + 1;
-    var endIndex = sql.indexOf(')');
-    sql = sql.substring(startIndex, endIndex);
+  Future<bool> columnExists(String columnName, {Map<String, dynamic>? repeatMap}) async {
+    var result = await _database!.rawQuery("PRAGMA table_info('$tableName')");
+    return result.isNotEmpty && result.any((m) => m['name'].toString().toUpperCase() == columnName.toUpperCase());
+  }
 
-    var sqlList = sql.split(',').map((e) => e.trim()).toList();
-    var exists = false;
-    for (var j = 0; j < sqlList.length; j++) {
-      var rowStr = sqlList[j].trim().split(',').join('');
-      var colName = rowStr.split(' ')[0].trim();
-      if (colName == columnName) {
-        exists = true;
-        break;
-      }
-    }
-    return exists;
+  Future<Map<String, dynamic>> columnFilter(Map<String, Object?> maps) async {
+    var result = await _database!.rawQuery("PRAGMA table_info('$tableName')");
+    var cols = result.map((m) => m['name'].toString().toUpperCase()).toList();
+    maps = Map.fromEntries(maps.entries.where((e) => cols.contains(e.key.toUpperCase())));
+    return maps;
   }
 
   ///新增列
@@ -213,6 +218,7 @@ abstract class DbBase {
     if (idVal > 0 && await isExist({'id': _getIdVal(values)})) {
       return 0;
     }
+    values = await columnFilter(values);
     var insertData = <String, Object?>{};
     for (var element in values.entries) {
       if (element.value != null) insertData[element.key] = element.value;
@@ -229,6 +235,7 @@ abstract class DbBase {
     //   if (element.value.runtimeType == bool) insertData[element.key] = element.value.toString().toUpperCase() == 'TRUE' ? 1 : 0;
     // }
     var id = _getIdVal(values);
+    values = await columnFilter(values);
     var model = await findById(id);
     if (model != null) {
       return database.update(tableName, values, where: 'id=$id');
@@ -270,8 +277,10 @@ abstract class DbBase {
     var where = <String>[];
     for (var i = 0; i < keys.length; i++) {
       var key = keys[i];
-      if (whereData[key].runtimeType == String) {
+      if (whereData[key].runtimeType is String) {
         where.add("$key='${whereData[key]}'");
+      } else if (whereData[key].runtimeType is DateTime) {
+        where.add("date($key)='${DateUtil.formatDateObj(whereData[key]!, format: DateFormats.y_mo_d)}'");
       } else {
         where.add('$key=${whereData[key]}');
       }
@@ -292,27 +301,33 @@ abstract class DbBase {
     );
   }
 
+  updateCompleteStatus(int id) async {
+    return database.execute('UPDATE $tableName SET status="${ChatResStatusEnum.error.name}" WHERE id=$id and status="${ChatResStatusEnum.chatting.name}"');
+  }
+
   ///缓存的数据
   static final Map<String, List<Map<String, Object?>>> _findCache = {};
 
   ///根据id查询单个x
   Future<Map<String, Object?>?> findById(int id) async {
     var one = await find(where: {'id': id});
-    return one.isEmpty ? null : one.first;
+    if (one.isNotNullOrEmpty) return one!.first;
+    return null;
   }
 
   //根据查询条件判断是否存储记录
   Future<bool> isExist(Map<String, dynamic> where) async {
     var one = await find(where: where);
-    return one.isNotEmpty;
+    return one.isNotNullOrEmpty;
   }
 
   ///查找数据
-  Future<List<Map<String, Object?>>> find({
+  Future<List<Map<String, Object?>>?> find({
     Map<String, dynamic>? where,
     Map<String, SequenceEnum>? orderBy,
     int? page,
     int? pageSize,
+    bool isGetCache = true,
   }) async {
     var keys = where?.keys.toList() ?? [];
     var whereList = <String>[];
@@ -335,7 +350,7 @@ abstract class DbBase {
     var orderBysql = orderByList.join(' , ');
     var mapKey = '${tableName}_${sql}_page=${page}_pageSize=$pageSize';
 
-    var data = sql.isEmpty ? [] : (_findCache[mapKey] ?? []);
+    var data = sql.isEmpty || !isGetCache ? [] : (_findCache[mapKey] ?? []);
     if (data.isNotEmpty) {
       return _findCache[mapKey]!;
     }

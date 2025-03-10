@@ -15,7 +15,7 @@ class PromptReq with _$PromptReq {
     @Default(10) int pageSize,
     DateTime? lastCreate,
     String? searchKey,
-    @Default(PromptReqCategoryType.all) PromptReqCategoryType category,
+    @Default(PromptReqCategoryType.all) PromptReqCategoryType? category,
   }) = _PromptReq;
 
   factory PromptReq.fromJson(Map<String, dynamic> json) => _$PromptReqFromJson(json);

@@ -1,4 +1,7 @@
+import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter/cupertino.dart';
+
+import '../../base/base.dart';
 
 extension ExtensionWidget on Widget {
   Widget gesture(VoidCallback onPressed) {
@@ -60,6 +63,18 @@ extension ExtensionWidget on Widget {
     );
   }
 
+  Widget juContainer({double? maxWidth}) {
+    return F.pc
+        ? Container(
+            alignment: Alignment.center,
+            child: SizedBox(
+              width: (maxWidth ?? 400),
+              child: this,
+            ),
+          )
+        : this;
+  }
+
   Widget container({
     EdgeInsetsGeometry? padding,
     Color? color,
@@ -84,23 +99,25 @@ extension ExtensionWidget on Widget {
       child: this,
     );
   }
+
+  Widget get juCursor {
+    return InkWell(
+      mouseCursor: SystemMouseCursors.click,
+      child: this,
+    );
+  }
 }
 
 extension ExtensionContext on BuildContext {
-  Future<T?> cPushAndReplace<T, T0>(Widget widget,
-      {bool needLogin = false}) async {
-    return Navigator.of(this).pushReplacement<T, T0>(
-        CupertinoPageRoute(builder: (context) => widget));
+  Future<T?> cPushAndReplace<T, T0>(Widget widget, {bool needLogin = false}) async {
+    return Navigator.of(this).pushReplacement<T, T0>(CupertinoPageRoute(builder: (context) => widget));
   }
 
   Future<T?> cPush<T>(Widget widget, {bool needLogin = false}) async {
-    return Navigator.of(this)
-        .push<T>(CupertinoPageRoute(builder: (context) => widget));
+    return Navigator.of(this).push<T>(CupertinoPageRoute(builder: (context) => widget));
   }
 
-  Future<T?> cPushAndRemoveAll<T>(Widget widget,
-      {bool needLogin = false}) async {
-    return Navigator.of(this).pushAndRemoveUntil<T>(
-        CupertinoPageRoute(builder: (context) => widget), (route) => false);
+  Future<T?> cPushAndRemoveAll<T>(Widget widget, {bool needLogin = false}) async {
+    return Navigator.of(this).pushAndRemoveUntil<T>(CupertinoPageRoute(builder: (context) => widget), (route) => false);
   }
 }

@@ -7,9 +7,19 @@ extension ExtensionInt on int? {
     return SizedBox(width: toInt().toDouble());
   }
 
+  String toFixed({int length = 2}) {
+    return (this ?? 0).toStringAsFixed(length);
+  }
+
+  String toThousandsFixed({int length = 3}) {
+    return ((this ?? 0) / 1000).toStringAsFixed(length);
+  }
+
   int toInt() {
     return this ?? 0;
   }
+
+  bool get isGreaterThanZero => toInt() > 0;
 
   String toYMD() {
     return DateUtil.formatDateMs(toInt(), format: DateFormats.y_mo_d);

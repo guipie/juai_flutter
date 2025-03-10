@@ -6,7 +6,7 @@ import 'package:dio/dio.dart';
 import '../base/base.dart';
 import '../base/base_repository.dart';
 import '../constants/enums/conversation_enum.dart';
-import '../models/chat/chat_item_model.dart';
+import '../models/chat/chat_model.dart';
 import '../models/chat/request/chat_req_dto.dart';
 import '../models/chat/response/chat_res_dto.dart';
 import '../services/http/apis/chat.dart';
@@ -26,7 +26,7 @@ class ChatRepository extends BaseRepository<Object> {
     CancelToken? cancelToken,
   }) async {
     var response = await Api.response<ResponseBody>(
-      ApisChat.baseChat,
+      ApisChat.baseChatStream,
       options: Options(
         responseType: ResponseType.stream,
         headers: {'Accept': 'text/event-stream'},

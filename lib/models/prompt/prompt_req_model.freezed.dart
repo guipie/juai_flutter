@@ -21,7 +21,7 @@ return _PromptReq.fromJson(json);
 /// @nodoc
 mixin _$PromptReq {
 
- int get page => throw _privateConstructorUsedError; int get pageSize => throw _privateConstructorUsedError; DateTime? get lastCreate => throw _privateConstructorUsedError; String? get searchKey => throw _privateConstructorUsedError; PromptReqCategoryType get category => throw _privateConstructorUsedError;
+ int get page => throw _privateConstructorUsedError; int get pageSize => throw _privateConstructorUsedError; DateTime? get lastCreate => throw _privateConstructorUsedError; String? get searchKey => throw _privateConstructorUsedError; PromptReqCategoryType? get category => throw _privateConstructorUsedError;
 
 
 
@@ -42,7 +42,7 @@ abstract class $PromptReqCopyWith<$Res>  {
   factory $PromptReqCopyWith(PromptReq value, $Res Function(PromptReq) then) = _$PromptReqCopyWithImpl<$Res, PromptReq>;
 @useResult
 $Res call({
- int page, int pageSize, DateTime? lastCreate, String? searchKey, PromptReqCategoryType category
+ int page, int pageSize, DateTime? lastCreate, String? searchKey, PromptReqCategoryType? category
 });
 
 
@@ -60,14 +60,14 @@ class _$PromptReqCopyWithImpl<$Res,$Val extends PromptReq> implements $PromptReq
 
 /// Create a copy of PromptReq
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? page = null,Object? pageSize = null,Object? lastCreate = freezed,Object? searchKey = freezed,Object? category = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? page = null,Object? pageSize = null,Object? lastCreate = freezed,Object? searchKey = freezed,Object? category = freezed,}) {
   return _then(_value.copyWith(
 page: null == page ? _value.page : page // ignore: cast_nullable_to_non_nullable
 as int,pageSize: null == pageSize ? _value.pageSize : pageSize // ignore: cast_nullable_to_non_nullable
 as int,lastCreate: freezed == lastCreate ? _value.lastCreate : lastCreate // ignore: cast_nullable_to_non_nullable
 as DateTime?,searchKey: freezed == searchKey ? _value.searchKey : searchKey // ignore: cast_nullable_to_non_nullable
-as String?,category: null == category ? _value.category : category // ignore: cast_nullable_to_non_nullable
-as PromptReqCategoryType,
+as String?,category: freezed == category ? _value.category : category // ignore: cast_nullable_to_non_nullable
+as PromptReqCategoryType?,
   )as $Val);
 }
 
@@ -79,7 +79,7 @@ abstract class _$$PromptReqImplCopyWith<$Res> implements $PromptReqCopyWith<$Res
   factory _$$PromptReqImplCopyWith(_$PromptReqImpl value, $Res Function(_$PromptReqImpl) then) = __$$PromptReqImplCopyWithImpl<$Res>;
 @override @useResult
 $Res call({
- int page, int pageSize, DateTime? lastCreate, String? searchKey, PromptReqCategoryType category
+ int page, int pageSize, DateTime? lastCreate, String? searchKey, PromptReqCategoryType? category
 });
 
 
@@ -94,14 +94,14 @@ class __$$PromptReqImplCopyWithImpl<$Res> extends _$PromptReqCopyWithImpl<$Res, 
 
 /// Create a copy of PromptReq
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? page = null,Object? pageSize = null,Object? lastCreate = freezed,Object? searchKey = freezed,Object? category = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? page = null,Object? pageSize = null,Object? lastCreate = freezed,Object? searchKey = freezed,Object? category = freezed,}) {
   return _then(_$PromptReqImpl(
 page: null == page ? _value.page : page // ignore: cast_nullable_to_non_nullable
 as int,pageSize: null == pageSize ? _value.pageSize : pageSize // ignore: cast_nullable_to_non_nullable
 as int,lastCreate: freezed == lastCreate ? _value.lastCreate : lastCreate // ignore: cast_nullable_to_non_nullable
 as DateTime?,searchKey: freezed == searchKey ? _value.searchKey : searchKey // ignore: cast_nullable_to_non_nullable
-as String?,category: null == category ? _value.category : category // ignore: cast_nullable_to_non_nullable
-as PromptReqCategoryType,
+as String?,category: freezed == category ? _value.category : category // ignore: cast_nullable_to_non_nullable
+as PromptReqCategoryType?,
   ));
 }
 
@@ -120,7 +120,7 @@ class _$PromptReqImpl  with DiagnosticableTreeMixin implements _PromptReq {
 @override@JsonKey() final  int pageSize;
 @override final  DateTime? lastCreate;
 @override final  String? searchKey;
-@override@JsonKey() final  PromptReqCategoryType category;
+@override@JsonKey() final  PromptReqCategoryType? category;
 
 @override
 String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
@@ -158,12 +158,12 @@ Map<String, dynamic> toJson() {
 
 
 abstract class _PromptReq implements PromptReq {
-  const factory _PromptReq({final  int page, final  int pageSize, final  DateTime? lastCreate, final  String? searchKey, final  PromptReqCategoryType category}) = _$PromptReqImpl;
+  const factory _PromptReq({final  int page, final  int pageSize, final  DateTime? lastCreate, final  String? searchKey, final  PromptReqCategoryType? category}) = _$PromptReqImpl;
   
 
   factory _PromptReq.fromJson(Map<String, dynamic> json) = _$PromptReqImpl.fromJson;
 
-@override int get page;@override int get pageSize;@override DateTime? get lastCreate;@override String? get searchKey;@override PromptReqCategoryType get category;
+@override int get page;@override int get pageSize;@override DateTime? get lastCreate;@override String? get searchKey;@override PromptReqCategoryType? get category;
 /// Create a copy of PromptReq
 /// with the given fields replaced by the non-null parameter values.
 @override @JsonKey(includeFromJson: false, includeToJson: false)

@@ -14,7 +14,12 @@ class BaseRepository<T> {
     return (await Api.getList<T>(apiUrl ?? listApi!, queryParameters: req, fromJsonT: fromJsonT)).result ?? [];
   }
 
-  Future<T?> getDetail(String id, {String? apiUrl}) async {
+  Future<T?> getRouteDetail(String id, {String? apiUrl}) async {
+    assert(detailApi != null && fromJsonT != null, ' detailApi is null');
+    return (await Api.get<T>(apiUrl ?? detailApi! + id, fromJsonT: fromJsonT)).result;
+  }
+
+  Future<T?> getQueryDetail(String id, {String? apiUrl}) async {
     assert(detailApi != null && fromJsonT != null, ' detailApi is null');
     return (await Api.get<T>(apiUrl ?? detailApi!, queryParameters: {'id': id}, fromJsonT: fromJsonT)).result;
   }

@@ -40,6 +40,7 @@
   "copy_success": "Copy success",
   "share": "Share",
   "delete": "Delete",
+  "add": "Add",
   "delete_reminder": "Are you sure you want to delete this message?",
   "reminder": "Reminder",
   "conform_resend": "Are you sure you want to resend this message?",
@@ -173,5 +174,14 @@
   "collect": "Collect",
   "retry": "retry",
   "no_more_data": "no data to refresh",
-  "ju_switch": "switch"
+  "ju_switch": "switch",
+  "input": " input",
+  "output": " output",
+  "maximum": "maximum",
+  "least": "least",
+  "price": "Price",
+  "about": "About",
+  "exit": "Exit", 
+  "maxContext":"The maximum memory {context} context", 
+  "maxContext_extend": "No limit, if the maximum input memory is exceeded, it will be automatically intercepted"
 }

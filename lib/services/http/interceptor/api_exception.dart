@@ -52,7 +52,7 @@ class ApiException implements Exception {
         if (exception.error is SocketException) {
           return DisconnectException(-1, '网络未连接');
         } else {
-          return ApiException(-1, '连接错误');
+          return ApiException(-1, '网络连接错误');
         }
       case DioExceptionType.badCertificate:
         return ApiException(-1, '证书错误');

@@ -1,13 +1,13 @@
 targets:
   $default:
     builders:
-      freezed|freezed:
+      freezed:
         options:
           format: false
           copy_with: true
           equal: false
           map: false
-      json_serializable|json_serializable:
+      json_serializable:
         options:
           any_map: false
           checked: false

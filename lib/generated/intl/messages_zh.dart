@@ -20,8 +20,12 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'zh';
 
+  static String m0(context) => "最大记忆【${context}】个上下文";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "about": MessageLookupByLibrary.simpleMessage("关于"),
+        "add": MessageLookupByLibrary.simpleMessage("新建"),
         "add_prompt": MessageLookupByLibrary.simpleMessage("新增AI提示"),
         "alias_desc": MessageLookupByLibrary.simpleMessage("仅用于多个相同的服务商之间区分"),
         "alias_empty": MessageLookupByLibrary.simpleMessage("别名不能为空"),
@@ -84,6 +88,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "error_parse": MessageLookupByLibrary.simpleMessage("解析错误"),
         "error_timeout": MessageLookupByLibrary.simpleMessage("请求超时"),
         "error_unknown": MessageLookupByLibrary.simpleMessage("未知错误"),
+        "exit": MessageLookupByLibrary.simpleMessage("退出"),
         "feedback": MessageLookupByLibrary.simpleMessage("反馈"),
         "feedback_question": MessageLookupByLibrary.simpleMessage("问题反馈"),
         "forget_password": MessageLookupByLibrary.simpleMessage("忘记密码"),
@@ -112,6 +117,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "home_server": MessageLookupByLibrary.simpleMessage("服务"),
         "home_setting": MessageLookupByLibrary.simpleMessage("设置"),
         "home_square": MessageLookupByLibrary.simpleMessage("广场"),
+        "input": MessageLookupByLibrary.simpleMessage("输入"),
         "input_name": MessageLookupByLibrary.simpleMessage("请输入名称"),
         "input_text": MessageLookupByLibrary.simpleMessage("请输入内容"),
         "invitation_code": MessageLookupByLibrary.simpleMessage("邀请码"),
@@ -122,6 +128,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "is_responsing": MessageLookupByLibrary.simpleMessage("服务器正在回应..."),
         "ju_switch": MessageLookupByLibrary.simpleMessage("切换"),
         "language": MessageLookupByLibrary.simpleMessage("语言"),
+        "least": MessageLookupByLibrary.simpleMessage("最小"),
         "leave_cancel": MessageLookupByLibrary.simpleMessage("松开 取消"),
         "leave_send": MessageLookupByLibrary.simpleMessage("松开 发送"),
         "library": MessageLookupByLibrary.simpleMessage("工坊"),
@@ -129,6 +136,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "login": MessageLookupByLibrary.simpleMessage("登录"),
         "login_success": MessageLookupByLibrary.simpleMessage("登录成功"),
         "main_language": MessageLookupByLibrary.simpleMessage("简体中文"),
+        "maxContext": m0,
+        "maxContext_extend":
+            MessageLookupByLibrary.simpleMessage("不限制,超过最大输入记忆时，会自动截取"),
+        "maximum": MessageLookupByLibrary.simpleMessage("最大"),
         "model": MessageLookupByLibrary.simpleMessage("模型"),
         "models": MessageLookupByLibrary.simpleMessage("模型"),
         "more": MessageLookupByLibrary.simpleMessage("更多"),
@@ -155,9 +166,11 @@ class MessageLookup extends MessageLookupByLibrary {
             "设置 ChatGPT 的 API key 和 API Server"),
         "org_notrequired": MessageLookupByLibrary.simpleMessage("组织(选填)"),
         "other_set": MessageLookupByLibrary.simpleMessage("其他设置"),
+        "output": MessageLookupByLibrary.simpleMessage("输出"),
         "phone": MessageLookupByLibrary.simpleMessage("手机号"),
         "pin": MessageLookupByLibrary.simpleMessage("置顶"),
         "please_input": MessageLookupByLibrary.simpleMessage("请输入"),
+        "price": MessageLookupByLibrary.simpleMessage("价格"),
         "primary_color": MessageLookupByLibrary.simpleMessage("主题色"),
         "prompt_demo": MessageLookupByLibrary.simpleMessage(
             "示例:请根据我提供的信息，帮助我制作简历或优化简历。其中制作和优化的内容一定要围绕提供的信息进行，内容需突出个人亮点和特点，并按照时间顺序列出过往的工作经验，通过数据化等方式量化工作中的突出事迹和成绩，且整体内容要求简洁易懂、格式清晰，不能有语法错误。"),

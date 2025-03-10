@@ -21,7 +21,7 @@ return _ChatResDto.fromJson(json);
 /// @nodoc
 mixin _$ChatResDto {
 
-@JsonKey(name: 'conversationId') int get conversationId => throw _privateConstructorUsedError;@JsonKey(name: 'chatDbId') int get chatDbId => throw _privateConstructorUsedError;@JsonKey(name: 'text') String? get text => throw _privateConstructorUsedError;@JsonKey(name: 'role') String? get role => throw _privateConstructorUsedError;@JsonKey(name: 'reqNum') int? get reqNum => throw _privateConstructorUsedError;@JsonKey(name: 'resNum') int? get resNum => throw _privateConstructorUsedError;@JsonKey(name: 'msg') String? get msg => throw _privateConstructorUsedError;@JsonKey(name: 'status', fromJson: ChatResStatusEnum.fromJson, toJson: ChatResStatusEnum.toJson) ChatResStatusEnum get status => throw _privateConstructorUsedError;
+@JsonKey(name: 'conversationId') int get conversationId => throw _privateConstructorUsedError;@JsonKey(name: 'chatDbId') int get chatDbId => throw _privateConstructorUsedError;@JsonKey(name: 'text') String? get text => throw _privateConstructorUsedError;@JsonKey(name: 'role') String? get role => throw _privateConstructorUsedError;@JsonKey(name: 'reqNum') int? get reqNum => throw _privateConstructorUsedError;@JsonKey(name: 'resNum') int? get resNum => throw _privateConstructorUsedError;@JsonKey(name: 'msg') String? get msg => throw _privateConstructorUsedError;@JsonKey(name: 'status') ChatResStatusEnum get status => throw _privateConstructorUsedError;
 
 
 
@@ -42,7 +42,7 @@ abstract class $ChatResDtoCopyWith<$Res>  {
   factory $ChatResDtoCopyWith(ChatResDto value, $Res Function(ChatResDto) then) = _$ChatResDtoCopyWithImpl<$Res, ChatResDto>;
 @useResult
 $Res call({
-@JsonKey(name: 'conversationId') int conversationId,@JsonKey(name: 'chatDbId') int chatDbId,@JsonKey(name: 'text') String? text,@JsonKey(name: 'role') String? role,@JsonKey(name: 'reqNum') int? reqNum,@JsonKey(name: 'resNum') int? resNum,@JsonKey(name: 'msg') String? msg,@JsonKey(name: 'status', fromJson: ChatResStatusEnum.fromJson, toJson: ChatResStatusEnum.toJson) ChatResStatusEnum status
+@JsonKey(name: 'conversationId') int conversationId,@JsonKey(name: 'chatDbId') int chatDbId,@JsonKey(name: 'text') String? text,@JsonKey(name: 'role') String? role,@JsonKey(name: 'reqNum') int? reqNum,@JsonKey(name: 'resNum') int? resNum,@JsonKey(name: 'msg') String? msg,@JsonKey(name: 'status') ChatResStatusEnum status
 });
 
 
@@ -82,7 +82,7 @@ abstract class _$$ChatResDtoImplCopyWith<$Res> implements $ChatResDtoCopyWith<$R
   factory _$$ChatResDtoImplCopyWith(_$ChatResDtoImpl value, $Res Function(_$ChatResDtoImpl) then) = __$$ChatResDtoImplCopyWithImpl<$Res>;
 @override @useResult
 $Res call({
-@JsonKey(name: 'conversationId') int conversationId,@JsonKey(name: 'chatDbId') int chatDbId,@JsonKey(name: 'text') String? text,@JsonKey(name: 'role') String? role,@JsonKey(name: 'reqNum') int? reqNum,@JsonKey(name: 'resNum') int? resNum,@JsonKey(name: 'msg') String? msg,@JsonKey(name: 'status', fromJson: ChatResStatusEnum.fromJson, toJson: ChatResStatusEnum.toJson) ChatResStatusEnum status
+@JsonKey(name: 'conversationId') int conversationId,@JsonKey(name: 'chatDbId') int chatDbId,@JsonKey(name: 'text') String? text,@JsonKey(name: 'role') String? role,@JsonKey(name: 'reqNum') int? reqNum,@JsonKey(name: 'resNum') int? resNum,@JsonKey(name: 'msg') String? msg,@JsonKey(name: 'status') ChatResStatusEnum status
 });
 
 
@@ -118,7 +118,7 @@ as ChatResStatusEnum,
 @JsonSerializable()
 
 class _$ChatResDtoImpl  implements _ChatResDto {
-  const _$ChatResDtoImpl({@JsonKey(name: 'conversationId') required this.conversationId, @JsonKey(name: 'chatDbId') required this.chatDbId, @JsonKey(name: 'text') this.text, @JsonKey(name: 'role') this.role, @JsonKey(name: 'reqNum') this.reqNum, @JsonKey(name: 'resNum') this.resNum, @JsonKey(name: 'msg') this.msg, @JsonKey(name: 'status', fromJson: ChatResStatusEnum.fromJson, toJson: ChatResStatusEnum.toJson) required this.status});
+  const _$ChatResDtoImpl({@JsonKey(name: 'conversationId') required this.conversationId, @JsonKey(name: 'chatDbId') required this.chatDbId, @JsonKey(name: 'text') this.text, @JsonKey(name: 'role') this.role, @JsonKey(name: 'reqNum') this.reqNum, @JsonKey(name: 'resNum') this.resNum, @JsonKey(name: 'msg') this.msg, @JsonKey(name: 'status') required this.status});
 
   factory _$ChatResDtoImpl.fromJson(Map<String, dynamic> json) => _$$ChatResDtoImplFromJson(json);
 
@@ -129,7 +129,7 @@ class _$ChatResDtoImpl  implements _ChatResDto {
 @override@JsonKey(name: 'reqNum') final  int? reqNum;
 @override@JsonKey(name: 'resNum') final  int? resNum;
 @override@JsonKey(name: 'msg') final  String? msg;
-@override@JsonKey(name: 'status', fromJson: ChatResStatusEnum.fromJson, toJson: ChatResStatusEnum.toJson) final  ChatResStatusEnum status;
+@override@JsonKey(name: 'status') final  ChatResStatusEnum status;
 
 @override
 String toString() {
@@ -160,12 +160,12 @@ Map<String, dynamic> toJson() {
 
 
 abstract class _ChatResDto implements ChatResDto {
-  const factory _ChatResDto({@JsonKey(name: 'conversationId') required final  int conversationId, @JsonKey(name: 'chatDbId') required final  int chatDbId, @JsonKey(name: 'text') final  String? text, @JsonKey(name: 'role') final  String? role, @JsonKey(name: 'reqNum') final  int? reqNum, @JsonKey(name: 'resNum') final  int? resNum, @JsonKey(name: 'msg') final  String? msg, @JsonKey(name: 'status', fromJson: ChatResStatusEnum.fromJson, toJson: ChatResStatusEnum.toJson) required final  ChatResStatusEnum status}) = _$ChatResDtoImpl;
+  const factory _ChatResDto({@JsonKey(name: 'conversationId') required final  int conversationId, @JsonKey(name: 'chatDbId') required final  int chatDbId, @JsonKey(name: 'text') final  String? text, @JsonKey(name: 'role') final  String? role, @JsonKey(name: 'reqNum') final  int? reqNum, @JsonKey(name: 'resNum') final  int? resNum, @JsonKey(name: 'msg') final  String? msg, @JsonKey(name: 'status') required final  ChatResStatusEnum status}) = _$ChatResDtoImpl;
   
 
   factory _ChatResDto.fromJson(Map<String, dynamic> json) = _$ChatResDtoImpl.fromJson;
 
-@override@JsonKey(name: 'conversationId') int get conversationId;@override@JsonKey(name: 'chatDbId') int get chatDbId;@override@JsonKey(name: 'text') String? get text;@override@JsonKey(name: 'role') String? get role;@override@JsonKey(name: 'reqNum') int? get reqNum;@override@JsonKey(name: 'resNum') int? get resNum;@override@JsonKey(name: 'msg') String? get msg;@override@JsonKey(name: 'status', fromJson: ChatResStatusEnum.fromJson, toJson: ChatResStatusEnum.toJson) ChatResStatusEnum get status;
+@override@JsonKey(name: 'conversationId') int get conversationId;@override@JsonKey(name: 'chatDbId') int get chatDbId;@override@JsonKey(name: 'text') String? get text;@override@JsonKey(name: 'role') String? get role;@override@JsonKey(name: 'reqNum') int? get reqNum;@override@JsonKey(name: 'resNum') int? get resNum;@override@JsonKey(name: 'msg') String? get msg;@override@JsonKey(name: 'status') ChatResStatusEnum get status;
 /// Create a copy of ChatResDto
 /// with the given fields replaced by the non-null parameter values.
 @override @JsonKey(includeFromJson: false, includeToJson: false)

@@ -13,9 +13,13 @@ _$ChatReqDtoImpl _$$ChatReqDtoImplFromJson(Map<String, dynamic> json) =>
       conversationId: (json['conversationId'] as num).toInt(),
       message: json['message'] as String,
       model: json['model'] as String,
+      modelService: json['modelService'] as String,
+      maxContext: (json['maxContext'] as num).toInt(),
+      hisChatList: (json['hisChatList'] as List<dynamic>)
+          .map((e) => Map<String, String>.from(e as Map))
+          .toList(),
       chatDbId: (json['chatDbId'] as num?)?.toInt(),
       rolePrompt: json['rolePrompt'] as String?,
-      maxContext: (json['maxContext'] as num?)?.toInt(),
       useAsyncDb: json['useAsyncDb'] as bool? ?? false,
       options: json['options'] as Map<String, dynamic>?,
     );
@@ -25,9 +29,11 @@ Map<String, dynamic> _$$ChatReqDtoImplToJson(_$ChatReqDtoImpl instance) =>
       'conversationId': instance.conversationId,
       'message': instance.message,
       'model': instance.model,
+      'modelService': instance.modelService,
+      'maxContext': instance.maxContext,
+      'hisChatList': instance.hisChatList,
       'chatDbId': instance.chatDbId,
       'rolePrompt': instance.rolePrompt,
-      'maxContext': instance.maxContext,
       'useAsyncDb': instance.useAsyncDb,
       'options': instance.options,
     };

@@ -10,7 +10,8 @@ import '../../../components/form/icon_button.dart';
 import '../../../components/image/avatar.dart';
 import '../../../components/image/image.dart';
 import '../../../constants/enums/conversation_enum.dart';
-import '../../../models/chat/chat_item_model.dart';
+import '../../../models/chat/chat_model.dart';
+import '../../../utils/mydialog.dart';
 import '../../aimodel/widget/aimodel_widget.dart';
 import '../../home/view_model/home_view_model.dart';
 import '../../login/provider/login_provider.dart';
@@ -67,10 +68,7 @@ class ChatPage extends BasePage {
     var chatState = ref.watch(chatStateVMProvider);
     var myAvatar = ref.watch(curentUserProvider).avatar;
     cur = ref.watch(conversationStateVmProvider);
-    var receiveAvatar = Assets.imageAvatar;
-    if (cur!.current!.type == ConversationEnum.prompt)
-      receiveAvatar = cur!.prompt!.avatar ?? Assets.imageAvatar;
-    else if (cur!.current!.type == ConversationEnum.model) receiveAvatar = cur!.aiModel!.avatarUrl;
+    var receiveAvatar = (cur!.prompt?.avatar ?? cur!.aiModel?.avatarUrl) ?? Assets.imageAvatar;
     var sendBtn = chatState.sending
         ? ButtonSending(
             onPressed: () => ref.read(chatVmProvider.notifier).cancelSendMsg(),
@@ -91,7 +89,6 @@ class ChatPage extends BasePage {
             child: CustomScrollView(
               reverse: true,
               shrinkWrap: _shrinkWrap,
-              clipBehavior: Clip.none,
               scrollDirection: Axis.vertical,
               slivers: [
                 SliverList(
@@ -115,78 +112,103 @@ class ChatPage extends BasePage {
         Container(
           padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 0),
           decoration: BoxDecoration(
-            color: fl.FluentTheme.of(context).scaffoldBackgroundColor.withOpacity(0.3),
-            borderRadius: BorderRadius.circular(4),
-            border: Border.all(
-              color: themeData.pinedBgColor(),
-              width: 1,
+            // color: fl.FluentTheme.of(context).scaffoldBackgroundColor,
+            borderRadius: BorderRadius.circular(2),
+            border: Border(
+              top: BorderSide(color: themeData.pinedBgColor(), width: 0.5),
             ),
           ),
-          child: fl.Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
+          child: Column(
             children: [
-              fl.CommandBar(
-                overflowBehavior: fl.CommandBarOverflowBehavior.wrap,
-                primaryItems: [
-                  fl.CommandBarBuilderItem(
-                    builder: (context, mode, w) => Tooltip(
-                      message: S.current.ju_switch + S.current.models,
-                      child: w,
-                    ),
-                    wrappedItem: fl.CommandBarButton(
-                      icon: AimodelWidget.buildOptions(
-                        context,
-                        ref,
-                        cur!.aiModel!,
-                      ),
-                      onPressed: null,
-                    ),
+              TextField(
+                autofocus: true,
+                controller: inputController,
+                minLines: F.pc ? 4 : 1,
+                maxLines: 4,
+                cursorColor: fl.FluentTheme.of(context).accentColor,
+                decoration: const InputDecoration(
+                  isDense: true, // 减少额外填充
+                  border: OutlineInputBorder(
+                    borderSide: BorderSide.none,
+                    gapPadding: 0,
                   ),
-                  fl.CommandBarBuilderItem(
-                    builder: (context, mode, w) => Tooltip(
-                      message: S.current.clear_context,
-                      child: w,
-                    ),
-                    wrappedItem: fl.CommandBarButton(
-                      icon: fl.Icon(
-                        Icons.clear_all_outlined,
-                        size: 24,
-                        color: themeData.secondColor(),
-                      ),
-                      onPressed: () {},
-                    ),
-                  ),
-                ],
+                  hintText: '请输入您的问题',
+                  // hoverColor: fl.FluentTheme.of(context).activeColor,
+                ),
+                enabled: true,
+                onSubmitted: (_) => ref.read(chatVmProvider.notifier).sendMsg(inputController.text),
               ),
-              Container(
-                margin: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
-                decoration: BoxDecoration(
-                  color: fl.FluentTheme.of(context).scaffoldBackgroundColor,
-                  borderRadius: BorderRadius.circular(4),
-                  border: Border.all(
-                    color: themeData.pinedBgColor(),
-                    width: 1,
-                  ),
-                ),
-                child: TextField(
-                  autofocus: true,
-                  controller: inputController,
-                  minLines: F.pc ? 4 : 1,
-                  maxLines: 4,
-                  cursorColor: fl.FluentTheme.of(context).accentColor,
-                  decoration: InputDecoration(
-                    isDense: true, // 减少额外填充
-                    border: const OutlineInputBorder(
-                      borderSide: BorderSide.none,
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SizedBox(
+                    width: 0.5.sw,
+                    child: fl.CommandBar(
+                      overflowBehavior: fl.CommandBarOverflowBehavior.wrap,
+                      primaryItems: [
+                        fl.CommandBarBuilderItem(
+                          builder: (context, mode, w) => Tooltip(
+                            message: S.current.ju_switch + S.current.models,
+                            child: w,
+                          ),
+                          wrappedItem: fl.CommandBarButton(
+                            icon: AimodelWidget.buildOptions(
+                              context,
+                              ref,
+                              cur!.aiModel!,
+                              (model) => ref.read(conversationStateVmProvider.notifier).setCurrentModel(model),
+                            ),
+                            onPressed: null,
+                          ),
+                        ),
+                        fl.CommandBarBuilderItem(
+                          builder: (context, mode, w) => Tooltip(
+                            message: S.current.clear_context,
+                            child: w,
+                          ),
+                          wrappedItem: fl.CommandBarButton(
+                            icon: fl.Icon(
+                              Icons.clear_all_outlined,
+                              size: 24,
+                              color: themeData.secondColor(),
+                            ),
+                            onPressed: () {},
+                          ),
+                        ),
+                        fl.CommandBarBuilderItem(
+                          builder: (context, mode, w) => Tooltip(
+                            message: S.current.clear_context,
+                            child: w,
+                          ),
+                          wrappedItem: fl.CommandBarButton(
+                            label: Container(
+                              width: 26,
+                              height: 26,
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                                color: fl.FluentTheme.of(context).accentColor,
+                              ),
+                              child: const Text('2'),
+                            ),
+                            onPressed: () {
+                              Mydialog(
+                                  context: context,
+                                  itemStringList: ConversationState.maxContexts,
+                                  selectIndex: ConversationState.maxContexts.indexWhere((m) => m.val == cur!.current!.maxContext.toString()),
+                                  onBtnPressed: () {
+                                    Navigator.pop(context);
+                                  }).showSheetView();
+                            },
+                          ),
+                        ),
+                        // const fl.CommandBarSeparator(thickness: 0.5),
+                      ],
                     ),
-                    hintText: '请输入您的问题',
-                    suffix: sendBtn,
-                    hoverColor: fl.FluentTheme.of(context).activeColor,
                   ),
-                  enabled: true,
-                  onSubmitted: (_) => ref.read(chatVmProvider.notifier).sendMsg(inputController.text),
-                ),
+                  sendBtn,
+                ],
               ),
             ],
           ),

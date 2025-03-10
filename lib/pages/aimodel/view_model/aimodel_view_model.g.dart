@@ -8,23 +8,6 @@ part of 'aimodel_view_model.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$currentAiModelNotifierHash() =>
-    r'118adb91125b3d7eb9a3ffd38061cdda80f7af9a';
-
-/// See also [CurrentAiModelNotifier].
-@ProviderFor(CurrentAiModelNotifier)
-final currentAiModelNotifierProvider =
-    AutoDisposeNotifierProvider<CurrentAiModelNotifier, AiModelRes?>.internal(
-  CurrentAiModelNotifier.new,
-  name: r'currentAiModelNotifierProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$currentAiModelNotifierHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-typedef _$CurrentAiModelNotifier = AutoDisposeNotifier<AiModelRes?>;
 String _$aiModelVmHash() => r'4a517774e3b7e1634f851e8c5faa98d2008dac46';
 
 /// See also [AiModelVm].

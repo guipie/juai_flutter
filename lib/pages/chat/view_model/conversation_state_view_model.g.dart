@@ -9,7 +9,7 @@ part of 'conversation_state_view_model.dart';
 // **************************************************************************
 
 String _$conversationStateVmHash() =>
-    r'4c7a210d08adf0177293bfaaf88ac53e97c8e0d1';
+    r'a921450c160c212387dca277326d501b0afa26fe';
 
 /// See also [ConversationStateVm].
 @ProviderFor(ConversationStateVm)

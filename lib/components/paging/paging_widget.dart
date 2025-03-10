@@ -87,17 +87,19 @@ final class PagingWidget<D extends PagingData<I>, I> extends ConsumerWidget {
                 _ => const SizedBox.shrink(),
               },
             );
-            return EasyRefresh.builder(
+            return EasyRefresh(
               header: BezierCircleHeader(
                 triggerOffset: 40,
                 foregroundColor: fl.FluentTheme.of(context).accentColor,
                 backgroundColor: fl.FluentTheme.of(context).scaffoldBackgroundColor.withOpacity(0.4),
               ),
+              scrollController: ScrollController(),
               footer: BezierFooter(
                 triggerOffset: 40,
+                infiniteOffset: 0,
                 foregroundColor: fl.FluentTheme.of(context).accentColor,
                 backgroundColor: fl.FluentTheme.of(context).scaffoldBackgroundColor.withOpacity(0.4),
-                clamping: true,
+                // clamping: true,
                 showBalls: true,
                 spinInCenter: true,
                 onlySpin: true,
@@ -110,12 +112,10 @@ final class PagingWidget<D extends PagingData<I>, I> extends ConsumerWidget {
               ),
               onRefresh: () async => ref.refresh(futureRefreshable),
               onLoad: () async => await ref.read(notifierRefreshable).loadNext(),
-              childBuilder: (BuildContext context, ScrollPhysics physics) {
-                return SingleChildScrollView(
-                  padding: padding,
-                  child: content,
-                );
-              },
+              child: SingleChildScrollView(
+                padding: padding,
+                child: content,
+              ),
             );
           },
           // Loading state for the first page
@@ -128,7 +128,7 @@ final class PagingWidget<D extends PagingData<I>, I> extends ConsumerWidget {
             () async {
               if (e is ApiException && e.code == 401) {
                 await F.push(LoginPage());
-                if (!ref.read(curentUserProvider.notifier).isLogin) return;
+                if (!ref.read(curentUserProvider.notifier).isLogin()) return;
               }
               ref.read(notifierRefreshable).forceRefresh();
             },

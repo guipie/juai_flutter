@@ -32,7 +32,6 @@ class JuFormRow extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Ink(
       decoration: BoxDecoration(
-        color: fl.FluentTheme.of(context).activeColor,
         borderRadius: BorderRadius.circular(8),
       ),
       child: InkWell(
@@ -56,6 +55,7 @@ class JuFormRow extends ConsumerWidget {
               ),
               const Spacer(),
               right ?? const SizedBox.shrink(),
+              2.width(),
               if (isMustRight == true)
                 Icon(
                   Icons.arrow_forward_ios,

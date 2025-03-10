@@ -21,7 +21,7 @@ Map<String, dynamic> _$$PromptReqImplToJson(_$PromptReqImpl instance) =>
       'pageSize': instance.pageSize,
       'lastCreate': instance.lastCreate?.toIso8601String(),
       'searchKey': instance.searchKey,
-      'category': _$PromptReqCategoryTypeEnumMap[instance.category]!,
+      'category': _$PromptReqCategoryTypeEnumMap[instance.category],
     };
 
 const _$PromptReqCategoryTypeEnumMap = {

@@ -10,9 +10,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  analyzer: any
-  build: any
-  source_gen: any
+  build:
+  source_gen:
 
 dev_dependencies:
   flutter_test:

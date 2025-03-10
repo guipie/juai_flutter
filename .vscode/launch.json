@@ -5,18 +5,18 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "juai_flutter",
+      "name": "juai",
       "request": "launch",
       "type": "dart"
     },
     {
-      "name": "juai_flutter (profile mode)",
+      "name": "juai (profile mode)",
       "request": "launch",
       "type": "dart",
       "flutterMode": "profile"
     },
     {
-      "name": "juai_flutter (release mode)",
+      "name": "juai (release mode)",
       "request": "launch",
       "type": "dart",
       "flutterMode": "release"
@@ -40,12 +40,6 @@
       "request": "launch",
       "type": "dart",
       "flutterMode": "release"
-    },
-    {
-      "name": "openai",
-      "cwd": "pub\\openai",
-      "request": "launch",
-      "type": "dart"
     }
   ]
 }

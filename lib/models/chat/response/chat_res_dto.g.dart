@@ -17,7 +17,7 @@ _$ChatResDtoImpl _$$ChatResDtoImplFromJson(Map<String, dynamic> json) =>
       reqNum: (json['reqNum'] as num?)?.toInt(),
       resNum: (json['resNum'] as num?)?.toInt(),
       msg: json['msg'] as String?,
-      status: ChatResStatusEnum.fromJson((json['status'] as num).toInt()),
+      status: $enumDecode(_$ChatResStatusEnumEnumMap, json['status']),
     );
 
 Map<String, dynamic> _$$ChatResDtoImplToJson(_$ChatResDtoImpl instance) =>
@@ -29,5 +29,12 @@ Map<String, dynamic> _$$ChatResDtoImplToJson(_$ChatResDtoImpl instance) =>
       'reqNum': instance.reqNum,
       'resNum': instance.resNum,
       'msg': instance.msg,
-      'status': ChatResStatusEnum.toJson(instance.status),
+      'status': _$ChatResStatusEnumEnumMap[instance.status]!,
     };
+
+const _$ChatResStatusEnumEnumMap = {
+  ChatResStatusEnum.chatting: 'chatting',
+  ChatResStatusEnum.error: 'error',
+  ChatResStatusEnum.success: 'success',
+  ChatResStatusEnum.auth: 'auth',
+};

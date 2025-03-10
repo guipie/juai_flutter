@@ -21,7 +21,7 @@ return _LoginResModel.fromJson(json);
 /// @nodoc
 mixin _$LoginResModel {
 
-@JsonKey(name: 'account') String? get account => throw _privateConstructorUsedError;@JsonKey(name: 'nickName') String? get nickName => throw _privateConstructorUsedError;@JsonKey(name: 'avatar') String? get avatar => throw _privateConstructorUsedError;@JsonKey(name: 'phone') String? get phone => throw _privateConstructorUsedError;@JsonKey(name: 'email') String? get email => throw _privateConstructorUsedError;@JsonKey(name: 'remark') String? get remark => throw _privateConstructorUsedError;@JsonKey(name: 'sex') int? get sex => throw _privateConstructorUsedError;@JsonKey(name: 'tokenNum') int? get tokenNum => throw _privateConstructorUsedError;@JsonKey(name: 'payType') int? get payType => throw _privateConstructorUsedError;@JsonKey(name: 'userId') int? get userId => throw _privateConstructorUsedError;@JsonKey(name: 'refreshToken') String? get refreshToken => throw _privateConstructorUsedError;@JsonKey(name: 'accessToken') String? get accessToken => throw _privateConstructorUsedError;
+@JsonKey(name: 'account') String? get account => throw _privateConstructorUsedError;@JsonKey(name: 'nickName') String? get nickName => throw _privateConstructorUsedError;@JsonKey(name: 'avatar') String? get avatar => throw _privateConstructorUsedError;@JsonKey(name: 'phone') String? get phone => throw _privateConstructorUsedError;@JsonKey(name: 'email') String? get email => throw _privateConstructorUsedError;@JsonKey(name: 'remark') String? get remark => throw _privateConstructorUsedError;@JsonKey(name: 'sex') int? get sex => throw _privateConstructorUsedError;@JsonKey(name: 'tokenNum') int? get tokenNum => throw _privateConstructorUsedError;@JsonKey(name: 'payType') String? get payType => throw _privateConstructorUsedError;@JsonKey(name: 'userId') int? get userId => throw _privateConstructorUsedError;@JsonKey(name: 'refreshToken') String? get refreshToken => throw _privateConstructorUsedError;@JsonKey(name: 'accessToken') String? get accessToken => throw _privateConstructorUsedError;
 
 
 
@@ -42,7 +42,7 @@ abstract class $LoginResModelCopyWith<$Res>  {
   factory $LoginResModelCopyWith(LoginResModel value, $Res Function(LoginResModel) then) = _$LoginResModelCopyWithImpl<$Res, LoginResModel>;
 @useResult
 $Res call({
-@JsonKey(name: 'account') String? account,@JsonKey(name: 'nickName') String? nickName,@JsonKey(name: 'avatar') String? avatar,@JsonKey(name: 'phone') String? phone,@JsonKey(name: 'email') String? email,@JsonKey(name: 'remark') String? remark,@JsonKey(name: 'sex') int? sex,@JsonKey(name: 'tokenNum') int? tokenNum,@JsonKey(name: 'payType') int? payType,@JsonKey(name: 'userId') int? userId,@JsonKey(name: 'refreshToken') String? refreshToken,@JsonKey(name: 'accessToken') String? accessToken
+@JsonKey(name: 'account') String? account,@JsonKey(name: 'nickName') String? nickName,@JsonKey(name: 'avatar') String? avatar,@JsonKey(name: 'phone') String? phone,@JsonKey(name: 'email') String? email,@JsonKey(name: 'remark') String? remark,@JsonKey(name: 'sex') int? sex,@JsonKey(name: 'tokenNum') int? tokenNum,@JsonKey(name: 'payType') String? payType,@JsonKey(name: 'userId') int? userId,@JsonKey(name: 'refreshToken') String? refreshToken,@JsonKey(name: 'accessToken') String? accessToken
 });
 
 
@@ -71,7 +71,7 @@ as String?,remark: freezed == remark ? _value.remark : remark // ignore: cast_nu
 as String?,sex: freezed == sex ? _value.sex : sex // ignore: cast_nullable_to_non_nullable
 as int?,tokenNum: freezed == tokenNum ? _value.tokenNum : tokenNum // ignore: cast_nullable_to_non_nullable
 as int?,payType: freezed == payType ? _value.payType : payType // ignore: cast_nullable_to_non_nullable
-as int?,userId: freezed == userId ? _value.userId : userId // ignore: cast_nullable_to_non_nullable
+as String?,userId: freezed == userId ? _value.userId : userId // ignore: cast_nullable_to_non_nullable
 as int?,refreshToken: freezed == refreshToken ? _value.refreshToken : refreshToken // ignore: cast_nullable_to_non_nullable
 as String?,accessToken: freezed == accessToken ? _value.accessToken : accessToken // ignore: cast_nullable_to_non_nullable
 as String?,
@@ -86,7 +86,7 @@ abstract class _$$LoginResModelImplCopyWith<$Res> implements $LoginResModelCopyW
   factory _$$LoginResModelImplCopyWith(_$LoginResModelImpl value, $Res Function(_$LoginResModelImpl) then) = __$$LoginResModelImplCopyWithImpl<$Res>;
 @override @useResult
 $Res call({
-@JsonKey(name: 'account') String? account,@JsonKey(name: 'nickName') String? nickName,@JsonKey(name: 'avatar') String? avatar,@JsonKey(name: 'phone') String? phone,@JsonKey(name: 'email') String? email,@JsonKey(name: 'remark') String? remark,@JsonKey(name: 'sex') int? sex,@JsonKey(name: 'tokenNum') int? tokenNum,@JsonKey(name: 'payType') int? payType,@JsonKey(name: 'userId') int? userId,@JsonKey(name: 'refreshToken') String? refreshToken,@JsonKey(name: 'accessToken') String? accessToken
+@JsonKey(name: 'account') String? account,@JsonKey(name: 'nickName') String? nickName,@JsonKey(name: 'avatar') String? avatar,@JsonKey(name: 'phone') String? phone,@JsonKey(name: 'email') String? email,@JsonKey(name: 'remark') String? remark,@JsonKey(name: 'sex') int? sex,@JsonKey(name: 'tokenNum') int? tokenNum,@JsonKey(name: 'payType') String? payType,@JsonKey(name: 'userId') int? userId,@JsonKey(name: 'refreshToken') String? refreshToken,@JsonKey(name: 'accessToken') String? accessToken
 });
 
 
@@ -112,7 +112,7 @@ as String?,remark: freezed == remark ? _value.remark : remark // ignore: cast_nu
 as String?,sex: freezed == sex ? _value.sex : sex // ignore: cast_nullable_to_non_nullable
 as int?,tokenNum: freezed == tokenNum ? _value.tokenNum : tokenNum // ignore: cast_nullable_to_non_nullable
 as int?,payType: freezed == payType ? _value.payType : payType // ignore: cast_nullable_to_non_nullable
-as int?,userId: freezed == userId ? _value.userId : userId // ignore: cast_nullable_to_non_nullable
+as String?,userId: freezed == userId ? _value.userId : userId // ignore: cast_nullable_to_non_nullable
 as int?,refreshToken: freezed == refreshToken ? _value.refreshToken : refreshToken // ignore: cast_nullable_to_non_nullable
 as String?,accessToken: freezed == accessToken ? _value.accessToken : accessToken // ignore: cast_nullable_to_non_nullable
 as String?,
@@ -138,7 +138,7 @@ class _$LoginResModelImpl  implements _LoginResModel {
 @override@JsonKey(name: 'remark') final  String? remark;
 @override@JsonKey(name: 'sex') final  int? sex;
 @override@JsonKey(name: 'tokenNum') final  int? tokenNum;
-@override@JsonKey(name: 'payType') final  int? payType;
+@override@JsonKey(name: 'payType') final  String? payType;
 @override@JsonKey(name: 'userId') final  int? userId;
 @override@JsonKey(name: 'refreshToken') final  String? refreshToken;
 @override@JsonKey(name: 'accessToken') final  String? accessToken;
@@ -172,12 +172,12 @@ Map<String, dynamic> toJson() {
 
 
 abstract class _LoginResModel implements LoginResModel {
-  const factory _LoginResModel({@JsonKey(name: 'account') final  String? account, @JsonKey(name: 'nickName') final  String? nickName, @JsonKey(name: 'avatar') final  String? avatar, @JsonKey(name: 'phone') final  String? phone, @JsonKey(name: 'email') final  String? email, @JsonKey(name: 'remark') final  String? remark, @JsonKey(name: 'sex') final  int? sex, @JsonKey(name: 'tokenNum') final  int? tokenNum, @JsonKey(name: 'payType') final  int? payType, @JsonKey(name: 'userId') final  int? userId, @JsonKey(name: 'refreshToken') final  String? refreshToken, @JsonKey(name: 'accessToken') final  String? accessToken}) = _$LoginResModelImpl;
+  const factory _LoginResModel({@JsonKey(name: 'account') final  String? account, @JsonKey(name: 'nickName') final  String? nickName, @JsonKey(name: 'avatar') final  String? avatar, @JsonKey(name: 'phone') final  String? phone, @JsonKey(name: 'email') final  String? email, @JsonKey(name: 'remark') final  String? remark, @JsonKey(name: 'sex') final  int? sex, @JsonKey(name: 'tokenNum') final  int? tokenNum, @JsonKey(name: 'payType') final  String? payType, @JsonKey(name: 'userId') final  int? userId, @JsonKey(name: 'refreshToken') final  String? refreshToken, @JsonKey(name: 'accessToken') final  String? accessToken}) = _$LoginResModelImpl;
   
 
   factory _LoginResModel.fromJson(Map<String, dynamic> json) = _$LoginResModelImpl.fromJson;
 
-@override@JsonKey(name: 'account') String? get account;@override@JsonKey(name: 'nickName') String? get nickName;@override@JsonKey(name: 'avatar') String? get avatar;@override@JsonKey(name: 'phone') String? get phone;@override@JsonKey(name: 'email') String? get email;@override@JsonKey(name: 'remark') String? get remark;@override@JsonKey(name: 'sex') int? get sex;@override@JsonKey(name: 'tokenNum') int? get tokenNum;@override@JsonKey(name: 'payType') int? get payType;@override@JsonKey(name: 'userId') int? get userId;@override@JsonKey(name: 'refreshToken') String? get refreshToken;@override@JsonKey(name: 'accessToken') String? get accessToken;
+@override@JsonKey(name: 'account') String? get account;@override@JsonKey(name: 'nickName') String? get nickName;@override@JsonKey(name: 'avatar') String? get avatar;@override@JsonKey(name: 'phone') String? get phone;@override@JsonKey(name: 'email') String? get email;@override@JsonKey(name: 'remark') String? get remark;@override@JsonKey(name: 'sex') int? get sex;@override@JsonKey(name: 'tokenNum') int? get tokenNum;@override@JsonKey(name: 'payType') String? get payType;@override@JsonKey(name: 'userId') int? get userId;@override@JsonKey(name: 'refreshToken') String? get refreshToken;@override@JsonKey(name: 'accessToken') String? get accessToken;
 /// Create a copy of LoginResModel
 /// with the given fields replaced by the non-null parameter values.
 @override @JsonKey(includeFromJson: false, includeToJson: false)

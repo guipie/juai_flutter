@@ -5,6 +5,7 @@ import '../generated/l10n.dart';
 /// year -> yyyy/yy   month -> MM/M    day -> dd/d
 /// hour -> HH/H      minute -> mm/m   second -> ss/s
 class DateFormats {
+  static String full_sss = 'yyyy-MM-dd HH:mm:ss:SSS';
   static String full = 'yyyy-MM-dd HH:mm:ss';
   static String y_mo_d_h_m = 'yyyy-MM-dd HH:mm';
   static String y_mo_d = 'yyyy-MM-dd';
@@ -75,9 +76,11 @@ class DateUtil {
 
   /// format date by date str.
   /// dateStr 日期字符串
-  static String formatDateStr(String dateStr, {bool? isUtc, String? format}) {
-    return formatDate(getDateTime(dateStr, isUtc: isUtc), format: format);
+  static String formatDateObj(Object dateStr, {bool? isUtc, String? format}) {
+    return formatDate(getDateTime(dateStr.toString(), isUtc: isUtc), format: format);
   }
+
+  static String get formatDateNow => formatDate(DateTime.now(), format: DateFormats.full_sss);
 
   /// format date by DateTime.
   /// format 转换格式(已提供常用格式 DateFormats，可以自定义格式：'yyyy/MM/dd HH:mm:ss')
@@ -86,7 +89,7 @@ class DateUtil {
   /// hour -> HH/H      minute -> mm/m   second -> ss/s
   static String formatDate(DateTime? dateTime, {String? format}) {
     if (dateTime == null) return '';
-    format = format ?? DateFormats.full;
+    format = format ?? DateFormats.full_sss;
     if (format.contains('yy')) {
       var year = dateTime.year.toString();
       if (format.contains('yyyy')) {

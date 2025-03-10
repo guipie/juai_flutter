@@ -5,6 +5,13 @@
 part of 'prompt_res_model.dart';
 
 // **************************************************************************
+// DBGenerator
+// **************************************************************************
+
+String get createTableSql =>
+    'CREATE TABLE IF NOT EXISTS prompt (  id INTEGER   PRIMARY KEY AUTOINCREMENT  ,type TEXT      ,title TEXT   NOT NULL    ,prompt TEXT   NOT NULL    ,maxContext INTEGER    ,promptExtend TEXT      ,avatar TEXT      ,file TEXT      ,initMessage TEXT      ,tags TEXT      ,model TEXT   NOT NULL    ,vendor TEXT      ,category TEXT      ,isGroup INTEGER   CHECK(isGroup=0 OR isGroup=1),createTime TEXT      DEFAULT (datetime(\'now\',\'localtime\')) )';
+
+// **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 

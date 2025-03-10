@@ -67,7 +67,7 @@ class PromptAddPage extends ConsumerWidget {
             ),
             LabelTextWidget(
               S.current.home_model,
-              Constant.defaultModel,
+              Constant.defaultModel.modelId,
               leading: Icon(
                 Icons.model_training_outlined,
                 color: Theme.of(context).colorScheme.primaryFixed,

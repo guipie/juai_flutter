@@ -15,7 +15,7 @@ class ChatResDto with _$ChatResDto {
     @JsonKey(name: 'reqNum') int? reqNum,
     @JsonKey(name: 'resNum') int? resNum,
     @JsonKey(name: 'msg') String? msg,
-    @JsonKey(name: 'status', fromJson: ChatResStatusEnum.fromJson, toJson: ChatResStatusEnum.toJson) required ChatResStatusEnum status,
+    @JsonKey(name: 'status') required ChatResStatusEnum status,
   }) = _ChatResDto;
 
   factory ChatResDto.fromJson(Map<String, Object?> json) => _$ChatResDtoFromJson(json);

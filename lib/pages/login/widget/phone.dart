@@ -12,7 +12,6 @@ class PhoneWidget extends ConsumerWidget {
       decoration: InputDecoration(
         hintText: S.current.phone,
         filled: true,
-        fillColor: const Color(0xFFF5FCF9),
         contentPadding: const EdgeInsets.symmetric(horizontal: 16.0 * 1.5, vertical: 8.0),
         border: const OutlineInputBorder(
           borderSide: BorderSide.none,

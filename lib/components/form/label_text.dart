@@ -34,31 +34,25 @@ class _LabelTextWidgetState extends State<LabelTextWidget> {
       ),
       child: InkWell(
         onTap: widget.onTap,
-        child: Row(
+        child: Wrap(
+          alignment: WrapAlignment.spaceBetween,
           children: [
-            4.width(),
-            widget.leading ?? const SizedBox.shrink(),
-            2.width(),
+            if (widget.leading != null) widget.leading!,
             Text(
               widget.label,
-              style: widget.weakenLabel ? Theme.of(context).textTheme.bodyMedium!.copyWith(color: Theme.of(context).textTheme.bodyMedium!.color!.withOpacity(0.6)) : Theme.of(context).textTheme.bodyMedium,
+              style: widget.weakenLabel ? Theme.of(context).textTheme.bodyMedium!.copyWith(color: Theme.of(context).textTheme.bodyMedium!.color!.withAlpha(122)) : Theme.of(context).textTheme.bodyMedium,
             ),
-            const Spacer(),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8),
-              child: Text(
-                widget.val,
-                style: Theme.of(context).textTheme.titleMedium,
-              ),
+              child: Text(widget.val),
             ),
-            widget.valExtend ?? const SizedBox.shrink(),
+            if (widget.valExtend != null) widget.valExtend!,
             if (widget.isShowDefaultTrailing)
               Icon(
                 Icons.arrow_forward_ios_outlined,
                 color: Theme.of(context).textTheme.titleSmall?.color,
                 size: 18,
               ),
-            4.width(),
           ],
         ),
       ),

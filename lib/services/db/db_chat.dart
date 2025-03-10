@@ -1,36 +1,36 @@
+import '../../base/base.dart';
 import '../../constants/enums/common_enum.dart';
 import '../../constants/enums/conversation_enum.dart';
-import '../../models/chat/chat_item_model.dart';
-import 'db_base.dart';
+import '../../models/chat/chat_model.dart';
 
 class DbChat extends DbBase {
   @override
-  String tableName = 'chat';
+  String tableName = DbTables.dbChat;
 
   @override
   Future<void> onCreate(Database db, int version) async {
-    await super.createTable(ChatItemModel(
-      id: 0,
-      conversationId: 0,
-      sendMsg: '',
-      receiveMsg: '',
-      sendId: 0,
-      receiveId: 0,
-      msgType: MsgTypeEnum.text,
-      type: ConversationEnum.chat,
-      createTime: DateTime.now(),
-      lastTime: DateTime.now(),
-      status: ChatResStatusEnum.error,
-    ).toJson());
+    await db.execute(ChatModel.tableSql);
   }
 
-  Future<List<ChatItemModel>> getChatList(int conversationId, int page) async {
+  Future<List<ChatModel>> getChatList(int conversationId, int page, {int pageSize = 20}) async {
     var data = await super.find(
       where: {'conversationId': conversationId},
       orderBy: {'createTime': SequenceEnum.desc},
-      page: 1,
-      pageSize: 20,
+      page: page,
+      pageSize: pageSize,
+      isGetCache: false,
     );
-    return data.map(ChatItemModel.fromJson).toList();
+    return data?.map(ChatModel.fromJson).toList() ?? [];
+  }
+
+  Future<List<ChatModel>> getSuccessChatList(int conversationId, int page, {int pageSize = 20}) async {
+    var data = await super.find(
+      where: {'conversationId': conversationId, 'status': ChatResStatusEnum.success},
+      orderBy: {'createTime': SequenceEnum.desc},
+      page: page,
+      pageSize: pageSize,
+      isGetCache: false,
+    );
+    return data?.map(ChatModel.fromJson).toList().reversed.toList() ?? [];
   }
 }

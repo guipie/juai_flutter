@@ -8,9 +8,11 @@ class ChatReqDto with _$ChatReqDto {
     required int conversationId,
     required String message,
     required String model,
+    required String modelService,
+    required int maxContext,
+    required List<Map<String, String>> hisChatList,
     int? chatDbId,
     String? rolePrompt,
-    int? maxContext,
     @Default(false) bool useAsyncDb,
     Map<String, dynamic>? options,
   }) = _ChatReqDto;

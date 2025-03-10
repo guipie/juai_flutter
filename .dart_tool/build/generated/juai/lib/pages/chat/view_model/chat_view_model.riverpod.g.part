@@ -2,12 +2,12 @@
 // RiverpodGenerator
 // **************************************************************************
 
-String _$chatVmHash() => r'176b1654c1955633fb8f637b7eedd4b2ea5c999e';
+String _$chatVmHash() => r'8f53a3c87b9d8d4e0077037b1e2a1f840ac6af6a';
 
 /// See also [ChatVm].
 @ProviderFor(ChatVm)
 final chatVmProvider = AutoDisposeAsyncNotifierProvider<ChatVm,
-    PagePagingData<ChatItemModel>>.internal(
+    PagePagingData<ChatModel>>.internal(
   ChatVm.new,
   name: r'chatVmProvider',
   debugGetCreateSourceHash:
@@ -16,6 +16,6 @@ final chatVmProvider = AutoDisposeAsyncNotifierProvider<ChatVm,
   allTransitiveDependencies: null,
 );
 
-typedef _$ChatVm = AutoDisposeAsyncNotifier<PagePagingData<ChatItemModel>>;
+typedef _$ChatVm = AutoDisposeAsyncNotifier<PagePagingData<ChatModel>>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

@@ -4,6 +4,7 @@ import '../../../base/base.dart';
 import '../../../constants/enums/user_enum.dart';
 import '../../home/home_page.dart';
 import '../../splash_page.dart';
+import '../login_page.dart';
 import '../model/login_model.dart';
 import '../model/login_req_model.dart';
 import '../model/login_res_model.dart';
@@ -50,6 +51,7 @@ class LoginProvider extends _$LoginProvider {
   }
 
   Future<void> toLoginRegister(LoginOpr opr) async {
+    if (state.isLogining) return;
     var req = LoginReqModel(account: state.textPhoneController.text);
     if (opr == LoginOpr.login) {
       req = req.copyWith(password: SM2.encrypt(state.textPasswordController.text, Constant.pubKey));
@@ -57,10 +59,20 @@ class LoginProvider extends _$LoginProvider {
       req = req.copyWith(code: state.textVcodeController.text);
       req = req.copyWith(u: state.textInvitationCodeController.text);
     }
-    var loginReponse = await Api.post<LoginResModel>(ApisUser.login, data: req.toJson(), fromJsonT: LoginResModel.fromJson);
+    state = state.copyWith(isLogining: true);
+    var loginReponse = await Api.post<LoginResModel>(ApisUser.login, data: req.toJson(), fromJsonT: LoginResModel.fromJson).catchError((err) {
+      state = state.copyWith(isLogining: false);
+      throw Future.error(err);
+    });
+    state = state.copyWith(isLogining: false);
     if (loginReponse.isSuccess && loginReponse.result!.accessToken!.isNotEmpty) {
       ref.read(curentUserProvider.notifier).setUser(loginReponse.result!);
       await ref.read(curentUserProvider.notifier).verifyLogin();
     }
+  }
+
+  Future<void> toLogout() async {
+    ref.read(curentUserProvider.notifier).clear();
+    await F.pushAndRemoveUntil(LoginPage());
   }
 }

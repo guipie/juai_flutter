@@ -1,29 +1,23 @@
 import '../../base/base.dart';
 import '../../constants/enums/common_enum.dart';
 import '../../constants/enums/conversation_enum.dart';
-import '../../models/chat/conversation_item_model.dart';
+import '../../models/chat/conversation_model.dart';
 import '../../models/prompt/prompt_res_model.dart';
 import 'db_base.dart';
 
-class DbConversationPrompt extends DbBase {
+class DbPrompt extends DbBase {
   @override
-  String tableName = 'conversation_prompt';
+  String tableName = DbTables.dbPrompt;
 
   @override
   Future<void> onCreate(Database db, int version) async {
-    await super.createTable(PromptRes(
-      id: 0,
-      maxContext: 0,
-      title: '',
-      prompt: '',
-      model: '',
-      createTime: DateTime.now(),
-    ).toJson());
+    await db.execute(PromptRes.tableSql);
   }
 
   Future<PromptRes> getConversationPrompt(int id) async {
     var data = await super.find(where: {'id': id});
-    return PromptRes.fromJson(data.first);
+    if (data.isNotNullOrEmpty) return PromptRes.fromJson(data!.first);
+    throw Exception('prompt is null');
   }
 
   Future<int> addConversationPrompt(PromptRes prompt) async {

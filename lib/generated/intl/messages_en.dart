@@ -20,8 +20,12 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
+  static String m0(context) => "The maximum memory ${context} context";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "about": MessageLookupByLibrary.simpleMessage("About"),
+        "add": MessageLookupByLibrary.simpleMessage("Add"),
         "add_prompt": MessageLookupByLibrary.simpleMessage("Add AI Prompt"),
         "alias_desc": MessageLookupByLibrary.simpleMessage(
             "Alias is used to distinguish different models"),
@@ -96,6 +100,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "error_parse": MessageLookupByLibrary.simpleMessage("error parse"),
         "error_timeout": MessageLookupByLibrary.simpleMessage("error timeout"),
         "error_unknown": MessageLookupByLibrary.simpleMessage("error unknown"),
+        "exit": MessageLookupByLibrary.simpleMessage("Exit"),
         "feedback": MessageLookupByLibrary.simpleMessage("Feedback"),
         "feedback_question": MessageLookupByLibrary.simpleMessage("Feedback"),
         "forget_password":
@@ -128,6 +133,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "home_server": MessageLookupByLibrary.simpleMessage("Server"),
         "home_setting": MessageLookupByLibrary.simpleMessage("Setting"),
         "home_square": MessageLookupByLibrary.simpleMessage("Square"),
+        "input": MessageLookupByLibrary.simpleMessage(" input"),
         "input_name":
             MessageLookupByLibrary.simpleMessage("Please enter a name"),
         "input_text": MessageLookupByLibrary.simpleMessage("Type text here"),
@@ -143,6 +149,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("The server is responding..."),
         "ju_switch": MessageLookupByLibrary.simpleMessage("switch"),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
+        "least": MessageLookupByLibrary.simpleMessage("least"),
         "leave_cancel": MessageLookupByLibrary.simpleMessage("Leave Cancel"),
         "leave_send": MessageLookupByLibrary.simpleMessage("Leave Send"),
         "library": MessageLookupByLibrary.simpleMessage("Library"),
@@ -151,6 +158,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "login_success":
             MessageLookupByLibrary.simpleMessage("sign in success"),
         "main_language": MessageLookupByLibrary.simpleMessage("English"),
+        "maxContext": m0,
+        "maxContext_extend": MessageLookupByLibrary.simpleMessage(
+            "No limit, if the maximum input memory is exceeded, it will be automatically intercepted"),
+        "maximum": MessageLookupByLibrary.simpleMessage("maximum"),
         "model": MessageLookupByLibrary.simpleMessage("Model"),
         "models": MessageLookupByLibrary.simpleMessage("Model"),
         "more": MessageLookupByLibrary.simpleMessage("More"),
@@ -183,9 +194,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "org_notrequired":
             MessageLookupByLibrary.simpleMessage("Organization(optional)"),
         "other_set": MessageLookupByLibrary.simpleMessage("Other Settings"),
+        "output": MessageLookupByLibrary.simpleMessage(" output"),
         "phone": MessageLookupByLibrary.simpleMessage("phone number"),
         "pin": MessageLookupByLibrary.simpleMessage("Pin"),
         "please_input": MessageLookupByLibrary.simpleMessage("Please type"),
+        "price": MessageLookupByLibrary.simpleMessage("Price"),
         "primary_color": MessageLookupByLibrary.simpleMessage("Primary Color"),
         "prompt_demo": MessageLookupByLibrary.simpleMessage(
             "Example:Please help me create or optimize my resume based on the information I provided. The content produced and optimized must be centered around the information provided. The content must highlight personal highlights and characteristics, list past work experience in chronological order, quantify outstanding deeds and achievements at work through digitization and other methods, and the overall content It is required to be concise and easy to understand, with clear format and no grammatical errors。"),

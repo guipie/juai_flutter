@@ -6,17 +6,17 @@ import '../../../components/mouse_hover_item.dart';
 import '../../../components/paging/paging_widget.dart';
 import '../../../components/text_tips.dart';
 import '../../../constants/enums/widget_enum.dart';
-import '../../../models/aimodel/aimodel_res_model.dart';
+import '../../../models/aimodel/aimodel_model.dart';
 import '../../../models/prompt/prompt_req_model.dart';
 import '../../chat/view_model/conversation_state_view_model.dart';
 import '../../chat/view_model/conversation_view_model.dart';
+import '../view_model/aimodel_state_view_model.dart';
 import '../view_model/aimodel_view_model.dart';
 import '../view_model/prompt_view_model.dart';
 
 class AimodelWidget {
   static Widget buildBody(BuildContext context, WidgetRef ref) {
     var promptReqProvider = ref.watch(promptReqNotifierProvider);
-    var currentAiModelProvider = ref.watch(currentAiModelNotifierProvider);
     return PagingWidget(
       provider: aiModelVmProvider,
       futureRefreshable: aiModelVmProvider.future,
@@ -37,35 +37,38 @@ class AimodelWidget {
               MouseHoverItem(
                 isRadius: false,
                 isSelected: promptReqProvider.category == PromptReqCategoryType.all,
-                onTap: () => ref.read(promptVMProvider.notifier).promptMenuClick(PromptReqCategoryType.all),
+                onTap: () => ref.watch(promptVMProvider.notifier).promptMenuClick(PromptReqCategoryType.all),
                 leadingWidget: Icon(
                   Icons.people,
                   size: 32,
                   color: Theme.of(context).colorScheme.primary,
                 ),
                 title: S.current.digitalMan + S.current.home_square,
+                isShowDefaultTrailing: false,
               ),
               MouseHoverItem(
                 isRadius: false,
                 isSelected: promptReqProvider.category == PromptReqCategoryType.my,
-                onTap: () => ref.read(promptVMProvider.notifier).promptMenuClick(PromptReqCategoryType.my),
+                onTap: () => ref.watch(promptVMProvider.notifier).promptMenuClick(PromptReqCategoryType.my),
                 leadingWidget: Icon(
                   Icons.person,
                   size: 32,
                   color: Theme.of(context).colorScheme.primary,
                 ),
                 title: S.current.home_my + S.current.digitalMan,
+                isShowDefaultTrailing: false,
               ),
               MouseHoverItem(
                 isRadius: false,
                 isSelected: promptReqProvider.category == PromptReqCategoryType.collection,
-                onTap: () => ref.read(promptVMProvider.notifier).promptMenuClick(PromptReqCategoryType.collection),
+                onTap: () => ref.watch(promptVMProvider.notifier).promptMenuClick(PromptReqCategoryType.collection),
                 leadingWidget: Icon(
                   Icons.category,
                   size: 32,
                   color: Theme.of(context).colorScheme.primary,
                 ),
                 title: S.current.home_my + S.current.collect,
+                isShowDefaultTrailing: false,
               ),
               8.height(),
               ...data.items.map(
@@ -79,10 +82,10 @@ class AimodelWidget {
                     ...e.models.map(
                       (item) => MouseHoverItem(
                         isRadius: false,
-                        isSelected: currentAiModelProvider?.modelId == item.modelId,
-                        onTap: () => ref.read(currentAiModelNotifierProvider.notifier).update(item),
+                        isSelected: ref.watch(aimodelStateViewModelProvider).currentAiModel?.modelId == item.modelId,
+                        onTap: () => ref.watch(aimodelStateViewModelProvider.notifier).setCurrentAiModel(currentAiModel: item, isToChat: true),
                         leadingPicUrl: item.avatarUrl,
-                        title: item.name,
+                        title: item.shortName ?? item.name,
                         subTitle: item.desc,
                         isShowDefaultTrailing: false,
                       ),
@@ -113,13 +116,14 @@ class AimodelWidget {
     );
   }
 
-  static Widget buildOptions(BuildContext context, WidgetRef ref, AiModelRes curModel, {Function()? onTap}) {
+  static Widget buildOptions(BuildContext context, WidgetRef ref, AiModel? curModel, Function(AiModel) onTap, {bool isEnableTxt = false}) {
     final itemsController = fl.FlyoutController();
     return fl.FlyoutTarget(
       controller: itemsController,
       child: JuAvatar(
-        curModel.avatarUrl,
+        curModel!.avatarUrl,
         size: WSize.small,
+        text: isEnableTxt ? curModel.name : null,
         onTap: () {
           itemsController.showFlyout(
             autoModeConfiguration: fl.FlyoutAutoConfiguration(
@@ -144,7 +148,7 @@ class AimodelWidget {
                         trailing: JuAvatar(model.avatarUrl),
                         value: model.name == curModel.name,
                         onChanged: (v) {
-                          ref.read(conversationStateVmProvider.notifier).setCurrentModel(model);
+                          onTap(model);
                           F.pop();
                         },
                       )

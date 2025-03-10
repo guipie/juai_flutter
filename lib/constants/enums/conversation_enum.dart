@@ -4,8 +4,6 @@ import 'enum_base.dart';
 
 enum ConversationEnum {
   chat,
-  prompt,
-  model,
   group,
 }
 
@@ -27,13 +25,13 @@ enum ChatResStatusEnum implements EnumBase {
     return status == ChatResStatusEnum.error || status == ChatResStatusEnum.auth;
   }
 
-  static ChatResStatusEnum fromJson(int json) {
-    return ChatResStatusEnum.values.firstWhere((e) => e.value == json);
-  }
+  // static ChatResStatusEnum fromJson(int json) {
+  //   return ChatResStatusEnum.values.firstWhere((e) => e.value == json);
+  // }
 
-  static int toJson(ChatResStatusEnum status) {
-    return status.value;
-  }
+  // static int toJson(ChatResStatusEnum status) {
+  //   return status.value;
+  // }
 }
 
 enum MsgTypeEnum { text, image, audio, video, file }

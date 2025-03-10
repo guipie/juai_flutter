@@ -34,9 +34,9 @@ class SpUtil {
   }
 
   /// get obj.
-  static T? getObj<T>(String key, T Function(Map v) f, {T? defValue}) {
+  static T? getObj<T>(String key, T Function(Map<String, Object?> v) f, {T? defValue}) {
     var map = getObject(key);
-    return map == null ? defValue : f(map);
+    return map == null ? defValue : f(map.cast());
   }
 
   /// get object.

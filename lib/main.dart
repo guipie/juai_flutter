@@ -12,8 +12,8 @@ ProviderContainer? globalRef;
 void main() async {
   await Initial.init();
   await S.load(getLocaleByCode(HiveBox().globalLanguageCode));
-  if (F.windows) {
-    debugPrint('IsWindows: ${F.windows}');
+  if (F.desktop) {
+    debugPrint('IsWindows: ${F.desktop}');
     // 必须加上这一行。
     await windowManager.ensureInitialized();
     var windowOptions = const WindowOptions(
@@ -40,7 +40,7 @@ void main() async {
       child: const MyApp(),
     ),
   );
-  if (Platform.isAndroid) {
+  if (!kIsWeb && Platform.isAndroid) {
     var style = const SystemUiOverlayStyle(statusBarColor: Colors.transparent);
     SystemChrome.setSystemUIOverlayStyle(style);
   }

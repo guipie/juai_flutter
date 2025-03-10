@@ -6,9 +6,19 @@ class LoginModel {
   final TextEditingController textVcodeController;
   final TextEditingController textPasswordController;
   final TextEditingController textInvitationCodeController;
-  LoginModel({this.invitaionCodeShow = false})
+  final bool isLogining;
+  LoginModel({this.invitaionCodeShow = false, this.isLogining = false})
       : textPhoneController = TextEditingController(),
         textVcodeController = TextEditingController(),
         textInvitationCodeController = TextEditingController(),
         textPasswordController = TextEditingController();
+  LoginModel copyWith({
+    bool? invitaionCodeShow,
+    bool? isLogining,
+  }) {
+    return LoginModel(
+      invitaionCodeShow: invitaionCodeShow ?? this.invitaionCodeShow,
+      isLogining: isLogining ?? this.isLogining,
+    );
+  }
 }

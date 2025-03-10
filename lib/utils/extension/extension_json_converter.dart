@@ -10,7 +10,7 @@ class DateTimeConverter implements JsonConverter<DateTime, String> {
 
   // 从JSON到Dart的转换：将日期字符串转换为DateTime对象。
   @override
-  DateTime fromJson(String json) => DateTime.parse(json);
+  DateTime fromJson(String json) => DateUtil.getDateTime(json) ?? DateTime.now();
 
   // 从Dart到JSON的转换：将DateTime对象转换为日期字符串。
   @override
@@ -20,12 +20,12 @@ class DateTimeConverter implements JsonConverter<DateTime, String> {
   }
 }
 
-class BoolConverter implements JsonConverter<bool, String> {
+class BoolConverter implements JsonConverter<bool?, dynamic> {
   const BoolConverter();
 
   @override
-  bool fromJson(String json) {
-    if (json.toLowerCase() == 'true' || json == '1')
+  bool? fromJson(dynamic json) {
+    if (json.toString().toLowerCase() == 'true' || json == '1')
       return true;
     else
       return false;
@@ -44,7 +44,7 @@ class EnumConverter<Enum> implements JsonConverter<Enum, String> {
 
   @override
   Enum fromJson(String json) {
-    return values.firstWhere((e) => e == json);
+    return values.firstWhere((e) => e.toString() == json);
   }
 
   @override

@@ -12,7 +12,7 @@ _$LoginResModelImpl _$$LoginResModelImplFromJson(Map<String, dynamic> json) =>
       remark: json['remark'] as String?,
       sex: (json['sex'] as num?)?.toInt(),
       tokenNum: (json['tokenNum'] as num?)?.toInt(),
-      payType: (json['payType'] as num?)?.toInt(),
+      payType: json['payType'] as String?,
       userId: (json['userId'] as num?)?.toInt(),
       refreshToken: json['refreshToken'] as String?,
       accessToken: json['accessToken'] as String?,

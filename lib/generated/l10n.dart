@@ -450,6 +450,16 @@ class S {
     );
   }
 
+  /// `Add`
+  String get add {
+    return Intl.message(
+      'Add',
+      name: 'add',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Are you sure you want to delete this message?`
   String get delete_reminder {
     return Intl.message(
@@ -1785,6 +1795,96 @@ class S {
     return Intl.message(
       'switch',
       name: 'ju_switch',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// ` input`
+  String get input {
+    return Intl.message(
+      ' input',
+      name: 'input',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// ` output`
+  String get output {
+    return Intl.message(
+      ' output',
+      name: 'output',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `maximum`
+  String get maximum {
+    return Intl.message(
+      'maximum',
+      name: 'maximum',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `least`
+  String get least {
+    return Intl.message(
+      'least',
+      name: 'least',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Price`
+  String get price {
+    return Intl.message(
+      'Price',
+      name: 'price',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `About`
+  String get about {
+    return Intl.message(
+      'About',
+      name: 'about',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Exit`
+  String get exit {
+    return Intl.message(
+      'Exit',
+      name: 'exit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The maximum memory {context} context`
+  String maxContext(Object context) {
+    return Intl.message(
+      'The maximum memory $context context',
+      name: 'maxContext',
+      desc: '',
+      args: [context],
+    );
+  }
+
+  /// `No limit, if the maximum input memory is exceeded, it will be automatically intercepted`
+  String get maxContext_extend {
+    return Intl.message(
+      'No limit, if the maximum input memory is exceeded, it will be automatically intercepted',
+      name: 'maxContext_extend',
       desc: '',
       args: [],
     );

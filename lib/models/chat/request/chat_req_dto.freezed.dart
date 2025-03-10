@@ -21,7 +21,7 @@ return _ChatReqDto.fromJson(json);
 /// @nodoc
 mixin _$ChatReqDto {
 
- int get conversationId => throw _privateConstructorUsedError; String get message => throw _privateConstructorUsedError; String get model => throw _privateConstructorUsedError; int? get chatDbId => throw _privateConstructorUsedError; String? get rolePrompt => throw _privateConstructorUsedError; int? get maxContext => throw _privateConstructorUsedError; bool get useAsyncDb => throw _privateConstructorUsedError; Map<String, dynamic>? get options => throw _privateConstructorUsedError;
+ int get conversationId => throw _privateConstructorUsedError; String get message => throw _privateConstructorUsedError; String get model => throw _privateConstructorUsedError; String get modelService => throw _privateConstructorUsedError; int get maxContext => throw _privateConstructorUsedError; List<Map<String, String>> get hisChatList => throw _privateConstructorUsedError; int? get chatDbId => throw _privateConstructorUsedError; String? get rolePrompt => throw _privateConstructorUsedError; bool get useAsyncDb => throw _privateConstructorUsedError; Map<String, dynamic>? get options => throw _privateConstructorUsedError;
 
 
 
@@ -42,7 +42,7 @@ abstract class $ChatReqDtoCopyWith<$Res>  {
   factory $ChatReqDtoCopyWith(ChatReqDto value, $Res Function(ChatReqDto) then) = _$ChatReqDtoCopyWithImpl<$Res, ChatReqDto>;
 @useResult
 $Res call({
- int conversationId, String message, String model, int? chatDbId, String? rolePrompt, int? maxContext, bool useAsyncDb, Map<String, dynamic>? options
+ int conversationId, String message, String model, String modelService, int maxContext, List<Map<String, String>> hisChatList, int? chatDbId, String? rolePrompt, bool useAsyncDb, Map<String, dynamic>? options
 });
 
 
@@ -60,15 +60,17 @@ class _$ChatReqDtoCopyWithImpl<$Res,$Val extends ChatReqDto> implements $ChatReq
 
 /// Create a copy of ChatReqDto
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? conversationId = null,Object? message = null,Object? model = null,Object? chatDbId = freezed,Object? rolePrompt = freezed,Object? maxContext = freezed,Object? useAsyncDb = null,Object? options = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? conversationId = null,Object? message = null,Object? model = null,Object? modelService = null,Object? maxContext = null,Object? hisChatList = null,Object? chatDbId = freezed,Object? rolePrompt = freezed,Object? useAsyncDb = null,Object? options = freezed,}) {
   return _then(_value.copyWith(
 conversationId: null == conversationId ? _value.conversationId : conversationId // ignore: cast_nullable_to_non_nullable
 as int,message: null == message ? _value.message : message // ignore: cast_nullable_to_non_nullable
 as String,model: null == model ? _value.model : model // ignore: cast_nullable_to_non_nullable
-as String,chatDbId: freezed == chatDbId ? _value.chatDbId : chatDbId // ignore: cast_nullable_to_non_nullable
+as String,modelService: null == modelService ? _value.modelService : modelService // ignore: cast_nullable_to_non_nullable
+as String,maxContext: null == maxContext ? _value.maxContext : maxContext // ignore: cast_nullable_to_non_nullable
+as int,hisChatList: null == hisChatList ? _value.hisChatList : hisChatList // ignore: cast_nullable_to_non_nullable
+as List<Map<String, String>>,chatDbId: freezed == chatDbId ? _value.chatDbId : chatDbId // ignore: cast_nullable_to_non_nullable
 as int?,rolePrompt: freezed == rolePrompt ? _value.rolePrompt : rolePrompt // ignore: cast_nullable_to_non_nullable
-as String?,maxContext: freezed == maxContext ? _value.maxContext : maxContext // ignore: cast_nullable_to_non_nullable
-as int?,useAsyncDb: null == useAsyncDb ? _value.useAsyncDb : useAsyncDb // ignore: cast_nullable_to_non_nullable
+as String?,useAsyncDb: null == useAsyncDb ? _value.useAsyncDb : useAsyncDb // ignore: cast_nullable_to_non_nullable
 as bool,options: freezed == options ? _value.options : options // ignore: cast_nullable_to_non_nullable
 as Map<String, dynamic>?,
   )as $Val);
@@ -82,7 +84,7 @@ abstract class _$$ChatReqDtoImplCopyWith<$Res> implements $ChatReqDtoCopyWith<$R
   factory _$$ChatReqDtoImplCopyWith(_$ChatReqDtoImpl value, $Res Function(_$ChatReqDtoImpl) then) = __$$ChatReqDtoImplCopyWithImpl<$Res>;
 @override @useResult
 $Res call({
- int conversationId, String message, String model, int? chatDbId, String? rolePrompt, int? maxContext, bool useAsyncDb, Map<String, dynamic>? options
+ int conversationId, String message, String model, String modelService, int maxContext, List<Map<String, String>> hisChatList, int? chatDbId, String? rolePrompt, bool useAsyncDb, Map<String, dynamic>? options
 });
 
 
@@ -97,15 +99,17 @@ class __$$ChatReqDtoImplCopyWithImpl<$Res> extends _$ChatReqDtoCopyWithImpl<$Res
 
 /// Create a copy of ChatReqDto
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? conversationId = null,Object? message = null,Object? model = null,Object? chatDbId = freezed,Object? rolePrompt = freezed,Object? maxContext = freezed,Object? useAsyncDb = null,Object? options = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? conversationId = null,Object? message = null,Object? model = null,Object? modelService = null,Object? maxContext = null,Object? hisChatList = null,Object? chatDbId = freezed,Object? rolePrompt = freezed,Object? useAsyncDb = null,Object? options = freezed,}) {
   return _then(_$ChatReqDtoImpl(
 conversationId: null == conversationId ? _value.conversationId : conversationId // ignore: cast_nullable_to_non_nullable
 as int,message: null == message ? _value.message : message // ignore: cast_nullable_to_non_nullable
 as String,model: null == model ? _value.model : model // ignore: cast_nullable_to_non_nullable
-as String,chatDbId: freezed == chatDbId ? _value.chatDbId : chatDbId // ignore: cast_nullable_to_non_nullable
+as String,modelService: null == modelService ? _value.modelService : modelService // ignore: cast_nullable_to_non_nullable
+as String,maxContext: null == maxContext ? _value.maxContext : maxContext // ignore: cast_nullable_to_non_nullable
+as int,hisChatList: null == hisChatList ? _value._hisChatList : hisChatList // ignore: cast_nullable_to_non_nullable
+as List<Map<String, String>>,chatDbId: freezed == chatDbId ? _value.chatDbId : chatDbId // ignore: cast_nullable_to_non_nullable
 as int?,rolePrompt: freezed == rolePrompt ? _value.rolePrompt : rolePrompt // ignore: cast_nullable_to_non_nullable
-as String?,maxContext: freezed == maxContext ? _value.maxContext : maxContext // ignore: cast_nullable_to_non_nullable
-as int?,useAsyncDb: null == useAsyncDb ? _value.useAsyncDb : useAsyncDb // ignore: cast_nullable_to_non_nullable
+as String?,useAsyncDb: null == useAsyncDb ? _value.useAsyncDb : useAsyncDb // ignore: cast_nullable_to_non_nullable
 as bool,options: freezed == options ? _value._options : options // ignore: cast_nullable_to_non_nullable
 as Map<String, dynamic>?,
   ));
@@ -118,16 +122,24 @@ as Map<String, dynamic>?,
 @JsonSerializable()
 
 class _$ChatReqDtoImpl  implements _ChatReqDto {
-  const _$ChatReqDtoImpl({required this.conversationId, required this.message, required this.model, this.chatDbId, this.rolePrompt, this.maxContext, this.useAsyncDb = false, final  Map<String, dynamic>? options}): _options = options;
+  const _$ChatReqDtoImpl({required this.conversationId, required this.message, required this.model, required this.modelService, required this.maxContext, required final  List<Map<String, String>> hisChatList, this.chatDbId, this.rolePrompt, this.useAsyncDb = false, final  Map<String, dynamic>? options}): _hisChatList = hisChatList,_options = options;
 
   factory _$ChatReqDtoImpl.fromJson(Map<String, dynamic> json) => _$$ChatReqDtoImplFromJson(json);
 
 @override final  int conversationId;
 @override final  String message;
 @override final  String model;
+@override final  String modelService;
+@override final  int maxContext;
+ final  List<Map<String, String>> _hisChatList;
+@override List<Map<String, String>> get hisChatList {
+  if (_hisChatList is EqualUnmodifiableListView) return _hisChatList;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_hisChatList);
+}
+
 @override final  int? chatDbId;
 @override final  String? rolePrompt;
-@override final  int? maxContext;
 @override@JsonKey() final  bool useAsyncDb;
  final  Map<String, dynamic>? _options;
 @override Map<String, dynamic>? get options {
@@ -141,7 +153,7 @@ class _$ChatReqDtoImpl  implements _ChatReqDto {
 
 @override
 String toString() {
-  return 'ChatReqDto(conversationId: $conversationId, message: $message, model: $model, chatDbId: $chatDbId, rolePrompt: $rolePrompt, maxContext: $maxContext, useAsyncDb: $useAsyncDb, options: $options)';
+  return 'ChatReqDto(conversationId: $conversationId, message: $message, model: $model, modelService: $modelService, maxContext: $maxContext, hisChatList: $hisChatList, chatDbId: $chatDbId, rolePrompt: $rolePrompt, useAsyncDb: $useAsyncDb, options: $options)';
 }
 
 
@@ -168,12 +180,12 @@ Map<String, dynamic> toJson() {
 
 
 abstract class _ChatReqDto implements ChatReqDto {
-  const factory _ChatReqDto({required final  int conversationId, required final  String message, required final  String model, final  int? chatDbId, final  String? rolePrompt, final  int? maxContext, final  bool useAsyncDb, final  Map<String, dynamic>? options}) = _$ChatReqDtoImpl;
+  const factory _ChatReqDto({required final  int conversationId, required final  String message, required final  String model, required final  String modelService, required final  int maxContext, required final  List<Map<String, String>> hisChatList, final  int? chatDbId, final  String? rolePrompt, final  bool useAsyncDb, final  Map<String, dynamic>? options}) = _$ChatReqDtoImpl;
   
 
   factory _ChatReqDto.fromJson(Map<String, dynamic> json) = _$ChatReqDtoImpl.fromJson;
 
-@override int get conversationId;@override String get message;@override String get model;@override int? get chatDbId;@override String? get rolePrompt;@override int? get maxContext;@override bool get useAsyncDb;@override Map<String, dynamic>? get options;
+@override int get conversationId;@override String get message;@override String get model;@override String get modelService;@override int get maxContext;@override List<Map<String, String>> get hisChatList;@override int? get chatDbId;@override String? get rolePrompt;@override bool get useAsyncDb;@override Map<String, dynamic>? get options;
 /// Create a copy of ChatReqDto
 /// with the given fields replaced by the non-null parameter values.
 @override @JsonKey(includeFromJson: false, includeToJson: false)

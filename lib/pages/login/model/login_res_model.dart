@@ -13,11 +13,10 @@ class LoginResModel with _$LoginResModel {
     @JsonKey(name: 'remark') String? remark,
     @JsonKey(name: 'sex') int? sex,
     @JsonKey(name: 'tokenNum') int? tokenNum,
-    @JsonKey(name: 'payType') int? payType,
+    @JsonKey(name: 'payType') String? payType,
     @JsonKey(name: 'userId') int? userId,
     @JsonKey(name: 'refreshToken') String? refreshToken,
     @JsonKey(name: 'accessToken') String? accessToken,
   }) = _LoginResModel;
-
   factory LoginResModel.fromJson(Map<String, Object?> json) => _$LoginResModelFromJson(json);
 }

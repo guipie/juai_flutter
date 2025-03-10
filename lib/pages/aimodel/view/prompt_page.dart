@@ -72,7 +72,7 @@ class PromptPage extends BasePage {
                               padding: fl.WidgetStatePropertyAll(fl.EdgeInsets.zero),
                             ),
                             child: Text(S.current.home_chat),
-                            onPressed: () => F.pushChat(ref, ConversationEnum.prompt, promptRes: m),
+                            onPressed: () => F.pushChat(ref, promptRes: m),
                           ),
                         ],
                       ),

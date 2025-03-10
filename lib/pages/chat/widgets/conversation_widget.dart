@@ -7,14 +7,14 @@ import '../../../components/form/input_search.dart';
 import '../../../components/image/avatar.dart';
 import '../../../components/image/image.dart';
 import '../../../components/paging/paging_widget.dart';
-import '../../../models/chat/conversation_item_model.dart';
+import '../../../models/chat/conversation_model.dart';
 import '../../../utils/hive_box.dart';
 import '../view_model/conversation_state_view_model.dart';
 import '../view_model/conversation_view_model.dart';
 
 class ConversationWidget {
   static Widget buildConversationItem(
-    ConversationItemModel item,
+    ConversationModel item,
     WidgetRef ref,
     BuildContext context, {
     VoidCallback? onClick,
@@ -28,8 +28,7 @@ class ConversationWidget {
             onPressed: (context) {
               debugPrint('SlidableAction-1');
             },
-            backgroundColor: Theme.of(context).primaryColor,
-            foregroundColor: Colors.white,
+            backgroundColor: fl.Colors.grey[30],
             icon: Icons.push_pin_outlined,
             padding: const EdgeInsets.symmetric(horizontal: 2),
           ),
@@ -37,13 +36,14 @@ class ConversationWidget {
             onPressed: (context) {
               ref.read(conversationVmProvider.notifier).deleteConversation(item.id!);
             },
-            backgroundColor: Colors.red,
+            foregroundColor: fl.Colors.grey[20],
             icon: Icons.delete,
             padding: const EdgeInsets.symmetric(horizontal: 2),
           ),
         ],
       ),
       child: fl.ListTile.selectable(
+        shape: const Border(bottom: BorderSide(width: 0.05)),
         leading: JuImage(
           item.avatar,
           width: 42,
@@ -65,14 +65,6 @@ class ConversationWidget {
         subtitle: Container(
           width: double.infinity,
           padding: const EdgeInsets.only(bottom: 8),
-          decoration: BoxDecoration(
-            border: Border(
-              bottom: BorderSide(
-                width: 0.5,
-                color: ref.watch(themeProvider).divideBgColor(),
-              ),
-            ),
-          ),
           child: fl.Text(
             item.desc ?? '',
             maxLines: 1,
@@ -86,7 +78,7 @@ class ConversationWidget {
         selectionMode: fl.ListTileSelectionMode.single,
         selected: ref.watch(conversationStateVmProvider).current?.id == item.id,
         onPressed: () {
-          F.pushChat(ref, item.type, conversation: item);
+          F.pushChat(ref, conversation: item);
           onClick?.call();
         },
         cursor: SystemMouseCursors.click,
@@ -165,52 +157,72 @@ class ConversationWidget {
       contentBuilder: (data, widgetCount, endItemView) {
         return Column(
           children: [
-            fl.TextBox(
-              onChanged: (text) => ref.read(conversationVmProvider.notifier).search(text),
-              unfocusedColor: Colors.transparent,
-              focusNode: FocusNode(skipTraversal: true),
-              prefix: const fl.Padding(padding: EdgeInsets.only(left: 10), child: fl.Icon(Icons.search, size: 18)),
-              suffix: fl.FlyoutTarget(
-                controller: itemsController,
-                child: fl.IconButton(
-                  iconButtonMode: fl.IconButtonMode.large,
-                  icon: const fl.Icon(
-                    Icons.add,
-                    size: 24,
+            Row(
+              children: [
+                Expanded(
+                  child: fl.TextBox(
+                    onChanged: (text) => ref.read(conversationStateVmProvider.notifier).setSearch(text),
+                    unfocusedColor: Colors.transparent,
+                    focusNode: FocusNode(skipTraversal: true),
+                    decoration: fl.WidgetStateProperty.all(
+                      const fl.BoxDecoration(border: fl.Border()),
+                    ),
+                    prefix: const fl.Padding(padding: EdgeInsets.only(left: 10), child: fl.Icon(Icons.search, size: 18)),
+                    placeholder: 'Search',
                   ),
-                  onPressed: () {
-                    itemsController.showFlyout(
-                        autoModeConfiguration: fl.FlyoutAutoConfiguration(
-                          preferredMode: fl.FlyoutPlacementMode.bottomLeft,
-                        ),
-                        additionalOffset: 0,
-                        navigatorKey: GlobalKey<NavigatorState>().currentState,
-                        builder: (context) {
-                          return fl.MenuFlyout(
-                            items: [
-                              fl.MenuFlyoutItem(
-                                text: Text(S.current.new_chat),
-                                onPressed: () => ref.read(conversationVmProvider.notifier).addRandomChat(),
-                              ),
-                              const fl.MenuFlyoutSeparator(),
-                              fl.MenuFlyoutItem(
-                                text: Text(S.current.btn_add + S.current.group_chat),
-                                onPressed: () {},
-                              ),
-                              const fl.MenuFlyoutSeparator(),
-                              fl.MenuFlyoutItem(
-                                text: Text(S.current.custom + S.current.home_chat),
-                                onPressed: () {},
-                              ),
-                              const fl.MenuFlyoutSeparator(),
-                            ],
-                          );
-                        });
-                  },
+                ),
+                fl.FlyoutTarget(
+                  controller: itemsController,
+                  child: IconButton(
+                    icon: const fl.Icon(
+                      Icons.add,
+                      size: 24,
+                    ),
+                    onPressed: () {
+                      itemsController.showFlyout(
+                          autoModeConfiguration: fl.FlyoutAutoConfiguration(
+                            preferredMode: fl.FlyoutPlacementMode.bottomLeft,
+                          ),
+                          additionalOffset: 0,
+                          // barrierDismissible: false,
+                          // dismissOnPointerMoveAway: true,
+                          navigatorKey: GlobalKey<NavigatorState>().currentState,
+                          builder: (context) {
+                            return fl.MenuFlyout(
+                              items: [
+                                fl.MenuFlyoutItem(
+                                  text: Text(S.current.add + S.current.home_chat),
+                                  onPressed: () => F.pushChat(ref),
+                                ),
+                                const fl.MenuFlyoutSeparator(),
+                                fl.MenuFlyoutItem(
+                                  text: Text(S.current.add + S.current.group_chat),
+                                  onPressed: () {},
+                                ),
+                                const fl.MenuFlyoutSeparator(),
+                                fl.MenuFlyoutItem(
+                                  text: Text(S.current.custom + S.current.home_chat),
+                                  onPressed: () {},
+                                ),
+                                const fl.MenuFlyoutSeparator(),
+                              ],
+                            );
+                          });
+                    },
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(
+              width: double.infinity,
+              child: fl.Button(
+                onPressed: () => F.pushChat(ref),
+                child: Text(
+                  S.current.add + S.current.home_chat,
+                  style: TextStyle(color: Theme.of(context).colorScheme.primary),
                 ),
               ),
-              placeholder: 'Search',
-            ),
+            ).juCursor,
             ...data.items
                 .map(
                   (e) => buildConversationItem(

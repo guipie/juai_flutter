@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 
 import '../../base/base.dart';
+import '../../constants/sp_keys.dart';
 import '../../models/api_res.dart';
 
 import 'http.dart';
@@ -67,7 +68,7 @@ class Api {
   }) async {
     options ??= Options(method: 'GET');
     options.headers!['version'] = Config.appVersion;
-    options.headers!['Authorization'] = SpUtil.getString(CacheKeys.accessToken, prefix: 'Bearer ');
+    options.headers!['Authorization'] = SpUtil.getString(SpKeys.accessToken, prefix: 'Bearer ');
     return httpRequest.responseDio(isErrorToast: isErrorToast).request<T>(
           path,
           data: data,

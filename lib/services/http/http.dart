@@ -3,6 +3,7 @@ import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 import '../../base/base.dart';
 import '../../constants/config.dart';
+import '../../constants/sp_keys.dart';
 import '../../models/api_res.dart';
 import 'interceptor/api_exception.dart';
 import 'interceptor/interceptor_cache.dart';
@@ -76,7 +77,7 @@ class Http {
     requestOptions.method = methodValues[method];
     requestOptions.headers ??= {};
     requestOptions.headers!['version'] = Config.appVersion;
-    requestOptions.headers!['Authorization'] = SpUtil.getString(CacheKeys.accessToken, prefix: 'Bearer ');
+    requestOptions.headers!['Authorization'] = SpUtil.getString(SpKeys.accessToken, prefix: 'Bearer ');
     try {
       if (showLoading) {
         //EasyLoading.show(status: 'loading...');

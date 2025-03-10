@@ -1,5 +1,8 @@
 {
   "svn.ignoreMissingSvnWarning": true,
   "java.configuration.updateBuildConfiguration": "interactive",
-  "nuxt.isNuxtApp": false
+  "nuxt.isNuxtApp": false,
+  "http.proxy": "http://127.0.0.1:7897",
+  "https.proxy": "https://127.0.0.1:7897",
+  "http.proxyStrictSSL": false
 }

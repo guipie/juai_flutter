@@ -21,7 +21,7 @@ return _Prompt.fromJson(json);
 /// @nodoc
 mixin _$PromptRes {
 
-@JsonKey(name: 'id') int get id => throw _privateConstructorUsedError;@JsonKey(name: 'type') String? get type => throw _privateConstructorUsedError;@JsonKey(name: 'title') String get title => throw _privateConstructorUsedError;@JsonKey(name: 'prompt') String get prompt => throw _privateConstructorUsedError;@JsonKey(name: 'maxContext') int? get maxContext => throw _privateConstructorUsedError;@JsonKey(name: 'promptExtend') String? get promptExtend => throw _privateConstructorUsedError;@JsonKey(name: 'avatar') String? get avatar => throw _privateConstructorUsedError;@JsonKey(name: 'file') String? get file => throw _privateConstructorUsedError;@JsonKey(name: 'initMessage') String? get initMessage => throw _privateConstructorUsedError;@JsonKey(name: 'tags') String? get tags => throw _privateConstructorUsedError;@JsonKey(name: 'model') String get model => throw _privateConstructorUsedError;@JsonKey(name: 'vendor') String? get vendor => throw _privateConstructorUsedError;@JsonKey(name: 'category') String? get category => throw _privateConstructorUsedError;@JsonKey(name: 'isGroup') bool? get isGroup => throw _privateConstructorUsedError;@JsonKey(name: 'createTime') DateTime? get createTime => throw _privateConstructorUsedError;
+@JuColumn(primaryKey: true, type: DbType.integer)@JsonKey(name: 'id') int get id => throw _privateConstructorUsedError;@JuColumn()@JsonKey(name: 'type') String? get type => throw _privateConstructorUsedError;@JuColumn(nullable: false)@JsonKey(name: 'title') String get title => throw _privateConstructorUsedError;@JuColumn(nullable: false)@JsonKey(name: 'prompt') String get prompt => throw _privateConstructorUsedError;@JuColumn(type: DbType.integer)@JsonKey(name: 'maxContext') int? get maxContext => throw _privateConstructorUsedError;@JuColumn()@JsonKey(name: 'promptExtend') String? get promptExtend => throw _privateConstructorUsedError;@JuColumn()@JsonKey(name: 'avatar') String? get avatar => throw _privateConstructorUsedError;@JuColumn()@JsonKey(name: 'file') String? get file => throw _privateConstructorUsedError;@JuColumn()@JsonKey(name: 'initMessage') String? get initMessage => throw _privateConstructorUsedError;@JuColumn()@JsonKey(name: 'tags') String? get tags => throw _privateConstructorUsedError;@JuColumn(nullable: false)@JsonKey(name: 'model') String get model => throw _privateConstructorUsedError;@JuColumn()@JsonKey(name: 'vendor') String? get vendor => throw _privateConstructorUsedError;@JuColumn()@JsonKey(name: 'category') String? get category => throw _privateConstructorUsedError;@JuColumn(type: DbType.bool)@JsonKey(name: 'isGroup') bool? get isGroup => throw _privateConstructorUsedError;@JuColumn(type: DbType.date)@JsonKey(name: 'createTime') DateTime? get createTime => throw _privateConstructorUsedError;
 
 
 
@@ -42,7 +42,7 @@ abstract class $PromptResCopyWith<$Res>  {
   factory $PromptResCopyWith(PromptRes value, $Res Function(PromptRes) then) = _$PromptResCopyWithImpl<$Res, PromptRes>;
 @useResult
 $Res call({
-@JsonKey(name: 'id') int id,@JsonKey(name: 'type') String? type,@JsonKey(name: 'title') String title,@JsonKey(name: 'prompt') String prompt,@JsonKey(name: 'maxContext') int? maxContext,@JsonKey(name: 'promptExtend') String? promptExtend,@JsonKey(name: 'avatar') String? avatar,@JsonKey(name: 'file') String? file,@JsonKey(name: 'initMessage') String? initMessage,@JsonKey(name: 'tags') String? tags,@JsonKey(name: 'model') String model,@JsonKey(name: 'vendor') String? vendor,@JsonKey(name: 'category') String? category,@JsonKey(name: 'isGroup') bool? isGroup,@JsonKey(name: 'createTime') DateTime? createTime
+@JuColumn(primaryKey: true, type: DbType.integer)@JsonKey(name: 'id') int id,@JuColumn()@JsonKey(name: 'type') String? type,@JuColumn(nullable: false)@JsonKey(name: 'title') String title,@JuColumn(nullable: false)@JsonKey(name: 'prompt') String prompt,@JuColumn(type: DbType.integer)@JsonKey(name: 'maxContext') int? maxContext,@JuColumn()@JsonKey(name: 'promptExtend') String? promptExtend,@JuColumn()@JsonKey(name: 'avatar') String? avatar,@JuColumn()@JsonKey(name: 'file') String? file,@JuColumn()@JsonKey(name: 'initMessage') String? initMessage,@JuColumn()@JsonKey(name: 'tags') String? tags,@JuColumn(nullable: false)@JsonKey(name: 'model') String model,@JuColumn()@JsonKey(name: 'vendor') String? vendor,@JuColumn()@JsonKey(name: 'category') String? category,@JuColumn(type: DbType.bool)@JsonKey(name: 'isGroup') bool? isGroup,@JuColumn(type: DbType.date)@JsonKey(name: 'createTime') DateTime? createTime
 });
 
 
@@ -89,7 +89,7 @@ abstract class _$$PromptImplCopyWith<$Res> implements $PromptResCopyWith<$Res> {
   factory _$$PromptImplCopyWith(_$PromptImpl value, $Res Function(_$PromptImpl) then) = __$$PromptImplCopyWithImpl<$Res>;
 @override @useResult
 $Res call({
-@JsonKey(name: 'id') int id,@JsonKey(name: 'type') String? type,@JsonKey(name: 'title') String title,@JsonKey(name: 'prompt') String prompt,@JsonKey(name: 'maxContext') int? maxContext,@JsonKey(name: 'promptExtend') String? promptExtend,@JsonKey(name: 'avatar') String? avatar,@JsonKey(name: 'file') String? file,@JsonKey(name: 'initMessage') String? initMessage,@JsonKey(name: 'tags') String? tags,@JsonKey(name: 'model') String model,@JsonKey(name: 'vendor') String? vendor,@JsonKey(name: 'category') String? category,@JsonKey(name: 'isGroup') bool? isGroup,@JsonKey(name: 'createTime') DateTime? createTime
+@JuColumn(primaryKey: true, type: DbType.integer)@JsonKey(name: 'id') int id,@JuColumn()@JsonKey(name: 'type') String? type,@JuColumn(nullable: false)@JsonKey(name: 'title') String title,@JuColumn(nullable: false)@JsonKey(name: 'prompt') String prompt,@JuColumn(type: DbType.integer)@JsonKey(name: 'maxContext') int? maxContext,@JuColumn()@JsonKey(name: 'promptExtend') String? promptExtend,@JuColumn()@JsonKey(name: 'avatar') String? avatar,@JuColumn()@JsonKey(name: 'file') String? file,@JuColumn()@JsonKey(name: 'initMessage') String? initMessage,@JuColumn()@JsonKey(name: 'tags') String? tags,@JuColumn(nullable: false)@JsonKey(name: 'model') String model,@JuColumn()@JsonKey(name: 'vendor') String? vendor,@JuColumn()@JsonKey(name: 'category') String? category,@JuColumn(type: DbType.bool)@JsonKey(name: 'isGroup') bool? isGroup,@JuColumn(type: DbType.date)@JsonKey(name: 'createTime') DateTime? createTime
 });
 
 
@@ -131,32 +131,39 @@ as DateTime?,
 /// @nodoc
 @JsonSerializable()
 
-class _$PromptImpl  implements _Prompt {
-   _$PromptImpl({@JsonKey(name: 'id') required this.id, @JsonKey(name: 'type') this.type, @JsonKey(name: 'title') required this.title, @JsonKey(name: 'prompt') required this.prompt, @JsonKey(name: 'maxContext') this.maxContext, @JsonKey(name: 'promptExtend') this.promptExtend, @JsonKey(name: 'avatar') this.avatar, @JsonKey(name: 'file') this.file, @JsonKey(name: 'initMessage') this.initMessage, @JsonKey(name: 'tags') this.tags, @JsonKey(name: 'model') required this.model, @JsonKey(name: 'vendor') this.vendor, @JsonKey(name: 'category') this.category, @JsonKey(name: 'isGroup') this.isGroup, @JsonKey(name: 'createTime') this.createTime});
+class _$PromptImpl  with DiagnosticableTreeMixin implements _Prompt {
+   _$PromptImpl({@JuColumn(primaryKey: true, type: DbType.integer)@JsonKey(name: 'id') required this.id, @JuColumn()@JsonKey(name: 'type') this.type, @JuColumn(nullable: false)@JsonKey(name: 'title') required this.title, @JuColumn(nullable: false)@JsonKey(name: 'prompt') required this.prompt, @JuColumn(type: DbType.integer)@JsonKey(name: 'maxContext') this.maxContext, @JuColumn()@JsonKey(name: 'promptExtend') this.promptExtend, @JuColumn()@JsonKey(name: 'avatar') this.avatar, @JuColumn()@JsonKey(name: 'file') this.file, @JuColumn()@JsonKey(name: 'initMessage') this.initMessage, @JuColumn()@JsonKey(name: 'tags') this.tags, @JuColumn(nullable: false)@JsonKey(name: 'model') required this.model, @JuColumn()@JsonKey(name: 'vendor') this.vendor, @JuColumn()@JsonKey(name: 'category') this.category, @JuColumn(type: DbType.bool)@JsonKey(name: 'isGroup') this.isGroup, @JuColumn(type: DbType.date)@JsonKey(name: 'createTime') this.createTime});
 
   factory _$PromptImpl.fromJson(Map<String, dynamic> json) => _$$PromptImplFromJson(json);
 
-@override@JsonKey(name: 'id') final  int id;
-@override@JsonKey(name: 'type') final  String? type;
-@override@JsonKey(name: 'title') final  String title;
-@override@JsonKey(name: 'prompt') final  String prompt;
-@override@JsonKey(name: 'maxContext') final  int? maxContext;
-@override@JsonKey(name: 'promptExtend') final  String? promptExtend;
-@override@JsonKey(name: 'avatar') final  String? avatar;
-@override@JsonKey(name: 'file') final  String? file;
-@override@JsonKey(name: 'initMessage') final  String? initMessage;
-@override@JsonKey(name: 'tags') final  String? tags;
-@override@JsonKey(name: 'model') final  String model;
-@override@JsonKey(name: 'vendor') final  String? vendor;
-@override@JsonKey(name: 'category') final  String? category;
-@override@JsonKey(name: 'isGroup') final  bool? isGroup;
-@override@JsonKey(name: 'createTime') final  DateTime? createTime;
+@override@JuColumn(primaryKey: true, type: DbType.integer)@JsonKey(name: 'id') final  int id;
+@override@JuColumn()@JsonKey(name: 'type') final  String? type;
+@override@JuColumn(nullable: false)@JsonKey(name: 'title') final  String title;
+@override@JuColumn(nullable: false)@JsonKey(name: 'prompt') final  String prompt;
+@override@JuColumn(type: DbType.integer)@JsonKey(name: 'maxContext') final  int? maxContext;
+@override@JuColumn()@JsonKey(name: 'promptExtend') final  String? promptExtend;
+@override@JuColumn()@JsonKey(name: 'avatar') final  String? avatar;
+@override@JuColumn()@JsonKey(name: 'file') final  String? file;
+@override@JuColumn()@JsonKey(name: 'initMessage') final  String? initMessage;
+@override@JuColumn()@JsonKey(name: 'tags') final  String? tags;
+@override@JuColumn(nullable: false)@JsonKey(name: 'model') final  String model;
+@override@JuColumn()@JsonKey(name: 'vendor') final  String? vendor;
+@override@JuColumn()@JsonKey(name: 'category') final  String? category;
+@override@JuColumn(type: DbType.bool)@JsonKey(name: 'isGroup') final  bool? isGroup;
+@override@JuColumn(type: DbType.date)@JsonKey(name: 'createTime') final  DateTime? createTime;
 
 @override
-String toString() {
+String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
   return 'PromptRes(id: $id, type: $type, title: $title, prompt: $prompt, maxContext: $maxContext, promptExtend: $promptExtend, avatar: $avatar, file: $file, initMessage: $initMessage, tags: $tags, model: $model, vendor: $vendor, category: $category, isGroup: $isGroup, createTime: $createTime)';
 }
 
+@override
+void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+  super.debugFillProperties(properties);
+  properties
+    ..add(DiagnosticsProperty('type', 'PromptRes'))
+    ..add(DiagnosticsProperty('id', id))..add(DiagnosticsProperty('type', type))..add(DiagnosticsProperty('title', title))..add(DiagnosticsProperty('prompt', prompt))..add(DiagnosticsProperty('maxContext', maxContext))..add(DiagnosticsProperty('promptExtend', promptExtend))..add(DiagnosticsProperty('avatar', avatar))..add(DiagnosticsProperty('file', file))..add(DiagnosticsProperty('initMessage', initMessage))..add(DiagnosticsProperty('tags', tags))..add(DiagnosticsProperty('model', model))..add(DiagnosticsProperty('vendor', vendor))..add(DiagnosticsProperty('category', category))..add(DiagnosticsProperty('isGroup', isGroup))..add(DiagnosticsProperty('createTime', createTime));
+}
 
 
 
@@ -181,12 +188,12 @@ Map<String, dynamic> toJson() {
 
 
 abstract class _Prompt implements PromptRes {
-   factory _Prompt({@JsonKey(name: 'id') required final  int id, @JsonKey(name: 'type') final  String? type, @JsonKey(name: 'title') required final  String title, @JsonKey(name: 'prompt') required final  String prompt, @JsonKey(name: 'maxContext') final  int? maxContext, @JsonKey(name: 'promptExtend') final  String? promptExtend, @JsonKey(name: 'avatar') final  String? avatar, @JsonKey(name: 'file') final  String? file, @JsonKey(name: 'initMessage') final  String? initMessage, @JsonKey(name: 'tags') final  String? tags, @JsonKey(name: 'model') required final  String model, @JsonKey(name: 'vendor') final  String? vendor, @JsonKey(name: 'category') final  String? category, @JsonKey(name: 'isGroup') final  bool? isGroup, @JsonKey(name: 'createTime') final  DateTime? createTime}) = _$PromptImpl;
+   factory _Prompt({@JuColumn(primaryKey: true, type: DbType.integer)@JsonKey(name: 'id') required final  int id, @JuColumn()@JsonKey(name: 'type') final  String? type, @JuColumn(nullable: false)@JsonKey(name: 'title') required final  String title, @JuColumn(nullable: false)@JsonKey(name: 'prompt') required final  String prompt, @JuColumn(type: DbType.integer)@JsonKey(name: 'maxContext') final  int? maxContext, @JuColumn()@JsonKey(name: 'promptExtend') final  String? promptExtend, @JuColumn()@JsonKey(name: 'avatar') final  String? avatar, @JuColumn()@JsonKey(name: 'file') final  String? file, @JuColumn()@JsonKey(name: 'initMessage') final  String? initMessage, @JuColumn()@JsonKey(name: 'tags') final  String? tags, @JuColumn(nullable: false)@JsonKey(name: 'model') required final  String model, @JuColumn()@JsonKey(name: 'vendor') final  String? vendor, @JuColumn()@JsonKey(name: 'category') final  String? category, @JuColumn(type: DbType.bool)@JsonKey(name: 'isGroup') final  bool? isGroup, @JuColumn(type: DbType.date)@JsonKey(name: 'createTime') final  DateTime? createTime}) = _$PromptImpl;
   
 
   factory _Prompt.fromJson(Map<String, dynamic> json) = _$PromptImpl.fromJson;
 
-@override@JsonKey(name: 'id') int get id;@override@JsonKey(name: 'type') String? get type;@override@JsonKey(name: 'title') String get title;@override@JsonKey(name: 'prompt') String get prompt;@override@JsonKey(name: 'maxContext') int? get maxContext;@override@JsonKey(name: 'promptExtend') String? get promptExtend;@override@JsonKey(name: 'avatar') String? get avatar;@override@JsonKey(name: 'file') String? get file;@override@JsonKey(name: 'initMessage') String? get initMessage;@override@JsonKey(name: 'tags') String? get tags;@override@JsonKey(name: 'model') String get model;@override@JsonKey(name: 'vendor') String? get vendor;@override@JsonKey(name: 'category') String? get category;@override@JsonKey(name: 'isGroup') bool? get isGroup;@override@JsonKey(name: 'createTime') DateTime? get createTime;
+@override@JuColumn(primaryKey: true, type: DbType.integer)@JsonKey(name: 'id') int get id;@override@JuColumn()@JsonKey(name: 'type') String? get type;@override@JuColumn(nullable: false)@JsonKey(name: 'title') String get title;@override@JuColumn(nullable: false)@JsonKey(name: 'prompt') String get prompt;@override@JuColumn(type: DbType.integer)@JsonKey(name: 'maxContext') int? get maxContext;@override@JuColumn()@JsonKey(name: 'promptExtend') String? get promptExtend;@override@JuColumn()@JsonKey(name: 'avatar') String? get avatar;@override@JuColumn()@JsonKey(name: 'file') String? get file;@override@JuColumn()@JsonKey(name: 'initMessage') String? get initMessage;@override@JuColumn()@JsonKey(name: 'tags') String? get tags;@override@JuColumn(nullable: false)@JsonKey(name: 'model') String get model;@override@JuColumn()@JsonKey(name: 'vendor') String? get vendor;@override@JuColumn()@JsonKey(name: 'category') String? get category;@override@JuColumn(type: DbType.bool)@JsonKey(name: 'isGroup') bool? get isGroup;@override@JuColumn(type: DbType.date)@JsonKey(name: 'createTime') DateTime? get createTime;
 /// Create a copy of PromptRes
 /// with the given fields replaced by the non-null parameter values.
 @override @JsonKey(includeFromJson: false, includeToJson: false)

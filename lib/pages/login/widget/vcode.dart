@@ -20,7 +20,6 @@ class _VcodeWidgetState extends ConsumerState<VcodeWidget> {
         decoration: InputDecoration(
           hintText: S.current.vcode,
           filled: true,
-          fillColor: const Color(0xFFF5FCF9),
           contentPadding: const EdgeInsets.symmetric(horizontal: 16.0 * 1.5, vertical: 4.0),
           border: const OutlineInputBorder(
             borderSide: BorderSide.none,

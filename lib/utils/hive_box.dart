@@ -3,7 +3,6 @@ import 'dart:ui';
 import 'package:hive_flutter/adapters.dart';
 
 import '../constants/theme.dart';
-import '../hive_bean/local_chat_history.dart';
 import '../hive_bean/openai_bean.dart';
 import '../hive_bean/supported_models.dart';
 
@@ -27,8 +26,6 @@ class HiveBox {
 
   Box<String> get appConfig => _appConfig;
 
-  Box<ChatParentItem> get chatHistory => _chatHistory;
-
   Box<AllModelBean> get openAIConfig => _openAIConfig;
 
   Box<String> get apiServerHistory => _apiServerHistory;
@@ -49,7 +46,6 @@ class HiveBox {
   late Box<String> _apiServerHistory;
   late Box<String> _geminiApiServerHistory;
   late Box<AllModelBean> _openAIConfig;
-  late Box<ChatParentItem> _chatHistory;
 
   static final HiveBox _instance = HiveBox._internal();
 
@@ -61,11 +57,9 @@ class HiveBox {
 
   Future<void> init() async {
     await Hive.initFlutter();
-    Hive.registerAdapter(ChatParentItemAdapter());
     Hive.registerAdapter(AllModelBeanAdapter());
     Hive.registerAdapter(SupportedModelsAdapter());
     _appConfig = await Hive.openBox(cAppConfig);
-    _chatHistory = await Hive.openBox(cChatHistory);
     _openAIConfig = await Hive.openBox(cOpenAIConfig);
     _apiServerHistory = await Hive.openBox(cApiServerHistory);
     _geminiApiServerHistory = await Hive.openBox(cGeminiApiServerHistory);
