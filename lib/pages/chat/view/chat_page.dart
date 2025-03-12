@@ -178,7 +178,7 @@ class ChatPage extends BasePage {
                         ),
                         fl.CommandBarBuilderItem(
                           builder: (context, mode, w) => Tooltip(
-                            message: S.current.clear_context,
+                            message: ConversationState.maxContexts.firstWhere((m) => m.val == cur!.current!.maxContext.toString()).label,
                             child: w,
                           ),
                           wrappedItem: fl.CommandBarButton(
@@ -190,15 +190,22 @@ class ChatPage extends BasePage {
                                 borderRadius: BorderRadius.circular(8),
                                 color: fl.FluentTheme.of(context).accentColor,
                               ),
-                              child: const Text('2'),
+                              child: Text(
+                                '${ref.watch(conversationStateVmProvider).current!.maxContext}',
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
                             ),
                             onPressed: () {
                               Mydialog(
                                   context: context,
                                   itemStringList: ConversationState.maxContexts,
                                   selectIndex: ConversationState.maxContexts.indexWhere((m) => m.val == cur!.current!.maxContext.toString()),
-                                  onBtnPressed: () {
-                                    Navigator.pop(context);
+                                  onSelected: (index, val) {
+                                    ref.read(conversationVmProvider.notifier).setConversationContext(cur!.current!.id!, val.toInt());
                                   }).showSheetView();
                             },
                           ),

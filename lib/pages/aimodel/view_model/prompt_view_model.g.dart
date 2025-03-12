@@ -24,7 +24,7 @@ final promptReqNotifierProvider =
 );
 
 typedef _$PromptReqNotifier = Notifier<PromptReq>;
-String _$promptVMHash() => r'30b909853f63d74fac1c6e600b22a0839536ae5c';
+String _$promptVMHash() => r'f6ca96550ea161c7f26aa8b70ef4ab8b2039f3ab';
 
 /// See also [PromptVM].
 @ProviderFor(PromptVM)

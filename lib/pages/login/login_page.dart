@@ -29,6 +29,7 @@ class LoginPage extends BasePage {
       builder: (context, constraints) {
         return Container(
           color: fl.FluentTheme.of(context).scaffoldBackgroundColor,
+          height: double.infinity,
           child: SingleChildScrollView(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Column(

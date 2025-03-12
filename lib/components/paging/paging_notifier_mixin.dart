@@ -23,7 +23,7 @@ abstract mixin class PagePagingNotifierMixin<T> implements PagingNotifierMixin<P
   @override
   Future<void> loadNext() async {
     final value = state.valueOrNull;
-    if (value == null) {
+    if (value == null || state.isLoading || state.isRefreshing || state.isReloading) {
       return;
     }
 

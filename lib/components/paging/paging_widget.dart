@@ -28,6 +28,7 @@ final class PagingWidget<D extends PagingData<I>, I> extends ConsumerWidget {
     required this.futureRefreshable,
     required this.notifierRefreshable,
     required this.contentBuilder,
+    this.scrollController,
     this.showSecondPageError = true,
     this.padding = const EdgeInsets.only(left: 16, top: 10, bottom: 20),
     super.key,
@@ -37,6 +38,7 @@ final class PagingWidget<D extends PagingData<I>, I> extends ConsumerWidget {
   final Refreshable<Future<D>> futureRefreshable;
   final Refreshable<PagingNotifierMixin<D, I>> notifierRefreshable;
   final EdgeInsetsGeometry padding;
+  final ScrollController? scrollController;
 
   /// Specifies a function that returns a widget to display when data is available.
   /// endItemView is a widget to detect when the last displayed item is visible.
@@ -93,13 +95,13 @@ final class PagingWidget<D extends PagingData<I>, I> extends ConsumerWidget {
                 foregroundColor: fl.FluentTheme.of(context).accentColor,
                 backgroundColor: fl.FluentTheme.of(context).scaffoldBackgroundColor.withOpacity(0.4),
               ),
-              scrollController: ScrollController(),
+              simultaneously: true,
               footer: BezierFooter(
-                triggerOffset: 40,
-                infiniteOffset: 0,
+                triggerOffset: 30,
+                // infiniteOffset: 0,
                 foregroundColor: fl.FluentTheme.of(context).accentColor,
                 backgroundColor: fl.FluentTheme.of(context).scaffoldBackgroundColor.withOpacity(0.4),
-                // clamping: true,
+                clamping: true,
                 showBalls: true,
                 spinInCenter: true,
                 onlySpin: true,
@@ -113,6 +115,7 @@ final class PagingWidget<D extends PagingData<I>, I> extends ConsumerWidget {
               onRefresh: () async => ref.refresh(futureRefreshable),
               onLoad: () async => await ref.read(notifierRefreshable).loadNext(),
               child: SingleChildScrollView(
+                controller: scrollController,
                 padding: padding,
                 child: content,
               ),

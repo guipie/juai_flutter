@@ -36,7 +36,15 @@ class Http {
   _setInterceptors(Dio dio, bool isErrorToast) {
     dio.interceptors.add(ErrorInterceptor(isErrorToast));
     dio.interceptors.add(CacheInterceptor());
-    dio.interceptors.add(PrettyDioLogger(requestHeader: true, requestBody: true, responseHeader: false, responseBody: true));
+    dio.interceptors.add(PrettyDioLogger(
+      requestHeader: true,
+      requestBody: true,
+      responseHeader: false,
+      responseBody: true,
+      error: true,
+      enabled: kDebugMode,
+      maxWidth: 500,
+    ));
   }
 
   Dio responseDio({bool isErrorToast = false}) {

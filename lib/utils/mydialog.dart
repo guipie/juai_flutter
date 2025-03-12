@@ -13,6 +13,7 @@ class Mydialog {
 
   /// 内容
   final String content;
+  final Widget? contentWidget;
 
   /// 按钮名称
   final String btnName;
@@ -63,7 +64,8 @@ class Mydialog {
   int selectIndex = 0;
 
   /// 选择item后回调
-  final ValueChanged<int>? onSelected;
+  // final ValueChanged<int, String>? onSelected;
+  final Function(int, String)? onSelected;
 
   Mydialog({
     required this.context,
@@ -86,37 +88,46 @@ class Mydialog {
     this.itemStringList = const [],
     this.selectIndex = 0,
     this.onSelected,
+    this.contentWidget,
   });
 
-  void showNoticeDialogWithOneButton() {
+  void showNoticeDialog() {
     _showGeneralDialog(
-        builder: (BuildContext context) {
-          return WillPopScope(
-            onWillPop: () {
-              return Future.value(backDismissible);
-            },
-            child: AnimatedPadding(
-              padding: padding ?? EdgeInsets.symmetric(horizontal: 0.2.sw, vertical: 24),
-              duration: const Duration(milliseconds: 100),
-              curve: Curves.decelerate,
-              child: MediaQuery.removeViewInsets(
-                removeLeft: true,
-                removeTop: true,
-                removeRight: true,
-                removeBottom: true,
-                context: context,
-                child: Center(
-                  child: Material(
-                    elevation: elevation,
-                    borderRadius: BorderRadius.circular(14),
-                    child: _noticeViewWithOneButton(),
-                  ),
+      builder: (BuildContext context) {
+        return WillPopScope(
+          onWillPop: () {
+            return Future.value(backDismissible);
+          },
+          child: AnimatedPadding(
+            padding: padding ?? EdgeInsets.symmetric(horizontal: 0.2.sw, vertical: 24),
+            duration: const Duration(milliseconds: 100),
+            curve: Curves.decelerate,
+            child: MediaQuery.removeViewInsets(
+              removeLeft: true,
+              removeTop: true,
+              removeRight: true,
+              removeBottom: true,
+              context: context,
+              child: Center(
+                child: Material(
+                  elevation: elevation,
+                  borderRadius: BorderRadius.circular(14),
+                  child: _noticeViewWithOneButton(),
                 ),
               ),
             ),
-          );
-        },
-        child: null);
+          ),
+        );
+      },
+      child: contentWidget == null
+          ? null
+          : AnimatedPadding(
+              padding: padding ?? EdgeInsets.symmetric(horizontal: 0.2.sw, vertical: 24),
+              duration: const Duration(milliseconds: 100),
+              curve: Curves.decelerate,
+              child: contentWidget!,
+            ),
+    );
   }
 
   void showNoticeDialogWithTwoButtons() {
@@ -165,7 +176,7 @@ class Mydialog {
       },
       barrierDismissible: barrierDismissible,
       barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
-      barrierColor: barrierColor ?? Colors.black54,
+      barrierColor: Theme.of(context).scaffoldBackgroundColor,
       transitionDuration: const Duration(milliseconds: 150),
       transitionBuilder: (BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation, Widget child) {
         return FadeTransition(
@@ -189,12 +200,8 @@ class Mydialog {
         mainAxisSize: MainAxisSize.min, //column自适应子控件的高度，不加这条默认会撑到最大
         children: <Widget>[
           _contentViewInOneButton(),
-          const Divider(
-            height: 1,
-            thickness: 1,
-            color: Color(0xFFEEEEEE),
-          ),
-          _bottomViewInOneButton(),
+          const fl.Divider(),
+          _clickView(btnName, btnColor, onBtnPressed),
         ],
       ),
     );
@@ -254,7 +261,6 @@ class Mydialog {
         children: <Widget>[
           _clickView(leftBtnName, leftBtnColor, onLeftBtnPressed),
           const VerticalDivider(
-            color: Color(0xFFEEEEEE),
             width: 1,
             thickness: 1,
           ),
@@ -269,31 +275,26 @@ class Mydialog {
       constraints: const BoxConstraints(minHeight: 44),
       margin: const EdgeInsets.only(top: 22, bottom: 20, left: 16, right: 16),
       alignment: Alignment.center,
-      child: Text(content, textAlign: TextAlign.center, style: const TextStyle(color: Color(0xFF333333), fontSize: 17, fontWeight: FontWeight.w400)),
-    );
-  }
-
-  Widget _bottomViewInOneButton() {
-    return SizedBox(
-      height: 43,
-      child: Row(
-        children: <Widget>[
-          _clickView(btnName, btnColor, onBtnPressed),
-        ],
+      child: Text(
+        content,
+        textAlign: TextAlign.center,
+        style: const TextStyle(
+          color: Color(0xFF333333),
+          fontSize: 17,
+          fontWeight: FontWeight.w400,
+        ),
       ),
     );
   }
 
   Widget _clickView(String btnName, Color textColor, Function()? btnClick) {
-    return Expanded(
-      child: GestureDetector(
-        behavior: HitTestBehavior.opaque,
-        onTap: btnClick,
-        child: Container(
-          height: 43,
-          alignment: Alignment.center,
-          child: Text(btnName, style: TextStyle(color: textColor, fontSize: 17, fontWeight: FontWeight.w400)),
-        ),
+    return GestureDetector(
+      behavior: HitTestBehavior.opaque,
+      onTap: () => {btnClick?.call(), Navigator.pop(context)},
+      child: Container(
+        height: 43,
+        alignment: Alignment.center,
+        child: Text(btnName, style: TextStyle(color: textColor, fontSize: 17, fontWeight: FontWeight.w400)),
       ),
     );
   }
@@ -301,6 +302,7 @@ class Mydialog {
   void showSheetView() {
     showModalBottomSheet(
         context: context,
+        backgroundColor: Theme.of(context).secondaryHeaderColor,
         // isScrollControlled: true,
         builder: (context) {
           return StatefulBuilder(
@@ -340,7 +342,6 @@ class Mydialog {
                         ),
                       ),
                       onPressed: () {
-                        if (onSelected != null) onSelected!(selectIndex);
                         Navigator.pop(context);
                       },
                     ),
@@ -378,7 +379,7 @@ class Mydialog {
       onTap: () {
         setMyState(() {
           selectIndex = index;
-          if (onSelected != null) onSelected!(selectIndex);
+          if (onSelected != null) onSelected!(selectIndex, itemStringList[index].val);
         });
         Navigator.pop(context);
       },

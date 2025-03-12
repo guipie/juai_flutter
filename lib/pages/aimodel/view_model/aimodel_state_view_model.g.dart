@@ -9,7 +9,7 @@ part of 'aimodel_state_view_model.dart';
 // **************************************************************************
 
 String _$aimodelStateViewModelHash() =>
-    r'65de1e3dd2a2312a23d08377ee1b79bd8d8f6277';
+    r'3c92071d54ead9961e582177e75cbea1d37a6125';
 
 /// See also [AimodelStateViewModel].
 @ProviderFor(AimodelStateViewModel)

@@ -39,6 +39,17 @@ class ConversationVm extends _$ConversationVm with PagePagingNotifierMixin<Conve
     });
   }
 
+  void setConversationContext(int conversationId, int val) {
+    state.whenData((value) {
+      var entity = value.items.firstWhere((element) => element.id == conversationId);
+      entity = entity.copyWith(maxContext: val);
+      var newValue = value.copyWith(items: value.items.map((con) => con.id == conversationId ? entity : con).toList());
+      state = AsyncValue.data(newValue);
+      ref.read(conversationStateVmProvider.notifier).setCurrentProperty(entity);
+      DbConversation().updateById(conversationId, {'maxContext': val});
+    });
+  }
+
   Future<void> addConversation(ConversationModel conversation, PromptRes? prompt) async {
     if (state.value?.items.any((element) => element.id == conversation.id) == true) return;
     await DbConversation().addConversation(conversation);

@@ -5,11 +5,19 @@ import '../../services/http/interceptor/api_exception.dart';
 
 var _logger = Logger(
   printer: PrettyPrinter(
+    colors: true, // 启用颜色
+    printEmojis: true, // 启用表情符号
+    lineLength: 120, // 每行的最大长度
+    // levelColors: {
+    //   Level.trace: AnsiColor.fg(AnsiColor.grey(0.5)), // 灰色
+    //   Level.debug: AnsiColor.fg(AnsiColor.blue(1.0)), // 蓝色
+    //   Level.info: AnsiColor.fg(AnsiColor.green(1.0)), // 绿色
+    //   Level.warning: AnsiColor.fg(AnsiColor.yellow(1.0)), // 黄色
+    //   Level.error: AnsiColor.fg(AnsiColor.red(1.0)), // 红色
+    //   Level.wtf: AnsiColor.fg(AnsiColor.magenta(1.0)), // 洋红色
+    // },
     methodCount: 2, // Number of method calls to be displayed
     errorMethodCount: 8, // Number of method calls if stacktrace is provided
-    lineLength: 120, // Width of the output
-    colors: true, // Colorful log messages
-    printEmojis: true, // Print an emoji for each log message
     // Should each log print contain a timestamp
     dateTimeFormat: DateTimeFormat.onlyTimeAndSinceStart,
   ),

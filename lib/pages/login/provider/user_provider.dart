@@ -42,7 +42,7 @@ class CurentUser extends _$CurentUser {
 
   Future<void> verifyLogin() async {
     if (isLogin()) {
-      ref.watch(aiModelVmProvider.notifier);
+      // ref.watch(aiModelVmProvider.notifier);
       if (F.isRootPage)
         F.pop();
       else

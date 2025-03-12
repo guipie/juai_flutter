@@ -9,6 +9,8 @@ import '../../../components/image/image.dart';
 import '../../../components/paging/paging_widget.dart';
 import '../../../models/chat/conversation_model.dart';
 import '../../../utils/hive_box.dart';
+import '../../aimodel/view_model/prompt_view_model.dart';
+import '../view_model/chat_view_model.dart';
 import '../view_model/conversation_state_view_model.dart';
 import '../view_model/conversation_view_model.dart';
 
@@ -197,12 +199,12 @@ class ConversationWidget {
                                 const fl.MenuFlyoutSeparator(),
                                 fl.MenuFlyoutItem(
                                   text: Text(S.current.add + S.current.group_chat),
-                                  onPressed: () {},
+                                  onPressed: () => ref.read(chatVmProvider.notifier).addGroupChat(),
                                 ),
                                 const fl.MenuFlyoutSeparator(),
                                 fl.MenuFlyoutItem(
                                   text: Text(S.current.custom + S.current.home_chat),
-                                  onPressed: () {},
+                                  onPressed: () => ref.read(promptVMProvider.notifier).promptAdd(context),
                                 ),
                                 const fl.MenuFlyoutSeparator(),
                               ],

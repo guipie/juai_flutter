@@ -15,7 +15,7 @@ part 'aimodel_state_view_model.g.dart';
 class AimodelStateViewModel extends _$AimodelStateViewModel {
   @override
   AimodelState build() {
-    return AimodelState(SpUtil.getObj(SpKeys.defaultModel, AiModel.fromJson)!);
+    return AimodelState(Constant.defaultModel);
   }
 
   void setCurrentAiModel({AiModel? currentAiModel, bool isToChat = false}) {

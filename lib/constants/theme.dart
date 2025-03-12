@@ -235,7 +235,7 @@ class LightTheme extends BaseTheme {
     return FluentThemeData(
       accentColor: primaryColor.toAccentColor(),
       visualDensity: VisualDensity.standard,
-      scaffoldBackgroundColor: Colors.grey[30],
+      // scaffoldBackgroundColor: Colors.white,
       cardColor: const Color(0xffF8F8FF),
       iconTheme: IconThemeData(color: Colors.grey[120], size: 24, opacity: 0.8),
       dividerTheme: const DividerThemeData(

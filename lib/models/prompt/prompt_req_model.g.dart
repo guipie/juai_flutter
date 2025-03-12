@@ -10,7 +10,6 @@ part of 'prompt_req_model.dart';
 
 _$PromptReqImpl _$$PromptReqImplFromJson(Map<String, dynamic> json) =>
     _$PromptReqImpl(
-      page: (json['page'] as num?)?.toInt() ?? 1,
       pageSize: (json['pageSize'] as num?)?.toInt() ?? 10,
       lastCreate: json['lastCreate'] == null
           ? null
@@ -23,7 +22,6 @@ _$PromptReqImpl _$$PromptReqImplFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$$PromptReqImplToJson(_$PromptReqImpl instance) =>
     <String, dynamic>{
-      'page': instance.page,
       'pageSize': instance.pageSize,
       'lastCreate': instance.lastCreate?.toIso8601String(),
       'searchKey': instance.searchKey,

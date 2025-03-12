@@ -102,6 +102,10 @@ class ChatVm extends _$ChatVm {
     state = state.whenData((value) => value.copyWith(items: value.items.where((element) => element.id != id).toList()));
   }
 
+  void addGroupChat() {
+    EasyLoading.showInfo('开发中,尽请期待');
+  }
+
   Future<void> sendMsg(String sendMsg, {int? chatDbId}) async {
     if (sendMsg.isEmpty) {
       return;

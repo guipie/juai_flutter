@@ -9,15 +9,31 @@ import '../view_model/prompt_view_model.dart';
 
 class PromptPage extends BasePage {
   const PromptPage({super.key});
+
   @override
+  // TODO: implement title
   String get title => S.current.digitalMan + S.current.home_square;
   @override
-  fl.Widget buildBody(fl.BuildContext context, WidgetRef ref) {
+  void initStateBase(WidgetRef ref) {
+    super.initStateBase(ref);
+    var scrollController = ref.read(scrollControllerProvider);
+    scrollController.addListener(() {
+      // 判断是否滚动到底部
+      if (scrollController.position.pixels >= scrollController.position.maxScrollExtent - 60) {
+        if (ref.read(promptVMProvider).isRefreshing || ref.read(promptVMProvider).isLoading) return;
+        ref.read(promptVMProvider.notifier).loadNext();
+      }
+    });
+  }
+
+  @override
+  Widget buildBody(BuildContext context, WidgetRef ref) {
     return PagingWidget(
       provider: promptVMProvider,
       futureRefreshable: promptVMProvider.future,
       notifierRefreshable: promptVMProvider.notifier,
       padding: const fl.EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      scrollController: ref.read(scrollControllerProvider),
       contentBuilder: (data, widgetCount, endItemView) {
         return Wrap(
           runSpacing: 12,

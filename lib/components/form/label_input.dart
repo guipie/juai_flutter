@@ -28,19 +28,16 @@ class _LabelInputWidgetState extends State<LabelInputWidget> {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.all(4),
-      decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.secondary,
-        borderRadius: const BorderRadius.all(Radius.circular(8)),
-      ),
       child: Row(
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8),
+            padding: const EdgeInsets.symmetric(vertical: 4),
             child: Text(
               widget.label,
               style: Theme.of(context).textTheme.titleMedium,
             ),
           ),
+          8.width(),
           Expanded(
             child: TextField(
               controller: _controller,
@@ -48,13 +45,16 @@ class _LabelInputWidgetState extends State<LabelInputWidget> {
                 hintText: widget.hintText,
                 hintStyle: Theme.of(context).textTheme.bodyMedium,
                 filled: true,
-                fillColor: Theme.of(context).colorScheme.secondary,
-                contentPadding: const EdgeInsets.symmetric(horizontal: 16.0 * 1.5, vertical: 16.0),
-                border: InputBorder.none,
+                contentPadding: const EdgeInsets.only(left: 8),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8.0),
+                  borderSide: BorderSide.none,
+                ),
                 suffixIcon: _controller.text.isNotEmpty
                     ? IconButton(
                         icon: const Icon(Icons.clear),
                         onPressed: _controller.clear,
+                        iconSize: 13,
                       )
                     : null,
               ),

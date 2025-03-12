@@ -11,7 +11,7 @@ enum PromptReqCategoryType {
 @freezed
 class PromptReq with _$PromptReq {
   const factory PromptReq({
-    @Default(1) int page,
+    // @Default(1) int page,
     @Default(10) int pageSize,
     DateTime? lastCreate,
     String? searchKey,

@@ -28,6 +28,10 @@ class ConversationStateVm extends _$ConversationStateVm {
     state = state.copyWith(searchTxt_: text);
   }
 
+  void setCurrentProperty(ConversationModel current) {
+    state = state.copyWith(current_: current);
+  }
+
   Future<void> setCurrent(ConversationModel current, PromptRes? prompt) async {
     if (current.id == state.current?.id) return;
     var model = await ref.read(aimodelStateViewModelProvider.notifier).getAimodel(current.model);

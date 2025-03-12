@@ -1,10 +1,15 @@
+import 'package:fluent_ui/fluent_ui.dart' as fl;
+
 import '../../../base/base.dart';
 import '../../../components/button/filled_btn.dart';
+import '../../../components/form/form_row.dart';
 import '../../../components/form/label_input.dart';
 import '../../../components/form/label_input_multi.dart';
 import '../../../components/form/label_text.dart';
 import '../../../components/image/image.dart';
 import '../../../components/mouse_hover_item.dart';
+import '../view_model/aimodel_state_view_model.dart';
+import '../widget/aimodel_widget.dart';
 
 class PromptAddPage extends ConsumerWidget {
   const PromptAddPage({super.key});
@@ -32,7 +37,6 @@ class PromptAddPage extends ConsumerWidget {
                     child: Container(
                       padding: const EdgeInsets.all(4.0), // 图标周围的内边距
                       decoration: BoxDecoration(
-                        color: Colors.white, // 背景颜色
                         shape: BoxShape.circle, // 圆形背景
                         boxShadow: [
                           BoxShadow(
@@ -53,24 +57,26 @@ class PromptAddPage extends ConsumerWidget {
               S.current.name,
               hintText: S.current.btn_add + S.current.digitalMan,
             ),
+            const fl.Divider(),
             LabelInputMultiWidget(
               S.current.prompt_hint,
               hintText: S.current.prompt_demo,
             ),
-            LabelTextWidget(
-              S.current.feedback,
-              '全部可见',
-              leading: Icon(
-                Icons.public_outlined,
-                color: Theme.of(context).colorScheme.primaryFixed,
-              ),
+            const fl.Divider(
+              size: 0.5,
             ),
-            LabelTextWidget(
-              S.current.home_model,
-              Constant.defaultModel.modelId,
-              leading: Icon(
-                Icons.model_training_outlined,
-                color: Theme.of(context).colorScheme.primaryFixed,
+            JuFormRow(
+              S.current.feedback,
+              right: const Text('全部可见'),
+            ),
+            JuFormRow(
+              S.current.model,
+              right: AimodelWidget.buildOptions(
+                context,
+                ref,
+                ref.watch(aimodelStateViewModelProvider).defaultModel,
+                (model) => ref.watch(aimodelStateViewModelProvider.notifier).changeDefaultModel(model),
+                isEnableTxt: true,
               ),
             ),
             LabelInputMultiWidget(

@@ -30,40 +30,35 @@ class JuFormRow extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Ink(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: InkWell(
-        onTap: onTap,
-        child: Container(
-          padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
-          decoration: BoxDecoration(
-            border: Border(
-              bottom: BorderSide(width: .6, color: border ? ref.watch(themeProvider).divideBgColor() : Colors.transparent),
-            ),
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+        decoration: BoxDecoration(
+          border: Border(
+            bottom: BorderSide(width: .2, color: border ? ref.watch(themeProvider).divideBgColor() : Colors.transparent),
           ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              if (prefix != null) prefix!,
-              Text(
-                text,
-                style: TextStyle(
-                  fontSize: ref.watch(themeProvider).fsL,
-                ),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            if (prefix != null) prefix!,
+            Text(
+              text,
+              style: TextStyle(
+                fontSize: ref.watch(themeProvider).fsL,
               ),
-              const Spacer(),
-              right ?? const SizedBox.shrink(),
-              2.width(),
-              if (isMustRight == true)
-                Icon(
-                  Icons.arrow_forward_ios,
-                  size: ref.watch(themeProvider).fsXl,
-                  color: ref.watch(themeProvider).secondColor(),
-                ),
-            ],
-          ),
+            ),
+            const Spacer(),
+            right != null ? right!.juCursor : const SizedBox.shrink(),
+            2.width(),
+            if (isMustRight == true)
+              Icon(
+                Icons.arrow_forward_ios,
+                size: ref.watch(themeProvider).fsXl,
+                color: ref.watch(themeProvider).secondColor(),
+              ),
+          ],
         ),
       ),
     );

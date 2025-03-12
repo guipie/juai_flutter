@@ -1,7 +1,5 @@
-import 'package:fluent_ui/fluent_ui.dart';
-
-import 'base.dart';
 import '../pages/home/view_model/home_view_model.dart';
+import 'base.dart';
 
 abstract class BasePage extends ConsumerStatefulWidget {
   const BasePage({super.key});
@@ -24,6 +22,7 @@ class _BasePageState extends ConsumerState<BasePage> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       // 在这里放置你想要在页面初始化完成后执行的代码
       if (F.pc) ref.watch(homeVmProvider.notifier).setHomePcTitle(widget.title);
+      ('${widget.title}初始化..').i();
     });
   }
 

@@ -6,6 +6,9 @@ import '../../base/version_check.dart';
 import '../../components/image/image.dart';
 import '../../components/mouse_hover_item.dart';
 import '../../const.dart';
+import '../../utils/mydialog.dart';
+import '../aimodel/view_model/prompt_view_model.dart';
+import '../chat/view_model/chat_view_model.dart';
 import '../login/provider/user_provider.dart';
 import '../setting/setting_page.dart';
 import '../square/square.dart';
@@ -54,64 +57,70 @@ class _HomePcPageState extends ConsumerState<HomePcPage> with WidgetsBindingObse
   @override
   Widget build(BuildContext context) {
     var currentIndex = ref.watch(homeVmProvider.select((value) => value.curTabIndex));
+    final itemsController = fl.FlyoutController();
     return fl.NavigationView(
       appBar: fl.NavigationAppBar(
-          title: Row(
-            children: [
-              const Text('聚AI,一个就够了.'),
-              Expanded(
-                child: Center(
-                  child: Text(
-                    ref.watch(homeVmProvider.select((value) => value.homePcTitle)),
-                    style: Theme.of(context).textTheme.titleMedium,
-                  ),
+        title: Row(
+          children: [
+            const Text('聚AI,一个就够了.'),
+            Expanded(
+              child: Center(
+                child: Text(
+                  ref.watch(homeVmProvider.select((value) => value.homePcTitle)),
+                  style: Theme.of(context).textTheme.titleMedium,
                 ),
-              )
-            ],
+              ),
+            )
+          ],
+        ),
+        leading: Center(
+          child: JuImage(
+            ref.read(curentUserProvider).avatar,
+            width: 36,
+            height: 36,
           ),
-          leading: Center(
-            child: JuImage(
-              ref.read(curentUserProvider).avatar,
-              width: 36,
-              height: 36,
+        ),
+        actions: fl.FlyoutTarget(
+          controller: itemsController,
+          child: IconButton(
+            icon: const fl.Icon(
+              Icons.add,
+              size: 24,
             ),
+            onPressed: () {
+              itemsController.showFlyout(
+                  autoModeConfiguration: fl.FlyoutAutoConfiguration(
+                    preferredMode: fl.FlyoutPlacementMode.bottomLeft,
+                  ),
+                  additionalOffset: 0,
+                  // barrierDismissible: false,
+                  dismissOnPointerMoveAway: true,
+                  navigatorKey: GlobalKey<NavigatorState>().currentState,
+                  builder: (context) {
+                    return fl.MenuFlyout(
+                      items: [
+                        fl.MenuFlyoutItem(
+                          text: Text(S.current.add + S.current.home_chat),
+                          onPressed: () => F.pushChat(ref),
+                        ),
+                        const fl.MenuFlyoutSeparator(),
+                        fl.MenuFlyoutItem(
+                          text: Text(S.current.add + S.current.group_chat),
+                          onPressed: () => ref.read(chatVmProvider.notifier).addGroupChat(),
+                        ),
+                        const fl.MenuFlyoutSeparator(),
+                        fl.MenuFlyoutItem(
+                          text: Text(S.current.add + S.current.digitalMan),
+                          onPressed: () => ref.read(promptVMProvider.notifier).promptAdd(context),
+                        ),
+                        const fl.MenuFlyoutSeparator(),
+                      ],
+                    );
+                  });
+            },
           ),
-          actions: PullDownButton(
-            scrollController: ScrollController(),
-            menuOffset: 6,
-            position: PullDownMenuPosition.automatic,
-            buttonBuilder: (context, showMenu) {
-              return GestureDetector(
-                behavior: HitTestBehavior.opaque,
-                onTap: () {
-                  showMenu();
-                },
-                child: IconButton(
-                  icon: const Icon(Icons.add, size: 26),
-                  onPressed: () {
-                    showMenu();
-                  },
-                ),
-              );
-            },
-            itemBuilder: (context) {
-              return [
-                {'key': 1, 'val': S.current.new_chat},
-                {'key': 2, 'val': S.current.btn_add + S.current.digitalMan}
-              ]
-                  .map(
-                    (m) => PullDownMenuItem(
-                      title: m['val'].toString(),
-                      onTap: () {
-                        if (m['key'] == 1) {
-                        } else if (m['key'] == 2) {}
-                      },
-                      icon: Icons.chat_bubble_outline,
-                    ),
-                  )
-                  .toList();
-            },
-          )),
+        ),
+      ),
       paneBodyBuilder: (item, body) {
         return AnimatedSwitcher(
           transitionBuilder: (child, animation) {
@@ -119,6 +128,7 @@ class _HomePcPageState extends ConsumerState<HomePcPage> with WidgetsBindingObse
           },
           duration: const Duration(seconds: 2),
           child: IndexedStack(
+            key: const ValueKey<int>(0),
             index: currentIndex,
             children: [...ref.read(homeVmProvider).menus.map((item) => item.page).toList()],
           ),
@@ -132,7 +142,7 @@ class _HomePcPageState extends ConsumerState<HomePcPage> with WidgetsBindingObse
         items: [
           fl.PaneItemHeader(
             header: const Text(
-              'Inputs',
+              '111',
             ),
           ),
           ...ref
@@ -141,7 +151,7 @@ class _HomePcPageState extends ConsumerState<HomePcPage> with WidgetsBindingObse
               .map((item) => fl.PaneItem(
                     icon: Icon(item.icon),
                     title: Text(item.label!),
-                    body: const SizedBox.shrink(),
+                    body: item.page,
                   ))
               .toList()
         ],

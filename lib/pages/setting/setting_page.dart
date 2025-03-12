@@ -125,7 +125,7 @@ class _SettingPageState extends ConsumerState<SettingPage> {
                                           ref.watch(globalLanguageProvider.notifier).change(item.languageCode);
                                         },
                                         iconColor: Theme.of(context).primaryColor,
-                                        icon: item.languageCode != globalLanguage ? null : CupertinoIcons.checkmark_alt,
+                                        icon: item.languageCode != globalLanguage ? null : Icons.check,
                                       ))
                                   .toList();
                             },
